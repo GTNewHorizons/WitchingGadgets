@@ -5,6 +5,7 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.util.ForgeDirection;
 import witchinggadgets.common.util.recipe.SpinningRecipe;
 
 public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedInventory
