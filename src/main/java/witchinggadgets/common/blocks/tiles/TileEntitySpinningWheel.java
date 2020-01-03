@@ -1,13 +1,13 @@
 package witchinggadgets.common.blocks.tiles;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import witchinggadgets.common.util.recipe.SpinningRecipe;
 
-public class TileEntitySpinningWheel extends TileEntityWGBase implements IInventory
+public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedInventory
 {
 	public int facing = 0;
 	public int animation = 0;
@@ -222,5 +222,21 @@ public class TileEntitySpinningWheel extends TileEntityWGBase implements IInvent
 	{
 		return true;
 	}
+	
+	public static int[] InSlots = {0,1,2,3,4};
+	public static int[] OutSlots = {5};
+	@Override
+	public int[] getAccessibleSlotsFromSide(int p_94128_1_) {
+		return p_94128_1_ == ForgeDirection.DOWN.ordinal() ? OutSlots : InSlots;
+	}
 
+	@Override
+	public boolean canInsertItem(int p_102007_1_, ItemStack p_102007_2_, int p_102007_3_) {
+		return p_102007_3_ != ForgeDirection.DOWN.ordinal();
+	}
+
+	@Override
+	public boolean canExtractItem(int p_102008_1_, ItemStack p_102008_2_, int p_102008_3_) {
+		return p_102008_3_ == ForgeDirection.DOWN.ordinal();
+	}
 }
