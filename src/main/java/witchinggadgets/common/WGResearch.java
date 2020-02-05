@@ -5,7 +5,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import fox.spiteful.forbidden.DarkAspects;
+import gregtech.api.enums.Materials;
+import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GT_ModHandler;
+import gregtech.api.util.GT_OreDictUnificator;
 import magicbees.api.MagicBeesAPI;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -523,11 +526,11 @@ public class WGResearch
 		//Dreamcraft-Pearl-Dupe Recipe fix
 		researchAspects = new AspectList().add(Aspect.AURA,64).add(Aspect.ORDER,256).add(Aspect.FIRE,256).add(Aspect.EARTH,256).add(Aspect.WATER,256).add(Aspect.AIR,256).add(Aspect.ENTROPY,256).add(Aspect.MAGIC,64).add(Aspect.TAINT,64);
 		InfusionRecipe PearlDupe = ThaumcraftApi.addInfusionCraftingRecipe("PRIMORDRIALPEARL", GT_ModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L,3), 20, researchAspects, GT_ModHandler.getModItem("dreamcraft", "item.PrimordialPearlFragment", 1L), new ItemStack[] {
-				GT_ModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L),GT_ModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L,6),GT_ModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L,2),
+				GT_ModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L),GT_ModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L,6), GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L),
 				GT_ModHandler.getModItem("TwilightForest", "tile.TFAuroraBrick", 1L),GT_ModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L),GT_ModHandler.getModItem("TwilightForest", "tile.TFAuroraBrick", 1L),
-				GT_ModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L,2),GT_ModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L,7),GT_ModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L),
-				GT_ModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L,7),GT_ModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L,2),GT_ModHandler.getModItem("TwilightForest", "tile.TFAuroraBrick", 1L),
-				GT_ModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L),GT_ModHandler.getModItem("TwilightForest", "tile.TFAuroraBrick", 1L),GT_ModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L,2),
+				GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L), GT_ModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L,7),GT_ModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L),
+				GT_ModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L,7), GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L), GT_ModHandler.getModItem("TwilightForest", "tile.TFAuroraBrick", 1L),
+				GT_ModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L),GT_ModHandler.getModItem("TwilightForest", "tile.TFAuroraBrick", 1L), GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L),
 				GT_ModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L,6)});
 		
 		/*
