@@ -295,13 +295,6 @@ public class ItemPrimordialArmor extends ItemShadowFortressArmor implements IAct
 				if (player.isInsideOfMaterial(Material.water))
 					player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 202, 0, true));
 			}
-			
-			int[] curedPotions = {Potion.blindness.id,Potion.poison.id,Potion.wither.id,Potion.confusion.id,Config.potionTaintPoisonID,Potion.digSlowdown.id,Potion.hunger.id,Potion.weakness.id};
-			for(int c : curedPotions)
-				if(world.isRemote)
-					player.removePotionEffectClient(c);
-				else
-					player.removePotionEffect(c);
 			break;
 		case 5:
 			player.addPotionEffect(new PotionEffect(Potion.regeneration.id, 202, 0, true));
