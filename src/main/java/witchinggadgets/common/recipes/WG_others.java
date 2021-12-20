@@ -164,7 +164,7 @@ public class WG_others {
 					else if (!aMaterial.equalsIgnoreCase("Oilsands"))
 						GT_Values.RA.addFluidExtractionRecipe(OreDictionary.getOres(name).get(0).copy(), GT_Values.NI,new FluidStack(WGContent.ClusterSmeltable.get(aMaterial),344), 0, 60, 120);
 					else
-						GT_Values.RA.addCentrifugeRecipe(OreDictionary.getOres(name).get(0).copy(), GT_Values.NI, GT_Values.NF, Materials.Oil.getFluid(4000L), GT_Values.NI, GT_Values.NI, GT_Values.NI, GT_Values.NI, GT_Values.NI, GT_Values.NI, null, 60, 120, false);
+						GT_Values.RA.addCentrifugeRecipe(OreDictionary.getOres(name).get(0).copy(), GT_Values.NI, GT_Values.NF, Materials.OilHeavy.getFluid(4000L), GT_Values.NI, GT_Values.NI, GT_Values.NI, GT_Values.NI, GT_Values.NI, GT_Values.NI, null, 60, 120, false);
 				}
 				}
 			}
