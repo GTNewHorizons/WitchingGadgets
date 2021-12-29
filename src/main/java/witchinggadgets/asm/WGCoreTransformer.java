@@ -90,7 +90,7 @@ public class WGCoreTransformer implements IClassTransformer
 		mv.visitVarInsn(Opcodes.ALOAD, 2);
 		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "witchinggadgets/asm/WGCoreTransformer", "boots_getIsRepairable", desc, false);
 		mv.visitInsn(Opcodes.IRETURN);
-		mv.visitMaxs(2, 1);
+		mv.visitMaxs(2, 3);
 		mv.visitEnd();
 
 		cr.accept(cw, 0);
@@ -136,7 +136,7 @@ public class WGCoreTransformer implements IClassTransformer
 		mv.visitCode();
 		mv.visitFieldInsn(Opcodes.GETSTATIC, "witchinggadgets/common/WGConfig", "coremod_allowFocusPouchActive", "Z");
 		mv.visitInsn(Opcodes.IRETURN);
-		mv.visitMaxs(3, 1);
+		mv.visitMaxs(1, 4);
 		mv.visitEnd();
 
 		final String methodToPatch2 = "activate";
@@ -147,7 +147,7 @@ public class WGCoreTransformer implements IClassTransformer
 		mv.visitVarInsn(Opcodes.ALOAD, 2);
 		mv.visitMethodInsn(Opcodes.INVOKESTATIC, "witchinggadgets/asm/WGCoreTransformer", "pouch_activate", desc2, false);
 		mv.visitInsn(Opcodes.RETURN);
-		mv.visitMaxs(2, 1);
+		mv.visitMaxs(2, 3);
 		mv.visitEnd();
 
 		cr.accept(cw, 0);
@@ -383,7 +383,7 @@ public class WGCoreTransformer implements IClassTransformer
 		ClassWriter cw=new ClassWriter(ClassWriter.COMPUTE_MAXS);
 		classNode.accept(cw);
 
-		return cw.toByteArray();	
+		return cw.toByteArray();
 	}
 	public static Block[] worldGen_getValidHilltopStones()
 	{
