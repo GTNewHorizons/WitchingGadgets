@@ -106,3 +106,26 @@ processResources
 sourceSets {
     main { output.resourcesDir = output.classesDir }
 }
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+    manifest {
+        attributes 'FMLCorePlugin': 'witchinggadgets.asm.WitchingGadgetsCoreLoader',
+                'FMLCorePluginContainsFMLMod': 'true'
+    }
+}
+
+task devJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'dev'
+    manifest {
+        attributes 'FMLCorePlugin': 'witchinggadgets.asm.WitchingGadgetsCoreLoader',
+                'FMLCorePluginContainsFMLMod': 'true'
+    }
+}
+
+artifacts {
+    archives(devJar)
+    archives(sourceJar)
+}

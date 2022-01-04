@@ -71,7 +71,7 @@ public class WG_alchemic_recipe {
 					
 				
 				try {
-					alchemyAspects = ThaumcraftApi.objectTags.get( Arrays.asList(new Object[] { ingot.getItem(), Integer.valueOf(ingot.getItemDamage()) }) ).add(Aspect.ORDER,1);
+					alchemyAspects = ThaumcraftApi.objectTags.get( Arrays.asList(ingot.getItem(), ingot.getItemDamage()) ).add(Aspect.ORDER,1);
 				} catch (NullPointerException e) {
 					WitchingGadgets.logger.error("Could not get the objectTags for"+witchinggadgets.common.WGContent.GT_Cluster[iOre]);
 					alchemyAspects = new AspectList().add(Aspect.METAL,2).add(Aspect.ORDER,1).add((Aspect)gregtech.api.enums.TC_Aspects.NEBRISUM.mAspect,2);
@@ -85,17 +85,17 @@ public class WG_alchemic_recipe {
 				if(!OreDictionary.getOres("ore"+witchinggadgets.common.WGContent.GT_Cluster[iOre]).isEmpty())
 					registerAlchemyRecipe("METALLURGICPERFECTION_CLUSTERS","_"+witchinggadgets.common.WGContent.GT_Cluster[iOre], new ItemStack(WGContent.ItemCluster, 2, iOre), "ore"+witchinggadgets.common.WGContent.GT_Cluster[iOre], alchemyAspects);
 				if(!OreDictionary.getOres("oreNetherrack"+witchinggadgets.common.WGContent.GT_Cluster[iOre]).isEmpty())	
-					registerAlchemyRecipe("METALLURGICPERFECTION_CLUSTERS","_Netherrack_"+witchinggadgets.common.WGContent.GT_Cluster[iOre], new ItemStack(WGContent.ItemCluster, 2, iOre), "oreNetherrack"+witchinggadgets.common.WGContent.GT_Cluster[iOre], alchemyAspects);
+					registerAlchemyRecipe("METALLURGICPERFECTION_CLUSTERS","_Netherrack_"+ WGContent.GT_Cluster[iOre], new ItemStack(WGContent.ItemCluster, 2, iOre), "oreNetherrack"+ WGContent.GT_Cluster[iOre], alchemyAspects).hash += 1;
 				if(!OreDictionary.getOres("oreEndstone"+witchinggadgets.common.WGContent.GT_Cluster[iOre]).isEmpty())	
-					registerAlchemyRecipe("METALLURGICPERFECTION_CLUSTERS","_Endstone_"+witchinggadgets.common.WGContent.GT_Cluster[iOre], new ItemStack(WGContent.ItemCluster, 2, iOre), "oreEndstone"+witchinggadgets.common.WGContent.GT_Cluster[iOre], alchemyAspects);
+					registerAlchemyRecipe("METALLURGICPERFECTION_CLUSTERS","_Endstone_"+witchinggadgets.common.WGContent.GT_Cluster[iOre], new ItemStack(WGContent.ItemCluster, 2, iOre), "oreEndstone"+witchinggadgets.common.WGContent.GT_Cluster[iOre], alchemyAspects).hash += 2;
 				if(!OreDictionary.getOres("oreBlackgranite"+witchinggadgets.common.WGContent.GT_Cluster[iOre]).isEmpty())
-					registerAlchemyRecipe("METALLURGICPERFECTION_CLUSTERS","_Blackgranite_"+witchinggadgets.common.WGContent.GT_Cluster[iOre], new ItemStack(WGContent.ItemCluster, 2, iOre), "oreBlackgranite"+witchinggadgets.common.WGContent.GT_Cluster[iOre], alchemyAspects);
+					registerAlchemyRecipe("METALLURGICPERFECTION_CLUSTERS","_Blackgranite_"+witchinggadgets.common.WGContent.GT_Cluster[iOre], new ItemStack(WGContent.ItemCluster, 2, iOre), "oreBlackgranite"+witchinggadgets.common.WGContent.GT_Cluster[iOre], alchemyAspects).hash += 3;
 				if(!OreDictionary.getOres("oreRedgranite"+witchinggadgets.common.WGContent.GT_Cluster[iOre]).isEmpty())
-					registerAlchemyRecipe("METALLURGICPERFECTION_CLUSTERS","_Redgranite_"+witchinggadgets.common.WGContent.GT_Cluster[iOre], new ItemStack(WGContent.ItemCluster, 2, iOre), "oreRedgranite"+witchinggadgets.common.WGContent.GT_Cluster[iOre], alchemyAspects);
+					registerAlchemyRecipe("METALLURGICPERFECTION_CLUSTERS","_Redgranite_"+witchinggadgets.common.WGContent.GT_Cluster[iOre], new ItemStack(WGContent.ItemCluster, 2, iOre), "oreRedgranite"+witchinggadgets.common.WGContent.GT_Cluster[iOre], alchemyAspects).hash += 4;
 				if(!OreDictionary.getOres("oreMarble"+witchinggadgets.common.WGContent.GT_Cluster[iOre]).isEmpty())
-					registerAlchemyRecipe("METALLURGICPERFECTION_CLUSTERS","_Marble_"+witchinggadgets.common.WGContent.GT_Cluster[iOre], new ItemStack(WGContent.ItemCluster, 2, iOre), "oreMarble"+witchinggadgets.common.WGContent.GT_Cluster[iOre], alchemyAspects);
+					registerAlchemyRecipe("METALLURGICPERFECTION_CLUSTERS","_Marble_"+witchinggadgets.common.WGContent.GT_Cluster[iOre], new ItemStack(WGContent.ItemCluster, 2, iOre), "oreMarble"+witchinggadgets.common.WGContent.GT_Cluster[iOre], alchemyAspects).hash += 5;
 				if(!OreDictionary.getOres("oreBasalt"+witchinggadgets.common.WGContent.GT_Cluster[iOre]).isEmpty())
-					registerAlchemyRecipe("METALLURGICPERFECTION_CLUSTERS","_Basalt_"+witchinggadgets.common.WGContent.GT_Cluster[iOre], new ItemStack(WGContent.ItemCluster, 2, iOre), "oreBasalt"+witchinggadgets.common.WGContent.GT_Cluster[iOre], alchemyAspects);
+					registerAlchemyRecipe("METALLURGICPERFECTION_CLUSTERS","_Basalt_"+witchinggadgets.common.WGContent.GT_Cluster[iOre], new ItemStack(WGContent.ItemCluster, 2, iOre), "oreBasalt"+witchinggadgets.common.WGContent.GT_Cluster[iOre], alchemyAspects).hash += 6;
 				if (!OreDictionary.getOres("ore"+witchinggadgets.common.WGContent.GT_Cluster[iOre]).isEmpty()				||
 					!OreDictionary.getOres("oreNetherrack"+witchinggadgets.common.WGContent.GT_Cluster[iOre]).isEmpty()		||
 					!OreDictionary.getOres("oreEndstone"+witchinggadgets.common.WGContent.GT_Cluster[iOre]).isEmpty()		||
@@ -118,7 +118,7 @@ public class WG_alchemic_recipe {
 						continue;
 					}
 					try {
-						alchemyAspects = ThaumcraftApi.objectTags.get( Arrays.asList(new Object[] { ingot.getItem(), Integer.valueOf(ingot.getItemDamage()) }) ).add(Aspect.EXCHANGE,1);
+						alchemyAspects = ThaumcraftApi.objectTags.get( Arrays.asList(ingot.getItem(), ingot.getItemDamage()) ).add(Aspect.EXCHANGE,1);
 					} catch (NullPointerException e) {
 						WitchingGadgets.logger.error("Could not get the objectTags for"+witchinggadgets.common.WGContent.GT_Cluster[iOre]);
 						alchemyAspects = new AspectList().add(Aspect.METAL,2).add(Aspect.ORDER,1).add((Aspect)gregtech.api.enums.TC_Aspects.NEBRISUM.mAspect,2);
@@ -128,13 +128,7 @@ public class WG_alchemic_recipe {
 						alchemyAspects = new AspectList().add(Aspect.METAL,2).add(Aspect.ORDER,1).add((Aspect)gregtech.api.enums.TC_Aspects.NEBRISUM.mAspect,2);
 					alchemyAspects.remove(Aspect.METAL);
 					alchemyAspects.add(Aspect.METAL, 2);
-					Iterator<Entry<Aspect,Integer>> it = alchemyAspects.aspects.entrySet().iterator();
-					while(it.hasNext())
-					{
-						Entry<Aspect,Integer> e = it.next();
-						if(e.getKey()==null||e.getValue()==null)
-							it.remove();
-					}
+					alchemyAspects.aspects.entrySet().removeIf(e -> e.getKey() == null || e.getValue() == null || e.getValue() <= 0);
 					int f = 0;
 						ItemStack rawnuggets = OreDictionary.getOres("nugget"+witchinggadgets.common.WGContent.GT_Cluster[iOre]).get(f).copy();
 					if(rawnuggets.getDisplayName().contains("Oreberry"))
@@ -147,10 +141,11 @@ public class WG_alchemic_recipe {
 		}
 	}
 	
-	private static void registerAlchemyRecipe(String tag, String tagAddon, ItemStack result, Object catalyst, AspectList alchemyAspects)
+	private static CrucibleRecipe registerAlchemyRecipe(String tag, String tagAddon, ItemStack result, Object catalyst, AspectList alchemyAspects)
 	{
 		CrucibleRecipe crucibleRecipe = ThaumcraftApi.addCrucibleRecipe(tag, result, catalyst, alchemyAspects);
 		WGContent.recipeList.put(tag+tagAddon, crucibleRecipe);
+		return crucibleRecipe;
 	}
 	private static void setupCluster(String name)
 	{
