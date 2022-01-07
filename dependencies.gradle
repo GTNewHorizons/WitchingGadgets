@@ -27,7 +27,7 @@ dependencies {
     compileOnly("com.github.GTNewHorizons:ZenScript:master-SNAPSHOT") {
         transitive = false
     }
-    compileOnly("com.github.GTNewHorizons:MagicBees:unified-build-script-SNAPSHOT:api") {  // TODO: switch to master
+    compileOnly("com.github.GTNewHorizons:MagicBees:master-SNAPSHOT:api") {
         transitive = false
     }
 
