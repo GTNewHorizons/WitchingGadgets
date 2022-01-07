@@ -296,10 +296,12 @@ public class WGContent
 				 if (!aMaterial.contains(SubTag.NO_SMELTING)) {
 					 if ((aMaterial.mBlastFurnaceRequired) || (aMaterial.mDirectSmelting.mBlastFurnaceRequired)) {
 						 if(aMaterial.mBlastFurnaceTemp <= 1000 && aMaterial.mDirectSmelting.mBlastFurnaceTemp <= 1000) {
-							 InfernalBlastfurnaceRecipe temp = new InfernalBlastfurnaceRecipe(aMaterial.getIngots(1), aMaterial.getDust(1),240, false);
-							 InfernalBlastfurnaceRecipe.addRecipe(temp);	
-							 if (!InfernalBlastfurnaceRecipe.recipes.contains(temp))
+						 	if(aMaterial.getDust(1) != null) {
+								InfernalBlastfurnaceRecipe temp = new InfernalBlastfurnaceRecipe(aMaterial.getIngots(1), aMaterial.getDust(1), 240, false);
+								InfernalBlastfurnaceRecipe.addRecipe(temp);
+								if (!InfernalBlastfurnaceRecipe.recipes.contains(temp))
 									WitchingGadgets.logger.warn("Error at performing GT-Primitive-Blast Recipe -> InfernalBlastfurnaceRecipe");
+							}
 						 }
 					 } else {
 						 int outputAmount = GT_Mod.gregtechproxy.mMixedOreOnlyYieldsTwoThirdsOfPureOre ? 2 : 3;

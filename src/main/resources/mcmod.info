@@ -1,10 +1,10 @@
 [
 {
-  "modid": "WitchingGadgets",
-  "name": "Witching Gadgets",
+  "modid": "${modId}",
+  "name": "${modName}",
   "description": "It's a kind of magic",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
+  "version": "${modVersion}",
+  "mcversion": "${minecraftVersion}",
   "url": "",
   "updateUrl": "",
   "authorList": ["BluSunrize", "KryptonCaptain"],

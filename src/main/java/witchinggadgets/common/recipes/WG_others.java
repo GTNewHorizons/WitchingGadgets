@@ -3,6 +3,7 @@ package witchinggadgets.common.recipes;
 import java.util.Arrays;
 import java.util.List;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import gregtech.api.enums.GT_Values;
 import gregtech.api.enums.Materials;
@@ -43,12 +44,14 @@ public class WG_others {
 	/**
 	 * SPINNING
 	 */
-		
-	SpinningRecipe spin_String = new SpinningRecipe(new ItemStack(Items.string,5), new Object[] {GT_ModHandler.getModItem("Natura", "barleyFood", 1L,3),GT_ModHandler.getModItem("Natura", "barleyFood", 1L,3),GT_ModHandler.getModItem("Natura", "barleyFood", 1L,3),GT_ModHandler.getModItem("Natura", "barleyFood", 1L,3),GT_ModHandler.getModItem("Natura", "barleyFood", 1L,3)});
-	SpinningRecipe.addRecipe(spin_String);
-		
-	SpinningRecipe spin_flameString = new SpinningRecipe(GT_ModHandler.getModItem("Natura", "barleyFood", 2L,7), new Object[] {new ItemStack(WGContent.ItemMaterial,1,2),GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.InfusedFire, 1L),new ItemStack(WGContent.ItemMaterial,1,2),GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.InfusedFire, 1L),new ItemStack(WGContent.ItemMaterial,1,2)});
-	SpinningRecipe.addRecipe(spin_flameString);
+
+	if(Loader.isModLoaded("Natura")) {
+		SpinningRecipe spin_String = new SpinningRecipe(new ItemStack(Items.string, 5), new Object[]{GT_ModHandler.getModItem("Natura", "barleyFood", 1L, 3), GT_ModHandler.getModItem("Natura", "barleyFood", 1L, 3), GT_ModHandler.getModItem("Natura", "barleyFood", 1L, 3), GT_ModHandler.getModItem("Natura", "barleyFood", 1L, 3), GT_ModHandler.getModItem("Natura", "barleyFood", 1L, 3)});
+		SpinningRecipe.addRecipe(spin_String);
+
+		SpinningRecipe spin_flameString = new SpinningRecipe(GT_ModHandler.getModItem("Natura", "barleyFood", 2L, 7), new Object[]{new ItemStack(WGContent.ItemMaterial, 1, 2), GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.InfusedFire, 1L), new ItemStack(WGContent.ItemMaterial, 1, 2), GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.InfusedFire, 1L), new ItemStack(WGContent.ItemMaterial, 1, 2)});
+		SpinningRecipe.addRecipe(spin_flameString);
+	}
 	
 	SpinningRecipe spin_Thread = new SpinningRecipe(new ItemStack(WGContent.ItemMaterial,2,0), new Object[] {Items.string, Items.string, Items.string, Items.string});
 	SpinningRecipe.addRecipe(spin_Thread);

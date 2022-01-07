@@ -1,5 +1,6 @@
 package witchinggadgets.common.recipes;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
@@ -89,9 +90,13 @@ public class WG_arcane_recipes {
 	//ETHEREALWALL
 	craftingAspects = new AspectList().add(Aspect.ORDER,15).add(Aspect.EARTH,5);
 	registerArcaneRecipe("ETHEREALWALL","",new ItemStack(WGContent.BlockStoneDevice,6,0), craftingAspects, "SsS", "STS", "SsS", 'S',new ItemStack(ConfigBlocks.blockCosmeticSolid, 1, 6), 's', new ItemStack(ConfigBlocks.blockCrystal, 1, 32767), 'T', new ItemStack(Blocks.redstone_lamp));
-	//AGEINGSTONE
-	craftingAspects = new AspectList().add(Aspect.ORDER,15).add(Aspect.ENTROPY,15);
-	registerArcaneRecipe("AGEINGSTONE","",new ItemStack(WGContent.BlockStoneDevice,1,1), craftingAspects, " s ", "SCS", " s ", 'S',new ItemStack(ConfigBlocks.blockCosmeticSolid, 1, 6), 's', new ItemStack(ConfigBlocks.blockCrystal, 1, 32767), 'C', GT_ModHandler.getModItem("MagicBees", "miscResources",1L,9));
+
+	if(Loader.isModLoaded("magicbees")) {
+		//AGEINGSTONE
+		craftingAspects = new AspectList().add(Aspect.ORDER, 15).add(Aspect.ENTROPY, 15);
+		registerArcaneRecipe("AGEINGSTONE", "", new ItemStack(WGContent.BlockStoneDevice, 1, 1), craftingAspects, " s ", "SCS", " s ", 'S', new ItemStack(ConfigBlocks.blockCosmeticSolid, 1, 6), 's', new ItemStack(ConfigBlocks.blockCrystal, 1, 32767), 'C', GT_ModHandler.getModItem("MagicBees", "miscResources", 1L, 9));
+	}
+
 	//SPINNINGWHEEL
 	craftingAspects = new AspectList().add(Aspect.ORDER,10).add(Aspect.AIR,10);
 	registerArcaneRecipe("SPINNINGWHEEL","",new ItemStack(WGContent.BlockWoodenDevice), craftingAspects, "IsW", "RDS", "TTT", 'T',new ItemStack(ConfigBlocks.blockTable),'s',GT_OreDictUnificator.get(OrePrefixes.screw, Materials.Steel, 1L), 'D', "craftingToolScrewdriver", 'I', "gearGtWoodSealed",'R', GT_OreDictUnificator.get(OrePrefixes.stickLong, Materials.WoodSealed, 1L),'S', GT_OreDictUnificator.get(OrePrefixes.stick, Materials.WoodSealed, 1L) ,'W', "gearGtSmallThaumium");

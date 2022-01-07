@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import cpw.mods.fml.common.Loader;
 import fox.spiteful.forbidden.DarkAspects;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
@@ -210,12 +211,15 @@ public class WGResearch
 		pages = new ResearchPage[]{ new ResearchPage("witchinggadgets_research_page.ICESOLIDIFIER.1"), new ResearchPage((InfusionRecipe) WGContent.recipeList.get("ICESOLIDIFIER")) };
 		getResearchItem("ICESOLIDIFIER", "WITCHGADG", researchAspects, -4, -8, 4, new ItemStack(WGContent.BlockWoodenDevice,1,1)).addWarp(3).setParents("STONEEXTRUDER").setConcealed().setPages(pages).registerResearchItem();
 		
-		
-		//AGEINGSTONE
-		researchAspects = new AspectList().add(Aspect.LIFE,3).add(Aspect.MECHANISM,3).add((Aspect)MagicBeesAPI.thaumcraftAspectTempus,3).add(Aspect.EARTH,6);
-		if(Aspect.getAspect("tempus")!=null)researchAspects.add(Aspect.getAspect("tempus"), 2);
-		pages = new ResearchPage[]{ new ResearchPage("witchinggadgets_research_page.AGEINGSTONE.1"), new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("AGEINGSTONE")) };
-		getResearchItem("AGEINGSTONE", "WITCHGADG", researchAspects, -5, -6, 3, new ItemStack(WGContent.BlockStoneDevice,1,1)).addWarp(1).setParents(new String[] { "WG.ARCANESTONE","MB_EssenceTime"}).setConcealed().setPages(pages).registerResearchItem();
+
+		if(Loader.isModLoaded("magicbees")) {
+			//AGEINGSTONE
+			researchAspects = new AspectList().add(Aspect.LIFE, 3).add(Aspect.MECHANISM, 3).add((Aspect) MagicBeesAPI.thaumcraftAspectTempus, 3).add(Aspect.EARTH, 6);
+			if (Aspect.getAspect("tempus") != null) researchAspects.add(Aspect.getAspect("tempus"), 2);
+			pages = new ResearchPage[]{new ResearchPage("witchinggadgets_research_page.AGEINGSTONE.1"), new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("AGEINGSTONE"))};
+			getResearchItem("AGEINGSTONE", "WITCHGADG", researchAspects, -5, -6, 3, new ItemStack(WGContent.BlockStoneDevice, 1, 1)).addWarp(1).setParents(new String[]{"WG.ARCANESTONE", "MB_EssenceTime"}).setConcealed().setPages(pages).registerResearchItem();
+		}
+
 		//ETHEREALWALL
 		researchAspects = new AspectList().add(Aspect.ELDRITCH, 2).add(Aspect.MECHANISM, 2).add(Aspect.EARTH, 4).add(Aspect.MOTION,7).add(Aspect.TRAP, 4);
 		pages = new ResearchPage[]{ new ResearchPage("witchinggadgets_research_page.ETHEREALWALL.1"), new ResearchPage("witchinggadgets_research_page.ETHEREALWALL.2"), new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("ETHEREALWALL")) };
@@ -401,59 +405,59 @@ public class WGResearch
 		pages = new ResearchPage[]{ new ResearchPage("witchinggadgets_research_page.ENCH_SOULBOUND.1"), new ResearchPage((InfusionEnchantmentRecipe) WGContent.recipeList.get("ENCH_SOULBOUND")), new ResearchPage((ShapedArcaneRecipe)WGContent.recipeList.get("ENCH_SOULBOUND_BOOK"))};
 		getResearchItem("ENCH_SOULBOUND", "WITCHGADG", researchAspects, -6, 2, 4, new ResourceLocation("witchinggadgets:textures/gui/research/icon_ench_soulbound.png")).setParents("WG.INFUSIONENCHANTMENT").setConcealed().setPages(pages).registerResearchItem();
 
-		if (WGConfig.terraformer) {
-		//ORIGINAL CENTRIFUGE
-		new FakeResearchItem("WG.CENTRIFUGE", "WITCHGADG", "CENTRIFUGE", "ALCHEMY", 0,-5, new ItemStack(ConfigBlocks.blockTube, 1, 2)).setParents("WGPOTIONS").setConcealed().registerResearchItem();
-		//TERRAFORMER
-		researchAspects = new AspectList().add(Aspect.EARTH,64).add(Aspect.EXCHANGE, 14).add(Aspect.ENERGY, 7).add(Aspect.ORDER, 8).add(Aspect.ENTROPY, 16).add(Aspect.MINE, 24).add(Aspect.COLD,12).add(Aspect.FIRE,9).add(Aspect.AURA,8);
-		pages = new ResearchPage[]{ new ResearchPage("witchinggadgets_research_page.TERRAFORMER.1"), new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMER"))};
-		getResearchItem("TERRAFORMER", "WITCHGADG", researchAspects, 0, -7, 5, new ItemStack(WGContent.BlockMetalDevice,1,2)).addWarp(10).setPages(pages).setParents("WG.CENTRIFUGE").setConcealed().registerResearchItem();
-		
-		researchAspects = new AspectList().add(Aspect.PLANT,8).add(Aspect.ORDER,4).add(Aspect.EXCHANGE, 2).add(Aspect.ENERGY, 1);
-		pages = new ResearchPage[]{ new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_PLAINS.1"), new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_PLAINS"))};
-		getResearchItem("TERRAFORMFOCUS_PLAINS", "WITCHGADG", researchAspects, -2, -6, 3, new ItemStack(WGContent.BlockMetalDevice,1,3)).setPages(pages).setParents("TERRAFORMER").setConcealed().registerResearchItem();
-		
-		researchAspects = new AspectList().add(Aspect.COLD,8).add(Aspect.ORDER,4).add(Aspect.EXCHANGE, 2).add(Aspect.ENERGY, 1);
-		pages = new ResearchPage[]{ new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_COLDTAIGA.1"), new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_COLDTAIGA"))};
-		getResearchItem("TERRAFORMFOCUS_COLDTAIGA", "WITCHGADG", researchAspects, -2, -7, 3, new ItemStack(WGContent.BlockMetalDevice,1,4)).setPages(pages).setParents("TERRAFORMER").setConcealed().registerResearchItem();
-		
-		researchAspects = new AspectList().add(Aspect.FIRE,4).add(Aspect.ENTROPY,8).add(Aspect.EXCHANGE, 2).add(Aspect.ENERGY, 1);
-		pages = new ResearchPage[]{ new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_DESERT.1"), new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_DESERT"))};
-		getResearchItem("TERRAFORMFOCUS_DESERT", "WITCHGADG", researchAspects, -2, -8, 3, new ItemStack(WGContent.BlockMetalDevice,1,5)).setPages(pages).setParents("TERRAFORMER").setConcealed().registerResearchItem();
-		
-		researchAspects = new AspectList().add(Aspect.TREE,8).add(Aspect.PLANT,4).add(Aspect.EXCHANGE, 2).add(Aspect.ENERGY, 1);
-		pages = new ResearchPage[]{ new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_JUNGLE.1"), new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_JUNGLE"))};
-		getResearchItem("TERRAFORMFOCUS_JUNGLE", "WITCHGADG", researchAspects, -1, -9, 3, new ItemStack(WGContent.BlockMetalDevice,1,6)).setPages(pages).setParents("TERRAFORMER").setConcealed().registerResearchItem();
-		
-		researchAspects = new AspectList().add(Aspect.DARKNESS,8).add(Aspect.FIRE,4).add(Aspect.EXCHANGE, 2).add(Aspect.ENERGY, 1);
-		pages = new ResearchPage[]{ new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_HELL.1"), new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_HELL"))};
-		getResearchItem("TERRAFORMFOCUS_HELL", "WITCHGADG", researchAspects, 0, -9, 3, new ItemStack(WGContent.BlockMetalDevice,1,7)).addWarp(2).setPages(pages).setParents("TERRAFORMER").setConcealed().registerResearchItem();
-		
-		researchAspects = new AspectList().add(Aspect.PLANT,8).add(Aspect.EARTH,4).add(Aspect.EXCHANGE, 2).add(Aspect.ENERGY, 1);
-		pages = new ResearchPage[]{ new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_MUSHROOM.1"), new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_MUSHROOM"))};
-		getResearchItem("TERRAFORMFOCUS_MUSHROOM", "WITCHGADG", researchAspects, 1, -9, 3, new ItemStack(WGContent.BlockMetalDevice,1,9)).setPages(pages).setParents("TERRAFORMER").setConcealed().registerResearchItem();
-		
-		researchAspects = new AspectList().add(Aspect.TAINT,8).add(Aspect.MAGIC,4).add(Aspect.EXCHANGE, 2).add(Aspect.ENERGY, 1);
-		pages = new ResearchPage[]{ new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_TAINT.1"), new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_TAINT"))};
-		getResearchItem("TERRAFORMFOCUS_TAINT", "WITCHGADG", researchAspects, 2, -8, 3, new ItemStack(WGContent.BlockMetalDevice,1,8)).addWarp(3).setPages(pages).setParents("TERRAFORMER","BOTTLETAINT").setConcealed().registerResearchItem();
-		
-		researchAspects = new AspectList().add(Aspect.WATER,8).add(Aspect.MAGIC,4).add(Aspect.EXCHANGE, 2).add(Aspect.ENERGY, 1);
-		pages = new ResearchPage[]{ new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_RIVER.1"), new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_RIVER"))};
-		getResearchItem("TERRAFORMFOCUS_RIVER", "WITCHGADG", researchAspects, 2, -6, 3, new ItemStack(WGContent.BlockMetalDevice,1,10)).setPages(pages).setParents("TERRAFORMER").setConcealed().registerResearchItem();
-		
-		researchAspects = new AspectList().add(Aspect.WATER,8).add(Aspect.MAGIC,4).add(Aspect.EXCHANGE, 2).add(Aspect.ENERGY, 1);
-		pages = new ResearchPage[]{ new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_OCEAN.1"), new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_OCEAN"))};
-		getResearchItem("TERRAFORMFOCUS_OCEAN", "WITCHGADG", researchAspects, 3, -6, 3, new ItemStack(WGContent.BlockMetalDevice,1,11)).setPages(pages).setParents("TERRAFORMFOCUS_RIVER").setConcealed().registerResearchItem();
-		
-		researchAspects = new AspectList().add(Aspect.ELDRITCH,8).add(Aspect.MAGIC,4).add(Aspect.EXCHANGE, 2).add(Aspect.ENERGY, 1);
-		pages = new ResearchPage[]{ new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_END.1"), new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_END"))};
-		getResearchItem("TERRAFORMFOCUS_END", "WITCHGADG", researchAspects, 2, -7, 3, new ItemStack(WGContent.BlockMetalDevice,1,12)).addWarp(3).setPages(pages).setParents("TERRAFORMER").setConcealed().registerResearchItem();
-		
-		researchAspects = new AspectList().add(Aspect.HEAL,8).add(Aspect.MAGIC,4).add(Aspect.EXCHANGE, 2).add(Aspect.ENERGY, 1);
-		pages = new ResearchPage[]{ new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_MAGIC.1"), new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_MAGIC"))};
-		getResearchItem("TERRAFORMFOCUS_MAGIC", "WITCHGADG", researchAspects, -1, -10, 3, new ItemStack(WGContent.BlockMetalDevice,1,13)).setPages(pages).setParents("TERRAFORMFOCUS_JUNGLE").setConcealed().registerResearchItem();
-		 
-		};
+		if (WGConfig.terraformer && WGContent.recipeList.containsKey("TERRAFORMER")) {
+			//ORIGINAL CENTRIFUGE
+			new FakeResearchItem("WG.CENTRIFUGE", "WITCHGADG", "CENTRIFUGE", "ALCHEMY", 0, -5, new ItemStack(ConfigBlocks.blockTube, 1, 2)).setParents("WGPOTIONS").setConcealed().registerResearchItem();
+			//TERRAFORMER
+			researchAspects = new AspectList().add(Aspect.EARTH, 64).add(Aspect.EXCHANGE, 14).add(Aspect.ENERGY, 7).add(Aspect.ORDER, 8).add(Aspect.ENTROPY, 16).add(Aspect.MINE, 24).add(Aspect.COLD, 12).add(Aspect.FIRE, 9).add(Aspect.AURA, 8);
+			pages = new ResearchPage[]{new ResearchPage("witchinggadgets_research_page.TERRAFORMER.1"), new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMER"))};
+			getResearchItem("TERRAFORMER", "WITCHGADG", researchAspects, 0, -7, 5, new ItemStack(WGContent.BlockMetalDevice, 1, 2)).addWarp(10).setPages(pages).setParents("WG.CENTRIFUGE").setConcealed().registerResearchItem();
+
+			researchAspects = new AspectList().add(Aspect.PLANT, 8).add(Aspect.ORDER, 4).add(Aspect.EXCHANGE, 2).add(Aspect.ENERGY, 1);
+			pages = new ResearchPage[]{new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_PLAINS.1"), new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_PLAINS"))};
+			getResearchItem("TERRAFORMFOCUS_PLAINS", "WITCHGADG", researchAspects, -2, -6, 3, new ItemStack(WGContent.BlockMetalDevice, 1, 3)).setPages(pages).setParents("TERRAFORMER").setConcealed().registerResearchItem();
+
+			researchAspects = new AspectList().add(Aspect.COLD, 8).add(Aspect.ORDER, 4).add(Aspect.EXCHANGE, 2).add(Aspect.ENERGY, 1);
+			pages = new ResearchPage[]{new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_COLDTAIGA.1"), new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_COLDTAIGA"))};
+			getResearchItem("TERRAFORMFOCUS_COLDTAIGA", "WITCHGADG", researchAspects, -2, -7, 3, new ItemStack(WGContent.BlockMetalDevice, 1, 4)).setPages(pages).setParents("TERRAFORMER").setConcealed().registerResearchItem();
+
+			researchAspects = new AspectList().add(Aspect.FIRE, 4).add(Aspect.ENTROPY, 8).add(Aspect.EXCHANGE, 2).add(Aspect.ENERGY, 1);
+			pages = new ResearchPage[]{new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_DESERT.1"), new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_DESERT"))};
+			getResearchItem("TERRAFORMFOCUS_DESERT", "WITCHGADG", researchAspects, -2, -8, 3, new ItemStack(WGContent.BlockMetalDevice, 1, 5)).setPages(pages).setParents("TERRAFORMER").setConcealed().registerResearchItem();
+
+			researchAspects = new AspectList().add(Aspect.TREE, 8).add(Aspect.PLANT, 4).add(Aspect.EXCHANGE, 2).add(Aspect.ENERGY, 1);
+			pages = new ResearchPage[]{new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_JUNGLE.1"), new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_JUNGLE"))};
+			getResearchItem("TERRAFORMFOCUS_JUNGLE", "WITCHGADG", researchAspects, -1, -9, 3, new ItemStack(WGContent.BlockMetalDevice, 1, 6)).setPages(pages).setParents("TERRAFORMER").setConcealed().registerResearchItem();
+
+			researchAspects = new AspectList().add(Aspect.DARKNESS, 8).add(Aspect.FIRE, 4).add(Aspect.EXCHANGE, 2).add(Aspect.ENERGY, 1);
+			pages = new ResearchPage[]{new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_HELL.1"), new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_HELL"))};
+			getResearchItem("TERRAFORMFOCUS_HELL", "WITCHGADG", researchAspects, 0, -9, 3, new ItemStack(WGContent.BlockMetalDevice, 1, 7)).addWarp(2).setPages(pages).setParents("TERRAFORMER").setConcealed().registerResearchItem();
+
+			researchAspects = new AspectList().add(Aspect.PLANT, 8).add(Aspect.EARTH, 4).add(Aspect.EXCHANGE, 2).add(Aspect.ENERGY, 1);
+			pages = new ResearchPage[]{new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_MUSHROOM.1"), new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_MUSHROOM"))};
+			getResearchItem("TERRAFORMFOCUS_MUSHROOM", "WITCHGADG", researchAspects, 1, -9, 3, new ItemStack(WGContent.BlockMetalDevice, 1, 9)).setPages(pages).setParents("TERRAFORMER").setConcealed().registerResearchItem();
+
+			researchAspects = new AspectList().add(Aspect.TAINT, 8).add(Aspect.MAGIC, 4).add(Aspect.EXCHANGE, 2).add(Aspect.ENERGY, 1);
+			pages = new ResearchPage[]{new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_TAINT.1"), new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_TAINT"))};
+			getResearchItem("TERRAFORMFOCUS_TAINT", "WITCHGADG", researchAspects, 2, -8, 3, new ItemStack(WGContent.BlockMetalDevice, 1, 8)).addWarp(3).setPages(pages).setParents("TERRAFORMER", "BOTTLETAINT").setConcealed().registerResearchItem();
+
+			researchAspects = new AspectList().add(Aspect.WATER, 8).add(Aspect.MAGIC, 4).add(Aspect.EXCHANGE, 2).add(Aspect.ENERGY, 1);
+			pages = new ResearchPage[]{new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_RIVER.1"), new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_RIVER"))};
+			getResearchItem("TERRAFORMFOCUS_RIVER", "WITCHGADG", researchAspects, 2, -6, 3, new ItemStack(WGContent.BlockMetalDevice, 1, 10)).setPages(pages).setParents("TERRAFORMER").setConcealed().registerResearchItem();
+
+			researchAspects = new AspectList().add(Aspect.WATER, 8).add(Aspect.MAGIC, 4).add(Aspect.EXCHANGE, 2).add(Aspect.ENERGY, 1);
+			pages = new ResearchPage[]{new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_OCEAN.1"), new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_OCEAN"))};
+			getResearchItem("TERRAFORMFOCUS_OCEAN", "WITCHGADG", researchAspects, 3, -6, 3, new ItemStack(WGContent.BlockMetalDevice, 1, 11)).setPages(pages).setParents("TERRAFORMFOCUS_RIVER").setConcealed().registerResearchItem();
+
+			researchAspects = new AspectList().add(Aspect.ELDRITCH, 8).add(Aspect.MAGIC, 4).add(Aspect.EXCHANGE, 2).add(Aspect.ENERGY, 1);
+			pages = new ResearchPage[]{new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_END.1"), new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_END"))};
+			getResearchItem("TERRAFORMFOCUS_END", "WITCHGADG", researchAspects, 2, -7, 3, new ItemStack(WGContent.BlockMetalDevice, 1, 12)).addWarp(3).setPages(pages).setParents("TERRAFORMER").setConcealed().registerResearchItem();
+
+			researchAspects = new AspectList().add(Aspect.HEAL, 8).add(Aspect.MAGIC, 4).add(Aspect.EXCHANGE, 2).add(Aspect.ENERGY, 1);
+			pages = new ResearchPage[]{new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_MAGIC.1"), new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_MAGIC"))};
+			getResearchItem("TERRAFORMFOCUS_MAGIC", "WITCHGADG", researchAspects, -1, -10, 3, new ItemStack(WGContent.BlockMetalDevice, 1, 13)).setPages(pages).setParents("TERRAFORMFOCUS_JUNGLE").setConcealed().registerResearchItem();
+
+		}
 		
 
 		//TODO primal
@@ -522,30 +526,32 @@ public class WGResearch
 
 		}
 		
-		
-		//Dreamcraft-Pearl-Dupe Recipe fix
-		researchAspects = new AspectList().add(Aspect.AURA,64).add(Aspect.ORDER,256).add(Aspect.FIRE,256).add(Aspect.EARTH,256).add(Aspect.WATER,256).add(Aspect.AIR,256).add(Aspect.ENTROPY,256).add(Aspect.MAGIC,64).add(Aspect.TAINT,64);
-		InfusionRecipe PearlDupe = ThaumcraftApi.addInfusionCraftingRecipe("PRIMORDRIALPEARL", GT_ModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L,3), 20, researchAspects, GT_ModHandler.getModItem("dreamcraft", "item.PrimordialPearlFragment", 1L), new ItemStack[] {
-				GT_ModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L),GT_ModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L,6), GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L),
-				GT_ModHandler.getModItem("TwilightForest", "tile.TFAuroraBrick", 1L),GT_ModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L),GT_ModHandler.getModItem("TwilightForest", "tile.TFAuroraBrick", 1L),
-				GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L), GT_ModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L,7),GT_ModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L),
-				GT_ModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L,7), GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L), GT_ModHandler.getModItem("TwilightForest", "tile.TFAuroraBrick", 1L),
-				GT_ModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L),GT_ModHandler.getModItem("TwilightForest", "tile.TFAuroraBrick", 1L), GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L),
-				GT_ModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L,6)});
-		
-		/*
-		 * <Thaumcraft:ItemEldritchObject>, <ThaumicTinkerer:kamiResource:6>, <ThaumicTinkerer:kamiResource:2>,
-		 * <TwilightForest:tile.TFAuroraBrick>, <Thaumcraft:ItemEldritchObject>, <TwilightForest:tile.TFAuroraBrick>,
-		 * <ThaumicTinkerer:kamiResource:2>, <ThaumicTinkerer:kamiResource:7>, <Thaumcraft:ItemEldritchObject>,
-		 * <ThaumicTinkerer:kamiResource:7>, <ThaumicTinkerer:kamiResource:2>, <TwilightForest:tile.TFAuroraBrick>,
-		 * <Thaumcraft:ItemEldritchObject>, <TwilightForest:tile.TFAuroraBrick>, <ThaumicTinkerer:kamiResource:2>,
-		 * <ThaumicTinkerer:kamiResource:6>, 
-		 */
-		
-		ResearchItem PearlDupeResearch = new ResearchItem("PRIMORDRIALPEARL", "WITCHGADG", new AspectList().add(Aspect.AURA,27).add(Aspect.MAGIC,24).add(Aspect.TAINT,21).add(Aspect.ORDER,18).add(Aspect.ENTROPY,15).add(Aspect.AIR,12).add(Aspect.FIRE,9).add(Aspect.EARTH,6).add(Aspect.WATER,3), -1, 3, 20, GT_ModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L,3));
-		pages = new ResearchPage[] {new ResearchPage("tc.research_page.PRIMORDRIALPEARL.1"),new ResearchPage((InfusionRecipe) PearlDupe)};
-		PearlDupeResearch.setPages(pages).setRound().setParentsHidden(new String[] {"PRIMPEARL","ICHORIUM"}).setConcealed().registerResearchItem();
-		ThaumcraftApi.addWarpToResearch("PRIMORDRIALPEARL", 20);
+
+		if(Loader.isModLoaded("dreamcraft")) {
+			//Dreamcraft-Pearl-Dupe Recipe fix
+			researchAspects = new AspectList().add(Aspect.AURA, 64).add(Aspect.ORDER, 256).add(Aspect.FIRE, 256).add(Aspect.EARTH, 256).add(Aspect.WATER, 256).add(Aspect.AIR, 256).add(Aspect.ENTROPY, 256).add(Aspect.MAGIC, 64).add(Aspect.TAINT, 64);
+			InfusionRecipe PearlDupe = ThaumcraftApi.addInfusionCraftingRecipe("PRIMORDRIALPEARL", GT_ModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L, 3), 20, researchAspects, GT_ModHandler.getModItem("dreamcraft", "item.PrimordialPearlFragment", 1L), new ItemStack[]{
+					GT_ModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L), GT_ModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L, 6), GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L),
+					GT_ModHandler.getModItem("TwilightForest", "tile.TFAuroraBrick", 1L), GT_ModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L), GT_ModHandler.getModItem("TwilightForest", "tile.TFAuroraBrick", 1L),
+					GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L), GT_ModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L, 7), GT_ModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L),
+					GT_ModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L, 7), GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L), GT_ModHandler.getModItem("TwilightForest", "tile.TFAuroraBrick", 1L),
+					GT_ModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L), GT_ModHandler.getModItem("TwilightForest", "tile.TFAuroraBrick", 1L), GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L),
+					GT_ModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L, 6)});
+
+			/*
+			 * <Thaumcraft:ItemEldritchObject>, <ThaumicTinkerer:kamiResource:6>, <ThaumicTinkerer:kamiResource:2>,
+			 * <TwilightForest:tile.TFAuroraBrick>, <Thaumcraft:ItemEldritchObject>, <TwilightForest:tile.TFAuroraBrick>,
+			 * <ThaumicTinkerer:kamiResource:2>, <ThaumicTinkerer:kamiResource:7>, <Thaumcraft:ItemEldritchObject>,
+			 * <ThaumicTinkerer:kamiResource:7>, <ThaumicTinkerer:kamiResource:2>, <TwilightForest:tile.TFAuroraBrick>,
+			 * <Thaumcraft:ItemEldritchObject>, <TwilightForest:tile.TFAuroraBrick>, <ThaumicTinkerer:kamiResource:2>,
+			 * <ThaumicTinkerer:kamiResource:6>,
+			 */
+
+			ResearchItem PearlDupeResearch = new ResearchItem("PRIMORDRIALPEARL", "WITCHGADG", new AspectList().add(Aspect.AURA,27).add(Aspect.MAGIC,24).add(Aspect.TAINT,21).add(Aspect.ORDER,18).add(Aspect.ENTROPY,15).add(Aspect.AIR,12).add(Aspect.FIRE,9).add(Aspect.EARTH,6).add(Aspect.WATER,3), -1, 3, 20, GT_ModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L,3));
+			pages = new ResearchPage[] {new ResearchPage("tc.research_page.PRIMORDRIALPEARL.1"),new ResearchPage((InfusionRecipe) PearlDupe)};
+			PearlDupeResearch.setPages(pages).setRound().setParentsHidden(new String[] {"PRIMPEARL","ICHORIUM"}).setConcealed().registerResearchItem();
+			ThaumcraftApi.addWarpToResearch("PRIMORDRIALPEARL", 20);
+		}
 	}
 	
 	public static void modifyStandardThaumcraftResearch()

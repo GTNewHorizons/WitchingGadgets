@@ -53,8 +53,6 @@ import gregtech.api.util.GT_Recipe;
 					+ "required-after:TravellersGear@[1.16.4,);"
 					+ "required-after:gregtech;"
 					+ "required-after:TwilightForest;"
-					+ "required-after:MagicBees;"
-					+ "required-after:dreamcraft;"
 					+ "required-after:TaintedMagic;"
 					+ "after:miscutils;"
 					+ "after:Mystcraft;"
@@ -67,7 +65,7 @@ public class WitchingGadgets
 {
 	public static final String MODID = "WitchingGadgets";
 	public static final String MODNAME = "Witching Gadgets";
-	public static final String VERSION = "${version}";
+	public static final String VERSION = "GRADLETOKEN_VERSION";
 
 	public PlayerTickHandler playerTickHandler;
 

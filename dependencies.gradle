@@ -1,0 +1,35 @@
+// Add your dependencies here
+
+dependencies {
+    compile("com.github.GTNewHorizons:Tainted-Magic:master-SNAPSHOT:dev")
+    compile("com.github.GTNewHorizons:GT5-Unofficial:master-SNAPSHOT:dev")
+    compile("com.github.GTNewHorizons:ForbiddenMagic:master-SNAPSHOT:dev")
+    compile("com.github.GTNewHorizons:twilightforest:master-SNAPSHOT:dev")
+
+    compile("curse.maven:travellers-gear-224440:2262113")
+    compile("thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev")
+
+    compileOnly("com.github.GTNewHorizons:CodeChickenLib:master-SNAPSHOT:dev") {
+        transitive = false
+    }
+    compileOnly("com.github.GTNewHorizons:NotEnoughItems:master-SNAPSHOT:dev") {
+        transitive = false
+    }
+    compileOnly("com.github.GTNewHorizons:ForgeMultipart:master-SNAPSHOT:dev") {
+        transitive = false
+    }
+    compileOnly("com.github.GTNewHorizons:Botania:master-SNAPSHOT:api") {
+        transitive = false
+    }
+    compileOnly("com.github.GTNewHorizons:CraftTweaker:master-SNAPSHOT:dev") {
+        transitive = false
+    }
+    compileOnly("com.github.GTNewHorizons:ZenScript:master-SNAPSHOT") {
+        transitive = false
+    }
+    compileOnly("com.github.GTNewHorizons:MagicBees:unified-build-script-SNAPSHOT:api") {  // TODO: switch to master
+        transitive = false
+    }
+
+    runtime("com.github.GTNewHorizons:Baubles:master-SNAPSHOT:dev")
+}
