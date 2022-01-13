@@ -13,7 +13,8 @@ tile.WG_StoneDevice.blastFurnace.name=炼狱高炉
 
 tile.WG_WoodenDevice.spinningWheel.name=纺车
 tile.WG_WoodenDevice.loom.name=织机
-tile.WG_WoodenDevice.snowGen.name=神秘造雪机
+tile.WG_WoodenDevice.snowGen.name=Thaumic Snowballer
+tile.WG_WoodenDevice.iceGen.name=神秘造雪机
 tile.WG_WoodenDevice.cobbleGen.name=神秘造石机
 tile.WG_WoodenDevice.armorStand.name=衣架
 tile.WG_WoodenDevice.cuttingTable.name=切割台

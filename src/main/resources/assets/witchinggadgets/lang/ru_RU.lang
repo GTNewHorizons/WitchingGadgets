@@ -13,7 +13,8 @@ tile.WG_StoneDevice.blastFurnace.name=Infernal Blast Furnace
 
 tile.WG_WoodenDevice.spinningWheel.name=Spinning Wheel
 tile.WG_WoodenDevice.loom.name=Loom
-tile.WG_WoodenDevice.snowGen.name=Thaumic Ice Solifier
+tile.WG_WoodenDevice.snowGen.name=Thaumic Snowballer
+tile.WG_WoodenDevice.iceGen.name=Thaumic Ice Solidifier
 tile.WG_WoodenDevice.cobbleGen.name=Thaumic Stone Extruder
 tile.WG_WoodenDevice.armorStand.name=Armor Stand
 tile.WG_WoodenDevice.cuttingTable.name=Cutting Table

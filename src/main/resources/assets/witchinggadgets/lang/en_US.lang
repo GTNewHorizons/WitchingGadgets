@@ -13,7 +13,8 @@ tile.WG_StoneDevice.blastFurnace.name=Infernal Blast Furnace
 
 tile.WG_WoodenDevice.spinningWheel.name=Spinning Wheel
 tile.WG_WoodenDevice.loom.name=Loom
-tile.WG_WoodenDevice.snowGen.name=Thaumic Ice Solifier
+tile.WG_WoodenDevice.snowGen.name=Thaumic Snowballer
+tile.WG_WoodenDevice.iceGen.name=Thaumic Ice Solidifier
 tile.WG_WoodenDevice.cobbleGen.name=Thaumic Stone Extruder
 tile.WG_WoodenDevice.armorStand.name=Armor Stand
 tile.WG_WoodenDevice.cuttingTable.name=Cutting Table
@@ -241,9 +242,9 @@ witchinggadgets_research_name.STONEEXTRUDER=Thaumic Stone Extruder
 witchinggadgets_research_text.STONEEXTRUDER=[WG] One can never have enough stone
 witchinggadgets_research_page.STONEEXTRUDER.1=Even those that are not skilled in the arts of Thaumaturgy are aware of how flowing lava will solidify into cobblestone when cooled by water. Those skilled in the magical arts don't want to waste their time on the tedious digging of these stones and have therefore created an automated way.<BR>This machine will create cobblestone, break it and place it either on the ground (if enabled in the config) or into a connected inventory. Work will be halted if the inventory is full or a redstone signal is applied. You can use a wand to rotate it.
 #
-witchinggadgets_research_name.ICESOLIDIFIER=Thaumic Snow Solidifier
-witchinggadgets_research_text.ICESOLIDIFIER=[WG] One can never have enough snow
-witchinggadgets_research_page.ICESOLIDIFIER.1=By manipulating and reversing the Thaumic Stone Extruder you have discovered the Thaumic Snow Solidifier, which is basically the same device, but it produces snow instead of cobble. Now go build an igloo!
+witchinggadgets_research_name.ICESOLIDIFIER=Thaumic Ice Solidifier
+witchinggadgets_research_text.ICESOLIDIFIER=[WG] One can never have enough ice
+witchinggadgets_research_page.ICESOLIDIFIER.1=By manipulating and reversing the Thaumic Stone Extruder you have discovered the Thaumic Ice Solidifier, which is basically the same device, but it produces ice instead of cobble. Now go build an igloo!<BR>You can also make snowballs with a slightly different recipe.
 #
 witchinggadgets_research_name.AGEINGSTONE=Ageing Stone
 witchinggadgets_research_text.AGEINGSTONE=[WG] Time flies when you're having fun!

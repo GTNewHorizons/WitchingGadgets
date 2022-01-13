@@ -33,13 +33,14 @@ import witchinggadgets.common.blocks.tiles.TileEntityCuttingTable;
 import witchinggadgets.common.blocks.tiles.TileEntityLabelLibrary;
 import witchinggadgets.common.blocks.tiles.TileEntitySaunaStove;
 import witchinggadgets.common.blocks.tiles.TileEntitySnowGen;
+import witchinggadgets.common.blocks.tiles.TileEntityIceGen;
 import witchinggadgets.common.blocks.tiles.TileEntitySpinningWheel;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockWGWoodenDevice extends BlockContainer implements IWandable
 {
-	public static String[] subNames = {"spinningWheel","snowGen","cobbleGen","cuttingTable","saunaStove","labelLibrary"};
+	public static String[] subNames = {"spinningWheel","snowGen","cobbleGen","cuttingTable","saunaStove","labelLibrary","iceGen",};
 	IIcon[] icons = new IIcon[subNames.length];
 	IIcon saunaTop;
 
@@ -65,9 +66,6 @@ public class BlockWGWoodenDevice extends BlockContainer implements IWandable
 	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side)
 	{
 		return getIcon(side,world.getBlockMetadata(x, y, z));
-		//		if(world.getBlockMetadata(x, y, z)==4)
-		//			return side==1?saunaTop:icons[4];
-		//		return icons[0];
 	}
 
 	@Override
@@ -237,6 +235,8 @@ public class BlockWGWoodenDevice extends BlockContainer implements IWandable
 		}
 		else if(meta == 5)
 			((TileEntityLabelLibrary)world.getTileEntity(x,y,z)).facing = f;
+		else if(meta == 6)
+			((TileEntityIceGen)world.getTileEntity(x,y,z)).facing = ForgeDirection.getOrientation(f);
 	}
 
 
@@ -273,8 +273,8 @@ public class BlockWGWoodenDevice extends BlockContainer implements IWandable
 			return new TileEntitySaunaStove();
 		case 5:
 			return new TileEntityLabelLibrary();
-			//		case 4:
-			//			return new TileEntityThaumicApplicator();
+		case 6:
+			return new TileEntityIceGen();
 		}
 		return null;
 	}
@@ -398,15 +398,19 @@ public class BlockWGWoodenDevice extends BlockContainer implements IWandable
 	{
 		if(md == 1)
 		{
-			ForgeDirection dir = player.isSneaking() ? ForgeDirection.getOrientation(side).getOpposite() : ForgeDirection.getOrientation(side);
-			((TileEntitySnowGen)world.getTileEntity(x,y,z)).facing = dir; 
+			((TileEntitySnowGen)world.getTileEntity(x,y,z)).facing = player.isSneaking() ? ForgeDirection.getOrientation(side).getOpposite() : ForgeDirection.getOrientation(side);
 			player.worldObj.playSound(x + 0.5D, y + 0.5D, z + 0.5D, "thaumcraft:tool", 0.3F, 1.9F + player.worldObj.rand.nextFloat() * 0.2F, false);
 			player.swingItem();
 		}
 		if(md == 2)
 		{
-			ForgeDirection dir = player.isSneaking() ? ForgeDirection.getOrientation(side).getOpposite() : ForgeDirection.getOrientation(side);
-			((TileEntityCobbleGen)world.getTileEntity(x,y,z)).facing = dir; 
+			((TileEntityCobbleGen)world.getTileEntity(x,y,z)).facing = player.isSneaking() ? ForgeDirection.getOrientation(side).getOpposite() : ForgeDirection.getOrientation(side);
+			player.worldObj.playSound(x + 0.5D, y + 0.5D, z + 0.5D, "thaumcraft:tool", 0.3F, 1.9F + player.worldObj.rand.nextFloat() * 0.2F, false);
+			player.swingItem();
+		}
+		if(md == 6)
+		{
+			((TileEntityIceGen)world.getTileEntity(x,y,z)).facing = player.isSneaking() ? ForgeDirection.getOrientation(side).getOpposite() : ForgeDirection.getOrientation(side);
 			player.worldObj.playSound(x + 0.5D, y + 0.5D, z + 0.5D, "thaumcraft:tool", 0.3F, 1.9F + player.worldObj.rand.nextFloat() * 0.2F, false);
 			player.swingItem();
 		}

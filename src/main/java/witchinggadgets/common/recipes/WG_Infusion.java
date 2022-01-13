@@ -8,7 +8,6 @@ import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentData;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -42,33 +41,34 @@ public class WG_Infusion {
 	registerInfusionRecipe("STONEEXTRUDER","",new ItemStack(WGContent.BlockWoodenDevice,1,2),7, infusionAspects, ItemList.Machine_HV_RockBreaker.get(1L), new ItemStack[] {ItemList.Conveyor_Module_HV.get(1L),new ItemStack(ConfigBlocks.blockCrystal, 1, 5),new ItemStack(Items.lava_bucket),new ItemStack(ConfigBlocks.blockCrystal, 1, 3), ItemList.IC2_EnergyCrystal.getWildcard(1L),new ItemStack(ConfigBlocks.blockCrystal, 1, 3),new ItemStack(Items.water_bucket) ,new ItemStack(ConfigBlocks.blockCrystal, 1, 5)} );
 	
 	infusionAspects = new AspectList().add(Aspect.WEATHER,32).add(Aspect.COLD,48).add(Aspect.TOOL, 64);
-	registerInfusionRecipe("ICESOLIDIFIER","",new ItemStack(WGContent.BlockWoodenDevice,1,1),7, infusionAspects, ItemList.Machine_HV_FluidSolidifier.get(1L), new ItemStack[] {ItemList.Conveyor_Module_HV.get(1L),new ItemStack(ConfigBlocks.blockCrystal, 1, 2),new ItemStack(Blocks.ice),new ItemStack(ConfigBlocks.blockCrystal, 1, 4), ItemList.IC2_EnergyCrystal.getWildcard(1L),new ItemStack(ConfigBlocks.blockCrystal, 1, 4),new ItemStack(Blocks.packed_ice) ,new ItemStack(ConfigBlocks.blockCrystal, 1, 2)} );
-	
-	
+	registerInfusionRecipe("SNOWBALLER","",new ItemStack(WGContent.BlockWoodenDevice,1,1),7, infusionAspects, ItemList.Machine_HV_FluidSolidifier.get(1L), new ItemStack[] {ItemList.Conveyor_Module_HV.get(1L),new ItemStack(ConfigBlocks.blockCrystal, 1, 2),new ItemStack(Items.snowball),new ItemStack(ConfigBlocks.blockCrystal, 1, 4), ItemList.IC2_EnergyCrystal.getWildcard(1L),new ItemStack(ConfigBlocks.blockCrystal, 1, 4),new ItemStack(Blocks.packed_ice) ,new ItemStack(ConfigBlocks.blockCrystal, 1, 2)} );
+
+	infusionAspects = new AspectList().add(Aspect.WEATHER,32).add(Aspect.COLD,48).add(Aspect.TOOL, 64);
+	registerInfusionRecipe("ICESOLIDIFIER","",new ItemStack(WGContent.BlockWoodenDevice,1,6),7, infusionAspects, ItemList.Machine_HV_FluidSolidifier.get(1L), new ItemStack[] {ItemList.Conveyor_Module_HV.get(1L),new ItemStack(ConfigBlocks.blockCrystal, 1, 2),new ItemStack(Blocks.ice),new ItemStack(ConfigBlocks.blockCrystal, 1, 4), ItemList.IC2_EnergyCrystal.getWildcard(1L),new ItemStack(ConfigBlocks.blockCrystal, 1, 4),new ItemStack(Blocks.packed_ice) ,new ItemStack(ConfigBlocks.blockCrystal, 1, 2)} );
+
+
 	if (WGConfig.moduleBag) {
-	if (WGConfig.bagEnder) {
-		infusionAspects = new AspectList().add(Aspect.VOID, 64).add(Aspect.ELDRITCH, 64).add(Aspect.MAGIC, 128).add(Aspect.TRAVEL,8).add(Aspect.TOOL,32);
-		registerInfusionRecipe("ENDERBAG","",new ItemStack(WGContent.ItemBag,1,2),8,infusionAspects,new ItemStack(WGContent.ItemBag,1,0),new ItemStack[] {new ItemStack(Blocks.ender_chest), new ItemStack(WGContent.ItemMaterial,1,3),new ItemStack(WGContent.ItemMaterial,1,5), new ItemStack(Items.ender_eye), new ItemStack(WGContent.ItemMaterial,1,3),new ItemStack(WGContent.ItemMaterial,1,5)});
+		if (WGConfig.bagEnder) {
+			infusionAspects = new AspectList().add(Aspect.VOID, 64).add(Aspect.ELDRITCH, 64).add(Aspect.MAGIC, 128).add(Aspect.TRAVEL,8).add(Aspect.TOOL,32);
+			registerInfusionRecipe("ENDERBAG","",new ItemStack(WGContent.ItemBag,1,2),8,infusionAspects,new ItemStack(WGContent.ItemBag,1,0),new ItemStack[] {new ItemStack(Blocks.ender_chest), new ItemStack(WGContent.ItemMaterial,1,3),new ItemStack(WGContent.ItemMaterial,1,5), new ItemStack(Items.ender_eye), new ItemStack(WGContent.ItemMaterial,1,3),new ItemStack(WGContent.ItemMaterial,1,5)});
+		}
+		if (WGConfig.bagVoid) {
+			infusionAspects = new AspectList().add(Aspect.VOID, 256).add(Aspect.ELDRITCH, 32).add(Aspect.ENTROPY, 64);
+			registerInfusionRecipe("VOIDBAG","",new ItemStack(WGContent.ItemBag,1,1),6,infusionAspects,new ItemStack(WGContent.ItemBag,1,0),new ItemStack[] {GT_ModHandler.getModItem("Railcraft", "machine.beta", 1L, 11), new ItemStack(WGContent.ItemMaterial,1,3), new ItemStack(ConfigItems.itemResource,1,17), new ItemStack(WGContent.ItemMaterial,1,3) });
+		}
+		if (WGConfig.capeSpectral) {
+			infusionAspects = new AspectList().add(Aspect.SOUL, 48).add(Aspect.TRAVEL, 48).add(Aspect.ELDRITCH, 24).add(Aspect.SENSES,24);
+			registerInfusionRecipe("CLOAK_SPECTRAL","",new ItemStack(WGContent.ItemCloak,1,1),5,infusionAspects,new ItemStack(WGContent.ItemCloak),new ItemStack[] {new ItemStack(Items.potionitem,1,8270),new ItemStack(WGContent.ItemMaterial,1,5),new ItemStack(Items.ender_pearl),new ItemStack(WGContent.ItemMaterial,1,5)});
+		}
 	}
-	if (WGConfig.bagVoid) {
-		infusionAspects = new AspectList().add(Aspect.VOID, 256).add(Aspect.ELDRITCH, 32).add(Aspect.ENTROPY, 64);
-		registerInfusionRecipe("VOIDBAG","",new ItemStack(WGContent.ItemBag,1,1),6,infusionAspects,new ItemStack(WGContent.ItemBag,1,0),new ItemStack[] {GT_ModHandler.getModItem("Railcraft", "machine.beta", 1L, 11), new ItemStack(WGContent.ItemMaterial,1,3), new ItemStack(ConfigItems.itemResource,1,17), new ItemStack(WGContent.ItemMaterial,1,3) });
-	}
-	
-	if (WGConfig.capeSpectral) {
-		infusionAspects = new AspectList().add(Aspect.SOUL, 48).add(Aspect.TRAVEL, 48).add(Aspect.ELDRITCH, 24).add(Aspect.SENSES,24);
-		registerInfusionRecipe("CLOAK_SPECTRAL","",new ItemStack(WGContent.ItemCloak,1,1),5,infusionAspects,new ItemStack(WGContent.ItemCloak),new ItemStack[] {new ItemStack(Items.potionitem,1,8270),new ItemStack(WGContent.ItemMaterial,1,5),new ItemStack(Items.ender_pearl),new ItemStack(WGContent.ItemMaterial,1,5)});
-	}
-	}
-	if(Config.allowMirrors)
-	{
+
+	if(Config.allowMirrors) {
 		//WALLMIRROR
 		infusionAspects = new AspectList().add(Aspect.VOID, 20).add(Aspect.TRAVEL, 20).add(Aspect.ELDRITCH, 20).add(Aspect.CRYSTAL, 20);
 		registerInfusionRecipe("WALLMIRROR","",new ItemStack(WGContent.BlockWallMirror),8,infusionAspects,new ItemStack(ConfigBlocks.blockMirror),new ItemStack[] {new ItemStack(ConfigItems.itemFocusPortableHole),new ItemStack(ConfigItems.itemShard, 1, 5),new ItemStack(Items.ender_pearl),new ItemStack(Items.gold_ingot),new ItemStack(Items.gold_ingot),new ItemStack(Blocks.quartz_block,1,1)});
-	
 	}
 
-	/**
+	/*
 	 * INFUSION
 	 */
 	
@@ -108,7 +108,6 @@ public class WG_Infusion {
 		ThaumcraftApi.addWarpToItem(new ItemStack(WGContent.BlockMetalDevice, 1, 12), 2);
 
 		infusionAspects = new AspectList().add(Aspect.EARTH, 32).add(Aspect.EXCHANGE, 16);
-		;
 		registerInfusionRecipe("TERRAFORMFOCUS_PLAINS", "", new ItemStack(WGContent.BlockMetalDevice, 1, 3), 3, infusionAspects, new ItemStack(Blocks.grass), new ItemStack[]{gregtech.api.util.GT_ModHandler.getModItem("thaumicbases", "blockSalisMundus", 1), GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L), GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L), new ItemStack(ConfigBlocks.blockTube, 1, 0), GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L), GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L)});
 
 		infusionAspects = new AspectList().add(Aspect.COLD, 32).add(Aspect.EXCHANGE, 16);
@@ -134,7 +133,6 @@ public class WG_Infusion {
 	
 	infusionAspects = new AspectList().add(Aspect.SENSES,24).add(Aspect.WEATHER,8).add(Aspect.WATER, 64).add(Aspect.HEAL,16);
 	registerInfusionRecipe("SAUNASTOVE","",new ItemStack(WGContent.BlockWoodenDevice,1,4), 5, infusionAspects,ItemList.Machine_MV_FluidHeater.get(1L),new ItemStack[] { ItemList.Cover_Drain.get(1L),new ItemStack(Blocks.stone_slab), new ItemStack(ConfigBlocks.blockWoodenDevice, 1, 6), new ItemStack(ConfigBlocks.blockWoodenDevice, 1, 6), new ItemStack(ConfigBlocks.blockWoodenDevice, 1, 6), new ItemStack(ConfigBlocks.blockWoodenDevice, 1, 6), new ItemStack(ConfigBlocks.blockWoodenDevice, 1, 6),new ItemStack(Blocks.stone_slab)});
-
 	
 	if(Config.allowMirrors)
 	{
@@ -175,13 +173,6 @@ public class WG_Infusion {
 		registerInfusionRecipe("PRIMORDIALARMOR","_BOOTS",new ItemStack(WGContent.ItemPrimordialBoots),10,infusionAspects,GT_OreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L),new ItemStack[] {new ItemStack(ConfigItems.itemEldritchObject,1,3), new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource,1,15), new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemEldritchObject,1,3), GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Shadow, 1L), GT_ModHandler.getModItem("TaintedMagic", "ItemVoidwalkerBoots", 1L), GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Shadow, 1L), new ItemStack(ConfigItems.itemEldritchObject,1,3), new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource,1,15), new ItemStack(ConfigItems.itemWispEssence) });
 		//ThaumcraftApi.addWarpToItem(new ItemStack(WGContent.ItemPrimordialAxe), 2);
 
-		//		for(ItemPrimordialArmor.PrimordialArmorUpgrade pau : ItemPrimordialArmor.PrimordialArmorUpgrade.values())
-		//		{
-		//			registerInfusionRecipe("PRIMODIALARMORUPGRADE_"+pau,"_HELMET",new Object[]{"primordialUpgrade",new NBTTagByte((byte)pau.ordinal())},8,pau.getAspects(),new ItemStack(WGContent.ItemPrimordialHelm),pau.getCompenents());
-		//			registerInfusionRecipe("PRIMODIALARMORUPGRADE_"+pau,"_CUIRASS",new Object[]{"primordialUpgrade",new NBTTagByte((byte)pau.ordinal())},8,pau.getAspects(),new ItemStack(WGContent.ItemPrimordialChest),pau.getCompenents());
-		//			registerInfusionRecipe("PRIMODIALARMORUPGRADE_"+pau,"_GREAVES",new Object[]{"primordialUpgrade",new NBTTagByte((byte)pau.ordinal())},8,pau.getAspects(),new ItemStack(WGContent.ItemPrimordialLegs),pau.getCompenents());
-		//			registerInfusionRecipe("PRIMODIALARMORUPGRADE_"+pau,"_BOOTS",new Object[]{"primordialUpgrade",new NBTTagByte((byte)pau.ordinal())},8,pau.getAspects(),new ItemStack(WGContent.ItemPrimordialBoots),pau.getCompenents());
-		//		}
 		infusionAspects = new AspectList().add(Aspect.SENSES,256).add(Aspect.AURA,128).add(Aspect.ARMOR,128);
 		registerInfusionRecipe("HELMGOGGLES","_PRIMORDIAL",new Object[]{"goggles",new NBTTagByte((byte)1)},5,infusionAspects,new ItemStack(WGContent.ItemPrimordialHelm,1,32767),new ItemStack[] { new ItemStack(Items.slime_ball), new ItemStack(ConfigItems.itemGoggles, 1, 32767) });
 		infusionAspects = new AspectList().add(Aspect.MIND,512).add(Aspect.HEAL,512).add(Aspect.ARMOR, 128);
@@ -192,9 +183,9 @@ public class WG_Infusion {
 		registerInfusionRecipe("MASKSIPPINGFIEND","_PRIMORDIAL",new Object[]{"mask",new NBTTagByte((byte)2)},8,infusionAspects,new ItemStack(WGContent.ItemPrimordialHelm,1,32767),new ItemStack[] { new ItemStack(Items.dye, 1, 1), new ItemStack(Items.iron_ingot), new ItemStack(Items.leather), new ItemStack(Items.ghast_tear), new ItemStack(Items.milk_bucket), new ItemStack(Items.iron_ingot) });
 
 	}
-	
-	
-	/**
+
+
+	/*
 	 * ENCHANTMENT
 	 */
 	infusionAspects = new AspectList().add(Aspect.DARKNESS, 48).add(Aspect.CRYSTAL, 48).add(Aspect.MAGIC, 48).add(Aspect.ARMOR,32).add(Aspect.AURA,24).add(Aspect.SOUL,8);

@@ -62,7 +62,7 @@ public class TileRenderSnowGen extends TileEntitySpecialRenderer
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glEnable(3042);
 		GL11.glBlendFunc(770, 771);
-		ClientUtilities.bindTexture("textures/blocks/ice.png");
+		ClientUtilities.bindTexture("textures/blocks/snow.png");
 		TileRenderCobbleGen.renderPixelBlock(tes, 0.1875, 0.25, 0.1875, 0.375, 0.5, 0.375, 0,0,1,1);
 		TileRenderCobbleGen.renderPixelBlock(tes, 0.375, 0.25, 0.1875, 0.625, 0.5625, 0.4375, 0,0,1,1);
 		TileRenderCobbleGen.renderPixelBlock(tes, 0.15625, 0.25, 0.5, 0.4375, 0.5625, 0.8125, 0,0,1,1);

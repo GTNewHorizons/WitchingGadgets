@@ -22,7 +22,7 @@ public class WGConfig
 	public static Block[] coremod_worldgenValidBase_HilltopStones,coremod_worldgenValidBase_EldritchRing;
 
 	public static float radialSpeed;
-	public static final String[] DEFUALTCLUSTERS={
+	public static final String[] DEFAULTCLUSTERS ={
 		"Infinity",
 		"Infinity Catalyst",
 		"Neutronium",
@@ -78,7 +78,7 @@ public class WGConfig
 		allowClusters = config.get("Ore/Crucible", "Enable clusters", true, "Set this to false to disable clusters, useful when you are using AOBD.").getBoolean(true);
 		allowTransmutations = config.get("Ore/Crucible", "Enable transmutations", true, "Set this to false to disable nugget transmutations, this should fix the infinite loop glitch").getBoolean(true);
 		terraformer = config.getBoolean("Enable Terraformer", "Other Options", true, "If the Terraformer is enabled");
-		tripplingClusterList = config.get("Ore/Crucible", "Not Trippling Cluster List", DEFUALTCLUSTERS, "A list of ore names for which no native Cluster will get generated").getStringList();
+		tripplingClusterList = config.get("Ore/Crucible", "Not Trippling Cluster List", DEFAULTCLUSTERS, "A list of ore names for which no native Cluster will get generated").getStringList();
 		
 		blocksforWGBF = config.get("Other Options", "Blocks for the WG Blast Furnace", DEFAULTBLOCKS, "Insert the Modname and the blockname for the WG Blast Furnace. The first pair is for the construction of the main ofen, the second pair for the stairs on top. Must be exactly 2 Values!").getStringList();
 		//search
@@ -152,13 +152,11 @@ public class WGConfig
 		//spawn settings for structures
 		String[] cm_allowedSpawnblocks_HilltopStones = config.getStringList("Valid generation bases: HilltopStones", "Other", new String[]{"minecraft:stone","minecraft:sand","minecraft:packed_ice","minecraft:grass","minecraft:gravel","minecraft:dirt"}, "A list of valid blocks that Thaumcraft's hilltop stones can spawn upon");
 		Set<Block> validBlocks = new HashSet();
-		for(int ss=0; ss<cm_allowedSpawnblocks_HilltopStones.length; ss++)
-		{
-			String[] ssA = cm_allowedSpawnblocks_HilltopStones[ss].split(":",2);
-			if(ssA.length>1)
-			{
+		for (String cm_allowedSpawnblocks_hilltopStone : cm_allowedSpawnblocks_HilltopStones) {
+			String[] ssA = cm_allowedSpawnblocks_hilltopStone.split(":", 2);
+			if (ssA.length > 1) {
 				Block b = GameRegistry.findBlock(ssA[0], ssA[1]);
-				if(b!=null)
+				if (b != null)
 					validBlocks.add(b);
 			}
 		}
@@ -166,13 +164,11 @@ public class WGConfig
 
 		String[] cm_allowedSpawnblocks_EldritchRing = config.getStringList("Valid generation bases: EldritchRing", "Other", new String[]{"minecraft:stone","minecraft:sand","minecraft:packed_ice","minecraft:grass","minecraft:gravel","minecraft:dirt"}, "A list of valid blocks that Thaumcraft's eldritch obelisks can spawn upon");
 		validBlocks = new HashSet();
-		for(int ss=0; ss<cm_allowedSpawnblocks_EldritchRing.length; ss++)
-		{
-			String[] ssA = cm_allowedSpawnblocks_EldritchRing[ss].split(":",2);
-			if(ssA.length>1)
-			{
+		for (String s : cm_allowedSpawnblocks_EldritchRing) {
+			String[] ssA = s.split(":", 2);
+			if (ssA.length > 1) {
 				Block b = GameRegistry.findBlock(ssA[0], ssA[1]);
-				if(b!=null)
+				if (b != null)
 					validBlocks.add(b);
 			}
 		}

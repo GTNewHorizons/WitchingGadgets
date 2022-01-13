@@ -44,6 +44,7 @@ import witchinggadgets.client.render.TileRenderEssentiaPump;
 import witchinggadgets.client.render.TileRenderLabelLibrary;
 import witchinggadgets.client.render.TileRenderSaunaStove;
 import witchinggadgets.client.render.TileRenderSnowGen;
+import witchinggadgets.client.render.TileRenderIceGen;
 import witchinggadgets.client.render.TileRenderSpinningWheel;
 import witchinggadgets.client.render.TileRenderTerraformFocus;
 import witchinggadgets.client.render.TileRenderTerraformer;
@@ -57,6 +58,7 @@ import witchinggadgets.common.blocks.tiles.TileEntityEssentiaPump;
 import witchinggadgets.common.blocks.tiles.TileEntityLabelLibrary;
 import witchinggadgets.common.blocks.tiles.TileEntitySaunaStove;
 import witchinggadgets.common.blocks.tiles.TileEntitySnowGen;
+import witchinggadgets.common.blocks.tiles.TileEntityIceGen;
 import witchinggadgets.common.blocks.tiles.TileEntitySpinningWheel;
 import witchinggadgets.common.blocks.tiles.TileEntityTerraformFocus;
 import witchinggadgets.common.blocks.tiles.TileEntityTerraformer;
@@ -82,6 +84,7 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWallMirror.class, new TileRenderWallMirror());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySpinningWheel.class, new TileRenderSpinningWheel());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySnowGen.class, new TileRenderSnowGen());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityIceGen.class, new TileRenderIceGen());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCobbleGen.class, new TileRenderCobbleGen());
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCuttingTable.class, new TileRenderCuttingTable());
@@ -129,7 +132,7 @@ public class ClientProxy extends CommonProxy
 		if(ID == 0)return new GuiSpinningWheel(player.inventory, (TileEntitySpinningWheel)tile);
 
 		if(ID == 3)return new GuiBag(player.inventory, world);
-		if(ID==4||ID==5)return new GuiCloakBag(player.inventory, world, ID==4?TravellersGearAPI.getExtendedInventory(player)[0]:BaublesApi.getBaubles(player).getStackInSlot(3) );
+		if(ID == 4 || ID == 5)return new GuiCloakBag(player.inventory, world, ID==4?TravellersGearAPI.getExtendedInventory(player)[0]:BaublesApi.getBaubles(player).getStackInSlot(3) );
 		
 		if(ID == 6)return new GuiPatchedFocusPouch(player.inventory, world, x, y, z);
 

@@ -130,23 +130,12 @@ public class ClientEventHandler
 			WitchingGadgets.packetHandler.sendToServer(new MessagePrimordialGlove(player, (byte)0, sel));
 			//WGPacketPipeline.INSTANCE.sendToServer(new PacketPrimordialGlove(player, (byte)0, sel));
 		}
-		//		if(thaumSearchField!=null)
-		//		{
-		//			Minecraft mc = Minecraft.getMinecraft();
-		//
-		//			int mx = Mouse.getEventX() * mc.currentScreen.width / mc.displayWidth;
-		//			int my = mc.currentScreen.height - Mouse.getEventY() * mc.currentScreen.height / mc.displayHeight - 1;
-		//			//			int k = Mouse.getEventButton();
-		//			thaumSearchField.mouseClicked(mx, my, event.button);
-		//		}
 	}
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void renderGameOverlay(RenderGameOverlayEvent.Pre event)
 	{
-		//		if(true)
-		//			return;
 		if(TileEntitySaunaStove.targetedPlayers.containsKey(Minecraft.getMinecraft().thePlayer.getEntityId()) && event.type == RenderGameOverlayEvent.ElementType.HELMET)
 		{
 			GL11.glDisable(GL11.GL_DEPTH_TEST);
@@ -320,13 +309,6 @@ public class ClientEventHandler
 				ResearchCategories.researchCategories.get("WITCHGADG").background = WGResearch.wgbackgrounds[0];
 		}
 	}
-
-	/*@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public void initializeIcons(TextureStitchEvent.Post event)
-	{
-		ItemClusters.setupClusters();
-	}*/
 
 	static float spectralAlpha = .5f;
 	@SideOnly(Side.CLIENT)

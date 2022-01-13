@@ -12,11 +12,7 @@ import org.lwjgl.opengl.GL11;
 import thaumcraft.common.blocks.BlockMetalDevice;
 import thaumcraft.common.config.ConfigBlocks;
 import witchinggadgets.client.ClientUtilities;
-import witchinggadgets.common.blocks.tiles.TileEntityCobbleGen;
-import witchinggadgets.common.blocks.tiles.TileEntityCuttingTable;
-import witchinggadgets.common.blocks.tiles.TileEntityLabelLibrary;
-import witchinggadgets.common.blocks.tiles.TileEntitySnowGen;
-import witchinggadgets.common.blocks.tiles.TileEntitySpinningWheel;
+import witchinggadgets.common.blocks.tiles.*;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 
@@ -30,45 +26,43 @@ public class BlockRenderWoodenDevice implements ISimpleBlockRenderingHandler
 	{
 		GL11.glPushMatrix();
 		try{
-			if(metadata == 0)
-			{
-				GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
-				GL11.glTranslatef(-.5F, 0F, -1F);
-				TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntitySpinningWheel(), 0.0D, 0.0D, 0.0D, 0.0F);
+			switch (metadata) {
+				case 0:
+					GL11.glRotatef(180.0F, 0.0F, 1.0F, 0.0F);
+					GL11.glTranslatef(-.5F, 0F, -1F);
+					TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntitySpinningWheel(), 0.0D, 0.0D, 0.0D, 0.0F);
+					break;
+				case 1:
+				case 6:
+					GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
+					GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+					TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntityIceGen(), 0.0D, 0.0D, 0.0D, 0.0F);
+					break;
+				case 2:
+					GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
+					GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+					TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntityCobbleGen(), 0.0D, 0.0D, 0.0D, 0.0F);
+					break;
+				case 3:
+					TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntityCuttingTable(), 0.0D, 0.0D, 0.0D, 0.0F);
+					break;
+				case 4:
+					renderer.setRenderBounds(0, 0, 0, 1, .75f, 1);
+					ClientUtilities.drawStandardBlock(block, metadata, renderer);
+					renderer.setRenderBounds(0, .75, 0, 1, 1, .1875);
+					ClientUtilities.drawStandardBlock(block, metadata, renderer);
+					renderer.setRenderBounds(0, .75, .8125, 1, 1, 1);
+					ClientUtilities.drawStandardBlock(block, metadata, renderer);
+					renderer.setRenderBounds(0, .75, .1875, .1875, 1, .8125);
+					ClientUtilities.drawStandardBlock(block, metadata, renderer);
+					renderer.setRenderBounds(.8125, .75, .1875, 1, 1, .8125);
+					ClientUtilities.drawStandardBlock(block, metadata, renderer);
+					break;
+				case 5:
+					TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntityLabelLibrary(), 0.0D, 0.0D, 0.0D, 0.0F);
+					break;
 			}
-			if(metadata == 1)
-			{
-				GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
-				GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-				TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntityCobbleGen(), 0.0D, 0.0D, 0.0D, 0.0F);
-			}
-			if(metadata == 2)
-			{
-				GL11.glRotatef(90.0F, 0.0F, 1.0F, 0.0F);
-				GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-				TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntityCobbleGen(), 0.0D, 0.0D, 0.0D, 0.0F);
-			}
-			if(metadata == 3)
-				TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntityCuttingTable(), 0.0D, 0.0D, 0.0D, 0.0F);
-			if(metadata == 4)
-			{
-				renderer.setRenderBounds(0, 0, 0, 1, .75f, 1);
-				ClientUtilities.drawStandardBlock(block, metadata, renderer);
-				renderer.setRenderBounds(0, .75, 0, 1, 1, .1875);
-				ClientUtilities.drawStandardBlock(block, metadata, renderer);
-				renderer.setRenderBounds(0, .75, .8125, 1, 1, 1);
-				ClientUtilities.drawStandardBlock(block, metadata, renderer);
-				renderer.setRenderBounds(0, .75, .1875, .1875, 1, .8125);
-				ClientUtilities.drawStandardBlock(block, metadata, renderer);
-				renderer.setRenderBounds(.8125, .75, .1875, 1, 1, .8125);
-				ClientUtilities.drawStandardBlock(block, metadata, renderer);
-
-			}
-			if(metadata == 5)
-			{
-				TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntityLabelLibrary(), 0.0D, 0.0D, 0.0D, 0.0F);
-			}
-		}catch(Exception e)
+		} catch(Exception e)
 		{
 			e.printStackTrace();
 		}
