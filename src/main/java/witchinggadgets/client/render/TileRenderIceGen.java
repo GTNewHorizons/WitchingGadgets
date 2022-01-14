@@ -17,8 +17,9 @@ public class TileRenderIceGen extends TileEntitySpecialRenderer
 		GL11.glPushMatrix();
 
 		Tessellator tes = Tessellator.instance;
+		GL11.glPushAttrib(GL11.GL_LIGHTING_BIT);
 		GL11.glDisable(GL11.GL_LIGHTING);
-		//		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+
 		int tick = tile.tick;
 		GL11.glTranslatef((float)x, (float)y, (float)z);
 
@@ -105,7 +106,7 @@ public class TileRenderIceGen extends TileEntitySpecialRenderer
 				renderPixelBlock(tes, 0.3125, 0.3125, 0.3125, 0.6875, 0.6875, 0.6875, 0,0,1,1);
 		}
 
-		GL11.glEnable(GL11.GL_LIGHTING);
+		GL11.glPopAttrib();
 
 		GL11.glPopMatrix();
 	}
