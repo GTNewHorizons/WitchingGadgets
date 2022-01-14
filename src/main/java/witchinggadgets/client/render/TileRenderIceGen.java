@@ -17,7 +17,7 @@ public class TileRenderIceGen extends TileEntitySpecialRenderer
 		GL11.glPushMatrix();
 
 		Tessellator tes = Tessellator.instance;
-		GL11.glPushAttrib(GL11.GL_LIGHTING_BIT);
+		GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
 		GL11.glDisable(GL11.GL_LIGHTING);
 
 		int tick = tile.tick;

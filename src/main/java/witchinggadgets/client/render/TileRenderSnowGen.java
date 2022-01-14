@@ -59,7 +59,7 @@ public class TileRenderSnowGen extends TileEntitySpecialRenderer
 
 		
 		// TODO INDICATE ACTIVE STATUS
-		GL11.glPushAttrib(GL11.GL_LIGHTING_BIT);
+		GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glEnable(3042);
 		GL11.glBlendFunc(770, 771);
