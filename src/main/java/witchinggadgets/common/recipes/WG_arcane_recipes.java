@@ -43,13 +43,13 @@ public class WG_arcane_recipes {
 
 	
 	//ADVANCEDSCRIBINGTOOLS
-	registerShapelessArcaneRecipe("ADVANCEDSCRIBINGTOOLSrefill", "", new ItemStack(WGContent.ItemAdvancedScribingTools), new AspectList().add(Aspect.AIR, 10).add(Aspect.FIRE,10), new Object[] { new ItemStack(WGContent.ItemAdvancedScribingTools, 1, 32767), "dustSmallGold",Items.glowstone_dust});
-	
+    registerShapelessArcaneRecipe("ADVANCEDSCRIBINGTOOLS", "refill", new ItemStack(WGContent.ItemAdvancedScribingTools), new AspectList().add(Aspect.AIR, 10).add(Aspect.FIRE,10), new Object[] { new ItemStack(WGContent.ItemAdvancedScribingTools, 1, 32767), "dustSmallGold",Items.glowstone_dust});
+
 	if (WGModCompat.loaded_Twilight)
 		registerShapelessArcaneRecipe("ADVANCEDSCRIBINGTOOLS","",new ItemStack(WGContent.ItemAdvancedScribingTools), new AspectList().add(Aspect.AIR, 50).add(Aspect.FIRE,50).add(Aspect.ORDER, 50).add(Aspect.ENTROPY,50).add(Aspect.EARTH,50).add(Aspect.WATER,50),new Object[] { "dustGold","dustGold","dustGold",Items.glowstone_dust,Items.glowstone_dust,Items.glowstone_dust,Items.glowstone_dust, new ItemStack(WGModCompat.tfMagicMapFocus), thaumcraft.api.ItemApi.getItem("itemEssence", 0)});
 	else
 		registerShapelessArcaneRecipe("ADVANCEDSCRIBINGTOOLS","",new ItemStack(WGContent.ItemAdvancedScribingTools), new AspectList().add(Aspect.AIR, 50).add(Aspect.FIRE,50).add(Aspect.ORDER, 50).add(Aspect.ENTROPY,50).add(Aspect.EARTH,50).add(Aspect.WATER,50),new Object[] { "dustGold", new ItemStack(Items.feather), thaumcraft.api.ItemApi.getItem("itemEssence", 0)});
-	
+
 
 	//SCANCAMERA
 	craftingAspects = new AspectList().add(Aspect.AIR, 20).add(Aspect.EARTH, 20).add(Aspect.ORDER, 10);
@@ -152,15 +152,15 @@ public class WG_arcane_recipes {
 			'G', new ItemStack(Items.gold_ingot));
 	}
 	
-	private static void registerArcaneRecipe(String tag, String tagAddon, ItemStack result, AspectList craftingAspects, Object... recipe)
+	private static void registerArcaneRecipe(String research, String tagAddon, ItemStack result, AspectList craftingAspects, Object... recipe)
 	{
-		ShapedArcaneRecipe arcaneRecipe = ThaumcraftApi.addArcaneCraftingRecipe(tag,result,craftingAspects,recipe);
-		WGContent.recipeList.put(tag+tagAddon, arcaneRecipe);
+		ShapedArcaneRecipe arcaneRecipe = ThaumcraftApi.addArcaneCraftingRecipe(research,result,craftingAspects,recipe);
+		WGContent.recipeList.put(research+tagAddon, arcaneRecipe);
 	}
 
-	private static void registerShapelessArcaneRecipe(String tag, String tagAddon, ItemStack result, AspectList craftingAspects, Object... recipe)
+	private static void registerShapelessArcaneRecipe(String research, String tagAddon, ItemStack result, AspectList craftingAspects, Object... recipe)
 	{
-		ShapelessArcaneRecipe arcaneRecipe = ThaumcraftApi.addShapelessArcaneCraftingRecipe(tag,result,craftingAspects,recipe);
-		WGContent.recipeList.put(tag+tagAddon, arcaneRecipe);
+		ShapelessArcaneRecipe arcaneRecipe = ThaumcraftApi.addShapelessArcaneCraftingRecipe(research,result,craftingAspects,recipe);
+		WGContent.recipeList.put(research+tagAddon, arcaneRecipe);
 	}
 }
