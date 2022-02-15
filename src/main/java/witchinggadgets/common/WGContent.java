@@ -191,11 +191,11 @@ public class WGContent
 	    
 		while (entries.hasNext()) {
 			Map.Entry<String, Materials> entry = entries.next();
-			if (!b.contains(entry.getValue().mLocalizedName) && !OreDictionary.getOres("ore"+entry.getValue().mLocalizedName.replaceAll(" ", "")).isEmpty()) {
+			if (!b.contains(entry.getValue().mDefaultLocalName) && !OreDictionary.getOres("ore"+entry.getValue().mDefaultLocalName.replaceAll(" ", "")).isEmpty()) {
 			Integer rgb = ((entry.getValue().getRGBA()[0]&0x0ff) << 16) | ((entry.getValue().getRGBA()[1]&0x0ff) << 8) | (entry.getValue().getRGBA()[2]&0x0ff);
-			L.add(entry.getValue().mLocalizedName.replaceAll(" ", ""));
-			GT_Cluster_Color.put(entry.getValue().mLocalizedName.replaceAll(" ", ""), new Integer[]{ClientUtilities.getVibrantColourToInt(rgb), entry.getValue().getRGBA()[0]>entry.getValue().getRGBA()[2]&&entry.getValue().getRGBA()[1]>entry.getValue().getRGBA()[2]?2 :entry.getValue().getRGBA()[0]>entry.getValue().getRGBA()[1]&&entry.getValue().getRGBA()[0]>entry.getValue().getRGBA()[2]?1 : 0});
-			ClusterEBF.put(entry.getValue().mLocalizedName.replaceAll(" ", ""), entry.getValue().mBlastFurnaceRequired);
+			L.add(entry.getValue().mDefaultLocalName.replaceAll(" ", ""));
+			GT_Cluster_Color.put(entry.getValue().mDefaultLocalName.replaceAll(" ", ""), new Integer[]{ClientUtilities.getVibrantColourToInt(rgb), entry.getValue().getRGBA()[0]>entry.getValue().getRGBA()[2]&&entry.getValue().getRGBA()[1]>entry.getValue().getRGBA()[2]?2 :entry.getValue().getRGBA()[0]>entry.getValue().getRGBA()[1]&&entry.getValue().getRGBA()[0]>entry.getValue().getRGBA()[2]?1 : 0});
+			ClusterEBF.put(entry.getValue().mDefaultLocalName.replaceAll(" ", ""), entry.getValue().mBlastFurnaceRequired);
 			if (!entry.getValue().mBlastFurnaceRequired && (entry.getValue().getMolten(144) != null || entry.getValue().getFluid(144) != null) )
 				if (entry.getValue().getMolten(144) != null )
 					ClusterSmeltable.put(entry.getValue().mLocalizedName.replaceAll(" ", ""), entry.getValue().getMolten(288).getFluid());
