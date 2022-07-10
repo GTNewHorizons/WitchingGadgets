@@ -1,14 +1,14 @@
-//package witchinggadgets.client.render;
+// package witchinggadgets.client.render;
 //
-//import net.minecraft.client.model.ModelBase;
-//import net.minecraftforge.client.model.IModelCustom;
+// import net.minecraft.client.model.ModelBase;
+// import net.minecraftforge.client.model.IModelCustom;
 //
-//import org.lwjgl.opengl.GL11;
+// import org.lwjgl.opengl.GL11;
 //
-//import witchinggadgets.client.ClientUtilities;
+// import witchinggadgets.client.ClientUtilities;
 //
-//public class ModelSpinningWheel extends ModelBase
-//{
+// public class ModelSpinningWheel extends ModelBase
+// {
 //	private IModelCustom model;
 //
 //	public ModelSpinningWheel()
@@ -39,4 +39,4 @@
 //		GL11.glRotated(angle, 0, -1, 0);
 //		GL11.glTranslatef(0, 0.105F, -0.725F);
 //	}
-//}
+// }

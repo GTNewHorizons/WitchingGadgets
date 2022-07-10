@@ -1,35 +1,35 @@
-//package witchinggadgets.common.items;
+// package witchinggadgets.common.items;
 //
-//import java.util.List;
+// import java.util.List;
 //
-//import net.minecraft.client.model.ModelBiped;
-//import net.minecraft.client.renderer.texture.IIconRegister;
-//import net.minecraft.creativetab.CreativeTabs;
-//import net.minecraft.entity.Entity;
-//import net.minecraft.entity.EntityLivingBase;
-//import net.minecraft.entity.player.EntityPlayer;
-//import net.minecraft.item.Item;
-//import net.minecraft.item.ItemStack;
-//import net.minecraft.nbt.NBTTagCompound;
-//import net.minecraft.nbt.NBTTagList;
-//import net.minecraft.util.EnumChatFormatting;
-//import net.minecraft.util.IIcon;
-//import net.minecraft.util.StatCollector;
-//import net.minecraft.world.World;
-//import thaumcraft.api.IVisDiscountGear;
-//import thaumcraft.api.aspects.Aspect;
-//import thaumcraft.api.aspects.AspectList;
-//import thaumcraft.common.items.armor.ItemRunicArmor;
-//import witchinggadgets.WitchingGadgets;
-//import witchinggadgets.client.ModelCloak;
-//import witchinggadgets.client.WGGraphicUtilities;
-//import witchinggadgets.common.WGContent;
-//import witchinggadgets.common.util.Cloak;
-//import cpw.mods.fml.relauncher.Side;
-//import cpw.mods.fml.relauncher.SideOnly;
+// import net.minecraft.client.model.ModelBiped;
+// import net.minecraft.client.renderer.texture.IIconRegister;
+// import net.minecraft.creativetab.CreativeTabs;
+// import net.minecraft.entity.Entity;
+// import net.minecraft.entity.EntityLivingBase;
+// import net.minecraft.entity.player.EntityPlayer;
+// import net.minecraft.item.Item;
+// import net.minecraft.item.ItemStack;
+// import net.minecraft.nbt.NBTTagCompound;
+// import net.minecraft.nbt.NBTTagList;
+// import net.minecraft.util.EnumChatFormatting;
+// import net.minecraft.util.IIcon;
+// import net.minecraft.util.StatCollector;
+// import net.minecraft.world.World;
+// import thaumcraft.api.IVisDiscountGear;
+// import thaumcraft.api.aspects.Aspect;
+// import thaumcraft.api.aspects.AspectList;
+// import thaumcraft.common.items.armor.ItemRunicArmor;
+// import witchinggadgets.WitchingGadgets;
+// import witchinggadgets.client.ModelCloak;
+// import witchinggadgets.client.WGGraphicUtilities;
+// import witchinggadgets.common.WGContent;
+// import witchinggadgets.common.util.Cloak;
+// import cpw.mods.fml.relauncher.Side;
+// import cpw.mods.fml.relauncher.SideOnly;
 //
-//public class ItemRunicCloak extends ItemRunicArmor implements IVisDiscountGear
-//{
+// public class ItemRunicCloak extends ItemRunicArmor implements IVisDiscountGear
+// {
 //	IIcon iconRuneBase;
 //
 //	public ItemRunicCloak()
@@ -108,7 +108,8 @@
 //			return cloak.getDefaultColour();
 //
 //		NBTTagCompound tagDisplay = tag.getCompoundTag("display");
-//		return tagDisplay == null ? WGGraphicUtilities.colour_CloakBlue : (tagDisplay.hasKey("color") ? tagDisplay.getInteger("color") : WGGraphicUtilities.colour_CloakBlue);
+//		return tagDisplay == null ? WGGraphicUtilities.colour_CloakBlue : (tagDisplay.hasKey("color") ?
+// tagDisplay.getInteger("color") : WGGraphicUtilities.colour_CloakBlue);
 //	}
 //
 //	@Override
@@ -263,7 +264,8 @@
 //				list.add("  \u00a7"+a.getChatcolor()+a.getName()+": "+al.getAmount(a) + "%");
 //		}
 //		else
-//			list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + ": " + getVisDiscount(stack, par2EntityPlayer, Aspect.AIR) + "%");
+//			list.add(EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount") + ": " +
+// getVisDiscount(stack, par2EntityPlayer, Aspect.AIR) + "%");
 //	}
 //
 //	@Override
@@ -290,4 +292,4 @@
 //		return !(aer==terra&&aer==ignis&&aer==aqua&&aer==ordo&&aer==perdito);
 //	}
 //
-//}
+// }

@@ -1,19 +1,19 @@
-//package witchinggadgets.common.world;
+// package witchinggadgets.common.world;
 //
-//import net.minecraft.entity.Entity;
-//import net.minecraft.util.MathHelper;
-//import net.minecraft.util.Vec3;
-//import net.minecraft.world.WorldProvider;
-//import net.minecraft.world.biome.WorldChunkManagerHell;
-//import net.minecraft.world.chunk.Chunk;
-//import net.minecraft.world.chunk.IChunkProvider;
-//import net.minecraftforge.client.IRenderHandler;
-//import witchinggadgets.WitchingGadgets;
-//import witchinggadgets.client.render.NotRenderer;
-//import witchinggadgets.common.WGConfig;
+// import net.minecraft.entity.Entity;
+// import net.minecraft.util.MathHelper;
+// import net.minecraft.util.Vec3;
+// import net.minecraft.world.WorldProvider;
+// import net.minecraft.world.biome.WorldChunkManagerHell;
+// import net.minecraft.world.chunk.Chunk;
+// import net.minecraft.world.chunk.IChunkProvider;
+// import net.minecraftforge.client.IRenderHandler;
+// import witchinggadgets.WitchingGadgets;
+// import witchinggadgets.client.render.NotRenderer;
+// import witchinggadgets.common.WGConfig;
 //
-//public class WorldProviderMirror extends WorldProvider
-//{
+// public class WorldProviderMirror extends WorldProvider
+// {
 //	@Override
 //	public String getDimensionName()
 //	{
@@ -205,4 +205,4 @@
 //		return false;
 //	}
 //
-//}
+// }

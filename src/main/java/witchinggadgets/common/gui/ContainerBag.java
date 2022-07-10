@@ -10,130 +10,114 @@ import net.minecraft.world.World;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.items.tools.ItemBag;
 
-public class ContainerBag extends Container
-{
-	private World worldObj;
-	private int blockedSlot;
-	public IInventory input = new InventoryBag(this);
-	ItemStack pouch = null;
-	EntityPlayer player = null;
-	private int pouchSlotAmount = 18;
+public class ContainerBag extends Container {
+    private World worldObj;
+    private int blockedSlot;
+    public IInventory input = new InventoryBag(this);
+    ItemStack pouch = null;
+    EntityPlayer player = null;
+    private int pouchSlotAmount = 18;
 
-	public ContainerBag(InventoryPlayer iinventory, World world)
-	{
-		this.worldObj = world;
-		this.player = iinventory.player;
-		this.pouch = iinventory.getCurrentItem();
-		this.blockedSlot = (iinventory.currentItem + 45);
+    public ContainerBag(InventoryPlayer iinventory, World world) {
+        this.worldObj = world;
+        this.player = iinventory.player;
+        this.pouch = iinventory.getCurrentItem();
+        this.blockedSlot = (iinventory.currentItem + 45);
 
-		for (int a = 0; a < pouchSlotAmount; a++) {
-			this.addSlotToContainer(new SlotBag(this.input, this, a, 35 + a % 6 * 18, 9 + a/6 * 18));
-		}
+        for (int a = 0; a < pouchSlotAmount; a++) {
+            this.addSlotToContainer(new SlotBag(this.input, this, a, 35 + a % 6 * 18, 9 + a / 6 * 18));
+        }
 
-		bindPlayerInventory(iinventory);
+        bindPlayerInventory(iinventory);
 
-		if (!world.isRemote)
-			try {
-				((InventoryBag)this.input).stackList = ((ItemBag)this.pouch.getItem()).getStoredItems(this.pouch);
-			}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		this.onCraftMatrixChanged(this.input);
-	}
+        if (!world.isRemote)
+            try {
+                ((InventoryBag) this.input).stackList = ((ItemBag) this.pouch.getItem()).getStoredItems(this.pouch);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        this.onCraftMatrixChanged(this.input);
+    }
 
-	protected void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 9; j++) {
-				this.addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 82 + i * 18));
-			}
+    protected void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 9; j++) {
+                this.addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 82 + i * 18));
+            }
+        }
 
-		}
+        for (int i = 0; i < 9; i++) this.addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 140));
+    }
 
-		for (int i = 0; i < 9; i++)
-			this.addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 140));
-	}
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int slot) {
+        ItemStack stack = null;
+        Slot slotObject = (Slot) this.inventorySlots.get(slot);
 
-	@Override
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int slot)
-	{
-		ItemStack stack = null;
-		Slot slotObject = (Slot)this.inventorySlots.get(slot);
+        if ((slotObject != null) && (slotObject.getHasStack())) {
+            ItemStack stackInSlot = slotObject.getStack();
+            stack = stackInSlot.copy();
 
-		if ((slotObject != null) && (slotObject.getHasStack())) {
-			ItemStack stackInSlot = slotObject.getStack();
-			stack = stackInSlot.copy();
+            if (slot < pouchSlotAmount) {
+                if (!this.mergeItemStack(stackInSlot, pouchSlotAmount, this.inventorySlots.size(), true)) {
+                    return null;
+                }
+            } else if (!this.mergeItemStack(stackInSlot, 0, pouchSlotAmount, false)) {
+                return null;
+            }
 
-			if (slot < pouchSlotAmount) {
-				if (!this.mergeItemStack(stackInSlot, pouchSlotAmount, this.inventorySlots.size(), true))
-				{
-					return null;
-				}
-			}
-			else if (!this.mergeItemStack(stackInSlot, 0, pouchSlotAmount, false))
-			{
-				return null;
-			}
+            if (stackInSlot.stackSize == 0) slotObject.putStack(null);
+            else {
+                slotObject.onSlotChanged();
+            }
+        }
 
-			if (stackInSlot.stackSize == 0)
-				slotObject.putStack(null);
-			else {
-				slotObject.onSlotChanged();
-			}
-		}
+        return stack;
+    }
 
-		return stack;
-	}
+    @Override
+    public boolean canInteractWith(EntityPlayer entityplayer) {
+        return true;
+    }
 
-	@Override
-	public boolean canInteractWith(EntityPlayer entityplayer)
-	{
-		return true;
-	}
+    @Override
+    public ItemStack slotClick(int par1, int par2, int par3, EntityPlayer par4EntityPlayer) {
+        if (par1 == this.blockedSlot || (par2 == 0 && par3 == blockedSlot)) return null;
+        ((ItemBag) this.pouch.getItem()).setStoredItems(this.pouch, ((InventoryBag) this.input).stackList);
 
-	@Override
-	public ItemStack slotClick(int par1, int par2, int par3, EntityPlayer par4EntityPlayer)
-	{
-		if(par1 == this.blockedSlot || (par2==0&&par3==blockedSlot)) return null;		
-		((ItemBag)this.pouch.getItem()).setStoredItems(this.pouch, ((InventoryBag)this.input).stackList);
+        return super.slotClick(par1, par2, par3, par4EntityPlayer);
+    }
 
-		return super.slotClick(par1, par2, par3, par4EntityPlayer);
-	}
-
-	@Override
-	public void onContainerClosed(EntityPlayer par1EntityPlayer)
-	{
-		super.onContainerClosed(par1EntityPlayer);
-		if (!this.worldObj.isRemote)
-		{
-			((ItemBag)this.pouch.getItem()).setStoredItems(this.pouch, ((InventoryBag)this.input).stackList);
-			/*
-			if (!this.player.getCurrentEquippedItem().equals(this.pouch))
-				this.player.setCurrentItemOrArmor(0, this.pouch);
-			*/
-			this.player.inventory.markDirty();
-		}
-	}
-	
-	
-	private boolean isHoldingPouch() {
-		ItemStack is = this.player.getHeldItem();
-		return (is != null) && (is.getItem() == WGContent.ItemBag);
-	}
-	
-	public void detectAndSendChanges() {
-		super.detectAndSendChanges();
-		if ((!this.player.worldObj.isRemote) && (!isHoldingPouch())) {
-			this.player.closeScreen();
-		}
-	}
-	
-	public void saveCharmPouch() {
-        if (!this.player.worldObj.isRemote && this.isHoldingPouch()) {
-        	this.player.setCurrentItemOrArmor(0, this.pouch);
-        	//ItemBag.setStoredItems(this.player.getHeldItem(), new ItemStack[] { this.charmInv.getStackInSlot(0), this.charmInv.getStackInSlot(1), this.charmInv.getStackInSlot(2) });
+    @Override
+    public void onContainerClosed(EntityPlayer par1EntityPlayer) {
+        super.onContainerClosed(par1EntityPlayer);
+        if (!this.worldObj.isRemote) {
+            ((ItemBag) this.pouch.getItem()).setStoredItems(this.pouch, ((InventoryBag) this.input).stackList);
+            /*
+            if (!this.player.getCurrentEquippedItem().equals(this.pouch))
+            	this.player.setCurrentItemOrArmor(0, this.pouch);
+            */
+            this.player.inventory.markDirty();
         }
     }
 
+    private boolean isHoldingPouch() {
+        ItemStack is = this.player.getHeldItem();
+        return (is != null) && (is.getItem() == WGContent.ItemBag);
+    }
+
+    public void detectAndSendChanges() {
+        super.detectAndSendChanges();
+        if ((!this.player.worldObj.isRemote) && (!isHoldingPouch())) {
+            this.player.closeScreen();
+        }
+    }
+
+    public void saveCharmPouch() {
+        if (!this.player.worldObj.isRemote && this.isHoldingPouch()) {
+            this.player.setCurrentItemOrArmor(0, this.pouch);
+            // ItemBag.setStoredItems(this.player.getHeldItem(), new ItemStack[] { this.charmInv.getStackInSlot(0),
+            // this.charmInv.getStackInSlot(1), this.charmInv.getStackInSlot(2) });
+        }
+    }
 }

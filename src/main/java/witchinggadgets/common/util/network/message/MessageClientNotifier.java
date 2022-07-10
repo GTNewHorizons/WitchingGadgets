@@ -1,52 +1,49 @@
 package witchinggadgets.common.util.network.message;
 
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.research.ResearchCategories;
 import witchinggadgets.common.WGResearch;
-import cpw.mods.fml.common.network.simpleimpl.IMessage;
-import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
-public class MessageClientNotifier implements IMessage
-{
-	int packetid;
-	public MessageClientNotifier(){}
+public class MessageClientNotifier implements IMessage {
+    int packetid;
 
-	public MessageClientNotifier(int id)
-	{
-		this.packetid = id;
-	}
+    public MessageClientNotifier() {}
 
-	@Override
-	public void fromBytes(ByteBuf buffer)
-	{
-		this.packetid = buffer.readInt();
-	}
+    public MessageClientNotifier(int id) {
+        this.packetid = id;
+    }
 
-	@Override
-	public void toBytes(ByteBuf buffer)
-	{
-		buffer.writeInt(this.packetid);
-	}
+    @Override
+    public void fromBytes(ByteBuf buffer) {
+        this.packetid = buffer.readInt();
+    }
 
-	public static class HandlerClient implements IMessageHandler<MessageClientNotifier, IMessage>
-	{
-		@Override
-		public IMessage onMessage(MessageClientNotifier message, MessageContext ctx)
-		{
-			switch(message.packetid)
-			{
-			case 0:
-				if(Minecraft.getMinecraft().thePlayer!=null)
-					if(ThaumcraftApiHelper.isResearchComplete(Minecraft.getMinecraft().thePlayer.getCommandSenderName(), "WGFAKEELDRITCHMINOR"))
-						ResearchCategories.researchCategories.get("WITCHGADG").background = WGResearch.wgbackgrounds[0];
-					else
-						ResearchCategories.researchCategories.get("WITCHGADG").background = WGResearch.wgbackgrounds[0];
-				break;
-			}
-			return null;
-		}
-	}
+    @Override
+    public void toBytes(ByteBuf buffer) {
+        buffer.writeInt(this.packetid);
+    }
+
+    public static class HandlerClient implements IMessageHandler<MessageClientNotifier, IMessage> {
+        @Override
+        public IMessage onMessage(MessageClientNotifier message, MessageContext ctx) {
+            switch (message.packetid) {
+                case 0:
+                    if (Minecraft.getMinecraft().thePlayer != null)
+                        if (ThaumcraftApiHelper.isResearchComplete(
+                                Minecraft.getMinecraft().thePlayer.getCommandSenderName(), "WGFAKEELDRITCHMINOR"))
+                            ResearchCategories.researchCategories.get("WITCHGADG").background =
+                                    WGResearch.wgbackgrounds[0];
+                        else
+                            ResearchCategories.researchCategories.get("WITCHGADG").background =
+                                    WGResearch.wgbackgrounds[0];
+                    break;
+            }
+            return null;
+        }
+    }
 }

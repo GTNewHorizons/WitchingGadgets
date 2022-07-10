@@ -8,11 +8,10 @@ import net.minecraftforge.client.IRenderHandler;
 
 public class NotRenderer extends IRenderHandler {
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void render(float partialTicks, WorldClient world, Minecraft mc) {
-		// TODO Auto-generated method stub
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void render(float partialTicks, WorldClient world, Minecraft mc) {
+        // TODO Auto-generated method stub
 
-	}
-
+    }
 }

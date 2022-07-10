@@ -1,45 +1,46 @@
-//package witchinggadgets.common.util.network;
+// package witchinggadgets.common.util.network;
 //
-//import io.netty.buffer.ByteBuf;
-//import io.netty.buffer.Unpooled;
-//import io.netty.channel.ChannelHandler;
-//import io.netty.channel.ChannelHandlerContext;
-//import io.netty.handler.codec.MessageToMessageCodec;
+// import io.netty.buffer.ByteBuf;
+// import io.netty.buffer.Unpooled;
+// import io.netty.channel.ChannelHandler;
+// import io.netty.channel.ChannelHandlerContext;
+// import io.netty.handler.codec.MessageToMessageCodec;
 //
-//import java.util.Collections;
-//import java.util.Comparator;
-//import java.util.EnumMap;
-//import java.util.LinkedList;
-//import java.util.List;
+// import java.util.Collections;
+// import java.util.Comparator;
+// import java.util.EnumMap;
+// import java.util.LinkedList;
+// import java.util.List;
 //
-//import net.minecraft.client.Minecraft;
-//import net.minecraft.entity.player.EntityPlayer;
-//import net.minecraft.entity.player.EntityPlayerMP;
-//import net.minecraft.network.INetHandler;
-//import net.minecraft.network.NetHandlerPlayServer;
+// import net.minecraft.client.Minecraft;
+// import net.minecraft.entity.player.EntityPlayer;
+// import net.minecraft.entity.player.EntityPlayerMP;
+// import net.minecraft.network.INetHandler;
+// import net.minecraft.network.NetHandlerPlayServer;
 //
-//import org.apache.logging.log4j.Level;
+// import org.apache.logging.log4j.Level;
 //
-//import witchinggadgets.WitchingGadgets;
-//import cpw.mods.fml.common.FMLCommonHandler;
-//import cpw.mods.fml.common.network.FMLEmbeddedChannel;
-//import cpw.mods.fml.common.network.FMLOutboundHandler;
-//import cpw.mods.fml.common.network.NetworkRegistry;
-//import cpw.mods.fml.common.network.internal.FMLProxyPacket;
-//import cpw.mods.fml.relauncher.Side;
-//import cpw.mods.fml.relauncher.SideOnly;
+// import witchinggadgets.WitchingGadgets;
+// import cpw.mods.fml.common.FMLCommonHandler;
+// import cpw.mods.fml.common.network.FMLEmbeddedChannel;
+// import cpw.mods.fml.common.network.FMLOutboundHandler;
+// import cpw.mods.fml.common.network.NetworkRegistry;
+// import cpw.mods.fml.common.network.internal.FMLProxyPacket;
+// import cpw.mods.fml.relauncher.Side;
+// import cpw.mods.fml.relauncher.SideOnly;
 //
-///**
+/// **
 // * fully stolen from TinkersConstruct
-// * 
+// *
 // * love you guys! =)
 // * @author sirgingalot
 // */
-//@ChannelHandler.Sharable
-//public class WGPacketPipeline extends MessageToMessageCodec<FMLProxyPacket, AbstractPacket>
-//{
+// @ChannelHandler.Sharable
+// public class WGPacketPipeline extends MessageToMessageCodec<FMLProxyPacket, AbstractPacket>
+// {
 //	private EnumMap<Side, FMLEmbeddedChannel>           channels;
-//	private LinkedList<Class<? extends AbstractPacket>> packets           = new LinkedList<Class<? extends AbstractPacket>>();
+//	private LinkedList<Class<? extends AbstractPacket>> packets           = new LinkedList<Class<? extends
+// AbstractPacket>>();
 //	private boolean                                     isPostInitialised = false;
 //	public static WGPacketPipeline INSTANCE = new WGPacketPipeline();
 //
@@ -76,7 +77,8 @@
 //		byte discriminator = (byte) this.packets.indexOf(clazz);
 //		buffer.writeByte(discriminator);
 //		msg.encodeInto(ctx, buffer);
-//		FMLProxyPacket proxyPacket = new FMLProxyPacket(buffer.copy(), ctx.channel().attr(NetworkRegistry.FML_CHANNEL).get());
+//		FMLProxyPacket proxyPacket = new FMLProxyPacket(buffer.copy(),
+// ctx.channel().attr(NetworkRegistry.FML_CHANNEL).get());
 //		out.add(proxyPacket);
 //	}
 //
@@ -152,30 +154,35 @@
 //
 //	public void sendToAll(AbstractPacket message)
 //	{
-//		this.channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALL);
+//
+//	this.channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALL);
 //		this.channels.get(Side.SERVER).writeAndFlush(message);
 //	}
 //	public void sendTo(AbstractPacket message, EntityPlayerMP player)
 //	{
-//		this.channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.PLAYER);
+//
+//	this.channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.PLAYER);
 //		this.channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(player);
 //		this.channels.get(Side.SERVER).writeAndFlush(message);
 //	}
 //	public void sendToAllAround(AbstractPacket message, NetworkRegistry.TargetPoint point)
 //	{
-//		this.channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALLAROUNDPOINT);
+//
+//	this.channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALLAROUNDPOINT);
 //		this.channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(point);
 //		this.channels.get(Side.SERVER).writeAndFlush(message);
 //	}
 //	public void sendToDimension(AbstractPacket message, int dimensionId)
 //	{
-//		this.channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.DIMENSION);
+//
+//	this.channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.DIMENSION);
 //		this.channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(dimensionId);
 //		this.channels.get(Side.SERVER).writeAndFlush(message);
 //	}
 //	public void sendToServer(AbstractPacket message)
 //	{
-//		this.channels.get(Side.CLIENT).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.TOSERVER);
+//
+//	this.channels.get(Side.CLIENT).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.TOSERVER);
 //		this.channels.get(Side.CLIENT).writeAndFlush(message);
 //	}
-//}
+// }

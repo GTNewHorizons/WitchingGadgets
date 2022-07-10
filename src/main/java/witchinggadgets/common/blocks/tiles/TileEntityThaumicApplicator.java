@@ -1,21 +1,21 @@
-//package witchinggadgets.common.blocks.tiles;
+// package witchinggadgets.common.blocks.tiles;
 //
-//import net.minecraft.block.Block;
-//import net.minecraft.client.Minecraft;
-//import net.minecraft.entity.player.EntityPlayer;
-//import net.minecraft.inventory.ISidedInventory;
-//import net.minecraft.item.ItemBlock;
-//import net.minecraft.item.ItemStack;
-//import net.minecraft.nbt.NBTTagCompound;
-//import net.minecraft.tileentity.TileEntity;
-//import net.minecraftforge.common.MinecraftForge;
-//import net.minecraftforge.common.util.FakePlayerFactory;
-//import net.minecraftforge.common.util.ForgeDirection;
-//import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
-//import thaumcraft.common.lib.FakeThaumcraftPlayer;
+// import net.minecraft.block.Block;
+// import net.minecraft.client.Minecraft;
+// import net.minecraft.entity.player.EntityPlayer;
+// import net.minecraft.inventory.ISidedInventory;
+// import net.minecraft.item.ItemBlock;
+// import net.minecraft.item.ItemStack;
+// import net.minecraft.nbt.NBTTagCompound;
+// import net.minecraft.tileentity.TileEntity;
+// import net.minecraftforge.common.MinecraftForge;
+// import net.minecraftforge.common.util.FakePlayerFactory;
+// import net.minecraftforge.common.util.ForgeDirection;
+// import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
+// import thaumcraft.common.lib.FakeThaumcraftPlayer;
 //
-//public class TileEntityThaumicApplicator extends TileEntity implements ISidedInventory
-//{
+// public class TileEntityThaumicApplicator extends TileEntity implements ISidedInventory
+// {
 //	public ForgeDirection facing;
 //	FakeThaumcraftPlayer fakePlayer;
 //	ItemStack[] inv = new ItemStack[9];
@@ -62,11 +62,13 @@
 //			if(stack.getItem().onItemUseFirst(stack, fakePlayer, worldObj, targetX, targetY, targetZ, side, 0.5f, 0.5f, 0.5f))
 //				return true;
 //
-//		if (!fakePlayer.isSneaking() || (fakePlayer.getHeldItem() == null || fakePlayer.getHeldItem().getItem().shouldPassSneakingClickToBlock(worldObj, targetX, targetY, targetZ)))
+//		if (!fakePlayer.isSneaking() || (fakePlayer.getHeldItem() == null ||
+// fakePlayer.getHeldItem().getItem().shouldPassSneakingClickToBlock(worldObj, targetX, targetY, targetZ)))
 //		{
 //			i1 = worldObj.getBlockId(targetX, targetY, targetZ);
 //
-//			if (i1 > 0 && Block.blocksList[i1].onBlockActivated(worldObj, targetX, targetY, targetZ, fakePlayer, side, 0.5f, 0.5f, 0.5f))
+//			if (i1 > 0 && Block.blocksList[i1].onBlockActivated(worldObj, targetX, targetY, targetZ, fakePlayer, side, 0.5f,
+// 0.5f, 0.5f))
 //			{
 //				flag = true;
 //			}
@@ -83,7 +85,8 @@
 //		}
 //
 //		if(worldObj.isRemote)
-//			Minecraft.getMinecraft().getNetHandler().addToSendQueue(new Packet15Place(targetX, targetY, targetZ, side, stack, 0.5f, 0.5f, 0.5f));
+//			Minecraft.getMinecraft().getNetHandler().addToSendQueue(new Packet15Place(targetX, targetY, targetZ, side, stack,
+// 0.5f, 0.5f, 0.5f));
 //
 //		if (flag)
 //		{
@@ -247,4 +250,4 @@
 ////	{
 ////		readCustomNBT(packet.data);
 ////	}
-//}
+// }

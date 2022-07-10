@@ -1,21 +1,21 @@
 // Add your dependencies here
 
 dependencies {
-    compile('com.github.GTNewHorizons:Tainted-Magic:8.1.1.1-GTNH:dev')
-    compile('com.github.GTNewHorizons:GT5-Unofficial:5.09.40.34:dev')
-    compile('com.github.GTNewHorizons:ForbiddenMagic:0.6.2-GTNH:dev')
-    compile('com.github.GTNewHorizons:twilightforest:2.3.8.13:dev')
+	compile('com.github.GTNewHorizons:Tainted-Magic:8.1.1.1-GTNH:dev')
+	compile('com.github.GTNewHorizons:GT5-Unofficial:5.09.40.58:dev')
+	compile('com.github.GTNewHorizons:ForbiddenMagic:0.6.2-GTNH:dev')
+	compile('com.github.GTNewHorizons:twilightforest:2.3.8.13:dev')
 
-    compile('curse.maven:travellers-gear-224440:2262113')
-    compile('thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev')
+	compile('curse.maven:travellers-gear-224440:2262113')
+	compile('thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev')
 
-    compile('com.github.GTNewHorizons:CodeChickenLib:1.1.5.3:dev')
-    compile('com.github.GTNewHorizons:NotEnoughItems:2.2.7-GTNH:dev')
-    compileOnly('com.github.GTNewHorizons:ForgeMultipart:1.2.7:dev') {transitive=false}
-    compileOnly('com.github.GTNewHorizons:Botania:1.9.1-GTNH:api') {transitive=false}
-    compileOnly('com.github.GTNewHorizons:CraftTweaker:3.2.6:dev') {transitive=false}
-    compileOnly('com.github.GTNewHorizons:ZenScript:master-SNAPSHOT') {transitive=false}
-    compileOnly('com.github.GTNewHorizons:MagicBees:master-SNAPSHOT:api') {transitive=false}
+	compile('com.github.GTNewHorizons:CodeChickenLib:1.1.5.3:dev')
+	compile('com.github.GTNewHorizons:NotEnoughItems:2.2.19-GTNH:dev')
+	compileOnly('com.github.GTNewHorizons:ForgeMultipart:1.2.7:dev') {transitive=false}
+	compileOnly('com.github.GTNewHorizons:Botania:1.9.1-GTNH:api') {transitive=false}
+	compileOnly('com.github.GTNewHorizons:CraftTweaker:3.2.6:dev') {transitive=false}
+	compileOnly('com.github.GTNewHorizons:ZenScript:master-SNAPSHOT') {transitive=false}
+	compileOnly('com.github.GTNewHorizons:MagicBees:master-SNAPSHOT:api') {transitive=false}
 
-    runtime('com.github.GTNewHorizons:Baubles:1.0.1.14:dev')
+	runtime('com.github.GTNewHorizons:Baubles:1.0.1.14:dev')
 }
