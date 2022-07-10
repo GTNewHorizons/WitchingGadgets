@@ -3,7 +3,6 @@ package witchinggadgets.client.render;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -58,6 +57,7 @@ public class ItemRenderMaterial implements IItemRenderer {
     @Override
     public void renderItem(ItemRenderType type, ItemStack stack, Object... data) {
         if (stack == null) return;
+        GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
         String itemTexture = "witchingGadgets:textures/items/mat_"
                 + (stack.getItemDamage() == 9 ? "photoPlate.png" : "developedPhoto.png");
 
@@ -329,7 +329,6 @@ public class ItemRenderMaterial implements IItemRenderer {
         }
 
         GL11.glPopMatrix();
-        GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-        RenderHelper.disableStandardItemLighting();
+        GL11.glPopAttrib();
     }
 }
