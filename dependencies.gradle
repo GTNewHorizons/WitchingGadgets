@@ -15,7 +15,7 @@ dependencies {
 	compileOnly('com.github.GTNewHorizons:Botania:1.9.1-GTNH:api') {transitive=false}
 	compileOnly('com.github.GTNewHorizons:CraftTweaker:3.2.6:dev') {transitive=false}
 	compileOnly('com.github.GTNewHorizons:ZenScript:master-SNAPSHOT') {transitive=false}
-	compileOnly('com.github.GTNewHorizons:MagicBees:master-SNAPSHOT:api') {transitive=false}
+	compileOnly('com.github.GTNewHorizons:MagicBees:2.5.15-GTNH:api') {transitive=false}
 
 	runtime('com.github.GTNewHorizons:Baubles:1.0.1.14:dev')
 }
