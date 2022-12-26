@@ -27,7 +27,7 @@ public class ContainerCuttingTable extends Container {
                 public boolean isItemValid(ItemStack stack) {
                     if (stack == null) return true;
                     if (stack.hasTagCompound()) {
-                        if (stack.getItem().equals(ConfigItems.itemEssence)
+                        if (stack.getItem() == ConfigItems.itemEssence
                                 || stack.getItem().equals(ConfigItems.itemWispEssence)) {
                             AspectList aspects = new AspectList();
                             aspects.readFromNBT(stack.getTagCompound());
