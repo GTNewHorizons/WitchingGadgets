@@ -28,7 +28,7 @@ public class ContainerCuttingTable extends Container {
                     if (stack == null) return true;
                     if (stack.hasTagCompound()) {
                         if (stack.getItem() == ConfigItems.itemEssence
-                                || stack.getItem().equals(ConfigItems.itemWispEssence)) {
+                                || stack.getItem() == ConfigItems.itemWispEssence) {
                             AspectList aspects = new AspectList();
                             aspects.readFromNBT(stack.getTagCompound());
                             return tileEntity.canAcceptAspect(aspects.getAspectsSortedAmount()[0]);
