@@ -5,6 +5,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.config.ConfigItems;
 import witchinggadgets.common.blocks.tiles.TileEntityCuttingTable;
@@ -26,7 +27,9 @@ public class ContainerCuttingTable extends Container {
                 @Override
                 public boolean isItemValid(ItemStack stack) {
                     if (stack == null) return true;
-                    if (stack.getItem().equals(ConfigItems.itemEssence)
+                    if (stack.hasTagCompound() == false)
+                    {}
+                    else if (stack.getItem().equals(ConfigItems.itemEssence)
                             || stack.getItem().equals(ConfigItems.itemWispEssence)) {
                         AspectList aspects = new AspectList();
                         aspects.readFromNBT(stack.getTagCompound());
