@@ -195,7 +195,7 @@ public class ItemPrimordialArmor extends ItemShadowFortressArmor
         if ((amorcounter >= 2 && modescounter[0] >= 2)) {
             flightStatus = FlightStatus.ON;
             player.capabilities.allowFlying = true;
-        } else if (flightStatus.equals(FlightStatus.ON)) {
+        } else if (flightStatus == FlightStatus.ON) {
             flightStatus = FlightStatus.OFF;
             player.capabilities.allowFlying = false;
             player.capabilities.isFlying = false;
