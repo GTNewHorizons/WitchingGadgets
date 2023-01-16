@@ -19,6 +19,7 @@ public class WitchingGadgetsCore extends DummyModContainer {
         metadata.name = WitchingGadgets.MODNAME + " Core";
         metadata.version = WitchingGadgets.VERSION;
         metadata.authorList.add("BluSunrize");
+        metadata.parent = "WitchingGadgets";
     }
 
     @Override
