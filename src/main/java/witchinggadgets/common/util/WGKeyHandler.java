@@ -38,7 +38,8 @@ public class WGKeyHandler {
         if (event.phase == TickEvent.Phase.START) {
             if (thaumcraftFKey == null) {
                 for (KeyBinding kb : Minecraft.getMinecraft().gameSettings.keyBindings) {
-                    if ("Thaumcraft".equals(kb.getKeyCategory()) && "Change Wand Focus".equals(kb.getKeyDescription())) {
+                    if ("Thaumcraft".equals(kb.getKeyCategory())
+                            && "Change Wand Focus".equals(kb.getKeyDescription())) {
                         thaumcraftFKey = kb;
                     }
                 }
@@ -52,9 +53,8 @@ public class WGKeyHandler {
                         event.player.motionY = 0.42D;
                         event.player.fallDistance = 0;
 
-                        if (event.player.isPotionActive(Potion.jump))
-                            event.player.motionY += (float) (event.player.getActivePotionEffect(Potion.jump)
-                                    .getAmplifier() + 1) * 0.1F;
+                        if (event.player.isPotionActive(Potion.jump)) event.player.motionY += (float) (event.player
+                                .getActivePotionEffect(Potion.jump).getAmplifier() + 1) * 0.1F;
                         ForgeHooks.onLivingJump(event.player);
                         multiJumps--;
                     }
