@@ -29,17 +29,19 @@ public class WGKeyHandler {
     private boolean isJumping = false;
     private int multiJumps = 0;
 
-    public WGKeyHandler() {}
-
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void playerTick(TickEvent.PlayerTickEvent event) {
-        if (event.side == Side.SERVER) return;
+        if (event.side == Side.SERVER) {
+            return;
+        }
         if (event.phase == TickEvent.Phase.START) {
             if (thaumcraftFKey == null) {
-                for (KeyBinding kb : Minecraft.getMinecraft().gameSettings.keyBindings)
-                    if (kb.getKeyCategory() == "key.categories.misc" && kb.getKeyDescription() == "Change Wand Focus")
+                for (KeyBinding kb : Minecraft.getMinecraft().gameSettings.keyBindings) {
+                    if ("Thaumcraft".equals(kb.getKeyCategory()) && "Change Wand Focus".equals(kb.getKeyDescription())) {
                         thaumcraftFKey = kb;
+                    }
+                }
             }
             if (jumpKey == null) jumpKey = Minecraft.getMinecraft().gameSettings.keyBindJump;
 
