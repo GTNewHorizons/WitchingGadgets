@@ -53,8 +53,8 @@ public class WGKeyHandler {
                         event.player.fallDistance = 0;
 
                         if (event.player.isPotionActive(Potion.jump))
-                            event.player.motionY += (double) ((float) (event.player.getActivePotionEffect(Potion.jump)
-                                    .getAmplifier() + 1) * 0.1F);
+                            event.player.motionY += (float) (event.player.getActivePotionEffect(Potion.jump)
+                                    .getAmplifier() + 1) * 0.1F;
                         ForgeHooks.onLivingJump(event.player);
                         multiJumps--;
                     }
@@ -90,7 +90,7 @@ public class WGKeyHandler {
                             }
                         }
             } else {
-                if (keyDown[1] && !thaumcraftFKey.getIsKeyPressed()) keyDown[1] = false;
+                if (keyDown[1] && thaumcraftFKey != null && !thaumcraftFKey.getIsKeyPressed()) keyDown[1] = false;
                 if (!gemLock) {
                     if (gemRadial > 0) gemRadial -= step;
                     if (gemRadial < 0) gemRadial = 0f;
