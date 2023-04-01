@@ -332,19 +332,20 @@ public class EventHandler {
                             event.setCanceled(true);
                             itemWasPickedUp = true;
                             break;
-                        } else if (OreDictionary.itemMatches(inv[f], event.item.getEntityItem(), true)) {
-                            int fit = Math.min(
-                                    Math.min(64, inv[f].getMaxStackSize()) - inv[f].stackSize,
-                                    event.item.getEntityItem().stackSize);
-                            inv[f].stackSize += fit;
-                            event.item.getEntityItem().stackSize -= fit;
-                            if (event.item.getEntityItem().stackSize <= 0) {
-                                event.item.setDead();
-                                event.setCanceled(true);
-                                itemWasPickedUp = true;
-                                break;
-                            }
-                        }
+                        } else if (inv[f].isItemEqual(event.item.getEntityItem())
+                                && ItemStack.areItemStackTagsEqual(inv[f], event.item.getEntityItem())) {
+                                    int fit = Math.min(
+                                            Math.min(64, inv[f].getMaxStackSize()) - inv[f].stackSize,
+                                            event.item.getEntityItem().stackSize);
+                                    inv[f].stackSize += fit;
+                                    event.item.getEntityItem().stackSize -= fit;
+                                    if (event.item.getEntityItem().stackSize <= 0) {
+                                        event.item.setDead();
+                                        event.setCanceled(true);
+                                        itemWasPickedUp = true;
+                                        break;
+                                    }
+                                }
                     }
                     ItemBag.setStoredItems(event.entityPlayer.inventory.getStackInSlot(i), inv);
                     if (itemWasPickedUp) {
