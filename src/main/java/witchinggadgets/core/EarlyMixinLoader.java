@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.gtnewhorizon.gtnhmixins.IEarlyMixinLoader;
+
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 
 public class EarlyMixinLoader implements IEarlyMixinLoader, IFMLLoadingPlugin {

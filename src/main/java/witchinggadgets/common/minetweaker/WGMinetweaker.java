@@ -2,15 +2,14 @@ package witchinggadgets.common.minetweaker;
 
 import static minetweaker.api.minecraft.MineTweakerMC.getItemStack;
 
+import net.minecraft.item.ItemStack;
+
+import cpw.mods.fml.relauncher.ReflectionHelper;
 import minetweaker.MineTweakerAPI;
 import minetweaker.api.item.IIngredient;
 import minetweaker.api.item.IItemStack;
 import minetweaker.api.item.IngredientStack;
 import minetweaker.api.oredict.IOreDictEntry;
-
-import net.minecraft.item.ItemStack;
-
-import cpw.mods.fml.relauncher.ReflectionHelper;
 
 public class WGMinetweaker {
 

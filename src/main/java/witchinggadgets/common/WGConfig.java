@@ -6,9 +6,9 @@ import java.util.Set;
 import net.minecraft.block.Block;
 import net.minecraftforge.common.config.Configuration;
 
-import witchinggadgets.common.util.Utilities;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import witchinggadgets.common.util.Utilities;
 
 public class WGConfig {
 

@@ -8,12 +8,12 @@ import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
+import com.gtnewhorizon.mixinextras.injector.ModifyReturnValue;
+
+import baubles.api.BaublesApi;
 import witchinggadgets.common.WGConfig;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.items.baubles.ItemMagicalBaubles;
-import baubles.api.BaublesApi;
-
-import com.gtnewhorizon.mixinextras.injector.ModifyReturnValue;
 
 @Mixin(EnchantmentHelper.class)
 public class MixinEnchantmentHelper {

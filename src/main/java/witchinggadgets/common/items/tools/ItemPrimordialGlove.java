@@ -17,6 +17,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import com.google.common.collect.Multimap;
+
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -31,8 +33,6 @@ import witchinggadgets.common.WGContent;
 import witchinggadgets.common.gui.ContainerPrimordialGlove;
 import witchinggadgets.common.gui.InventoryPrimordialGlove;
 import witchinggadgets.common.items.ItemInfusedGem;
-
-import com.google.common.collect.Multimap;
 
 public class ItemPrimordialGlove extends Item implements IPrimordialCrafting {
 

@@ -26,14 +26,14 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import witchinggadgets.WitchingGadgets;
 import witchinggadgets.client.render.BlockRenderStoneDevice;
 import witchinggadgets.common.blocks.tiles.TileEntityAgeingStone;
 import witchinggadgets.common.blocks.tiles.TileEntityBlastfurnace;
 import witchinggadgets.common.blocks.tiles.TileEntityEtherealWall;
 import witchinggadgets.common.util.recipe.InfernalBlastfurnaceRecipe;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockWGStoneDevice extends BlockContainer {
 

@@ -18,6 +18,16 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
+import codechicken.lib.data.MCDataInput;
+import codechicken.lib.data.MCDataOutput;
+import codechicken.lib.raytracer.IndexedCuboid6;
+import codechicken.lib.raytracer.RayTracer;
+import codechicken.lib.vec.Cuboid6;
+import codechicken.lib.vec.Vector3;
+import codechicken.multipart.TMultiPart;
+import codechicken.multipart.TileMultipart;
+import codechicken.multipart.minecraft.McMetaPart;
+import codechicken.multipart.minecraft.PartMetaAccess;
 import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -32,16 +42,6 @@ import thaumcraft.common.tiles.TileBellows;
 import thaumcraft.common.tiles.TileTube;
 import thaumcraft.common.tiles.TileTubeBuffer;
 import witchinggadgets.client.ClientUtilities;
-import codechicken.lib.data.MCDataInput;
-import codechicken.lib.data.MCDataOutput;
-import codechicken.lib.raytracer.IndexedCuboid6;
-import codechicken.lib.raytracer.RayTracer;
-import codechicken.lib.vec.Cuboid6;
-import codechicken.lib.vec.Vector3;
-import codechicken.multipart.TMultiPart;
-import codechicken.multipart.TileMultipart;
-import codechicken.multipart.minecraft.McMetaPart;
-import codechicken.multipart.minecraft.PartMetaAccess;
 
 public class MultipartEssentiaBuffer extends McMetaPart implements IAspectContainer, IEssentiaTransport, IWandable {
 

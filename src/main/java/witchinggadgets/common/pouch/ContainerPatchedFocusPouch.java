@@ -6,11 +6,11 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import baubles.api.BaublesApi;
 import thaumcraft.common.container.ContainerFocusPouch;
 import thaumcraft.common.container.InventoryFocusPouch;
 import thaumcraft.common.items.wands.ItemFocusPouch;
 import witchinggadgets.mixins.late.thaumcraft.ContainerFocusPouchAccessor;
-import baubles.api.BaublesApi;
 
 public class ContainerPatchedFocusPouch extends ContainerFocusPouch {
 

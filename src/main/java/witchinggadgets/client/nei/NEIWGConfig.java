@@ -2,10 +2,10 @@ package witchinggadgets.client.nei;
 
 import net.minecraft.item.ItemStack;
 
-import witchinggadgets.WitchingGadgets;
-import witchinggadgets.common.WGContent;
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
+import witchinggadgets.WitchingGadgets;
+import witchinggadgets.common.WGContent;
 
 public class NEIWGConfig implements IConfigureNEI {
 

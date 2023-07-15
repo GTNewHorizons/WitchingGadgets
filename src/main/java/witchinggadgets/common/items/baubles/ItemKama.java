@@ -10,13 +10,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 
-import witchinggadgets.client.render.ModelKama;
-import witchinggadgets.common.util.Lib;
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import witchinggadgets.client.render.ModelKama;
+import witchinggadgets.common.util.Lib;
 
 public class ItemKama extends ItemCloak implements IBauble {
 

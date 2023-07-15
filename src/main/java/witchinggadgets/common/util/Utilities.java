@@ -31,6 +31,8 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import org.apache.logging.log4j.Level;
 
+import baubles.api.BaublesApi;
+import cpw.mods.fml.common.Loader;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.nodes.INode;
@@ -46,8 +48,6 @@ import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.items.baubles.ItemCloak;
 import witchinggadgets.mixins.early.minecraft.EntityLivingAccessor;
-import baubles.api.BaublesApi;
-import cpw.mods.fml.common.Loader;
 
 public class Utilities {
 

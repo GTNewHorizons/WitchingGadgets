@@ -21,19 +21,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
-import thaumcraft.api.ThaumcraftApiHelper;
-import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.aspects.IEssentiaTransport;
-import thaumcraft.api.wands.IWandable;
-import thaumcraft.common.Thaumcraft;
-import thaumcraft.common.blocks.BlockTube;
-import thaumcraft.common.config.ConfigBlocks;
-import thaumcraft.common.items.relics.ItemResonator;
-import thaumcraft.common.items.wands.ItemWandCasting;
-import thaumcraft.common.tiles.TileBellows;
-import thaumcraft.common.tiles.TileTube;
-import witchinggadgets.client.ClientUtilities;
-import witchinggadgets.common.util.handler.WGMultiPartHandler;
 import codechicken.lib.data.MCDataInput;
 import codechicken.lib.data.MCDataOutput;
 import codechicken.lib.raytracer.IndexedCuboid6;
@@ -47,6 +34,19 @@ import codechicken.multipart.TSlottedPart;
 import codechicken.multipart.TileMultipart;
 import codechicken.multipart.minecraft.McMetaPart;
 import codechicken.multipart.minecraft.PartMetaAccess;
+import thaumcraft.api.ThaumcraftApiHelper;
+import thaumcraft.api.aspects.Aspect;
+import thaumcraft.api.aspects.IEssentiaTransport;
+import thaumcraft.api.wands.IWandable;
+import thaumcraft.common.Thaumcraft;
+import thaumcraft.common.blocks.BlockTube;
+import thaumcraft.common.config.ConfigBlocks;
+import thaumcraft.common.items.relics.ItemResonator;
+import thaumcraft.common.items.wands.ItemWandCasting;
+import thaumcraft.common.tiles.TileBellows;
+import thaumcraft.common.tiles.TileTube;
+import witchinggadgets.client.ClientUtilities;
+import witchinggadgets.common.util.handler.WGMultiPartHandler;
 
 public class MultipartEssentiaTube extends McMetaPart
         // implements ISidedHollowConnect, TSlottedPart

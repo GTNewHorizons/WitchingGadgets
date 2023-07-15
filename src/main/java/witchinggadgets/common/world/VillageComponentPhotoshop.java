@@ -33,13 +33,13 @@ import net.minecraft.world.gen.structure.StructureVillagePieces.PieceWeight;
 import net.minecraft.world.gen.structure.StructureVillagePieces.Start;
 import net.minecraftforge.common.ChestGenHooks;
 
+import cpw.mods.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
 import thaumcraft.api.research.ScanResult;
 import thaumcraft.common.config.ConfigItems;
 import thaumcraft.common.entities.monster.EntityBrainyZombie;
 import thaumcraft.common.entities.monster.EntityFireBat;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.util.Utilities;
-import cpw.mods.fml.common.registry.VillagerRegistry.IVillageCreationHandler;
 
 public class VillageComponentPhotoshop extends StructureVillagePieces.Village {
 

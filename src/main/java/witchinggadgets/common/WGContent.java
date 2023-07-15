@@ -27,6 +27,12 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.RecipeSorter;
 
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.registry.EntityRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
+import gregtech.GT_Mod;
+import gregtech.api.enums.Materials;
+import gregtech.api.enums.SubTag;
 import thaumcraft.api.ItemApi;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
@@ -84,12 +90,6 @@ import witchinggadgets.common.util.recipe.BagColourizationRecipe;
 import witchinggadgets.common.util.recipe.CloakColourizationRecipe;
 import witchinggadgets.common.util.recipe.InfernalBlastfurnaceRecipe;
 import witchinggadgets.common.util.recipe.RobeColourizationRecipe;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.registry.EntityRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
-import gregtech.GT_Mod;
-import gregtech.api.enums.Materials;
-import gregtech.api.enums.SubTag;
 
 public class WGContent {
 

@@ -9,6 +9,9 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
+import gregtech.api.enums.ItemList;
+import gregtech.api.enums.Materials;
+import gregtech.api.util.GT_ModHandler;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -22,9 +25,6 @@ import witchinggadgets.common.WGModCompat;
 import witchinggadgets.common.items.ItemClusters;
 import witchinggadgets.common.util.Utilities;
 import witchinggadgets.common.util.registry.MetalFluidData;
-import gregtech.api.enums.ItemList;
-import gregtech.api.enums.Materials;
-import gregtech.api.util.GT_ModHandler;
 
 public class WG_alchemic_recipe {
 

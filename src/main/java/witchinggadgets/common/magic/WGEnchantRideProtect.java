@@ -5,8 +5,8 @@ import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
-import travellersgear.api.TravellersGearAPI;
 import baubles.api.IBauble;
+import travellersgear.api.TravellersGearAPI;
 
 public class WGEnchantRideProtect extends Enchantment {
 

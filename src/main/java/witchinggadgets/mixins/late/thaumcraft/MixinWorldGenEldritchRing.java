@@ -5,10 +5,10 @@ import net.minecraft.block.Block;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
+import com.gtnewhorizon.mixinextras.injector.ModifyReturnValue;
+
 import thaumcraft.common.lib.world.WorldGenEldritchRing;
 import witchinggadgets.common.WGConfig;
-
-import com.gtnewhorizon.mixinextras.injector.ModifyReturnValue;
 
 @Mixin(WorldGenEldritchRing.class)
 public class MixinWorldGenEldritchRing {

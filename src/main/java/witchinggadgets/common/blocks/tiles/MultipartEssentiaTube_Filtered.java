@@ -12,6 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import codechicken.lib.vec.Vector3;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.IEssentiaContainerItem;
@@ -20,7 +21,6 @@ import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.config.ConfigItems;
 import thaumcraft.common.tiles.TileTubeFilter;
 import witchinggadgets.client.ClientUtilities;
-import codechicken.lib.vec.Vector3;
 
 public class MultipartEssentiaTube_Filtered extends MultipartEssentiaTube
 // implements IAspectContainer

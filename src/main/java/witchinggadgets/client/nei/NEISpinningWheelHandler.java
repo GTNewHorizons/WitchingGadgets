@@ -13,9 +13,9 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import org.lwjgl.opengl.GL11;
 
-import witchinggadgets.common.util.recipe.SpinningRecipe;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
+import witchinggadgets.common.util.recipe.SpinningRecipe;
 
 public class NEISpinningWheelHandler extends TemplateRecipeHandler {
 

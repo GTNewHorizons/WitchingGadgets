@@ -7,9 +7,9 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
-import witchinggadgets.client.ClientUtilities;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import witchinggadgets.client.ClientUtilities;
 
 public class BlockRenderRoseVine implements ISimpleBlockRenderingHandler {
 

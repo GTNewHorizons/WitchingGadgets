@@ -9,9 +9,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
 
-import witchinggadgets.WitchingGadgets;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import witchinggadgets.WitchingGadgets;
 
 public class ItemVorpalSword extends ItemSword { // TODO: Extend Avarita Sword
 

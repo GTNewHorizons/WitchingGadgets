@@ -5,10 +5,10 @@ import net.minecraft.block.Block;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
+import com.gtnewhorizon.mixinextras.injector.ModifyReturnValue;
+
 import thaumcraft.common.lib.world.WorldGenHilltopStones;
 import witchinggadgets.common.WGConfig;
-
-import com.gtnewhorizon.mixinextras.injector.ModifyReturnValue;
 
 @Mixin(WorldGenHilltopStones.class)
 public class MixinWorldGenHilltopStones {

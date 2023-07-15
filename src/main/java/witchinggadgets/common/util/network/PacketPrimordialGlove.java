@@ -6,9 +6,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 
-import witchinggadgets.WitchingGadgets;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+import witchinggadgets.WitchingGadgets;
 
 public class PacketPrimordialGlove extends AbstractPacket {
 

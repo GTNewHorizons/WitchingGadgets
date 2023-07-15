@@ -8,15 +8,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
-import thaumcraft.common.config.ConfigBlocks;
-import thaumcraft.common.tiles.TileTube;
-import thaumcraft.common.tiles.TileTubeBuffer;
-import thaumcraft.common.tiles.TileTubeFilter;
-import thaumcraft.common.tiles.TileTubeValve;
-import witchinggadgets.common.blocks.tiles.MultipartEssentiaBuffer;
-import witchinggadgets.common.blocks.tiles.MultipartEssentiaTube;
-import witchinggadgets.common.blocks.tiles.MultipartEssentiaTube_Filtered;
-import witchinggadgets.common.blocks.tiles.MultipartEssentiaTube_Valve;
 import codechicken.lib.raytracer.RayTracer;
 import codechicken.lib.vec.BlockCoord;
 import codechicken.multipart.MultiPartRegistry;
@@ -26,6 +17,15 @@ import codechicken.multipart.MultipartGenerator;
 import codechicken.multipart.TMultiPart;
 import codechicken.multipart.TileMultipart;
 import cpw.mods.fml.common.eventhandler.Event;
+import thaumcraft.common.config.ConfigBlocks;
+import thaumcraft.common.tiles.TileTube;
+import thaumcraft.common.tiles.TileTubeBuffer;
+import thaumcraft.common.tiles.TileTubeFilter;
+import thaumcraft.common.tiles.TileTubeValve;
+import witchinggadgets.common.blocks.tiles.MultipartEssentiaBuffer;
+import witchinggadgets.common.blocks.tiles.MultipartEssentiaTube;
+import witchinggadgets.common.blocks.tiles.MultipartEssentiaTube_Filtered;
+import witchinggadgets.common.blocks.tiles.MultipartEssentiaTube_Valve;
 
 public class WGMultiPartHandler implements IPartFactory, IPartConverter {
 

@@ -19,10 +19,10 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-import witchinggadgets.WitchingGadgets;
-import witchinggadgets.common.util.Lib;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import witchinggadgets.WitchingGadgets;
+import witchinggadgets.common.util.Lib;
 
 public class ItemBag extends Item {
 

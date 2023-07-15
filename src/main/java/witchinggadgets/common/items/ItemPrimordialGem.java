@@ -19,10 +19,10 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
-import thaumcraft.api.aspects.Aspect;
-import witchinggadgets.WitchingGadgets;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import thaumcraft.api.aspects.Aspect;
+import witchinggadgets.WitchingGadgets;
 
 public class ItemPrimordialGem extends Item {
 

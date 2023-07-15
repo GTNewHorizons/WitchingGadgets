@@ -17,10 +17,10 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import witchinggadgets.WitchingGadgets;
-import witchinggadgets.common.blocks.tiles.TileEntityWallMirror;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import witchinggadgets.WitchingGadgets;
+import witchinggadgets.common.blocks.tiles.TileEntityWallMirror;
 
 public class BlockWallMirror extends BlockContainer {
 

@@ -11,10 +11,10 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
 
+import gregtech.api.enums.Materials;
 import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.WGConfig;
 import witchinggadgets.common.WGContent;
-import gregtech.api.enums.Materials;
 
 public class ItemClusters extends Item {
 

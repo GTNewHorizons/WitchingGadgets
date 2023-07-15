@@ -15,6 +15,9 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
+import baubles.api.BaublesApi;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.lib.potions.PotionWarpWard;
 import witchinggadgets.WitchingGadgets;
@@ -23,9 +26,6 @@ import witchinggadgets.common.WGModCompat;
 import witchinggadgets.common.blocks.tiles.TileEntitySaunaStove;
 import witchinggadgets.common.util.Lib;
 import witchinggadgets.common.util.Utilities;
-import baubles.api.BaublesApi;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
 
 public class PlayerTickHandler {
 

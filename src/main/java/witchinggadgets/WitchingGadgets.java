@@ -10,19 +10,6 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import witchinggadgets.common.CommonProxy;
-import witchinggadgets.common.WGConfig;
-import witchinggadgets.common.WGContent;
-import witchinggadgets.common.WGModCompat;
-import witchinggadgets.common.util.WGCreativeTab;
-import witchinggadgets.common.util.handler.EventHandler;
-import witchinggadgets.common.util.handler.PlayerTickHandler;
-import witchinggadgets.common.util.handler.WGWandManager;
-import witchinggadgets.common.util.network.message.MessageClientNotifier;
-import witchinggadgets.common.util.network.message.MessagePlaySound;
-import witchinggadgets.common.util.network.message.MessagePrimordialGlove;
-import witchinggadgets.common.util.network.message.MessageTileUpdate;
-import witchinggadgets.common.world.VillageComponentPhotoshop;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
@@ -38,6 +25,19 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry.Type;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
+import witchinggadgets.common.CommonProxy;
+import witchinggadgets.common.WGConfig;
+import witchinggadgets.common.WGContent;
+import witchinggadgets.common.WGModCompat;
+import witchinggadgets.common.util.WGCreativeTab;
+import witchinggadgets.common.util.handler.EventHandler;
+import witchinggadgets.common.util.handler.PlayerTickHandler;
+import witchinggadgets.common.util.handler.WGWandManager;
+import witchinggadgets.common.util.network.message.MessageClientNotifier;
+import witchinggadgets.common.util.network.message.MessagePlaySound;
+import witchinggadgets.common.util.network.message.MessagePrimordialGlove;
+import witchinggadgets.common.util.network.message.MessageTileUpdate;
+import witchinggadgets.common.world.VillageComponentPhotoshop;
 
 @Mod(
         modid = WitchingGadgets.MODID,

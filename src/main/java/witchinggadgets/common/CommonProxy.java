@@ -5,6 +5,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import baubles.api.BaublesApi;
+import cpw.mods.fml.common.network.IGuiHandler;
 import travellersgear.api.TravellersGearAPI;
 import witchinggadgets.common.blocks.tiles.TileEntityCuttingTable;
 import witchinggadgets.common.blocks.tiles.TileEntityLabelLibrary;
@@ -17,8 +19,6 @@ import witchinggadgets.common.gui.ContainerPrimordialGlove;
 import witchinggadgets.common.gui.ContainerSpinningWheel;
 import witchinggadgets.common.gui.ContainerVoidBag;
 import witchinggadgets.common.pouch.ContainerPatchedFocusPouch;
-import baubles.api.BaublesApi;
-import cpw.mods.fml.common.network.IGuiHandler;
 
 public class CommonProxy implements IGuiHandler {
 

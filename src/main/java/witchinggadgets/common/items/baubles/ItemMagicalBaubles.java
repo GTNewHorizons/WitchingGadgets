@@ -19,18 +19,18 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-import travellersgear.api.ITravellersGear;
-import witchinggadgets.WitchingGadgets;
-import witchinggadgets.client.render.ModelMagicalBaubles;
-import witchinggadgets.common.items.ItemInfusedGem;
-import witchinggadgets.common.util.Lib;
-import witchinggadgets.common.util.Utilities;
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import travellersgear.api.ITravellersGear;
+import witchinggadgets.WitchingGadgets;
+import witchinggadgets.client.render.ModelMagicalBaubles;
+import witchinggadgets.common.items.ItemInfusedGem;
+import witchinggadgets.common.util.Lib;
+import witchinggadgets.common.util.Utilities;
 
 @Optional.Interface(iface = "vazkii.botania.api.item.ICosmeticAttachable", modid = "Botania")
 public class ItemMagicalBaubles extends Item
