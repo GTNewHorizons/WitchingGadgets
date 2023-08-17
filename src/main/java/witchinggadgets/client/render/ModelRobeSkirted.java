@@ -153,11 +153,12 @@ public class ModelRobeSkirted extends ModelBiped {
             this.isChild = ((EntityLivingBase) entity).isChild();
             this.heldItemRight = (((EntityLivingBase) entity).getHeldItem() != null ? 1 : 0);
             if ((entity instanceof EntityPlayer)) this.aimedBow = (((EntityPlayer) entity).getItemInUseDuration() > 0);
-            if (((EntityLivingBase) entity).getEquipmentInSlot(4) != null && !(((EntityLivingBase) entity)
-                    .getEquipmentInSlot(4).getUnlocalizedName().contains("goggles")
-                    || ((EntityLivingBase) entity).getEquipmentInSlot(4).getUnlocalizedName().contains("Goggles")
-                    || ((EntityLivingBase) entity).getEquipmentInSlot(4).getUnlocalizedName().contains("glasses")))
-                this.bipedHead.showModel = false;
+            this.bipedHead.showModel = ((EntityLivingBase) entity).getEquipmentInSlot(4) == null
+                    || (((EntityLivingBase) entity).getEquipmentInSlot(4).getUnlocalizedName().contains("goggles")
+                            || ((EntityLivingBase) entity).getEquipmentInSlot(4).getUnlocalizedName()
+                                    .contains("Goggles")
+                            || ((EntityLivingBase) entity).getEquipmentInSlot(4).getUnlocalizedName()
+                                    .contains("glasses"));
         }
 
         if (this.isChild) {
