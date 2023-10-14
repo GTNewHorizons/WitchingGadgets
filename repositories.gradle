@@ -7,14 +7,6 @@ repositories {
 		allowInsecureProtocol
 	}
 	maven {
-		name 'ic2'
-		url 'https://maven.ic2.player.to/'
-		metadataSources {
-			mavenPom()
-			artifact()
-		}
-	}
-	maven {
 		url 'https://cursemaven.com'
 		content {
 			includeGroup 'curse.maven'
