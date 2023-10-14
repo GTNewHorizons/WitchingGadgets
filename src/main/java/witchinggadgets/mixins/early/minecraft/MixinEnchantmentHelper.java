@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
-import com.gtnewhorizon.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 
 import baubles.api.BaublesApi;
 import witchinggadgets.common.WGConfig;
