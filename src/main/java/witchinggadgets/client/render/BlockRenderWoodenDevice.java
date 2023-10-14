@@ -14,7 +14,11 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import thaumcraft.common.blocks.BlockMetalDevice;
 import thaumcraft.common.config.ConfigBlocks;
 import witchinggadgets.client.ClientUtilities;
-import witchinggadgets.common.blocks.tiles.*;
+import witchinggadgets.common.blocks.tiles.TileEntityCobbleGen;
+import witchinggadgets.common.blocks.tiles.TileEntityCuttingTable;
+import witchinggadgets.common.blocks.tiles.TileEntityIceGen;
+import witchinggadgets.common.blocks.tiles.TileEntityLabelLibrary;
+import witchinggadgets.common.blocks.tiles.TileEntitySpinningWheel;
 
 public class BlockRenderWoodenDevice implements ISimpleBlockRenderingHandler {
 
