@@ -722,12 +722,6 @@ public class WG_others {
                         550,
                         "silver.molten",
                         WGConfig.smelteryResultForClusters);
-                WGModCompat.addTConSmelteryRecipe(
-                        "clusterLead",
-                        "blockLead",
-                        400,
-                        "lead.molten",
-                        WGConfig.smelteryResultForClusters);
             }
             WGModCompat.addTConDryingRecipe(
                     new ItemStack(ConfigItems.itemZombieBrain),
