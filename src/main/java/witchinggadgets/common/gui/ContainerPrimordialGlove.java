@@ -27,7 +27,9 @@ public class ContainerPrimordialGlove extends Container {
         this.worldObj = world;
         this.player = iinventory.player;
         this.bracelet = iinventory.getCurrentItem();
-        this.blockedSlot = (iinventory.currentItem + 45);
+        this.blockedSlot = (iinventory.currentItem + slotAmount
+                + iinventory.mainInventory.length
+                - InventoryPlayer.getHotbarSize());
 
         this.addSlotToContainer(new SlotInfusedGem(this.input, 0, 60, 06));
         this.addSlotToContainer(new SlotInfusedGem(this.input, 1, 100, 06));
