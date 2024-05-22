@@ -134,9 +134,9 @@ public class TileEntityBlastfurnace extends TileEntityWGBase implements IEssenti
             for (int y = this.yCoord - 5; y < this.yCoord + 5; y++) {
                 for (int z = this.zCoord - 5; z < this.zCoord + 5; z++) {
                     TileEntity tile = this.worldObj.getTileEntity(x, y, z);
-                    if ((tile != null) && ((tile instanceof IAspectSource))) {
+                    if (tile instanceof IAspectSource) {
                         IAspectSource as = (IAspectSource) tile;
-                        if ((as.doesContainerContainAmount(Aspect.FIRE, 1)) && (as.takeFromContainer(Aspect.FIRE, 1))) {
+                        if (as.takeFromContainer(Aspect.FIRE, 1)) {
                             PacketHandler.INSTANCE.sendToAllAround(
                                     new PacketFXEssentiaSource(
                                             this.xCoord,
