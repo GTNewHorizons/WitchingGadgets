@@ -11,7 +11,9 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 
 import baubles.api.BaubleType;
+import baubles.api.BaublesApi;
 import baubles.api.IBauble;
+import baubles.common.container.InventoryBaubles;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -24,6 +26,16 @@ public class ItemKama extends ItemCloak implements IBauble {
 
     public ItemKama() {
         super();
+    }
+
+    @Override
+    public void activate(EntityPlayer player, ItemStack stack) {
+        super.activate(player, stack);
+        // 13116: Synchronize raven kama for client-authoritative player movement
+        if (subNames[stack.getItemDamage()].equals("raven") && !player.worldObj.isRemote) {
+            InventoryBaubles baubles = (InventoryBaubles) BaublesApi.getBaubles(player);
+            baubles.syncSlotToClients(3);
+        }
     }
 
     @Override
