@@ -12,7 +12,7 @@ import witchinggadgets.common.recipes.alchemic.WG_alchemic_pure_cinnabar;
 import witchinggadgets.common.recipes.alchemic.WG_alchemic_rose_vine;
 import witchinggadgets.common.recipes.alchemic.WG_alchemic_transmogrify;
 
-public class WG_alchemic_recipe {
+public class WG_alchemic_recipes {
 
     public static void registeralchemic() {
 

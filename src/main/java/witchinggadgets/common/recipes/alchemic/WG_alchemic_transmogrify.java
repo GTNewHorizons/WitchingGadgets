@@ -1,6 +1,6 @@
 package witchinggadgets.common.recipes.alchemic;
 
-import static witchinggadgets.common.recipes.WG_alchemic_recipe.registerAlchemyRecipe;
+import static witchinggadgets.common.recipes.WG_alchemic_recipes.registerAlchemyRecipe;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

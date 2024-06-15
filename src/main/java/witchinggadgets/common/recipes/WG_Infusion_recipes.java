@@ -26,7 +26,7 @@ import witchinggadgets.common.WGConfig;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.WGModCompat;
 
-public class WG_Infusion {
+public class WG_Infusion_recipes {
 
     static AspectList infusionAspects;
     static AspectList alchemyAspects;
