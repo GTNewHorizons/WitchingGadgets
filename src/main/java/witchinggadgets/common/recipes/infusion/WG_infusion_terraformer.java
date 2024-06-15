@@ -23,7 +23,7 @@ import witchinggadgets.common.WGContent;
 public class WG_infusion_terraformer {
 
     public static void registerTerraformer() {
-        if (Loader.isModLoaded("gregtech")) {
+        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
             if (Loader.isModLoaded("dreamcraft")) {
                 registerInfusionRecipe(
                         "TERRAFORMER",
