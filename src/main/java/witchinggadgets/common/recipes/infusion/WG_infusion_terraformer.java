@@ -33,11 +33,12 @@ public class WG_infusion_terraformer {
                         new AspectList().add(Aspect.WEATHER, 64).add(Aspect.EXCHANGE, 256)
                                 .add((Aspect) gregtech.api.enums.TC_Aspects.NEBRISUM.mAspect, 32),
                         new ItemStack(ConfigBlocks.blockMetalDevice, 1, 9),
-                        new ItemStack[]{Materials.Blaze.getBlocks(1),
+                        new ItemStack[] { Materials.Blaze.getBlocks(1),
                                 GT_OreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L),
                                 GT_ModHandler.getModItem("dreamcraft", "tile.CallistoColdIce", 1L),
-                                Materials.Knightmetal.getBlocks(1), gregtech.api.enums.ItemList.Field_Generator_MV.get(1L),
-                                GT_OreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L)});
+                                Materials.Knightmetal.getBlocks(1),
+                                gregtech.api.enums.ItemList.Field_Generator_MV.get(1L),
+                                GT_OreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L) });
             } else {
                 registerInfusionRecipe(
                         "TERRAFORMER",
@@ -47,11 +48,11 @@ public class WG_infusion_terraformer {
                         new AspectList().add(Aspect.WEATHER, 64).add(Aspect.EXCHANGE, 256)
                                 .add((Aspect) gregtech.api.enums.TC_Aspects.NEBRISUM.mAspect, 32),
                         new ItemStack(ConfigBlocks.blockMetalDevice, 1, 9),
-                        new ItemStack[]{Materials.Blaze.getBlocks(1),
+                        new ItemStack[] { Materials.Blaze.getBlocks(1),
                                 GT_OreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L),
-                                new ItemStack(Blocks.packed_ice),
-                                Materials.Knightmetal.getBlocks(1), gregtech.api.enums.ItemList.Field_Generator_MV.get(1L),
-                                GT_OreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L)});
+                                new ItemStack(Blocks.packed_ice), Materials.Knightmetal.getBlocks(1),
+                                gregtech.api.enums.ItemList.Field_Generator_MV.get(1L),
+                                GT_OreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L) });
             }
 
             registerInfusionRecipe(
