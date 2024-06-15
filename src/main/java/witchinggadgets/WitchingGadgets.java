@@ -52,8 +52,8 @@ import witchinggadgets.common.world.VillageComponentPhotoshop;
                 + "after:Mystcraft;"
                 + "after:TConstruct;"
                 + "after:ThaumicTinkerer;"
-                + "after:ForgeMultipart"
-                + "after:ThaumicExploration")
+                + "after:ThaumicExploration;"
+                + "after:ForgeMultipart")
 public class WitchingGadgets {
 
     public static final String MODID = "WitchingGadgets";
