@@ -98,7 +98,7 @@ import witchinggadgets.common.magic.WGPotion;
 import witchinggadgets.common.recipes.WG_Infusion_recipes;
 import witchinggadgets.common.recipes.WG_alchemic_recipes;
 import witchinggadgets.common.recipes.WG_arcane_recipes;
-import witchinggadgets.common.recipes.WG_others;
+import witchinggadgets.common.recipes.WG_other_recipes;
 import witchinggadgets.common.util.Utilities;
 import witchinggadgets.common.util.handler.WGMultiPartHandler;
 import witchinggadgets.common.util.recipe.BagColourizationRecipe;
@@ -805,7 +805,7 @@ public class WGContent {
         WGResearch.setupResearchPages();
         if (!devbuild) {
             WG_alchemic_recipes.registeralchemic();
-            WG_others.register_others();
+            WG_other_recipes.register_others();
             WG_Infusion_recipes.register_infusion();
             WG_arcane_recipes.register_arcane();
             WGResearch.registerResearch();
