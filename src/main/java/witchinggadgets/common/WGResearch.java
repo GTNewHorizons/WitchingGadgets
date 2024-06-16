@@ -657,9 +657,14 @@ public class WGResearch {
                                 (CrucibleRecipe) WGContent.recipeList.get("METALLURGICPERFECTION_CLUSTERS_" + vore)));
             }
             pages = clusterPages.toArray(new ResearchPage[0]);
-            researchAspects = new AspectList().add(Aspect.METAL, 20).add(Aspect.ORDER, 10).add(Aspect.CRYSTAL, 10)
-                    .add(Aspect.EXCHANGE, 20).add(Aspect.MINE, 10).add(Aspect.MIND, 5).add(Aspect.GREED, 4)
-                    .add((Aspect) gregtech.api.enums.TC_Aspects.NEBRISUM.mAspect, 8);
+            if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+                researchAspects = new AspectList().add(Aspect.METAL, 20).add(Aspect.ORDER, 10).add(Aspect.CRYSTAL, 10)
+                        .add(Aspect.EXCHANGE, 20).add(Aspect.MINE, 10).add(Aspect.MIND, 5).add(Aspect.GREED, 4)
+                        .add((Aspect) gregtech.api.enums.TC_Aspects.NEBRISUM.mAspect, 8);
+            } else {
+                researchAspects = new AspectList().add(Aspect.METAL, 20).add(Aspect.ORDER, 10).add(Aspect.CRYSTAL, 10)
+                        .add(Aspect.EXCHANGE, 20).add(Aspect.MINE, 10).add(Aspect.MIND, 5).add(Aspect.GREED, 4);
+            }
             ArrayList<String> clusterParents = new ArrayList<String>();
             clusterParents.add("WG.PUREIRON");
             clusterParents.add("PUREGOLD");
@@ -703,9 +708,14 @@ public class WGResearch {
                                 (CrucibleRecipe) WGContent.recipeList
                                         .get("METALLURGICPERFECTION_TRANSMUTATION_" + ore)));
             pages = transmutePages.toArray(new ResearchPage[0]);
-            researchAspects = new AspectList().add(Aspect.METAL, 20).add(Aspect.ORDER, 10).add(Aspect.TOOL, 10)
-                    .add(Aspect.MAGIC, 10).add(Aspect.MIND, 5).add(Aspect.EXCHANGE, 20).add(Aspect.GREED, 4)
-                    .add((Aspect) gregtech.api.enums.TC_Aspects.NEBRISUM.mAspect, 8);
+            if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+                researchAspects = new AspectList().add(Aspect.METAL, 20).add(Aspect.ORDER, 10).add(Aspect.TOOL, 10)
+                        .add(Aspect.MAGIC, 10).add(Aspect.MIND, 5).add(Aspect.EXCHANGE, 20).add(Aspect.GREED, 4)
+                        .add((Aspect) gregtech.api.enums.TC_Aspects.NEBRISUM.mAspect, 8);
+            } else {
+                researchAspects = new AspectList().add(Aspect.METAL, 20).add(Aspect.ORDER, 10).add(Aspect.TOOL, 10)
+                        .add(Aspect.MAGIC, 10).add(Aspect.MIND, 5).add(Aspect.EXCHANGE, 20).add(Aspect.GREED, 4);
+            }
             ArrayList<String> transmuteParents = new ArrayList<String>();
             transmuteParents.add("WG.TRANSIRON");
             transmuteParents.add("TRANSGOLD");
