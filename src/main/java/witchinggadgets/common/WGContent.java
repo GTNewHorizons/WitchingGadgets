@@ -292,7 +292,8 @@ public class WGContent {
             if (!devbuild) for (Materials aMaterial : gregtech.api.enums.Materials.getMaterialsMap().values()) {
                 if (!aMaterial.contains(SubTag.NO_SMELTING)) {
                     if ((aMaterial.mBlastFurnaceRequired) || (aMaterial.mDirectSmelting.mBlastFurnaceRequired)) {
-                        if (aMaterial.mBlastFurnaceTemp <= 1000 && aMaterial.mDirectSmelting.mBlastFurnaceTemp <= 1000) {
+                        if (aMaterial.mBlastFurnaceTemp <= 1000
+                                && aMaterial.mDirectSmelting.mBlastFurnaceTemp <= 1000) {
                             if (aMaterial.getDust(1) != null) {
                                 InfernalBlastfurnaceRecipe temp = new InfernalBlastfurnaceRecipe(
                                         aMaterial.getIngots(1),
