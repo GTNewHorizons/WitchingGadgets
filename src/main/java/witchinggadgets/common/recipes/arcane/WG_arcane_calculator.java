@@ -4,6 +4,7 @@ import static witchinggadgets.common.recipes.WG_arcane_recipes.registerArcaneRec
 
 import net.minecraft.item.ItemStack;
 
+import cpw.mods.fml.common.Loader;
 import gregtech.api.enums.ItemList;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -13,22 +14,40 @@ import witchinggadgets.common.WGContent;
 public class WG_arcane_calculator {
 
     public static void registerScanCamera() {
-
-        registerArcaneRecipe(
-                "CALCULATOR",
-                "",
-                new ItemStack(WGContent.ItemMaterial, 1, 7),
-                new AspectList().add(Aspect.ORDER, 50),
-                "srs",
-                "sbs",
-                "sgs",
-                's',
-                "stickThaumium",
-                'r',
-                ItemList.Sensor_HV.get(1L),
-                'b',
-                "circuitAdvanced",
-                'g',
-                new ItemStack(ConfigBlocks.blockStoneDevice, 1, 2));
+        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+            registerArcaneRecipe(
+                    "CALCULATOR",
+                    "",
+                    new ItemStack(WGContent.ItemMaterial, 1, 7),
+                    new AspectList().add(Aspect.ORDER, 50),
+                    "srs",
+                    "sbs",
+                    "sgs",
+                    's',
+                    "stickThaumium",
+                    'r',
+                    ItemList.Sensor_HV.get(1L),
+                    'b',
+                    "circuitAdvanced",
+                    'g',
+                    new ItemStack(ConfigBlocks.blockStoneDevice, 1, 2));
+        } else {
+            registerArcaneRecipe(
+                    "CALCULATOR",
+                    "",
+                    new ItemStack(WGContent.ItemMaterial, 1, 7),
+                    new AspectList().add(Aspect.ORDER, 10),
+                    "srs",
+                    "sbs",
+                    "sgs",
+                    's',
+                    "stickWood",
+                    'r',
+                    "dyeRed",
+                    'b',
+                    "dyeBlue",
+                    'g',
+                    "dyeGreen");
+        }
     }
 }

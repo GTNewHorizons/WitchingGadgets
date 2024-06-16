@@ -3,8 +3,10 @@ package witchinggadgets.common.recipes.other;
 import static witchinggadgets.common.recipes.WG_other_recipes.registerCompoundRecipe;
 import static witchinggadgets.common.recipes.WG_other_recipes.registerShapedOreRecipe;
 
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
+import cpw.mods.fml.common.Loader;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GT_OreDictUnificator;
@@ -15,20 +17,37 @@ import witchinggadgets.common.WGContent;
 public class WG_other_gemcutting {
 
     public static void registerGemcutting() {
-        registerShapedOreRecipe(
-                "GEMCUTTING",
-                "_TOOLS",
-                new ItemStack(WGContent.ItemMaterial, 1, 8),
-                "qfi",
-                "sss",
-                'q',
-                GT_OreDictUnificator.get(OrePrefixes.gemChipped, Materials.Ruby, 1L),
-                'f',
-                GT_OreDictUnificator.get(OrePrefixes.gemChipped, Materials.Diamond, 1L),
-                'i',
-                GT_OreDictUnificator.get(OrePrefixes.gemChipped, Materials.Emerald, 1L),
-                's',
-                GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Thaumium, 1L));
+        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+            registerShapedOreRecipe(
+                    "GEMCUTTING",
+                    "_TOOLS",
+                    new ItemStack(WGContent.ItemMaterial, 1, 8),
+                    "qfi",
+                    "sss",
+                    'q',
+                    GT_OreDictUnificator.get(OrePrefixes.gemChipped, Materials.Ruby, 1L),
+                    'f',
+                    GT_OreDictUnificator.get(OrePrefixes.gemChipped, Materials.Diamond, 1L),
+                    'i',
+                    GT_OreDictUnificator.get(OrePrefixes.gemChipped, Materials.Emerald, 1L),
+                    's',
+                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Thaumium, 1L));
+        } else {
+            registerShapedOreRecipe(
+                    "GEMCUTTING",
+                    "_TOOLS",
+                    new ItemStack(WGContent.ItemMaterial, 1, 8),
+                    "qfi",
+                    "sss",
+                    'q',
+                    "gemQuartz",
+                    'f',
+                    Items.flint,
+                    'i',
+                    "ingotIron",
+                    's',
+                    "stickWood");
+        }
 
         registerCompoundRecipe(
                 "GEMCUTTING",

@@ -24,6 +24,7 @@ public class WGModCompat {
 
     public static Item tConResource;
 
+    public static Item natBarleyFood;
     public static Item tfRavensFeather;
     public static Item tfMagicMapFocus;
     public static Block tfTowerWood;
@@ -39,6 +40,9 @@ public class WGModCompat {
     public static boolean loaded_EnderIO;
 
     public static void init() {
+        // Natura
+        natBarleyFood = GameRegistry.findItem("Natura", "barleyFood");
+
         // Twilight Forest
         tfRavensFeather = GameRegistry.findItem("TwilightForest", "item.tfFeather");
         tfMagicMapFocus = GameRegistry.findItem("TwilightForest", "item.magicMapFocus");

@@ -12,6 +12,7 @@ import witchinggadgets.common.WGConfig;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.recipes.infusion.WG_infusion_bags;
 import witchinggadgets.common.recipes.infusion.WG_infusion_baubles;
+import witchinggadgets.common.recipes.infusion.WG_infusion_cloak_spectral;
 import witchinggadgets.common.recipes.infusion.WG_infusion_enchantments;
 import witchinggadgets.common.recipes.infusion.WG_infusion_ice_solidifier;
 import witchinggadgets.common.recipes.infusion.WG_infusion_labyrinth_string;
@@ -33,6 +34,10 @@ public class WG_Infusion_recipes {
 
         if (WGConfig.moduleBag) {
             WG_infusion_bags.registerBags();
+        }
+
+        if (WGConfig.capeSpectral) {
+            WG_infusion_cloak_spectral.registerCloakSpectral();
         }
 
         if (Config.allowMirrors) {

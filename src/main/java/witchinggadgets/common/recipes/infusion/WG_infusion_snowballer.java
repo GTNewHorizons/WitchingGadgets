@@ -6,6 +6,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
+import cpw.mods.fml.common.Loader;
 import gregtech.api.enums.ItemList;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -15,16 +16,32 @@ import witchinggadgets.common.WGContent;
 public class WG_infusion_snowballer {
 
     public static void registerSnowballer() {
-        registerInfusionRecipe(
-                "SNOWBALLER",
-                "",
-                new ItemStack(WGContent.BlockWoodenDevice, 1, 1),
-                7,
-                new AspectList().add(Aspect.WEATHER, 32).add(Aspect.COLD, 48).add(Aspect.TOOL, 64),
-                ItemList.Machine_HV_FluidSolidifier.get(1L),
-                new ItemStack[] { ItemList.Conveyor_Module_HV.get(1L), new ItemStack(ConfigBlocks.blockCrystal, 1, 2),
-                        new ItemStack(Items.snowball), new ItemStack(ConfigBlocks.blockCrystal, 1, 4),
-                        ItemList.IC2_EnergyCrystal.getWildcard(1L), new ItemStack(ConfigBlocks.blockCrystal, 1, 4),
-                        new ItemStack(Blocks.packed_ice), new ItemStack(ConfigBlocks.blockCrystal, 1, 2) });
+        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+            registerInfusionRecipe(
+                    "SNOWBALLER",
+                    "",
+                    new ItemStack(WGContent.BlockWoodenDevice, 1, 1),
+                    7,
+                    new AspectList().add(Aspect.WEATHER, 32).add(Aspect.COLD, 48).add(Aspect.TOOL, 64),
+                    ItemList.Machine_HV_FluidSolidifier.get(1L),
+                    new ItemStack[] { ItemList.Conveyor_Module_HV.get(1L),
+                            new ItemStack(ConfigBlocks.blockCrystal, 1, 2), new ItemStack(Items.snowball),
+                            new ItemStack(ConfigBlocks.blockCrystal, 1, 4), ItemList.IC2_EnergyCrystal.getWildcard(1L),
+                            new ItemStack(ConfigBlocks.blockCrystal, 1, 4), new ItemStack(Blocks.packed_ice),
+                            new ItemStack(ConfigBlocks.blockCrystal, 1, 2) });
+        } else {
+            registerInfusionRecipe(
+                    "SNOWBALLER",
+                    "",
+                    new ItemStack(WGContent.BlockWoodenDevice, 1, 1),
+                    4,
+                    new AspectList().add(Aspect.WEATHER, 16).add(Aspect.COLD, 24).add(Aspect.TOOL, 32),
+                    new ItemStack(Items.cauldron),
+                    new ItemStack[] { new ItemStack(Blocks.sticky_piston),
+                            new ItemStack(ConfigBlocks.blockCrystal, 1, 2), new ItemStack(Items.snowball),
+                            new ItemStack(ConfigBlocks.blockCrystal, 1, 4), new ItemStack(Items.redstone),
+                            new ItemStack(ConfigBlocks.blockCrystal, 1, 4), new ItemStack(Blocks.packed_ice),
+                            new ItemStack(ConfigBlocks.blockCrystal, 1, 2) });
+        }
     }
 }

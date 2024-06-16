@@ -5,9 +5,10 @@ import net.minecraft.item.ItemStack;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.crafting.CrucibleRecipe;
+import witchinggadgets.common.WGConfig;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.recipes.alchemic.WG_alchemic_clusters;
-import witchinggadgets.common.recipes.alchemic.WG_alchemic_gemcutting;
+import witchinggadgets.common.recipes.alchemic.WG_alchemic_crystal_capsule;
 import witchinggadgets.common.recipes.alchemic.WG_alchemic_pure_cinnabar;
 import witchinggadgets.common.recipes.alchemic.WG_alchemic_rose_vine;
 import witchinggadgets.common.recipes.alchemic.WG_alchemic_transmogrify;
@@ -21,7 +22,11 @@ public class WG_alchemic_recipes {
         WG_alchemic_rose_vine.registerRoseWine();
         WG_alchemic_transmogrify.registerTransmogrify();
         WG_alchemic_pure_cinnabar.registerPureCinnabar();
-        WG_alchemic_gemcutting.registerGemcutting();
+
+        if (WGConfig.moduleGemcutting) {
+            WG_alchemic_crystal_capsule.registerCrystalCapsule();
+        }
+
         WG_alchemic_clusters.registerClusters();
 
     }
