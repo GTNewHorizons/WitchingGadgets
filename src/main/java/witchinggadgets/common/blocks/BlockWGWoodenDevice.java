@@ -100,7 +100,7 @@ public class BlockWGWoodenDevice extends BlockContainer implements IWandable {
     }
 
     @Override
-    public void getSubBlocks(Item item, CreativeTabs par2CreativeTabs, List list) {
+    public void getSubBlocks(Item item, CreativeTabs par2CreativeTabs, List<ItemStack> list) {
         for (int i = 0; i < subNames.length; i++) list.add(new ItemStack(item, 1, i));
     }
 
@@ -165,19 +165,13 @@ public class BlockWGWoodenDevice extends BlockContainer implements IWandable {
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess iBlockAccess, int x, int y, int z) {
         int meta = iBlockAccess.getBlockMetadata(x, y, z);
-        if (meta == 0 && iBlockAccess.getTileEntity(x, y, z) instanceof TileEntitySpinningWheel) {
-            switch (((TileEntitySpinningWheel) iBlockAccess.getTileEntity(x, y, z)).facing) {
+        if (meta == 0 && iBlockAccess.getTileEntity(x, y, z) instanceof TileEntitySpinningWheel spinningWheel) {
+            switch (spinningWheel.facing) {
                 case 2:
                 default:
                     this.setBlockBounds(0F, 0F, 0.3125F, 1F, 1.25F, 0.6875F);
                     break;
-                case 3:
-                    this.setBlockBounds(0F, 0F, 0.3125F, 1F, 1.25F, 0.6875F);
-                    break;
-                case 4:
-                    this.setBlockBounds(0.3125F, 0F, 0F, 0.6875F, 1.25F, 1F);
-                    break;
-                case 5:
+                case 4, 5:
                     this.setBlockBounds(0.3125F, 0F, 0F, 0.6875F, 1.25F, 1F);
                     break;
             }
@@ -243,23 +237,16 @@ public class BlockWGWoodenDevice extends BlockContainer implements IWandable {
 
     @Override
     public TileEntity createNewTileEntity(World world, int metadata) {
-        switch (metadata) {
-            case 0:
-                return new TileEntitySpinningWheel();
-            case 1:
-                return new TileEntitySnowGen();
-            case 2:
-                return new TileEntityCobbleGen();
-            case 3:
-                return new TileEntityCuttingTable();
-            case 4:
-                return new TileEntitySaunaStove();
-            case 5:
-                return new TileEntityLabelLibrary();
-            case 6:
-                return new TileEntityIceGen();
-        }
-        return null;
+        return switch (metadata) {
+            case 0 -> new TileEntitySpinningWheel();
+            case 1 -> new TileEntitySnowGen();
+            case 2 -> new TileEntityCobbleGen();
+            case 3 -> new TileEntityCuttingTable();
+            case 4 -> new TileEntitySaunaStove();
+            case 5 -> new TileEntityLabelLibrary();
+            case 6 -> new TileEntityIceGen();
+            default -> null;
+        };
     }
 
     @Override
@@ -274,8 +261,7 @@ public class BlockWGWoodenDevice extends BlockContainer implements IWandable {
 
     @Override
     public void breakBlock(World world, int x, int y, int z, Block par5, int par6) {
-        if (world.getTileEntity(x, y, z) instanceof TileEntitySpinningWheel) {
-            TileEntitySpinningWheel tile = (TileEntitySpinningWheel) world.getTileEntity(x, y, z);
+        if (world.getTileEntity(x, y, z) instanceof TileEntitySpinningWheel tile) {
 
             for (int i = 0; i < 4; i++) {
                 ItemStack stack = tile.getStackInSlot(i);
@@ -306,8 +292,7 @@ public class BlockWGWoodenDevice extends BlockContainer implements IWandable {
                 }
             }
         }
-        if (world.getTileEntity(x, y, z) instanceof TileEntityCuttingTable) {
-            TileEntityCuttingTable tile = (TileEntityCuttingTable) world.getTileEntity(x, y, z);
+        if (world.getTileEntity(x, y, z) instanceof TileEntityCuttingTable tile) {
 
             for (int i = 0; i < tile.getSizeInventory(); i++) {
                 ItemStack stack = tile.getStackInSlot(i);
@@ -338,8 +323,7 @@ public class BlockWGWoodenDevice extends BlockContainer implements IWandable {
                 }
             }
         }
-        if (world.getTileEntity(x, y, z) instanceof TileEntityLabelLibrary) {
-            TileEntityLabelLibrary tile = (TileEntityLabelLibrary) world.getTileEntity(x, y, z);
+        if (world.getTileEntity(x, y, z) instanceof TileEntityLabelLibrary tile) {
 
             for (int i = 0; i < tile.getSizeInventory(); i++) {
                 ItemStack stack = tile.getStackInSlot(i);

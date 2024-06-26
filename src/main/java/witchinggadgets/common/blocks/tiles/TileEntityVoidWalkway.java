@@ -1,6 +1,5 @@
 package witchinggadgets.common.blocks.tiles;
 
-import java.util.Iterator;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,17 +19,13 @@ public class TileEntityVoidWalkway extends TileEntity {
 
         AxisAlignedBB aabb = AxisAlignedBB.getBoundingBox(minX, minY, minZ, maxX, maxY, maxZ);
 
-        List list = worldObj.getEntitiesWithinAABB(EntityPlayer.class, aabb);
+        List<EntityPlayer> list = worldObj.getEntitiesWithinAABB(EntityPlayer.class, aabb);
         boolean flag = false;
-        Iterator i = list.iterator();
-        while (i.hasNext()) {
-            EntityPlayer p = (EntityPlayer) i.next();
+        for (EntityPlayer p : list) {
             if (p.isSneaking()) flag = true;
         }
         if (list.isEmpty() || flag) {
             worldObj.setBlockToAir(xCoord, yCoord, zCoord);
-        } else {
-
         }
     }
 }

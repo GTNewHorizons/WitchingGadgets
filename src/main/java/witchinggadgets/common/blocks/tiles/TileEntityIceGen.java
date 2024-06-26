@@ -84,11 +84,8 @@ public class TileEntityIceGen extends TileEntityWGBase {
                 this.xCoord + this.facing.offsetX,
                 this.yCoord + this.facing.offsetY,
                 this.zCoord + this.facing.offsetZ);
-        if (inventory instanceof IInventory) return InventoryUtils.insertStack(
-                (IInventory) inventory,
-                new ItemStack(Blocks.ice),
-                this.facing.getOpposite().ordinal(),
-                false) == null;
+        if (inventory instanceof IInventory inv) return InventoryUtils
+                .insertStack(inv, new ItemStack(Blocks.ice), this.facing.getOpposite().ordinal(), false) == null;
         return true;
     }
 

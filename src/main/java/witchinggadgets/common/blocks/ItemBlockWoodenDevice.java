@@ -21,7 +21,7 @@ public class ItemBlockWoodenDevice extends ItemBlock {
     }
 
     @Override
-    public void getSubItems(Item item, CreativeTabs tab, List itemList) {
+    public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> itemList) {
         this.field_150939_a.getSubBlocks(item, tab, itemList);
     }
 
