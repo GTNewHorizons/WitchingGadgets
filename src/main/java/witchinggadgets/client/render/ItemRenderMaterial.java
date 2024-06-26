@@ -208,8 +208,8 @@ public class ItemRenderMaterial implements IItemRenderer {
             // double step = 1.0/9.0;
             // int frame = timerSteps<60 ? 0 : timerSteps-59;
 
-            GL11.glEnable(3042);
-            GL11.glBlendFunc(770, 771);
+            GL11.glEnable(GL11.GL_BLEND);
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             tessellator.startDrawingQuads();
             byte b0 = 7;
             // tessellator.addVertexWithUV(0 - b0, 128 + b0, 0.0D, 0.0D, frame*step);
@@ -267,7 +267,7 @@ public class ItemRenderMaterial implements IItemRenderer {
             tessellator.addVertexWithUV(0 - b0, 0 - b0, 0.0D, ic.getMinU(), ic.getMinV());
             tessellator.draw();
             GL11.glColor4d(1, 1, 1, 1);
-            GL11.glDisable(3042);
+            GL11.glDisable(GL11.GL_BLEND);
         }
 
         if (scanStack != null) {

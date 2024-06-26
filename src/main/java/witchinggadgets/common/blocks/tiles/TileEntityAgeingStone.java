@@ -13,18 +13,18 @@ public class TileEntityAgeingStone extends TileEntityWGBase {
     public void updateEntity() {
         AxisAlignedBB box = AxisAlignedBB
                 .getBoundingBox(xCoord - 3, yCoord - 2, zCoord - 3, xCoord + 4, yCoord + 3, zCoord + 4);
-        List hitEntities = worldObj.getEntitiesWithinAABB(Entity.class, box);
+        List<Entity> hitEntities = worldObj.getEntitiesWithinAABB(Entity.class, box);
         for (int i = 0; i < hitEntities.size(); i++) {
-            Object ent = hitEntities.get(i);
-            if (ent instanceof EntityAgeable) {
-                int age = ((EntityAgeable) ent).getGrowingAge();
+            Entity ent = hitEntities.get(i);
+            if (ent instanceof EntityAgeable ageable) {
+                int age = ageable.getGrowingAge();
 
                 if (age < 0) {
                     ++age;
-                    ((EntityAgeable) ent).setGrowingAge(age);
+                    ageable.setGrowingAge(age);
                 } else if (age > 0) {
                     --age;
-                    ((EntityAgeable) ent).setGrowingAge(age);
+                    ageable.setGrowingAge(age);
                 }
             }
         }

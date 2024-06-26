@@ -17,17 +17,15 @@ import thaumcraft.client.fx.particles.FXWisp;
 
 public class ClientTickHandler {
 
-    public static HashMap<ChunkCoordinates, Integer> oreHighlightMap = new HashMap();
-    public static HashMap<ChunkCoordinates, Object> oreHighlightBeamMap = new HashMap();
+    public static HashMap<ChunkCoordinates, Integer> oreHighlightMap = new HashMap<>();
+    public static HashMap<ChunkCoordinates, Object> oreHighlightBeamMap = new HashMap<>();
     static int highlight;
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void renderTick(TickEvent.RenderTickEvent event) {
-        if (!(Minecraft.getMinecraft().renderViewEntity instanceof EntityPlayer)) return;
-        EntityPlayer player = (EntityPlayer) Minecraft.getMinecraft().renderViewEntity;
-        if (player == null || oreHighlightMap.isEmpty()) {
-            oreHighlightMap.clear();
+        if (!(Minecraft.getMinecraft().renderViewEntity instanceof EntityPlayer player)) return;
+        if (oreHighlightMap.isEmpty()) {
             oreHighlightBeamMap.clear();
             highlight = 0;
             return;
@@ -43,18 +41,11 @@ public class ClientTickHandler {
 
             double[] hand = ClientUtilities.getPlayerHandPos(player, true);
 
-            // Thaumcraft.proxy.wispFX3(player.worldObj, hand[0],hand[1],hand[2], x,y,z, .15f,3,false,0);
             FXWisp ef = new FXWisp(player.worldObj, hand[0], hand[1], hand[2], x, y, z, .05f, 3);
             ef.noClip = true;
             ef.setGravity(0);
             ef.shrink = true;
-
             ParticleEngine.instance.addEffect(player.worldObj, ef);
-
-            // oreHighlightBeamMap.put(e.getKey(), Thaumcraft.proxy.beamPower(player.worldObj, hand[0],hand[1],hand[2],
-            // x,y,z, 0, 1, 0, true, oreHighlightBeamMap.get(e.getKey())));//beamBore(Minecraft.getMinecraft().theWorld,
-            // x,y,z, hand[0],hand[1],hand[2], 1,Aspect.EARTH.getColor(), true, .2f,
-            // oreHighlightBeamMap.get(e.getKey()), 0));
             highlight++;
             if (highlight >= oreHighlightMap.size()) highlight = 0;
         }

@@ -165,17 +165,17 @@ public class ItemBag extends Item {
     }
 
     @Override
-    public void getSubItems(Item item, CreativeTabs tab, List itemList) {
+    public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> itemList) {
         for (int i = 0; i < subNames.length; i++) itemList.add(new ItemStack(this, 1, i));
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack item, EntityPlayer par2EntityPlayer, List list, boolean par4) {
+    public void addInformation(ItemStack item, EntityPlayer par2EntityPlayer, List<String> list, boolean par4) {
         if (item.getItemDamage() == 1) {
             list.add(
                     EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal(Lib.DESCRIPTION + "filteredItems"));
-            for (ItemStack stack : this.getStoredItems(item))
+            for (ItemStack stack : getStoredItems(item))
                 if (stack != null) list.add(EnumChatFormatting.DARK_GRAY + " " + stack.getDisplayName());
         }
     }
@@ -190,7 +190,7 @@ public class ItemBag extends Item {
                 NBTTagCompound tag = inv.getCompoundTagAt(i);
                 int slot = tag.getByte("Slot") & 0xFF;
 
-                if ((slot >= 0) && (slot < stackList.length)) {
+                if (slot < stackList.length) {
                     stackList[slot] = ItemStack.loadItemStackFromNBT(tag);
                 }
             }

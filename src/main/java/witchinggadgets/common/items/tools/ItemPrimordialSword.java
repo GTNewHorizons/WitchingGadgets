@@ -59,9 +59,9 @@ public class ItemPrimordialSword extends ItemSword
 
     @Override
     public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity target) {
-        if (target instanceof EntityLivingBase) {
+        if (target instanceof EntityLivingBase targetEntity) {
             if (getAbility(stack) == 0) {
-                for (EntityLivingBase e : (List<EntityLivingBase>) player.worldObj.getEntitiesWithinAABB(
+                for (EntityLivingBase e : player.worldObj.getEntitiesWithinAABB(
                         EntityLivingBase.class,
                         AxisAlignedBB.getBoundingBox(
                                 target.posX - 2,
@@ -73,8 +73,8 @@ public class ItemPrimordialSword extends ItemSword
                     if (e.canAttackWithItem() && !e.hitByEntity(player) && !e.equals(player)) {
                         float f = (float) player.getEntityAttribute(SharedMonsterAttributes.attackDamage)
                                 .getAttributeValue();
-                        int i = EnchantmentHelper.getKnockbackModifier(player, (EntityLivingBase) e);
-                        float f1 = EnchantmentHelper.getEnchantmentModifierLiving(player, (EntityLivingBase) e);
+                        int i = EnchantmentHelper.getKnockbackModifier(player, e);
+                        float f1 = EnchantmentHelper.getEnchantmentModifierLiving(player, e);
                         if (player.isSprinting()) ++i;
                         if (f > 0 || f1 > 0) {
                             boolean flag = player.fallDistance > 0.0F && !player.onGround
@@ -99,13 +99,11 @@ public class ItemPrimordialSword extends ItemSword
                             if (flag2) {
                                 if (i > 0) {
                                     e.addVelocity(
-                                            (double) (-MathHelper.sin(player.rotationYaw * (float) Math.PI / 180.0F)
-                                                    * (float) i
-                                                    * 0.5F),
+                                            -MathHelper.sin(player.rotationYaw * (float) Math.PI / 180.0F) * (float) i
+                                                    * 0.5F,
                                             0.1D,
-                                            (double) (MathHelper.cos(player.rotationYaw * (float) Math.PI / 180.0F)
-                                                    * (float) i
-                                                    * 0.5F));
+                                            MathHelper.cos(player.rotationYaw * (float) Math.PI / 180.0F) * (float) i
+                                                    * 0.5F);
                                     player.motionX *= 0.6D;
                                     player.motionZ *= 0.6D;
                                     player.setSprinting(false);
@@ -116,7 +114,7 @@ public class ItemPrimordialSword extends ItemSword
                                 if (f >= 18) player.triggerAchievement(AchievementList.overkill);
 
                                 player.setLastAttacker(e);
-                                EnchantmentHelper.func_151384_a((EntityLivingBase) e, player);
+                                EnchantmentHelper.func_151384_a(e, player);
                                 EnchantmentHelper.func_151385_b(player, e);
                                 player.addStat(StatList.damageDealtStat, Math.round(f * 10.0F));
                                 if (j > 0) e.setFire(j * 4);
@@ -126,14 +124,14 @@ public class ItemPrimordialSword extends ItemSword
                     }
             }
             if (getAbility(stack) == 2) {
-                ((EntityLivingBase) target).addPotionEffect(new PotionEffect(WGContent.pot_cinderCoat.id, 80, 1));
+                targetEntity.addPotionEffect(new PotionEffect(WGContent.pot_cinderCoat.id, 80, 1));
                 target.setFire(4);
             }
             if (getAbility(stack) == 3)
-                ((EntityLivingBase) target).addPotionEffect(new PotionEffect(WGContent.pot_dissolve.id, 80, 2));
+                targetEntity.addPotionEffect(new PotionEffect(WGContent.pot_dissolve.id, 80, 2));
             if (getAbility(stack) == 5) {
-                ((EntityLivingBase) target).addPotionEffect(new PotionEffect(Potion.weakness.getId(), 60));
-                ((EntityLivingBase) target).addPotionEffect(new PotionEffect(Potion.hunger.getId(), 120));
+                targetEntity.addPotionEffect(new PotionEffect(Potion.weakness.getId(), 60));
+                targetEntity.addPotionEffect(new PotionEffect(Potion.hunger.getId(), 120));
             }
         }
         return false;
@@ -169,14 +167,7 @@ public class ItemPrimordialSword extends ItemSword
         return 2;
     }
 
-    /*
-     * @Override public String getItemStackDisplayName(ItemStack stack) { int ab = getAbility(stack); String add =
-     * ab>=0&&ab<6? " "+EnumChatFormatting.DARK_GRAY+"- \u00a7"+Aspect.getPrimalAspects().get(ab).getChatcolor()+Aspect.
-     * getPrimalAspects().get(ab).getName()+EnumChatFormatting.RESET : ""; return
-     * super.getItemStackDisplayName(stack)+add; }
-     */
-
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean par4) {
         int ab = getAbility(stack);
         String add = ab >= 0 && ab < 6 ? " " + EnumChatFormatting.DARK_GRAY
                 + "- \u00a7"

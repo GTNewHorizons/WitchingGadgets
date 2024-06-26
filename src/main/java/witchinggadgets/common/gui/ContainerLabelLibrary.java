@@ -61,7 +61,7 @@ public class ContainerLabelLibrary extends Container {
 
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int slot) {
-        Slot clickedSlot = (Slot) inventorySlots.get(slot);
+        Slot clickedSlot = inventorySlots.get(slot);
         switch (slot) {
             case LABEL_INPUT_SLOT:
                 return transferLabelsWithAspect(new AspectList());
@@ -81,7 +81,7 @@ public class ContainerLabelLibrary extends Container {
     private void transferInventoryToLabels(Slot clickedSlot) {
         ItemStack clickedItem = clickedSlot.getStack();
         if (isLabel(clickedItem)) {
-            Slot labelSlot = (Slot) inventorySlots.get(LABEL_INPUT_SLOT);
+            Slot labelSlot = inventorySlots.get(LABEL_INPUT_SLOT);
             ItemStack labels = labelSlot.getStack();
             if (labels == null) {
                 ((IEssentiaContainerItem) clickedItem.getItem()).setAspects(clickedItem, new AspectList());
@@ -101,7 +101,7 @@ public class ContainerLabelLibrary extends Container {
     }
 
     private ItemStack transferLabelsWithAspect(AspectList aspects) {
-        Slot labelSlot = (Slot) inventorySlots.get(LABEL_INPUT_SLOT);
+        Slot labelSlot = inventorySlots.get(LABEL_INPUT_SLOT);
         ItemStack labels = labelSlot.getStack();
         ItemStack returnStack = null;
         if (labelSlot.getHasStack()) {
@@ -128,7 +128,7 @@ public class ContainerLabelLibrary extends Container {
     public ItemStack slotClick(int slotId, int dragType, int clickTypeIn, EntityPlayer player) {
         ItemStack heldStack = player.inventory.getItemStack();
         if (slotId == LABEL_INPUT_SLOT && heldStack != null) {
-            Slot labelSlot = (Slot) inventorySlots.get(slotId);
+            Slot labelSlot = inventorySlots.get(slotId);
             ItemStack labels = labelSlot.getStack();
             // Accept all label items no matter their aspect, and clear their aspect
             if (labelSlot.isItemValid(heldStack)) {

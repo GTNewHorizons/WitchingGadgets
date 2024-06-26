@@ -1,8 +1,5 @@
 package witchinggadgets.common;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,9 +12,15 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
+import enviromine.handlers.EM_StatusManager;
+import enviromine.trackers.EnviroDataTracker;
+import mods.railcraft.common.core.RailcraftConfig;
+import tconstruct.library.crafting.DryingRackRecipes;
+import tconstruct.library.crafting.Smeltery;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
+import thaumic.tinkerer.common.enchantment.core.EnchantmentManager;
 import witchinggadgets.common.minetweaker.WGMinetweaker;
 
 public class WGModCompat {
@@ -153,127 +156,57 @@ public class WGModCompat {
             if (blockStack == null || Block.getBlockFromItem(blockStack.getItem()) == null)
                 blockStack = new ItemStack(Blocks.iron_block);
             Block b = Block.getBlockFromItem(blockStack.getItem());
-
             if (!OreDictionary.getOres(oreName).isEmpty())
                 for (ItemStack oreStack : OreDictionary.getOres(oreName)) if (oreStack != null)
                     addTConSmelteryRecipe(oreStack, b, blockStack.getItemDamage(), temperature, fluidName, fluidAmount);
         }
     }
 
-    static Class smeltery = null;
-    static Method addMelting = null;
-
     public static void addTConSmelteryRecipe(ItemStack ore, Block block, int blockMeta, int temperature,
             String fluidName, int fluidAmount) {
         if (!loaded_TCon || FluidRegistry.getFluid(fluidName) == null) return;
-
-        try {
-            FluidStack fluid = new FluidStack(FluidRegistry.getFluid(fluidName), fluidAmount);
-
-            if (smeltery == null) smeltery = Class.forName("tconstruct.library.crafting.Smeltery");
-            if (addMelting == null) addMelting = smeltery.getDeclaredMethod(
-                    "addMelting",
-                    ItemStack.class,
-                    Block.class,
-                    int.class,
-                    int.class,
-                    FluidStack.class);
-            addMelting.invoke(null, ore, block, blockMeta, temperature, fluid);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        FluidStack fluid = new FluidStack(FluidRegistry.getFluid(fluidName), fluidAmount);
+        Smeltery.addMelting(ore, block, blockMeta, temperature, fluid);
     }
-
-    static Class dryingRack = null;
-    static Method addDryingRecipe = null;
 
     public static void addTConDryingRecipe(Object input, int time, Object output) {
         if (!loaded_TCon) return;
-
-        try {
-            if (dryingRack == null) dryingRack = Class.forName("tconstruct.library.crafting.DryingRackRecipes");
-            if (addDryingRecipe == null) addDryingRecipe = dryingRack
-                    .getDeclaredMethod("addDryingRecipe", Object.class, int.class, Object.class);
-            addDryingRecipe.invoke(null, input, time, output);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
+        DryingRackRecipes.addDryingRecipe(input, time, output);
     }
 
-    static Class enviro_DataTracker = null;
-    static Method enviro_lookupTracker = null;
-    static Field enviro_temperatue = null;
-    static Field enviro_hydration = null;
-    static Field enviro_sanity = null;
-    static Method enviro_dehydrate = null;
     static final float SANITYBUFF = .02f;
 
     public static void enviromineDoSaunaStuff(EntityLivingBase player, float deh, float temp) {
         if (!loaded_Enviromine) return;
 
-        try {
-            if (enviro_DataTracker == null) enviro_DataTracker = Class.forName("enviromine.trackers.EnviroDataTracker");
-            if (enviro_lookupTracker == null) {
-                Class c_EM_StatusManager = Class.forName("enviromine.handlers.EM_StatusManager");
-                enviro_lookupTracker = c_EM_StatusManager.getDeclaredMethod("lookupTracker", EntityLivingBase.class);
-            }
-            if (enviro_temperatue == null) enviro_temperatue = enviro_DataTracker.getField("bodyTemp");
-            if (enviro_hydration == null) enviro_hydration = enviro_DataTracker.getField("hydration");
-            if (enviro_sanity == null) enviro_sanity = enviro_DataTracker.getField("sanity");
-            if (enviro_dehydrate == null) enviro_dehydrate = enviro_DataTracker.getMethod("dehydrate", float.class);
-            Object tracker = enviro_lookupTracker.invoke(null, player);
-            float curTemp = enviro_temperatue.getFloat(tracker);
-            if (curTemp + temp < 37.5f) enviro_temperatue.set(tracker, curTemp + temp);
-            float curSane = enviro_sanity.getFloat(tracker);
-            if (curSane + SANITYBUFF <= 100f) enviro_sanity.set(tracker, curSane + SANITYBUFF);
-
-            float curHyd = enviro_hydration.getFloat(tracker);
-            enviro_dehydrate.invoke(tracker, curHyd > 80 ? deh : 0);
-        } catch (Exception e) {
-            e.printStackTrace();
+        EnviroDataTracker tracker = EM_StatusManager.lookupTracker(player);
+        float curTemp = tracker.bodyTemp;
+        if (curTemp + temp < 37.5f) {
+            tracker.bodyTemp = curTemp + temp;
         }
-    }
 
-    static Method railcraft_isSubBlockEnabled = null;
+        float curSane = tracker.sanity;
+        if (curSane + SANITYBUFF <= 100f) {
+            tracker.sanity = curSane + SANITYBUFF;
+        }
+
+        float curHyd = tracker.hydration;
+        tracker.dehydrate(curHyd > 80 ? deh : 0);
+    }
 
     public static boolean railcraftAllowBlastFurnace() {
         if (!loaded_Railcraft) return false;
-        try {
-            if (railcraft_isSubBlockEnabled == null) {
-                Class c_RailcraftConfig = Class.forName("mods.railcraft.common.core.RailcraftConfig");
-                railcraft_isSubBlockEnabled = c_RailcraftConfig.getMethod("isSubBlockEnabled", String.class);
-            }
-            boolean enabled = (Boolean) railcraft_isSubBlockEnabled.invoke(null, "machine.alpha.blast.furnace");
-            boolean block = GameRegistry.findBlock("Railcraft", "brick.infernal") != null;
-            boolean stair = GameRegistry.findBlock("Railcraft", "stair") != null;
-            return enabled && block && stair;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
 
-    static Method thaumtink_registerExponentialCostData = null;
+        boolean enabled = RailcraftConfig.isSubBlockEnabled("machine.alpha.blast.furnace");
+        boolean block = GameRegistry.findBlock("Railcraft", "brick.infernal") != null;
+        boolean stair = GameRegistry.findBlock("Railcraft", "stair") != null;
+
+        return enabled && block && stair;
+    }
 
     public static void thaumicTinkererRegisterEnchantment(Enchantment enchantment, String texture, AspectList aspects,
             String research) {
         if (!loaded_TT) return;
-        try {
-            if (thaumtink_registerExponentialCostData == null) {
-                Class c_EnchantmentManager = Class
-                        .forName("thaumic.tinkerer.common.enchantment.core.EnchantmentManager");
-                thaumtink_registerExponentialCostData = c_EnchantmentManager.getMethod(
-                        "registerExponentialCostData",
-                        Enchantment.class,
-                        String.class,
-                        boolean.class,
-                        AspectList.class,
-                        String.class);
-            }
-            thaumtink_registerExponentialCostData.invoke(null, enchantment, texture, false, aspects, research);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        EnchantmentManager.registerExponentialCostData(enchantment, texture, false, aspects, research);
     }
 }

@@ -141,7 +141,7 @@ public class ThaumonomiconIndexSearcher {
 
             if (!searchResults.isEmpty()) {
                 ClientUtilities.bindTexture("thaumcraft:textures/misc/parchment3.png");
-                GL11.glEnable(3042);
+                GL11.glEnable(GL11.GL_BLEND);
                 Tessellator tes = Tessellator.instance;
                 tes.startDrawingQuads();
                 tes.setColorOpaque_I(0xffffff);
@@ -218,7 +218,7 @@ public class ThaumonomiconIndexSearcher {
 
     static String searchCategory;
     static String lastKeyword;
-    static List<SearchQuery> searchResults = new ArrayList();
+    static List<SearchQuery> searchResults = new ArrayList<>();
 
     static void buildEntryList(String query) {
         if (query == null || query.isEmpty()) {
@@ -226,18 +226,18 @@ public class ThaumonomiconIndexSearcher {
             return;
         }
         query = query.toLowerCase();
-        List<SearchQuery> valids = new ArrayList();
+        List<SearchQuery> valids = new ArrayList<>();
         Set<String> keys;
         if (searchCategory != null && !searchCategory.isEmpty())
             keys = ResearchCategories.getResearchList(searchCategory).research.keySet();
         else {
-            keys = new HashSet<String>();
+            keys = new HashSet<>();
             for (ResearchCategoryList cat : ResearchCategories.researchCategories.values())
                 keys.addAll(cat.research.keySet());
         }
 
-        Set<SearchQuery> recipeBased = new HashSet();
-        Set<String> usedResearches = new HashSet();
+        Set<SearchQuery> recipeBased = new HashSet<>();
+        Set<String> usedResearches = new HashSet<>();
         for (String key : keys) if (key != null && !key.isEmpty()
                 && ResearchCategories.getResearch(key) != null
                 && ThaumcraftApiHelper

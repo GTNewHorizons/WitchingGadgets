@@ -156,7 +156,7 @@ public class ItemCloak extends Item
     }
 
     @Override
-    public void getSubItems(Item item, CreativeTabs tab, List itemList) {
+    public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> itemList) {
         for (int i = 0; i < subNames.length; i++)
             if (i != 4 || WGModCompat.loaded_Twilight) itemList.add(new ItemStack(item, 1, i));
     }
@@ -197,7 +197,7 @@ public class ItemCloak extends Item
     }
 
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List list, boolean par4) {
+    public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List<String> list, boolean par4) {
         if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("noGlide"))
             list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide"));
         list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.tg." + getSlot(stack)));
@@ -355,9 +355,7 @@ public class ItemCloak extends Item
     @Optional.Method(modid = "Botania")
     public ItemStack getCosmeticItem(ItemStack stack) {
         if (!stack.hasTagCompound()) return null;
-        ItemStack cosmetic = ItemStack
-                .loadItemStackFromNBT(stack.getTagCompound().getCompoundTag("botaniaCosmeticOverride"));
-        return cosmetic;
+        return ItemStack.loadItemStackFromNBT(stack.getTagCompound().getCompoundTag("botaniaCosmeticOverride"));
     }
 
     @Optional.Method(modid = "Botania")

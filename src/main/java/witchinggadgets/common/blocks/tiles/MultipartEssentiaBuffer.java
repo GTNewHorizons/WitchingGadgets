@@ -71,23 +71,12 @@ public class MultipartEssentiaBuffer extends McMetaPart implements IAspectContai
             TileEntity te = ThaumcraftApiHelper.getConnectableTile(world(), x(), y(), z(), fd);
             if (te != null) {
                 switch (side) {
-                    case 0:
-                        miny = 0.0F;
-                        break;
-                    case 1:
-                        maxy = 1.0F;
-                        break;
-                    case 2:
-                        minz = 0.0F;
-                        break;
-                    case 3:
-                        maxz = 1.0F;
-                        break;
-                    case 4:
-                        minx = 0.0F;
-                        break;
-                    case 5:
-                        maxx = 1.0F;
+                    case 0 -> miny = 0.0F;
+                    case 1 -> maxy = 1.0F;
+                    case 2 -> minz = 0.0F;
+                    case 3 -> maxz = 1.0F;
+                    case 4 -> minx = 0.0F;
+                    case 5 -> maxx = 1.0F;
                 }
             }
         }
@@ -96,7 +85,7 @@ public class MultipartEssentiaBuffer extends McMetaPart implements IAspectContai
 
     @Override
     public Iterable<IndexedCuboid6> getSubParts() {
-        ArrayList<IndexedCuboid6> t = new ArrayList();
+        ArrayList<IndexedCuboid6> t = new ArrayList<>();
         if (world().isRemote && (Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem() == null
                 || !(Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem().getItem() instanceof ItemWandCasting
                         || Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem()
@@ -119,14 +108,14 @@ public class MultipartEssentiaBuffer extends McMetaPart implements IAspectContai
 
     @Override
     public Iterable<Cuboid6> getOcclusionBoxes() {
-        ArrayList<Cuboid6> t = new ArrayList();
+        ArrayList<Cuboid6> t = new ArrayList<>();
         t.add(new Cuboid6(.25, .25, .25, .75, .75, .75));
         return t;
     }
 
     @Override
     public Iterable<Cuboid6> getCollisionBoxes() {
-        ArrayList<Cuboid6> t = new ArrayList();
+        ArrayList<Cuboid6> t = new ArrayList<>();
         t.add(getBounds());
         return t;
     }
@@ -135,10 +124,10 @@ public class MultipartEssentiaBuffer extends McMetaPart implements IAspectContai
     public void invalidateConvertedTile() {
         super.invalidateConvertedTile();
         TileEntity te = world().getTileEntity(x(), y(), z());
-        if (te instanceof TileTubeBuffer) {
-            this.aspects = ((TileTubeBuffer) te).aspects;
-            this.openSides = ((TileTubeBuffer) te).openSides;
-            this.chokedSides = ((TileTubeBuffer) te).chokedSides;
+        if (te instanceof TileTubeBuffer buffer) {
+            this.aspects = buffer.aspects;
+            this.openSides = buffer.openSides;
+            this.chokedSides = buffer.chokedSides;
         }
     }
 
@@ -160,12 +149,10 @@ public class MultipartEssentiaBuffer extends McMetaPart implements IAspectContai
     }
 
     void fillBuffer() {
-        TileEntity te = null;
-        IEssentiaTransport ic = null;
         for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-            te = ThaumcraftApiHelper.getConnectableTile(world(), x(), y(), z(), dir);
+            TileEntity te = ThaumcraftApiHelper.getConnectableTile(world(), x(), y(), z(), dir);
             if (te != null) {
-                ic = (IEssentiaTransport) te;
+                IEssentiaTransport ic = (IEssentiaTransport) te;
                 if (ic.getEssentiaAmount(dir.getOpposite()) > 0
                         && ic.getSuctionAmount(dir.getOpposite()) < getSuctionAmount(dir)
                         && getSuctionAmount(dir) >= ic.getMinimumSuction()) {
@@ -338,8 +325,7 @@ public class MultipartEssentiaBuffer extends McMetaPart implements IAspectContai
             if (ibox.min.x <= localHit.xCoord && ibox.max.x >= localHit.xCoord)
                 if (ibox.min.y <= localHit.yCoord && ibox.max.y >= localHit.yCoord)
                     if (ibox.min.z <= localHit.zCoord && ibox.max.z >= localHit.zCoord) {
-                        if (ibox.data instanceof ForgeDirection) {
-                            ForgeDirection fd = (ForgeDirection) ibox.data;
+                        if (ibox.data instanceof ForgeDirection fd) {
                             player.swingItem();
 
                             if (player.isSneaking()) {

@@ -16,7 +16,7 @@ public class BagColourizationRecipe implements IRecipe {
     @Override
     public boolean matches(InventoryCrafting par1InventoryCrafting, World par2World) {
         ItemStack itemstack = null;
-        ArrayList<ItemStack> arraylist = new ArrayList<ItemStack>();
+        ArrayList<ItemStack> arraylist = new ArrayList<>();
 
         for (int i = 0; i < par1InventoryCrafting.getSizeInventory(); i++) {
             ItemStack itemstack1 = par1InventoryCrafting.getStackInSlot(i);

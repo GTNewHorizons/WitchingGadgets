@@ -45,35 +45,6 @@ public class EtherealWallMaster {
         this.tileMap = new ArrayList<TileEntityEtherealWall>();
     }
 
-    public void checkNetIntegrity(TileEntityEtherealWall tile) {
-        // //Get adjacent tiles
-        // TileEntityEtherealWall adjYneg = null;
-        // TileEntityEtherealWall adjYpos = null;
-        // TileEntityEtherealWall adjZneg = null;
-        // TileEntityEtherealWall adjZpos = null;
-        // TileEntityEtherealWall adjXneg = null;
-        // TileEntityEtherealWall adjXpos = null;
-        //
-        // if(tile.getWorldObj().getTileEntity(tile.xCoord,tile.yCoord-1,tile.zCoord) instanceof
-        // TileEntityEtherealWall)adjYneg =
-        // (TileEntityEtherealWall)tile.getWorldObj().getTileEntity(tile.xCoord,tile.yCoord-1,tile.zCoord);
-        // if(tile.getWorldObj().getTileEntity(tile.xCoord,tile.yCoord+1,tile.zCoord) instanceof
-        // TileEntityEtherealWall)adjYpos =
-        // (TileEntityEtherealWall)tile.getWorldObj().getTileEntity(tile.xCoord,tile.yCoord+1,tile.zCoord);
-        // if(tile.getWorldObj().getTileEntity(tile.xCoord,tile.yCoord,tile.zCoord-1) instanceof
-        // TileEntityEtherealWall)adjZneg =
-        // (TileEntityEtherealWall)tile.getWorldObj().getTileEntity(tile.xCoord,tile.yCoord,tile.zCoord-1);
-        // if(tile.getWorldObj().getTileEntity(tile.xCoord,tile.yCoord,tile.zCoord+1) instanceof
-        // TileEntityEtherealWall)adjZpos =
-        // (TileEntityEtherealWall)tile.getWorldObj().getTileEntity(tile.xCoord,tile.yCoord,tile.zCoord+1);
-        // if(tile.getWorldObj().getTileEntity(tile.xCoord-1,tile.yCoord,tile.zCoord) instanceof
-        // TileEntityEtherealWall)adjXneg =
-        // (TileEntityEtherealWall)tile.getWorldObj().getTileEntity(tile.xCoord-1,tile.yCoord,tile.zCoord);
-        // if(tile.getWorldObj().getTileEntity(tile.xCoord+1,tile.yCoord,tile.zCoord) instanceof
-        // TileEntityEtherealWall)adjXpos =
-        // (TileEntityEtherealWall)tile.getWorldObj().getTileEntity(tile.xCoord+1,tile.yCoord,tile.zCoord);
-    }
-
     public TileEntityEtherealWall[] sortTilesByDistanceTo(int x, int y, int z) {
         TileEntityEtherealWall[] result = new TileEntityEtherealWall[tileMap.size()];
         int counter = 0;

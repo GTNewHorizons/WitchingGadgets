@@ -53,8 +53,8 @@ public class TileRenderWallMirror extends TileEntitySpecialRenderer {
 
         Tessellator tes = Tessellator.instance;
 
-        // GL11.glEnable(3042);
-        // GL11.glBlendFunc(770, 771);
+        // GL11.glEnable(GL11.GL_BLEND);
+        // GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
         GL11.glTranslatef((float) x, (float) y, (float) z);
 

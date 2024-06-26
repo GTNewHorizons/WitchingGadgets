@@ -35,7 +35,7 @@ public class GuiCuttingTable extends GuiContainer {
         int xOff = this.tile.targetGemCut == 0 ? 0 : 80;
         int yOff = this.tile.targetGemCut == 0 ? 0 : 80;
         Tessellator tes = Tessellator.instance;
-        GL11.glEnable(3042);
+        GL11.glEnable(GL11.GL_BLEND);
         tes.startDrawingQuads();
         tes.addVertexWithUV(guiLeft + 73, guiTop + 17, 0, (xOff) / 255f, (yOff) / 255f);
         tes.addVertexWithUV(guiLeft + 73, guiTop + 47, 0, (xOff) / 255f, (yOff + 80) / 255f);
@@ -53,18 +53,13 @@ public class GuiCuttingTable extends GuiContainer {
         mY -= (height - ySize) / 2;
         if (mY > 12 && mY < 24) {
             int old = this.tile.targetGemCut;
-            if (mX > 106 && mX < 117)
-                // this.tile.targetGemCut = (byte) (old==0?1:0);
-                this.tile.targetGemCut++;
-            if (mX > 59 && mX < 70)
-                // this.tile.targetGemCut = (byte) (old==0?1:0);
-                this.tile.targetGemCut--;
+            if (mX > 106 && mX < 117) this.tile.targetGemCut++;
+            if (mX > 59 && mX < 70) this.tile.targetGemCut--;
             if (this.tile.targetGemCut < 0) this.tile.targetGemCut = (byte) (ItemInfusedGem.GemCut.values().length - 1);
             else if (this.tile.targetGemCut >= ItemInfusedGem.GemCut.values().length) this.tile.targetGemCut = 0;
 
             if (this.tile.targetGemCut != old)
                 WitchingGadgets.packetHandler.sendToServer(new MessageTileUpdate(this.tile));
-            // WGPacketPipeline.INSTANCE.sendToServer(new PacketTileUpdate(this.tile));
         }
     }
 }

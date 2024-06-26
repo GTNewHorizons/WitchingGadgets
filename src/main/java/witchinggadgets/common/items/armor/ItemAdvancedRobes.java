@@ -90,7 +90,7 @@ public class ItemAdvancedRobes extends ItemArmor implements IRepairable, IVisDis
     }
 
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List list, boolean par4) {
+    public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List<String> list, boolean par4) {
         list.add(
                 EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount")
                         + ": "
@@ -99,8 +99,8 @@ public class ItemAdvancedRobes extends ItemArmor implements IRepairable, IVisDis
     }
 
     public boolean getIsRepairable(ItemStack par1ItemStack, ItemStack par2ItemStack) {
-        return par2ItemStack.isItemEqual(ItemApi.getItem("itemResource", 7)) ? true
-                : super.getIsRepairable(par1ItemStack, par2ItemStack);
+        return par2ItemStack.isItemEqual(ItemApi.getItem("itemResource", 7))
+                || super.getIsRepairable(par1ItemStack, par2ItemStack);
     }
 
     @Override

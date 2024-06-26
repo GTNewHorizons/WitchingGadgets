@@ -54,8 +54,9 @@ public class MessageTileUpdate implements IMessage {
         public IMessage onMessage(MessageTileUpdate message, MessageContext ctx) {
             World world = DimensionManager.getWorld(message.worldId);
             if (world != null && world.getTileEntity(message.x, message.y, message.z) != null
-                    && world.getTileEntity(message.x, message.y, message.z) instanceof TileEntityWGBase)
-                ((TileEntityWGBase) world.getTileEntity(message.x, message.y, message.z)).readCustomNBT(message.tag);
+                    && world.getTileEntity(message.x, message.y, message.z) instanceof TileEntityWGBase tile) {
+                tile.readCustomNBT(message.tag);
+            }
             return null;
         }
     }
@@ -66,8 +67,9 @@ public class MessageTileUpdate implements IMessage {
         public IMessage onMessage(MessageTileUpdate message, MessageContext ctx) {
             World world = DimensionManager.getWorld(message.worldId);
             if (world != null && world.getTileEntity(message.x, message.y, message.z) != null
-                    && world.getTileEntity(message.x, message.y, message.z) instanceof TileEntityWGBase)
-                ((TileEntityWGBase) world.getTileEntity(message.x, message.y, message.z)).readCustomNBT(message.tag);
+                    && world.getTileEntity(message.x, message.y, message.z) instanceof TileEntityWGBase tile) {
+                tile.readCustomNBT(message.tag);
+            }
             return null;
         }
     }

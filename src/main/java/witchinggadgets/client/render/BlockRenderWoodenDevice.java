@@ -8,6 +8,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -72,7 +73,7 @@ public class BlockRenderWoodenDevice implements ISimpleBlockRenderingHandler {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        GL11.glEnable(32826);
+        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glPopMatrix();
     }
 

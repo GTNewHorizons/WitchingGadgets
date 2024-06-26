@@ -28,7 +28,7 @@ public class ItemRenderWallMirror implements IItemRenderer {
 
         GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(770, 771);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glDisable(GL11.GL_LIGHTING);
 
         GL11.glRotatef(90, 0, 1, 0);

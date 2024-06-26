@@ -65,8 +65,8 @@ public class ItemRenderScanCamera implements IItemRenderer {
             EntityClientPlayerMP player = mc.thePlayer;
 
             GL11.glPushMatrix();
-            GL11.glEnable(3042);
-            GL11.glBlendFunc(770, 771);
+            GL11.glEnable(GL11.GL_BLEND);
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             if (type == ItemRenderType.ENTITY) {
                 GL11.glScaled(2, 2, 2);
                 GL11.glTranslated(0, 0.125, 0);
@@ -78,7 +78,7 @@ public class ItemRenderScanCamera implements IItemRenderer {
                 ClientProxy.cameraModel.renderPart("scanner_03");
                 ClientUtilities.bindTexture(woodTexture);
                 ClientProxy.cameraModel.renderPart("wood_04");
-                GL11.glDisable(3042);
+                GL11.glDisable(GL11.GL_BLEND);
                 GL11.glPopMatrix();
                 return;
             }
@@ -92,7 +92,7 @@ public class ItemRenderScanCamera implements IItemRenderer {
                 ClientProxy.cameraModel.renderPart("scanner_03");
                 ClientUtilities.bindTexture(woodTexture);
                 ClientProxy.cameraModel.renderPart("wood_04");
-                GL11.glDisable(3042);
+                GL11.glDisable(GL11.GL_BLEND);
                 GL11.glPopMatrix();
                 return;
             }
@@ -315,8 +315,8 @@ public class ItemRenderScanCamera implements IItemRenderer {
                                 aspects = ((INode) tile).getAspects();
 
                                 GL11.glPushMatrix();
-                                GL11.glEnable(3042);
-                                GL11.glBlendFunc(770, 1);
+                                GL11.glEnable(GL11.GL_BLEND);
+                                GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
                                 String t = StatCollector
                                         .translateToLocal("nodetype." + ((INode) tile).getNodeType() + ".name");
                                 if (((INode) tile).getNodeModifier() != null) {
@@ -330,7 +330,7 @@ public class ItemRenderScanCamera implements IItemRenderer {
                                 float scale = 0.006F;
                                 GL11.glScalef(scale, scale, scale);
                                 mc.fontRenderer.drawString(t, -sw / 2, -40, 16777215, false);
-                                GL11.glDisable(3042);
+                                GL11.glDisable(GL11.GL_BLEND);
                                 GL11.glPopMatrix();
                             }
                         }
@@ -379,8 +379,8 @@ public class ItemRenderScanCamera implements IItemRenderer {
                     if (text.length() > 0) {
                         GL11.glPushMatrix();
 
-                        GL11.glEnable(3042);
-                        GL11.glBlendFunc(770, 1);
+                        GL11.glEnable(GL11.GL_BLEND);
+                        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 
                         //
                         // GL11.glRotatef(45.0F, 0.5F, 0.0F, 0.0F);
@@ -394,7 +394,7 @@ public class ItemRenderScanCamera implements IItemRenderer {
                         }
                         GL11.glScalef(scale, scale, scale);
                         mc.fontRenderer.drawString(text, -sw / 2, 0, 16777215, false);
-                        GL11.glDisable(3042);
+                        GL11.glDisable(GL11.GL_BLEND);
                         GL11.glPopMatrix();
                     }
                 }
@@ -403,7 +403,7 @@ public class ItemRenderScanCamera implements IItemRenderer {
             // double step = 1.0/9.0;
             // int frame = timerSteps<60 ? 0 : timerSteps-59;
 
-            GL11.glDisable(3042);
+            GL11.glDisable(GL11.GL_BLEND);
 
             GL11.glPopMatrix();
 

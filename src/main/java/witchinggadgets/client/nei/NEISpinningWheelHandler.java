@@ -87,7 +87,7 @@ public class NEISpinningWheelHandler extends TemplateRecipeHandler {
     public void loadUsageRecipes(ItemStack ingredient) {
         for (SpinningRecipe recipe : SpinningRecipe.recipeList)
             if (recipe != null && recipe.getOutput() != null) for (Object ss : recipe.getInput()) {
-                if (ss instanceof List && ((List) ss).contains(ingredient)) {
+                if (ss instanceof List && ((List<?>) ss).contains(ingredient)) {
                     this.arecipes.add(new CachedSpinningWheelRecipe(recipe));
                     break;
                 } else if (ss instanceof ItemStack && OreDictionary.itemMatches((ItemStack) ss, ingredient, true)) {

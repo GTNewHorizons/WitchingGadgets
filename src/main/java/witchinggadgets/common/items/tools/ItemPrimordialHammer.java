@@ -67,11 +67,11 @@ public class ItemPrimordialHammer extends ItemPickaxe
 
     @Override
     public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity target) {
-        if (target instanceof EntityLivingBase) {
-            ((EntityLivingBase) target).addPotionEffect(new PotionEffect(Potion.confusion.id, 20));
+        if (target instanceof EntityLivingBase targetEntity) {
+            targetEntity.addPotionEffect(new PotionEffect(Potion.confusion.id, 20));
 
             if (getAbility(stack) == 0) {
-                for (EntityLivingBase e : (List<EntityLivingBase>) player.worldObj.getEntitiesWithinAABB(
+                for (EntityLivingBase e : player.worldObj.getEntitiesWithinAABB(
                         EntityLivingBase.class,
                         AxisAlignedBB.getBoundingBox(
                                 target.posX - 2,
@@ -136,14 +136,14 @@ public class ItemPrimordialHammer extends ItemPickaxe
                     }
             }
             if (getAbility(stack) == 2) {
-                ((EntityLivingBase) target).addPotionEffect(new PotionEffect(WGContent.pot_cinderCoat.id, 80, 1));
+                targetEntity.addPotionEffect(new PotionEffect(WGContent.pot_cinderCoat.id, 80, 1));
                 target.setFire(4);
             }
             if (getAbility(stack) == 3)
-                ((EntityLivingBase) target).addPotionEffect(new PotionEffect(WGContent.pot_dissolve.id, 80, 2));
+                targetEntity.addPotionEffect(new PotionEffect(WGContent.pot_dissolve.id, 80, 2));
             if (getAbility(stack) == 5) {
-                ((EntityLivingBase) target).addPotionEffect(new PotionEffect(Potion.weakness.getId(), 60));
-                ((EntityLivingBase) target).addPotionEffect(new PotionEffect(Potion.hunger.getId(), 120));
+                targetEntity.addPotionEffect(new PotionEffect(Potion.weakness.getId(), 60));
+                targetEntity.addPotionEffect(new PotionEffect(Potion.hunger.getId(), 120));
             }
         }
         return false;
@@ -179,14 +179,7 @@ public class ItemPrimordialHammer extends ItemPickaxe
         return 2;
     }
 
-    /*
-     * @Override public String getItemStackDisplayName(ItemStack stack) { int ab = getAbility(stack); String add =
-     * ab>=0&&ab<6? " "+EnumChatFormatting.DARK_GRAY+"- \u00a7"+Aspect.getPrimalAspects().get(ab).getChatcolor()+Aspect.
-     * getPrimalAspects().get(ab).getName()+EnumChatFormatting.RESET : ""; return
-     * super.getItemStackDisplayName(stack)+add; }
-     */
-
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean par4) {
         int ab = getAbility(stack);
         String add = ab >= 0 && ab < 6 ? " " + EnumChatFormatting.DARK_GRAY
                 + "- \u00a7"

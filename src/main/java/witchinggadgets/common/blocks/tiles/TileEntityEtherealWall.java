@@ -2,6 +2,7 @@ package witchinggadgets.common.blocks.tiles;
 
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 
 import thaumcraft.common.config.ConfigBlocks;
 import witchinggadgets.common.util.EtherealWallMaster;
@@ -22,36 +23,36 @@ public class TileEntityEtherealWall extends TileEntityWGBase {
         EtherealWallMaster masterZmax = null;
         EtherealWallMaster masterXmin = null;
         EtherealWallMaster masterXmax = null;
-        if (worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) != null
-                && worldObj.getTileEntity(xCoord, yCoord - 1, zCoord) instanceof TileEntityEtherealWall
-                && ((TileEntityEtherealWall) worldObj.getTileEntity(xCoord, yCoord - 1, zCoord)).master != null) {
-            masterYmin = ((TileEntityEtherealWall) worldObj.getTileEntity(xCoord, yCoord - 1, zCoord)).master;
+        TileEntity tile = worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
+        if (tile instanceof TileEntityEtherealWall etherealWall && etherealWall.master != null) {
+            masterYmin = etherealWall.master;
         }
-        if (worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) != null
-                && worldObj.getTileEntity(xCoord, yCoord + 1, zCoord) instanceof TileEntityEtherealWall
-                && ((TileEntityEtherealWall) worldObj.getTileEntity(xCoord, yCoord + 1, zCoord)).master != null) {
-            masterYmax = ((TileEntityEtherealWall) worldObj.getTileEntity(xCoord, yCoord + 1, zCoord)).master;
+
+        tile = worldObj.getTileEntity(xCoord, yCoord + 1, zCoord);
+        if (tile instanceof TileEntityEtherealWall etherealWall && etherealWall.master != null) {
+            masterYmax = etherealWall.master;
         }
-        if (worldObj.getTileEntity(xCoord, yCoord, zCoord - 1) != null
-                && worldObj.getTileEntity(xCoord, yCoord, zCoord - 1) instanceof TileEntityEtherealWall
-                && ((TileEntityEtherealWall) worldObj.getTileEntity(xCoord, yCoord, zCoord - 1)).master != null) {
-            masterZmin = ((TileEntityEtherealWall) worldObj.getTileEntity(xCoord, yCoord, zCoord - 1)).master;
+
+        tile = worldObj.getTileEntity(xCoord, yCoord, zCoord - 1);
+        if (tile instanceof TileEntityEtherealWall etherealWall && etherealWall.master != null) {
+            masterZmin = etherealWall.master;
         }
-        if (worldObj.getTileEntity(xCoord, yCoord, zCoord + 1) != null
-                && worldObj.getTileEntity(xCoord, yCoord, zCoord + 1) instanceof TileEntityEtherealWall
-                && ((TileEntityEtherealWall) worldObj.getTileEntity(xCoord, yCoord, zCoord + 1)).master != null) {
-            masterZmax = ((TileEntityEtherealWall) worldObj.getTileEntity(xCoord, yCoord, zCoord + 1)).master;
+
+        tile = worldObj.getTileEntity(xCoord, yCoord, zCoord + 1);
+        if (tile instanceof TileEntityEtherealWall etherealWall && etherealWall.master != null) {
+            masterZmax = etherealWall.master;
         }
-        if (worldObj.getTileEntity(xCoord - 1, yCoord, zCoord) != null
-                && worldObj.getTileEntity(xCoord - 1, yCoord, zCoord) instanceof TileEntityEtherealWall
-                && ((TileEntityEtherealWall) worldObj.getTileEntity(xCoord - 1, yCoord, zCoord)).master != null) {
-            masterXmin = ((TileEntityEtherealWall) worldObj.getTileEntity(xCoord - 1, yCoord, zCoord)).master;
+
+        tile = worldObj.getTileEntity(xCoord - 1, yCoord, zCoord);
+        if (tile instanceof TileEntityEtherealWall etherealWall && etherealWall.master != null) {
+            masterXmin = etherealWall.master;
         }
-        if (worldObj.getTileEntity(xCoord + 1, yCoord, zCoord) != null
-                && worldObj.getTileEntity(xCoord + 1, yCoord, zCoord) instanceof TileEntityEtherealWall
-                && ((TileEntityEtherealWall) worldObj.getTileEntity(xCoord + 1, yCoord, zCoord)).master != null) {
-            masterXmax = ((TileEntityEtherealWall) worldObj.getTileEntity(xCoord + 1, yCoord, zCoord)).master;
+
+        tile = worldObj.getTileEntity(xCoord + 1, yCoord, zCoord);
+        if (tile instanceof TileEntityEtherealWall etherealWall && etherealWall.master != null) {
+            masterXmax = etherealWall.master;
         }
+
         // get Overall Master
         if (masterYmin != null) masterOV = masterYmin;
         else if (masterYmax != null) masterOV = masterYmax;
@@ -91,8 +92,7 @@ public class TileEntityEtherealWall extends TileEntityWGBase {
     @Override
     public void updateEntity() {
         super.updateEntity();
-        if (this.master == null) // || !this.master.tileMap.containsKey(this))
-        {
+        if (this.master == null) {
             this.master = getMaster();
             if (this.master == null) this.master = new EtherealWallMaster();
             this.master.addTileToNet(this);
@@ -119,7 +119,6 @@ public class TileEntityEtherealWall extends TileEntityWGBase {
         if (renderType == ConfigBlocks.blockStoneDeviceRI) return blockMeta == 0;
         if (renderType == ConfigBlocks.blockMetalDeviceRI) return blockMeta == 9;
         if (renderType == ConfigBlocks.blockCustomOreRI) return blockMeta == 0 || blockMeta == 7;
-        if (renderType == ConfigBlocks.blockCosmeticOpaqueRI) return true;
-        return false;
+        return renderType == ConfigBlocks.blockCosmeticOpaqueRI;
     }
 }

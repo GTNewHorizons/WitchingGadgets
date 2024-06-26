@@ -64,8 +64,8 @@ public class ModelCloak extends ModelBiped {
         this.bipedLeftLeg.showModel = false;
         super.render(entity, par2, par3, par4, par5, par6, par7);
         GL11.glPushMatrix();
-        GL11.glEnable(3042);
-        GL11.glBlendFunc(770, 771);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         boolean drawHood = false;
 
         Tessellator tessellator = Tessellator.instance;
@@ -254,7 +254,7 @@ public class ModelCloak extends ModelBiped {
         }
 
         GL11.glColor3f(1, 1, 1);
-        GL11.glDisable(3042);
+        GL11.glDisable(GL11.GL_BLEND);
         // GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
     }

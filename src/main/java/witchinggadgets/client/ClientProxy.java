@@ -109,8 +109,6 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.registerItemRenderer(WGContent.ItemCapsule, new ItemRenderCapsule());
 
         RenderingRegistry.registerEntityRenderingHandler(EntityItemReforming.class, new EntityRenderReforming());
-        // MinecraftForgeClient.registerItemRenderer(WGContent.BlockWoodenDevice.blockID, new
-        // ItemRenderSpinningWheel());
     }
 
     public void registerHandlers() {

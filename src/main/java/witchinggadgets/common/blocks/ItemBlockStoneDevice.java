@@ -21,7 +21,7 @@ public class ItemBlockStoneDevice extends ItemBlock {
     }
 
     @Override
-    public void getSubItems(Item item, CreativeTabs tab, List itemList) {
+    public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> itemList) {
         itemList.add(new ItemStack(item, 1, 0));
         itemList.add(new ItemStack(item, 1, 1));
     }
