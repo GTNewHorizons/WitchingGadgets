@@ -84,7 +84,6 @@ import witchinggadgets.common.items.tools.ItemPrimordialGlove;
 import witchinggadgets.common.items.tools.ItemPrimordialHammer;
 import witchinggadgets.common.items.tools.ItemPrimordialSword;
 import witchinggadgets.common.items.tools.ItemScanCamera;
-import witchinggadgets.common.items.tools.ItemVorpalSword;
 import witchinggadgets.common.magic.WGEnchantBackstab;
 import witchinggadgets.common.magic.WGEnchantGemBrittle;
 import witchinggadgets.common.magic.WGEnchantGemPotency;
@@ -429,9 +428,6 @@ public class WGContent {
     private static void preInitItems() {
         ItemMaterial = new ItemMaterials().setUnlocalizedName("WG_Material");
         GameRegistry.registerItem(ItemMaterial, ItemMaterial.getUnlocalizedName());
-
-        ItemVorpalSword = new ItemVorpalSword().setUnlocalizedName("WG_VorpalSword");
-        // GameRegistry.registerItem(ItemVorpalSword,ItemVorpalSword.getUnlocalizedName()); TODO
 
         ItemThaumiumShears = new ItemThaumiumShears().setUnlocalizedName("WG_ThaumiumShears");
         GameRegistry.registerItem(ItemThaumiumShears, ItemThaumiumShears.getUnlocalizedName());
