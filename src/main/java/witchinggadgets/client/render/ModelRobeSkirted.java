@@ -132,14 +132,14 @@ public class ModelRobeSkirted extends ModelBiped {
     public void render(Entity entity, float par2, float par3, float par4, float par5, float par6, float par7) {
         this.setRotationAngles(par2, par3, par4, par5, par6, par7, entity);
         if (((entity instanceof EntitySkeleton)) || ((entity instanceof EntityZombie))) {
-            float f6 = MathHelper.sin(this.onGround * (float)Math.PI);
-            float f7 = MathHelper.sin((1.0F - (1.0F - this.onGround) * (1.0F - this.onGround)) * (float)Math.PI);
+            float f6 = MathHelper.sin(this.onGround * (float) Math.PI);
+            float f7 = MathHelper.sin((1.0F - (1.0F - this.onGround) * (1.0F - this.onGround)) * (float) Math.PI);
             this.bipedRightArm.rotateAngleZ = 0.0F;
             this.bipedLeftArm.rotateAngleZ = 0.0F;
             this.bipedRightArm.rotateAngleY = (-(0.1F - f6 * 0.6F));
             this.bipedLeftArm.rotateAngleY = (0.1F - f6 * 0.6F);
-            this.bipedRightArm.rotateAngleX = -((float)Math.PI / 2F);
-            this.bipedLeftArm.rotateAngleX = -((float)Math.PI / 2F);
+            this.bipedRightArm.rotateAngleX = -((float) Math.PI / 2F);
+            this.bipedLeftArm.rotateAngleX = -((float) Math.PI / 2F);
             this.bipedRightArm.rotateAngleX -= f6 * 1.2F - f7 * 0.4F;
             this.bipedLeftArm.rotateAngleX -= f6 * 1.2F - f7 * 0.4F;
             this.bipedRightArm.rotateAngleZ += MathHelper.cos(par4 * 0.09F) * 0.05F + 0.05F;

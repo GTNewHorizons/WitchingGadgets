@@ -121,7 +121,9 @@ public class GuiPrimordialGlove extends GuiContainer {
 
                 GL11.glPushMatrix();
                 GL11.glEnable(GL11.GL_BLEND);
-                if (nodeType != 0) GL11.glBlendFunc(GL11.GL_SRC_ALPHA, nodeType == 3 || nodeType == 4 ? GL11.GL_ONE_MINUS_SRC_ALPHA : GL11.GL_ONE);
+                if (nodeType != 0) GL11.glBlendFunc(
+                        GL11.GL_SRC_ALPHA,
+                        nodeType == 3 || nodeType == 4 ? GL11.GL_ONE_MINUS_SRC_ALPHA : GL11.GL_ONE);
 
                 float radius = 10;
                 int perm = (int) ((System.currentTimeMillis() / 64) % 32);

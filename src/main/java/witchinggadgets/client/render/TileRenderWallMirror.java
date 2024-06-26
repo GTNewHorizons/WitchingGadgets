@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 import witchinggadgets.client.ClientUtilities;
 import witchinggadgets.common.blocks.tiles.TileEntityWallMirror;
