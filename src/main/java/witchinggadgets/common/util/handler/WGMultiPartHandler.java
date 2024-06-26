@@ -92,7 +92,7 @@ public class WGMultiPartHandler implements IPartFactory, IPartConverter {
                 && event.entityPlayer.getCurrentEquippedItem().getItemDamage() != 2)
             if (event.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK
                     && event.world.getTileEntity(event.x, event.y, event.z) instanceof TileMultipart mp) {
-                int meta = event.entityPlayer.getCurrentEquippedItem().getItemDamage();
+                        int meta = event.entityPlayer.getCurrentEquippedItem().getItemDamage();
                         TMultiPart part = meta == 1 ? new MultipartEssentiaTube_Valve(meta)
                                 : meta == 3 ? new MultipartEssentiaTube_Filtered(meta)
                                         : meta == 4 ? new MultipartEssentiaBuffer(meta)

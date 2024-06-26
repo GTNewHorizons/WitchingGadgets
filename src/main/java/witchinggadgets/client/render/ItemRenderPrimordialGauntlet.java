@@ -304,7 +304,9 @@ public class ItemRenderPrimordialGauntlet implements IItemRenderer {
                 nodeScale = 0.1F + average / 150.0F;
                 nodeScale *= size;
 
-                if (nodeType != 0) GL11.glBlendFunc(GL11.GL_SRC_ALPHA, nodeType == 3 || nodeType == 4 ? GL11.GL_ONE_MINUS_SRC_ALPHA : GL11.GL_ONE);
+                if (nodeType != 0) GL11.glBlendFunc(
+                        GL11.GL_SRC_ALPHA,
+                        nodeType == 3 || nodeType == 4 ? GL11.GL_ONE_MINUS_SRC_ALPHA : GL11.GL_ONE);
 
                 int perm = (int) ((System.currentTimeMillis() / 64) % 32);
                 int overl = nodeType == 2 ? 6

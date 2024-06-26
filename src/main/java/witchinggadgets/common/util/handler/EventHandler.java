@@ -209,7 +209,8 @@ public class EventHandler {
                 }
         }
 
-        if (event.recentlyHit && event.source != null && event.source.getSourceOfDamage() instanceof EntityPlayer player) {
+        if (event.recentlyHit && event.source != null
+                && event.source.getSourceOfDamage() instanceof EntityPlayer player) {
             if (player.getCurrentEquippedItem() != null
                     && WGContent.ItemPrimordialSword.equals(player.getCurrentEquippedItem().getItem())
                     && player.getRNG().nextInt(6) < EnchantmentHelper.getLootingModifier(player)) {

@@ -53,10 +53,8 @@ public class GuiCuttingTable extends GuiContainer {
         mY -= (height - ySize) / 2;
         if (mY > 12 && mY < 24) {
             int old = this.tile.targetGemCut;
-            if (mX > 106 && mX < 117)
-                this.tile.targetGemCut++;
-            if (mX > 59 && mX < 70)
-                this.tile.targetGemCut--;
+            if (mX > 106 && mX < 117) this.tile.targetGemCut++;
+            if (mX > 59 && mX < 70) this.tile.targetGemCut--;
             if (this.tile.targetGemCut < 0) this.tile.targetGemCut = (byte) (ItemInfusedGem.GemCut.values().length - 1);
             else if (this.tile.targetGemCut >= ItemInfusedGem.GemCut.values().length) this.tile.targetGemCut = 0;
 
