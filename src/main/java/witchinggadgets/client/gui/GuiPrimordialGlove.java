@@ -26,14 +26,6 @@ import witchinggadgets.common.gui.ContainerPrimordialGlove;
 
 public class GuiPrimordialGlove extends GuiContainer {
 
-    String tx1 = "textures/misc/node.png";
-    String tx_c_n = "textures/misc/node_core_normal.png";
-    String tx_c_d = "textures/misc/node_core_dark.png";
-    String tx_c_u = "textures/misc/node_core_unstable.png";
-    String tx_c_t = "textures/misc/node_core_taint.png";
-    String tx_c_p = "textures/misc/node_core_pure.png";
-    String tx_c_h = "textures/misc/node_core_hungry.png";
-
     InventoryPlayer invPlayer;
     EntityPlayer player;
     protected Slot theSlot;

@@ -81,9 +81,8 @@ public class EventHandler {
             event.ammount *= 2 + event.entityLiving.getActivePotionEffect(WGContent.pot_cinderCoat).getAmplifier();
         }
 
-        if (event.source.getSourceOfDamage() instanceof EntityPlayer
+        if (event.source.getSourceOfDamage() instanceof EntityPlayer player
                 && ((EntityPlayer) event.source.getSourceOfDamage()).getCurrentEquippedItem() != null) {
-            EntityPlayer player = (EntityPlayer) event.source.getSourceOfDamage();
             if (WGContent.ItemPrimordialHammer.equals(player.getCurrentEquippedItem().getItem())
                     && (event.entityLiving instanceof EntitySlime
                             || event.entityLiving.getClass().getName().endsWith("BlueSlime")
@@ -196,8 +195,7 @@ public class EventHandler {
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onLivingDrop(LivingDropsEvent event) {
-        if (event.entityLiving instanceof EntityWolf) {
-            EntityWolf enemy = (EntityWolf) event.entityLiving;
+        if (event.entityLiving instanceof EntityWolf enemy) {
             for (int i = 0; i < 2 + Math.min(4, event.lootingLevel); i++)
                 if (enemy.worldObj.rand.nextInt(Math.max(1, 3 - event.lootingLevel)) == 0) {
                     EntityItem entityitem = new EntityItem(
@@ -211,25 +209,7 @@ public class EventHandler {
                 }
         }
 
-        // here resides the cancer of crimson titles. begone
-        /*
-         * if(event.entityLiving instanceof EntityCultistCleric &&
-         * event.entityLiving.worldObj.rand.nextInt(10)<1+event.lootingLevel) event.drops.add(new
-         * EntityItem(event.entityLiving.worldObj, event.entityLiving.posX, event.entityLiving.posY,
-         * event.entityLiving.posZ, ItemMagicalBaubles.getItemWithTitle(new
-         * ItemStack(WGContent.ItemMagicalBaubles,1,4),Lib.TITLE+"crimsonCultist"))); if(event.entityLiving instanceof
-         * EntityCultistKnight && event.entityLiving.worldObj.rand.nextInt(10)<1+event.lootingLevel) event.drops.add(new
-         * EntityItem(event.entityLiving.worldObj, event.entityLiving.posX, event.entityLiving.posY,
-         * event.entityLiving.posZ, ItemMagicalBaubles.getItemWithTitle(new
-         * ItemStack(WGContent.ItemMagicalBaubles,1,4),Lib.TITLE+"crimsonKnight"))); if(event.entityLiving instanceof
-         * EntityCultistLeader && event.entityLiving.worldObj.rand.nextInt(2)==0) event.drops.add(new
-         * EntityItem(event.entityLiving.worldObj, event.entityLiving.posX, event.entityLiving.posY,
-         * event.entityLiving.posZ, ItemMagicalBaubles.getItemWithTitle(new
-         * ItemStack(WGContent.ItemMagicalBaubles,1,4),Lib.TITLE+"crimsonPraetor")));
-         */
-
-        if (event.recentlyHit && event.source != null && event.source.getSourceOfDamage() instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) event.source.getSourceOfDamage();
+        if (event.recentlyHit && event.source != null && event.source.getSourceOfDamage() instanceof EntityPlayer player) {
             if (player.getCurrentEquippedItem() != null
                     && WGContent.ItemPrimordialSword.equals(player.getCurrentEquippedItem().getItem())
                     && player.getRNG().nextInt(6) < EnchantmentHelper.getLootingModifier(player)) {
@@ -275,11 +255,10 @@ public class EventHandler {
 
     @SubscribeEvent
     public void onLivingDies(LivingDeathEvent event) {
-        if (event.source != null && event.source.getSourceOfDamage() instanceof EntityPlayer
+        if (event.source != null && event.source.getSourceOfDamage() instanceof EntityPlayer player
                 && event.entityLiving instanceof EntityLiving
                 && !event.entityLiving.worldObj.isRemote
                 && event.entityLiving.worldObj.getGameRules().getGameRuleBooleanValue("doMobLoot")) {
-            EntityPlayer player = (EntityPlayer) event.source.getSourceOfDamage();
 
             if (player.getCurrentEquippedItem() != null
                     && player.getCurrentEquippedItem().getItem() instanceof IPrimordialGear
@@ -312,7 +291,7 @@ public class EventHandler {
                     for (ItemStack f : filter) if (OreDictionary.itemMatches(f, event.item.getEntityItem(), true)) {
                         AspectList al = ThaumcraftCraftingManager.getObjectTags(event.item.getEntityItem());
                         al = ThaumcraftCraftingManager.getBonusTags(event.item.getEntityItem(), al);
-                        if (al != null && al.size() >= 0) {
+                        if (al.size() >= 0) {
                             AspectList primals = ResearchManager.reduceToPrimals(al);
                             Aspect a = primals.getAspects()[event.entityPlayer.getRNG()
                                     .nextInt(primals.getAspects().length)];
@@ -424,7 +403,6 @@ public class EventHandler {
     @SubscribeEvent
     public void playerLogin(PlayerLoggedInEvent event) {
         WitchingGadgets.packetHandler.sendTo(new MessageClientNotifier(0), (EntityPlayerMP) event.player);
-        // WGPacketPipeline.INSTANCE.sendTo(new PacketClientNotifier(0), (EntityPlayerMP) event.player);
     }
 
     // TODO SOULBOUND
