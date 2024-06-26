@@ -85,8 +85,8 @@ public class TileRenderIceGen extends TileEntitySpecialRenderer {
             double slowTick = tick / 4.0;
             double loopTick = slowTick * 1.65;
             double inc = 1.0 / 512.0;
-            GL11.glEnable(3042);
-            GL11.glBlendFunc(770, 771);
+            GL11.glEnable(GL11.GL_BLEND);
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             ClientUtilities.bindTexture("textures/blocks/ice.png");
             renderPixelBlock(
                     tes,
@@ -114,7 +114,7 @@ public class TileRenderIceGen extends TileEntitySpecialRenderer {
                     (loopTick * inc),
                     .625,
                     ((loopTick + 8) * inc));
-            GL11.glDisable(3042);
+            GL11.glDisable(GL11.GL_BLEND);
 
             ClientUtilities.bindTexture("textures/blocks/ice.png");
             if (tick > 32) renderPixelBlock(tes, 0.3125, 0.3125, 0.3125, 0.6875, 0.6875, 0.6875, 0, 0, 1, 1);

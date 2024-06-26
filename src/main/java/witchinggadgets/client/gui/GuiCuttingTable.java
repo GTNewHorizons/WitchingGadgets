@@ -35,7 +35,7 @@ public class GuiCuttingTable extends GuiContainer {
         int xOff = this.tile.targetGemCut == 0 ? 0 : 80;
         int yOff = this.tile.targetGemCut == 0 ? 0 : 80;
         Tessellator tes = Tessellator.instance;
-        GL11.glEnable(3042);
+        GL11.glEnable(GL11.GL_BLEND);
         tes.startDrawingQuads();
         tes.addVertexWithUV(guiLeft + 73, guiTop + 17, 0, (xOff) / 255f, (yOff) / 255f);
         tes.addVertexWithUV(guiLeft + 73, guiTop + 47, 0, (xOff) / 255f, (yOff + 80) / 255f);
