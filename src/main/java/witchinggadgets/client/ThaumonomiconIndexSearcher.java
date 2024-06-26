@@ -141,7 +141,7 @@ public class ThaumonomiconIndexSearcher {
 
             if (!searchResults.isEmpty()) {
                 ClientUtilities.bindTexture("thaumcraft:textures/misc/parchment3.png");
-                GL11.glEnable(3042);
+                GL11.glEnable(GL11.GL_BLEND);
                 Tessellator tes = Tessellator.instance;
                 tes.startDrawingQuads();
                 tes.setColorOpaque_I(0xffffff);

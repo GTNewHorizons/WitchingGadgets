@@ -174,7 +174,7 @@ public class ClientEventHandler {
                     || !(mc.thePlayer.getCurrentEquippedItem().getItem() instanceof ItemPrimordialGlove)))
                 WGKeyHandler.gemLock = false;
 
-            GL11.glEnable(3042);
+            GL11.glEnable(GL11.GL_BLEND);
             double rad = 50 * WGKeyHandler.gemRadial;
             int x = event.resolution.getScaledWidth() / 2;
             int y = event.resolution.getScaledHeight() / 2;
@@ -227,9 +227,9 @@ public class ClientEventHandler {
                         GL11.glDisable(GL11.GL_LIGHTING);
                         GL11.glDepthMask(false);
                         ClientUtilities.bindTexture("witchinggadgets:textures/models/white.png");
-                        GL11.glEnable(3042);
                         GL11.glEnable(GL11.GL_BLEND);
-                        GL11.glBlendFunc(770, 771);
+                        GL11.glEnable(GL11.GL_BLEND);
+                        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
                         for (int j1 = 0; j1 < 2; ++j1) {
                             tessellator.startDrawingQuads();
@@ -320,7 +320,7 @@ public class ClientEventHandler {
                     .getPlayerEntityByName(event.entity.getCommandSenderName());
             if (pl != null) for (ItemStack cloak : Utilities.getActiveMagicalCloak(pl))
                 if (cloak != null && cloak.hasTagCompound() && cloak.getTagCompound().getBoolean("isSpectral")) {
-                    GL11.glEnable(3042);
+                    GL11.glEnable(GL11.GL_BLEND);
                     boolean goggles = Minecraft.getMinecraft().thePlayer.getEquipmentInSlot(4) != null
                             && (Minecraft.getMinecraft().thePlayer.getEquipmentInSlot(4).getItem() instanceof IRevealer
                                     || Minecraft.getMinecraft().thePlayer.getEquipmentInSlot(4)
@@ -346,7 +346,7 @@ public class ClientEventHandler {
                     .getPlayerEntityByName(event.entity.getCommandSenderName());
             if (pl != null) for (ItemStack cloak : Utilities.getActiveMagicalCloak(pl))
                 if (cloak != null && cloak.hasTagCompound() && cloak.getTagCompound().getBoolean("isSpectral")) {
-                    GL11.glDisable(3042);
+                    GL11.glDisable(GL11.GL_BLEND);
                     GL11.glColor4f(1, 1, 1, 1);
                 }
         }

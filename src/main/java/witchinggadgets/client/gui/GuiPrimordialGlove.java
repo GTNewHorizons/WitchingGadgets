@@ -75,7 +75,7 @@ public class GuiPrimordialGlove extends GuiContainer {
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
-        GL11.glEnable(3042);
+        GL11.glEnable(GL11.GL_BLEND);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         ClientUtilities.bindTexture("witchinggadgets:textures/gui/primordialGlove.png");
         int k = (this.width - this.xSize) / 2;
@@ -103,8 +103,8 @@ public class GuiPrimordialGlove extends GuiContainer {
                     float radius = 10 + 8 * mod * (aspects.getAmount(a) / average);
                     int perm = (int) ((System.currentTimeMillis() / 64) % 32) + count * 4;
                     GL11.glPushMatrix();
-                    GL11.glEnable(3042);
-                    GL11.glBlendFunc(770, 771);
+                    GL11.glEnable(GL11.GL_BLEND);
+                    GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
                     tes.startDrawingQuads();
                     tes.setColorRGBA_I(a.getColor(), 64);
@@ -114,14 +114,14 @@ public class GuiPrimordialGlove extends GuiContainer {
                     tes.addVertexWithUV(k + 88 - radius, l + 39 - radius, zLevel, (perm + 0) * .03125, 0);
                     tes.draw();
 
-                    GL11.glDisable(3042);
+                    GL11.glDisable(GL11.GL_BLEND);
                     GL11.glPopMatrix();
                     count++;
                 }
 
                 GL11.glPushMatrix();
-                GL11.glEnable(3042);
-                if (nodeType != 0) GL11.glBlendFunc(770, nodeType == 3 || nodeType == 4 ? 771 : 1);
+                GL11.glEnable(GL11.GL_BLEND);
+                if (nodeType != 0) GL11.glBlendFunc(GL11.GL_SRC_ALPHA, nodeType == 3 || nodeType == 4 ? GL11.GL_ONE_MINUS_SRC_ALPHA : GL11.GL_ONE);
 
                 float radius = 10;
                 int perm = (int) ((System.currentTimeMillis() / 64) % 32);
@@ -155,7 +155,7 @@ public class GuiPrimordialGlove extends GuiContainer {
                         (overl + 0) * .03125);
                 tes.draw();
 
-                GL11.glDisable(3042);
+                GL11.glDisable(GL11.GL_BLEND);
                 GL11.glPopMatrix();
             }
         }

@@ -114,7 +114,7 @@ public class ModelPrimordialArmor extends ModelBiped {
         this.bd_add0 = new ModelRenderer(this, 66, 46);
         this.bd_add0.setRotationPoint(0.0F, 0.0F, -3.3F);
         this.bd_add0.addBox(-2.0F, 0.0F, -1.0F, 4, 4, 2, scale);
-        this.setRotateAngle(bd_add0, 0.3141592653589793F, 0.0F, 0.0F);
+        this.setRotateAngle(bd_add0, ((float)Math.PI / 10F), 0.0F, 0.0F);
 
         this.bd_add1 = new ModelRenderer(this, 66, 52);
         this.bd_add1.mirror = true;
@@ -269,7 +269,7 @@ public class ModelPrimordialArmor extends ModelBiped {
         this.ll_plate_o0.mirror = true;
         this.ll_plate_o0.setRotationPoint(1.8F, 0.2F, 0.0F);
         this.ll_plate_o0.addBox(-0.5F, 0.0F, -2.0F, 1, 4, 4, scale);
-        this.setRotateAngle(ll_plate_o0, 0.0F, 0.0F, -0.3141592653589793F);
+        this.setRotateAngle(ll_plate_o0, 0.0F, 0.0F, -((float)Math.PI / 10F));
         this.ll_plate_o1 = new ModelRenderer(this, 16, 32);
         this.ll_plate_o1.mirror = true;
         this.ll_plate_o1.setRotationPoint(1.9F, 3.0F, 0.0F);
@@ -308,7 +308,7 @@ public class ModelPrimordialArmor extends ModelBiped {
         this.rl_plate_o0 = new ModelRenderer(this, 16, 32);
         this.rl_plate_o0.setRotationPoint(-1.8F, 0.2F, 0.0F);
         this.rl_plate_o0.addBox(-0.5F, 0.0F, -2.0F, 1, 4, 4, scale);
-        this.setRotateAngle(rl_plate_o0, 0.0F, 0.0F, 0.3141592653589793F);
+        this.setRotateAngle(rl_plate_o0, 0.0F, 0.0F, ((float)Math.PI / 10F));
         this.rl_plate_o1 = new ModelRenderer(this, 16, 32);
         this.rl_plate_o1.setRotationPoint(-1.9F, 3.0F, 0.0F);
         this.rl_plate_o1.addBox(-0.5F, 0.0F, -2.0F, 1, 4, 4, scale);
@@ -498,14 +498,14 @@ public class ModelPrimordialArmor extends ModelBiped {
 
         this.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
         if (((entity instanceof EntitySkeleton)) || ((entity instanceof EntityZombie))) {
-            float f6 = MathHelper.sin(this.onGround * 3.141593F);
-            float f7 = MathHelper.sin((1.0F - (1.0F - this.onGround) * (1.0F - this.onGround)) * 3.141593F);
+            float f6 = MathHelper.sin(this.onGround * (float)Math.PI);
+            float f7 = MathHelper.sin((1.0F - (1.0F - this.onGround) * (1.0F - this.onGround)) * (float)Math.PI);
             this.bipedRightArm.rotateAngleZ = 0.0F;
             this.bipedLeftArm.rotateAngleZ = 0.0F;
             this.bipedRightArm.rotateAngleY = (-(0.1F - f6 * 0.6F));
             this.bipedLeftArm.rotateAngleY = (0.1F - f6 * 0.6F);
-            this.bipedRightArm.rotateAngleX = -1.570796F;
-            this.bipedLeftArm.rotateAngleX = -1.570796F;
+            this.bipedRightArm.rotateAngleX = -((float)Math.PI / 2F);
+            this.bipedLeftArm.rotateAngleX = -((float)Math.PI / 2F);
             this.bipedRightArm.rotateAngleX -= f6 * 1.2F - f7 * 0.4F;
             this.bipedLeftArm.rotateAngleX -= f6 * 1.2F - f7 * 0.4F;
             this.bipedRightArm.rotateAngleZ += MathHelper.cos(f2 * 0.09F) * 0.05F + 0.05F;
