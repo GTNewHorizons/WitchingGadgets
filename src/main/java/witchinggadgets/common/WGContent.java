@@ -2,10 +2,9 @@ package witchinggadgets.common;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.UUID;
 
@@ -179,11 +178,11 @@ public class WGContent {
     public static HashMap<String, Fluid> ClusterSmeltable = new HashMap<String, Fluid>();
     public static String[] bannedMaterials = { "AnyIron", "AnyCopper" };
 
-    public static ArrayList b = new ArrayList<String>();
+    public static ArrayList<String> b = new ArrayList<>();
 
     public static void preInit() {
-        for (String s : bannedMaterials) b.add(s);
-        for (String s : WGConfig.tripplingClusterList) b.add(s);
+        Collections.addAll(b, bannedMaterials);
+        Collections.addAll(b, WGConfig.tripplingClusterList);
         initClusters();
         preInitItems();
         preInitBlocks();
@@ -191,39 +190,31 @@ public class WGContent {
     // final static String UUIDBASE = "424C5553-5747-1694-4452-";
 
     private static void initClusters() {
-        HashSet L = new HashSet<String>();
-        Map<String, Materials> map = Materials.getMaterialsMap();
-        Iterator<Entry<String, Materials>> entries = Materials.getMaterialsMap().entrySet().iterator();
-
-        while (entries.hasNext()) {
-            Map.Entry<String, Materials> entry = entries.next();
-            if (!b.contains(entry.getValue().mDefaultLocalName) && !OreDictionary
-                    .getOres("ore" + entry.getValue().mDefaultLocalName.replaceAll(" ", "")).isEmpty()) {
-                Integer rgb = ((entry.getValue().getRGBA()[0] & 0x0ff) << 16)
-                        | ((entry.getValue().getRGBA()[1] & 0x0ff) << 8)
-                        | (entry.getValue().getRGBA()[2] & 0x0ff);
-                L.add(entry.getValue().mDefaultLocalName.replaceAll(" ", ""));
-                GT_Cluster_Color.put(
-                        entry.getValue().mDefaultLocalName.replaceAll(" ", ""),
-                        new Integer[] { ClientUtilities.getVibrantColourToInt(rgb),
-                                entry.getValue().getRGBA()[0] > entry.getValue().getRGBA()[2]
-                                        && entry.getValue().getRGBA()[1] > entry.getValue().getRGBA()[2]
-                                                ? 2
-                                                : entry.getValue().getRGBA()[0] > entry.getValue().getRGBA()[1]
-                                                        && entry.getValue().getRGBA()[0] > entry.getValue().getRGBA()[2]
-                                                                ? 1
-                                                                : 0 });
-                ClusterEBF.put(
-                        entry.getValue().mDefaultLocalName.replaceAll(" ", ""),
-                        entry.getValue().mBlastFurnaceRequired);
-                if (!entry.getValue().mBlastFurnaceRequired
-                        && (entry.getValue().getMolten(144) != null || entry.getValue().getFluid(144) != null))
-                    if (entry.getValue().getMolten(144) != null) ClusterSmeltable.put(
-                            entry.getValue().mLocalizedName.replaceAll(" ", ""),
-                            entry.getValue().getMolten(288).getFluid());
-                    else if (entry.getValue().getMolten(144) == null) ClusterSmeltable.put(
-                            entry.getValue().mLocalizedName.replaceAll(" ", ""),
-                            entry.getValue().getFluid(288).getFluid());
+        HashSet<String> L = new HashSet<>();
+        for (Entry<String, Materials> entry : Materials.getMaterialsMap().entrySet()) {
+            Materials material = entry.getValue();
+            if (!b.contains(material.mDefaultLocalName)
+                    && !OreDictionary.getOres("ore" + material.mDefaultLocalName.replaceAll(" ", "")).isEmpty()) {
+                Integer rgb = ((material.getRGBA()[0] & 0x0ff) << 16) | ((material.getRGBA()[1] & 0x0ff) << 8)
+                        | (material.getRGBA()[2] & 0x0ff);
+                L.add(material.mDefaultLocalName.replaceAll(" ", ""));
+                GT_Cluster_Color
+                        .put(
+                                material.mDefaultLocalName.replaceAll(" ", ""),
+                                new Integer[] { ClientUtilities.getVibrantColourToInt(rgb),
+                                        material.getRGBA()[0] > material.getRGBA()[2]
+                                                && material.getRGBA()[1] > material.getRGBA()[2]
+                                                        ? 2
+                                                        : material.getRGBA()[0] > material.getRGBA()[1]
+                                                                && material.getRGBA()[0] > material.getRGBA()[2] ? 1
+                                                                        : 0 });
+                ClusterEBF.put(material.mDefaultLocalName.replaceAll(" ", ""), material.mBlastFurnaceRequired);
+                if (!material.mBlastFurnaceRequired
+                        && (material.getMolten(144) != null || material.getFluid(144) != null))
+                    if (material.getMolten(144) != null) ClusterSmeltable
+                            .put(material.mLocalizedName.replaceAll(" ", ""), material.getMolten(288).getFluid());
+                    else if (material.getMolten(144) == null) ClusterSmeltable
+                            .put(material.mLocalizedName.replaceAll(" ", ""), material.getFluid(288).getFluid());
             }
         }
         GT_Cluster = new String[L.size()];
@@ -852,8 +843,8 @@ public class WGContent {
     }
 
     static boolean oreHasAspects(String ore) {
-        for (ItemStack stack : OreDictionary.getOres(ore)) if (stack != null) return ThaumcraftApi.objectTags
-                .get(Arrays.asList(new Object[] { stack.getItem(), Integer.valueOf(stack.getItemDamage()) })) != null;
+        for (ItemStack stack : OreDictionary.getOres(ore)) if (stack != null)
+            return ThaumcraftApi.objectTags.get(Arrays.asList(stack.getItem(), stack.getItemDamage())) != null;
         return false;
     }
 }

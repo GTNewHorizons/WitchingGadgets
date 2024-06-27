@@ -129,13 +129,12 @@ public class ClientEventHandler {
             int my = event.y - mc.displayHeight / 2;
             double radius = Math.sqrt(mx * mx + my * my);
 
-            double cx = mx / radius; // Math.cos(Math.toRadians(angle));
+            double cx = mx / radius;
             double angle = (mx < 0 ? 180 : 0) + Math.abs(
                     (mx < 0 ? -180 : 0) + (my < 0 ? 90 : 0)
                             + Math.abs((my < 0 ? -90 : 0) + Math.abs(Math.toDegrees(Math.acos(cx)) - 90)));
             int sel = angle > 288 ? 0 : angle < 72 ? 1 : 2 + (int) ((288 - angle) / 72);
             WitchingGadgets.packetHandler.sendToServer(new MessagePrimordialGlove(player, (byte) 0, sel));
-            // WGPacketPipeline.INSTANCE.sendToServer(new PacketPrimordialGlove(player, (byte)0, sel));
         }
     }
 
@@ -152,14 +151,14 @@ public class ClientEventHandler {
             ClientUtilities.bindTexture("witchinggadgets:textures/gui/steam_overlay.png");
             Tessellator tessellator = Tessellator.instance;
             tessellator.startDrawingQuads();
-            tessellator.addVertexWithUV(0.0D, (double) event.resolution.getScaledHeight(), -90.0D, 0.0D, 1.0D);
+            tessellator.addVertexWithUV(0.0D, event.resolution.getScaledHeight(), -90.0D, 0.0D, 1.0D);
             tessellator.addVertexWithUV(
-                    (double) event.resolution.getScaledWidth(),
-                    (double) event.resolution.getScaledHeight(),
+                    event.resolution.getScaledWidth(),
+                    event.resolution.getScaledHeight(),
                     -90.0D,
                     1.0D,
                     1.0D);
-            tessellator.addVertexWithUV((double) event.resolution.getScaledWidth(), 0.0D, -90.0D, 1.0D, 0.0D);
+            tessellator.addVertexWithUV(event.resolution.getScaledWidth(), 0.0D, -90.0D, 1.0D, 0.0D);
             tessellator.addVertexWithUV(0.0D, 0.0D, -90.0D, 0.0D, 0.0D);
             tessellator.draw();
             GL11.glDepthMask(true);
@@ -217,8 +216,7 @@ public class ClientEventHandler {
                                         (my < 0 ? -90 : 0)
                                                 + Math.abs(Math.toDegrees(Math.acos(mx / reverseRadius)) - 90)));
                 int sel = reverseAngle > 288 ? 0 : reverseAngle < 72 ? 1 : 2 + (int) ((288 - reverseAngle) / 72);
-                //
-                // mc.fontRenderer.drawString("mPos: "+mx+", "+my+", sel: "+sel, x, y, 0xffffff);
+
                 GL11.glPushMatrix();
                 for (int g = 0; g < gems.length; g++) if (gems[g] != null) {
                     int ix = (int) (((g == 0 ? -54 : g == 1 ? 13 : g == 3 ? -22 : g == 2 ? -76 : 35) / 256f) * rad * 2);
@@ -236,17 +234,10 @@ public class ClientEventHandler {
                         for (int j1 = 0; j1 < 2; ++j1) {
                             tessellator.startDrawingQuads();
                             tessellator.setColorRGBA_I(0, 64);
-                            tessellator.addVertexWithUV(ix - 2 + 00, iy - 2 + 20, 50, 0, 1); // ((f2 + (float)p5 * f4) *
-                                                                                             // f), )((f3 + (float)p5) *
-                                                                                             // f1));
-                            tessellator.addVertexWithUV(ix - 2 + 20, iy - 2 + 20, 50, 1, 1); // ((f2 + (float)p4 +
-                                                                                             // (float)p5 * f4) * f),
-                                                                                             // ((f3 + (float)p5) *
-                                                                                             // f1));
-                            tessellator.addVertexWithUV(ix - 2 + 20, iy - 2 + 00, 50, 1, 0); // ((f2 + (float)p4) * f),
-                                                                                             // ((f3 + 0.0F) * f1));
-                            tessellator.addVertexWithUV(ix - 2 + 00, iy - 2 + 00, 50, 0, 0); // ((f2 + 0.0F) * f), ((f3
-                                                                                             // + 0.0F) * f1));
+                            tessellator.addVertexWithUV(ix - 2, iy - 2 + 20, 50, 0, 1);
+                            tessellator.addVertexWithUV(ix - 2 + 20, iy - 2 + 20, 50, 1, 1);
+                            tessellator.addVertexWithUV(ix - 2 + 20, iy - 2, 50, 1, 0);
+                            tessellator.addVertexWithUV(ix - 2, iy - 2, 50, 0, 0);
                             tessellator.draw();
                         }
 

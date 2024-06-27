@@ -49,9 +49,6 @@ public class GuiLabelLibrary extends GuiContainer {
         GL11.glScalef(1 / scale, 1 / scale, 1);
 
         UtilsFX.drawTag(guiLeft + 8, guiTop + 30, tile.aspect, 0.0F, 0, zLevel);
-
-        // if(this.tile.getOutput()!=null)
-        // this.drawVirtualItem(tile.getOutput(), guiLeft+118,guiTop+24, false, mX, mY, false);
     }
 
     @Override
@@ -72,6 +69,5 @@ public class GuiLabelLibrary extends GuiContainer {
                 i++;
             }
         if (tile.aspect != old) WitchingGadgets.packetHandler.sendToServer(new MessageTileUpdate(this.tile));
-        // WGPacketPipeline.INSTANCE.sendToServer(new PacketTileUpdate(tile));
     }
 }

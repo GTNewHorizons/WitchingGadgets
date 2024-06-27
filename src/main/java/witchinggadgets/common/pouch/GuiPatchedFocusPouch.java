@@ -12,7 +12,6 @@ public class GuiPatchedFocusPouch extends GuiContainer {
 
     public GuiPatchedFocusPouch(InventoryPlayer inventoryPlayer, World world, int x, int y, int z) {
         super(new ContainerPatchedFocusPouch(inventoryPlayer, world, x, y, z));
-        // this.blockSlot = par1InventoryPlayer.currentItem;
         this.xSize = 175;
         this.ySize = 232;
     }

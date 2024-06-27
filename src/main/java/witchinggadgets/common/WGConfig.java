@@ -191,7 +191,7 @@ public class WGConfig {
                 new String[] { "minecraft:stone", "minecraft:sand", "minecraft:packed_ice", "minecraft:grass",
                         "minecraft:gravel", "minecraft:dirt" },
                 "A list of valid blocks that Thaumcraft's hilltop stones can spawn upon");
-        Set<Block> validBlocks = new HashSet();
+        Set<Block> validBlocks = new HashSet<>();
         for (String cm_allowedSpawnblocks_hilltopStone : cm_allowedSpawnblocks_HilltopStones) {
             String[] ssA = cm_allowedSpawnblocks_hilltopStone.split(":", 2);
             if (ssA.length > 1) {
@@ -207,7 +207,7 @@ public class WGConfig {
                 new String[] { "minecraft:stone", "minecraft:sand", "minecraft:packed_ice", "minecraft:grass",
                         "minecraft:gravel", "minecraft:dirt" },
                 "A list of valid blocks that Thaumcraft's eldritch obelisks can spawn upon");
-        validBlocks = new HashSet();
+        validBlocks = new HashSet<>();
         for (String s : cm_allowedSpawnblocks_EldritchRing) {
             String[] ssA = s.split(":", 2);
             if (ssA.length > 1) {

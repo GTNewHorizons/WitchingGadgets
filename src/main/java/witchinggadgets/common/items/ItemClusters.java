@@ -35,10 +35,10 @@ public class ItemClusters extends Item {
             "Beryllium", "Cobalt", "Iridium", "Molybdenum", "Naquadah", "Neodymium", "Nickel", "Palladium", "Platinum",
             "Thorium", "Uranium235", "Uranium238", "Zinc", "Casserite" };
 
-    public static HashMap<String, String> loccodename = new HashMap();
+    public static HashMap<String, String> loccodename = new HashMap<>();
 
     @Deprecated
-    public static HashMap<String, Integer[]> materialMap = new HashMap();
+    public static HashMap<String, Integer[]> materialMap = new HashMap<>();
 
     IIcon iconMetal;
     IIcon[] iconOverlay = new IIcon[3];
@@ -98,49 +98,16 @@ public class ItemClusters extends Item {
 
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
-        String ss = "";
-        /*
-         * if(!OreDictionary.getOres("ingot"+witchinggadgets.common.WGContent.GT_Cluster[stack.getItemDamage()]).isEmpty
-         * ()) { ItemStack ingot =
-         * OreDictionary.getOres("ingot"+witchinggadgets.common.WGContent.GT_Cluster[stack.getItemDamage()]).get(0); int
-         * limit = ingot.getDisplayName().lastIndexOf(" "); ss = ingot.getDisplayName().substring(0, Math.max(0,
-         * limit)); } else
-         * if(!OreDictionary.getOres("gem"+witchinggadgets.common.WGContent.GT_Cluster[stack.getItemDamage()]).isEmpty()
-         * ) { ItemStack ingot =
-         * OreDictionary.getOres("gem"+witchinggadgets.common.WGContent.GT_Cluster[stack.getItemDamage()]).get(0); int
-         * limit = ingot.getDisplayName().lastIndexOf(" "); ss = ingot.getDisplayName().substring(0, Math.max(0,
-         * limit)); } else
-         * if(!OreDictionary.getOres("dust"+witchinggadgets.common.WGContent.GT_Cluster[stack.getItemDamage()]).isEmpty(
-         * )) { ItemStack ingot =
-         * OreDictionary.getOres("dust"+witchinggadgets.common.WGContent.GT_Cluster[stack.getItemDamage()]).get(0); int
-         * limit = ingot.getDisplayName().lastIndexOf(" "); ss = ingot.getDisplayName().substring(0, Math.max(0,
-         * limit)); }
-         */
-        ss = Materials.get(witchinggadgets.common.WGContent.GT_Cluster[stack.getItemDamage()]).mLocalizedName;
+        String ss = Materials.get(witchinggadgets.common.WGContent.GT_Cluster[stack.getItemDamage()]).mLocalizedName;
         return StatCollector.translateToLocalFormatted(this.getUnlocalizedNameInefficiently(stack) + ".name", ss)
                 .trim();
     }
 
     @Override
-    public void getSubItems(Item item, CreativeTabs tab, List itemList) {
+    public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> itemList) {
         if (WGConfig.allowClusters)
             for (int iOre = 0; iOre < witchinggadgets.common.WGContent.GT_Cluster.length; iOre++)
                 if (!OreDictionary.getOres("ore" + witchinggadgets.common.WGContent.GT_Cluster[iOre]).isEmpty()) // &&
-                    // !OreDictionary.getOres("ingot"+witchinggadgets.common.WGContent.GT_Cluster[iOre]).isEmpty())
                     itemList.add(new ItemStack(item, 1, iOre));
     }
-
-    /*
-     * public static void setupClusters() { if(WGConfig.allowClusters) for(String ore :
-     * witchinggadgets.common.WGContent.GT_Cluster) { materialMap.put(ore, new
-     * Integer[]{ClientUtilities.getVibrantColourToInt(witchinggadgets.common.WGContent.GT_Cluster_Color.get(ore)),0});
-     * try{ List<Integer> colList = ClientUtilities.getItemColours( OreDictionary.getOres("ore"+ore).get(0) );
-     * if(!colList.isEmpty()) { int oreBlockColour = colList.get(0); int[] rgb = {oreBlockColour>>16&0xff,
-     * oreBlockColour>>8&0xff, oreBlockColour&0xff}; int clustertype = rgb[0]>rgb[2]&&rgb[1]>rgb[2]?2
-     * :rgb[0]>rgb[1]&&rgb[0]>rgb[2]?1 : 0; List<Integer> colours =
-     * ClientUtilities.getItemColours(OreDictionary.getOres("ingot"+ore).get(0)); int colour =
-     * ClientUtilities.getVibrantColourToInt(colours.get((int)(colours.size()*.65))); colour =
-     * ClientUtilities.getVibrantColourToInt(colour); materialMap.put(ore, new Integer[]{colour, clustertype} ); }
-     * }catch(Exception e){ WitchingGadgets.logger.log(Level.ERROR, "Error setting up cluster for "+ore); } } }
-     */
 }

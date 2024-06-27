@@ -70,8 +70,6 @@ public class WGMultiPartHandler implements IPartFactory, IPartConverter {
 
     @Override
     public TMultiPart createPart(String name, boolean client) {
-        // if (name.equals("witchingGadgets:vis_relay"))
-        // return new MultipartVisRelay(0);
         if (name.equals("witchingGadgets:essentia_tube")) return new MultipartEssentiaTube(0);
         if (name.equals("witchingGadgets:essentia_tube_valve")) return new MultipartEssentiaTube_Valve(0);
         if (name.equals("witchingGadgets:essentia_tube_filtered")) return new MultipartEssentiaTube_Filtered(0);
@@ -93,9 +91,8 @@ public class WGMultiPartHandler implements IPartFactory, IPartConverter {
                 && event.entityPlayer.getCurrentEquippedItem().getItemDamage() != 7
                 && event.entityPlayer.getCurrentEquippedItem().getItemDamage() != 2)
             if (event.action == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK
-                    && event.world.getTileEntity(event.x, event.y, event.z) instanceof TileMultipart) {
-                        TileMultipart mp = (TileMultipart) event.world.getTileEntity(event.x, event.y, event.z);
-                        int meta = event.entityPlayer.getCurrentEquippedItem().getItemDamage();
+                    && event.world.getTileEntity(event.x, event.y, event.z) instanceof TileMultipart mp) {
+                int meta = event.entityPlayer.getCurrentEquippedItem().getItemDamage();
                         TMultiPart part = meta == 1 ? new MultipartEssentiaTube_Valve(meta)
                                 : meta == 3 ? new MultipartEssentiaTube_Filtered(meta)
                                         : meta == 4 ? new MultipartEssentiaBuffer(meta)

@@ -21,12 +21,14 @@ public class PhotoDevelopingRecipe extends ShapelessArcaneRecipe {
                 "SCANCAMERA",
                 new ItemStack(WGContent.ItemMaterial, 1, 10),
                 new AspectList().add(Aspect.AIR, 5).add(Aspect.WATER, 5).add(Aspect.ORDER, 5),
-                new Object[] { new ItemStack(WGContent.ItemMaterial, 1, 9), "dyeBlack", Items.paper });
+                new ItemStack(WGContent.ItemMaterial, 1, 9),
+                "dyeBlack",
+                Items.paper);
     }
 
     @Override
     public AspectList getAspects(IInventory iinventoryCrafting) {
-        ArrayList<ItemStack> paper = new ArrayList<ItemStack>();
+        ArrayList<ItemStack> paper = new ArrayList<>();
 
         for (int i = 0; i < iinventoryCrafting.getSizeInventory(); i++) {
             ItemStack stackInSlot = iinventoryCrafting.getStackInSlot(i);

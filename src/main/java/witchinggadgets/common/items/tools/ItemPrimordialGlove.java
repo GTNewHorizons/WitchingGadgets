@@ -49,7 +49,7 @@ public class ItemPrimordialGlove extends Item implements IPrimordialCrafting {
     }
 
     @Override
-    public void addInformation(ItemStack item, EntityPlayer par2EntityPlayer, List list, boolean par4) {
+    public void addInformation(ItemStack item, EntityPlayer par2EntityPlayer, List<String> list, boolean par4) {
         super.addInformation(item, par2EntityPlayer, list, par4);
     }
 
@@ -66,7 +66,7 @@ public class ItemPrimordialGlove extends Item implements IPrimordialCrafting {
         for (int i = 0; i < list.tagCount(); i++) {
             NBTTagCompound tag = list.getCompoundTagAt(i);
             int slot = tag.getByte("Slot") & 0xFF;
-            if ((slot >= 0) && (slot < gems.length)) gems[slot] = ItemStack.loadItemStackFromNBT(tag);
+            if (slot < gems.length) gems[slot] = ItemStack.loadItemStackFromNBT(tag);
         }
         return gems;
     }
@@ -74,8 +74,9 @@ public class ItemPrimordialGlove extends Item implements IPrimordialCrafting {
     public static ItemStack setSetGems(ItemStack bracelet, ItemStack[] gems) {
         if (bracelet == null || (!(bracelet.getItem() instanceof ItemPrimordialGlove))
                 || gems == null
-                || gems.length > 5)
+                || gems.length > 5) {
             return bracelet;
+        }
 
         if (bracelet.getTagCompound() == null) bracelet.setTagCompound(new NBTTagCompound());
 
@@ -127,7 +128,7 @@ public class ItemPrimordialGlove extends Item implements IPrimordialCrafting {
         ItemStack[] gems = getSetGems(stack);
         boolean b = false;
 
-        if (gems != null && sel >= 0 && sel < gems.length && gems[sel] != null /* && !player.isSneaking() */) {
+        if (gems != null && sel >= 0 && sel < gems.length && gems[sel] != null) {
             ItemStack gem = gems[sel];
             if (gem.getItem() instanceof IInfusedGem && gem.getItemDamage() + ((IInfusedGem) gem.getItem())
                     .getConsumedCharge(ItemInfusedGem.getCut(gem).toString(), ItemInfusedGem.getAspect(gem), player)
@@ -160,8 +161,8 @@ public class ItemPrimordialGlove extends Item implements IPrimordialCrafting {
     }
 
     @Override
-    public Multimap getAttributeModifiers(ItemStack stack) {
-        Multimap multimap = super.getAttributeModifiers(stack);
+    public Multimap<String, AttributeModifier> getAttributeModifiers(ItemStack stack) {
+        Multimap<String, AttributeModifier> multimap = super.getAttributeModifiers(stack);
         multimap.put(
                 SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),
                 new AttributeModifier(
@@ -176,8 +177,7 @@ public class ItemPrimordialGlove extends Item implements IPrimordialCrafting {
     public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side,
             float hitX, float hitY, float hitZ) {
         TileEntity tile = world.getTileEntity(x, y, z);
-        if (!world.isRemote && tile != null && tile instanceof INode) {
-            INode node = (INode) tile;
+        if (!world.isRemote && tile instanceof INode node) {
             AspectList primals = new AspectList();
             AspectList temp = ResearchManager.reduceToPrimals(node.getAspects(), true);
             for (Aspect aspect : temp.getAspects()) {

@@ -173,7 +173,7 @@ public class ItemMaterials extends Item {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean par4) {
         try {
             if (stack.getItemDamage() == 11 && stack.hasTagCompound() && stack.getTagCompound().getBoolean("active"))
                 list.add(Lib.DESCRIPTION + "active");
@@ -196,8 +196,7 @@ public class ItemMaterials extends Item {
                                     .getBonusTags(new ItemStack(Item.getItemById(scan.id), 1, scan.meta), aspects);
                             break;
                         case 2:
-                            if ((scan.entity instanceof EntityItem)) {
-                                EntityItem item = (EntityItem) scan.entity;
+                            if ((scan.entity instanceof EntityItem item)) {
                                 name = "\u00a7" + item.getEntityItem().getRarity().rarityColor.getFormattingCode()
                                         + item.getEntityItem().getDisplayName();
                                 aspects = ThaumcraftCraftingManager.getObjectTags(
@@ -263,7 +262,7 @@ public class ItemMaterials extends Item {
 
     @Override
     public IIcon getIconFromDamageForRenderPass(int meta, int pass) {
-        if (pass == 99) return meta == 9 ? iconPlateOverlay : iconPlateOverlay;
+        if (pass == 99) return iconPlateOverlay;
         return getIconFromDamage(meta);
     }
 
@@ -283,7 +282,7 @@ public class ItemMaterials extends Item {
     }
 
     @Override
-    public void getSubItems(Item item, CreativeTabs tab, List itemList) {
+    public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> itemList) {
         for (int i = 0; i < subNames.length; i++) itemList.add(new ItemStack(item, 1, i));
         ItemStack luckyCoin = new ItemStack(ConfigItems.itemResource, 1, 18);
         luckyCoin.addEnchantment(Enchantment.fortune, 1);
@@ -310,10 +309,10 @@ public class ItemMaterials extends Item {
                 return true;
             }
             if (world.getTileEntity(targetX, targetY, targetZ) instanceof TileInfusionMatrix) {
-                ArrayList<ChunkCoordinates> stabilizers = new ArrayList();
-                ArrayList<ChunkCoordinates> pedestals = new ArrayList();
-                ArrayList<Object[]> warnings = new ArrayList();
-                ArrayList<ItemStack> components = new ArrayList();
+                ArrayList<ChunkCoordinates> stabilizers = new ArrayList<>();
+                ArrayList<ChunkCoordinates> pedestals = new ArrayList<>();
+                ArrayList<Object[]> warnings = new ArrayList<>();
+                ArrayList<ItemStack> components = new ArrayList<>();
 
                 for (int xx = -12; xx <= 12; xx++) for (int zz = -12; zz <= 12; zz++) {
                     boolean skip = false;
@@ -323,7 +322,7 @@ public class ItemMaterials extends Item {
                         int z = targetZ + zz;
 
                         TileEntity te = world.getTileEntity(x, y, z);
-                        if (!skip && te != null && te instanceof TilePedestal) {
+                        if (!skip && te instanceof TilePedestal) {
                             if (yy >= 0) warnings.add(new Object[] { "pedestalHeight", x, y, z });
                             else if (Math.abs(xx) > 8 || Math.abs(zz) > 8)
                                 warnings.add(new Object[] { "pedestalPos", x, y, z });
@@ -346,7 +345,7 @@ public class ItemMaterials extends Item {
                     int dz = targetZ - cc.posZ;
 
                     TileEntity te = world.getTileEntity(cc.posX, cc.posY, cc.posZ);
-                    if (te != null && te instanceof TilePedestal) {
+                    if (te instanceof TilePedestal) {
                         symmetry += 2;
                         if (((TilePedestal) te).getStackInSlot(0) != null) {
                             symmetry += 1;
@@ -357,7 +356,7 @@ public class ItemMaterials extends Item {
                     int xx = targetX + dx;
                     int zz = targetZ + dz;
                     te = world.getTileEntity(xx, cc.posY, zz);
-                    if (te != null && te instanceof TilePedestal) {
+                    if (te instanceof TilePedestal) {
                         symmetry -= 2;
                         if (((TilePedestal) te).getStackInSlot(0) != null) {
                             if (items) symmetry -= 1;
@@ -465,12 +464,13 @@ public class ItemMaterials extends Item {
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side,
             float hitX, float hitY, float hitZ) {
-        if (subNames[stack.getItemDamage()] == "cuttingTools" && world.getTileEntity(x, y, z) instanceof TileTable) {
+        if (subNames[stack.getItemDamage()].equals("cuttingTools")
+                && world.getTileEntity(x, y, z) instanceof TileTable) {
             world.setBlock(x, y, z, WGContent.BlockWoodenDevice, 3, 0x3);
-            if (world.getTileEntity(x, y, z) instanceof TileEntityCuttingTable) {
+            if (world.getTileEntity(x, y, z) instanceof TileEntityCuttingTable cuttingTable) {
                 int playerViewQuarter = MathHelper.floor_double(player.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
-                int f = playerViewQuarter == 0 ? 2 : playerViewQuarter == 1 ? 5 : playerViewQuarter == 2 ? 3 : 4;
-                ((TileEntityCuttingTable) world.getTileEntity(x, y, z)).facing = f;
+                cuttingTable.facing = playerViewQuarter == 0 ? 2
+                        : playerViewQuarter == 1 ? 5 : playerViewQuarter == 2 ? 3 : 4;
             }
             return true;
         }
@@ -483,7 +483,7 @@ public class ItemMaterials extends Item {
             if (stack.hasTagCompound()) {
                 ScanResult scan = Utilities
                         .readScanResultFromNBT(stack.getTagCompound().getCompoundTag("scanResult"), world);
-                if (scan != null && !ScanManager.hasBeenScanned(player, scan)) {
+                if (!ScanManager.hasBeenScanned(player, scan)) {
                     if (world.isRemote && ScanManager.completeScan(player, scan, "@"))
                         PacketHandler.INSTANCE.sendToServer(new PacketScannedToServer(scan, player, "@"));
                     player.inventory.decrStackSize(player.inventory.currentItem, 1);

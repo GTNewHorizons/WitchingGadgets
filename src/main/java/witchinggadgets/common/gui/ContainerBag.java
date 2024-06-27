@@ -13,13 +13,13 @@ import witchinggadgets.common.items.tools.ItemBag;
 
 public class ContainerBag extends Container {
 
-    private World worldObj;
-    private int blockedSlot;
+    private final World worldObj;
+    private final int blockedSlot;
+    private final int pouchSlotAmount = 18;
+private final int hotbarSlot;
+    private final ItemStack pouch;
+    private final EntityPlayer player;
     public IInventory input = new InventoryBag(this);
-    ItemStack pouch = null;
-    EntityPlayer player = null;
-    private int pouchSlotAmount = 18;
-    private final int hotbarSlot;
 
     public ContainerBag(InventoryPlayer iinventory, World world) {
         this.worldObj = world;
@@ -35,7 +35,7 @@ public class ContainerBag extends Container {
         bindPlayerInventory(iinventory);
 
         if (!world.isRemote) try {
-            ((InventoryBag) this.input).stackList = ((ItemBag) this.pouch.getItem()).getStoredItems(this.pouch);
+            ((InventoryBag) this.input).stackList = ItemBag.getStoredItems(this.pouch);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -55,9 +55,9 @@ public class ContainerBag extends Container {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int slot) {
         ItemStack stack = null;
-        Slot slotObject = (Slot) this.inventorySlots.get(slot);
+        Slot slotObject = this.inventorySlots.get(slot);
 
-        if ((slotObject != null) && (slotObject.getHasStack())) {
+        if (slotObject != null && slotObject.getHasStack()) {
             ItemStack stackInSlot = slotObject.getStack();
             stack = stackInSlot.copy();
 
@@ -98,11 +98,7 @@ public class ContainerBag extends Container {
     public void onContainerClosed(EntityPlayer par1EntityPlayer) {
         super.onContainerClosed(par1EntityPlayer);
         if (!this.worldObj.isRemote) {
-            ((ItemBag) this.pouch.getItem()).setStoredItems(this.pouch, ((InventoryBag) this.input).stackList);
-            /*
-             * if (!this.player.getCurrentEquippedItem().equals(this.pouch)) this.player.setCurrentItemOrArmor(0,
-             * this.pouch);
-             */
+            ItemBag.setStoredItems(this.pouch, ((InventoryBag) this.input).stackList);
             this.player.inventory.markDirty();
         }
     }
@@ -122,8 +118,6 @@ public class ContainerBag extends Container {
     public void saveCharmPouch() {
         if (!this.player.worldObj.isRemote && this.isHoldingPouch()) {
             this.player.setCurrentItemOrArmor(0, this.pouch);
-            // ItemBag.setStoredItems(this.player.getHeldItem(), new ItemStack[] { this.charmInv.getStackInSlot(0),
-            // this.charmInv.getStackInSlot(1), this.charmInv.getStackInSlot(2) });
         }
     }
 }
