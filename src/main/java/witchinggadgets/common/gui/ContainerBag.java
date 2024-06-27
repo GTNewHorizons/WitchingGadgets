@@ -16,7 +16,7 @@ public class ContainerBag extends Container {
     private final World worldObj;
     private final int blockedSlot;
     private final int pouchSlotAmount = 18;
-private final int hotbarSlot;
+    private final int hotbarSlot;
     private final ItemStack pouch;
     private final EntityPlayer player;
     public IInventory input = new InventoryBag(this);
