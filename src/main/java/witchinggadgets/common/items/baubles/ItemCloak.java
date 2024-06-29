@@ -151,6 +151,11 @@ public class ItemCloak extends Item
     }
 
     @Override
+    public int getItemStackLimit(ItemStack stack) {
+        return subNames[stack.getItemDamage()].equals("storage") ? 1 : maxStackSize;
+    }
+
+    @Override
     public String getUnlocalizedName(ItemStack stack) {
         return getUnlocalizedName() + "." + subNames[stack.getItemDamage()];
     }
