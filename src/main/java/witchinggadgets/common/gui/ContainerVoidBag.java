@@ -18,12 +18,14 @@ public class ContainerVoidBag extends ContainerGhostSlots {
     ItemStack pouch = null;
     EntityPlayer player = null;
     private int pouchSlotAmount = 18;
+    private final int hotbarSlot;
 
     public ContainerVoidBag(InventoryPlayer iinventory, World world) {
         this.worldObj = world;
         this.player = iinventory.player;
         this.pouch = iinventory.getCurrentItem();
-        this.blockedSlot = (iinventory.currentItem + 45);
+        this.blockedSlot = iinventory.currentItem + 45;
+        this.hotbarSlot = iinventory.currentItem;
 
         for (int a = 0; a < pouchSlotAmount; a++) {
             this.addSlotToContainer(new SlotGhostSingleItem(this.input, a, 29 + a % 6 * 20, 7 + a / 6 * 20));
@@ -81,11 +83,14 @@ public class ContainerVoidBag extends ContainerGhostSlots {
     }
 
     @Override
-    public ItemStack slotClick(int par1, int par2, int par3, EntityPlayer par4EntityPlayer) {
-        if (par1 == this.blockedSlot || (par2 == 0 && par3 == blockedSlot)) return null;
-        ((ItemBag) this.pouch.getItem()).setStoredItems(this.pouch, ((InventoryBag) this.input).stackList);
+    public ItemStack slotClick(int slotId, int clickedButton, int mode, EntityPlayer player) {
+        if (slotId == this.blockedSlot || mode == 0 && clickedButton == blockedSlot
+                || mode == 2 && clickedButton == hotbarSlot) {
+            return null;
+        }
+        ItemBag.setStoredItems(this.pouch, ((InventoryBag) this.input).stackList);
 
-        return super.slotClick(par1, par2, par3, par4EntityPlayer);
+        return super.slotClick(slotId, clickedButton, mode, player);
     }
 
     @Override
