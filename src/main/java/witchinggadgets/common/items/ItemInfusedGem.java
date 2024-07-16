@@ -53,7 +53,6 @@ import witchinggadgets.common.util.Utilities;
 
 public class ItemInfusedGem extends Item implements IInfusedGem {
 
-    private static final boolean isDreamcraftLoaded = Loader.isModLoaded("dreamcraft");
 
     IIcon[] icons = new IIcon[GemCut.values().length];
 
@@ -63,7 +62,7 @@ public class ItemInfusedGem extends Item implements IInfusedGem {
     }
 
     public static boolean isTeleportationAllowed() {
-        return Config.allowMirrors && !isDreamcraftLoaded;
+        return Config.allowMirrors && !WitchingGadgets.IS_DREAMCRAFT_LOADED;
     }
 
     @Override

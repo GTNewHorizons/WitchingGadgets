@@ -1,5 +1,6 @@
 package witchinggadgets;
 
+import cpw.mods.fml.common.Loader;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -75,6 +76,8 @@ public class WitchingGadgets {
     public static CommonProxy proxy;
 
     public static SimpleNetworkWrapper packetHandler;
+
+    public static final boolean IS_DREAMCRAFT_LOADED = Loader.isModLoaded("dreamcraft");
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
