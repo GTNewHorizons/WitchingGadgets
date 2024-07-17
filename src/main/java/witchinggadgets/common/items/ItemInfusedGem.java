@@ -60,6 +60,10 @@ public class ItemInfusedGem extends Item implements IInfusedGem {
         this.setCreativeTab(WitchingGadgets.tabWG);
     }
 
+    public static boolean isTeleportationAllowed() {
+        return Config.allowMirrors && !WitchingGadgets.IS_DREAMCRAFT_LOADED;
+    }
+
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         int brittle = EnchantmentHelper.getEnchantmentLevel(WGContent.enc_gemstoneBrittle.effectId, stack);
@@ -562,7 +566,7 @@ public class ItemInfusedGem extends Item implements IInfusedGem {
                 }
             }
             if (aspect.equals(Aspect.ENTROPY)) {
-                if (Config.allowMirrors && !Loader.isModLoaded("dreamcraft")) {
+                if (isTeleportationAllowed()) {
                     if (mop != null && mop.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
                         TileEntity tile = world.getTileEntity(targetX, targetY, targetZ);
                         if (tile instanceof TileMirror || tile instanceof TileMirrorEssentia) {
@@ -639,7 +643,7 @@ public class ItemInfusedGem extends Item implements IInfusedGem {
         if (cut == GemCut.OVAL.toString())
             return aspect == Aspect.FIRE || aspect == Aspect.AIR || aspect == Aspect.EARTH ? 1
                     : aspect == Aspect.WATER || aspect == Aspect.ORDER ? 2
-                            : aspect == Aspect.ENTROPY ? (Config.allowMirrors ? 16 : 2) : 0;
+                            : aspect == Aspect.ENTROPY ? (isTeleportationAllowed() ? 16 : 2) : 0;
         return 32;
     }
 
