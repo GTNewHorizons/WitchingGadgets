@@ -53,7 +53,6 @@ import witchinggadgets.common.util.Utilities;
 
 public class ItemInfusedGem extends Item implements IInfusedGem {
 
-
     IIcon[] icons = new IIcon[GemCut.values().length];
 
     public ItemInfusedGem() {
