@@ -68,7 +68,7 @@ public class TileRenderLabelLibrary extends TileEntitySpecialRenderer {
         }
 
         if (tile.getWorldObj() != null) {
-            GL11.glBlendFunc(770, 771);
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             ClientUtilities.bindTexture("textures/atlas/items.png");
             GL11.glTranslatef(-.375f, 1f, -.4375f);
             GL11.glScaled(.375f, .75f, .375f);

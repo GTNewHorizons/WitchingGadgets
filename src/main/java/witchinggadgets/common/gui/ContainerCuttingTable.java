@@ -86,15 +86,13 @@ public class ContainerCuttingTable extends Container {
             // merges the item into player inventory since its in the tileEntity
             if (slot < slotCount) {
                 if (slot == 4) {
-                    int maxStuff = ((Slot) inventorySlots.get(0)).getHasStack()
-                            ? ((Slot) inventorySlots.get(0)).getStack().stackSize
-                            : 0;
-                    if (((Slot) inventorySlots.get(1)).getHasStack())
-                        maxStuff = Math.min(maxStuff, ((Slot) inventorySlots.get(1)).getStack().stackSize);
-                    if (((Slot) inventorySlots.get(2)).getHasStack())
-                        maxStuff = Math.min(maxStuff, ((Slot) inventorySlots.get(2)).getStack().stackSize);
-                    if (((Slot) inventorySlots.get(3)).getHasStack())
-                        maxStuff = Math.min(maxStuff, ((Slot) inventorySlots.get(3)).getStack().stackSize);
+                    int maxStuff = inventorySlots.get(0).getHasStack() ? inventorySlots.get(0).getStack().stackSize : 0;
+                    if (inventorySlots.get(1).getHasStack())
+                        maxStuff = Math.min(maxStuff, inventorySlots.get(1).getStack().stackSize);
+                    if (inventorySlots.get(2).getHasStack())
+                        maxStuff = Math.min(maxStuff, inventorySlots.get(2).getStack().stackSize);
+                    if (inventorySlots.get(3).getHasStack())
+                        maxStuff = Math.min(maxStuff, inventorySlots.get(3).getStack().stackSize);
 
                     stackInSlot.stackSize = maxStuff;
 

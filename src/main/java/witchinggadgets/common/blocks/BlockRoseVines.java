@@ -64,8 +64,9 @@ public class BlockRoseVines extends Block implements IWandable, IShearable {
 
     @Override
     public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
-        // world.markBlockForRenderUpdate(x, y, z);
-        if (entity instanceof EntityLivingBase) entity.attackEntityFrom(DamageSource.generic, 1.0F);
+        if (entity instanceof EntityLivingBase) {
+            entity.attackEntityFrom(DamageSource.generic, 1.0F);
+        }
     }
 
     @Override
@@ -73,53 +74,18 @@ public class BlockRoseVines extends Block implements IWandable, IShearable {
         return null;
     }
 
-    // @SuppressWarnings("unused")
-    // private boolean canBePlacedOn(int id)
-    // {
-    // if (id == 0)
-    // {
-    // return false;
-    // }
-    // Block block = Block.blocksList[id];
-    // return block.renderAsNormalBlock() && block.blockMaterial.blocksMovement();
-    // }
-
     public void spreadVines(World world, int x, int y, int z, Random random, boolean ignoreRandom) {
         int growthStage = world.getBlockMetadata(x, y, z);
         if (growthStage >= 5) {
-            // if(isRoseVinePlaceable(world, x, y, z+1))
-            // if(random.nextInt(4)==0 || ignoreRandom)
-            // world.setBlock(x, y, z+1, this.blockID);
-            //
-            // if(isRoseVinePlaceable(world, x, y, z-1))
-            // if(random.nextInt(4)==0 || ignoreRandom)
-            // world.setBlock(x, y, z-1, this.blockID);
-            //
-            // if(isRoseVinePlaceable(world, x+1, y, z))
-            // if(random.nextInt(4)==0 || ignoreRandom)
-            // world.setBlock(x+1, y, z, this.blockID);
-            //
-            // if(isRoseVinePlaceable(world, x-1, y, z))
-            // if(random.nextInt(4)==0 || ignoreRandom)
-            // world.setBlock(x-1, y, z, this.blockID);
-
             if (isRoseVinePlaceable(world, x, y + 1, z)) if (random.nextInt(4) == 0 || ignoreRandom)
                 if (world.isSideSolid(x, y + 1, z - 1, ForgeDirection.SOUTH, false)
                         || world.isSideSolid(x, y + 1, z + 1, ForgeDirection.NORTH, false)
                         || world.isSideSolid(x - 1, y + 1, z, ForgeDirection.WEST, false)
                         || world.isSideSolid(x + 1, y + 1, z, ForgeDirection.EAST, false))
                     world.setBlock(x, y + 1, z, this);
-
-            // if(isRoseVinePlaceable(world, x, y-1, z))
-            // if(random.nextInt(4)==0 || ignoreRandom)
-            // world.setBlock(x, y-1, z, this.blockID);
         } else {
             world.setBlockMetadataWithNotify(x, y, z, growthStage + 1, 2);
         }
-    }
-
-    public boolean isBlockSolidOnSide(World world, int x, int y, int z, ForgeDirection side) {
-        return false;
     }
 
     public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
@@ -215,7 +181,7 @@ public class BlockRoseVines extends Block implements IWandable, IShearable {
 
     @Override
     public ArrayList<ItemStack> onSheared(ItemStack item, IBlockAccess world, int x, int y, int z, int fortune) {
-        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+        ArrayList<ItemStack> ret = new ArrayList<>();
         ret.add(new ItemStack(this, 1));
         return ret;
     }

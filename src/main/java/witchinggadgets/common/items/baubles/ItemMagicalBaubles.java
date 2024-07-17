@@ -66,7 +66,7 @@ public class ItemMagicalBaubles extends Item
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean par4) {
         String type = getSlot(stack) > 0 ? ("tg." + getSlot(stack)) : "bauble." + getBaubleType(stack);
         list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot." + type));
 
@@ -128,7 +128,7 @@ public class ItemMagicalBaubles extends Item
     }
 
     @Override
-    public void getSubItems(Item item, CreativeTabs tab, List itemList) {
+    public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> itemList) {
         for (int i = 0; i < subNames.length; i++) if (i == 5) {
             itemList.add(getItemWithTitle(new ItemStack(this, 1, i), Lib.TITLE + "crimsonCultist"));
             itemList.add(getItemWithTitle(new ItemStack(this, 1, i), Lib.TITLE + "crimsonKnight"));
@@ -261,9 +261,7 @@ public class ItemMagicalBaubles extends Item
     @Optional.Method(modid = "Botania")
     public ItemStack getCosmeticItem(ItemStack stack) {
         if (!stack.hasTagCompound()) return null;
-        ItemStack cosmetic = ItemStack
-                .loadItemStackFromNBT(stack.getTagCompound().getCompoundTag("botaniaCosmeticOverride"));
-        return cosmetic;
+        return ItemStack.loadItemStackFromNBT(stack.getTagCompound().getCompoundTag("botaniaCosmeticOverride"));
     }
 
     @Optional.Method(modid = "Botania")

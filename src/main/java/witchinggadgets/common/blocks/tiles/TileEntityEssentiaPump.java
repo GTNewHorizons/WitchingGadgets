@@ -86,9 +86,11 @@ public class TileEntityEssentiaPump extends TileEntityWGBase implements IEssenti
                 yy += h;
                 zz += l * fd.offsetZ;
             }
+
             TileEntity te = worldObj.getTileEntity(xx, yy, zz);
-            if (te != null && te instanceof TileMirrorEssentia && canSeeMirror((TileMirrorEssentia) te))
-                list.add((TileMirrorEssentia) te);
+            if (te instanceof TileMirrorEssentia mirror && canSeeMirror(mirror)) {
+                list.add(mirror);
+            }
         }
         return list;
     }

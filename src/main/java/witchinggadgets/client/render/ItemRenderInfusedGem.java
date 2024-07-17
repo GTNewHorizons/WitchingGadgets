@@ -58,14 +58,14 @@ public class ItemRenderInfusedGem implements IItemRenderer {
         }
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glEnable(GL11.GL_BLEND);
-        GL11.glEnable(3042);
+        GL11.glEnable(GL11.GL_BLEND);
 
         ItemInfusedGem.GemCut cut = ItemInfusedGem.getCut(stack);
 
         ClientUtilities.bindTexture("witchinggadgets:textures/models/white.png");
         Aspect a = ItemInfusedGem.getAspect(stack);
         if (a != null) {
-            // GL11.glBlendFunc(770, a.getBlend());
+            // GL11.glBlendFunc(GL11.GL_SRC_ALPHA, a.getBlend());
             float r = (a.getColor() >> 16 & 0xff) / 255f;
             float g = (a.getColor() >> 8 & 0xff) / 255f;
             float b = (a.getColor() & 0xff) / 255f;
@@ -73,7 +73,7 @@ public class ItemRenderInfusedGem implements IItemRenderer {
         }
         if (cut != null) ClientProxy.gemModel.renderPart(Utilities.getTitleCase(cut.name()) + "Cut_0" + cut.ordinal());
         if (cut != null && type != ItemRenderType.INVENTORY) {
-            GL11.glBlendFunc(770, 1);
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
             GL11.glColor4f(1, 1, 1, 1f);
             float scale = .875f;
             GL11.glScaled(scale, scale, scale);

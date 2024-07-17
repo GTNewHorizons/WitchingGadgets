@@ -90,8 +90,7 @@ public class ItemCrystalCapsule extends Item implements IFluidContainerItem {
 
     boolean tryFillTank(ItemStack stack, World world, int x, int y, int z, int side, EntityPlayer player) {
         TileEntity te = world.getTileEntity(x, y, z);
-        if (te instanceof IFluidHandler) {
-            IFluidHandler handler = (IFluidHandler) te;
+        if (te instanceof IFluidHandler handler) {
             ForgeDirection dir = ForgeDirection.getOrientation(side);
             FluidStack fs = getFluid(stack);
             if (fs == null) {
@@ -176,7 +175,7 @@ public class ItemCrystalCapsule extends Item implements IFluidContainerItem {
     }
 
     @Override
-    public void addInformation(ItemStack item, EntityPlayer player, List list, boolean adv) {
+    public void addInformation(ItemStack item, EntityPlayer player, List<String> list, boolean adv) {
         Fluid f = this.getFluidStored(item);
         if (f != null) {
             String fluidName = "ERROR";
@@ -191,7 +190,7 @@ public class ItemCrystalCapsule extends Item implements IFluidContainerItem {
     }
 
     @Override
-    public void getSubItems(Item item, CreativeTabs tab, List list) {
+    public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> list) {
         list.add(new ItemStack(item));
         for (Map.Entry<String, Fluid> f : FluidRegistry.getRegisteredFluids().entrySet()) {
             ItemStack s = new ItemStack(item);
@@ -247,14 +246,7 @@ public class ItemCrystalCapsule extends Item implements IFluidContainerItem {
                     stack);
             s = InventoryUtils.insertStack((IInventory) dispenser.getBlockTileEntity(), s, enumfacing.ordinal(), true);
             if (s != null) this.deafultBehaviour.dispense(dispenser, s);
-            // if(!dispenser.getWorld().isRemote)
-            // dispenser.getWorld().spawnEntityInWorld(new EntityFireworkRocket(dispenser.getWorld(),
-            // x+enumfacing.getFrontOffsetX(), y+enumfacing.getFrontOffsetY(), z+enumfacing.getFrontOffsetZ(), null));
-            // if(s == stack)
             return stack;
-            // else
-            // return this.deafultBehaviour.dispense(dispenser, capsule.useCapsule(dispenser.getWorld(),
-            // x+enumfacing.getFrontOffsetX(), y+enumfacing.getFrontOffsetY(), z+enumfacing.getFrontOffsetZ(), stack));
         }
     }
 }

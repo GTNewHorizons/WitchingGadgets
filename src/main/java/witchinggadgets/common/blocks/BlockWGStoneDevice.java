@@ -21,7 +21,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -98,29 +97,26 @@ public class BlockWGStoneDevice extends BlockContainer {
 
     @Override
     public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
-        if (world.getTileEntity(x, y, z) instanceof TileEntityEtherealWall) {
-            TileEntityEtherealWall tile = (TileEntityEtherealWall) world.getTileEntity(x, y, z);
-
-            if (tile.camoID != null) {
-                if (tile.camoID != null && tile.isRenderTypeValid(tile.camoID.getRenderType(), tile.camoMeta))
-                    return tile.camoID.getIcon(side, tile.camoMeta);
+        if (world.getTileEntity(x, y, z) instanceof TileEntityEtherealWall tile) {
+            if (tile.camoID != null && tile.isRenderTypeValid(tile.camoID.getRenderType(), tile.camoMeta)) {
+                return tile.camoID.getIcon(side, tile.camoMeta);
             }
         }
 
-        if (world.getTileEntity(x, y, z) instanceof TileEntityBlastfurnace) {
-            return ((TileEntityBlastfurnace) world.getTileEntity(x, y, z)).getTexture(side);
+        if (world.getTileEntity(x, y, z) instanceof TileEntityBlastfurnace blastfurnace) {
+            return blastfurnace.getTexture(side);
         }
+
         return this.icons[Math.min(world.getBlockMetadata(x, y, z), icons.length - 1)];
     }
 
     @Override
     public int getLightValue(IBlockAccess world, int x, int y, int z) {
-        if (world.getTileEntity(x, y, z) instanceof TileEntityEtherealWall) {
-            TileEntityEtherealWall tile = (TileEntityEtherealWall) world.getTileEntity(x, y, z);
+        if (world.getTileEntity(x, y, z) instanceof TileEntityEtherealWall tile) {
             if (tile.camoID != null) return tile.camoID.getLightValue();
         }
-        if (world.getTileEntity(x, y, z) instanceof TileEntityBlastfurnace) {
-            int pos = ((TileEntityBlastfurnace) world.getTileEntity(x, y, z)).position;
+        if (world.getTileEntity(x, y, z) instanceof TileEntityBlastfurnace blastfurnace) {
+            int pos = blastfurnace.position;
             return pos == 10 || pos == 12 || pos == 14 || pos == 16 ? 13 : pos == 22 ? 15 : 0;
         }
         return 0;
@@ -147,21 +143,16 @@ public class BlockWGStoneDevice extends BlockContainer {
         int xx = x - ForgeDirection.getOrientation(side).offsetX;
         int yy = y - ForgeDirection.getOrientation(side).offsetY;
         int zz = z - ForgeDirection.getOrientation(side).offsetZ;
-        if (iBlockAccess.getTileEntity(xx, yy, zz) instanceof TileEntityEtherealWall) {
-            TileEntityEtherealWall tile = (TileEntityEtherealWall) iBlockAccess.getTileEntity(xx, yy, zz);
+        if (iBlockAccess.getTileEntity(xx, yy, zz) instanceof TileEntityEtherealWall tile) {
             boolean sameBlock = iBlockAccess.getBlock(x, y, z).equals(this)
                     && iBlockAccess.getBlockMetadata(x, y, z) == iBlockAccess.getBlockMetadata(xx, yy, zz);
-            boolean sameRenderBlock = tile.camoID != null
-                    ? (iBlockAccess.getBlock(x, y, z).equals(tile.camoID)
-                            && iBlockAccess.getBlockMetadata(x, y, z) == tile.camoMeta)
-                    : false;
+            boolean sameRenderBlock = tile.camoID != null && (iBlockAccess.getBlock(x, y, z).equals(tile.camoID)
+                    && iBlockAccess.getBlockMetadata(x, y, z) == tile.camoMeta);
             sameBlock |= sameRenderBlock;
-            if (iBlockAccess.getTileEntity(x, y, z) instanceof TileEntityEtherealWall)
-                sameBlock &= ((TileEntityEtherealWall) iBlockAccess.getTileEntity(x, y, z)).camoID != null
-                        ? (((TileEntityEtherealWall) iBlockAccess.getTileEntity(x, y, z)).camoID.equals(tile.camoID)
-                                && ((TileEntityEtherealWall) iBlockAccess.getTileEntity(x, y, z)).camoMeta
-                                        == tile.camoMeta)
-                        : false;
+            if (iBlockAccess.getTileEntity(x, y, z) instanceof TileEntityEtherealWall etherealWall) {
+                sameBlock &= etherealWall.camoID != null && etherealWall.camoID.equals(tile.camoID)
+                        && etherealWall.camoMeta == tile.camoMeta;
+            }
 
             return !sameBlock;
         }
@@ -172,12 +163,11 @@ public class BlockWGStoneDevice extends BlockContainer {
     }
 
     @Override
-    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB aabb, List list,
+    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB aabb, List<AxisAlignedBB> list,
             Entity entity) {
-        if (world.getTileEntity(x, y, z) instanceof TileEntityEtherealWall) {
-            TileEntityEtherealWall tile = (TileEntityEtherealWall) world.getTileEntity(x, y, z);
+        if (world.getTileEntity(x, y, z) instanceof TileEntityEtherealWall tile) {
 
-            if (tile != null && tile.master != null && tile.master.isAnyTileInNetPowered()) return;
+            if (tile.master != null && tile.master.isAnyTileInNetPowered()) return;
         }
         if (world.getTileEntity(x, y, z) instanceof TileEntityBlastfurnace) {
             int pos = ((TileEntityBlastfurnace) world.getTileEntity(x, y, z)).position;
@@ -223,25 +213,23 @@ public class BlockWGStoneDevice extends BlockContainer {
 
     @Override
     public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
-        if (world.getTileEntity(x, y, z) instanceof TileEntityBlastfurnace
-                && ((TileEntityBlastfurnace) world.getTileEntity(x, y, z)).position == 22)
-            return false;
-        return true;
+        return !(world.getTileEntity(x, y, z) instanceof TileEntityBlastfurnace blastfurnace)
+                || blastfurnace.position != 22;
     }
 
     @Override
     public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
-        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityBlastfurnace
-                && ((TileEntityBlastfurnace) world.getTileEntity(x, y, z)).position == 22)
-            if (entity instanceof EntityItem) {
-                ItemStack input = ((EntityItem) entity).getEntityItem();
+        if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityBlastfurnace blastfurnace
+                && blastfurnace.position == 22)
+            if (entity instanceof EntityItem entityItem) {
+                ItemStack input = entityItem.getEntityItem();
                 if (InfernalBlastfurnaceRecipe.getRecipeForInput(input) == null) {
                     world.addBlockEvent(x, y, z, this, 5, 0);
                     entity.setDead();
                     return;
                 }
 
-                int[] mPos = ((TileEntityBlastfurnace) world.getTileEntity(x, y, z)).masterPos;
+                int[] mPos = blastfurnace.masterPos;
                 TileEntityBlastfurnace master = (TileEntityBlastfurnace) world.getTileEntity(mPos[0], mPos[1], mPos[2]);
                 master.addStackToInputs(input);
                 entity.setDead();
@@ -253,36 +241,22 @@ public class BlockWGStoneDevice extends BlockContainer {
 
     @Override
     public TileEntity createNewTileEntity(World world, int metadata) {
-        switch (metadata) {
-            case 0:
-                return new TileEntityEtherealWall();
-            case 1:
-                return new TileEntityAgeingStone();
-            case 2:
-                return new TileEntityBlastfurnace();
-        }
-        return null;
-    }
-
-    @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack stack) {
-        int playerViewQuarter = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
-        int meta = world.getBlockMetadata(x, y, z);
-        int f = playerViewQuarter == 0 ? 2 : playerViewQuarter == 1 ? 5 : playerViewQuarter == 2 ? 3 : 4;
-        /*
-         * if(meta == 0) ((TileEntityEtherealWall)world.getTileEntity(x,y,z)).facing = f; else
-         */
-
+        return switch (metadata) {
+            case 0 -> new TileEntityEtherealWall();
+            case 1 -> new TileEntityAgeingStone();
+            case 2 -> new TileEntityBlastfurnace();
+            default -> null;
+        };
     }
 
     @Override
     public void breakBlock(World world, int x, int y, int z, Block b, int side) {
 
-        if (world.getTileEntity(x, y, z) instanceof TileEntityBlastfurnace) {
+        if (world.getTileEntity(x, y, z) instanceof TileEntityBlastfurnace blastFurnace) {
 
-            int[] mPos = ((TileEntityBlastfurnace) world.getTileEntity(x, y, z)).masterPos;
+            int[] mPos = blastFurnace.masterPos;
             if (mPos != null && mPos.length > 2 && world.getBlock(mPos[0], mPos[1], mPos[2]).equals(this)) {
-                byte pos = ((TileEntityBlastfurnace) world.getTileEntity(x, y, z)).position;
+                byte pos = blastFurnace.position;
                 removeBlastfurnace(world, mPos[0], mPos[1], mPos[2], x, y, z);
                 if (pos != 22) {
                     EntityItem blockDrop = new EntityItem(
@@ -307,15 +281,14 @@ public class BlockWGStoneDevice extends BlockContainer {
 
     @Override
     public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
-        if (metadata == 2) return new ArrayList();
+        if (metadata == 2) return new ArrayList<>();
         return super.getDrops(world, x, y, z, metadata, fortune);
     }
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX,
             float hitY, float hitZ) {
-        if (world.getTileEntity(x, y, z) instanceof TileEntityEtherealWall) {
-            TileEntityEtherealWall tile = (TileEntityEtherealWall) world.getTileEntity(x, y, z);
+        if (world.getTileEntity(x, y, z) instanceof TileEntityEtherealWall tile) {
             ItemStack currentStack = player.getCurrentEquippedItem();
             Block camoID = null;
             int camoMeta = -1;
@@ -334,7 +307,7 @@ public class BlockWGStoneDevice extends BlockContainer {
                             blockMeta = blockMeta & 12 | 2;
                             break;
                         case 3:
-                            blockMeta = blockMeta & 12 | 0;
+                            blockMeta = blockMeta & 12;
                             break;
                         case 4:
                             blockMeta = blockMeta & 12 | 1;
@@ -343,38 +316,26 @@ public class BlockWGStoneDevice extends BlockContainer {
                             blockMeta = blockMeta & 12 | 3;
                             break;
                     }
-                    if (block.getRenderType() == 39 && blockMeta == 2) switch (side) {
-                        case 0:
-                        case 1:
-                            blockMeta = 2;
-                            break;
-                        case 2:
-                        case 3:
-                            blockMeta = 4;
-                            break;
-                        case 4:
-                        case 5:
-                            blockMeta = 3;
+
+                    if (block.getRenderType() == 39 && blockMeta == 2) {
+                        blockMeta = switch (side) {
+                            case 0, 1 -> 2;
+                            case 2, 3 -> 4;
+                            case 4, 5 -> 3;
+                            default -> blockMeta;
+                        };
                     }
+
                     if (block.getRenderType() == 31) {
                         int j1 = blockMeta & 3;
-                        byte b0 = 0;
-
-                        switch (side) {
-                            case 0:
-                            case 1:
-                                b0 = 0;
-                                break;
-                            case 2:
-                            case 3:
-                                b0 = 8;
-                                break;
-                            case 4:
-                            case 5:
-                                b0 = 4;
-                        }
+                        byte b0 = switch (side) {
+                            case 2, 3 -> 8;
+                            case 4, 5 -> 4;
+                            default -> 0;
+                        };
                         blockMeta = j1 | b0;
                     }
+
                     camoID = block;
                     camoMeta = blockMeta;
                     changeTexture = true;
@@ -384,8 +345,6 @@ public class BlockWGStoneDevice extends BlockContainer {
                 tile.camoID = camoID;
                 tile.camoMeta = camoMeta;
                 world.markBlockRangeForRenderUpdate(x, y, z, x, y, z);
-                // PacketDispatcher.sendPacketToAllInDimension(tile.getDescriptionPacket(),
-                // world.provider.dimensionId);
             }
             return changeTexture;
         }
@@ -395,9 +354,8 @@ public class BlockWGStoneDevice extends BlockContainer {
 
     @Override
     public void onNeighborChange(IBlockAccess world, int x, int y, int z, int tileX, int tileY, int tileZ) {
-        if (world.getTileEntity(x, y, z) instanceof TileEntityEtherealWall) {
-            TileEntityEtherealWall tile = (TileEntityEtherealWall) world.getTileEntity(x, y, z);
-            if (tile != null) if (tile.master != null) tile.master.freeSlaves();
+        if (world.getTileEntity(x, y, z) instanceof TileEntityEtherealWall tile) {
+            if (tile.master != null) tile.master.freeSlaves();
         }
     }
 
@@ -444,8 +402,7 @@ public class BlockWGStoneDevice extends BlockContainer {
 
     @Override
     public int colorMultiplier(IBlockAccess world, int x, int y, int z) {
-        if (world.getTileEntity(x, y, z) instanceof TileEntityEtherealWall) {
-            TileEntityEtherealWall tile = (TileEntityEtherealWall) world.getTileEntity(x, y, z);
+        if (world.getTileEntity(x, y, z) instanceof TileEntityEtherealWall tile) {
             if (tile.camoID != null) return tile.camoID instanceof BlockWGStoneDevice ? 0xFFFFFF
                     : tile.camoID.colorMultiplier(world, x, y, z);
         }

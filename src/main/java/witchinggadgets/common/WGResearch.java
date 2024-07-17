@@ -214,7 +214,7 @@ public class WGResearch {
                     .add(Aspect.CRAFT, 1);
             pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.GEMCUTTING.1"),
                     new ResearchPage((ShapedOreRecipe) WGContent.recipeList.get("GEMCUTTING_TOOLS")),
-                    new ResearchPage((List) WGContent.recipeList.get("GEMCUTTING")),
+                    new ResearchPage((List<?>) WGContent.recipeList.get("GEMCUTTING")),
                     new ResearchPage("witchinggadgets_research_page.GEMCUTTING.2"),
                     new ResearchPage("witchinggadgets_research_page.GEMCUTTING.3"),
                     new ResearchPage("witchinggadgets_research_page.GEMCUTTING.4"),
@@ -383,11 +383,11 @@ public class WGResearch {
             if (WGConfig.moduleKama) {
                 // KAMA
                 researchAspects = new AspectList().add(Aspect.CLOTH, 2).add(Aspect.ARMOR, 2);
-                ArrayList<ShapedArcaneRecipe> recList = new ArrayList();
+                ArrayList<ShapedArcaneRecipe> recList = new ArrayList<>();
                 for (int cm = 0; cm < ItemCloak.subNames.length; cm++)
                     recList.add((ShapedArcaneRecipe) WGContent.recipeList.get("CLOAKKAMA_" + cm));
                 pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.CLOAKKAMA.1"),
-                        new ResearchPage((ShapedArcaneRecipe[]) recList.toArray(new ShapedArcaneRecipe[0])) };
+                        new ResearchPage(recList.toArray(new ShapedArcaneRecipe[0])) };
                 getResearchItem(
                         "CLOAKKAMA",
                         "WITCHGADG",
@@ -752,7 +752,7 @@ public class WGResearch {
                 .add(Aspect.DARKNESS, 1).add(Aspect.TAINT, 1);
         pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.INFERNALBLASTFURNACE.1"),
                 new ResearchPage("witchinggadgets_research_page.INFERNALBLASTFURNACE.2"),
-                new ResearchPage((List) WGContent.recipeList.get("INFERNALBLASTFURNACE")),
+                new ResearchPage((List<?>) WGContent.recipeList.get("INFERNALBLASTFURNACE")),
                 new ResearchPage("witchinggadgets_research_page.INFERNALBLASTFURNACE.3") };
         getResearchItem(
                 "INFERNALBLASTFURNACE",
