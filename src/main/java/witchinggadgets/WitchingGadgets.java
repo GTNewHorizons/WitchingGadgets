@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
@@ -75,6 +76,8 @@ public class WitchingGadgets {
     public static CommonProxy proxy;
 
     public static SimpleNetworkWrapper packetHandler;
+
+    public static final boolean IS_DREAMCRAFT_LOADED = Loader.isModLoaded("dreamcraft");
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
