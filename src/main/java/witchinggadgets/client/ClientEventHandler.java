@@ -228,7 +228,6 @@ public class ClientEventHandler {
                         GL11.glDepthMask(false);
                         ClientUtilities.bindTexture("witchinggadgets:textures/models/white.png");
                         GL11.glEnable(GL11.GL_BLEND);
-                        GL11.glEnable(GL11.GL_BLEND);
                         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
                         for (int j1 = 0; j1 < 2; ++j1) {
