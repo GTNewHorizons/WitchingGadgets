@@ -2,6 +2,8 @@ package witchinggadgets.common.util.recipe;
 
 import java.util.ArrayList;
 
+import net.minecraft.block.BlockColored;
+import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -22,8 +24,7 @@ public class RobeColourizationRecipe implements IRecipe {
             ItemStack itemstack1 = par1InventoryCrafting.getStackInSlot(i);
 
             if (itemstack1 != null) {
-                if ((itemstack1.getItem() instanceof ItemArmor)) {
-                    ItemArmor itemarmor = (ItemArmor) itemstack1.getItem();
+                if ((itemstack1.getItem() instanceof ItemArmor itemarmor)) {
 
                     if ((!(itemarmor instanceof ItemAdvancedRobes)) || (itemstack != null)) {
                         return false;
@@ -77,7 +78,7 @@ public class RobeColourizationRecipe implements IRecipe {
                 } else {
                     if (!Utilities.isDye(itemstack1)) return null;
 
-                    float[] afloat = net.minecraft.entity.passive.EntitySheep.fleeceColorTable[net.minecraft.block.BlockColored
+                    float[] afloat = EntitySheep.fleeceColorTable[BlockColored
                             .func_150032_b(Utilities.getDamageForDye(itemstack1))];
                     int j1 = (int) (afloat[0] * 255.0F);
                     int k1 = (int) (afloat[1] * 255.0F);

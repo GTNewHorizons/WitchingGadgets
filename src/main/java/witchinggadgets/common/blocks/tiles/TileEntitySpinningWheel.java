@@ -60,8 +60,7 @@ public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedI
     private boolean canWork() {
         SpinningRecipe s = getRecipe();
         ItemStack out = s.getOutput();
-        if (!this.canStack(inv[5], out)) return false;
-        return true;
+        return this.canStack(inv[5], out);
     }
 
     private SpinningRecipe getRecipe() {
@@ -77,10 +76,8 @@ public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedI
         if (par2 == null) return true;
         if (par1 == null) return true;
         if (!(par1.isItemEqual(par2))) return false;
-        if (((par1.stackSize + par2.stackSize) <= par1.getMaxStackSize())
-                && ((par1.stackSize + par2.stackSize) <= par2.getMaxStackSize()))
-            return true;
-        return false;
+        return ((par1.stackSize + par2.stackSize) <= par1.getMaxStackSize())
+                && ((par1.stackSize + par2.stackSize) <= par2.getMaxStackSize());
     }
 
     public int getProgressScaled(int max) {

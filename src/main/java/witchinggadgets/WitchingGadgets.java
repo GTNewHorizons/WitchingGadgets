@@ -59,7 +59,7 @@ public class WitchingGadgets {
 
     public static final String MODID = "WitchingGadgets";
     public static final String MODNAME = "Witching Gadgets";
-    public static final String VERSION = "GRADLETOKEN_VERSION";
+    public static final String VERSION = Tags.VERSION;
 
     public PlayerTickHandler playerTickHandler;
 

@@ -53,9 +53,6 @@ public class TileRenderWallMirror extends TileEntitySpecialRenderer {
 
         Tessellator tes = Tessellator.instance;
 
-        // GL11.glEnable(3042);
-        // GL11.glBlendFunc(770, 771);
-
         GL11.glTranslatef((float) x, (float) y, (float) z);
 
         switch (tile.facing) {
@@ -87,12 +84,6 @@ public class TileRenderWallMirror extends TileEntitySpecialRenderer {
         }
 
         ClientUtilities.bindTexture("witchinggadgets:textures/models/glass.png");
-        // tes.startDrawingQuads();
-        // tes.addVertexWithUV(0.03, 0, 0, glassUmax, darknessVmax);
-        // tes.addVertexWithUV(0.03, 2, 0, glassUmax, darknessVmin);
-        // tes.addVertexWithUV(0.03, 2, 1, glassUmin, darknessVmin);
-        // tes.addVertexWithUV(0.03, 0, 1, glassUmin, darknessVmax);
-        // tes.draw();
         if (activating || deactivating || !active) {
             tes.startDrawingQuads();
             tes.addVertexWithUV(0.0005, 0, 0, glassUmax, glassVmax);
@@ -102,7 +93,6 @@ public class TileRenderWallMirror extends TileEntitySpecialRenderer {
             tes.draw();
         }
 
-        // this.bindTexture(new ResourceLocation(Block.blockGold.getItemIconName()));
         ClientUtilities.bindTexture("witchinggadgets:textures/blocks/white.png");
         for (int i = 0; i < shape.length; i++) {
             for (int j = 0; j < shape[i].length; j++) {
@@ -153,7 +143,6 @@ public class TileRenderWallMirror extends TileEntitySpecialRenderer {
         GL11.glScalef((-0.0048f), 1, 1);
         GL11.glScalef(1, scale, scale);
         GL11.glTranslatef(0.5f, 0, 0);
-        // +vOffset
         switch (facing) {
             case 2:
                 GL11.glRotatef(90, 0, -1, 0);
@@ -172,26 +161,10 @@ public class TileRenderWallMirror extends TileEntitySpecialRenderer {
         ItemStack cc = player.getHeldItem();
         player.setCurrentItemOrArmor(0, null);
 
-        // GL11.glDepthMask(false);
-        // GL11.glDisable(GL11.GL_BLEND);
-        // GL11.glDepthFunc(0);
-        // GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
-        // GL11.glDisable(GL11.GL_TEXTURE_2D);
-
         RenderManager.instance.renderEntityWithPosYaw(player, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F);
-
-        // GL11.glDepthMask(true);
-        // GL11.glEnable(GL11.GL_BLEND);
-        // GL11.glBlendFunc(GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE);
-        // GL11.glEnable(GL11.GL_TEXTURE_2D);
 
         player.setCurrentItemOrArmor(0, cc);
 
         GL11.glPopMatrix();
-        // RenderHelper.disableStandardItemLighting();
-        // GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-        // OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
-        // GL11.glDisable(GL11.GL_TEXTURE_2D);
-        // OpenGlHelper.setActiveTexture(OpenGlHelper.defaultTexUnit);
     }
 }

@@ -65,14 +65,14 @@ public class ItemMagicFood extends ItemFood {
                 Thaumcraft.proxy.playerKnowledge.addAspectPool(player.getCommandSenderName(), a, q);
                 Thaumcraft.proxy.getResearchManager();
                 ResearchManager.scheduleSave(player);
-                PacketHandler.INSTANCE.sendTo(
-                        new PacketAspectPool(
-                                a.getTag(),
-                                Short.valueOf(q),
-                                Short.valueOf(
+                PacketHandler.INSTANCE
+                        .sendTo(
+                                new PacketAspectPool(
+                                        a.getTag(),
+                                        q,
                                         Thaumcraft.proxy.playerKnowledge
-                                                .getAspectPoolFor(player.getCommandSenderName(), a))),
-                        (EntityPlayerMP) player);
+                                                .getAspectPoolFor(player.getCommandSenderName(), a)),
+                                (EntityPlayerMP) player);
             }
         }
     }
@@ -95,7 +95,7 @@ public class ItemMagicFood extends ItemFood {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void getSubItems(Item item, CreativeTabs tab, List itemList) {
+    public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> itemList) {
         for (int i = 0; i < subNames.length; i++)
             if (i != 2 || WGModCompat.loaded_TCon) itemList.add(new ItemStack(item, 1, i));
     }

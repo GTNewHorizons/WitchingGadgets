@@ -1,6 +1,5 @@
 package witchinggadgets.common.items;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -117,15 +116,16 @@ public class ItemInfusedGem extends Item implements IInfusedGem {
                             if (!world.isRemote) world.setBlock(x + xoff, y, z + zoff, WGContent.BlockCustomAiry);
                             world.scheduleBlockUpdate(x + xoff, y, z + zoff, WGContent.BlockCustomAiry, 10);
                             te = world.getTileEntity(x + xoff, y, z + zoff);
-                            if (te != null && te instanceof TileEntityTempLight)
-                                ((TileEntityTempLight) te).tickMax = 3600 + potency * 800; // 3m + Potency*40s
+                            if (te instanceof TileEntityTempLight tempLight) tempLight.tickMax = 3600 + potency * 800; // 3m
+                                                                                                                       // +
+                                                                                                                       // Potency*40s
                         }
                 if (world.isAirBlock(x, y + 2, z) && world.getBlockLightValue(x, y + 2, z) < 10) {
                     if (!world.isRemote) world.setBlock(x, y + 2, z, WGContent.BlockCustomAiry);
                     world.scheduleBlockUpdate(x, y + 2, z, WGContent.BlockCustomAiry, 10);
                     te = world.getTileEntity(x, y + 2, z);
-                    if (te != null && te instanceof TileEntityTempLight)
-                        ((TileEntityTempLight) te).tickMax = 3600 + potency * 800; // 3m + Potency*40s
+                    if (te instanceof TileEntityTempLight tempLight) tempLight.tickMax = 3600 + potency * 800; // 3m +
+                                                                                                               // Potency*40s
                 }
             }
             if (aspect.equals(Aspect.WATER)) {
@@ -208,9 +208,6 @@ public class ItemInfusedGem extends Item implements IInfusedGem {
                 } else {
                     if (!world.isRemote) {
 
-                        int x = (int) player.posX;
-                        int y = (int) player.posY;
-                        int z = (int) player.posZ;
                         if (potency == 0) {
                             if (world.getBlock((int) player.posX, (int) player.posY + 2, (int) player.posZ)
                                     .equals(Blocks.air))
@@ -530,7 +527,7 @@ public class ItemInfusedGem extends Item implements IInfusedGem {
                     double xOff = fnX - player.posX;
                     double zOff = fnZ - player.posZ;
                     double yOff = fnY - (player.posY + (double) player.getEyeHeight());
-                    double d3 = (double) MathHelper.sqrt_double(xOff * xOff + zOff * zOff);
+                    double d3 = MathHelper.sqrt_double(xOff * xOff + zOff * zOff);
                     float yaw = (float) (Math.atan2(zOff, xOff) * 180.0D / Math.PI) - 90.0F;
                     float f3 = MathHelper.wrapAngleTo180_float(yaw - player.rotationYaw);
                     yaw = player.rotationYaw + f3;
@@ -647,7 +644,7 @@ public class ItemInfusedGem extends Item implements IInfusedGem {
         return 32;
     }
 
-    static HashMap<Integer, Object> powerBeams = new HashMap();
+    static HashMap<Integer, Object> powerBeams = new HashMap<>();
 
     @Override
     public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
@@ -655,18 +652,16 @@ public class ItemInfusedGem extends Item implements IInfusedGem {
             stack.getTagCompound().setByte("GemCut", (byte) 1);
 
         int brittle = EnchantmentHelper.getEnchantmentLevel(WGContent.enc_gemstoneBrittle.effectId, stack);
-        if (entity instanceof EntityPlayer)
+        if (entity instanceof EntityPlayer player)
             if (world.rand.nextInt(1000) < brittle || (getCut(stack) == GemCut.POINT && stack.getItemDamage() != 0)) {
                 if (!world.isRemote) {
-                    if (!((EntityPlayer) entity).inventory
-                            .addItemStackToInventory(new ItemStack(WGContent.ItemMaterial, 1, 13)))
-                        ((EntityPlayer) entity)
-                                .dropPlayerItemWithRandomChoice(new ItemStack(WGContent.ItemMaterial, 1, 13), false);
-                    ((EntityPlayer) entity).addChatMessage(new ChatComponentTranslation(Lib.CHAT + "gem.shatter"));
+                    if (!player.inventory.addItemStackToInventory(new ItemStack(WGContent.ItemMaterial, 1, 13)))
+                        player.dropPlayerItemWithRandomChoice(new ItemStack(WGContent.ItemMaterial, 1, 13), false);
+                    player.addChatMessage(new ChatComponentTranslation(Lib.CHAT + "gem.shatter"));
                 }
                 stack.stackSize--;
                 if (stack.stackSize <= 0) stack = null;
-                ((EntityPlayer) entity).inventory.setInventorySlotContents(slot, stack);
+                player.inventory.setInventorySlotContents(slot, stack);
                 return;
             }
         if (world.rand.nextInt(20) < brittle) return;
@@ -675,63 +670,47 @@ public class ItemInfusedGem extends Item implements IInfusedGem {
                 && selected
                 && entity.ticksExisted % 4 == 0
                 && this.getDamage(stack) > 0) {
-            if (TileVisRelay.nearbyPlayers.containsKey(Integer.valueOf(entity.getEntityId())))
-                if ((((WeakReference) TileVisRelay.nearbyPlayers.get(Integer.valueOf(entity.getEntityId()))).get()
-                        != null)
-                        && (((TileVisRelay) ((WeakReference) TileVisRelay.nearbyPlayers
-                                .get(Integer.valueOf(entity.getEntityId()))).get())
-                                        .getDistanceFrom(entity.posX, entity.posY, entity.posZ)
-                                < 26.0D)) {
-                                    Aspect aspect = getAspect(stack);
-                                    int amt = ((TileVisRelay) ((WeakReference) TileVisRelay.nearbyPlayers
-                                            .get(Integer.valueOf(entity.getEntityId()))).get()).consumeVis(aspect, 1);
-                                    if (amt > 0) {
-                                        this.setDamage(stack, getDamage(stack) - amt);
-                                        ((TileVisRelay) ((WeakReference) TileVisRelay.nearbyPlayers
-                                                .get(Integer.valueOf(entity.getEntityId()))).get())
-                                                        .triggerConsumeEffect(aspect);
-                                        if (world.isRemote) {
-                                            ForgeDirection d2 = ForgeDirection.getOrientation(
-                                                    ((TileVisRelay) ((WeakReference) TileVisRelay.nearbyPlayers
-                                                            .get(Integer.valueOf(entity.getEntityId())))
-                                                                    .get()).orientation);
-                                            double x = ((TileVisRelay) ((WeakReference) TileVisRelay.nearbyPlayers
-                                                    .get(Integer.valueOf(entity.getEntityId()))).get()).xCoord + .5
-                                                    + d2.offsetX * .05;
-                                            double y = ((TileVisRelay) ((WeakReference) TileVisRelay.nearbyPlayers
-                                                    .get(Integer.valueOf(entity.getEntityId()))).get()).yCoord + .5
-                                                    + d2.offsetY * .05;
-                                            double z = ((TileVisRelay) ((WeakReference) TileVisRelay.nearbyPlayers
-                                                    .get(Integer.valueOf(entity.getEntityId()))).get()).zCoord + .5
-                                                    + d2.offsetZ * .05;
-                                            double[] playerPos = ClientUtilities
-                                                    .getPlayerHandPos((EntityPlayer) entity, true);
-                                            powerBeams.put(
-                                                    entity.getEntityId(),
-                                                    Thaumcraft.proxy.beamPower(
-                                                            world,
-                                                            x,
-                                                            y,
-                                                            z,
-                                                            playerPos[0],
-                                                            playerPos[1],
-                                                            playerPos[2],
-                                                            ((aspect.getColor() >> 16) & 0xff) / 255f,
-                                                            ((aspect.getColor() >> 8) & 0xff) / 255f,
-                                                            (aspect.getColor() & 0xff) / 255f,
-                                                            false,
-                                                            powerBeams.get(entity.getEntityId())));
-                                        }
-                                    }
-                                } else {
-                                    powerBeams.remove(entity.getEntityId());
-                                    TileVisRelay.nearbyPlayers.remove(Integer.valueOf(entity.getEntityId()));
-                                }
+            if (TileVisRelay.nearbyPlayers.containsKey(entity.getEntityId())) {
+                TileVisRelay relay = TileVisRelay.nearbyPlayers.get(entity.getEntityId()).get();
+                if (relay != null && relay.getDistanceFrom(entity.posX, entity.posY, entity.posZ) < 26.0D) {
+                    Aspect aspect = getAspect(stack);
+                    int amt = relay.consumeVis(aspect, 1);
+                    if (amt > 0) {
+                        this.setDamage(stack, getDamage(stack) - amt);
+                        relay.triggerConsumeEffect(aspect);
+                        if (world.isRemote) {
+                            ForgeDirection d2 = ForgeDirection.getOrientation(relay.orientation);
+                            double x = relay.xCoord + .5 + d2.offsetX * .05;
+                            double y = relay.yCoord + .5 + d2.offsetY * .05;
+                            double z = relay.zCoord + .5 + d2.offsetZ * .05;
+                            double[] playerPos = ClientUtilities.getPlayerHandPos((EntityPlayer) entity, true);
+                            powerBeams.put(
+                                    entity.getEntityId(),
+                                    Thaumcraft.proxy.beamPower(
+                                            world,
+                                            x,
+                                            y,
+                                            z,
+                                            playerPos[0],
+                                            playerPos[1],
+                                            playerPos[2],
+                                            ((aspect.getColor() >> 16) & 0xff) / 255f,
+                                            ((aspect.getColor() >> 8) & 0xff) / 255f,
+                                            (aspect.getColor() & 0xff) / 255f,
+                                            false,
+                                            powerBeams.get(entity.getEntityId())));
+                        }
+                    }
+                } else {
+                    powerBeams.remove(entity.getEntityId());
+                    TileVisRelay.nearbyPlayers.remove(entity.getEntityId());
+                }
+            }
         }
     }
 
     @Override
-    public void getSubItems(Item item, CreativeTabs tab, List list) {
+    public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> list) {
         list.add(createGem(null, ItemInfusedGem.GemCut.POINT, true));
         list.add(createGem(Aspect.ORDER, ItemInfusedGem.GemCut.POINT, false));
         list.add(createGem(Aspect.ENTROPY, ItemInfusedGem.GemCut.POINT, false));
@@ -748,7 +727,7 @@ public class ItemInfusedGem extends Item implements IInfusedGem {
     }
 
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool) {
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean bool) {
         if (getCut(stack) != null)
             list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "gemcut." + getCut(stack)));
     }
@@ -806,11 +785,11 @@ public class ItemInfusedGem extends Item implements IInfusedGem {
 
     List<ChunkCoordinates> getOres(World world, int x, int y, int z) {
         Block search = world.getBlock(x, y, z);
-        List<ChunkCoordinates> ores = new ArrayList();
+        List<ChunkCoordinates> ores = new ArrayList<>();
 
-        List<ChunkCoordinates> openList = new ArrayList();
-        List<ChunkCoordinates> closedList = new ArrayList();
-        List<ChunkCoordinates> checked = new ArrayList();
+        List<ChunkCoordinates> openList = new ArrayList<>();
+        List<ChunkCoordinates> closedList = new ArrayList<>();
+        List<ChunkCoordinates> checked = new ArrayList<>();
 
         openList.add(new ChunkCoordinates(x, y, z));
 

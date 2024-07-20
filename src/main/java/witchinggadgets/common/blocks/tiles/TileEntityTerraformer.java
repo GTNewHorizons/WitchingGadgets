@@ -77,9 +77,8 @@ public class TileEntityTerraformer extends TileEntityWGBase implements IAspectCo
         if (te != null) {
             IEssentiaTransport ic = (IEssentiaTransport) te;
             if (!ic.canOutputTo(ForgeDirection.UP)) return false;
-            if ((ic.getSuctionAmount(ForgeDirection.UP) < getSuctionAmount(ForgeDirection.DOWN))
-                    && (ic.takeEssentia(this.currentSuction, 1, ForgeDirection.UP) == 1))
-                return true;
+            return (ic.getSuctionAmount(ForgeDirection.UP) < getSuctionAmount(ForgeDirection.DOWN))
+                    && (ic.takeEssentia(this.currentSuction, 1, ForgeDirection.UP) == 1);
         }
         return false;
     }

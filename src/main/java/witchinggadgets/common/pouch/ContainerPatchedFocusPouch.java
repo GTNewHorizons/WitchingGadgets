@@ -37,15 +37,6 @@ public class ContainerPatchedFocusPouch extends ContainerFocusPouch {
     public void onContainerClosed(EntityPlayer player) {
         super.onContainerClosed(player);
         if (!player.worldObj.isRemote) {
-            // ((ItemFocusPouch)this.pouch.getItem()).setInventory(this.pouch,
-            // ((InventoryFocusPouch)this.input).stackList);
-            // if (this.player == null) {
-            // return;
-            // }
-            // if ((this.player.getHeldItem() != null) && (this.player.getHeldItem().isItemEqual(this.pouch))) {
-            // this.player.setCurrentItemOrArmor(0, this.pouch);
-            // }
-            // this.player.inventory.markDirty();
             ItemStack beltPouch = ((ContainerFocusPouchAccessor) this).getPouch();
             if (beltPouch != null) {
                 if (BaublesApi.getBaubles(player).getStackInSlot(3) != null
