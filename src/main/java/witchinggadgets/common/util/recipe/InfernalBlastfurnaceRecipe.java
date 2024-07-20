@@ -18,11 +18,11 @@ public class InfernalBlastfurnaceRecipe {
     private final boolean isSpecial;
     private ItemStack bonus;
 
-    public static List<InfernalBlastfurnaceRecipe> recipes = new ArrayList();
+    public static List<InfernalBlastfurnaceRecipe> recipes = new ArrayList<>();
 
     public InfernalBlastfurnaceRecipe(ItemStack output, Object input, int time, boolean isSpecial) {
-        if (input instanceof ItemStack) this.input = (ItemStack) input;
-        else if (input instanceof OreDictStack) this.input = (OreDictStack) input;
+        if (input instanceof ItemStack) this.input = input;
+        else if (input instanceof OreDictStack) this.input = input;
         else if (input instanceof String) this.input = new OreDictStack((String) input, 1);
         else throw new RuntimeException(
                 "Infernal Blast Furance Recipes MUST be initialized with ItemStack, OreDictStack or String");
@@ -145,8 +145,7 @@ public class InfernalBlastfurnaceRecipe {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof InfernalBlastfurnaceRecipe)) return false;
-        InfernalBlastfurnaceRecipe r = (InfernalBlastfurnaceRecipe) o;
+        if (!(o instanceof InfernalBlastfurnaceRecipe r)) return false;
 
         boolean b_out = ItemStack.areItemStacksEqual(r.output, this.output);
         boolean b_in_IS = (this.input instanceof ItemStack && r.input instanceof ItemStack)

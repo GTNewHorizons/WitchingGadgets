@@ -51,8 +51,7 @@ public class MessagePrimordialGlove implements IMessage {
             World world = DimensionManager.getWorld(message.dim);
             if (world != null) {
                 Entity ent = world.getEntityByID(message.playerid);
-                if (ent instanceof EntityPlayer) {
-                    EntityPlayer player = (EntityPlayer) ent;
+                if (ent instanceof EntityPlayer player) {
                     if (message.type == (byte) 0 && player.getCurrentEquippedItem() != null) {
                         if (!player.getCurrentEquippedItem().hasTagCompound())
                             player.getCurrentEquippedItem().setTagCompound(new NBTTagCompound());

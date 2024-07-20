@@ -87,23 +87,12 @@ public class MultipartEssentiaTube extends McMetaPart
             TileEntity te = ThaumcraftApiHelper.getConnectableTile(world(), x(), y(), z(), fd);
             if (te != null) {
                 switch (side) {
-                    case 0:
-                        miny = 0.0F;
-                        break;
-                    case 1:
-                        maxy = 1.0F;
-                        break;
-                    case 2:
-                        minz = 0.0F;
-                        break;
-                    case 3:
-                        maxz = 1.0F;
-                        break;
-                    case 4:
-                        minx = 0.0F;
-                        break;
-                    case 5:
-                        maxx = 1.0F;
+                    case 0 -> miny = 0.0F;
+                    case 1 -> maxy = 1.0F;
+                    case 2 -> minz = 0.0F;
+                    case 3 -> maxz = 1.0F;
+                    case 4 -> minx = 0.0F;
+                    case 5 -> maxx = 1.0F;
                 }
             }
         }
@@ -112,21 +101,21 @@ public class MultipartEssentiaTube extends McMetaPart
 
     @Override
     public Iterable<Cuboid6> getOcclusionBoxes() {
-        ArrayList<Cuboid6> t = new ArrayList();
+        ArrayList<Cuboid6> t = new ArrayList<>();
         t.add(new Cuboid6(.375, .375, .375, .625, .625, .625));
         return t;
     }
 
     @Override
     public Iterable<Cuboid6> getCollisionBoxes() {
-        ArrayList<Cuboid6> t = new ArrayList();
+        ArrayList<Cuboid6> t = new ArrayList<>();
         t.add(getBounds());
         return t;
     }
 
     @Override
     public Iterable<IndexedCuboid6> getSubParts() {
-        ArrayList<IndexedCuboid6> t = new ArrayList();
+        ArrayList<IndexedCuboid6> t = new ArrayList<>();
         if (world().isRemote && (Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem() == null
                 || !(Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem().getItem() instanceof ItemWandCasting
                         || Minecraft.getMinecraft().thePlayer.getCurrentEquippedItem()
@@ -139,7 +128,6 @@ public class MultipartEssentiaTube extends McMetaPart
                         x() + fd.offsetX,
                         y() + fd.offsetY,
                         z() + fd.offsetZ) instanceof IEssentiaTransport)
-                    // if(getConnectableTile(world(), x(), y(), z(), ForgeDirection.getOrientation(i))!=null)
                     t.add(getConnectionPipe(ForgeDirection.getOrientation(i)));
             }
             t.add(new IndexedCuboid6(null, new Cuboid6(.375, .375, .375, .625, .625, .625)));
@@ -189,9 +177,9 @@ public class MultipartEssentiaTube extends McMetaPart
             Random r = new Random(hashCode() * 4);
             float rp = r.nextFloat() * 360.0F;
             float ry = r.nextFloat() * 360.0F;
-            double fx = -MathHelper.sin(ry / 180.0F * 3.141593F) * MathHelper.cos(rp / 180.0F * 3.141593F);
-            double fz = MathHelper.cos(ry / 180.0F * 3.141593F) * MathHelper.cos(rp / 180.0F * 3.141593F);
-            double fy = -MathHelper.sin(rp / 180.0F * 3.141593F);
+            double fx = -MathHelper.sin(ry / 180.0F * (float) Math.PI) * MathHelper.cos(rp / 180.0F * (float) Math.PI);
+            double fz = MathHelper.cos(ry / 180.0F * (float) Math.PI) * MathHelper.cos(rp / 180.0F * (float) Math.PI);
+            double fy = -MathHelper.sin(rp / 180.0F * (float) Math.PI);
 
             Thaumcraft.proxy.drawVentParticles(
                     this.world(),
@@ -292,9 +280,6 @@ public class MultipartEssentiaTube extends McMetaPart
                             }
                             int am = addEssentia(a, ic.takeEssentia(a, 1, fd.getOpposite()), fd);
                             if (am > 0) {
-                                // if (this.world().rand.nextInt(100) == 0)
-                                // this.world().addBlockEvent(this.x(), this.y(), this.z(),
-                                // ConfigBlocks.blockTube, 0, 0);
                                 return;
                             }
                         }
@@ -393,10 +378,10 @@ public class MultipartEssentiaTube extends McMetaPart
 
     public TileEntity getConnectableTile(IBlockAccess world, int x, int y, int z, ForgeDirection face) {
         TileEntity te = world.getTileEntity(x + face.offsetX, y + face.offsetY, z + face.offsetZ);
-        if (((te instanceof IEssentiaTransport)) && (((IEssentiaTransport) te).isConnectable(face.getOpposite()))) {
+        if (te instanceof IEssentiaTransport transport && transport.isConnectable(face.getOpposite())) {
             return te;
         }
-        if (((te instanceof TileBellows)) && (((TileBellows) te).orientation == face.getOpposite().ordinal())) {
+        if (te instanceof TileBellows bellow && bellow.orientation == face.getOpposite().ordinal()) {
             return te;
         }
         return null;
@@ -465,8 +450,7 @@ public class MultipartEssentiaTube extends McMetaPart
             if (ibox.min.x <= localHit.xCoord && ibox.max.x >= localHit.xCoord)
                 if (ibox.min.y <= localHit.yCoord && ibox.max.y >= localHit.yCoord)
                     if (ibox.min.z <= localHit.zCoord && ibox.max.z >= localHit.zCoord) {
-                        if (ibox.data instanceof ForgeDirection) {
-                            ForgeDirection fd = (ForgeDirection) ibox.data;
+                        if (ibox.data instanceof ForgeDirection fd) {
                             player.worldObj.playSound(
                                     x() + .5,
                                     y() + .5,

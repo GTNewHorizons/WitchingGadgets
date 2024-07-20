@@ -67,13 +67,12 @@ public class TileEntityCuttingTable extends TileEntityWGBase implements IInvento
 
     public ItemStack getOutput() {
         if (this.inventory[0] == null || !InfusedGemHandler.isGem(this.inventory[0])) return null;
-        ItemStack stack = new ItemStack(WGContent.ItemInfusedGem);
         Aspect aspect = getInfusingAspect();
         if (aspect != null) {
             int amplifier = (this.inventory[1] != null ? 1 : 0) + (this.inventory[2] != null ? 1 : 0)
                     + (this.inventory[3] != null ? 1 : 0);
             int brittle = ItemInfusedGem.GemCut.getValue(targetGemCut) == GemCut.OVAL ? 1 : 0;
-            stack = ItemInfusedGem.createGem(aspect, ItemInfusedGem.GemCut.getValue(targetGemCut), false);
+            ItemStack stack = ItemInfusedGem.createGem(aspect, ItemInfusedGem.GemCut.getValue(targetGemCut), false);
             if (amplifier > 0) {
                 if (Arrays.asList(InfusedGemHandler.getNaturalAffinities(inventory[0])).contains(aspect)) {
                     if (amplifier - brittle > 0)
@@ -99,7 +98,7 @@ public class TileEntityCuttingTable extends TileEntityWGBase implements IInvento
         return l.getAspectsSortedAmount()[0];
     }
 
-    static Set<Aspect> acceptedAspects = new HashSet();
+    static Set<Aspect> acceptedAspects = new HashSet<>();
 
     static {
         acceptedAspects.add(Aspect.AIR);

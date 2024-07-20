@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -32,6 +31,7 @@ import net.minecraftforge.client.model.IModelCustom;
 
 import org.apache.logging.log4j.Level;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 
 import thaumcraft.api.aspects.Aspect;
 import witchinggadgets.WitchingGadgets;
@@ -218,10 +218,10 @@ public class ClientUtilities {
                 colour.getGreen() / 255f,
                 colour.getBlue() / 255f,
                 colour.getAlpha() / 255f);
-        GL11.glEnable(3042);
-        GL11.glBlendFunc(770, 771);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-        GL11.glDisable(2884);
+        GL11.glDisable(GL11.GL_CULL_FACE);
         Tessellator localTessellator = Tessellator.instance;
         localTessellator.startDrawingQuads();
         localTessellator.setNormal(0.0F, 0.0F, 1.0F);
@@ -266,7 +266,7 @@ public class ClientUtilities {
         // RenderHelper.setBlockTextureSheet();
         bindTexture("textures/atlas/blocks.png");
 
-        GL11.glDepthFunc(514);
+        GL11.glDepthFunc(GL11.GL_EQUAL);
         GL11.glDepthMask(false);
 
         localTessellator.startDrawingQuads();
@@ -309,10 +309,10 @@ public class ClientUtilities {
         }
         localTessellator.draw();
 
-        GL11.glDisable(3042);
+        GL11.glDisable(GL11.GL_BLEND);
         GL11.glDepthMask(true);
-        GL11.glDepthFunc(515);
-        GL11.glEnable(2884);
+        GL11.glDepthFunc(GL11.GL_LEQUAL);
+        GL11.glEnable(GL11.GL_CULL_FACE);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
@@ -321,13 +321,11 @@ public class ClientUtilities {
         if ((list == null) || (list.isEmpty())) {
             return;
         }
-        GL11.glDisable(32826);
-        GL11.glDisable(2896);
-        GL11.glDisable(2929);
+        GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+        GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
         int k = minimalWidth;
-        Iterator iterator = list.iterator();
-        while (iterator.hasNext()) {
-            String s = (String) iterator.next();
+        for (String s : list) {
             int l = font.getStringWidth(s);
             if (l > k) {
                 k = l;
@@ -346,8 +344,6 @@ public class ClientUtilities {
             j1 = gui.height - k1 - 6;
         }
 
-        // gui.zLevel = 300.0F;
-        // GuiContainer.itemRenderer.zLevel = 300.0F;
         int l1 = -267386864;
         drawGradientRect(i1 - 3, j1 - 4, i1 + k + 3, j1 - 3, l1, l1);
         drawGradientRect(i1 - 3, j1 + k1 + 3, i1 + k + 3, j1 + k1 + 4, l1, l1);
@@ -362,25 +358,13 @@ public class ClientUtilities {
         drawGradientRect(i1 - 3, j1 + k1 + 2, i1 + k + 3, j1 + k1 + 3, j2, j2);
 
         drawHoveringText(list, i1, j1, font);
-        // for (int k2 = 0; k2 < list.size(); k2++)
-        // {
-        // String s1 = (String)list.get(k2);
-        // font.drawStringWithShadow(s1, i1, j1, -1);
-        // if (k2 == 0) {
-        // j1 += 2;
-        // }
-        // j1 += 10;
-        // }
-        // gui.zLevel = 0.0F;
-        // GuiContainer.itemRenderer.zLevel = 0.0F;
-        // GL11.glEnable(2896);
-        GL11.glEnable(2929);
-        GL11.glEnable(32826);
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
     }
 
     public static void drawHoveringText(List<String> list, int x, int y, FontRenderer font) {
         for (int iS = 0; iS < list.size(); iS++) {
-            String s1 = (String) list.get(iS);
+            String s1 = list.get(iS);
             font.drawStringWithShadow(s1, x, y, -1);
             if (iS == 0) {
                 y += 2;
@@ -405,11 +389,11 @@ public class ClientUtilities {
         GL11.glShadeModel(GL11.GL_SMOOTH);
         Tessellator.instance.startDrawingQuads();
         Tessellator.instance.setColorRGBA_F(f1, f2, f3, f);
-        Tessellator.instance.addVertex((double) par3, (double) par2, (double) 500);
-        Tessellator.instance.addVertex((double) par1, (double) par2, (double) 500);
+        Tessellator.instance.addVertex(par3, par2, 500);
+        Tessellator.instance.addVertex(par1, par2, 500);
         Tessellator.instance.setColorRGBA_F(f5, f6, f7, f4);
-        Tessellator.instance.addVertex((double) par1, (double) par4, (double) 500);
-        Tessellator.instance.addVertex((double) par3, (double) par4, (double) 500);
+        Tessellator.instance.addVertex(par1, par4, 500);
+        Tessellator.instance.addVertex(par3, par4, 500);
         Tessellator.instance.draw();
         GL11.glShadeModel(GL11.GL_FLAT);
         GL11.glDisable(GL11.GL_BLEND);
@@ -435,8 +419,8 @@ public class ClientUtilities {
         return new double[] { x - xOff * radius, y, z - zOff * radius };
     }
 
-    static HashMap<String, IModelCustom> modelMap = new HashMap<String, IModelCustom>();
-    static HashMap<String, ResourceLocation> textureMap = new HashMap<String, ResourceLocation>();
+    static HashMap<String, IModelCustom> modelMap = new HashMap<>();
+    static HashMap<String, ResourceLocation> textureMap = new HashMap<>();
 
     public static void bindTexture(String path) {
         mc().getTextureManager().bindTexture(getResource(path));
@@ -633,83 +617,23 @@ public class ClientUtilities {
                 icon.getInterpolatedV(16 - yMax * 16));
     }
 
-    // public static Framebuffer stackBuffer;
-    // /** Thanks TTFTCUTS! :P */
-    // public static BufferedImage getItemStackImage(ItemStack stack)
-    // {
-    // if (stackBuffer == null)
-    // stackBuffer = new Framebuffer(16,16,true);
-    // Minecraft mc = Minecraft.getMinecraft();
-    // // bind the buffer and such
-    // GL11.glPushMatrix();
-    // GL11.glLoadIdentity();
-    // stackBuffer.bindFramebuffer(true);
-    // GL11.glClearColor(0, 0, 0, 0);
-    // GL11.glClear(GL11.GL_STENCIL_BUFFER_BIT | GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
-    // GL11.glMatrixMode(GL11.GL_PROJECTION);
-    // GL11.glLoadIdentity();
-    // GL11.glOrtho(0.0D, 16, 16, 0.0D, 1000.0D, 3000.0D);
-    // GL11.glMatrixMode(GL11.GL_MODELVIEW);
-    // GL11.glLoadIdentity();
-    // GL11.glTranslatef(0.0F, 0.0F, -2000.0F);
-    // //GL11.glTranslatef(0, 0, -5);
-    // GL11.glColor3f(1, 0, 0);
-    // // draw image
-    // RenderItem render = new RenderItem();
-    // GL11.glPushMatrix();
-    // GL11.glEnable(GL11.GL_BLEND);
-    // GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-    // RenderHelper.enableGUIStandardItemLighting();
-    // GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-    // GL11.glEnable(GL11.GL_DEPTH_TEST);
-    // render.renderItemIntoGUI(mc.fontRenderer, mc.getTextureManager(), stack, 0, 0);
-    // RenderHelper.disableStandardItemLighting();
-    // GL11.glDisable(GL11.GL_BLEND);
-    // GL11.glPopMatrix();
-    // // set back to normal
-    // stackBuffer.unbindFramebuffer();
-    // GL11.glPopMatrix();
-    // // dump to image
-    // int width = 16;
-    // int height = 16;
-    // int length = width * height;
-    // IntBuffer data = BufferUtils.createIntBuffer(length);
-    // BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-    // GL11.glPixelStorei(GL11.GL_PACK_ALIGNMENT, 1);
-    // GL11.glPixelStorei(GL11.GL_UNPACK_ALIGNMENT, 1);
-    // GL11.glBindTexture(GL11.GL_TEXTURE_2D, stackBuffer.framebufferTexture);
-    // GL11.glGetTexImage(GL11.GL_TEXTURE_2D, 0, GL12.GL_BGRA, GL12.GL_UNSIGNED_INT_8_8_8_8_REV, data);
-    // int[] dataarray = new int[length];
-    // data.get(dataarray);
-    // TextureUtil.func_147953_a(dataarray, 16, 16);
-    // int l = stackBuffer.framebufferTextureHeight - stackBuffer.framebufferHeight;
-    // image.setRGB(0, 0, 16, 16, dataarray, 0, 16);
-    // for (int i1 = l; i1 < stackBuffer.framebufferTextureHeight; ++i1)
-    // for (int j1 = 0; j1 < stackBuffer.framebufferWidth; ++j1)
-    // image.setRGB(j1, i1 - l, dataarray[i1 * stackBuffer.framebufferTextureWidth + j1]);
-    // // send out the image
-    // return image;
-    // }
-
     public static BufferedImage getImageForResource(ResourceLocation resource) throws IOException {
         InputStream layer = Minecraft.getMinecraft().getResourceManager().getResource(resource).getInputStream();
         return ImageIO.read(layer);
     }
 
     public static List<Integer> getItemColours(ItemStack stack) {
-        List<Integer> colourSet = new ArrayList();
+        List<Integer> colourSet = new ArrayList<>();
         Item item = stack.getItem();
 
         ResourceLocation resource;
         BufferedImage buffered;
-        // = item.getSpriteNumber()==1?TextureMap.locationItemsTexture:TextureMap.locationBlocksTexture;
         try {
 
             for (int pass = 0; pass < item.getRenderPasses(stack.getItemDamage()); pass++) {
                 IIcon icon = item.getIcon(stack, pass);
 
-                if (icon instanceof TextureAtlasSprite) {
-                    TextureAtlasSprite tas = (TextureAtlasSprite) icon;
+                if (icon instanceof TextureAtlasSprite tas) {
                     String iconName = tas.getIconName();
                     iconName = iconName.substring(0, Math.max(0, iconName.indexOf(":") + 1))
                             + (item.getSpriteNumber() == 0 ? "textures/blocks/" : "textures/items/")
@@ -747,7 +671,7 @@ public class ClientUtilities {
     }
 
     public static List<Integer> getImageColours(BufferedImage image) {
-        List<Integer> colourSet = new ArrayList();
+        List<Integer> colourSet = new ArrayList<>();
         int[] data = new int[image.getWidth() * image.getHeight()];
         image.getRGB(0, 0, image.getWidth(), image.getHeight(), data, 0, image.getWidth());
         for (int i = 0; i < data.length; i++) colourSet.add(data[i]);

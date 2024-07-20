@@ -185,7 +185,7 @@ public class ItemRenderPrimordialGauntlet implements IItemRenderer {
                     GL11.glRotated(-90, 1, 0, 0);
                     GL11.glRotated(-90, 0, 1, 0);
                     GL11.glTranslated(-.1875, .147, 0.0);
-                    GL11.glEnable(3042);
+                    GL11.glEnable(GL11.GL_BLEND);
 
                     GL11.glTranslated(
                             sel < 2 ? .09375 : sel == 3 ? .0125 : .035,
@@ -269,8 +269,8 @@ public class ItemRenderPrimordialGauntlet implements IItemRenderer {
                     }
                     average += nodeAspects.getAmount(aspect);
                     GL11.glPushMatrix();
-                    GL11.glEnable(3042);
-                    GL11.glBlendFunc(770, aspect.getBlend());
+                    GL11.glEnable(GL11.GL_BLEND);
+                    GL11.glBlendFunc(GL11.GL_SRC_ALPHA, aspect.getBlend());
                     nodeScale = MathHelper.sin(ticksExisted / (14.0F - count)) * bscale + bscale * 2.0F;
                     nodeScale = 0.2F + nodeScale * (nodeAspects.getAmount(aspect) / 50.0F);
                     nodeScale *= size;
@@ -291,7 +291,7 @@ public class ItemRenderPrimordialGauntlet implements IItemRenderer {
                     tessellator.addVertexWithUV(-radius, -radius, -count * .001, uMin, 0);
                     tessellator.draw();
 
-                    GL11.glDisable(3042);
+                    GL11.glDisable(GL11.GL_BLEND);
                     GL11.glPopMatrix();
                     count++;
                     if (aspect.getBlend() == 771) {
@@ -300,11 +300,13 @@ public class ItemRenderPrimordialGauntlet implements IItemRenderer {
                 }
                 average /= nodeAspects.size();
                 GL11.glPushMatrix();
-                GL11.glEnable(3042);
+                GL11.glEnable(GL11.GL_BLEND);
                 nodeScale = 0.1F + average / 150.0F;
                 nodeScale *= size;
 
-                if (nodeType != 0) GL11.glBlendFunc(770, nodeType == 3 || nodeType == 4 ? 771 : 1);
+                if (nodeType != 0) GL11.glBlendFunc(
+                        GL11.GL_SRC_ALPHA,
+                        nodeType == 3 || nodeType == 4 ? GL11.GL_ONE_MINUS_SRC_ALPHA : GL11.GL_ONE);
 
                 int perm = (int) ((System.currentTimeMillis() / 64) % 32);
                 int overl = nodeType == 2 ? 6
@@ -319,7 +321,7 @@ public class ItemRenderPrimordialGauntlet implements IItemRenderer {
                 tessellator.addVertexWithUV(-0.0825, -0.0825, -count * .001, uMin, (overl + 0) * .03125);
                 tessellator.draw();
 
-                GL11.glDisable(3042);
+                GL11.glDisable(GL11.GL_BLEND);
                 GL11.glPopMatrix();
             }
 

@@ -37,8 +37,8 @@ public class ItemRenderCapsule implements IItemRenderer {
         TextureManager textureManager = Minecraft.getMinecraft().getTextureManager();
 
         GL11.glPushMatrix();
-        GL11.glEnable(3042);
-        GL11.glEnable(3008);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glEnable(GL11.GL_ALPHA_TEST);
         OpenGlHelper.glBlendFunc(770, 771, 1, 0);
 
         if (type.equals(ItemRenderType.ENTITY)) {
@@ -103,7 +103,7 @@ public class ItemRenderCapsule implements IItemRenderer {
             return;
         }
 
-        GL11.glEnable(3042);
+        GL11.glEnable(GL11.GL_BLEND);
         ItemRenderer.renderItemIn2D(
                 tes,
                 iicon.getMaxU(),
@@ -115,7 +115,7 @@ public class ItemRenderCapsule implements IItemRenderer {
                 0.0625F);
         if (type.equals(ItemRenderType.INVENTORY)) GL11.glScaled(1 / 16, 1 / 16, 1 / 16);
 
-        GL11.glDisable(3042);
+        GL11.glDisable(GL11.GL_BLEND);
         textureManager.bindTexture(textureManager.getResourceLocation(item.getItemSpriteNumber()));
         TextureUtil.func_147945_b();
         GL11.glPopMatrix();

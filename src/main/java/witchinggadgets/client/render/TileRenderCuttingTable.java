@@ -44,7 +44,7 @@ public class TileRenderCuttingTable extends TileEntitySpecialRenderer {
 
         ClientUtilities.bindTexture("witchinggadgets:textures/models/cuttingTable.png");
         model.render(null, 0, 0, 0, 0, 0, .0625f);
-        GL11.glBlendFunc(770, 771);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
         for (byte i = 0; i < 3; i++)
             if (tile.getStackInSlot(1 + i) != null && tile.getStackInSlot(1 + i).hasTagCompound()) {
@@ -356,14 +356,14 @@ public class TileRenderCuttingTable extends TileEntitySpecialRenderer {
         }
 
         public void renderFlask(byte fl, int colour) {
-            GL11.glEnable(3042);
+            GL11.glEnable(GL11.GL_BLEND);
             flasks.get(fl)[2].render(.0625f);
             GL11.glColor3f((colour >> 16 & 255) / 255.0F, (colour >> 8 & 255) / 255.0F, (colour & 255) / 255.0F);
             flasks.get(fl)[3].render(.0625f);
             GL11.glColor4f(1, 1, 1, 1);
             flasks.get(fl)[0].render(.0625f);
             flasks.get(fl)[1].render(.0625f);
-            GL11.glDisable(3042);
+            GL11.glDisable(GL11.GL_BLEND);
         }
 
         public void renderEssence(byte fl, int colour) {

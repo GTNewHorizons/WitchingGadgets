@@ -22,10 +22,7 @@ public class CloakColourizationRecipe implements IRecipe {
 
             if (itemstack1 != null) {
                 if ((itemstack1.getItem() instanceof ItemCloak)) {
-                    boolean flag_wonttakecolour = itemstack1.getItemDamage() != 0; // ItemCloak.getCloakFromStack(itemstack1)!=null
-                                                                                   // &&
-                    // ItemCloak.getCloakFromStack(itemstack1).getUnlocalizedName() !=
-                    // Cloak.standard.getUnlocalizedName();
+                    boolean flag_wonttakecolour = itemstack1.getItemDamage() != 0;
                     if (itemstack != null || flag_wonttakecolour) return false;
                     itemstack = itemstack1;
                 } else {
@@ -53,10 +50,7 @@ public class CloakColourizationRecipe implements IRecipe {
                 if ((itemstack1.getItem() instanceof ItemCloak)) {
                     itemcloak = (ItemCloak) itemstack1.getItem();
 
-                    boolean flag_wonttakecolour = itemstack1.getItemDamage() != 0; // ItemCloak.getCloakFromStack(itemstack1)!=null
-                                                                                   // &&
-                    // ItemCloak.getCloakFromStack(itemstack1).getUnlocalizedName() !=
-                    // Cloak.standard.getUnlocalizedName();
+                    boolean flag_wonttakecolour = itemstack1.getItemDamage() != 0;
 
                     if (itemstack != null || flag_wonttakecolour) return null;
 

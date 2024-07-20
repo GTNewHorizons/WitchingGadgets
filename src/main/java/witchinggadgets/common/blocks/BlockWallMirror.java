@@ -36,7 +36,7 @@ public class BlockWallMirror extends BlockContainer {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubBlocks(Item item, CreativeTabs tab, List list) {}
+    public void getSubBlocks(Item item, CreativeTabs tab, List<ItemStack> list) {}
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX,
@@ -47,7 +47,6 @@ public class BlockWallMirror extends BlockContainer {
                 tile = (TileEntityWallMirror) world.getTileEntity(x, y, z);
             else tile = (TileEntityWallMirror) world.getTileEntity(x, y - 1, z);
 
-            // tile.toggleState();
         }
         return true;
     }
@@ -77,9 +76,9 @@ public class BlockWallMirror extends BlockContainer {
         super.onNeighborBlockChange(world, x, y, z, par5);
         TileEntityWallMirror tile = (TileEntityWallMirror) world.getTileEntity(x, y, z);
         if (tile.isDummy) {
-            if (world.isAirBlock(x, y - 1, z)) world.setBlockToAir(x, y, z); // ,false);
+            if (world.isAirBlock(x, y - 1, z)) world.setBlockToAir(x, y, z);
         } else {
-            if (world.isAirBlock(x, y + 1, z)) world.setBlockToAir(x, y, z); // ,true);
+            if (world.isAirBlock(x, y + 1, z)) world.setBlockToAir(x, y, z);
         }
     }
 
@@ -91,7 +90,7 @@ public class BlockWallMirror extends BlockContainer {
 
     @Override
     public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
-        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+        ArrayList<ItemStack> ret = new ArrayList<>();
         TileEntityWallMirror tile = (TileEntityWallMirror) world.getTileEntity(x, y, z);
 
         if (tile != null && !tile.isDummy) ret.add(new ItemStack(this, 1, damageDropped(metadata)));
