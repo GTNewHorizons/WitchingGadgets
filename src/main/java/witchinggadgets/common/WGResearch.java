@@ -16,7 +16,6 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
-import magicbees.api.MagicBeesAPI;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -447,9 +446,8 @@ public class WGResearch {
                         .setPages(pages).registerResearchItem();
 
         // AGEINGSTONE
-        researchAspects = new AspectList().add(Aspect.LIFE, 3).add(Aspect.MECHANISM, 3)
-                .add((Aspect) MagicBeesAPI.thaumcraftAspectTempus, 3).add(Aspect.EARTH, 6);
-        if (Aspect.getAspect("tempus") != null) researchAspects.add(Aspect.getAspect("tempus"), 2);
+        researchAspects = new AspectList().add(Aspect.LIFE, 3).add(Aspect.MECHANISM, 3).add(Aspect.EARTH, 6);
+        if (Aspect.getAspect("tempus") != null) researchAspects.add(Aspect.getAspect("tempus"), 3);
         pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.AGEINGSTONE.1"),
                 new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("AGEINGSTONE")) };
 
