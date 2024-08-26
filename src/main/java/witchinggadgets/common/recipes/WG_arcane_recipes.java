@@ -2,7 +2,6 @@ package witchinggadgets.common.recipes;
 
 import net.minecraft.item.ItemStack;
 
-import cpw.mods.fml.common.Loader;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.crafting.ShapedArcaneRecipe;
@@ -36,9 +35,7 @@ public class WG_arcane_recipes {
 
         WG_arcane_ethereal_wall.registerEtherealWall();
 
-        if (Loader.isModLoaded("magicbees")) {
-            WG_arcane_ageingstone.registerAgeingStone();
-        }
+        WG_arcane_ageingstone.registerAgeingStone();
 
         WG_arcane_spinning_wheel.registerSpinningWheel();
         WG_arcane_label_lib.registerLabelLib();
