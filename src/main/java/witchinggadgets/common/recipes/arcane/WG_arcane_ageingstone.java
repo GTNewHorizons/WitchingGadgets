@@ -16,7 +16,7 @@ import witchinggadgets.common.WGContent;
 public class WG_arcane_ageingstone {
 
     public static void registerAgeingStone() {
-        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+        if (Loader.isModLoaded("MagicBees") && Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
             registerArcaneRecipe(
                     "AGEINGSTONE",
                     "",

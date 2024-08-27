@@ -16,7 +16,6 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
-import magicbees.api.MagicBeesAPI;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -209,6 +208,7 @@ public class WGResearch {
                         .registerResearchItem();
 
         if (WGConfig.moduleGemcutting) {
+
             // GEMCUTTING
             researchAspects = new AspectList().add(Aspect.CRYSTAL, 1).add(Aspect.ORDER, 1).add(Aspect.MAGIC, 1)
                     .add(Aspect.CRAFT, 1);
@@ -229,6 +229,7 @@ public class WGResearch {
                     3,
                     5,
                     new ItemStack(WGContent.BlockWoodenDevice, 1, 3)).setPages(pages).registerResearchItem();
+
             // CRYSTALCAPSULE
             researchAspects = new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.ORDER, 2).add(Aspect.VOID, 4);
             pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.CRYSTALCAPSULE.1"),
@@ -256,6 +257,7 @@ public class WGResearch {
                 new ResearchPage((IRecipe) WGContent.recipeList.get("SCANCAMERA_CLEARPLATE")) };
         getResearchItem("SCANCAMERA", "WITCHGADG", researchAspects, 5, 3, 5, new ItemStack(WGContent.ItemScanCamera))
                 .setPages(pages).registerResearchItem();
+
         // CALCULATOR
         researchAspects = new AspectList().add(Aspect.TOOL, 1).add(Aspect.MIND, 1).add(Aspect.MECHANISM, 1);
         pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.CALCULATOR.1"),
@@ -269,6 +271,7 @@ public class WGResearch {
                 3,
                 new ItemStack(WGContent.ItemMaterial, 1, 7)).setPages(pages).setParents("INFUSION").setConcealed()
                         .registerResearchItem();
+
         // LABYRINTHSTRING
         researchAspects = new AspectList().add(Aspect.TOOL, 1).add(Aspect.MIND, 1).add(Aspect.TRAVEL, 1);
         pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.LABYRINTHSTRING.1"),
@@ -310,7 +313,7 @@ public class WGResearch {
 
         if (WGConfig.moduleCloak) {
 
-            // CLOAK
+            // CLOAKS
             ItemStack standardCloak = new ItemStack(WGContent.ItemCloak, 1, 0); // ItemCloak.getCloakWithTag("STANDARD");
             researchAspects = new AspectList().add(Aspect.CLOTH, 1).add(Aspect.AIR, 1).add(Aspect.ARMOR, 1)
                     .add(Aspect.MAGIC, 1);
@@ -380,8 +383,8 @@ public class WGResearch {
                                 .registerResearchItem();
             }
 
+            // KAMA
             if (WGConfig.moduleKama) {
-                // KAMA
                 researchAspects = new AspectList().add(Aspect.CLOTH, 2).add(Aspect.ARMOR, 2);
                 ArrayList<ShapedArcaneRecipe> recList = new ArrayList<>();
                 for (int cm = 0; cm < ItemCloak.subNames.length; cm++)
@@ -412,6 +415,7 @@ public class WGResearch {
                 -4,
                 ResearchCategories.getResearch("ARCANESTONE").icon_item).setParents("WGPOTIONS").setConcealed()
                         .registerResearchItem();
+
         // STONEEXTRUDER
         researchAspects = new AspectList().add(Aspect.EARTH, 1).add(Aspect.MECHANISM, 7).add(Aspect.TOOL, 12);
         pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.STONEEXTRUDER.1"),
@@ -425,6 +429,7 @@ public class WGResearch {
                 4,
                 new ItemStack(WGContent.BlockWoodenDevice, 1, 2)).addWarp(2).setParents("WG.ARCANESTONE", "THAUMIUM")
                         .setConcealed().setPages(pages).registerResearchItem();
+
         // ICESOLIDIFIER
         researchAspects = new AspectList().add(Aspect.COLD, 1).add(Aspect.MECHANISM, 1).add(Aspect.TOOL, 1);
         pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.ICESOLIDIFIER.1"),
@@ -440,13 +445,13 @@ public class WGResearch {
                 new ItemStack(WGContent.BlockWoodenDevice, 1, 1)).addWarp(3).setParents("STONEEXTRUDER").setConcealed()
                         .setPages(pages).registerResearchItem();
 
-        if (Loader.isModLoaded("magicbees")) {
-            // AGEINGSTONE
-            researchAspects = new AspectList().add(Aspect.LIFE, 3).add(Aspect.MECHANISM, 3)
-                    .add((Aspect) MagicBeesAPI.thaumcraftAspectTempus, 3).add(Aspect.EARTH, 6);
-            if (Aspect.getAspect("tempus") != null) researchAspects.add(Aspect.getAspect("tempus"), 2);
-            pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.AGEINGSTONE.1"),
-                    new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("AGEINGSTONE")) };
+        // AGEINGSTONE
+        researchAspects = new AspectList().add(Aspect.LIFE, 3).add(Aspect.MECHANISM, 3).add(Aspect.EARTH, 6);
+        if (Aspect.getAspect("tempus") != null) researchAspects.add(Aspect.getAspect("tempus"), 3);
+        pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.AGEINGSTONE.1"),
+                new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("AGEINGSTONE")) };
+
+        if (Loader.isModLoaded("MagicBees")) {
             getResearchItem(
                     "AGEINGSTONE",
                     "WITCHGADG",
@@ -457,6 +462,16 @@ public class WGResearch {
                     new ItemStack(WGContent.BlockStoneDevice, 1, 1)).addWarp(1)
                             .setParents("WG.ARCANESTONE", "MB_EssenceTime").setConcealed().setPages(pages)
                             .registerResearchItem();
+        } else {
+            getResearchItem(
+                    "AGEINGSTONE",
+                    "WITCHGADG",
+                    researchAspects,
+                    -5,
+                    -6,
+                    3,
+                    new ItemStack(WGContent.BlockStoneDevice, 1, 1)).addWarp(1).setParents("WG.ARCANESTONE")
+                            .setConcealed().setPages(pages).registerResearchItem();
         }
 
         // ETHEREALWALL
@@ -515,6 +530,7 @@ public class WGResearch {
                 -4,
                 ResearchCategories.getResearch("JARLABEL").icon_item).setParents("WGPOTIONS").setConcealed()
                         .registerResearchItem();
+
         // LABELLIB
         researchAspects = new AspectList().add(Aspect.SENSES, 4).add(Aspect.MIND, 4).add(Aspect.TOOL, 2);
         pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.LABELLIB.1"),
@@ -571,6 +587,7 @@ public class WGResearch {
                 -3,
                 ResearchCategories.getResearch("ALCHEMICALMANUFACTURE").icon_resource).setParents("WGPOTIONS")
                         .setConcealed().registerResearchItem();
+
         // ALCHEMICALTRANSFORM
         researchAspects = new AspectList().add(Aspect.PLANT, 4).add(Aspect.LIFE, 2).add(Aspect.WATER, 2);
         pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.ALCHEMICALTRANSMOGRIFY.1"),
@@ -580,6 +597,7 @@ public class WGResearch {
                 new ResearchPage((CrucibleRecipe) WGContent.recipeList.get("ALCHEMICALTRANSMOGRIFY_FLINT")) };
         getResearchItem("ALCHEMICALTRANSMOGRIFY", "WITCHGADG", researchAspects, -7, -3, 3, new ItemStack(Blocks.grass))
                 .setParents("WG.ALCHEMICALMANUFACTURE").setConcealed().setPages(pages).registerResearchItem();
+
         // ROSEVINE
         researchAspects = new AspectList().add(Aspect.PLANT, 2).add(Aspect.AIR, 3).add(Aspect.ENTROPY, 2)
                 .add(Aspect.WEAPON, 4).add(Aspect.CROP, 8);
@@ -602,6 +620,7 @@ public class WGResearch {
                 0,
                 ResearchCategories.getResearch("PUREIRON").icon_item).setParents("WGPOTIONS").setConcealed()
                         .registerResearchItem();
+
         // PURECINNABAR
         researchAspects = new AspectList().add(Aspect.METAL, 5).add(Aspect.ORDER, 1).add(Aspect.POISON, 1);
         pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.PURECINNABAR.1"),
@@ -656,6 +675,7 @@ public class WGResearch {
                         new ResearchPage(
                                 (CrucibleRecipe) WGContent.recipeList.get("METALLURGICPERFECTION_CLUSTERS_" + vore)));
             }
+
             pages = clusterPages.toArray(new ResearchPage[0]);
             if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
                 researchAspects = new AspectList().add(Aspect.METAL, 20).add(Aspect.ORDER, 10).add(Aspect.CRYSTAL, 10)
@@ -665,6 +685,7 @@ public class WGResearch {
                 researchAspects = new AspectList().add(Aspect.METAL, 20).add(Aspect.ORDER, 10).add(Aspect.CRYSTAL, 10)
                         .add(Aspect.EXCHANGE, 20).add(Aspect.MINE, 10).add(Aspect.MIND, 5).add(Aspect.GREED, 4);
             }
+
             ArrayList<String> clusterParents = new ArrayList<String>();
             clusterParents.add("WG.PUREIRON");
             clusterParents.add("PUREGOLD");
@@ -716,6 +737,7 @@ public class WGResearch {
                 researchAspects = new AspectList().add(Aspect.METAL, 20).add(Aspect.ORDER, 10).add(Aspect.TOOL, 10)
                         .add(Aspect.MAGIC, 10).add(Aspect.MIND, 5).add(Aspect.EXCHANGE, 20).add(Aspect.GREED, 4);
             }
+
             ArrayList<String> transmuteParents = new ArrayList<String>();
             transmuteParents.add("WG.TRANSIRON");
             transmuteParents.add("TRANSGOLD");
@@ -747,6 +769,7 @@ public class WGResearch {
                 3,
                 ResearchCategories.getResearch("INFERNALFURNACE").icon_resource).setParents("WGPOTIONS").setConcealed()
                         .registerResearchItem();
+
         // INFERNALBLASTFURNACE
         researchAspects = new AspectList().add(Aspect.FIRE, 2).add(Aspect.METAL, 1).add(Aspect.CRAFT, 1)
                 .add(Aspect.DARKNESS, 1).add(Aspect.TAINT, 1);
@@ -790,6 +813,7 @@ public class WGResearch {
                 4,
                 new ResourceLocation("witchinggadgets:textures/gui/research/icon_ench_invisGear.png"))
                         .setParents("WG.INFUSIONENCHANTMENT").setConcealed().setPages(pages).registerResearchItem();
+
         // ENCH_REVEALING
         researchAspects = new AspectList().add(Aspect.MAGIC, 2).add(Aspect.SENSES, 4).add(Aspect.LIGHT, 4);
         pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.ENCH_UNVEILING.1"),
@@ -803,6 +827,7 @@ public class WGResearch {
                 4,
                 new ResourceLocation("witchinggadgets:textures/gui/research/icon_ench_unveiling.png"))
                         .setParents("WG.INFUSIONENCHANTMENT").setConcealed().setPages(pages).registerResearchItem();
+
         // ENCH_STEALTH
         researchAspects = new AspectList().add(Aspect.MAGIC, 2).add(Aspect.MOTION, 4).add(Aspect.DARKNESS, 4);
         pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.ENCH_STEALTH.1"),
@@ -816,6 +841,7 @@ public class WGResearch {
                 4,
                 new ResourceLocation("witchinggadgets:textures/gui/research/icon_ench_stealth.png")).addWarp(2)
                         .setParents("WG.INFUSIONENCHANTMENT").setConcealed().setPages(pages).registerResearchItem();
+
         // ENCH_BACKSTAB
         researchAspects = new AspectList().add(Aspect.MAGIC, 2).add(Aspect.WEAPON, 4).add(Aspect.DARKNESS, 4);
         pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.ENCH_BACKSTAB.1"),
@@ -829,6 +855,7 @@ public class WGResearch {
                 4,
                 new ResourceLocation("witchinggadgets:textures/gui/research/icon_ench_backstab.png")).addWarp(2)
                         .setParents("ENCH_STEALTH").setConcealed().setPages(pages).registerResearchItem();
+
         // ENCH_RIDEPROTECT
         researchAspects = new AspectList().add(Aspect.MAGIC, 2).add(Aspect.TRAP, 4).add(Aspect.ARMOR, 4);
         pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.ENCH_RIDEPROTECT.1"),
@@ -842,6 +869,7 @@ public class WGResearch {
                 4,
                 new ResourceLocation("witchinggadgets:textures/gui/research/icon_ench_rideProtect.png"))
                         .setParents("WG.INFUSIONENCHANTMENT").setConcealed().setPages(pages).registerResearchItem();
+
         // ENCH_SOULBOUND
         researchAspects = new AspectList().add(Aspect.MAGIC, 4).add(Aspect.ELDRITCH, 2).add(Aspect.SOUL, 2);
         pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.ENCH_SOULBOUND.1"),
@@ -868,6 +896,7 @@ public class WGResearch {
                     -5,
                     new ItemStack(ConfigBlocks.blockTube, 1, 2)).setParents("WGPOTIONS").setConcealed()
                             .registerResearchItem();
+
             // TERRAFORMER
             researchAspects = new AspectList().add(Aspect.EARTH, 64).add(Aspect.EXCHANGE, 14).add(Aspect.ENERGY, 7)
                     .add(Aspect.ORDER, 8).add(Aspect.ENTROPY, 16).add(Aspect.MINE, 24).add(Aspect.COLD, 12)
