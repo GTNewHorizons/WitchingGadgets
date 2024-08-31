@@ -72,7 +72,8 @@ public class WG_other_clusters {
                                     }
                                     // x5
                                     case "Redstone":
-                                    case "Electrotine": {
+                                    case "Electrotine":
+                                    case "Cryolite": {
                                         outputs = new ItemStack[] {
                                                 OreDictionary.getOres("dust" + aMaterial).get(0).copy().splitStack(12),
                                                 OreDictionary.getOres("dustTiny" + aMaterial).get(0).copy()
