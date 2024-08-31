@@ -55,7 +55,11 @@ public class WG_alchemic_clusters {
 
                     if (alchemyAspects == null || alchemyAspects.equals(new AspectList()) || alchemyAspects.size() < 3)
                         alchemyAspects = new AspectList().add(Aspect.METAL, 2).add(Aspect.ORDER, 1)
-                                .add((Aspect) gregtech.api.enums.TC_Aspects.NEBRISUM.mAspect, 2);
+                                .add(Aspect.GREED, 2); // Default aspect for unset (Cryolite, Oilsands, etc) is now the
+                                                       // same as if it had too many aspects (Lucrum instead of
+                                                       // Nebrisum). In the future for stuff like Callisto Ice , etc
+                                                       // that is not aspected, either aspects can be added to the
+                                                       // material or those special cases can be manually set here.
                     else if (alchemyAspects.size() > 6) alchemyAspects = new AspectList().add(Aspect.METAL, 2)
                             .add(Aspect.ORDER, 1).add(Aspect.GREED, 2);
 
@@ -63,72 +67,72 @@ public class WG_alchemic_clusters {
                         registerAlchemyRecipe(
                                 "METALLURGICPERFECTION_CLUSTERS",
                                 "_" + witchinggadgets.common.WGContent.GT_Cluster[iOre],
-                                new ItemStack(WGContent.ItemCluster, 2, iOre),
-                                "ore" + witchinggadgets.common.WGContent.GT_Cluster[iOre],
+                                new ItemStack(witchinggadgets.common.WGContent.ItemCluster, 2, iOre),
+                                "ore*" + witchinggadgets.common.WGContent.GT_Cluster[iOre],
                                 alchemyAspects);
 
                     if (!OreDictionary.getOres("oreNetherrack" + witchinggadgets.common.WGContent.GT_Cluster[iOre])
                             .isEmpty())
                         registerAlchemyRecipe(
                                 "METALLURGICPERFECTION_CLUSTERS",
-                                "_Netherrack_" + WGContent.GT_Cluster[iOre],
-                                new ItemStack(WGContent.ItemCluster, 2, iOre),
-                                "oreNetherrack" + WGContent.GT_Cluster[iOre],
-                                alchemyAspects).hash += 1;
+                                "_Netherrack_" + witchinggadgets.common.WGContent.GT_Cluster[iOre],
+                                new ItemStack(witchinggadgets.common.WGContent.ItemCluster, 4, iOre),
+                                "oreNetherrack" + witchinggadgets.common.WGContent.GT_Cluster[iOre],
+                                alchemyAspects);
 
                     if (!OreDictionary.getOres("oreEndstone" + witchinggadgets.common.WGContent.GT_Cluster[iOre])
                             .isEmpty())
                         registerAlchemyRecipe(
                                 "METALLURGICPERFECTION_CLUSTERS",
                                 "_Endstone_" + witchinggadgets.common.WGContent.GT_Cluster[iOre],
-                                new ItemStack(WGContent.ItemCluster, 2, iOre),
+                                new ItemStack(witchinggadgets.common.WGContent.ItemCluster, 4, iOre),
                                 "oreEndstone" + witchinggadgets.common.WGContent.GT_Cluster[iOre],
-                                alchemyAspects).hash += 2;
+                                alchemyAspects).hash += 1;
 
                     if (!OreDictionary.getOres("oreBlackgranite" + witchinggadgets.common.WGContent.GT_Cluster[iOre])
                             .isEmpty())
                         registerAlchemyRecipe(
                                 "METALLURGICPERFECTION_CLUSTERS",
                                 "_Blackgranite_" + witchinggadgets.common.WGContent.GT_Cluster[iOre],
-                                new ItemStack(WGContent.ItemCluster, 2, iOre),
+                                new ItemStack(witchinggadgets.common.WGContent.ItemCluster, 2, iOre),
                                 "oreBlackgranite" + witchinggadgets.common.WGContent.GT_Cluster[iOre],
-                                alchemyAspects).hash += 3;
+                                alchemyAspects).hash += 1;
 
                     if (!OreDictionary.getOres("oreRedgranite" + witchinggadgets.common.WGContent.GT_Cluster[iOre])
                             .isEmpty())
                         registerAlchemyRecipe(
                                 "METALLURGICPERFECTION_CLUSTERS",
                                 "_Redgranite_" + witchinggadgets.common.WGContent.GT_Cluster[iOre],
-                                new ItemStack(WGContent.ItemCluster, 2, iOre),
+                                new ItemStack(witchinggadgets.common.WGContent.ItemCluster, 2, iOre),
                                 "oreRedgranite" + witchinggadgets.common.WGContent.GT_Cluster[iOre],
-                                alchemyAspects).hash += 4;
+                                alchemyAspects).hash += 2;
 
                     if (!OreDictionary.getOres("oreMarble" + witchinggadgets.common.WGContent.GT_Cluster[iOre])
                             .isEmpty())
                         registerAlchemyRecipe(
                                 "METALLURGICPERFECTION_CLUSTERS",
                                 "_Marble_" + witchinggadgets.common.WGContent.GT_Cluster[iOre],
-                                new ItemStack(WGContent.ItemCluster, 2, iOre),
+                                new ItemStack(witchinggadgets.common.WGContent.ItemCluster, 2, iOre),
                                 "oreMarble" + witchinggadgets.common.WGContent.GT_Cluster[iOre],
-                                alchemyAspects).hash += 5;
+                                alchemyAspects).hash += 3;
 
                     if (!OreDictionary.getOres("oreBasalt" + witchinggadgets.common.WGContent.GT_Cluster[iOre])
                             .isEmpty())
                         registerAlchemyRecipe(
                                 "METALLURGICPERFECTION_CLUSTERS",
                                 "_Basalt_" + witchinggadgets.common.WGContent.GT_Cluster[iOre],
-                                new ItemStack(WGContent.ItemCluster, 2, iOre),
+                                new ItemStack(witchinggadgets.common.WGContent.ItemCluster, 2, iOre),
                                 "oreBasalt" + witchinggadgets.common.WGContent.GT_Cluster[iOre],
-                                alchemyAspects).hash += 6;
+                                alchemyAspects).hash += 4;
 
                     if (!OreDictionary.getOres("rawOre" + witchinggadgets.common.WGContent.GT_Cluster[iOre]).isEmpty())
                         registerAlchemyRecipe(
                                 "METALLURGICPERFECTION_CLUSTERS",
-                                "_" + witchinggadgets.common.WGContent.GT_Cluster[iOre],
-                                new ItemStack(WGContent.ItemCluster, 2, iOre),
+                                "_Raw_" + witchinggadgets.common.WGContent.GT_Cluster[iOre],
+                                new ItemStack(witchinggadgets.common.WGContent.ItemCluster, 2, iOre),
                                 "rawOre" + witchinggadgets.common.WGContent.GT_Cluster[iOre],
-                                alchemyAspects);
-
+                                alchemyAspects).hash += 5;
+                    // I blame Bart.
                     if (!OreDictionary.getOres("ore" + witchinggadgets.common.WGContent.GT_Cluster[iOre]).isEmpty()
                             || !OreDictionary
                                     .getOres("oreNetherrack" + witchinggadgets.common.WGContent.GT_Cluster[iOre])
