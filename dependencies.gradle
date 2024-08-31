@@ -1,21 +1,21 @@
 // Add your dependencies here
 
 dependencies {
-	implementation('com.github.GTNewHorizons:Tainted-Magic:7.6.10-GTNH:dev')
-	implementation('com.github.GTNewHorizons:GT5-Unofficial:5.09.48.97:dev')
+	implementation('com.github.GTNewHorizons:Tainted-Magic:7.6.11-GTNH:dev')
+	implementation('com.github.GTNewHorizons:GT5-Unofficial:5.09.49.29:dev')
 	implementation('com.github.GTNewHorizons:ForbiddenMagic:0.7.0-GTNH:dev')
-	implementation('com.github.GTNewHorizons:twilightforest:2.6.31:dev')
+	implementation('com.github.GTNewHorizons:twilightforest:2.6.33:dev')
 	implementation('curse.maven:travellers-gear-224440:2262113')
 	implementation('thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev')
 	implementation('com.github.GTNewHorizons:CodeChickenLib:1.3.0:dev')
-	implementation('com.github.GTNewHorizons:NotEnoughItems:2.6.14-GTNH:dev')
+	implementation('com.github.GTNewHorizons:NotEnoughItems:2.6.26-GTNH:dev')
 
 	compileOnly('com.github.GTNewHorizons:ForgeMultipart:1.5.0:dev') {transitive=false}
-	compileOnly('com.github.GTNewHorizons:Botania:1.11.3-GTNH:api') {transitive=false}
-	compileOnly('com.github.GTNewHorizons:CraftTweaker:3.3.1:dev') {transitive=false}
+	compileOnly('com.github.GTNewHorizons:Botania:1.11.5-GTNH:api') {transitive=false}
+	compileOnly('com.github.GTNewHorizons:CraftTweaker:3.4.0:dev') {transitive=false}
 	compileOnly('com.github.GTNewHorizons:ZenScript:1.0.0-GTNH') {transitive=false}
 	compileOnly('com.github.GTNewHorizons:MagicBees:2.8.2-GTNH:api') {transitive=false}
-	compileOnly('com.github.GTNewHorizons:TinkersConstruct:1.12.5-GTNH:dev') {transitive=false}
+	compileOnly('com.github.GTNewHorizons:TinkersConstruct:1.12.6-GTNH:dev') {transitive=false}
 	compileOnly(deobfCurse('enviromine-230236:2269710'))
 
 	runtimeOnly('com.github.GTNewHorizons:Baubles:1.0.4:dev')
