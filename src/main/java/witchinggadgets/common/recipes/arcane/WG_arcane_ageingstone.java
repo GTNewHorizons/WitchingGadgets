@@ -6,7 +6,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.common.Loader;
-import gregtech.api.util.GT_ModHandler;
+import gregtech.api.util.GTModHandler;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.config.ConfigBlocks;
@@ -30,7 +30,7 @@ public class WG_arcane_ageingstone {
                     's',
                     new ItemStack(ConfigBlocks.blockCrystal, 1, 32767),
                     'C',
-                    GT_ModHandler.getModItem("MagicBees", "miscResources", 1L, 9));
+                    GTModHandler.getModItem("MagicBees", "miscResources", 1L, 9));
         } else {
             registerArcaneRecipe(
                     "AGEINGSTONE",

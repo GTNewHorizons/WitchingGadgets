@@ -14,8 +14,8 @@ import cpw.mods.fml.common.Loader;
 import fox.spiteful.forbidden.DarkAspects;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
-import gregtech.api.util.GT_ModHandler;
-import gregtech.api.util.GT_OreDictUnificator;
+import gregtech.api.util.GTModHandler;
+import gregtech.api.util.GTOreDictUnificator;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -680,7 +680,7 @@ public class WGResearch {
             if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
                 researchAspects = new AspectList().add(Aspect.METAL, 20).add(Aspect.ORDER, 10).add(Aspect.CRYSTAL, 10)
                         .add(Aspect.EXCHANGE, 20).add(Aspect.MINE, 10).add(Aspect.MIND, 5).add(Aspect.GREED, 4)
-                        .add((Aspect) gregtech.api.enums.TC_Aspects.NEBRISUM.mAspect, 8);
+                        .add((Aspect) gregtech.api.enums.TCAspects.NEBRISUM.mAspect, 8);
             } else {
                 researchAspects = new AspectList().add(Aspect.METAL, 20).add(Aspect.ORDER, 10).add(Aspect.CRYSTAL, 10)
                         .add(Aspect.EXCHANGE, 20).add(Aspect.MINE, 10).add(Aspect.MIND, 5).add(Aspect.GREED, 4);
@@ -732,7 +732,7 @@ public class WGResearch {
             if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
                 researchAspects = new AspectList().add(Aspect.METAL, 20).add(Aspect.ORDER, 10).add(Aspect.TOOL, 10)
                         .add(Aspect.MAGIC, 10).add(Aspect.MIND, 5).add(Aspect.EXCHANGE, 20).add(Aspect.GREED, 4)
-                        .add((Aspect) gregtech.api.enums.TC_Aspects.NEBRISUM.mAspect, 8);
+                        .add((Aspect) gregtech.api.enums.TCAspects.NEBRISUM.mAspect, 8);
             } else {
                 researchAspects = new AspectList().add(Aspect.METAL, 20).add(Aspect.ORDER, 10).add(Aspect.TOOL, 10)
                         .add(Aspect.MAGIC, 10).add(Aspect.MIND, 5).add(Aspect.EXCHANGE, 20).add(Aspect.GREED, 4);
@@ -1189,26 +1189,26 @@ public class WGResearch {
                     .add(Aspect.MAGIC, 64).add(Aspect.TAINT, 64);
             InfusionRecipe PearlDupe = ThaumcraftApi.addInfusionCraftingRecipe(
                     "PRIMORDRIALPEARL",
-                    GT_ModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L, 3),
+                    GTModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L, 3),
                     20,
                     researchAspects,
-                    GT_ModHandler.getModItem("dreamcraft", "item.PrimordialPearlFragment", 1L),
-                    new ItemStack[] { GT_ModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L),
-                            GT_ModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L, 6),
-                            GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L),
-                            GT_ModHandler.getModItem("TwilightForest", "tile.TFAuroraBrick", 1L),
-                            GT_ModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L),
-                            GT_ModHandler.getModItem("TwilightForest", "tile.TFAuroraBrick", 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L),
-                            GT_ModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L, 7),
-                            GT_ModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L),
-                            GT_ModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L, 7),
-                            GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L),
-                            GT_ModHandler.getModItem("TwilightForest", "tile.TFAuroraBrick", 1L),
-                            GT_ModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L),
-                            GT_ModHandler.getModItem("TwilightForest", "tile.TFAuroraBrick", 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L),
-                            GT_ModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L, 6) });
+                    GTModHandler.getModItem("dreamcraft", "item.PrimordialPearlFragment", 1L),
+                    new ItemStack[] { GTModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L),
+                            GTModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L, 6),
+                            GTOreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L),
+                            GTModHandler.getModItem("TwilightForest", "tile.TFAuroraBrick", 1L),
+                            GTModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L),
+                            GTModHandler.getModItem("TwilightForest", "tile.TFAuroraBrick", 1L),
+                            GTOreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L),
+                            GTModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L, 7),
+                            GTModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L),
+                            GTModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L, 7),
+                            GTOreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L),
+                            GTModHandler.getModItem("TwilightForest", "tile.TFAuroraBrick", 1L),
+                            GTModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L),
+                            GTModHandler.getModItem("TwilightForest", "tile.TFAuroraBrick", 1L),
+                            GTOreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L),
+                            GTModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L, 6) });
 
             ResearchItem PearlDupeResearch = new ResearchItem(
                     "PRIMORDRIALPEARL",
@@ -1219,7 +1219,7 @@ public class WGResearch {
                     -1,
                     3,
                     20,
-                    GT_ModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L, 3));
+                    GTModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L, 3));
             pages = new ResearchPage[] { new ResearchPage("tc.research_page.PRIMORDRIALPEARL.1"),
                     new ResearchPage((InfusionRecipe) PearlDupe) };
             PearlDupeResearch.setPages(pages).setRound().setParentsHidden("PRIMPEARL", "ICHORIUM").setConcealed()

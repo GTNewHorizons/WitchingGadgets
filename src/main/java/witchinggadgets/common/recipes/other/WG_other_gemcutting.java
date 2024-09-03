@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.Loader;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
-import gregtech.api.util.GT_OreDictUnificator;
+import gregtech.api.util.GTOreDictUnificator;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.config.ConfigBlocks;
 import witchinggadgets.common.WGContent;
@@ -25,13 +25,13 @@ public class WG_other_gemcutting {
                     "qfi",
                     "sss",
                     'q',
-                    GT_OreDictUnificator.get(OrePrefixes.gemChipped, Materials.Ruby, 1L),
+                    GTOreDictUnificator.get(OrePrefixes.gemChipped, Materials.Ruby, 1L),
                     'f',
-                    GT_OreDictUnificator.get(OrePrefixes.gemChipped, Materials.Diamond, 1L),
+                    GTOreDictUnificator.get(OrePrefixes.gemChipped, Materials.Diamond, 1L),
                     'i',
-                    GT_OreDictUnificator.get(OrePrefixes.gemChipped, Materials.Emerald, 1L),
+                    GTOreDictUnificator.get(OrePrefixes.gemChipped, Materials.Emerald, 1L),
                     's',
-                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Thaumium, 1L));
+                    GTOreDictUnificator.get(OrePrefixes.stick, Materials.Thaumium, 1L));
         } else {
             registerShapedOreRecipe(
                     "GEMCUTTING",

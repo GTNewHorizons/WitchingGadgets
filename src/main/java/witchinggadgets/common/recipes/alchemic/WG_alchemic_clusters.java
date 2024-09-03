@@ -50,7 +50,7 @@ public class WG_alchemic_clusters {
                         WitchingGadgets.logger.error(
                                 "Could not get the objectTags for" + witchinggadgets.common.WGContent.GT_Cluster[iOre]);
                         alchemyAspects = new AspectList().add(Aspect.METAL, 2).add(Aspect.ORDER, 1)
-                                .add((Aspect) gregtech.api.enums.TC_Aspects.NEBRISUM.mAspect, 2);
+                                .add((Aspect) gregtech.api.enums.TCAspects.NEBRISUM.mAspect, 2);
                     }
 
                     if (alchemyAspects == null || alchemyAspects.equals(new AspectList()) || alchemyAspects.size() < 3)
@@ -177,13 +177,13 @@ public class WG_alchemic_clusters {
                                     "Could not get the objectTags for"
                                             + witchinggadgets.common.WGContent.GT_Cluster[iOre]);
                             alchemyAspects = new AspectList().add(Aspect.METAL, 2).add(Aspect.ORDER, 1)
-                                    .add((Aspect) gregtech.api.enums.TC_Aspects.NEBRISUM.mAspect, 2);
+                                    .add((Aspect) gregtech.api.enums.TCAspects.NEBRISUM.mAspect, 2);
                         }
 
                         if (alchemyAspects == null || alchemyAspects.equals(new AspectList())
                                 || alchemyAspects.size() < 3)
                             alchemyAspects = new AspectList().add(Aspect.METAL, 2).add(Aspect.ORDER, 1)
-                                    .add((Aspect) gregtech.api.enums.TC_Aspects.NEBRISUM.mAspect, 2);
+                                    .add((Aspect) gregtech.api.enums.TCAspects.NEBRISUM.mAspect, 2);
                         alchemyAspects.remove(Aspect.METAL);
                         alchemyAspects.add(Aspect.METAL, 2);
                         alchemyAspects.aspects.entrySet()
