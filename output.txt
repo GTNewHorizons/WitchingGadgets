@@ -1,0 +1,3492 @@
+
+> Configure project :
+You might want to check out './gradlew :faq' if your build fails.
+
+> Task :dependencies
+
+------------------------------------------------------------
+Root project 'WitchingGadgets'
+------------------------------------------------------------
+
+annotationProcessor - Annotation processors and their dependencies for source set 'main'.
++--- com.github.bsideup.jabel:jabel-javac-plugin:1.0.1
+|    +--- net.bytebuddy:byte-buddy-parent:1.14.9
+|    |    +--- net.bytebuddy:byte-buddy:1.14.9 (c)
+|    |    \--- net.bytebuddy:byte-buddy-agent:1.14.9 (c)
+|    +--- net.bytebuddy:byte-buddy -> 1.14.9
+|    +--- net.bytebuddy:byte-buddy-agent -> 1.14.9
+|    \--- net.java.dev.jna:jna:5.13.0
++--- net.java.dev.jna:jna-platform:5.13.0
+|    \--- net.java.dev.jna:jna:5.13.0
++--- org.ow2.asm:asm-debug-all:5.0.3
++--- com.google.guava:guava:24.1.1-jre
+|    +--- com.google.code.findbugs:jsr305:1.3.9
+|    +--- org.checkerframework:checker-compat-qual:2.0.0
+|    +--- com.google.errorprone:error_prone_annotations:2.1.3
+|    +--- com.google.j2objc:j2objc-annotations:1.1
+|    \--- org.codehaus.mojo:animal-sniffer-annotations:1.14
++--- com.google.code.gson:gson:2.8.6
+\--- io.github.legacymoddingmc:unimixins:0.1.17
+
+api - API dependencies for the 'main' feature. (n)
+No dependencies
+
+apiAnnotationProcessor - Annotation processors and their dependencies for source set 'api'.
+No dependencies
+
+apiCompileClasspath - Compile classpath for source set 'api'.
+No dependencies
+
+apiCompileOnly - Compile only dependencies for source set 'api'. (n)
+No dependencies
+
+apiElements - API elements for the 'main' feature. (n)
+No dependencies
+
+apiImplementation - Implementation only dependencies for source set 'api'. (n)
+No dependencies
+
+apiRuntimeClasspath - Runtime classpath of source set 'api'.
+No dependencies
+
+apiRuntimeOnly - Runtime only dependencies for source set 'api'. (n)
+No dependencies
+
+checkstyle - The Checkstyle libraries to be used for this project.
+\--- com.puppycrawl.tools:checkstyle:9.3
+     +--- info.picocli:picocli:4.6.2
+     +--- org.antlr:antlr4-runtime:4.9.3
+     +--- commons-beanutils:commons-beanutils:1.9.4
+     |    \--- commons-collections:commons-collections:3.2.2
+     +--- com.google.guava:guava:31.0.1-jre
+     |    +--- com.google.guava:failureaccess:1.0.1
+     |    +--- com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava
+     |    +--- com.google.code.findbugs:jsr305:3.0.2
+     |    +--- org.checkerframework:checker-qual:3.12.0
+     |    +--- com.google.errorprone:error_prone_annotations:2.7.1
+     |    \--- com.google.j2objc:j2objc-annotations:1.3
+     +--- org.reflections:reflections:0.10.2
+     |    +--- org.javassist:javassist:3.28.0-GA
+     |    \--- com.google.code.findbugs:jsr305:3.0.2
+     \--- net.sf.saxon:Saxon-HE:10.6
+
+compile - Deprecated: use api or implementation instead, gets put in api (n)
+No dependencies
+
+compileClasspath - Compile classpath for source set 'main'.
++--- com.github.bsideup.jabel:jabel-javac-plugin:1.0.1
++--- com.github.GTNewHorizons:ForgeMultipart:1.5.0
++--- com.github.GTNewHorizons:Botania:1.11.5-GTNH
++--- com.github.GTNewHorizons:CraftTweaker:3.4.0
++--- com.github.GTNewHorizons:ZenScript:1.0.0-GTNH
++--- com.github.GTNewHorizons:MagicBees:2.8.3-GTNH
++--- com.github.GTNewHorizons:TinkersConstruct:1.12.9-GTNH
++--- curse.maven:enviromine-230236:2269710
++--- io.github.legacymoddingmc:unimixins:0.1.17
++--- com.github.GTNewHorizons:Tainted-Magic:7.6.11-GTNH
+|    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    \--- com.github.GTNewHorizons:ThaumicBoots:1.3.7
+|         +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|         +--- com.github.GTNewHorizons:Baubles:1.0.4
+|         +--- com.github.GTNewHorizons:Thaumic_Exploration:1.3.3-GTNH
+|         |    +--- com.github.GTNewHorizons:AppleCore:3.3.0
+|         |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|         |    +--- curse.maven:witchery-69673:2234410
+|         |    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|         |    \--- com.github.GTNewHorizons:CodeChickenLib:1.2.1
+|         +--- com.github.GTNewHorizons:Electro-Magic-Tools:1.5.5
+|         |    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|         |    +--- com.github.GTNewHorizons:ModularUI:1.2.0 -> 1.2.1
+|         |    |    +--- org.jetbrains:annotations:23.0.0 -> 24.0.1
+|         |    |    \--- com.github.GTNewHorizons:NotEnoughItems:2.6.0-GTNH -> 2.6.34-GTNH
+|         |    |         \--- com.github.GTNewHorizons:CodeChickenCore:1.3.6
+|         |    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|         |    \--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|         \--- com.github.GTNewHorizons:GTNHLib:0.3.2 -> 0.5.3
++--- com.github.GTNewHorizons:GT5-Unofficial:5.09.49.60
+|    +--- com.github.GTNewHorizons:StructureLib:1.3.4
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.4.2 -> 0.5.3
+|    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    +--- com.github.GTNewHorizons:NotEnoughIds:2.1.0
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3
+|    +--- com.github.GTNewHorizons:GTNHLib:0.5.3
+|    +--- com.github.GTNewHorizons:ModularUI:1.2.1 (*)
+|    +--- com.github.GTNewHorizons:ModularUI2:2.1.3-1.7.10
+|    |    +--- org.jetbrains:annotations:24.0.1
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.4.3 -> 0.5.3
+|    +--- com.github.GTNewHorizons:waila:1.8.1
+|    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-449-GTNH
+|    |    \--- com.github.GTNewHorizons:Angelica:1.0.0-beta4 -> 1.0.0-beta5
+|    |         \--- com.github.GTNewHorizons:GTNHLib:0.4.2 -> 0.5.3
+|    +--- com.github.GTNewHorizons:AE2FluidCraft-Rework:1.3.35-gtnh
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-445-GTNH -> rv3-beta-449-GTNH (*)
+|    |    +--- curse.maven:cofh-core-69162:2388751
+|    |    \--- com.github.GTNewHorizons:waila:1.8.1
+|    +--- com.github.GTNewHorizons:Yamcl:0.6.0
+|    +--- com.github.GTNewHorizons:Postea:1.0.9
+|    |    \--- com.github.GTNewHorizons:NotEnoughIds:2.1.0 (*)
+|    +--- com.github.GTNewHorizons:ThaumicTinkerer:2.10.1
+|    |    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-402-GTNH -> rv3-beta-449-GTNH (*)
+|    |    \--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    +--- com.github.GTNewHorizons:Mobs-Info:0.4.6-GTNH
+|    |    \--- com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH -> 2.6.34-GTNH (*)
+|    +--- com.github.GTNewHorizons:Navigator:1.0.6
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.3.2 -> 0.5.3
+|    |    +--- maven.modrinth:journeymap:5.2.5
+|    |    +--- curse.maven:xaeros-minimap-263420:5060684
+|    |    \--- curse.maven:xaeros-world-map-317780:5060733
+|    +--- com.github.GTNewHorizons:Avaritia:1.52
+|    +--- com.github.GTNewHorizons:Angelica:1.0.0-beta5 (*)
+|    +--- com.github.GTNewHorizons:AppleCore:3.3.0
+|    +--- com.github.GTNewHorizons:BuildCraft:7.1.39
+|    +--- com.github.GTNewHorizons:EnderIO:2.8.17
+|    +--- com.github.GTNewHorizons:ProjectRed:4.10.2-GTNH
+|    +--- com.github.GTNewHorizons:Railcraft:9.15.12
+|    +--- com.github.GTNewHorizons:Galacticraft:3.2.4-GTNH
+|    \--- curse.maven:advsolar-362768:2885953
++--- com.github.GTNewHorizons:ForbiddenMagic:0.7.0-GTNH
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    \--- com.github.GTNewHorizons:Baubles:1.0.3 -> 1.0.4
++--- com.github.GTNewHorizons:twilightforest:2.6.33
++--- curse.maven:travellers-gear-224440:2262113
++--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
++--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
++--- org.lwjgl.lwjgl:lwjgl:2.9.4-nightly-20150209
+|    +--- org.lwjgl.lwjgl:lwjgl-platform:2.9.4-nightly-20150209
+|    \--- net.java.jinput:jinput:2.0.5
+|         \--- net.java.jutils:jutils:1.0.0
++--- org.lwjgl.lwjgl:lwjgl_util:2.9.4-nightly-20150209
+|    \--- org.lwjgl.lwjgl:lwjgl:2.9.4-nightly-20150209 (*)
++--- org.lwjgl.lwjgl:lwjgl-platform:2.9.4-nightly-20150209
++--- me.eigenraven.java8unsupported:java-8-unsupported-shim:1.0.0
++--- net.minecraft:launchwrapper:1.12
++--- com.google.code.findbugs:jsr305:1.3.9 -> 2.0.1
++--- com.typesafe.akka:akka-actor_2.11:2.3.3
++--- com.typesafe:config:1.2.1
++--- org.scala-lang:scala-actors-migration_2.11:1.1.0
++--- org.scala-lang:scala-compiler:2.11.5
++--- org.scala-lang.plugins:scala-continuations-library_2.11:1.0.2
++--- org.scala-lang.plugins:scala-continuations-plugin_2.11.1:1.0.2
++--- org.scala-lang:scala-library:2.11.5
++--- org.scala-lang:scala-parser-combinators_2.11:1.0.1
++--- org.scala-lang:scala-reflect:2.11.5
++--- org.scala-lang:scala-swing_2.11:1.0.1
++--- org.scala-lang:scala-xml_2.11:1.0.2
++--- lzma:lzma:0.0.1
++--- org.ow2.asm:asm-debug-all:5.0.3
++--- com.paulscode:codecjorbis:20101023
++--- com.paulscode:codecwav:20101023
++--- com.paulscode:libraryjavasound:20101123
++--- com.paulscode:librarylwjglopenal:20100824
++--- com.paulscode:soundsystem:20120107
++--- com.mojang:netty:1.8.8
++--- com.mojang:realms:1.3.5
+|    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    +--- org.apache.httpcomponents:httpclient:4.3.3
+|    |    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |    +--- commons-logging:commons-logging:1.1.3
+|    |    \--- commons-codec:commons-codec:1.6 -> 1.9
+|    \--- commons-logging:commons-logging:1.1.3
++--- org.apache.commons:commons-compress:1.8.1
++--- org.apache.httpcomponents:httpclient:4.3.3 (*)
++--- commons-logging:commons-logging:1.1.3
++--- org.apache.httpcomponents:httpcore:4.3.2
++--- java3d:vecmath:1.3.1
++--- net.sf.trove4j:trove4j:3.0.3
++--- com.ibm.icu:icu4j-core-mojang:51.2
++--- net.sf.jopt-simple:jopt-simple:4.5
++--- io.netty:netty-all:4.0.10.Final
++--- com.google.guava:guava:17.0
++--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
++--- commons-io:commons-io:2.4
++--- commons-codec:commons-codec:1.9
++--- net.java.jinput:jinput:2.0.5 (*)
++--- net.java.jutils:jutils:1.0.0
++--- com.google.code.gson:gson:2.2.4
++--- com.mojang:authlib:1.5.21
+|    +--- com.google.guava:guava:17.0
+|    +--- org.apache.commons:commons-lang3:3.3.2
+|    +--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- commons-codec:commons-codec:1.9
+|    +--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- com.google.code.gson:gson:2.2.4
+|    +--- com.google.code.findbugs:jsr305:2.0.1
+|    \--- commons-io:commons-io:2.4
++--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
++--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
++--- net.java.jinput:jinput-platform:2.0.5
++--- tv.twitch:twitch:5.16
+|    +--- tv.twitch:twitch-platform:5.16
+|    \--- tv.twitch:twitch-external-platform:4.5
++--- tv.twitch:twitch-platform:5.16
++--- tv.twitch:twitch-external-platform:4.5
+\--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+
+compileOnly - Compile-only dependencies for the 'main' feature. (n)
++--- com.github.bsideup.jabel:jabel-javac-plugin:1.0.1 (n)
++--- com.github.GTNewHorizons:ForgeMultipart:1.5.0 (n)
++--- com.github.GTNewHorizons:Botania:1.11.5-GTNH (n)
++--- com.github.GTNewHorizons:CraftTweaker:3.4.0 (n)
++--- com.github.GTNewHorizons:ZenScript:1.0.0-GTNH (n)
++--- com.github.GTNewHorizons:MagicBees:2.8.3-GTNH (n)
++--- com.github.GTNewHorizons:TinkersConstruct:1.12.9-GTNH (n)
+\--- curse.maven:enviromine-230236:2269710 (n)
+
+compileOnlyApi - Compile-only API dependencies for the 'main' feature. (n)
+No dependencies
+
+default - Configuration for default artifacts. (n)
+No dependencies
+
+devOnlyNonPublishable - Runtime and compiletime dependencies that are not published alongside the jar (compileOnly + runtimeOnlyNonPublishable) (n)
+No dependencies
+
+forgeUniversal
+\--- net.minecraftforge:forge:1.7.10-10.13.4.1614-1.7.10
+
+ideVirtualMainAnnotationProcessor - Annotation processors and their dependencies for source set 'ide virtual main'.
+No dependencies
+
+ideVirtualMainCompileClasspath - Compile classpath for source set 'ide virtual main'.
++--- io.github.legacymoddingmc:unimixins:0.1.17
++--- com.github.GTNewHorizons:Tainted-Magic:7.6.11-GTNH
+|    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    \--- com.github.GTNewHorizons:ThaumicBoots:1.3.7
+|         +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|         +--- com.github.GTNewHorizons:Baubles:1.0.4
+|         +--- com.github.GTNewHorizons:Thaumic_Exploration:1.3.3-GTNH
+|         |    +--- com.github.GTNewHorizons:AppleCore:3.3.0
+|         |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|         |    +--- curse.maven:witchery-69673:2234410
+|         |    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|         |    \--- com.github.GTNewHorizons:CodeChickenLib:1.2.1
+|         +--- com.github.GTNewHorizons:Electro-Magic-Tools:1.5.5
+|         |    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|         |    +--- com.github.GTNewHorizons:ModularUI:1.2.0 -> 1.2.1
+|         |    |    +--- org.jetbrains:annotations:23.0.0 -> 24.0.1
+|         |    |    \--- com.github.GTNewHorizons:NotEnoughItems:2.6.0-GTNH -> 2.6.34-GTNH
+|         |    |         \--- com.github.GTNewHorizons:CodeChickenCore:1.3.6
+|         |    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|         |    \--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|         \--- com.github.GTNewHorizons:GTNHLib:0.3.2 -> 0.5.3
++--- com.github.GTNewHorizons:GT5-Unofficial:5.09.49.60
+|    +--- com.github.GTNewHorizons:StructureLib:1.3.4
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.4.2 -> 0.5.3
+|    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    +--- com.github.GTNewHorizons:NotEnoughIds:2.1.0
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3
+|    +--- com.github.GTNewHorizons:GTNHLib:0.5.3
+|    +--- com.github.GTNewHorizons:ModularUI:1.2.1 (*)
+|    +--- com.github.GTNewHorizons:ModularUI2:2.1.3-1.7.10
+|    |    +--- org.jetbrains:annotations:24.0.1
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.4.3 -> 0.5.3
+|    +--- com.github.GTNewHorizons:waila:1.8.1
+|    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-449-GTNH
+|    |    \--- com.github.GTNewHorizons:Angelica:1.0.0-beta4 -> 1.0.0-beta5
+|    |         \--- com.github.GTNewHorizons:GTNHLib:0.4.2 -> 0.5.3
+|    +--- com.github.GTNewHorizons:AE2FluidCraft-Rework:1.3.35-gtnh
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-445-GTNH -> rv3-beta-449-GTNH (*)
+|    |    +--- curse.maven:cofh-core-69162:2388751
+|    |    \--- com.github.GTNewHorizons:waila:1.8.1
+|    +--- com.github.GTNewHorizons:Yamcl:0.6.0
+|    +--- com.github.GTNewHorizons:Postea:1.0.9
+|    |    \--- com.github.GTNewHorizons:NotEnoughIds:2.1.0 (*)
+|    +--- com.github.GTNewHorizons:ThaumicTinkerer:2.10.1
+|    |    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-402-GTNH -> rv3-beta-449-GTNH (*)
+|    |    \--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    +--- com.github.GTNewHorizons:Mobs-Info:0.4.6-GTNH
+|    |    \--- com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH -> 2.6.34-GTNH (*)
+|    +--- com.github.GTNewHorizons:Navigator:1.0.6
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.3.2 -> 0.5.3
+|    |    +--- maven.modrinth:journeymap:5.2.5
+|    |    +--- curse.maven:xaeros-minimap-263420:5060684
+|    |    \--- curse.maven:xaeros-world-map-317780:5060733
+|    +--- com.github.GTNewHorizons:Avaritia:1.52
+|    +--- com.github.GTNewHorizons:Angelica:1.0.0-beta5 (*)
+|    +--- com.github.GTNewHorizons:AppleCore:3.3.0
+|    +--- com.github.GTNewHorizons:BuildCraft:7.1.39
+|    +--- com.github.GTNewHorizons:EnderIO:2.8.17
+|    +--- com.github.GTNewHorizons:ProjectRed:4.10.2-GTNH
+|    +--- com.github.GTNewHorizons:Railcraft:9.15.12
+|    +--- com.github.GTNewHorizons:Galacticraft:3.2.4-GTNH
+|    \--- curse.maven:advsolar-362768:2885953
++--- com.github.GTNewHorizons:ForbiddenMagic:0.7.0-GTNH
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    \--- com.github.GTNewHorizons:Baubles:1.0.3 -> 1.0.4
++--- com.github.GTNewHorizons:twilightforest:2.6.33
++--- curse.maven:travellers-gear-224440:2262113
++--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
++--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
++--- org.lwjgl.lwjgl:lwjgl:2.9.4-nightly-20150209
+|    +--- org.lwjgl.lwjgl:lwjgl-platform:2.9.4-nightly-20150209
+|    \--- net.java.jinput:jinput:2.0.5
+|         \--- net.java.jutils:jutils:1.0.0
++--- org.lwjgl.lwjgl:lwjgl_util:2.9.4-nightly-20150209
+|    \--- org.lwjgl.lwjgl:lwjgl:2.9.4-nightly-20150209 (*)
++--- org.lwjgl.lwjgl:lwjgl-platform:2.9.4-nightly-20150209
++--- me.eigenraven.java8unsupported:java-8-unsupported-shim:1.0.0
++--- net.minecraft:launchwrapper:1.12
++--- com.google.code.findbugs:jsr305:1.3.9 -> 2.0.1
++--- com.typesafe.akka:akka-actor_2.11:2.3.3
++--- com.typesafe:config:1.2.1
++--- org.scala-lang:scala-actors-migration_2.11:1.1.0
++--- org.scala-lang:scala-compiler:2.11.5
++--- org.scala-lang.plugins:scala-continuations-library_2.11:1.0.2
++--- org.scala-lang.plugins:scala-continuations-plugin_2.11.1:1.0.2
++--- org.scala-lang:scala-library:2.11.5
++--- org.scala-lang:scala-parser-combinators_2.11:1.0.1
++--- org.scala-lang:scala-reflect:2.11.5
++--- org.scala-lang:scala-swing_2.11:1.0.1
++--- org.scala-lang:scala-xml_2.11:1.0.2
++--- lzma:lzma:0.0.1
++--- org.ow2.asm:asm-debug-all:5.0.3
++--- com.github.GTNewHorizons:Baubles:1.0.4
++--- org.jetbrains:intellij-fernflower:1.2.1.16
++--- com.paulscode:codecjorbis:20101023
++--- com.paulscode:codecwav:20101023
++--- com.paulscode:libraryjavasound:20101123
++--- com.paulscode:librarylwjglopenal:20100824
++--- com.paulscode:soundsystem:20120107
++--- com.mojang:netty:1.8.8
++--- com.mojang:realms:1.3.5
+|    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    +--- org.apache.httpcomponents:httpclient:4.3.3
+|    |    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |    +--- commons-logging:commons-logging:1.1.3
+|    |    \--- commons-codec:commons-codec:1.6 -> 1.9
+|    \--- commons-logging:commons-logging:1.1.3
++--- org.apache.commons:commons-compress:1.8.1
++--- org.apache.httpcomponents:httpclient:4.3.3 (*)
++--- commons-logging:commons-logging:1.1.3
++--- org.apache.httpcomponents:httpcore:4.3.2
++--- java3d:vecmath:1.3.1
++--- net.sf.trove4j:trove4j:3.0.3
++--- com.ibm.icu:icu4j-core-mojang:51.2
++--- net.sf.jopt-simple:jopt-simple:4.5
++--- io.netty:netty-all:4.0.10.Final
++--- com.google.guava:guava:17.0
++--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
++--- commons-io:commons-io:2.4
++--- commons-codec:commons-codec:1.9
++--- net.java.jinput:jinput:2.0.5 (*)
++--- net.java.jutils:jutils:1.0.0
++--- com.google.code.gson:gson:2.2.4
++--- com.mojang:authlib:1.5.21
+|    +--- com.google.guava:guava:17.0
+|    +--- org.apache.commons:commons-lang3:3.3.2
+|    +--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- commons-codec:commons-codec:1.9
+|    +--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- com.google.code.gson:gson:2.2.4
+|    +--- com.google.code.findbugs:jsr305:2.0.1
+|    \--- commons-io:commons-io:2.4
++--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
++--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
++--- net.java.jinput:jinput-platform:2.0.5
++--- tv.twitch:twitch:5.16
+|    +--- tv.twitch:twitch-platform:5.16
+|    \--- tv.twitch:twitch-external-platform:4.5
++--- tv.twitch:twitch-platform:5.16
++--- tv.twitch:twitch-external-platform:4.5
+\--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+
+ideVirtualMainCompileOnly - Compile only dependencies for source set 'ide virtual main'. (n)
+No dependencies
+
+ideVirtualMainImplementation - Implementation only dependencies for source set 'ide virtual main'. (n)
+No dependencies
+
+ideVirtualMainRuntimeClasspath - Runtime classpath of source set 'ide virtual main'.
++--- io.github.legacymoddingmc:unimixins:0.1.17
++--- com.github.GTNewHorizons:Tainted-Magic:7.6.11-GTNH
+|    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    +--- com.github.GTNewHorizons:ThaumicBoots:1.3.7
+|    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    +--- com.github.GTNewHorizons:Thaumic_Exploration:1.3.3-GTNH
+|    |    |    +--- com.github.GTNewHorizons:AppleCore:3.3.0
+|    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.13 -> 0.1.17
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    +--- curse.maven:witchery-69673:2234410
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenLib:1.2.1
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenCore:1.2.1 -> 1.3.6
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.1-GTNH -> 2.6.34-GTNH
+|    |    |    |    +--- com.github.GTNewHorizons:CodeChickenCore:1.3.6 (*)
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:Electro-Magic-Tools:1.5.5
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:ModularUI:1.2.0 -> 1.2.1
+|    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    |    +--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3
+|    |    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    |    |    +--- org.jetbrains:annotations:23.0.0 -> 24.0.1
+|    |    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.0-GTNH -> 2.6.34-GTNH (*)
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    |    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.3.2 -> 0.5.3 (*)
+|    |    +--- com.github.GTNewHorizons:TCNEIAdditions:1.4.0
+|    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH -> 2.6.34-GTNH (*)
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    +--- curse.maven:thaumcraft-nei-plugin-225095:2241913
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:GT5-Unofficial:5.09.49.60
+|    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    +--- com.github.GTNewHorizons:ForestryMC:4.9.10
+|    +--- com.github.GTNewHorizons:TinkersConstruct:1.12.9-GTNH
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.33-GTNH -> 2.6.34-GTNH (*)
+|    |    +--- com.github.GTNewHorizons:Mantle:0.4.1
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:ForgeMultipart:1.5.0
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenLib:1.2.1 (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:StructureLib:1.3.4
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.4.2 -> 0.5.3 (*)
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.19-GTNH -> 2.6.34-GTNH (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    +--- com.github.GTNewHorizons:NotEnoughIds:2.1.0
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:GTNHLib:0.5.3 (*)
+|    +--- com.github.GTNewHorizons:ModularUI:1.2.1 (*)
+|    +--- com.github.GTNewHorizons:ModularUI2:2.1.3-1.7.10
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- org.jetbrains:annotations:24.0.1
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.4.3 -> 0.5.3 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:waila:1.8.1
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH -> 2.6.34-GTNH (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-449-GTNH
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    |    +--- curse.maven:cofh-core-69162:2388751
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:AE2FluidCraft-Rework:1.3.35-gtnh
+|    |    +--- com.github.GTNewHorizons:WirelessCraftingTerminal:1.11.6
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-423-GTNH -> rv3-beta-449-GTNH (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-445-GTNH -> rv3-beta-449-GTNH (*)
+|    |    +--- curse.maven:cofh-core-69162:2388751
+|    |    +--- com.github.GTNewHorizons:waila:1.8.1 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Yamcl:0.6.0
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Postea:1.0.9
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:NotEnoughIds:2.1.0 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:ForbiddenMagic:0.7.0-GTNH
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    +--- com.github.GTNewHorizons:Baubles:1.0.3 -> 1.0.4 (*)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:twilightforest:2.6.33
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- curse.maven:travellers-gear-224440:2262113
++--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
++--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
++--- org.lwjgl.lwjgl:lwjgl:2.9.4-nightly-20150209
+|    +--- org.lwjgl.lwjgl:lwjgl-platform:2.9.4-nightly-20150209
+|    \--- net.java.jinput:jinput:2.0.5
+|         +--- net.java.jutils:jutils:1.0.0
+|         \--- net.java.jinput:jinput-platform:2.0.5
++--- org.lwjgl.lwjgl:lwjgl_util:2.9.4-nightly-20150209
+|    \--- org.lwjgl.lwjgl:lwjgl:2.9.4-nightly-20150209 (*)
++--- org.lwjgl.lwjgl:lwjgl-platform:2.9.4-nightly-20150209
++--- me.eigenraven.java8unsupported:java-8-unsupported-shim:1.0.0
++--- net.minecraft:launchwrapper:1.12
++--- com.google.code.findbugs:jsr305:1.3.9 -> 2.0.1
++--- com.typesafe.akka:akka-actor_2.11:2.3.3
++--- com.typesafe:config:1.2.1
++--- org.scala-lang:scala-actors-migration_2.11:1.1.0
++--- org.scala-lang:scala-compiler:2.11.5
++--- org.scala-lang.plugins:scala-continuations-library_2.11:1.0.2
++--- org.scala-lang.plugins:scala-continuations-plugin_2.11.1:1.0.2
++--- org.scala-lang:scala-library:2.11.5
++--- org.scala-lang:scala-parser-combinators_2.11:1.0.1
++--- org.scala-lang:scala-reflect:2.11.5
++--- org.scala-lang:scala-swing_2.11:1.0.1
++--- org.scala-lang:scala-xml_2.11:1.0.2
++--- lzma:lzma:0.0.1
++--- org.ow2.asm:asm-debug-all:5.0.3
++--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
++--- org.jetbrains:intellij-fernflower:1.2.1.16
++--- com.paulscode:codecjorbis:20101023
++--- com.paulscode:codecwav:20101023
++--- com.paulscode:libraryjavasound:20101123
++--- com.paulscode:librarylwjglopenal:20100824
++--- com.paulscode:soundsystem:20120107
++--- com.mojang:netty:1.8.8
+|    +--- io.netty:netty-all:4.0.10.Final
+|    +--- com.google.guava:guava:15.0 -> 17.0
+|    +--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
+|    \--- commons-io:commons-io:2.4
++--- com.mojang:realms:1.3.5
+|    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    +--- org.apache.httpcomponents:httpclient:4.3.3
+|    |    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |    +--- commons-logging:commons-logging:1.1.3
+|    |    \--- commons-codec:commons-codec:1.6 -> 1.9
+|    \--- commons-logging:commons-logging:1.1.3
++--- org.apache.commons:commons-compress:1.8.1
++--- org.apache.httpcomponents:httpclient:4.3.3 (*)
++--- commons-logging:commons-logging:1.1.3
++--- org.apache.httpcomponents:httpcore:4.3.2
++--- java3d:vecmath:1.3.1
++--- net.sf.trove4j:trove4j:3.0.3
++--- com.ibm.icu:icu4j-core-mojang:51.2
++--- net.sf.jopt-simple:jopt-simple:4.5
++--- io.netty:netty-all:4.0.10.Final
++--- com.google.guava:guava:17.0
++--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
++--- commons-io:commons-io:2.4
++--- commons-codec:commons-codec:1.9
++--- net.java.jinput:jinput:2.0.5 (*)
++--- net.java.jutils:jutils:1.0.0
++--- com.google.code.gson:gson:2.2.4
++--- com.mojang:authlib:1.5.21
+|    +--- com.google.guava:guava:17.0
+|    +--- org.apache.commons:commons-lang3:3.3.2
+|    +--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- commons-codec:commons-codec:1.9
+|    +--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- com.google.code.gson:gson:2.2.4
+|    +--- com.google.code.findbugs:jsr305:2.0.1
+|    \--- commons-io:commons-io:2.4
++--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
++--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
++--- net.java.jinput:jinput-platform:2.0.5
++--- tv.twitch:twitch:5.16
+|    +--- tv.twitch:twitch-platform:5.16
+|    \--- tv.twitch:twitch-external-platform:4.5
++--- tv.twitch:twitch-platform:5.16
++--- tv.twitch:twitch-external-platform:4.5
+\--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+
+ideVirtualMainRuntimeOnly - Runtime only dependencies for source set 'ide virtual main'. (n)
+No dependencies
+
+implementation - Implementation dependencies for the 'main' feature. (n)
++--- io.github.legacymoddingmc:unimixins:0.1.17 (n)
++--- com.github.GTNewHorizons:Tainted-Magic:7.6.11-GTNH (n)
++--- com.github.GTNewHorizons:GT5-Unofficial:5.09.49.60 (n)
++--- com.github.GTNewHorizons:ForbiddenMagic:0.7.0-GTNH (n)
++--- com.github.GTNewHorizons:twilightforest:2.6.33 (n)
++--- curse.maven:travellers-gear-224440:2262113 (n)
++--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5 (n)
+\--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (n)
+
+injectedTagsAnnotationProcessor - Annotation processors and their dependencies for source set 'injected tags'.
+No dependencies
+
+injectedTagsCompileClasspath - Compile classpath for source set 'injected tags'.
+No dependencies
+
+injectedTagsCompileOnly - Compile only dependencies for source set 'injected tags'. (n)
+No dependencies
+
+injectedTagsImplementation - Implementation only dependencies for source set 'injected tags'. (n)
+No dependencies
+
+injectedTagsRuntimeClasspath - Runtime classpath of source set 'injected tags'.
+No dependencies
+
+injectedTagsRuntimeOnly - Runtime only dependencies for source set 'injected tags'. (n)
+No dependencies
+
+java17Dependencies
++--- io.github.legacymoddingmc:unimixins:0.1.17
++--- com.github.GTNewHorizons:Tainted-Magic:7.6.11-GTNH
+|    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    +--- com.github.GTNewHorizons:ThaumicBoots:1.3.7
+|    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    +--- com.github.GTNewHorizons:Thaumic_Exploration:1.3.3-GTNH
+|    |    |    +--- com.github.GTNewHorizons:AppleCore:3.3.0
+|    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.13 -> 0.1.17
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    +--- curse.maven:witchery-69673:2234410
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenLib:1.2.1
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenCore:1.2.1 -> 1.3.6
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.1-GTNH -> 2.6.34-GTNH
+|    |    |    |    +--- com.github.GTNewHorizons:CodeChickenCore:1.3.6 (*)
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:Electro-Magic-Tools:1.5.5
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:ModularUI:1.2.0 -> 1.2.1
+|    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    |    +--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3
+|    |    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    |    |    +--- org.jetbrains:annotations:23.0.0 -> 24.0.1
+|    |    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.0-GTNH -> 2.6.34-GTNH (*)
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    |    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.3.2 -> 0.5.3 (*)
+|    |    +--- com.github.GTNewHorizons:TCNEIAdditions:1.4.0
+|    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH -> 2.6.34-GTNH (*)
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    +--- curse.maven:thaumcraft-nei-plugin-225095:2241913
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:GT5-Unofficial:5.09.49.60
+|    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    +--- com.github.GTNewHorizons:ForestryMC:4.9.10
+|    +--- com.github.GTNewHorizons:TinkersConstruct:1.12.9-GTNH
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.33-GTNH -> 2.6.34-GTNH (*)
+|    |    +--- com.github.GTNewHorizons:Mantle:0.4.1
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:ForgeMultipart:1.5.0
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenLib:1.2.1 (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:StructureLib:1.3.4
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.4.2 -> 0.5.3 (*)
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.19-GTNH -> 2.6.34-GTNH (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    +--- com.github.GTNewHorizons:NotEnoughIds:2.1.0
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:GTNHLib:0.5.3 (*)
+|    +--- com.github.GTNewHorizons:ModularUI:1.2.1 (*)
+|    +--- com.github.GTNewHorizons:ModularUI2:2.1.3-1.7.10
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- org.jetbrains:annotations:24.0.1
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.4.3 -> 0.5.3 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:waila:1.8.1
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH -> 2.6.34-GTNH (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-449-GTNH
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    |    +--- curse.maven:cofh-core-69162:2388751
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:AE2FluidCraft-Rework:1.3.35-gtnh
+|    |    +--- com.github.GTNewHorizons:WirelessCraftingTerminal:1.11.6
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-423-GTNH -> rv3-beta-449-GTNH (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-445-GTNH -> rv3-beta-449-GTNH (*)
+|    |    +--- curse.maven:cofh-core-69162:2388751
+|    |    +--- com.github.GTNewHorizons:waila:1.8.1 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Yamcl:0.6.0
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Postea:1.0.9
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:NotEnoughIds:2.1.0 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:ForbiddenMagic:0.7.0-GTNH
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    +--- com.github.GTNewHorizons:Baubles:1.0.3 -> 1.0.4 (*)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:twilightforest:2.6.33
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- curse.maven:travellers-gear-224440:2262113
++--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
++--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
++--- com.github.GTNewHorizons:lwjgl3ify:2.1.1
+|    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    +--- com.google.code.gson:gson:2.10.1
+|    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:Hodgepodge:2.5.57
+|    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    +--- com.github.GTNewHorizons:GTNHLib:0.5.0 -> 0.5.3 (*)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- io.github.legacymoddingmc:unimixins:0.1.17 (c)
++--- me.eigenraven.java8unsupported:java-8-unsupported-shim:1.0.0
++--- net.minecraft:launchwrapper:1.12
++--- com.google.code.findbugs:jsr305:1.3.9 -> 2.0.1
++--- com.typesafe.akka:akka-actor_2.11:2.3.3
++--- com.typesafe:config:1.2.1
++--- org.scala-lang:scala-actors-migration_2.11:1.1.0
++--- org.scala-lang:scala-compiler:2.11.5
++--- org.scala-lang.plugins:scala-continuations-library_2.11:1.0.2
++--- org.scala-lang.plugins:scala-continuations-plugin_2.11.1:1.0.2
++--- org.scala-lang:scala-library:2.11.5
++--- org.scala-lang:scala-parser-combinators_2.11:1.0.1
++--- org.scala-lang:scala-reflect:2.11.5
++--- org.scala-lang:scala-swing_2.11:1.0.1
++--- org.scala-lang:scala-xml_2.11:1.0.2
++--- lzma:lzma:0.0.1
++--- org.ow2.asm:asm-debug-all:5.0.3
++--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
++--- org.jetbrains:intellij-fernflower:1.2.1.16
++--- com.paulscode:codecjorbis:20101023
++--- com.paulscode:codecwav:20101023
++--- com.paulscode:libraryjavasound:20101123
++--- com.paulscode:librarylwjglopenal:20100824
++--- com.paulscode:soundsystem:20120107
++--- com.mojang:netty:1.8.8
+|    +--- io.netty:netty-all:4.0.10.Final
+|    +--- com.google.guava:guava:15.0 -> 17.0
+|    +--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
+|    \--- commons-io:commons-io:2.4
++--- com.mojang:realms:1.3.5
+|    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    +--- org.apache.httpcomponents:httpclient:4.3.3
+|    |    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |    +--- commons-logging:commons-logging:1.1.3
+|    |    \--- commons-codec:commons-codec:1.6 -> 1.9
+|    \--- commons-logging:commons-logging:1.1.3
++--- org.apache.commons:commons-compress:1.8.1
++--- org.apache.httpcomponents:httpclient:4.3.3 (*)
++--- commons-logging:commons-logging:1.1.3
++--- org.apache.httpcomponents:httpcore:4.3.2
++--- java3d:vecmath:1.3.1
++--- net.sf.trove4j:trove4j:3.0.3
++--- com.ibm.icu:icu4j-core-mojang:51.2
++--- net.sf.jopt-simple:jopt-simple:4.5
++--- io.netty:netty-all:4.0.10.Final
++--- com.google.guava:guava:17.0
++--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
++--- commons-io:commons-io:2.4
++--- commons-codec:commons-codec:1.9
++--- net.java.jinput:jinput:2.0.5
+|    +--- net.java.jutils:jutils:1.0.0
+|    \--- net.java.jinput:jinput-platform:2.0.5
++--- net.java.jutils:jutils:1.0.0
++--- com.google.code.gson:gson:2.2.4 -> 2.10.1
++--- com.mojang:authlib:1.5.21
+|    +--- com.google.guava:guava:17.0
+|    +--- org.apache.commons:commons-lang3:3.3.2
+|    +--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- commons-codec:commons-codec:1.9
+|    +--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- com.google.code.gson:gson:2.2.4 -> 2.10.1
+|    +--- com.google.code.findbugs:jsr305:2.0.1
+|    \--- commons-io:commons-io:2.4
++--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
++--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
++--- net.java.jinput:jinput-platform:2.0.5
++--- tv.twitch:twitch:5.16
+|    +--- tv.twitch:twitch-platform:5.16
+|    \--- tv.twitch:twitch-external-platform:4.5
++--- tv.twitch:twitch-platform:5.16
++--- tv.twitch:twitch-external-platform:4.5
+\--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+
+java17PatchDependencies
+\--- com.github.GTNewHorizons:lwjgl3ify:2.1.1
+
+lwjgl2Classpath
++--- org.lwjgl.lwjgl:lwjgl:2.9.4-nightly-20150209
++--- org.lwjgl.lwjgl:lwjgl_util:2.9.4-nightly-20150209
+\--- org.lwjgl.lwjgl:lwjgl-platform:2.9.4-nightly-20150209
+
+lwjgl3Classpath
++--- org.lwjgl:lwjgl-bom:3.3.3
+|    +--- org.lwjgl:lwjgl:3.3.3 (c)
+|    +--- org.lwjgl:lwjgl-glfw:3.3.3 (c)
+|    +--- org.lwjgl:lwjgl-jemalloc:3.3.3 (c)
+|    +--- org.lwjgl:lwjgl-openal:3.3.3 (c)
+|    +--- org.lwjgl:lwjgl-opengl:3.3.3 (c)
+|    +--- org.lwjgl:lwjgl-stb:3.3.3 (c)
+|    \--- org.lwjgl:lwjgl-tinyfd:3.3.3 (c)
++--- org.lwjgl:lwjgl:3.3.3
++--- org.lwjgl:lwjgl-glfw:3.3.3
+|    \--- org.lwjgl:lwjgl:3.3.3
++--- org.lwjgl:lwjgl-openal:3.3.3
+|    \--- org.lwjgl:lwjgl:3.3.3
++--- org.lwjgl:lwjgl-opengl:3.3.3
+|    \--- org.lwjgl:lwjgl:3.3.3
++--- org.lwjgl:lwjgl-jemalloc:3.3.3
+|    \--- org.lwjgl:lwjgl:3.3.3
++--- org.lwjgl:lwjgl-stb:3.3.3
+|    \--- org.lwjgl:lwjgl:3.3.3
+\--- org.lwjgl:lwjgl-tinyfd:3.3.3
+     \--- org.lwjgl:lwjgl:3.3.3
+
+mainSourceElements - List of source directories contained in the Main SourceSet. (n)
+No dependencies
+
+mcLauncherAnnotationProcessor - Annotation processors and their dependencies for source set 'mc launcher'.
+No dependencies
+
+mcLauncherCompileClasspath - Compile classpath for source set 'mc launcher'.
+No dependencies
+
+mcLauncherCompileOnly - Compile only dependencies for source set 'mc launcher'. (n)
+No dependencies
+
+mcLauncherImplementation - Implementation only dependencies for source set 'mc launcher'. (n)
+No dependencies
+
+mcLauncherRuntimeClasspath - Runtime classpath of source set 'mc launcher'.
+No dependencies
+
+mcLauncherRuntimeOnly - Runtime only dependencies for source set 'mc launcher'. (n)
+No dependencies
+
+obfuscatedRuntimeClasspath
++--- io.github.legacymoddingmc:unimixins:0.1.17
++--- com.github.GTNewHorizons:Tainted-Magic:7.6.11-GTNH
++--- com.github.GTNewHorizons:GT5-Unofficial:5.09.49.60
++--- com.github.GTNewHorizons:ForbiddenMagic:0.7.0-GTNH
++--- com.github.GTNewHorizons:twilightforest:2.6.33
++--- curse.maven:travellers-gear-224440:2262113
++--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
++--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH
++--- com.github.GTNewHorizons:Baubles:1.0.4
++--- com.github.GTNewHorizons:ThaumicBoots:1.3.7
++--- com.github.GTNewHorizons:StructureLib:1.3.4
++--- com.github.GTNewHorizons:Postea:1.0.9
++--- com.github.GTNewHorizons:NotEnoughIds:2.1.0
++--- com.github.GTNewHorizons:TinkersConstruct:1.12.9-GTNH
++--- com.github.GTNewHorizons:ModularUI:1.2.1
++--- com.github.GTNewHorizons:AE2FluidCraft-Rework:1.3.35-gtnh
++--- com.github.GTNewHorizons:waila:1.8.1
++--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-449-GTNH
++--- com.github.GTNewHorizons:ModularUI2:2.1.3-1.7.10
++--- com.github.GTNewHorizons:Yamcl:0.6.0
++--- com.github.GTNewHorizons:GTNHLib:0.5.3
++--- com.github.GTNewHorizons:ForestryMC:4.9.10
++--- curse.maven:ic2-242638:2353971
++--- com.github.GTNewHorizons:CodeChickenCore:1.3.6
++--- com.github.GTNewHorizons:Electro-Magic-Tools:1.5.5
++--- com.github.GTNewHorizons:Thaumic_Exploration:1.3.3-GTNH
++--- com.github.GTNewHorizons:TCNEIAdditions:1.4.0
++--- com.github.GTNewHorizons:Mantle:0.4.1
++--- com.github.GTNewHorizons:ForgeMultipart:1.5.0
++--- org.jetbrains:annotations:24.0.1
++--- com.github.GTNewHorizons:WirelessCraftingTerminal:1.11.6
++--- curse.maven:cofh-core-69162:2388751 -> 2388750
++--- com.github.GTNewHorizons:AppleCore:3.3.0
++--- com.github.GTNewHorizons:CodeChickenLib:1.2.1
++--- curse.maven:witchery-69673:2234410
+\--- curse.maven:thaumcraft-nei-plugin-225095:2241913
+
+patchedMcAnnotationProcessor - Annotation processors and their dependencies for source set 'patched mc'.
+No dependencies
+
+patchedMcCompileClasspath - Compile classpath for source set 'patched mc'.
+No dependencies
+
+patchedMcCompileOnly - Compile only dependencies for source set 'patched mc'. (n)
+No dependencies
+
+patchedMcImplementation - Implementation only dependencies for source set 'patched mc'. (n)
+No dependencies
+
+patchedMcRuntimeClasspath - Runtime classpath of source set 'patched mc'.
+No dependencies
+
+patchedMcRuntimeOnly - Runtime only dependencies for source set 'patched mc'. (n)
+No dependencies
+
+patchedMinecraft - Dependencies needed to run modded minecraft
++--- me.eigenraven.java8unsupported:java-8-unsupported-shim:1.0.0
++--- net.minecraft:launchwrapper:1.12
++--- com.google.code.findbugs:jsr305:1.3.9 -> 2.0.1
++--- com.typesafe.akka:akka-actor_2.11:2.3.3
++--- com.typesafe:config:1.2.1
++--- org.scala-lang:scala-actors-migration_2.11:1.1.0
++--- org.scala-lang:scala-compiler:2.11.5
++--- org.scala-lang.plugins:scala-continuations-library_2.11:1.0.2
++--- org.scala-lang.plugins:scala-continuations-plugin_2.11.1:1.0.2
++--- org.scala-lang:scala-library:2.11.5
++--- org.scala-lang:scala-parser-combinators_2.11:1.0.1
++--- org.scala-lang:scala-reflect:2.11.5
++--- org.scala-lang:scala-swing_2.11:1.0.1
++--- org.scala-lang:scala-xml_2.11:1.0.2
++--- lzma:lzma:0.0.1
++--- org.ow2.asm:asm-debug-all:5.0.3
++--- com.paulscode:codecjorbis:20101023
++--- com.paulscode:codecwav:20101023
++--- com.paulscode:libraryjavasound:20101123
++--- com.paulscode:librarylwjglopenal:20100824
++--- com.paulscode:soundsystem:20120107
++--- com.mojang:netty:1.8.8
+|    +--- io.netty:netty-all:4.0.10.Final
+|    +--- com.google.guava:guava:15.0 -> 17.0
+|    +--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
+|    \--- commons-io:commons-io:2.4
++--- com.mojang:realms:1.3.5
+|    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    +--- org.apache.httpcomponents:httpclient:4.3.3
+|    |    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |    +--- commons-logging:commons-logging:1.1.3
+|    |    \--- commons-codec:commons-codec:1.6 -> 1.9
+|    \--- commons-logging:commons-logging:1.1.3
++--- org.apache.commons:commons-compress:1.8.1
++--- org.apache.httpcomponents:httpclient:4.3.3 (*)
++--- commons-logging:commons-logging:1.1.3
++--- org.apache.httpcomponents:httpcore:4.3.2
++--- java3d:vecmath:1.3.1
++--- net.sf.trove4j:trove4j:3.0.3
++--- com.ibm.icu:icu4j-core-mojang:51.2
++--- net.sf.jopt-simple:jopt-simple:4.5
++--- io.netty:netty-all:4.0.10.Final
++--- com.google.guava:guava:17.0
++--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
++--- commons-io:commons-io:2.4
++--- commons-codec:commons-codec:1.9
++--- net.java.jinput:jinput:2.0.5
+|    +--- net.java.jutils:jutils:1.0.0
+|    \--- net.java.jinput:jinput-platform:2.0.5
++--- net.java.jutils:jutils:1.0.0
++--- com.google.code.gson:gson:2.2.4
++--- com.mojang:authlib:1.5.21
+|    +--- com.google.guava:guava:17.0
+|    +--- org.apache.commons:commons-lang3:3.3.2
+|    +--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- commons-codec:commons-codec:1.9
+|    +--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- com.google.code.gson:gson:2.2.4
+|    +--- com.google.code.findbugs:jsr305:2.0.1
+|    \--- commons-io:commons-io:2.4
++--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
++--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
++--- net.java.jinput:jinput-platform:2.0.5
++--- tv.twitch:twitch:5.16
+|    +--- tv.twitch:twitch-platform:5.16
+|    \--- tv.twitch:twitch-external-platform:4.5
++--- tv.twitch:twitch-platform:5.16
+\--- tv.twitch:twitch-external-platform:4.5
+
+reobfElements (n)
+No dependencies
+
+reobfJarConfiguration - Reobfuscated jar
++--- io.github.legacymoddingmc:unimixins:0.1.17
++--- com.github.GTNewHorizons:Tainted-Magic:7.6.11-GTNH
++--- com.github.GTNewHorizons:GT5-Unofficial:5.09.49.60
++--- com.github.GTNewHorizons:ForbiddenMagic:0.7.0-GTNH
++--- com.github.GTNewHorizons:twilightforest:2.6.33
++--- curse.maven:travellers-gear-224440:2262113
++--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
++--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH
++--- com.github.GTNewHorizons:Baubles:1.0.4
++--- com.github.GTNewHorizons:ThaumicBoots:1.3.7
++--- com.github.GTNewHorizons:StructureLib:1.3.4
++--- com.github.GTNewHorizons:Postea:1.0.9
++--- com.github.GTNewHorizons:NotEnoughIds:2.1.0
++--- com.github.GTNewHorizons:TinkersConstruct:1.12.9-GTNH
++--- com.github.GTNewHorizons:ModularUI:1.2.1
++--- com.github.GTNewHorizons:AE2FluidCraft-Rework:1.3.35-gtnh
++--- com.github.GTNewHorizons:waila:1.8.1
++--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-449-GTNH
++--- com.github.GTNewHorizons:ModularUI2:2.1.3-1.7.10
++--- com.github.GTNewHorizons:Yamcl:0.6.0
++--- com.github.GTNewHorizons:GTNHLib:0.5.3
++--- com.github.GTNewHorizons:ForestryMC:4.9.10
++--- curse.maven:ic2-242638:2353971
++--- com.github.GTNewHorizons:CodeChickenCore:1.3.6
++--- com.github.GTNewHorizons:Electro-Magic-Tools:1.5.5
++--- com.github.GTNewHorizons:Thaumic_Exploration:1.3.3-GTNH
++--- com.github.GTNewHorizons:TCNEIAdditions:1.4.0
++--- com.github.GTNewHorizons:Mantle:0.4.1
++--- com.github.GTNewHorizons:ForgeMultipart:1.5.0
++--- org.jetbrains:annotations:24.0.1
++--- com.github.GTNewHorizons:WirelessCraftingTerminal:1.11.6
++--- curse.maven:cofh-core-69162:2388751 -> 2388750
++--- com.github.GTNewHorizons:AppleCore:3.3.0
++--- com.github.GTNewHorizons:CodeChickenLib:1.2.1
++--- curse.maven:witchery-69673:2234410
+\--- curse.maven:thaumcraft-nei-plugin-225095:2241913
+
+reobfJarInputConfiguration
++--- io.github.legacymoddingmc:unimixins:0.1.17
++--- com.github.GTNewHorizons:Tainted-Magic:7.6.11-GTNH
+|    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    +--- com.github.GTNewHorizons:ThaumicBoots:1.3.7
+|    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    +--- com.github.GTNewHorizons:Thaumic_Exploration:1.3.3-GTNH
+|    |    |    +--- com.github.GTNewHorizons:AppleCore:3.3.0
+|    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.13 -> 0.1.17
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    +--- curse.maven:witchery-69673:2234410
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenLib:1.2.1
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenCore:1.2.1 -> 1.3.6
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.1-GTNH -> 2.6.34-GTNH
+|    |    |    |    +--- com.github.GTNewHorizons:CodeChickenCore:1.3.6 (*)
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:Electro-Magic-Tools:1.5.5
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:ModularUI:1.2.0 -> 1.2.1
+|    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    |    +--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3
+|    |    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    |    |    +--- org.jetbrains:annotations:23.0.0 -> 24.0.1
+|    |    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.0-GTNH -> 2.6.34-GTNH (*)
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    |    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.3.2 -> 0.5.3 (*)
+|    |    +--- com.github.GTNewHorizons:TCNEIAdditions:1.4.0
+|    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH -> 2.6.34-GTNH (*)
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    +--- curse.maven:thaumcraft-nei-plugin-225095:2241913
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:GT5-Unofficial:5.09.49.60
+|    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    +--- com.github.GTNewHorizons:ForestryMC:4.9.10
+|    +--- com.github.GTNewHorizons:TinkersConstruct:1.12.9-GTNH
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.33-GTNH -> 2.6.34-GTNH (*)
+|    |    +--- com.github.GTNewHorizons:Mantle:0.4.1
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:ForgeMultipart:1.5.0
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenLib:1.2.1 (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:StructureLib:1.3.4
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.4.2 -> 0.5.3 (*)
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.19-GTNH -> 2.6.34-GTNH (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    +--- com.github.GTNewHorizons:NotEnoughIds:2.1.0
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:GTNHLib:0.5.3 (*)
+|    +--- com.github.GTNewHorizons:ModularUI:1.2.1 (*)
+|    +--- com.github.GTNewHorizons:ModularUI2:2.1.3-1.7.10
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- org.jetbrains:annotations:24.0.1
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.4.3 -> 0.5.3 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:waila:1.8.1
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH -> 2.6.34-GTNH (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-449-GTNH
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    |    +--- curse.maven:cofh-core-69162:2388751
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:AE2FluidCraft-Rework:1.3.35-gtnh
+|    |    +--- com.github.GTNewHorizons:WirelessCraftingTerminal:1.11.6
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-423-GTNH -> rv3-beta-449-GTNH (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-445-GTNH -> rv3-beta-449-GTNH (*)
+|    |    +--- curse.maven:cofh-core-69162:2388751
+|    |    +--- com.github.GTNewHorizons:waila:1.8.1 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Yamcl:0.6.0
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Postea:1.0.9
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:NotEnoughIds:2.1.0 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:ForbiddenMagic:0.7.0-GTNH
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    +--- com.github.GTNewHorizons:Baubles:1.0.3 -> 1.0.4 (*)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:twilightforest:2.6.33
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- curse.maven:travellers-gear-224440:2262113
++--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
++--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+\--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+
+runtimeClasspath - Runtime classpath of source set 'main'.
++--- io.github.legacymoddingmc:unimixins:0.1.17
++--- com.github.GTNewHorizons:Tainted-Magic:7.6.11-GTNH
+|    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    +--- com.github.GTNewHorizons:ThaumicBoots:1.3.7
+|    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    +--- com.github.GTNewHorizons:Thaumic_Exploration:1.3.3-GTNH
+|    |    |    +--- com.github.GTNewHorizons:AppleCore:3.3.0
+|    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.13 -> 0.1.17
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    +--- curse.maven:witchery-69673:2234410
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenLib:1.2.1
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenCore:1.2.1 -> 1.3.6
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.1-GTNH -> 2.6.34-GTNH
+|    |    |    |    +--- com.github.GTNewHorizons:CodeChickenCore:1.3.6 (*)
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:Electro-Magic-Tools:1.5.5
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:ModularUI:1.2.0 -> 1.2.1
+|    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    |    +--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3
+|    |    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    |    |    +--- org.jetbrains:annotations:23.0.0 -> 24.0.1
+|    |    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.0-GTNH -> 2.6.34-GTNH (*)
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    |    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.3.2 -> 0.5.3 (*)
+|    |    +--- com.github.GTNewHorizons:TCNEIAdditions:1.4.0
+|    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH -> 2.6.34-GTNH (*)
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    +--- curse.maven:thaumcraft-nei-plugin-225095:2241913
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:GT5-Unofficial:5.09.49.60
+|    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    +--- com.github.GTNewHorizons:ForestryMC:4.9.10
+|    +--- com.github.GTNewHorizons:TinkersConstruct:1.12.9-GTNH
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.33-GTNH -> 2.6.34-GTNH (*)
+|    |    +--- com.github.GTNewHorizons:Mantle:0.4.1
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:ForgeMultipart:1.5.0
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenLib:1.2.1 (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:StructureLib:1.3.4
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.4.2 -> 0.5.3 (*)
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.19-GTNH -> 2.6.34-GTNH (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    +--- com.github.GTNewHorizons:NotEnoughIds:2.1.0
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:GTNHLib:0.5.3 (*)
+|    +--- com.github.GTNewHorizons:ModularUI:1.2.1 (*)
+|    +--- com.github.GTNewHorizons:ModularUI2:2.1.3-1.7.10
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- org.jetbrains:annotations:24.0.1
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.4.3 -> 0.5.3 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:waila:1.8.1
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH -> 2.6.34-GTNH (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-449-GTNH
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    |    +--- curse.maven:cofh-core-69162:2388751
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:AE2FluidCraft-Rework:1.3.35-gtnh
+|    |    +--- com.github.GTNewHorizons:WirelessCraftingTerminal:1.11.6
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-423-GTNH -> rv3-beta-449-GTNH (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-445-GTNH -> rv3-beta-449-GTNH (*)
+|    |    +--- curse.maven:cofh-core-69162:2388751
+|    |    +--- com.github.GTNewHorizons:waila:1.8.1 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Yamcl:0.6.0
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Postea:1.0.9
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:NotEnoughIds:2.1.0 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:ForbiddenMagic:0.7.0-GTNH
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    +--- com.github.GTNewHorizons:Baubles:1.0.3 -> 1.0.4 (*)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:twilightforest:2.6.33
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- curse.maven:travellers-gear-224440:2262113
++--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
++--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
++--- me.eigenraven.java8unsupported:java-8-unsupported-shim:1.0.0
++--- net.minecraft:launchwrapper:1.12
++--- com.google.code.findbugs:jsr305:1.3.9 -> 2.0.1
++--- com.typesafe.akka:akka-actor_2.11:2.3.3
++--- com.typesafe:config:1.2.1
++--- org.scala-lang:scala-actors-migration_2.11:1.1.0
++--- org.scala-lang:scala-compiler:2.11.5
++--- org.scala-lang.plugins:scala-continuations-library_2.11:1.0.2
++--- org.scala-lang.plugins:scala-continuations-plugin_2.11.1:1.0.2
++--- org.scala-lang:scala-library:2.11.5
++--- org.scala-lang:scala-parser-combinators_2.11:1.0.1
++--- org.scala-lang:scala-reflect:2.11.5
++--- org.scala-lang:scala-swing_2.11:1.0.1
++--- org.scala-lang:scala-xml_2.11:1.0.2
++--- lzma:lzma:0.0.1
++--- org.ow2.asm:asm-debug-all:5.0.3
++--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
++--- org.jetbrains:intellij-fernflower:1.2.1.16
++--- com.paulscode:codecjorbis:20101023
++--- com.paulscode:codecwav:20101023
++--- com.paulscode:libraryjavasound:20101123
++--- com.paulscode:librarylwjglopenal:20100824
++--- com.paulscode:soundsystem:20120107
++--- com.mojang:netty:1.8.8
+|    +--- io.netty:netty-all:4.0.10.Final
+|    +--- com.google.guava:guava:15.0 -> 17.0
+|    +--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
+|    \--- commons-io:commons-io:2.4
++--- com.mojang:realms:1.3.5
+|    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    +--- org.apache.httpcomponents:httpclient:4.3.3
+|    |    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |    +--- commons-logging:commons-logging:1.1.3
+|    |    \--- commons-codec:commons-codec:1.6 -> 1.9
+|    \--- commons-logging:commons-logging:1.1.3
++--- org.apache.commons:commons-compress:1.8.1
++--- org.apache.httpcomponents:httpclient:4.3.3 (*)
++--- commons-logging:commons-logging:1.1.3
++--- org.apache.httpcomponents:httpcore:4.3.2
++--- java3d:vecmath:1.3.1
++--- net.sf.trove4j:trove4j:3.0.3
++--- com.ibm.icu:icu4j-core-mojang:51.2
++--- net.sf.jopt-simple:jopt-simple:4.5
++--- io.netty:netty-all:4.0.10.Final
++--- com.google.guava:guava:17.0
++--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
++--- commons-io:commons-io:2.4
++--- commons-codec:commons-codec:1.9
++--- net.java.jinput:jinput:2.0.5
+|    +--- net.java.jutils:jutils:1.0.0
+|    \--- net.java.jinput:jinput-platform:2.0.5
++--- net.java.jutils:jutils:1.0.0
++--- com.google.code.gson:gson:2.2.4
++--- com.mojang:authlib:1.5.21
+|    +--- com.google.guava:guava:17.0
+|    +--- org.apache.commons:commons-lang3:3.3.2
+|    +--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- commons-codec:commons-codec:1.9
+|    +--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- com.google.code.gson:gson:2.2.4
+|    +--- com.google.code.findbugs:jsr305:2.0.1
+|    \--- commons-io:commons-io:2.4
++--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
++--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
++--- net.java.jinput:jinput-platform:2.0.5
++--- tv.twitch:twitch:5.16
+|    +--- tv.twitch:twitch-platform:5.16
+|    \--- tv.twitch:twitch-external-platform:4.5
++--- tv.twitch:twitch-platform:5.16
++--- tv.twitch:twitch-external-platform:4.5
+\--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+
+runtimeElements - Runtime elements for the 'main' feature. (n)
+No dependencies
+
+runtimeOnly - Runtime-only dependencies for the 'main' feature. (n)
+\--- com.github.GTNewHorizons:Baubles:1.0.4 (n)
+
+runtimeOnlyNonPublishable - Runtime only dependencies that are not published alongside the jar (n)
+\--- org.jetbrains:intellij-fernflower:1.2.1.16 (n)
+
+sourcesElements - sources elements for main. (n)
+No dependencies
+
+testAnnotationProcessor - Annotation processors and their dependencies for source set 'test'.
+No dependencies
+
+testCompile - Deprecated: use testImplementation instead (n)
+No dependencies
+
+testCompileClasspath - Compile classpath for source set 'test'.
++--- io.github.legacymoddingmc:unimixins:0.1.17
++--- com.github.GTNewHorizons:Tainted-Magic:7.6.11-GTNH
+|    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    \--- com.github.GTNewHorizons:ThaumicBoots:1.3.7
+|         +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|         +--- com.github.GTNewHorizons:Baubles:1.0.4
+|         +--- com.github.GTNewHorizons:Thaumic_Exploration:1.3.3-GTNH
+|         |    +--- com.github.GTNewHorizons:AppleCore:3.3.0
+|         |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|         |    +--- curse.maven:witchery-69673:2234410
+|         |    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|         |    \--- com.github.GTNewHorizons:CodeChickenLib:1.2.1
+|         +--- com.github.GTNewHorizons:Electro-Magic-Tools:1.5.5
+|         |    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|         |    +--- com.github.GTNewHorizons:ModularUI:1.2.0 -> 1.2.1
+|         |    |    +--- org.jetbrains:annotations:23.0.0 -> 24.0.1
+|         |    |    \--- com.github.GTNewHorizons:NotEnoughItems:2.6.0-GTNH -> 2.6.34-GTNH
+|         |    |         \--- com.github.GTNewHorizons:CodeChickenCore:1.3.6
+|         |    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|         |    \--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|         \--- com.github.GTNewHorizons:GTNHLib:0.3.2 -> 0.5.3
++--- com.github.GTNewHorizons:GT5-Unofficial:5.09.49.60
+|    +--- com.github.GTNewHorizons:StructureLib:1.3.4
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.4.2 -> 0.5.3
+|    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    +--- com.github.GTNewHorizons:NotEnoughIds:2.1.0
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3
+|    +--- com.github.GTNewHorizons:GTNHLib:0.5.3
+|    +--- com.github.GTNewHorizons:ModularUI:1.2.1 (*)
+|    +--- com.github.GTNewHorizons:ModularUI2:2.1.3-1.7.10
+|    |    +--- org.jetbrains:annotations:24.0.1
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.4.3 -> 0.5.3
+|    +--- com.github.GTNewHorizons:waila:1.8.1
+|    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-449-GTNH
+|    |    \--- com.github.GTNewHorizons:Angelica:1.0.0-beta4 -> 1.0.0-beta5
+|    |         \--- com.github.GTNewHorizons:GTNHLib:0.4.2 -> 0.5.3
+|    +--- com.github.GTNewHorizons:AE2FluidCraft-Rework:1.3.35-gtnh
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-445-GTNH -> rv3-beta-449-GTNH (*)
+|    |    +--- curse.maven:cofh-core-69162:2388751
+|    |    \--- com.github.GTNewHorizons:waila:1.8.1
+|    +--- com.github.GTNewHorizons:Yamcl:0.6.0
+|    +--- com.github.GTNewHorizons:Postea:1.0.9
+|    |    \--- com.github.GTNewHorizons:NotEnoughIds:2.1.0 (*)
+|    +--- com.github.GTNewHorizons:ThaumicTinkerer:2.10.1
+|    |    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-402-GTNH -> rv3-beta-449-GTNH (*)
+|    |    \--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    +--- com.github.GTNewHorizons:Mobs-Info:0.4.6-GTNH
+|    |    \--- com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH -> 2.6.34-GTNH (*)
+|    +--- com.github.GTNewHorizons:Navigator:1.0.6
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.3.2 -> 0.5.3
+|    |    +--- maven.modrinth:journeymap:5.2.5
+|    |    +--- curse.maven:xaeros-minimap-263420:5060684
+|    |    \--- curse.maven:xaeros-world-map-317780:5060733
+|    +--- com.github.GTNewHorizons:Avaritia:1.52
+|    +--- com.github.GTNewHorizons:Angelica:1.0.0-beta5 (*)
+|    +--- com.github.GTNewHorizons:AppleCore:3.3.0
+|    +--- com.github.GTNewHorizons:BuildCraft:7.1.39
+|    +--- com.github.GTNewHorizons:EnderIO:2.8.17
+|    +--- com.github.GTNewHorizons:ProjectRed:4.10.2-GTNH
+|    +--- com.github.GTNewHorizons:Railcraft:9.15.12
+|    +--- com.github.GTNewHorizons:Galacticraft:3.2.4-GTNH
+|    \--- curse.maven:advsolar-362768:2885953
++--- com.github.GTNewHorizons:ForbiddenMagic:0.7.0-GTNH
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    \--- com.github.GTNewHorizons:Baubles:1.0.3 -> 1.0.4
++--- com.github.GTNewHorizons:twilightforest:2.6.33
++--- curse.maven:travellers-gear-224440:2262113
++--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
++--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
++--- org.lwjgl.lwjgl:lwjgl:2.9.4-nightly-20150209
+|    +--- org.lwjgl.lwjgl:lwjgl-platform:2.9.4-nightly-20150209
+|    \--- net.java.jinput:jinput:2.0.5
+|         \--- net.java.jutils:jutils:1.0.0
++--- org.lwjgl.lwjgl:lwjgl_util:2.9.4-nightly-20150209
+|    \--- org.lwjgl.lwjgl:lwjgl:2.9.4-nightly-20150209 (*)
++--- org.lwjgl.lwjgl:lwjgl-platform:2.9.4-nightly-20150209
++--- me.eigenraven.java8unsupported:java-8-unsupported-shim:1.0.0
++--- net.minecraft:launchwrapper:1.12
++--- com.google.code.findbugs:jsr305:1.3.9 -> 2.0.1
++--- com.typesafe.akka:akka-actor_2.11:2.3.3
++--- com.typesafe:config:1.2.1
++--- org.scala-lang:scala-actors-migration_2.11:1.1.0
++--- org.scala-lang:scala-compiler:2.11.5
++--- org.scala-lang.plugins:scala-continuations-library_2.11:1.0.2
++--- org.scala-lang.plugins:scala-continuations-plugin_2.11.1:1.0.2
++--- org.scala-lang:scala-library:2.11.5
++--- org.scala-lang:scala-parser-combinators_2.11:1.0.1
++--- org.scala-lang:scala-reflect:2.11.5
++--- org.scala-lang:scala-swing_2.11:1.0.1
++--- org.scala-lang:scala-xml_2.11:1.0.2
++--- lzma:lzma:0.0.1
++--- org.ow2.asm:asm-debug-all:5.0.3
++--- com.paulscode:codecjorbis:20101023
++--- com.paulscode:codecwav:20101023
++--- com.paulscode:libraryjavasound:20101123
++--- com.paulscode:librarylwjglopenal:20100824
++--- com.paulscode:soundsystem:20120107
++--- com.mojang:netty:1.8.8
++--- com.mojang:realms:1.3.5
+|    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    +--- org.apache.httpcomponents:httpclient:4.3.3
+|    |    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |    +--- commons-logging:commons-logging:1.1.3
+|    |    \--- commons-codec:commons-codec:1.6 -> 1.9
+|    \--- commons-logging:commons-logging:1.1.3
++--- org.apache.commons:commons-compress:1.8.1
++--- org.apache.httpcomponents:httpclient:4.3.3 (*)
++--- commons-logging:commons-logging:1.1.3
++--- org.apache.httpcomponents:httpcore:4.3.2
++--- java3d:vecmath:1.3.1
++--- net.sf.trove4j:trove4j:3.0.3
++--- com.ibm.icu:icu4j-core-mojang:51.2
++--- net.sf.jopt-simple:jopt-simple:4.5
++--- io.netty:netty-all:4.0.10.Final
++--- com.google.guava:guava:17.0
++--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
++--- commons-io:commons-io:2.4
++--- commons-codec:commons-codec:1.9
++--- net.java.jinput:jinput:2.0.5 (*)
++--- net.java.jutils:jutils:1.0.0
++--- com.google.code.gson:gson:2.2.4
++--- com.mojang:authlib:1.5.21
+|    +--- com.google.guava:guava:17.0
+|    +--- org.apache.commons:commons-lang3:3.3.2
+|    +--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- commons-codec:commons-codec:1.9
+|    +--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- com.google.code.gson:gson:2.2.4
+|    +--- com.google.code.findbugs:jsr305:2.0.1
+|    \--- commons-io:commons-io:2.4
++--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
++--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
++--- net.java.jinput:jinput-platform:2.0.5
++--- tv.twitch:twitch:5.16
+|    +--- tv.twitch:twitch-platform:5.16
+|    \--- tv.twitch:twitch-external-platform:4.5
++--- tv.twitch:twitch-platform:5.16
++--- tv.twitch:twitch-external-platform:4.5
+\--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+
+testCompileOnly - Compile only dependencies for source set 'test'. (n)
+No dependencies
+
+testImplementation - Implementation only dependencies for source set 'test'. (n)
+No dependencies
+
+testRuntimeClasspath - Runtime classpath of source set 'test'.
++--- io.github.legacymoddingmc:unimixins:0.1.17
++--- com.github.GTNewHorizons:Tainted-Magic:7.6.11-GTNH
+|    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    +--- com.github.GTNewHorizons:ThaumicBoots:1.3.7
+|    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    +--- com.github.GTNewHorizons:Thaumic_Exploration:1.3.3-GTNH
+|    |    |    +--- com.github.GTNewHorizons:AppleCore:3.3.0
+|    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.13 -> 0.1.17
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    +--- curse.maven:witchery-69673:2234410
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenLib:1.2.1
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenCore:1.2.1 -> 1.3.6
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.1-GTNH -> 2.6.34-GTNH
+|    |    |    |    +--- com.github.GTNewHorizons:CodeChickenCore:1.3.6 (*)
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:Electro-Magic-Tools:1.5.5
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:ModularUI:1.2.0 -> 1.2.1
+|    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    |    +--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3
+|    |    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    |    |    +--- org.jetbrains:annotations:23.0.0 -> 24.0.1
+|    |    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.0-GTNH -> 2.6.34-GTNH (*)
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    |    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.3.2 -> 0.5.3 (*)
+|    |    +--- com.github.GTNewHorizons:TCNEIAdditions:1.4.0
+|    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH -> 2.6.34-GTNH (*)
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    +--- curse.maven:thaumcraft-nei-plugin-225095:2241913
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:GT5-Unofficial:5.09.49.60
+|    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    +--- com.github.GTNewHorizons:ForestryMC:4.9.10
+|    +--- com.github.GTNewHorizons:TinkersConstruct:1.12.9-GTNH
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.33-GTNH -> 2.6.34-GTNH (*)
+|    |    +--- com.github.GTNewHorizons:Mantle:0.4.1
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:ForgeMultipart:1.5.0
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenLib:1.2.1 (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:StructureLib:1.3.4
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.4.2 -> 0.5.3 (*)
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.19-GTNH -> 2.6.34-GTNH (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    +--- com.github.GTNewHorizons:NotEnoughIds:2.1.0
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:GTNHLib:0.5.3 (*)
+|    +--- com.github.GTNewHorizons:ModularUI:1.2.1 (*)
+|    +--- com.github.GTNewHorizons:ModularUI2:2.1.3-1.7.10
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- org.jetbrains:annotations:24.0.1
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.4.3 -> 0.5.3 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:waila:1.8.1
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH -> 2.6.34-GTNH (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-449-GTNH
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    |    +--- curse.maven:cofh-core-69162:2388751
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:AE2FluidCraft-Rework:1.3.35-gtnh
+|    |    +--- com.github.GTNewHorizons:WirelessCraftingTerminal:1.11.6
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-423-GTNH -> rv3-beta-449-GTNH (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-445-GTNH -> rv3-beta-449-GTNH (*)
+|    |    +--- curse.maven:cofh-core-69162:2388751
+|    |    +--- com.github.GTNewHorizons:waila:1.8.1 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Yamcl:0.6.0
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Postea:1.0.9
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:NotEnoughIds:2.1.0 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:ForbiddenMagic:0.7.0-GTNH
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    +--- com.github.GTNewHorizons:Baubles:1.0.3 -> 1.0.4 (*)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:twilightforest:2.6.33
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- curse.maven:travellers-gear-224440:2262113
++--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
++--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
++--- me.eigenraven.java8unsupported:java-8-unsupported-shim:1.0.0
++--- net.minecraft:launchwrapper:1.12
++--- com.google.code.findbugs:jsr305:1.3.9 -> 2.0.1
++--- com.typesafe.akka:akka-actor_2.11:2.3.3
++--- com.typesafe:config:1.2.1
++--- org.scala-lang:scala-actors-migration_2.11:1.1.0
++--- org.scala-lang:scala-compiler:2.11.5
++--- org.scala-lang.plugins:scala-continuations-library_2.11:1.0.2
++--- org.scala-lang.plugins:scala-continuations-plugin_2.11.1:1.0.2
++--- org.scala-lang:scala-library:2.11.5
++--- org.scala-lang:scala-parser-combinators_2.11:1.0.1
++--- org.scala-lang:scala-reflect:2.11.5
++--- org.scala-lang:scala-swing_2.11:1.0.1
++--- org.scala-lang:scala-xml_2.11:1.0.2
++--- lzma:lzma:0.0.1
++--- org.ow2.asm:asm-debug-all:5.0.3
++--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
++--- org.jetbrains:intellij-fernflower:1.2.1.16
++--- com.paulscode:codecjorbis:20101023
++--- com.paulscode:codecwav:20101023
++--- com.paulscode:libraryjavasound:20101123
++--- com.paulscode:librarylwjglopenal:20100824
++--- com.paulscode:soundsystem:20120107
++--- com.mojang:netty:1.8.8
+|    +--- io.netty:netty-all:4.0.10.Final
+|    +--- com.google.guava:guava:15.0 -> 17.0
+|    +--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
+|    \--- commons-io:commons-io:2.4
++--- com.mojang:realms:1.3.5
+|    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    +--- org.apache.httpcomponents:httpclient:4.3.3
+|    |    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |    +--- commons-logging:commons-logging:1.1.3
+|    |    \--- commons-codec:commons-codec:1.6 -> 1.9
+|    \--- commons-logging:commons-logging:1.1.3
++--- org.apache.commons:commons-compress:1.8.1
++--- org.apache.httpcomponents:httpclient:4.3.3 (*)
++--- commons-logging:commons-logging:1.1.3
++--- org.apache.httpcomponents:httpcore:4.3.2
++--- java3d:vecmath:1.3.1
++--- net.sf.trove4j:trove4j:3.0.3
++--- com.ibm.icu:icu4j-core-mojang:51.2
++--- net.sf.jopt-simple:jopt-simple:4.5
++--- io.netty:netty-all:4.0.10.Final
++--- com.google.guava:guava:17.0
++--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
++--- commons-io:commons-io:2.4
++--- commons-codec:commons-codec:1.9
++--- net.java.jinput:jinput:2.0.5
+|    +--- net.java.jutils:jutils:1.0.0
+|    \--- net.java.jinput:jinput-platform:2.0.5
++--- net.java.jutils:jutils:1.0.0
++--- com.google.code.gson:gson:2.2.4
++--- com.mojang:authlib:1.5.21
+|    +--- com.google.guava:guava:17.0
+|    +--- org.apache.commons:commons-lang3:3.3.2
+|    +--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- commons-codec:commons-codec:1.9
+|    +--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- com.google.code.gson:gson:2.2.4
+|    +--- com.google.code.findbugs:jsr305:2.0.1
+|    \--- commons-io:commons-io:2.4
++--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
++--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
++--- net.java.jinput:jinput-platform:2.0.5
++--- tv.twitch:twitch:5.16
+|    +--- tv.twitch:twitch-platform:5.16
+|    \--- tv.twitch:twitch-external-platform:4.5
++--- tv.twitch:twitch-platform:5.16
++--- tv.twitch:twitch-external-platform:4.5
+\--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+
+testRuntimeOnly - Runtime only dependencies for source set 'test'. (n)
+No dependencies
+
+vanilla_minecraft
++--- com.paulscode:codecjorbis:20101023
++--- com.paulscode:codecwav:20101023
++--- com.paulscode:libraryjavasound:20101123
++--- com.paulscode:librarylwjglopenal:20100824
++--- com.paulscode:soundsystem:20120107
++--- com.mojang:netty:1.8.8
+|    +--- io.netty:netty-all:4.0.10.Final
+|    +--- com.google.guava:guava:15.0 -> 17.0
+|    +--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
+|    \--- commons-io:commons-io:2.4
++--- com.mojang:realms:1.3.5
+|    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    +--- org.apache.httpcomponents:httpclient:4.3.3
+|    |    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |    +--- commons-logging:commons-logging:1.1.3
+|    |    \--- commons-codec:commons-codec:1.6 -> 1.9
+|    \--- commons-logging:commons-logging:1.1.3
++--- org.apache.commons:commons-compress:1.8.1
++--- org.apache.httpcomponents:httpclient:4.3.3 (*)
++--- commons-logging:commons-logging:1.1.3
++--- org.apache.httpcomponents:httpcore:4.3.2
++--- java3d:vecmath:1.3.1
++--- net.sf.trove4j:trove4j:3.0.3
++--- com.ibm.icu:icu4j-core-mojang:51.2
++--- net.sf.jopt-simple:jopt-simple:4.5
++--- io.netty:netty-all:4.0.10.Final
++--- com.google.guava:guava:17.0
++--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
++--- commons-io:commons-io:2.4
++--- commons-codec:commons-codec:1.9
++--- net.java.jinput:jinput:2.0.5
+|    +--- net.java.jutils:jutils:1.0.0
+|    \--- net.java.jinput:jinput-platform:2.0.5
++--- net.java.jutils:jutils:1.0.0
++--- com.google.code.gson:gson:2.2.4
++--- com.mojang:authlib:1.5.21
+|    +--- com.google.guava:guava:17.0
+|    +--- org.apache.commons:commons-lang3:3.3.2
+|    +--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- commons-codec:commons-codec:1.9
+|    +--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- com.google.code.gson:gson:2.2.4
+|    +--- com.google.code.findbugs:jsr305:2.0.1
+|    \--- commons-io:commons-io:2.4
++--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
++--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
++--- net.java.jinput:jinput-platform:2.0.5
++--- tv.twitch:twitch:5.16
+|    +--- tv.twitch:twitch-platform:5.16
+|    \--- tv.twitch:twitch-external-platform:4.5
++--- tv.twitch:twitch-platform:5.16
+\--- tv.twitch:twitch-external-platform:4.5
+
+(c) - A dependency constraint, not a dependency. The dependency affected by the constraint occurs elsewhere in the tree.
+(*) - Indicates repeated occurrences of a transitive dependency subtree. Gradle expands transitive dependency subtrees only once per project; repeat occurrences only display the root of the subtree, followed by this annotation.
+
+(n) - A dependency or dependency configuration that cannot be resolved.
+
+A web-based, searchable dependency report is available by adding the --scan option.
+
+BUILD SUCCESSFUL in 5s
+1 actionable task: 1 executed
+
+> Configure project :
+You might want to check out './gradlew :faq' if your build fails.
+
+> Task :dependencies
+
+------------------------------------------------------------
+Root project 'WitchingGadgets'
+------------------------------------------------------------
+
+annotationProcessor - Annotation processors and their dependencies for source set 'main'.
++--- com.github.bsideup.jabel:jabel-javac-plugin:1.0.1
+|    +--- net.bytebuddy:byte-buddy-parent:1.14.9
+|    |    +--- net.bytebuddy:byte-buddy:1.14.9 (c)
+|    |    \--- net.bytebuddy:byte-buddy-agent:1.14.9 (c)
+|    +--- net.bytebuddy:byte-buddy -> 1.14.9
+|    +--- net.bytebuddy:byte-buddy-agent -> 1.14.9
+|    \--- net.java.dev.jna:jna:5.13.0
++--- net.java.dev.jna:jna-platform:5.13.0
+|    \--- net.java.dev.jna:jna:5.13.0
++--- org.ow2.asm:asm-debug-all:5.0.3
++--- com.google.guava:guava:24.1.1-jre
+|    +--- com.google.code.findbugs:jsr305:1.3.9
+|    +--- org.checkerframework:checker-compat-qual:2.0.0
+|    +--- com.google.errorprone:error_prone_annotations:2.1.3
+|    +--- com.google.j2objc:j2objc-annotations:1.1
+|    \--- org.codehaus.mojo:animal-sniffer-annotations:1.14
++--- com.google.code.gson:gson:2.8.6
+\--- io.github.legacymoddingmc:unimixins:0.1.17
+
+api - API dependencies for the 'main' feature. (n)
+No dependencies
+
+apiAnnotationProcessor - Annotation processors and their dependencies for source set 'api'.
+No dependencies
+
+apiCompileClasspath - Compile classpath for source set 'api'.
+No dependencies
+
+apiCompileOnly - Compile only dependencies for source set 'api'. (n)
+No dependencies
+
+apiElements - API elements for the 'main' feature. (n)
+No dependencies
+
+apiImplementation - Implementation only dependencies for source set 'api'. (n)
+No dependencies
+
+apiRuntimeClasspath - Runtime classpath of source set 'api'.
+No dependencies
+
+apiRuntimeOnly - Runtime only dependencies for source set 'api'. (n)
+No dependencies
+
+checkstyle - The Checkstyle libraries to be used for this project.
+\--- com.puppycrawl.tools:checkstyle:9.3
+     +--- info.picocli:picocli:4.6.2
+     +--- org.antlr:antlr4-runtime:4.9.3
+     +--- commons-beanutils:commons-beanutils:1.9.4
+     |    \--- commons-collections:commons-collections:3.2.2
+     +--- com.google.guava:guava:31.0.1-jre
+     |    +--- com.google.guava:failureaccess:1.0.1
+     |    +--- com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava
+     |    +--- com.google.code.findbugs:jsr305:3.0.2
+     |    +--- org.checkerframework:checker-qual:3.12.0
+     |    +--- com.google.errorprone:error_prone_annotations:2.7.1
+     |    \--- com.google.j2objc:j2objc-annotations:1.3
+     +--- org.reflections:reflections:0.10.2
+     |    +--- org.javassist:javassist:3.28.0-GA
+     |    \--- com.google.code.findbugs:jsr305:3.0.2
+     \--- net.sf.saxon:Saxon-HE:10.6
+
+compile - Deprecated: use api or implementation instead, gets put in api (n)
+No dependencies
+
+compileClasspath - Compile classpath for source set 'main'.
++--- com.github.bsideup.jabel:jabel-javac-plugin:1.0.1
++--- com.github.GTNewHorizons:ForgeMultipart:1.5.0
++--- com.github.GTNewHorizons:Botania:1.11.5-GTNH
++--- com.github.GTNewHorizons:CraftTweaker:3.4.0
++--- com.github.GTNewHorizons:ZenScript:1.0.0-GTNH
++--- com.github.GTNewHorizons:MagicBees:2.8.3-GTNH
++--- com.github.GTNewHorizons:TinkersConstruct:1.12.9-GTNH
++--- curse.maven:enviromine-230236:2269710
++--- io.github.legacymoddingmc:unimixins:0.1.17
++--- com.github.GTNewHorizons:Tainted-Magic:7.6.11-GTNH
+|    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    \--- com.github.GTNewHorizons:ThaumicBoots:1.3.7
+|         +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|         +--- com.github.GTNewHorizons:Baubles:1.0.4
+|         +--- com.github.GTNewHorizons:Thaumic_Exploration:1.3.3-GTNH
+|         |    +--- com.github.GTNewHorizons:AppleCore:3.3.0
+|         |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|         |    +--- curse.maven:witchery-69673:2234410
+|         |    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|         |    \--- com.github.GTNewHorizons:CodeChickenLib:1.2.1
+|         +--- com.github.GTNewHorizons:Electro-Magic-Tools:1.5.5
+|         |    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|         |    +--- com.github.GTNewHorizons:ModularUI:1.2.0 -> 1.2.1
+|         |    |    +--- org.jetbrains:annotations:23.0.0 -> 24.0.1
+|         |    |    \--- com.github.GTNewHorizons:NotEnoughItems:2.6.0-GTNH -> 2.6.34-GTNH
+|         |    |         \--- com.github.GTNewHorizons:CodeChickenCore:1.3.6
+|         |    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|         |    \--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|         \--- com.github.GTNewHorizons:GTNHLib:0.3.2 -> 0.5.3
++--- com.github.GTNewHorizons:GT5-Unofficial:5.09.49.60
+|    +--- com.github.GTNewHorizons:StructureLib:1.3.4
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.4.2 -> 0.5.3
+|    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    +--- com.github.GTNewHorizons:NotEnoughIds:2.1.0
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3
+|    +--- com.github.GTNewHorizons:GTNHLib:0.5.3
+|    +--- com.github.GTNewHorizons:ModularUI:1.2.1 (*)
+|    +--- com.github.GTNewHorizons:ModularUI2:2.1.3-1.7.10
+|    |    +--- org.jetbrains:annotations:24.0.1
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.4.3 -> 0.5.3
+|    +--- com.github.GTNewHorizons:waila:1.8.1
+|    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-449-GTNH
+|    |    \--- com.github.GTNewHorizons:Angelica:1.0.0-beta4 -> 1.0.0-beta5
+|    |         \--- com.github.GTNewHorizons:GTNHLib:0.4.2 -> 0.5.3
+|    +--- com.github.GTNewHorizons:AE2FluidCraft-Rework:1.3.35-gtnh
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-445-GTNH -> rv3-beta-449-GTNH (*)
+|    |    +--- curse.maven:cofh-core-69162:2388751
+|    |    \--- com.github.GTNewHorizons:waila:1.8.1
+|    +--- com.github.GTNewHorizons:Yamcl:0.6.0
+|    +--- com.github.GTNewHorizons:Postea:1.0.9
+|    |    \--- com.github.GTNewHorizons:NotEnoughIds:2.1.0 (*)
+|    +--- com.github.GTNewHorizons:ThaumicTinkerer:2.10.1
+|    |    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-402-GTNH -> rv3-beta-449-GTNH (*)
+|    |    \--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    +--- com.github.GTNewHorizons:Mobs-Info:0.4.6-GTNH
+|    |    \--- com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH -> 2.6.34-GTNH (*)
+|    +--- com.github.GTNewHorizons:Navigator:1.0.6
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.3.2 -> 0.5.3
+|    |    +--- maven.modrinth:journeymap:5.2.5
+|    |    +--- curse.maven:xaeros-minimap-263420:5060684
+|    |    \--- curse.maven:xaeros-world-map-317780:5060733
+|    +--- com.github.GTNewHorizons:Avaritia:1.52
+|    +--- com.github.GTNewHorizons:Angelica:1.0.0-beta5 (*)
+|    +--- com.github.GTNewHorizons:AppleCore:3.3.0
+|    +--- com.github.GTNewHorizons:BuildCraft:7.1.39
+|    +--- com.github.GTNewHorizons:EnderIO:2.8.17
+|    +--- com.github.GTNewHorizons:ProjectRed:4.10.2-GTNH
+|    +--- com.github.GTNewHorizons:Railcraft:9.15.12
+|    +--- com.github.GTNewHorizons:Galacticraft:3.2.4-GTNH
+|    \--- curse.maven:advsolar-362768:2885953
++--- com.github.GTNewHorizons:ForbiddenMagic:0.7.0-GTNH
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    \--- com.github.GTNewHorizons:Baubles:1.0.3 -> 1.0.4
++--- com.github.GTNewHorizons:twilightforest:2.6.33
++--- curse.maven:travellers-gear-224440:2262113
++--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
++--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
++--- org.lwjgl.lwjgl:lwjgl:2.9.4-nightly-20150209
+|    +--- org.lwjgl.lwjgl:lwjgl-platform:2.9.4-nightly-20150209
+|    \--- net.java.jinput:jinput:2.0.5
+|         \--- net.java.jutils:jutils:1.0.0
++--- org.lwjgl.lwjgl:lwjgl_util:2.9.4-nightly-20150209
+|    \--- org.lwjgl.lwjgl:lwjgl:2.9.4-nightly-20150209 (*)
++--- org.lwjgl.lwjgl:lwjgl-platform:2.9.4-nightly-20150209
++--- me.eigenraven.java8unsupported:java-8-unsupported-shim:1.0.0
++--- net.minecraft:launchwrapper:1.12
++--- com.google.code.findbugs:jsr305:1.3.9 -> 2.0.1
++--- com.typesafe.akka:akka-actor_2.11:2.3.3
++--- com.typesafe:config:1.2.1
++--- org.scala-lang:scala-actors-migration_2.11:1.1.0
++--- org.scala-lang:scala-compiler:2.11.5
++--- org.scala-lang.plugins:scala-continuations-library_2.11:1.0.2
++--- org.scala-lang.plugins:scala-continuations-plugin_2.11.1:1.0.2
++--- org.scala-lang:scala-library:2.11.5
++--- org.scala-lang:scala-parser-combinators_2.11:1.0.1
++--- org.scala-lang:scala-reflect:2.11.5
++--- org.scala-lang:scala-swing_2.11:1.0.1
++--- org.scala-lang:scala-xml_2.11:1.0.2
++--- lzma:lzma:0.0.1
++--- org.ow2.asm:asm-debug-all:5.0.3
++--- com.paulscode:codecjorbis:20101023
++--- com.paulscode:codecwav:20101023
++--- com.paulscode:libraryjavasound:20101123
++--- com.paulscode:librarylwjglopenal:20100824
++--- com.paulscode:soundsystem:20120107
++--- com.mojang:netty:1.8.8
++--- com.mojang:realms:1.3.5
+|    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    +--- org.apache.httpcomponents:httpclient:4.3.3
+|    |    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |    +--- commons-logging:commons-logging:1.1.3
+|    |    \--- commons-codec:commons-codec:1.6 -> 1.9
+|    \--- commons-logging:commons-logging:1.1.3
++--- org.apache.commons:commons-compress:1.8.1
++--- org.apache.httpcomponents:httpclient:4.3.3 (*)
++--- commons-logging:commons-logging:1.1.3
++--- org.apache.httpcomponents:httpcore:4.3.2
++--- java3d:vecmath:1.3.1
++--- net.sf.trove4j:trove4j:3.0.3
++--- com.ibm.icu:icu4j-core-mojang:51.2
++--- net.sf.jopt-simple:jopt-simple:4.5
++--- io.netty:netty-all:4.0.10.Final
++--- com.google.guava:guava:17.0
++--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
++--- commons-io:commons-io:2.4
++--- commons-codec:commons-codec:1.9
++--- net.java.jinput:jinput:2.0.5 (*)
++--- net.java.jutils:jutils:1.0.0
++--- com.google.code.gson:gson:2.2.4
++--- com.mojang:authlib:1.5.21
+|    +--- com.google.guava:guava:17.0
+|    +--- org.apache.commons:commons-lang3:3.3.2
+|    +--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- commons-codec:commons-codec:1.9
+|    +--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- com.google.code.gson:gson:2.2.4
+|    +--- com.google.code.findbugs:jsr305:2.0.1
+|    \--- commons-io:commons-io:2.4
++--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
++--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
++--- net.java.jinput:jinput-platform:2.0.5
++--- tv.twitch:twitch:5.16
+|    +--- tv.twitch:twitch-platform:5.16
+|    \--- tv.twitch:twitch-external-platform:4.5
++--- tv.twitch:twitch-platform:5.16
++--- tv.twitch:twitch-external-platform:4.5
+\--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+
+compileOnly - Compile-only dependencies for the 'main' feature. (n)
++--- com.github.bsideup.jabel:jabel-javac-plugin:1.0.1 (n)
++--- com.github.GTNewHorizons:ForgeMultipart:1.5.0 (n)
++--- com.github.GTNewHorizons:Botania:1.11.5-GTNH (n)
++--- com.github.GTNewHorizons:CraftTweaker:3.4.0 (n)
++--- com.github.GTNewHorizons:ZenScript:1.0.0-GTNH (n)
++--- com.github.GTNewHorizons:MagicBees:2.8.3-GTNH (n)
++--- com.github.GTNewHorizons:TinkersConstruct:1.12.9-GTNH (n)
+\--- curse.maven:enviromine-230236:2269710 (n)
+
+compileOnlyApi - Compile-only API dependencies for the 'main' feature. (n)
+No dependencies
+
+default - Configuration for default artifacts. (n)
+No dependencies
+
+devOnlyNonPublishable - Runtime and compiletime dependencies that are not published alongside the jar (compileOnly + runtimeOnlyNonPublishable) (n)
+No dependencies
+
+forgeUniversal
+\--- net.minecraftforge:forge:1.7.10-10.13.4.1614-1.7.10
+
+ideVirtualMainAnnotationProcessor - Annotation processors and their dependencies for source set 'ide virtual main'.
+No dependencies
+
+ideVirtualMainCompileClasspath - Compile classpath for source set 'ide virtual main'.
++--- io.github.legacymoddingmc:unimixins:0.1.17
++--- com.github.GTNewHorizons:Tainted-Magic:7.6.11-GTNH
+|    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    \--- com.github.GTNewHorizons:ThaumicBoots:1.3.7
+|         +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|         +--- com.github.GTNewHorizons:Baubles:1.0.4
+|         +--- com.github.GTNewHorizons:Thaumic_Exploration:1.3.3-GTNH
+|         |    +--- com.github.GTNewHorizons:AppleCore:3.3.0
+|         |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|         |    +--- curse.maven:witchery-69673:2234410
+|         |    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|         |    \--- com.github.GTNewHorizons:CodeChickenLib:1.2.1
+|         +--- com.github.GTNewHorizons:Electro-Magic-Tools:1.5.5
+|         |    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|         |    +--- com.github.GTNewHorizons:ModularUI:1.2.0 -> 1.2.1
+|         |    |    +--- org.jetbrains:annotations:23.0.0 -> 24.0.1
+|         |    |    \--- com.github.GTNewHorizons:NotEnoughItems:2.6.0-GTNH -> 2.6.34-GTNH
+|         |    |         \--- com.github.GTNewHorizons:CodeChickenCore:1.3.6
+|         |    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|         |    \--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|         \--- com.github.GTNewHorizons:GTNHLib:0.3.2 -> 0.5.3
++--- com.github.GTNewHorizons:GT5-Unofficial:5.09.49.60
+|    +--- com.github.GTNewHorizons:StructureLib:1.3.4
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.4.2 -> 0.5.3
+|    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    +--- com.github.GTNewHorizons:NotEnoughIds:2.1.0
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3
+|    +--- com.github.GTNewHorizons:GTNHLib:0.5.3
+|    +--- com.github.GTNewHorizons:ModularUI:1.2.1 (*)
+|    +--- com.github.GTNewHorizons:ModularUI2:2.1.3-1.7.10
+|    |    +--- org.jetbrains:annotations:24.0.1
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.4.3 -> 0.5.3
+|    +--- com.github.GTNewHorizons:waila:1.8.1
+|    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-449-GTNH
+|    |    \--- com.github.GTNewHorizons:Angelica:1.0.0-beta4 -> 1.0.0-beta5
+|    |         \--- com.github.GTNewHorizons:GTNHLib:0.4.2 -> 0.5.3
+|    +--- com.github.GTNewHorizons:AE2FluidCraft-Rework:1.3.35-gtnh
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-445-GTNH -> rv3-beta-449-GTNH (*)
+|    |    +--- curse.maven:cofh-core-69162:2388751
+|    |    \--- com.github.GTNewHorizons:waila:1.8.1
+|    +--- com.github.GTNewHorizons:Yamcl:0.6.0
+|    +--- com.github.GTNewHorizons:Postea:1.0.9
+|    |    \--- com.github.GTNewHorizons:NotEnoughIds:2.1.0 (*)
+|    +--- com.github.GTNewHorizons:ThaumicTinkerer:2.10.1
+|    |    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-402-GTNH -> rv3-beta-449-GTNH (*)
+|    |    \--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    +--- com.github.GTNewHorizons:Mobs-Info:0.4.6-GTNH
+|    |    \--- com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH -> 2.6.34-GTNH (*)
+|    +--- com.github.GTNewHorizons:Navigator:1.0.6
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.3.2 -> 0.5.3
+|    |    +--- maven.modrinth:journeymap:5.2.5
+|    |    +--- curse.maven:xaeros-minimap-263420:5060684
+|    |    \--- curse.maven:xaeros-world-map-317780:5060733
+|    +--- com.github.GTNewHorizons:Avaritia:1.52
+|    +--- com.github.GTNewHorizons:Angelica:1.0.0-beta5 (*)
+|    +--- com.github.GTNewHorizons:AppleCore:3.3.0
+|    +--- com.github.GTNewHorizons:BuildCraft:7.1.39
+|    +--- com.github.GTNewHorizons:EnderIO:2.8.17
+|    +--- com.github.GTNewHorizons:ProjectRed:4.10.2-GTNH
+|    +--- com.github.GTNewHorizons:Railcraft:9.15.12
+|    +--- com.github.GTNewHorizons:Galacticraft:3.2.4-GTNH
+|    \--- curse.maven:advsolar-362768:2885953
++--- com.github.GTNewHorizons:ForbiddenMagic:0.7.0-GTNH
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    \--- com.github.GTNewHorizons:Baubles:1.0.3 -> 1.0.4
++--- com.github.GTNewHorizons:twilightforest:2.6.33
++--- curse.maven:travellers-gear-224440:2262113
++--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
++--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
++--- org.lwjgl.lwjgl:lwjgl:2.9.4-nightly-20150209
+|    +--- org.lwjgl.lwjgl:lwjgl-platform:2.9.4-nightly-20150209
+|    \--- net.java.jinput:jinput:2.0.5
+|         \--- net.java.jutils:jutils:1.0.0
++--- org.lwjgl.lwjgl:lwjgl_util:2.9.4-nightly-20150209
+|    \--- org.lwjgl.lwjgl:lwjgl:2.9.4-nightly-20150209 (*)
++--- org.lwjgl.lwjgl:lwjgl-platform:2.9.4-nightly-20150209
++--- me.eigenraven.java8unsupported:java-8-unsupported-shim:1.0.0
++--- net.minecraft:launchwrapper:1.12
++--- com.google.code.findbugs:jsr305:1.3.9 -> 2.0.1
++--- com.typesafe.akka:akka-actor_2.11:2.3.3
++--- com.typesafe:config:1.2.1
++--- org.scala-lang:scala-actors-migration_2.11:1.1.0
++--- org.scala-lang:scala-compiler:2.11.5
++--- org.scala-lang.plugins:scala-continuations-library_2.11:1.0.2
++--- org.scala-lang.plugins:scala-continuations-plugin_2.11.1:1.0.2
++--- org.scala-lang:scala-library:2.11.5
++--- org.scala-lang:scala-parser-combinators_2.11:1.0.1
++--- org.scala-lang:scala-reflect:2.11.5
++--- org.scala-lang:scala-swing_2.11:1.0.1
++--- org.scala-lang:scala-xml_2.11:1.0.2
++--- lzma:lzma:0.0.1
++--- org.ow2.asm:asm-debug-all:5.0.3
++--- com.github.GTNewHorizons:Baubles:1.0.4
++--- org.jetbrains:intellij-fernflower:1.2.1.16
++--- com.paulscode:codecjorbis:20101023
++--- com.paulscode:codecwav:20101023
++--- com.paulscode:libraryjavasound:20101123
++--- com.paulscode:librarylwjglopenal:20100824
++--- com.paulscode:soundsystem:20120107
++--- com.mojang:netty:1.8.8
++--- com.mojang:realms:1.3.5
+|    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    +--- org.apache.httpcomponents:httpclient:4.3.3
+|    |    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |    +--- commons-logging:commons-logging:1.1.3
+|    |    \--- commons-codec:commons-codec:1.6 -> 1.9
+|    \--- commons-logging:commons-logging:1.1.3
++--- org.apache.commons:commons-compress:1.8.1
++--- org.apache.httpcomponents:httpclient:4.3.3 (*)
++--- commons-logging:commons-logging:1.1.3
++--- org.apache.httpcomponents:httpcore:4.3.2
++--- java3d:vecmath:1.3.1
++--- net.sf.trove4j:trove4j:3.0.3
++--- com.ibm.icu:icu4j-core-mojang:51.2
++--- net.sf.jopt-simple:jopt-simple:4.5
++--- io.netty:netty-all:4.0.10.Final
++--- com.google.guava:guava:17.0
++--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
++--- commons-io:commons-io:2.4
++--- commons-codec:commons-codec:1.9
++--- net.java.jinput:jinput:2.0.5 (*)
++--- net.java.jutils:jutils:1.0.0
++--- com.google.code.gson:gson:2.2.4
++--- com.mojang:authlib:1.5.21
+|    +--- com.google.guava:guava:17.0
+|    +--- org.apache.commons:commons-lang3:3.3.2
+|    +--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- commons-codec:commons-codec:1.9
+|    +--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- com.google.code.gson:gson:2.2.4
+|    +--- com.google.code.findbugs:jsr305:2.0.1
+|    \--- commons-io:commons-io:2.4
++--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
++--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
++--- net.java.jinput:jinput-platform:2.0.5
++--- tv.twitch:twitch:5.16
+|    +--- tv.twitch:twitch-platform:5.16
+|    \--- tv.twitch:twitch-external-platform:4.5
++--- tv.twitch:twitch-platform:5.16
++--- tv.twitch:twitch-external-platform:4.5
+\--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+
+ideVirtualMainCompileOnly - Compile only dependencies for source set 'ide virtual main'. (n)
+No dependencies
+
+ideVirtualMainImplementation - Implementation only dependencies for source set 'ide virtual main'. (n)
+No dependencies
+
+ideVirtualMainRuntimeClasspath - Runtime classpath of source set 'ide virtual main'.
++--- io.github.legacymoddingmc:unimixins:0.1.17
++--- com.github.GTNewHorizons:Tainted-Magic:7.6.11-GTNH
+|    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    +--- com.github.GTNewHorizons:ThaumicBoots:1.3.7
+|    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    +--- com.github.GTNewHorizons:Thaumic_Exploration:1.3.3-GTNH
+|    |    |    +--- com.github.GTNewHorizons:AppleCore:3.3.0
+|    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.13 -> 0.1.17
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    +--- curse.maven:witchery-69673:2234410
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenLib:1.2.1
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenCore:1.2.1 -> 1.3.6
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.1-GTNH -> 2.6.34-GTNH
+|    |    |    |    +--- com.github.GTNewHorizons:CodeChickenCore:1.3.6 (*)
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:Electro-Magic-Tools:1.5.5
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:ModularUI:1.2.0 -> 1.2.1
+|    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    |    +--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3
+|    |    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    |    |    +--- org.jetbrains:annotations:23.0.0 -> 24.0.1
+|    |    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.0-GTNH -> 2.6.34-GTNH (*)
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    |    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.3.2 -> 0.5.3 (*)
+|    |    +--- com.github.GTNewHorizons:TCNEIAdditions:1.4.0
+|    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH -> 2.6.34-GTNH (*)
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    +--- curse.maven:thaumcraft-nei-plugin-225095:2241913
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:GT5-Unofficial:5.09.49.60
+|    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    +--- com.github.GTNewHorizons:ForestryMC:4.9.10
+|    +--- com.github.GTNewHorizons:TinkersConstruct:1.12.9-GTNH
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.33-GTNH -> 2.6.34-GTNH (*)
+|    |    +--- com.github.GTNewHorizons:Mantle:0.4.1
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:ForgeMultipart:1.5.0
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenLib:1.2.1 (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:StructureLib:1.3.4
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.4.2 -> 0.5.3 (*)
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.19-GTNH -> 2.6.34-GTNH (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    +--- com.github.GTNewHorizons:NotEnoughIds:2.1.0
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:GTNHLib:0.5.3 (*)
+|    +--- com.github.GTNewHorizons:ModularUI:1.2.1 (*)
+|    +--- com.github.GTNewHorizons:ModularUI2:2.1.3-1.7.10
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- org.jetbrains:annotations:24.0.1
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.4.3 -> 0.5.3 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:waila:1.8.1
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH -> 2.6.34-GTNH (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-449-GTNH
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    |    +--- curse.maven:cofh-core-69162:2388751
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:AE2FluidCraft-Rework:1.3.35-gtnh
+|    |    +--- com.github.GTNewHorizons:WirelessCraftingTerminal:1.11.6
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-423-GTNH -> rv3-beta-449-GTNH (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-445-GTNH -> rv3-beta-449-GTNH (*)
+|    |    +--- curse.maven:cofh-core-69162:2388751
+|    |    +--- com.github.GTNewHorizons:waila:1.8.1 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Yamcl:0.6.0
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Postea:1.0.9
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:NotEnoughIds:2.1.0 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:ForbiddenMagic:0.7.0-GTNH
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    +--- com.github.GTNewHorizons:Baubles:1.0.3 -> 1.0.4 (*)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:twilightforest:2.6.33
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- curse.maven:travellers-gear-224440:2262113
++--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
++--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
++--- org.lwjgl.lwjgl:lwjgl:2.9.4-nightly-20150209
+|    +--- org.lwjgl.lwjgl:lwjgl-platform:2.9.4-nightly-20150209
+|    \--- net.java.jinput:jinput:2.0.5
+|         +--- net.java.jutils:jutils:1.0.0
+|         \--- net.java.jinput:jinput-platform:2.0.5
++--- org.lwjgl.lwjgl:lwjgl_util:2.9.4-nightly-20150209
+|    \--- org.lwjgl.lwjgl:lwjgl:2.9.4-nightly-20150209 (*)
++--- org.lwjgl.lwjgl:lwjgl-platform:2.9.4-nightly-20150209
++--- me.eigenraven.java8unsupported:java-8-unsupported-shim:1.0.0
++--- net.minecraft:launchwrapper:1.12
++--- com.google.code.findbugs:jsr305:1.3.9 -> 2.0.1
++--- com.typesafe.akka:akka-actor_2.11:2.3.3
++--- com.typesafe:config:1.2.1
++--- org.scala-lang:scala-actors-migration_2.11:1.1.0
++--- org.scala-lang:scala-compiler:2.11.5
++--- org.scala-lang.plugins:scala-continuations-library_2.11:1.0.2
++--- org.scala-lang.plugins:scala-continuations-plugin_2.11.1:1.0.2
++--- org.scala-lang:scala-library:2.11.5
++--- org.scala-lang:scala-parser-combinators_2.11:1.0.1
++--- org.scala-lang:scala-reflect:2.11.5
++--- org.scala-lang:scala-swing_2.11:1.0.1
++--- org.scala-lang:scala-xml_2.11:1.0.2
++--- lzma:lzma:0.0.1
++--- org.ow2.asm:asm-debug-all:5.0.3
++--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
++--- org.jetbrains:intellij-fernflower:1.2.1.16
++--- com.paulscode:codecjorbis:20101023
++--- com.paulscode:codecwav:20101023
++--- com.paulscode:libraryjavasound:20101123
++--- com.paulscode:librarylwjglopenal:20100824
++--- com.paulscode:soundsystem:20120107
++--- com.mojang:netty:1.8.8
+|    +--- io.netty:netty-all:4.0.10.Final
+|    +--- com.google.guava:guava:15.0 -> 17.0
+|    +--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
+|    \--- commons-io:commons-io:2.4
++--- com.mojang:realms:1.3.5
+|    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    +--- org.apache.httpcomponents:httpclient:4.3.3
+|    |    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |    +--- commons-logging:commons-logging:1.1.3
+|    |    \--- commons-codec:commons-codec:1.6 -> 1.9
+|    \--- commons-logging:commons-logging:1.1.3
++--- org.apache.commons:commons-compress:1.8.1
++--- org.apache.httpcomponents:httpclient:4.3.3 (*)
++--- commons-logging:commons-logging:1.1.3
++--- org.apache.httpcomponents:httpcore:4.3.2
++--- java3d:vecmath:1.3.1
++--- net.sf.trove4j:trove4j:3.0.3
++--- com.ibm.icu:icu4j-core-mojang:51.2
++--- net.sf.jopt-simple:jopt-simple:4.5
++--- io.netty:netty-all:4.0.10.Final
++--- com.google.guava:guava:17.0
++--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
++--- commons-io:commons-io:2.4
++--- commons-codec:commons-codec:1.9
++--- net.java.jinput:jinput:2.0.5 (*)
++--- net.java.jutils:jutils:1.0.0
++--- com.google.code.gson:gson:2.2.4
++--- com.mojang:authlib:1.5.21
+|    +--- com.google.guava:guava:17.0
+|    +--- org.apache.commons:commons-lang3:3.3.2
+|    +--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- commons-codec:commons-codec:1.9
+|    +--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- com.google.code.gson:gson:2.2.4
+|    +--- com.google.code.findbugs:jsr305:2.0.1
+|    \--- commons-io:commons-io:2.4
++--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
++--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
++--- net.java.jinput:jinput-platform:2.0.5
++--- tv.twitch:twitch:5.16
+|    +--- tv.twitch:twitch-platform:5.16
+|    \--- tv.twitch:twitch-external-platform:4.5
++--- tv.twitch:twitch-platform:5.16
++--- tv.twitch:twitch-external-platform:4.5
+\--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+
+ideVirtualMainRuntimeOnly - Runtime only dependencies for source set 'ide virtual main'. (n)
+No dependencies
+
+implementation - Implementation dependencies for the 'main' feature. (n)
++--- io.github.legacymoddingmc:unimixins:0.1.17 (n)
++--- com.github.GTNewHorizons:Tainted-Magic:7.6.11-GTNH (n)
++--- com.github.GTNewHorizons:GT5-Unofficial:5.09.49.60 (n)
++--- com.github.GTNewHorizons:ForbiddenMagic:0.7.0-GTNH (n)
++--- com.github.GTNewHorizons:twilightforest:2.6.33 (n)
++--- curse.maven:travellers-gear-224440:2262113 (n)
++--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5 (n)
+\--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (n)
+
+injectedTagsAnnotationProcessor - Annotation processors and their dependencies for source set 'injected tags'.
+No dependencies
+
+injectedTagsCompileClasspath - Compile classpath for source set 'injected tags'.
+No dependencies
+
+injectedTagsCompileOnly - Compile only dependencies for source set 'injected tags'. (n)
+No dependencies
+
+injectedTagsImplementation - Implementation only dependencies for source set 'injected tags'. (n)
+No dependencies
+
+injectedTagsRuntimeClasspath - Runtime classpath of source set 'injected tags'.
+No dependencies
+
+injectedTagsRuntimeOnly - Runtime only dependencies for source set 'injected tags'. (n)
+No dependencies
+
+java17Dependencies
++--- io.github.legacymoddingmc:unimixins:0.1.17
++--- com.github.GTNewHorizons:Tainted-Magic:7.6.11-GTNH
+|    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    +--- com.github.GTNewHorizons:ThaumicBoots:1.3.7
+|    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    +--- com.github.GTNewHorizons:Thaumic_Exploration:1.3.3-GTNH
+|    |    |    +--- com.github.GTNewHorizons:AppleCore:3.3.0
+|    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.13 -> 0.1.17
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    +--- curse.maven:witchery-69673:2234410
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenLib:1.2.1
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenCore:1.2.1 -> 1.3.6
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.1-GTNH -> 2.6.34-GTNH
+|    |    |    |    +--- com.github.GTNewHorizons:CodeChickenCore:1.3.6 (*)
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:Electro-Magic-Tools:1.5.5
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:ModularUI:1.2.0 -> 1.2.1
+|    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    |    +--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3
+|    |    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    |    |    +--- org.jetbrains:annotations:23.0.0 -> 24.0.1
+|    |    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.0-GTNH -> 2.6.34-GTNH (*)
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    |    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.3.2 -> 0.5.3 (*)
+|    |    +--- com.github.GTNewHorizons:TCNEIAdditions:1.4.0
+|    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH -> 2.6.34-GTNH (*)
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    +--- curse.maven:thaumcraft-nei-plugin-225095:2241913
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:GT5-Unofficial:5.09.49.60
+|    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    +--- com.github.GTNewHorizons:ForestryMC:4.9.10
+|    +--- com.github.GTNewHorizons:TinkersConstruct:1.12.9-GTNH
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.33-GTNH -> 2.6.34-GTNH (*)
+|    |    +--- com.github.GTNewHorizons:Mantle:0.4.1
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:ForgeMultipart:1.5.0
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenLib:1.2.1 (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:StructureLib:1.3.4
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.4.2 -> 0.5.3 (*)
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.19-GTNH -> 2.6.34-GTNH (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    +--- com.github.GTNewHorizons:NotEnoughIds:2.1.0
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:GTNHLib:0.5.3 (*)
+|    +--- com.github.GTNewHorizons:ModularUI:1.2.1 (*)
+|    +--- com.github.GTNewHorizons:ModularUI2:2.1.3-1.7.10
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- org.jetbrains:annotations:24.0.1
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.4.3 -> 0.5.3 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:waila:1.8.1
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH -> 2.6.34-GTNH (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-449-GTNH
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    |    +--- curse.maven:cofh-core-69162:2388751
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:AE2FluidCraft-Rework:1.3.35-gtnh
+|    |    +--- com.github.GTNewHorizons:WirelessCraftingTerminal:1.11.6
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-423-GTNH -> rv3-beta-449-GTNH (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-445-GTNH -> rv3-beta-449-GTNH (*)
+|    |    +--- curse.maven:cofh-core-69162:2388751
+|    |    +--- com.github.GTNewHorizons:waila:1.8.1 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Yamcl:0.6.0
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Postea:1.0.9
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:NotEnoughIds:2.1.0 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:ForbiddenMagic:0.7.0-GTNH
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    +--- com.github.GTNewHorizons:Baubles:1.0.3 -> 1.0.4 (*)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:twilightforest:2.6.33
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- curse.maven:travellers-gear-224440:2262113
++--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
++--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
++--- com.github.GTNewHorizons:lwjgl3ify:2.1.1
+|    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    +--- com.google.code.gson:gson:2.10.1
+|    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:Hodgepodge:2.5.57
+|    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    +--- com.github.GTNewHorizons:GTNHLib:0.5.0 -> 0.5.3 (*)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- io.github.legacymoddingmc:unimixins:0.1.17 (c)
++--- me.eigenraven.java8unsupported:java-8-unsupported-shim:1.0.0
++--- net.minecraft:launchwrapper:1.12
++--- com.google.code.findbugs:jsr305:1.3.9 -> 2.0.1
++--- com.typesafe.akka:akka-actor_2.11:2.3.3
++--- com.typesafe:config:1.2.1
++--- org.scala-lang:scala-actors-migration_2.11:1.1.0
++--- org.scala-lang:scala-compiler:2.11.5
++--- org.scala-lang.plugins:scala-continuations-library_2.11:1.0.2
++--- org.scala-lang.plugins:scala-continuations-plugin_2.11.1:1.0.2
++--- org.scala-lang:scala-library:2.11.5
++--- org.scala-lang:scala-parser-combinators_2.11:1.0.1
++--- org.scala-lang:scala-reflect:2.11.5
++--- org.scala-lang:scala-swing_2.11:1.0.1
++--- org.scala-lang:scala-xml_2.11:1.0.2
++--- lzma:lzma:0.0.1
++--- org.ow2.asm:asm-debug-all:5.0.3
++--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
++--- org.jetbrains:intellij-fernflower:1.2.1.16
++--- com.paulscode:codecjorbis:20101023
++--- com.paulscode:codecwav:20101023
++--- com.paulscode:libraryjavasound:20101123
++--- com.paulscode:librarylwjglopenal:20100824
++--- com.paulscode:soundsystem:20120107
++--- com.mojang:netty:1.8.8
+|    +--- io.netty:netty-all:4.0.10.Final
+|    +--- com.google.guava:guava:15.0 -> 17.0
+|    +--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
+|    \--- commons-io:commons-io:2.4
++--- com.mojang:realms:1.3.5
+|    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    +--- org.apache.httpcomponents:httpclient:4.3.3
+|    |    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |    +--- commons-logging:commons-logging:1.1.3
+|    |    \--- commons-codec:commons-codec:1.6 -> 1.9
+|    \--- commons-logging:commons-logging:1.1.3
++--- org.apache.commons:commons-compress:1.8.1
++--- org.apache.httpcomponents:httpclient:4.3.3 (*)
++--- commons-logging:commons-logging:1.1.3
++--- org.apache.httpcomponents:httpcore:4.3.2
++--- java3d:vecmath:1.3.1
++--- net.sf.trove4j:trove4j:3.0.3
++--- com.ibm.icu:icu4j-core-mojang:51.2
++--- net.sf.jopt-simple:jopt-simple:4.5
++--- io.netty:netty-all:4.0.10.Final
++--- com.google.guava:guava:17.0
++--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
++--- commons-io:commons-io:2.4
++--- commons-codec:commons-codec:1.9
++--- net.java.jinput:jinput:2.0.5
+|    +--- net.java.jutils:jutils:1.0.0
+|    \--- net.java.jinput:jinput-platform:2.0.5
++--- net.java.jutils:jutils:1.0.0
++--- com.google.code.gson:gson:2.2.4 -> 2.10.1
++--- com.mojang:authlib:1.5.21
+|    +--- com.google.guava:guava:17.0
+|    +--- org.apache.commons:commons-lang3:3.3.2
+|    +--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- commons-codec:commons-codec:1.9
+|    +--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- com.google.code.gson:gson:2.2.4 -> 2.10.1
+|    +--- com.google.code.findbugs:jsr305:2.0.1
+|    \--- commons-io:commons-io:2.4
++--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
++--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
++--- net.java.jinput:jinput-platform:2.0.5
++--- tv.twitch:twitch:5.16
+|    +--- tv.twitch:twitch-platform:5.16
+|    \--- tv.twitch:twitch-external-platform:4.5
++--- tv.twitch:twitch-platform:5.16
++--- tv.twitch:twitch-external-platform:4.5
+\--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+
+java17PatchDependencies
+\--- com.github.GTNewHorizons:lwjgl3ify:2.1.1
+
+lwjgl2Classpath
++--- org.lwjgl.lwjgl:lwjgl:2.9.4-nightly-20150209
++--- org.lwjgl.lwjgl:lwjgl_util:2.9.4-nightly-20150209
+\--- org.lwjgl.lwjgl:lwjgl-platform:2.9.4-nightly-20150209
+
+lwjgl3Classpath
++--- org.lwjgl:lwjgl-bom:3.3.3
+|    +--- org.lwjgl:lwjgl:3.3.3 (c)
+|    +--- org.lwjgl:lwjgl-glfw:3.3.3 (c)
+|    +--- org.lwjgl:lwjgl-jemalloc:3.3.3 (c)
+|    +--- org.lwjgl:lwjgl-openal:3.3.3 (c)
+|    +--- org.lwjgl:lwjgl-opengl:3.3.3 (c)
+|    +--- org.lwjgl:lwjgl-stb:3.3.3 (c)
+|    \--- org.lwjgl:lwjgl-tinyfd:3.3.3 (c)
++--- org.lwjgl:lwjgl:3.3.3
++--- org.lwjgl:lwjgl-glfw:3.3.3
+|    \--- org.lwjgl:lwjgl:3.3.3
++--- org.lwjgl:lwjgl-openal:3.3.3
+|    \--- org.lwjgl:lwjgl:3.3.3
++--- org.lwjgl:lwjgl-opengl:3.3.3
+|    \--- org.lwjgl:lwjgl:3.3.3
++--- org.lwjgl:lwjgl-jemalloc:3.3.3
+|    \--- org.lwjgl:lwjgl:3.3.3
++--- org.lwjgl:lwjgl-stb:3.3.3
+|    \--- org.lwjgl:lwjgl:3.3.3
+\--- org.lwjgl:lwjgl-tinyfd:3.3.3
+     \--- org.lwjgl:lwjgl:3.3.3
+
+mainSourceElements - List of source directories contained in the Main SourceSet. (n)
+No dependencies
+
+mcLauncherAnnotationProcessor - Annotation processors and their dependencies for source set 'mc launcher'.
+No dependencies
+
+mcLauncherCompileClasspath - Compile classpath for source set 'mc launcher'.
+No dependencies
+
+mcLauncherCompileOnly - Compile only dependencies for source set 'mc launcher'. (n)
+No dependencies
+
+mcLauncherImplementation - Implementation only dependencies for source set 'mc launcher'. (n)
+No dependencies
+
+mcLauncherRuntimeClasspath - Runtime classpath of source set 'mc launcher'.
+No dependencies
+
+mcLauncherRuntimeOnly - Runtime only dependencies for source set 'mc launcher'. (n)
+No dependencies
+
+obfuscatedRuntimeClasspath
++--- io.github.legacymoddingmc:unimixins:0.1.17
++--- com.github.GTNewHorizons:Tainted-Magic:7.6.11-GTNH
++--- com.github.GTNewHorizons:GT5-Unofficial:5.09.49.60
++--- com.github.GTNewHorizons:ForbiddenMagic:0.7.0-GTNH
++--- com.github.GTNewHorizons:twilightforest:2.6.33
++--- curse.maven:travellers-gear-224440:2262113
++--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
++--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH
++--- com.github.GTNewHorizons:Baubles:1.0.4
++--- com.github.GTNewHorizons:ThaumicBoots:1.3.7
++--- com.github.GTNewHorizons:StructureLib:1.3.4
++--- com.github.GTNewHorizons:Postea:1.0.9
++--- com.github.GTNewHorizons:NotEnoughIds:2.1.0
++--- com.github.GTNewHorizons:TinkersConstruct:1.12.9-GTNH
++--- com.github.GTNewHorizons:ModularUI:1.2.1
++--- com.github.GTNewHorizons:AE2FluidCraft-Rework:1.3.35-gtnh
++--- com.github.GTNewHorizons:waila:1.8.1
++--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-449-GTNH
++--- com.github.GTNewHorizons:ModularUI2:2.1.3-1.7.10
++--- com.github.GTNewHorizons:Yamcl:0.6.0
++--- com.github.GTNewHorizons:GTNHLib:0.5.3
++--- com.github.GTNewHorizons:ForestryMC:4.9.10
++--- curse.maven:ic2-242638:2353971
++--- com.github.GTNewHorizons:CodeChickenCore:1.3.6
++--- com.github.GTNewHorizons:Electro-Magic-Tools:1.5.5
++--- com.github.GTNewHorizons:Thaumic_Exploration:1.3.3-GTNH
++--- com.github.GTNewHorizons:TCNEIAdditions:1.4.0
++--- com.github.GTNewHorizons:Mantle:0.4.1
++--- com.github.GTNewHorizons:ForgeMultipart:1.5.0
++--- org.jetbrains:annotations:24.0.1
++--- com.github.GTNewHorizons:WirelessCraftingTerminal:1.11.6
++--- curse.maven:cofh-core-69162:2388751 -> 2388750
++--- com.github.GTNewHorizons:AppleCore:3.3.0
++--- com.github.GTNewHorizons:CodeChickenLib:1.2.1
++--- curse.maven:witchery-69673:2234410
+\--- curse.maven:thaumcraft-nei-plugin-225095:2241913
+
+patchedMcAnnotationProcessor - Annotation processors and their dependencies for source set 'patched mc'.
+No dependencies
+
+patchedMcCompileClasspath - Compile classpath for source set 'patched mc'.
+No dependencies
+
+patchedMcCompileOnly - Compile only dependencies for source set 'patched mc'. (n)
+No dependencies
+
+patchedMcImplementation - Implementation only dependencies for source set 'patched mc'. (n)
+No dependencies
+
+patchedMcRuntimeClasspath - Runtime classpath of source set 'patched mc'.
+No dependencies
+
+patchedMcRuntimeOnly - Runtime only dependencies for source set 'patched mc'. (n)
+No dependencies
+
+patchedMinecraft - Dependencies needed to run modded minecraft
++--- me.eigenraven.java8unsupported:java-8-unsupported-shim:1.0.0
++--- net.minecraft:launchwrapper:1.12
++--- com.google.code.findbugs:jsr305:1.3.9 -> 2.0.1
++--- com.typesafe.akka:akka-actor_2.11:2.3.3
++--- com.typesafe:config:1.2.1
++--- org.scala-lang:scala-actors-migration_2.11:1.1.0
++--- org.scala-lang:scala-compiler:2.11.5
++--- org.scala-lang.plugins:scala-continuations-library_2.11:1.0.2
++--- org.scala-lang.plugins:scala-continuations-plugin_2.11.1:1.0.2
++--- org.scala-lang:scala-library:2.11.5
++--- org.scala-lang:scala-parser-combinators_2.11:1.0.1
++--- org.scala-lang:scala-reflect:2.11.5
++--- org.scala-lang:scala-swing_2.11:1.0.1
++--- org.scala-lang:scala-xml_2.11:1.0.2
++--- lzma:lzma:0.0.1
++--- org.ow2.asm:asm-debug-all:5.0.3
++--- com.paulscode:codecjorbis:20101023
++--- com.paulscode:codecwav:20101023
++--- com.paulscode:libraryjavasound:20101123
++--- com.paulscode:librarylwjglopenal:20100824
++--- com.paulscode:soundsystem:20120107
++--- com.mojang:netty:1.8.8
+|    +--- io.netty:netty-all:4.0.10.Final
+|    +--- com.google.guava:guava:15.0 -> 17.0
+|    +--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
+|    \--- commons-io:commons-io:2.4
++--- com.mojang:realms:1.3.5
+|    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    +--- org.apache.httpcomponents:httpclient:4.3.3
+|    |    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |    +--- commons-logging:commons-logging:1.1.3
+|    |    \--- commons-codec:commons-codec:1.6 -> 1.9
+|    \--- commons-logging:commons-logging:1.1.3
++--- org.apache.commons:commons-compress:1.8.1
++--- org.apache.httpcomponents:httpclient:4.3.3 (*)
++--- commons-logging:commons-logging:1.1.3
++--- org.apache.httpcomponents:httpcore:4.3.2
++--- java3d:vecmath:1.3.1
++--- net.sf.trove4j:trove4j:3.0.3
++--- com.ibm.icu:icu4j-core-mojang:51.2
++--- net.sf.jopt-simple:jopt-simple:4.5
++--- io.netty:netty-all:4.0.10.Final
++--- com.google.guava:guava:17.0
++--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
++--- commons-io:commons-io:2.4
++--- commons-codec:commons-codec:1.9
++--- net.java.jinput:jinput:2.0.5
+|    +--- net.java.jutils:jutils:1.0.0
+|    \--- net.java.jinput:jinput-platform:2.0.5
++--- net.java.jutils:jutils:1.0.0
++--- com.google.code.gson:gson:2.2.4
++--- com.mojang:authlib:1.5.21
+|    +--- com.google.guava:guava:17.0
+|    +--- org.apache.commons:commons-lang3:3.3.2
+|    +--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- commons-codec:commons-codec:1.9
+|    +--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- com.google.code.gson:gson:2.2.4
+|    +--- com.google.code.findbugs:jsr305:2.0.1
+|    \--- commons-io:commons-io:2.4
++--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
++--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
++--- net.java.jinput:jinput-platform:2.0.5
++--- tv.twitch:twitch:5.16
+|    +--- tv.twitch:twitch-platform:5.16
+|    \--- tv.twitch:twitch-external-platform:4.5
++--- tv.twitch:twitch-platform:5.16
+\--- tv.twitch:twitch-external-platform:4.5
+
+reobfElements (n)
+No dependencies
+
+reobfJarConfiguration - Reobfuscated jar
++--- io.github.legacymoddingmc:unimixins:0.1.17
++--- com.github.GTNewHorizons:Tainted-Magic:7.6.11-GTNH
++--- com.github.GTNewHorizons:GT5-Unofficial:5.09.49.60
++--- com.github.GTNewHorizons:ForbiddenMagic:0.7.0-GTNH
++--- com.github.GTNewHorizons:twilightforest:2.6.33
++--- curse.maven:travellers-gear-224440:2262113
++--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
++--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH
++--- com.github.GTNewHorizons:Baubles:1.0.4
++--- com.github.GTNewHorizons:ThaumicBoots:1.3.7
++--- com.github.GTNewHorizons:StructureLib:1.3.4
++--- com.github.GTNewHorizons:Postea:1.0.9
++--- com.github.GTNewHorizons:NotEnoughIds:2.1.0
++--- com.github.GTNewHorizons:TinkersConstruct:1.12.9-GTNH
++--- com.github.GTNewHorizons:ModularUI:1.2.1
++--- com.github.GTNewHorizons:AE2FluidCraft-Rework:1.3.35-gtnh
++--- com.github.GTNewHorizons:waila:1.8.1
++--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-449-GTNH
++--- com.github.GTNewHorizons:ModularUI2:2.1.3-1.7.10
++--- com.github.GTNewHorizons:Yamcl:0.6.0
++--- com.github.GTNewHorizons:GTNHLib:0.5.3
++--- com.github.GTNewHorizons:ForestryMC:4.9.10
++--- curse.maven:ic2-242638:2353971
++--- com.github.GTNewHorizons:CodeChickenCore:1.3.6
++--- com.github.GTNewHorizons:Electro-Magic-Tools:1.5.5
++--- com.github.GTNewHorizons:Thaumic_Exploration:1.3.3-GTNH
++--- com.github.GTNewHorizons:TCNEIAdditions:1.4.0
++--- com.github.GTNewHorizons:Mantle:0.4.1
++--- com.github.GTNewHorizons:ForgeMultipart:1.5.0
++--- org.jetbrains:annotations:24.0.1
++--- com.github.GTNewHorizons:WirelessCraftingTerminal:1.11.6
++--- curse.maven:cofh-core-69162:2388751 -> 2388750
++--- com.github.GTNewHorizons:AppleCore:3.3.0
++--- com.github.GTNewHorizons:CodeChickenLib:1.2.1
++--- curse.maven:witchery-69673:2234410
+\--- curse.maven:thaumcraft-nei-plugin-225095:2241913
+
+reobfJarInputConfiguration
++--- io.github.legacymoddingmc:unimixins:0.1.17
++--- com.github.GTNewHorizons:Tainted-Magic:7.6.11-GTNH
+|    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    +--- com.github.GTNewHorizons:ThaumicBoots:1.3.7
+|    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    +--- com.github.GTNewHorizons:Thaumic_Exploration:1.3.3-GTNH
+|    |    |    +--- com.github.GTNewHorizons:AppleCore:3.3.0
+|    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.13 -> 0.1.17
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    +--- curse.maven:witchery-69673:2234410
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenLib:1.2.1
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenCore:1.2.1 -> 1.3.6
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.1-GTNH -> 2.6.34-GTNH
+|    |    |    |    +--- com.github.GTNewHorizons:CodeChickenCore:1.3.6 (*)
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:Electro-Magic-Tools:1.5.5
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:ModularUI:1.2.0 -> 1.2.1
+|    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    |    +--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3
+|    |    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    |    |    +--- org.jetbrains:annotations:23.0.0 -> 24.0.1
+|    |    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.0-GTNH -> 2.6.34-GTNH (*)
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    |    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.3.2 -> 0.5.3 (*)
+|    |    +--- com.github.GTNewHorizons:TCNEIAdditions:1.4.0
+|    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH -> 2.6.34-GTNH (*)
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    +--- curse.maven:thaumcraft-nei-plugin-225095:2241913
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:GT5-Unofficial:5.09.49.60
+|    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    +--- com.github.GTNewHorizons:ForestryMC:4.9.10
+|    +--- com.github.GTNewHorizons:TinkersConstruct:1.12.9-GTNH
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.33-GTNH -> 2.6.34-GTNH (*)
+|    |    +--- com.github.GTNewHorizons:Mantle:0.4.1
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:ForgeMultipart:1.5.0
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenLib:1.2.1 (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:StructureLib:1.3.4
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.4.2 -> 0.5.3 (*)
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.19-GTNH -> 2.6.34-GTNH (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    +--- com.github.GTNewHorizons:NotEnoughIds:2.1.0
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:GTNHLib:0.5.3 (*)
+|    +--- com.github.GTNewHorizons:ModularUI:1.2.1 (*)
+|    +--- com.github.GTNewHorizons:ModularUI2:2.1.3-1.7.10
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- org.jetbrains:annotations:24.0.1
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.4.3 -> 0.5.3 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:waila:1.8.1
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH -> 2.6.34-GTNH (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-449-GTNH
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    |    +--- curse.maven:cofh-core-69162:2388751
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:AE2FluidCraft-Rework:1.3.35-gtnh
+|    |    +--- com.github.GTNewHorizons:WirelessCraftingTerminal:1.11.6
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-423-GTNH -> rv3-beta-449-GTNH (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-445-GTNH -> rv3-beta-449-GTNH (*)
+|    |    +--- curse.maven:cofh-core-69162:2388751
+|    |    +--- com.github.GTNewHorizons:waila:1.8.1 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Yamcl:0.6.0
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Postea:1.0.9
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:NotEnoughIds:2.1.0 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:ForbiddenMagic:0.7.0-GTNH
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    +--- com.github.GTNewHorizons:Baubles:1.0.3 -> 1.0.4 (*)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:twilightforest:2.6.33
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- curse.maven:travellers-gear-224440:2262113
++--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
++--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+\--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+
+runtimeClasspath - Runtime classpath of source set 'main'.
++--- io.github.legacymoddingmc:unimixins:0.1.17
++--- com.github.GTNewHorizons:Tainted-Magic:7.6.11-GTNH
+|    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    +--- com.github.GTNewHorizons:ThaumicBoots:1.3.7
+|    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    +--- com.github.GTNewHorizons:Thaumic_Exploration:1.3.3-GTNH
+|    |    |    +--- com.github.GTNewHorizons:AppleCore:3.3.0
+|    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.13 -> 0.1.17
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    +--- curse.maven:witchery-69673:2234410
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenLib:1.2.1
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenCore:1.2.1 -> 1.3.6
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.1-GTNH -> 2.6.34-GTNH
+|    |    |    |    +--- com.github.GTNewHorizons:CodeChickenCore:1.3.6 (*)
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:Electro-Magic-Tools:1.5.5
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:ModularUI:1.2.0 -> 1.2.1
+|    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    |    +--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3
+|    |    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    |    |    +--- org.jetbrains:annotations:23.0.0 -> 24.0.1
+|    |    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.0-GTNH -> 2.6.34-GTNH (*)
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    |    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.3.2 -> 0.5.3 (*)
+|    |    +--- com.github.GTNewHorizons:TCNEIAdditions:1.4.0
+|    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH -> 2.6.34-GTNH (*)
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    +--- curse.maven:thaumcraft-nei-plugin-225095:2241913
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:GT5-Unofficial:5.09.49.60
+|    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    +--- com.github.GTNewHorizons:ForestryMC:4.9.10
+|    +--- com.github.GTNewHorizons:TinkersConstruct:1.12.9-GTNH
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.33-GTNH -> 2.6.34-GTNH (*)
+|    |    +--- com.github.GTNewHorizons:Mantle:0.4.1
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:ForgeMultipart:1.5.0
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenLib:1.2.1 (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:StructureLib:1.3.4
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.4.2 -> 0.5.3 (*)
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.19-GTNH -> 2.6.34-GTNH (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    +--- com.github.GTNewHorizons:NotEnoughIds:2.1.0
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:GTNHLib:0.5.3 (*)
+|    +--- com.github.GTNewHorizons:ModularUI:1.2.1 (*)
+|    +--- com.github.GTNewHorizons:ModularUI2:2.1.3-1.7.10
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- org.jetbrains:annotations:24.0.1
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.4.3 -> 0.5.3 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:waila:1.8.1
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH -> 2.6.34-GTNH (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-449-GTNH
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    |    +--- curse.maven:cofh-core-69162:2388751
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:AE2FluidCraft-Rework:1.3.35-gtnh
+|    |    +--- com.github.GTNewHorizons:WirelessCraftingTerminal:1.11.6
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-423-GTNH -> rv3-beta-449-GTNH (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-445-GTNH -> rv3-beta-449-GTNH (*)
+|    |    +--- curse.maven:cofh-core-69162:2388751
+|    |    +--- com.github.GTNewHorizons:waila:1.8.1 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Yamcl:0.6.0
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Postea:1.0.9
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:NotEnoughIds:2.1.0 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:ForbiddenMagic:0.7.0-GTNH
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    +--- com.github.GTNewHorizons:Baubles:1.0.3 -> 1.0.4 (*)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:twilightforest:2.6.33
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- curse.maven:travellers-gear-224440:2262113
++--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
++--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
++--- me.eigenraven.java8unsupported:java-8-unsupported-shim:1.0.0
++--- net.minecraft:launchwrapper:1.12
++--- com.google.code.findbugs:jsr305:1.3.9 -> 2.0.1
++--- com.typesafe.akka:akka-actor_2.11:2.3.3
++--- com.typesafe:config:1.2.1
++--- org.scala-lang:scala-actors-migration_2.11:1.1.0
++--- org.scala-lang:scala-compiler:2.11.5
++--- org.scala-lang.plugins:scala-continuations-library_2.11:1.0.2
++--- org.scala-lang.plugins:scala-continuations-plugin_2.11.1:1.0.2
++--- org.scala-lang:scala-library:2.11.5
++--- org.scala-lang:scala-parser-combinators_2.11:1.0.1
++--- org.scala-lang:scala-reflect:2.11.5
++--- org.scala-lang:scala-swing_2.11:1.0.1
++--- org.scala-lang:scala-xml_2.11:1.0.2
++--- lzma:lzma:0.0.1
++--- org.ow2.asm:asm-debug-all:5.0.3
++--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
++--- org.jetbrains:intellij-fernflower:1.2.1.16
++--- com.paulscode:codecjorbis:20101023
++--- com.paulscode:codecwav:20101023
++--- com.paulscode:libraryjavasound:20101123
++--- com.paulscode:librarylwjglopenal:20100824
++--- com.paulscode:soundsystem:20120107
++--- com.mojang:netty:1.8.8
+|    +--- io.netty:netty-all:4.0.10.Final
+|    +--- com.google.guava:guava:15.0 -> 17.0
+|    +--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
+|    \--- commons-io:commons-io:2.4
++--- com.mojang:realms:1.3.5
+|    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    +--- org.apache.httpcomponents:httpclient:4.3.3
+|    |    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |    +--- commons-logging:commons-logging:1.1.3
+|    |    \--- commons-codec:commons-codec:1.6 -> 1.9
+|    \--- commons-logging:commons-logging:1.1.3
++--- org.apache.commons:commons-compress:1.8.1
++--- org.apache.httpcomponents:httpclient:4.3.3 (*)
++--- commons-logging:commons-logging:1.1.3
++--- org.apache.httpcomponents:httpcore:4.3.2
++--- java3d:vecmath:1.3.1
++--- net.sf.trove4j:trove4j:3.0.3
++--- com.ibm.icu:icu4j-core-mojang:51.2
++--- net.sf.jopt-simple:jopt-simple:4.5
++--- io.netty:netty-all:4.0.10.Final
++--- com.google.guava:guava:17.0
++--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
++--- commons-io:commons-io:2.4
++--- commons-codec:commons-codec:1.9
++--- net.java.jinput:jinput:2.0.5
+|    +--- net.java.jutils:jutils:1.0.0
+|    \--- net.java.jinput:jinput-platform:2.0.5
++--- net.java.jutils:jutils:1.0.0
++--- com.google.code.gson:gson:2.2.4
++--- com.mojang:authlib:1.5.21
+|    +--- com.google.guava:guava:17.0
+|    +--- org.apache.commons:commons-lang3:3.3.2
+|    +--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- commons-codec:commons-codec:1.9
+|    +--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- com.google.code.gson:gson:2.2.4
+|    +--- com.google.code.findbugs:jsr305:2.0.1
+|    \--- commons-io:commons-io:2.4
++--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
++--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
++--- net.java.jinput:jinput-platform:2.0.5
++--- tv.twitch:twitch:5.16
+|    +--- tv.twitch:twitch-platform:5.16
+|    \--- tv.twitch:twitch-external-platform:4.5
++--- tv.twitch:twitch-platform:5.16
++--- tv.twitch:twitch-external-platform:4.5
+\--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+
+runtimeElements - Runtime elements for the 'main' feature. (n)
+No dependencies
+
+runtimeOnly - Runtime-only dependencies for the 'main' feature. (n)
+\--- com.github.GTNewHorizons:Baubles:1.0.4 (n)
+
+runtimeOnlyNonPublishable - Runtime only dependencies that are not published alongside the jar (n)
+\--- org.jetbrains:intellij-fernflower:1.2.1.16 (n)
+
+sourcesElements - sources elements for main. (n)
+No dependencies
+
+testAnnotationProcessor - Annotation processors and their dependencies for source set 'test'.
+No dependencies
+
+testCompile - Deprecated: use testImplementation instead (n)
+No dependencies
+
+testCompileClasspath - Compile classpath for source set 'test'.
++--- io.github.legacymoddingmc:unimixins:0.1.17
++--- com.github.GTNewHorizons:Tainted-Magic:7.6.11-GTNH
+|    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    \--- com.github.GTNewHorizons:ThaumicBoots:1.3.7
+|         +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|         +--- com.github.GTNewHorizons:Baubles:1.0.4
+|         +--- com.github.GTNewHorizons:Thaumic_Exploration:1.3.3-GTNH
+|         |    +--- com.github.GTNewHorizons:AppleCore:3.3.0
+|         |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|         |    +--- curse.maven:witchery-69673:2234410
+|         |    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|         |    \--- com.github.GTNewHorizons:CodeChickenLib:1.2.1
+|         +--- com.github.GTNewHorizons:Electro-Magic-Tools:1.5.5
+|         |    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|         |    +--- com.github.GTNewHorizons:ModularUI:1.2.0 -> 1.2.1
+|         |    |    +--- org.jetbrains:annotations:23.0.0 -> 24.0.1
+|         |    |    \--- com.github.GTNewHorizons:NotEnoughItems:2.6.0-GTNH -> 2.6.34-GTNH
+|         |    |         \--- com.github.GTNewHorizons:CodeChickenCore:1.3.6
+|         |    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|         |    \--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|         \--- com.github.GTNewHorizons:GTNHLib:0.3.2 -> 0.5.3
++--- com.github.GTNewHorizons:GT5-Unofficial:5.09.49.60
+|    +--- com.github.GTNewHorizons:StructureLib:1.3.4
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.4.2 -> 0.5.3
+|    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    +--- com.github.GTNewHorizons:NotEnoughIds:2.1.0
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3
+|    +--- com.github.GTNewHorizons:GTNHLib:0.5.3
+|    +--- com.github.GTNewHorizons:ModularUI:1.2.1 (*)
+|    +--- com.github.GTNewHorizons:ModularUI2:2.1.3-1.7.10
+|    |    +--- org.jetbrains:annotations:24.0.1
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.4.3 -> 0.5.3
+|    +--- com.github.GTNewHorizons:waila:1.8.1
+|    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-449-GTNH
+|    |    \--- com.github.GTNewHorizons:Angelica:1.0.0-beta4 -> 1.0.0-beta5
+|    |         \--- com.github.GTNewHorizons:GTNHLib:0.4.2 -> 0.5.3
+|    +--- com.github.GTNewHorizons:AE2FluidCraft-Rework:1.3.35-gtnh
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-445-GTNH -> rv3-beta-449-GTNH (*)
+|    |    +--- curse.maven:cofh-core-69162:2388751
+|    |    \--- com.github.GTNewHorizons:waila:1.8.1
+|    +--- com.github.GTNewHorizons:Yamcl:0.6.0
+|    +--- com.github.GTNewHorizons:Postea:1.0.9
+|    |    \--- com.github.GTNewHorizons:NotEnoughIds:2.1.0 (*)
+|    +--- com.github.GTNewHorizons:ThaumicTinkerer:2.10.1
+|    |    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-402-GTNH -> rv3-beta-449-GTNH (*)
+|    |    \--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    +--- com.github.GTNewHorizons:Mobs-Info:0.4.6-GTNH
+|    |    \--- com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH -> 2.6.34-GTNH (*)
+|    +--- com.github.GTNewHorizons:Navigator:1.0.6
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.3.2 -> 0.5.3
+|    |    +--- maven.modrinth:journeymap:5.2.5
+|    |    +--- curse.maven:xaeros-minimap-263420:5060684
+|    |    \--- curse.maven:xaeros-world-map-317780:5060733
+|    +--- com.github.GTNewHorizons:Avaritia:1.52
+|    +--- com.github.GTNewHorizons:Angelica:1.0.0-beta5 (*)
+|    +--- com.github.GTNewHorizons:AppleCore:3.3.0
+|    +--- com.github.GTNewHorizons:BuildCraft:7.1.39
+|    +--- com.github.GTNewHorizons:EnderIO:2.8.17
+|    +--- com.github.GTNewHorizons:ProjectRed:4.10.2-GTNH
+|    +--- com.github.GTNewHorizons:Railcraft:9.15.12
+|    +--- com.github.GTNewHorizons:Galacticraft:3.2.4-GTNH
+|    \--- curse.maven:advsolar-362768:2885953
++--- com.github.GTNewHorizons:ForbiddenMagic:0.7.0-GTNH
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    \--- com.github.GTNewHorizons:Baubles:1.0.3 -> 1.0.4
++--- com.github.GTNewHorizons:twilightforest:2.6.33
++--- curse.maven:travellers-gear-224440:2262113
++--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
++--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
++--- org.lwjgl.lwjgl:lwjgl:2.9.4-nightly-20150209
+|    +--- org.lwjgl.lwjgl:lwjgl-platform:2.9.4-nightly-20150209
+|    \--- net.java.jinput:jinput:2.0.5
+|         \--- net.java.jutils:jutils:1.0.0
++--- org.lwjgl.lwjgl:lwjgl_util:2.9.4-nightly-20150209
+|    \--- org.lwjgl.lwjgl:lwjgl:2.9.4-nightly-20150209 (*)
++--- org.lwjgl.lwjgl:lwjgl-platform:2.9.4-nightly-20150209
++--- me.eigenraven.java8unsupported:java-8-unsupported-shim:1.0.0
++--- net.minecraft:launchwrapper:1.12
++--- com.google.code.findbugs:jsr305:1.3.9 -> 2.0.1
++--- com.typesafe.akka:akka-actor_2.11:2.3.3
++--- com.typesafe:config:1.2.1
++--- org.scala-lang:scala-actors-migration_2.11:1.1.0
++--- org.scala-lang:scala-compiler:2.11.5
++--- org.scala-lang.plugins:scala-continuations-library_2.11:1.0.2
++--- org.scala-lang.plugins:scala-continuations-plugin_2.11.1:1.0.2
++--- org.scala-lang:scala-library:2.11.5
++--- org.scala-lang:scala-parser-combinators_2.11:1.0.1
++--- org.scala-lang:scala-reflect:2.11.5
++--- org.scala-lang:scala-swing_2.11:1.0.1
++--- org.scala-lang:scala-xml_2.11:1.0.2
++--- lzma:lzma:0.0.1
++--- org.ow2.asm:asm-debug-all:5.0.3
++--- com.paulscode:codecjorbis:20101023
++--- com.paulscode:codecwav:20101023
++--- com.paulscode:libraryjavasound:20101123
++--- com.paulscode:librarylwjglopenal:20100824
++--- com.paulscode:soundsystem:20120107
++--- com.mojang:netty:1.8.8
++--- com.mojang:realms:1.3.5
+|    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    +--- org.apache.httpcomponents:httpclient:4.3.3
+|    |    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |    +--- commons-logging:commons-logging:1.1.3
+|    |    \--- commons-codec:commons-codec:1.6 -> 1.9
+|    \--- commons-logging:commons-logging:1.1.3
++--- org.apache.commons:commons-compress:1.8.1
++--- org.apache.httpcomponents:httpclient:4.3.3 (*)
++--- commons-logging:commons-logging:1.1.3
++--- org.apache.httpcomponents:httpcore:4.3.2
++--- java3d:vecmath:1.3.1
++--- net.sf.trove4j:trove4j:3.0.3
++--- com.ibm.icu:icu4j-core-mojang:51.2
++--- net.sf.jopt-simple:jopt-simple:4.5
++--- io.netty:netty-all:4.0.10.Final
++--- com.google.guava:guava:17.0
++--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
++--- commons-io:commons-io:2.4
++--- commons-codec:commons-codec:1.9
++--- net.java.jinput:jinput:2.0.5 (*)
++--- net.java.jutils:jutils:1.0.0
++--- com.google.code.gson:gson:2.2.4
++--- com.mojang:authlib:1.5.21
+|    +--- com.google.guava:guava:17.0
+|    +--- org.apache.commons:commons-lang3:3.3.2
+|    +--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- commons-codec:commons-codec:1.9
+|    +--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- com.google.code.gson:gson:2.2.4
+|    +--- com.google.code.findbugs:jsr305:2.0.1
+|    \--- commons-io:commons-io:2.4
++--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
++--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
++--- net.java.jinput:jinput-platform:2.0.5
++--- tv.twitch:twitch:5.16
+|    +--- tv.twitch:twitch-platform:5.16
+|    \--- tv.twitch:twitch-external-platform:4.5
++--- tv.twitch:twitch-platform:5.16
++--- tv.twitch:twitch-external-platform:4.5
+\--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+
+testCompileOnly - Compile only dependencies for source set 'test'. (n)
+No dependencies
+
+testImplementation - Implementation only dependencies for source set 'test'. (n)
+No dependencies
+
+testRuntimeClasspath - Runtime classpath of source set 'test'.
++--- io.github.legacymoddingmc:unimixins:0.1.17
++--- com.github.GTNewHorizons:Tainted-Magic:7.6.11-GTNH
+|    +--- com.github.GTNewHorizons:Baubles:1.0.4
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    +--- com.github.GTNewHorizons:ThaumicBoots:1.3.7
+|    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    +--- com.github.GTNewHorizons:Thaumic_Exploration:1.3.3-GTNH
+|    |    |    +--- com.github.GTNewHorizons:AppleCore:3.3.0
+|    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.13 -> 0.1.17
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    +--- curse.maven:witchery-69673:2234410
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenLib:1.2.1
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenCore:1.2.1 -> 1.3.6
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.1-GTNH -> 2.6.34-GTNH
+|    |    |    |    +--- com.github.GTNewHorizons:CodeChickenCore:1.3.6 (*)
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:Electro-Magic-Tools:1.5.5
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:ModularUI:1.2.0 -> 1.2.1
+|    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    |    +--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3
+|    |    |    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    |    |    +--- org.jetbrains:annotations:23.0.0 -> 24.0.1
+|    |    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.0-GTNH -> 2.6.34-GTNH (*)
+|    |    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    |    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.3.2 -> 0.5.3 (*)
+|    |    +--- com.github.GTNewHorizons:TCNEIAdditions:1.4.0
+|    |    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH -> 2.6.34-GTNH (*)
+|    |    |    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    |    |    +--- curse.maven:thaumcraft-nei-plugin-225095:2241913
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:GT5-Unofficial:5.09.49.60
+|    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    +--- com.github.GTNewHorizons:ForestryMC:4.9.10
+|    +--- com.github.GTNewHorizons:TinkersConstruct:1.12.9-GTNH
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.33-GTNH -> 2.6.34-GTNH (*)
+|    |    +--- com.github.GTNewHorizons:Mantle:0.4.1
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:ForgeMultipart:1.5.0
+|    |    |    +--- com.github.GTNewHorizons:CodeChickenLib:1.2.1 (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:StructureLib:1.3.4
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.4.2 -> 0.5.3 (*)
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.19-GTNH -> 2.6.34-GTNH (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- net.industrial-craft:industrialcraft-2:2.2.828-experimental -> curse.maven:ic2-242638:2353971
+|    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    +--- com.github.GTNewHorizons:NotEnoughIds:2.1.0
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:GTNHLib:0.5.3 (*)
+|    +--- com.github.GTNewHorizons:ModularUI:1.2.1 (*)
+|    +--- com.github.GTNewHorizons:ModularUI2:2.1.3-1.7.10
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- org.jetbrains:annotations:24.0.1
+|    |    +--- com.github.GTNewHorizons:GTNHLib:0.4.3 -> 0.5.3 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:waila:1.8.1
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.11-GTNH -> 2.6.34-GTNH (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.2.11 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-449-GTNH
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    |    +--- curse.maven:cofh-core-69162:2388751
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:AE2FluidCraft-Rework:1.3.35-gtnh
+|    |    +--- com.github.GTNewHorizons:WirelessCraftingTerminal:1.11.6
+|    |    |    +--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
+|    |    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-423-GTNH -> rv3-beta-449-GTNH (*)
+|    |    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    |    +--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
+|    |    +--- com.github.GTNewHorizons:Applied-Energistics-2-Unofficial:rv3-beta-445-GTNH -> rv3-beta-449-GTNH (*)
+|    |    +--- curse.maven:cofh-core-69162:2388751
+|    |    +--- com.github.GTNewHorizons:waila:1.8.1 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Yamcl:0.6.0
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
+|    +--- com.github.GTNewHorizons:Postea:1.0.9
+|    |    +--- io.github.legacymoddingmc:unimixins:0.1.17
+|    |    +--- com.github.GTNewHorizons:NotEnoughIds:2.1.0 (*)
+|    |    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:ForbiddenMagic:0.7.0-GTNH
+|    +--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
+|    +--- com.github.GTNewHorizons:Baubles:1.0.3 -> 1.0.4 (*)
+|    \--- com.github.GTNewHorizons:GTNHLib:0.0.13 -> 0.5.3 (c)
++--- com.github.GTNewHorizons:twilightforest:2.6.33
+|    \--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
++--- curse.maven:travellers-gear-224440:2262113
++--- thaumcraft:Thaumcraft:1.7.10-4.2.3.5
++--- com.github.GTNewHorizons:NotEnoughItems:2.6.34-GTNH (*)
++--- me.eigenraven.java8unsupported:java-8-unsupported-shim:1.0.0
++--- net.minecraft:launchwrapper:1.12
++--- com.google.code.findbugs:jsr305:1.3.9 -> 2.0.1
++--- com.typesafe.akka:akka-actor_2.11:2.3.3
++--- com.typesafe:config:1.2.1
++--- org.scala-lang:scala-actors-migration_2.11:1.1.0
++--- org.scala-lang:scala-compiler:2.11.5
++--- org.scala-lang.plugins:scala-continuations-library_2.11:1.0.2
++--- org.scala-lang.plugins:scala-continuations-plugin_2.11.1:1.0.2
++--- org.scala-lang:scala-library:2.11.5
++--- org.scala-lang:scala-parser-combinators_2.11:1.0.1
++--- org.scala-lang:scala-reflect:2.11.5
++--- org.scala-lang:scala-swing_2.11:1.0.1
++--- org.scala-lang:scala-xml_2.11:1.0.2
++--- lzma:lzma:0.0.1
++--- org.ow2.asm:asm-debug-all:5.0.3
++--- com.github.GTNewHorizons:Baubles:1.0.4 (*)
++--- org.jetbrains:intellij-fernflower:1.2.1.16
++--- com.paulscode:codecjorbis:20101023
++--- com.paulscode:codecwav:20101023
++--- com.paulscode:libraryjavasound:20101123
++--- com.paulscode:librarylwjglopenal:20100824
++--- com.paulscode:soundsystem:20120107
++--- com.mojang:netty:1.8.8
+|    +--- io.netty:netty-all:4.0.10.Final
+|    +--- com.google.guava:guava:15.0 -> 17.0
+|    +--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
+|    \--- commons-io:commons-io:2.4
++--- com.mojang:realms:1.3.5
+|    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    +--- org.apache.httpcomponents:httpclient:4.3.3
+|    |    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |    +--- commons-logging:commons-logging:1.1.3
+|    |    \--- commons-codec:commons-codec:1.6 -> 1.9
+|    \--- commons-logging:commons-logging:1.1.3
++--- org.apache.commons:commons-compress:1.8.1
++--- org.apache.httpcomponents:httpclient:4.3.3 (*)
++--- commons-logging:commons-logging:1.1.3
++--- org.apache.httpcomponents:httpcore:4.3.2
++--- java3d:vecmath:1.3.1
++--- net.sf.trove4j:trove4j:3.0.3
++--- com.ibm.icu:icu4j-core-mojang:51.2
++--- net.sf.jopt-simple:jopt-simple:4.5
++--- io.netty:netty-all:4.0.10.Final
++--- com.google.guava:guava:17.0
++--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
++--- commons-io:commons-io:2.4
++--- commons-codec:commons-codec:1.9
++--- net.java.jinput:jinput:2.0.5
+|    +--- net.java.jutils:jutils:1.0.0
+|    \--- net.java.jinput:jinput-platform:2.0.5
++--- net.java.jutils:jutils:1.0.0
++--- com.google.code.gson:gson:2.2.4
++--- com.mojang:authlib:1.5.21
+|    +--- com.google.guava:guava:17.0
+|    +--- org.apache.commons:commons-lang3:3.3.2
+|    +--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- commons-codec:commons-codec:1.9
+|    +--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- com.google.code.gson:gson:2.2.4
+|    +--- com.google.code.findbugs:jsr305:2.0.1
+|    \--- commons-io:commons-io:2.4
++--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
++--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
++--- net.java.jinput:jinput-platform:2.0.5
++--- tv.twitch:twitch:5.16
+|    +--- tv.twitch:twitch-platform:5.16
+|    \--- tv.twitch:twitch-external-platform:4.5
++--- tv.twitch:twitch-platform:5.16
++--- tv.twitch:twitch-external-platform:4.5
+\--- com.github.GTNewHorizons:GTNHLib:0.3.3 -> 0.5.3 (c)
+
+testRuntimeOnly - Runtime only dependencies for source set 'test'. (n)
+No dependencies
+
+vanilla_minecraft
++--- com.paulscode:codecjorbis:20101023
++--- com.paulscode:codecwav:20101023
++--- com.paulscode:libraryjavasound:20101123
++--- com.paulscode:librarylwjglopenal:20100824
++--- com.paulscode:soundsystem:20120107
++--- com.mojang:netty:1.8.8
+|    +--- io.netty:netty-all:4.0.10.Final
+|    +--- com.google.guava:guava:15.0 -> 17.0
+|    +--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
+|    \--- commons-io:commons-io:2.4
++--- com.mojang:realms:1.3.5
+|    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    +--- org.apache.httpcomponents:httpclient:4.3.3
+|    |    +--- org.apache.httpcomponents:httpcore:4.3.2
+|    |    +--- commons-logging:commons-logging:1.1.3
+|    |    \--- commons-codec:commons-codec:1.6 -> 1.9
+|    \--- commons-logging:commons-logging:1.1.3
++--- org.apache.commons:commons-compress:1.8.1
++--- org.apache.httpcomponents:httpclient:4.3.3 (*)
++--- commons-logging:commons-logging:1.1.3
++--- org.apache.httpcomponents:httpcore:4.3.2
++--- java3d:vecmath:1.3.1
++--- net.sf.trove4j:trove4j:3.0.3
++--- com.ibm.icu:icu4j-core-mojang:51.2
++--- net.sf.jopt-simple:jopt-simple:4.5
++--- io.netty:netty-all:4.0.10.Final
++--- com.google.guava:guava:17.0
++--- org.apache.commons:commons-lang3:3.1 -> 3.3.2
++--- commons-io:commons-io:2.4
++--- commons-codec:commons-codec:1.9
++--- net.java.jinput:jinput:2.0.5
+|    +--- net.java.jutils:jutils:1.0.0
+|    \--- net.java.jinput:jinput-platform:2.0.5
++--- net.java.jutils:jutils:1.0.0
++--- com.google.code.gson:gson:2.2.4
++--- com.mojang:authlib:1.5.21
+|    +--- com.google.guava:guava:17.0
+|    +--- org.apache.commons:commons-lang3:3.3.2
+|    +--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- commons-codec:commons-codec:1.9
+|    +--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
+|    +--- com.google.code.gson:gson:2.2.4
+|    +--- com.google.code.findbugs:jsr305:2.0.1
+|    \--- commons-io:commons-io:2.4
++--- org.apache.logging.log4j:log4j-api:2.0-beta9 -> 2.0-beta9-fixed
++--- org.apache.logging.log4j:log4j-core:2.0-beta9 -> 2.0-beta9-fixed
++--- net.java.jinput:jinput-platform:2.0.5
++--- tv.twitch:twitch:5.16
+|    +--- tv.twitch:twitch-platform:5.16
+|    \--- tv.twitch:twitch-external-platform:4.5
++--- tv.twitch:twitch-platform:5.16
+\--- tv.twitch:twitch-external-platform:4.5
+
+(c) - A dependency constraint, not a dependency. The dependency affected by the constraint occurs elsewhere in the tree.
+(*) - Indicates repeated occurrences of a transitive dependency subtree. Gradle expands transitive dependency subtrees only once per project; repeat occurrences only display the root of the subtree, followed by this annotation.
+
+(n) - A dependency or dependency configuration that cannot be resolved.
+
+A web-based, searchable dependency report is available by adding the --scan option.
+
+BUILD SUCCESSFUL in 1s
+1 actionable task: 1 executed
