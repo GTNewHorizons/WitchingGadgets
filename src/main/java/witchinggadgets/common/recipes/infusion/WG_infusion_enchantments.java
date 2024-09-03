@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.Loader;
 import fox.spiteful.forbidden.DarkAspects;
 import gregtech.api.enums.ItemList;
-import gregtech.api.util.GT_ModHandler;
+import gregtech.api.util.GTModHandler;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.config.ConfigItems;
@@ -77,7 +77,7 @@ public class WG_infusion_enchantments {
                     WGContent.enc_backstab,
                     3,
                     new AspectList().add(Aspect.WEAPON, 48).add(DarkAspects.ENVY, 32).add(Aspect.MAGIC, 16),
-                    new ItemStack[] { GT_ModHandler.getModItem("TConstruct", "knifeBlade", 1L, 2),
+                    new ItemStack[] { GTModHandler.getModItem("TConstruct", "knifeBlade", 1L, 2),
                             new ItemStack(Items.potionitem, 1, 8206), new ItemStack(ConfigItems.itemResource, 1, 14) });
 
         } else {

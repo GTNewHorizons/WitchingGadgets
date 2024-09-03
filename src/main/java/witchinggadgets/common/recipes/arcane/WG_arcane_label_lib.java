@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.Loader;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
-import gregtech.api.util.GT_OreDictUnificator;
+import gregtech.api.util.GTOreDictUnificator;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.config.ConfigBlocks;
@@ -30,7 +30,7 @@ public class WG_arcane_label_lib {
                     'B',
                     new ItemStack(Items.book),
                     's',
-                    GT_OreDictUnificator.get(OrePrefixes.screw, Materials.Steel, 1L),
+                    GTOreDictUnificator.get(OrePrefixes.screw, Materials.Steel, 1L),
                     'D',
                     "craftingToolScrewdriver",
                     'L',

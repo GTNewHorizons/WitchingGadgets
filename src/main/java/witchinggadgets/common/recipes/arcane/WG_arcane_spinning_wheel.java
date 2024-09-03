@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.Loader;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
-import gregtech.api.util.GT_OreDictUnificator;
+import gregtech.api.util.GTOreDictUnificator;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.config.ConfigBlocks;
@@ -29,15 +29,15 @@ public class WG_arcane_spinning_wheel {
                     'T',
                     new ItemStack(ConfigBlocks.blockTable),
                     's',
-                    GT_OreDictUnificator.get(OrePrefixes.screw, Materials.Steel, 1L),
+                    GTOreDictUnificator.get(OrePrefixes.screw, Materials.Steel, 1L),
                     'D',
                     "craftingToolScrewdriver",
                     'I',
                     "gearGtWoodSealed",
                     'R',
-                    GT_OreDictUnificator.get(OrePrefixes.stickLong, Materials.WoodSealed, 1L),
+                    GTOreDictUnificator.get(OrePrefixes.stickLong, Materials.WoodSealed, 1L),
                     'S',
-                    GT_OreDictUnificator.get(OrePrefixes.stick, Materials.WoodSealed, 1L),
+                    GTOreDictUnificator.get(OrePrefixes.stick, Materials.WoodSealed, 1L),
                     'W',
                     "gearGtSmallThaumium");
         } else {
