@@ -68,7 +68,7 @@ public class WG_alchemic_clusters {
                                 "METALLURGICPERFECTION_CLUSTERS",
                                 "_" + witchinggadgets.common.WGContent.GT_Cluster[iOre],
                                 new ItemStack(witchinggadgets.common.WGContent.ItemCluster, 2, iOre),
-                                "ore*" + witchinggadgets.common.WGContent.GT_Cluster[iOre],
+                                "ore" + witchinggadgets.common.WGContent.GT_Cluster[iOre],
                                 alchemyAspects);
 
                     if (!OreDictionary.getOres("oreNetherrack" + witchinggadgets.common.WGContent.GT_Cluster[iOre])
