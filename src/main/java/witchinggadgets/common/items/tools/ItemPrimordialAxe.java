@@ -41,14 +41,13 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import thaumcraft.api.IRepairable;
 import thaumcraft.api.aspects.Aspect;
-import travellersgear.api.IActiveAbility;
-import travellersgear.api.IEventGear;
 import witchinggadgets.api.IPrimordialCrafting;
 import witchinggadgets.common.WGContent;
+import witchinggadgets.common.items.interfaces.IItemEvent;
 import witchinggadgets.common.util.Utilities;
 
 public class ItemPrimordialAxe extends ItemAxe
-        implements IPrimordialCrafting, IActiveAbility, IRepairable, IEventGear, IPrimordialGear {
+        implements IPrimordialCrafting, IRepairable, IItemEvent, IPrimordialGear {
 
     IIcon overlay;
     public static Material[] validMats = { Material.cactus, Material.gourd, Material.leaves, Material.plants,
@@ -173,11 +172,6 @@ public class ItemPrimordialAxe extends ItemAxe
             amp = Math.min(amp + 1, 2);
             event.entityLiving.addPotionEffect(new PotionEffect(Potion.resistance.id, time, amp));
         }
-    }
-
-    @Override
-    public boolean canActivate(EntityPlayer player, ItemStack stack, boolean isInHand) {
-        return true;
     }
 
     @Override

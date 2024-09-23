@@ -38,12 +38,11 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.config.Config;
 import thaumcraft.common.items.armor.Hover;
-import travellersgear.api.IActiveAbility;
-import travellersgear.api.IEventGear;
 import witchinggadgets.WitchingGadgets;
 import witchinggadgets.api.IPrimordialCrafting;
 import witchinggadgets.client.render.ModelPrimordialArmor;
 import witchinggadgets.common.WGContent;
+import witchinggadgets.common.items.interfaces.IItemEvent;
 import witchinggadgets.common.items.tools.IPrimordialGear;
 
 enum FlightStatus {
@@ -52,7 +51,7 @@ enum FlightStatus {
 }
 
 public class ItemPrimordialArmor extends ItemShadowFortressArmor
-        implements IActiveAbility, IPrimordialCrafting, IEventGear, IPrimordialGear, IRunicArmor {
+        implements IPrimordialCrafting, IPrimordialGear, IRunicArmor, IItemEvent {
 
     IIcon rune;
 
@@ -304,14 +303,11 @@ public class ItemPrimordialArmor extends ItemShadowFortressArmor
     }
 
     @Override
-    public boolean canActivate(EntityPlayer player, ItemStack stack, boolean isInHand) {
-        return true;
-    }
-
-    @Override
     public void activate(EntityPlayer player, ItemStack stack) {
         if (!player.worldObj.isRemote) cycleAbilities(stack);
     }
+
+
 
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
         int ab = (getAbility(stack) - 1);

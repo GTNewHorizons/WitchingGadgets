@@ -37,10 +37,11 @@ import travellersgear.api.IActiveAbility;
 import travellersgear.api.IEventGear;
 import witchinggadgets.api.IPrimordialCrafting;
 import witchinggadgets.common.WGContent;
+import witchinggadgets.common.items.interfaces.IItemEvent;
 import witchinggadgets.common.util.Utilities;
 
 public class ItemPrimordialSword extends ItemSword
-        implements IPrimordialCrafting, IActiveAbility, IRepairable, IEventGear, IPrimordialGear {
+        implements IPrimordialCrafting, IRepairable, IItemEvent, IPrimordialGear {
 
     IIcon overlay;
 

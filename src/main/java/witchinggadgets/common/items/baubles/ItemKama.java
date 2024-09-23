@@ -2,6 +2,7 @@ package witchinggadgets.common.items.baubles;
 
 import java.util.List;
 
+import baubles.api.expanded.IBaubleExpanded;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -20,7 +21,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import witchinggadgets.client.render.ModelKama;
 import witchinggadgets.common.util.Lib;
 
-public class ItemKama extends ItemCloak implements IBauble {
+public class ItemKama extends ItemCloak implements IBaubleExpanded {
 
     IIcon overlay;
 
@@ -75,11 +76,6 @@ public class ItemKama extends ItemCloak implements IBauble {
     }
 
     @Override
-    public int getSlot(ItemStack stack) {
-        return -1;
-    }
-
-    @Override
     public BaubleType getBaubleType(ItemStack stack) {
         return BaubleType.BELT;
     }
@@ -112,15 +108,6 @@ public class ItemKama extends ItemCloak implements IBauble {
     public void onWornTick(ItemStack stack, EntityLivingBase living) {
         if (living instanceof EntityPlayer) this.onItemTicked((EntityPlayer) living, stack);
     }
-
-    @Override
-    public void onTravelGearTick(EntityPlayer player, ItemStack stack) {}
-
-    @Override
-    public void onTravelGearEquip(EntityPlayer player, ItemStack stack) {}
-
-    @Override
-    public void onTravelGearUnequip(EntityPlayer player, ItemStack stack) {}
 
     @Override
     public boolean canEquip(ItemStack arg0, EntityLivingBase arg1) {
