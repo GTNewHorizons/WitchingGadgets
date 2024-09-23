@@ -7,7 +7,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.common.Loader;
-import gregtech.api.util.GT_ModHandler;
+import gregtech.api.util.GTModHandler;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.config.ConfigItems;
@@ -42,7 +42,7 @@ public class WG_infusion_bags {
                         6,
                         new AspectList().add(Aspect.VOID, 256).add(Aspect.ELDRITCH, 32).add(Aspect.ENTROPY, 64),
                         new ItemStack(WGContent.ItemBag, 1, 0),
-                        new ItemStack[] { GT_ModHandler.getModItem("Railcraft", "machine.beta", 1L, 11),
+                        new ItemStack[] { GTModHandler.getModItem("Railcraft", "machine.beta", 1L, 11),
                                 new ItemStack(WGContent.ItemMaterial, 1, 3),
                                 new ItemStack(ConfigItems.itemResource, 1, 17),
                                 new ItemStack(WGContent.ItemMaterial, 1, 3) });

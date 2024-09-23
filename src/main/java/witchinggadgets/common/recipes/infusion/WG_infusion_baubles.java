@@ -11,7 +11,7 @@ import cpw.mods.fml.common.Loader;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
-import gregtech.api.util.GT_OreDictUnificator;
+import gregtech.api.util.GTOreDictUnificator;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.config.ConfigItems;
@@ -34,7 +34,7 @@ public class WG_infusion_baubles {
                     new ItemStack(WGContent.ItemMagicalBaubles, 1, 3),
                     2,
                     new AspectList().add(Aspect.MINE, 48).add(Aspect.TOOL, 24).add(Aspect.MOTION, 24)
-                            .add(Aspect.AIR, 16).add((Aspect) gregtech.api.enums.TC_Aspects.NEBRISUM.mAspect, 8),
+                            .add(Aspect.AIR, 16).add((Aspect) gregtech.api.enums.TCAspects.NEBRISUM.mAspect, 8),
                     OreDictionary.getOres("travelgearVambraceBase").get(0),
                     new ItemStack[] { Materials.Platinum.getIngots(1),
                             ItemList.IC2_CoffeePowder.get(1L, Materials.Coffee.getDust(1)),
@@ -47,7 +47,7 @@ public class WG_infusion_baubles {
                     new ItemStack(WGContent.ItemMagicalBaubles, 1, 0),
                     2,
                     new AspectList().add(Aspect.FLIGHT, 16).add(Aspect.MOTION, 8).add(Aspect.AIR, 16)
-                            .add((Aspect) gregtech.api.enums.TC_Aspects.NEBRISUM.mAspect, 8),
+                            .add((Aspect) gregtech.api.enums.TCAspects.NEBRISUM.mAspect, 8),
                     OreDictionary.getOres("travelgearShoulderBase").get(0),
                     new ItemStack[] { new ItemStack(WGModCompat.tfMagicMapFocus), ItemList.Electric_Piston_MV.get(1L),
                             new ItemStack(WGModCompat.tfMagicMapFocus), new ItemStack(ConfigItems.itemShard, 1, 0),
@@ -59,15 +59,15 @@ public class WG_infusion_baubles {
                     new ItemStack(WGContent.ItemMagicalBaubles, 1, 6),
                     2,
                     new AspectList().add(Aspect.AIR, 32).add(Aspect.WEAPON, 16).add(Aspect.ORDER, 8)
-                            .add((Aspect) gregtech.api.enums.TC_Aspects.NEBRISUM.mAspect, 8),
+                            .add((Aspect) gregtech.api.enums.TCAspects.NEBRISUM.mAspect, 8),
                     new ItemStack(ConfigItems.itemBaubleBlanks, 1, 1),
-                    new ItemStack[] { GT_OreDictUnificator.get(OrePrefixes.lens, Materials.InfusedAir, 1L),
+                    new ItemStack[] { GTOreDictUnificator.get(OrePrefixes.lens, Materials.InfusedAir, 1L),
                             new ItemStack(ConfigItems.itemPrimalArrow, 1, 0),
                             new ItemStack(ConfigItems.itemPrimalArrow, 1, 1),
-                            GT_OreDictUnificator.get(OrePrefixes.lens, Materials.InfusedAir, 1L),
+                            GTOreDictUnificator.get(OrePrefixes.lens, Materials.InfusedAir, 1L),
                             new ItemStack(ConfigItems.itemPrimalArrow, 1, 2),
                             new ItemStack(ConfigItems.itemPrimalArrow, 1, 3),
-                            GT_OreDictUnificator.get(OrePrefixes.lens, Materials.InfusedAir, 1L),
+                            GTOreDictUnificator.get(OrePrefixes.lens, Materials.InfusedAir, 1L),
                             new ItemStack(ConfigItems.itemPrimalArrow, 1, 4),
                             new ItemStack(ConfigItems.itemPrimalArrow, 1, 5) });
 
@@ -77,12 +77,12 @@ public class WG_infusion_baubles {
                     new ItemStack(WGContent.ItemMagicalBaubles, 1, 4),
                     3,
                     new AspectList().add(Aspect.GREED, 32).add(Aspect.TOOL, 16)
-                            .add((Aspect) gregtech.api.enums.TC_Aspects.NEBRISUM.mAspect, 8),
+                            .add((Aspect) gregtech.api.enums.TCAspects.NEBRISUM.mAspect, 8),
                     new ItemStack(ConfigItems.itemBaubleBlanks, 1, 1),
-                    new ItemStack[] { luckyCoin, GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Silver, 1L),
-                            luckyCoin, GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Silver, 1L), luckyCoin,
-                            GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Silver, 1L), luckyCoin,
-                            GT_OreDictUnificator.get(OrePrefixes.bolt, Materials.Silver, 1L) });
+                    new ItemStack[] { luckyCoin, GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Silver, 1L),
+                            luckyCoin, GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Silver, 1L), luckyCoin,
+                            GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Silver, 1L), luckyCoin,
+                            GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Silver, 1L) });
         } else {
             registerInfusionRecipe(
                     "WGBAUBLES",

@@ -29,7 +29,7 @@ import net.minecraftforge.oredict.RecipeSorter;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import gregtech.GT_Mod;
+import gregtech.GTMod;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.SubTag;
 import thaumcraft.api.ItemApi;
@@ -296,7 +296,7 @@ public class WGContent {
                             }
                         }
                     } else {
-                        int outputAmount = GT_Mod.gregtechproxy.mMixedOreOnlyYieldsTwoThirdsOfPureOre ? 2 : 3;
+                        int outputAmount = GTMod.gregtechproxy.mMixedOreOnlyYieldsTwoThirdsOfPureOre ? 2 : 3;
                         if (aMaterial.mDirectSmelting != aMaterial) {
                             if (!aMaterial.contains(SubTag.DONT_ADD_DEFAULT_BBF_RECIPE)) {
                                 InfernalBlastfurnaceRecipe temp = new InfernalBlastfurnaceRecipe(

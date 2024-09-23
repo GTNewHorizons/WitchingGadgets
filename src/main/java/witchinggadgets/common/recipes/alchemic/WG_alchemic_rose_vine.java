@@ -6,7 +6,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
 import cpw.mods.fml.common.Loader;
-import gregtech.api.util.GT_ModHandler;
+import gregtech.api.util.GTModHandler;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import witchinggadgets.common.WGContent;
@@ -19,21 +19,21 @@ public class WG_alchemic_rose_vine {
                     "ROSEVINE",
                     ".1",
                     new ItemStack(WGContent.BlockRoseVine),
-                    GT_ModHandler.getModItem("TwilightForest", "tile.TFThornRose", 1L),
+                    GTModHandler.getModItem("TwilightForest", "tile.TFThornRose", 1L),
                     new AspectList().add(Aspect.PLANT, 64).add(Aspect.LIFE, 16).add(Aspect.MAGIC, 8));
 
             registerAlchemyRecipe(
                     "ROSEVINE",
                     ".2",
                     new ItemStack(WGContent.BlockRoseVine),
-                    GT_ModHandler.getModItem("TwilightForest", "tile.TFThorns", 1L),
+                    GTModHandler.getModItem("TwilightForest", "tile.TFThorns", 1L),
                     new AspectList().add(Aspect.PLANT, 64).add(Aspect.LIFE, 16).add(Aspect.MAGIC, 8));
 
             registerAlchemyRecipe(
                     "ROSEVINE",
                     ".3",
                     new ItemStack(WGContent.BlockRoseVine),
-                    GT_ModHandler.getModItem("TwilightForest", "tile.TFThorns", 1L, 1),
+                    GTModHandler.getModItem("TwilightForest", "tile.TFThorns", 1L, 1),
                     new AspectList().add(Aspect.PLANT, 64).add(Aspect.LIFE, 16).add(Aspect.MAGIC, 8));
         } else {
             registerAlchemyRecipe(

@@ -11,8 +11,8 @@ import cpw.mods.fml.common.Loader;
 import fox.spiteful.forbidden.DarkAspects;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
-import gregtech.api.util.GT_ModHandler;
-import gregtech.api.util.GT_OreDictUnificator;
+import gregtech.api.util.GTModHandler;
+import gregtech.api.util.GTOreDictUnificator;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -31,14 +31,14 @@ public class WG_infusion_terraformer {
                         new ItemStack(WGContent.BlockMetalDevice, 1, 2),
                         10,
                         new AspectList().add(Aspect.WEATHER, 64).add(Aspect.EXCHANGE, 256)
-                                .add((Aspect) gregtech.api.enums.TC_Aspects.NEBRISUM.mAspect, 32),
+                                .add((Aspect) gregtech.api.enums.TCAspects.NEBRISUM.mAspect, 32),
                         new ItemStack(ConfigBlocks.blockMetalDevice, 1, 9),
                         new ItemStack[] { Materials.Blaze.getBlocks(1),
-                                GT_OreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L),
-                                GT_ModHandler.getModItem("dreamcraft", "tile.CallistoColdIce", 1L),
+                                GTOreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L),
+                                GTModHandler.getModItem("dreamcraft", "tile.CallistoColdIce", 1L),
                                 Materials.Knightmetal.getBlocks(1),
                                 gregtech.api.enums.ItemList.Field_Generator_MV.get(1L),
-                                GT_OreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L) });
+                                GTOreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L) });
             } else {
                 registerInfusionRecipe(
                         "TERRAFORMER",
@@ -46,13 +46,13 @@ public class WG_infusion_terraformer {
                         new ItemStack(WGContent.BlockMetalDevice, 1, 2),
                         10,
                         new AspectList().add(Aspect.WEATHER, 64).add(Aspect.EXCHANGE, 256)
-                                .add((Aspect) gregtech.api.enums.TC_Aspects.NEBRISUM.mAspect, 32),
+                                .add((Aspect) gregtech.api.enums.TCAspects.NEBRISUM.mAspect, 32),
                         new ItemStack(ConfigBlocks.blockMetalDevice, 1, 9),
                         new ItemStack[] { Materials.Blaze.getBlocks(1),
-                                GT_OreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L),
+                                GTOreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L),
                                 new ItemStack(Blocks.packed_ice), Materials.Knightmetal.getBlocks(1),
                                 gregtech.api.enums.ItemList.Field_Generator_MV.get(1L),
-                                GT_OreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L) });
+                                GTOreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L) });
             }
 
             registerInfusionRecipe(
@@ -62,12 +62,12 @@ public class WG_infusion_terraformer {
                     9,
                     new AspectList().add(Aspect.TAINT, 32).add(Aspect.EXCHANGE, 16),
                     new ItemStack(ConfigBlocks.blockTaint, 1, 0),
-                    new ItemStack[] { gregtech.api.util.GT_ModHandler.getModItem("thaumicbases", "blockSalisMundus", 1),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                    new ItemStack[] { gregtech.api.util.GTModHandler.getModItem("thaumicbases", "blockSalisMundus", 1),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
                             new ItemStack(ConfigBlocks.blockTube, 1, 0),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L) });
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L) });
             ThaumcraftApi.addWarpToItem(new ItemStack(WGContent.BlockMetalDevice, 1, 8), 2);
 
             registerInfusionRecipe(
@@ -77,12 +77,12 @@ public class WG_infusion_terraformer {
                     4,
                     new AspectList().add(Aspect.WATER, 32).add(Aspect.EXCHANGE, 16),
                     new ItemStack(Items.water_bucket, 1, 0),
-                    new ItemStack[] { gregtech.api.util.GT_ModHandler.getModItem("thaumicbases", "blockSalisMundus", 1),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                    new ItemStack[] { gregtech.api.util.GTModHandler.getModItem("thaumicbases", "blockSalisMundus", 1),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
                             new ItemStack(ConfigBlocks.blockTube, 1, 0),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L) });
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L) });
 
             registerInfusionRecipe(
                     "TERRAFORMFOCUS_OCEAN",
@@ -91,12 +91,12 @@ public class WG_infusion_terraformer {
                     5,
                     new AspectList().add(Aspect.WATER, 64).add(Aspect.EXCHANGE, 16),
                     new ItemStack(WGContent.BlockMetalDevice, 1, 10),
-                    new ItemStack[] { gregtech.api.util.GT_ModHandler.getModItem("thaumicbases", "blockSalisMundus", 1),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                    new ItemStack[] { gregtech.api.util.GTModHandler.getModItem("thaumicbases", "blockSalisMundus", 1),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
                             new ItemStack(ConfigBlocks.blockTube, 1, 0),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L) });
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L) });
 
             registerInfusionRecipe(
                     "TERRAFORMFOCUS_END",
@@ -105,12 +105,12 @@ public class WG_infusion_terraformer {
                     6,
                     new AspectList().add(Aspect.ELDRITCH, 32).add(Aspect.EXCHANGE, 64),
                     new ItemStack(Blocks.end_stone, 1, 0),
-                    new ItemStack[] { gregtech.api.util.GT_ModHandler.getModItem("thaumicbases", "blockSalisMundus", 1),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                    new ItemStack[] { gregtech.api.util.GTModHandler.getModItem("thaumicbases", "blockSalisMundus", 1),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
                             new ItemStack(ConfigBlocks.blockTube, 1, 0),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L) });
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L) });
             ThaumcraftApi.addWarpToItem(new ItemStack(WGContent.BlockMetalDevice, 1, 12), 2);
 
             registerInfusionRecipe(
@@ -120,12 +120,12 @@ public class WG_infusion_terraformer {
                     3,
                     new AspectList().add(Aspect.EARTH, 32).add(Aspect.EXCHANGE, 16),
                     new ItemStack(Blocks.grass),
-                    new ItemStack[] { gregtech.api.util.GT_ModHandler.getModItem("thaumicbases", "blockSalisMundus", 1),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                    new ItemStack[] { gregtech.api.util.GTModHandler.getModItem("thaumicbases", "blockSalisMundus", 1),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
                             new ItemStack(ConfigBlocks.blockTube, 1, 0),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L) });
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L) });
 
             registerInfusionRecipe(
                     "TERRAFORMFOCUS_COLDTAIGA",
@@ -134,12 +134,12 @@ public class WG_infusion_terraformer {
                     5,
                     new AspectList().add(Aspect.COLD, 32).add(Aspect.EXCHANGE, 16),
                     new ItemStack(Blocks.ice),
-                    new ItemStack[] { gregtech.api.util.GT_ModHandler.getModItem("thaumicbases", "blockSalisMundus", 1),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                    new ItemStack[] { gregtech.api.util.GTModHandler.getModItem("thaumicbases", "blockSalisMundus", 1),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
                             new ItemStack(ConfigBlocks.blockTube, 1, 0),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L) });
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L) });
 
             registerInfusionRecipe(
                     "TERRAFORMFOCUS_DESERT",
@@ -148,12 +148,12 @@ public class WG_infusion_terraformer {
                     5,
                     new AspectList().add(Aspect.FIRE, 32).add(Aspect.EXCHANGE, 16),
                     new ItemStack(Blocks.sand),
-                    new ItemStack[] { gregtech.api.util.GT_ModHandler.getModItem("thaumicbases", "blockSalisMundus", 1),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                    new ItemStack[] { gregtech.api.util.GTModHandler.getModItem("thaumicbases", "blockSalisMundus", 1),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
                             new ItemStack(ConfigBlocks.blockTube, 1, 0),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L) });
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L) });
 
             registerInfusionRecipe(
                     "TERRAFORMFOCUS_JUNGLE",
@@ -162,12 +162,12 @@ public class WG_infusion_terraformer {
                     5,
                     new AspectList().add(Aspect.LIFE, 16).add(Aspect.FIRE, 16).add(Aspect.EXCHANGE, 16),
                     new ItemStack(Blocks.log, 1, 3),
-                    new ItemStack[] { gregtech.api.util.GT_ModHandler.getModItem("thaumicbases", "blockSalisMundus", 1),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                    new ItemStack[] { gregtech.api.util.GTModHandler.getModItem("thaumicbases", "blockSalisMundus", 1),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
                             new ItemStack(ConfigBlocks.blockTube, 1, 0),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L) });
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L) });
 
             registerInfusionRecipe(
                     "TERRAFORMFOCUS_HELL",
@@ -176,12 +176,12 @@ public class WG_infusion_terraformer {
                     8,
                     new AspectList().add(DarkAspects.NETHER, 32).add(Aspect.EXCHANGE, 16),
                     new ItemStack(Blocks.nether_brick),
-                    new ItemStack[] { gregtech.api.util.GT_ModHandler.getModItem("thaumicbases", "blockSalisMundus", 1),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                    new ItemStack[] { gregtech.api.util.GTModHandler.getModItem("thaumicbases", "blockSalisMundus", 1),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
                             new ItemStack(ConfigBlocks.blockTube, 1, 0),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L) });
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L) });
             ThaumcraftApi.addWarpToItem(new ItemStack(WGContent.BlockMetalDevice, 1, 7), 1);
 
             registerInfusionRecipe(
@@ -191,12 +191,12 @@ public class WG_infusion_terraformer {
                     6,
                     new AspectList().add(Aspect.SLIME, 32).add(Aspect.EXCHANGE, 16),
                     new ItemStack(Blocks.mycelium),
-                    new ItemStack[] { gregtech.api.util.GT_ModHandler.getModItem("thaumicbases", "blockSalisMundus", 1),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                    new ItemStack[] { gregtech.api.util.GTModHandler.getModItem("thaumicbases", "blockSalisMundus", 1),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
                             new ItemStack(ConfigBlocks.blockTube, 1, 0),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L) });
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L) });
 
             registerInfusionRecipe(
                     "TERRAFORMFOCUS_MAGIC",
@@ -206,11 +206,11 @@ public class WG_infusion_terraformer {
                     new AspectList().add(Aspect.HEAL, 32).add(Aspect.EXCHANGE, 8).add(Aspect.ORDER, 16),
                     new ItemStack(ConfigBlocks.blockMagicalLog, 1, 1),
                     new ItemStack[] { new ItemStack(ConfigBlocks.blockCrystal, 1, 6),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
                             new ItemStack(ConfigBlocks.blockTube, 1, 0),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
-                            GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L) });
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L),
+                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Thaumium, 1L) });
         } else {
             registerInfusionRecipe(
                     "TERRAFORMER",
