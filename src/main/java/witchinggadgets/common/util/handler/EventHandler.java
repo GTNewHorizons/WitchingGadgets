@@ -184,7 +184,8 @@ public class EventHandler {
 
     @SubscribeEvent
     public void onPlayerBreaking(PlayerEvent.BreakSpeed event) {
-        if (event.entityPlayer.getItemInUse().getItem() instanceof ItemMagicalBaubles
+        if (event.entityPlayer.getItemInUse().getItem() != null
+                && event.entityPlayer.getItemInUse().getItem() instanceof ItemMagicalBaubles
                 && event.entityPlayer.getItemInUse().getItemDamage() == 3) {
             Block block = event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z);
             if (!event.entityPlayer.onGround) event.newSpeed *= 5.0F;
