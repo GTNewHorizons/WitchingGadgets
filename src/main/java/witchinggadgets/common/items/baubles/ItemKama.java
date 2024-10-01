@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
@@ -29,13 +30,13 @@ public class ItemKama extends ItemCloak implements IBaubleExpanded {
     }
 
     @Override
-    public void activate(EntityPlayer player, ItemStack stack) {
-        super.activate(player, stack);
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         // 13116: Synchronize raven kama for client-authoritative player movement
         if (subNames[stack.getItemDamage()].equals("raven") && !player.worldObj.isRemote) {
             InventoryBaubles baubles = (InventoryBaubles) BaublesApi.getBaubles(player);
             baubles.syncSlotToClients(3);
         }
+        return super.onItemRightClick(stack, world, player);
     }
 
     @Override

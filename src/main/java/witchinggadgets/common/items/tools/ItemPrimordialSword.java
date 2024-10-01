@@ -152,13 +152,12 @@ public class ItemPrimordialSword extends ItemSword
     }
 
     @Override
-    public boolean canActivate(EntityPlayer player, ItemStack stack, boolean isInHand) {
-        return true;
-    }
-
-    @Override
-    public void activate(EntityPlayer player, ItemStack stack) {
-        if (!player.worldObj.isRemote) cycleAbilities(stack);
+    public boolean onItemUse(ItemStack aStack, EntityPlayer aPlayer, World aWorld, int aX, int aY, int aZ, int aSide,
+            float a, float b, float c) {
+        if (aPlayer.isSneaking() && !aPlayer.worldObj.isRemote) {
+            cycleAbilities(aStack);
+        }
+        return super.onItemUse(aStack, aPlayer, aWorld, aX, aY, aZ, aSide, a, b, c);
     }
 
     @Override
