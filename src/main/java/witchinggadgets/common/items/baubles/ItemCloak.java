@@ -45,6 +45,7 @@ import witchinggadgets.common.WGModCompat;
 import witchinggadgets.common.items.interfaces.IItemEvent;
 import witchinggadgets.common.util.Lib;
 import witchinggadgets.common.util.Utilities;
+import witchinggadgets.common.util.WGKeyHandler;
 
 @Optional.Interface(iface = "vazkii.botania.api.item.ICosmeticAttachable", modid = "Botania")
 public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttachable, IItemEvent {
@@ -200,7 +201,7 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
             list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide"));
         list.add(
                 StatCollector.translateToLocalFormatted(
-                        Lib.DESCRIPTION + "gearSlot.tg." + Arrays.toString(getBaubleTypes(stack))));
+                        Lib.DESCRIPTION + "gearSlot.tg.0"));
 
         if (Loader.isModLoaded("Botania")) {
             ItemStack cosmetic = getCosmeticItem(stack);
@@ -211,6 +212,13 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
     }
 
     public void onItemTicked(EntityPlayer player, ItemStack stack) {
+        if (player.isSneaking() && WGKeyHandler.jumpKey.isPressed() && stack.getItemDamage() == 4) {
+            if (stack.getTagCompound().getBoolean("noGlide")) {
+                stack.getTagCompound().setBoolean("noGlide", false);
+            } else {
+                stack.getTagCompound().setBoolean("noGlide", true);
+            }
+        }
         if (player.ticksExisted < 1) {
             onItemUnequipped(player, stack);
             onItemEquipped(player, stack);
