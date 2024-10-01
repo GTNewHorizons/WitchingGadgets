@@ -7,6 +7,7 @@ import net.minecraft.potion.Potion;
 import net.minecraftforge.common.ForgeHooks;
 
 import baubles.api.BaublesApi;
+import baubles.api.expanded.BaubleExpandedSlots;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -15,6 +16,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.WGConfig;
 import witchinggadgets.common.WGContent;
+import witchinggadgets.common.items.baubles.ItemMagicalBaubles;
 import witchinggadgets.common.items.tools.ItemPrimordialGlove;
 import witchinggadgets.common.util.network.message.MessagePrimordialGlove;
 
@@ -61,9 +63,9 @@ public class WGKeyHandler {
                     if (!isJumping) {
                         multiJumps = 0;
                         isJumping = event.player.isAirBorne;
-                        if (BaublesApi.getBaubles(event.player) != null
-                                && player.inventory.getCurrentItem().getItem().equals(WGContent.ItemMagicalBaubles)
-                                && player.inventory.getCurrentItem().getItemDamage() == 0)
+                        if ( player.getCurrentEquippedItem() != null
+                                && player.getCurrentEquippedItem().getItem() instanceof ItemMagicalBaubles
+                                && player.getCurrentEquippedItem().getItemDamage() == 0)
                             multiJumps += 1;
                     }
                     keyDown[2] = true;

@@ -27,6 +27,7 @@ import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 
 import baubles.api.BaubleType;
+import baubles.api.expanded.BaubleExpandedSlots;
 import baubles.api.expanded.IBaubleExpanded;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Optional;
@@ -370,7 +371,7 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
 
     @Override
     public String[] getBaubleTypes(ItemStack itemstack) {
-        return new String[] { "cape" };
+        return new String[] { BaubleExpandedSlots.capeType };
     }
 
     @Override
