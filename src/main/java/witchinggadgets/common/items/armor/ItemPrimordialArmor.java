@@ -44,6 +44,7 @@ import witchinggadgets.client.render.ModelPrimordialArmor;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.items.interfaces.IItemEvent;
 import witchinggadgets.common.items.tools.IPrimordialGear;
+import witchinggadgets.common.util.WGKeyHandler;
 
 public class ItemPrimordialArmor extends ItemShadowFortressArmor
         implements IPrimordialCrafting, IPrimordialGear, IRunicArmor, IItemEvent {
@@ -117,6 +118,10 @@ public class ItemPrimordialArmor extends ItemShadowFortressArmor
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
         if (!world.isRemote && stack.isItemDamaged() && player.ticksExisted % 20 == 0) stack.damageItem(-1, player);
+
+        if (player.isSneaking() && WGKeyHandler.jumpKey.isPressed() && !player.worldObj.isRemote) {
+            cycleAbilities(stack);
+        }
 
         byte amorcounter = 0;
         byte[] modescounter = { 0, 0, 0, 0, 0, 0 };
@@ -300,11 +305,6 @@ public class ItemPrimordialArmor extends ItemShadowFortressArmor
             ratio *= set;
         }
         return new ISpecialArmor.ArmorProperties(priority, ratio, Integer.MAX_VALUE);
-    }
-
-    @Override
-    public void activate(EntityPlayer player, ItemStack stack) {
-        if (!player.worldObj.isRemote) cycleAbilities(stack);
     }
 
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
