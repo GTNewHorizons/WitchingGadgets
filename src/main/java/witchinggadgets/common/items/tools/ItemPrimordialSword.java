@@ -33,8 +33,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import thaumcraft.api.IRepairable;
 import thaumcraft.api.aspects.Aspect;
-import travellersgear.api.IActiveAbility;
-import travellersgear.api.IEventGear;
 import witchinggadgets.api.IPrimordialCrafting;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.items.interfaces.IItemEvent;

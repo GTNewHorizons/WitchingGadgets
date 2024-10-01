@@ -1,6 +1,7 @@
 package witchinggadgets.client.render.cloak;
 
 public interface ICloakPlayer {
+
     void setCloakFlying(boolean flag);
 
     float getTicksCloakFlying();
@@ -8,6 +9,8 @@ public interface ICloakPlayer {
     boolean lastCloakFlying();
 
     void setLastCloakFlying(boolean flag);
+
     boolean isElytraFlying();
+
     void tickCloak();
 }

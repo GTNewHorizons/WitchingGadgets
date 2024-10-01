@@ -3,8 +3,6 @@ package witchinggadgets.common.items.baubles;
 import java.util.Arrays;
 import java.util.List;
 
-import baubles.api.BaubleType;
-import baubles.api.expanded.IBaubleExpanded;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -26,10 +24,12 @@ import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 
+import baubles.api.BaubleType;
+import baubles.api.expanded.IBaubleExpanded;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Optional;
-import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import thaumcraft.api.IGoggles;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -197,7 +197,9 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
     public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List<String> list, boolean par4) {
         if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("noGlide"))
             list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide"));
-        list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.tg." + Arrays.toString(getBaubleTypes(stack))));
+        list.add(
+                StatCollector.translateToLocalFormatted(
+                        Lib.DESCRIPTION + "gearSlot.tg." + Arrays.toString(getBaubleTypes(stack))));
 
         if (Loader.isModLoaded("Botania")) {
             ItemStack cosmetic = getCosmeticItem(stack);
@@ -269,16 +271,13 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
     }
 
     @Override
-    public void onUserAttacking(AttackEntityEvent event, ItemStack stack) {
-    }
+    public void onUserAttacking(AttackEntityEvent event, ItemStack stack) {}
 
     @Override
-    public void onUserJump(LivingEvent.LivingJumpEvent event, ItemStack stack) {
-    }
+    public void onUserJump(LivingEvent.LivingJumpEvent event, ItemStack stack) {}
 
     @Override
-    public void onUserFall(LivingFallEvent event, ItemStack stack) {
-    }
+    public void onUserFall(LivingFallEvent event, ItemStack stack) {}
 
     @Override
     public void onUserTargeted(LivingSetAttackTargetEvent event, ItemStack stack) {
@@ -306,7 +305,6 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
         stack.getTagCompound().setTag("botaniaCosmeticOverride", cosTag);
     }
 
-
     @Override
     public void onWornTick(ItemStack aItem, EntityLivingBase playerEntity) {
         if (playerEntity instanceof EntityPlayer) {
@@ -331,24 +329,27 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
                     if (!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
                     stack.getTagCompound().setBoolean("noGlide", !stack.getTagCompound().getBoolean("noGlide"));
                 } else if (subNames[stack.getItemDamage()].equals("spectral") && !player.worldObj.isRemote
-                        && Utilities.consumeVisFromInventoryWithoutDiscount(player, new AspectList().add(Aspect.AIR, 1))) {
-                    if (!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
-                    stack.getTagCompound()
-                            .setBoolean("isSpectral", !stack.getTagCompound().getBoolean("isSpectral"));
-                    if (stack.getTagCompound().getBoolean("isSpectral")) {
-                        for (EntityCreature e : (List<EntityCreature>) player.worldObj.getEntitiesWithinAABB(
-                                EntityCreature.class,
-                                AxisAlignedBB.getBoundingBox(
-                                        player.posX - 16,
-                                        player.posY - 16,
-                                        player.posZ - 16,
-                                        player.posX + 16,
-                                        player.posY + 16,
-                                        player.posZ + 16)))
-                            if (e != null && !(e instanceof IBossDisplayData) && player.equals(e.getAttackTarget()))
-                                Utilities.setAttackTarget(e, null);
-                    }
-                }
+                        && Utilities
+                                .consumeVisFromInventoryWithoutDiscount(player, new AspectList().add(Aspect.AIR, 1))) {
+                                    if (!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
+                                    stack.getTagCompound()
+                                            .setBoolean("isSpectral", !stack.getTagCompound().getBoolean("isSpectral"));
+                                    if (stack.getTagCompound().getBoolean("isSpectral")) {
+                                        for (EntityCreature e : (List<EntityCreature>) player.worldObj
+                                                .getEntitiesWithinAABB(
+                                                        EntityCreature.class,
+                                                        AxisAlignedBB.getBoundingBox(
+                                                                player.posX - 16,
+                                                                player.posY - 16,
+                                                                player.posZ - 16,
+                                                                player.posX + 16,
+                                                                player.posY + 16,
+                                                                player.posZ + 16)))
+                                            if (e != null && !(e instanceof IBossDisplayData)
+                                                    && player.equals(e.getAttackTarget()))
+                                                Utilities.setAttackTarget(e, null);
+                                    }
+                                }
         }
     }
 
@@ -369,7 +370,7 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
 
     @Override
     public String[] getBaubleTypes(ItemStack itemstack) {
-        return new String[] {"cape"};
+        return new String[] { "cape" };
     }
 
     @Override

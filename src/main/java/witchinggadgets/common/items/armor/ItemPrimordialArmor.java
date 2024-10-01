@@ -45,13 +45,13 @@ import witchinggadgets.common.WGContent;
 import witchinggadgets.common.items.interfaces.IItemEvent;
 import witchinggadgets.common.items.tools.IPrimordialGear;
 
-enum FlightStatus {
-    ON,
-    OFF
-}
-
 public class ItemPrimordialArmor extends ItemShadowFortressArmor
         implements IPrimordialCrafting, IPrimordialGear, IRunicArmor, IItemEvent {
+
+    enum FlightStatus {
+        ON,
+        OFF
+    }
 
     IIcon rune;
 
@@ -306,8 +306,6 @@ public class ItemPrimordialArmor extends ItemShadowFortressArmor
     public void activate(EntityPlayer player, ItemStack stack) {
         if (!player.worldObj.isRemote) cycleAbilities(stack);
     }
-
-
 
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {
         int ab = (getAbility(stack) - 1);

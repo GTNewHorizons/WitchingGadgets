@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
-import baubles.api.expanded.IBaubleExpanded;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -22,6 +21,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import baubles.api.BaubleType;
+import baubles.api.expanded.IBaubleExpanded;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.relauncher.Side;
@@ -66,7 +66,8 @@ public class ItemMagicalBaubles extends Item implements IBaubleExpanded, vazkii.
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean par4) {
-        String type = getBaubleTypes(stack) != null ? ("tg." + Arrays.toString(getBaubleTypes(stack))) : "bauble." + getBaubleType(stack);
+        String type = getBaubleTypes(stack) != null ? ("tg." + Arrays.toString(getBaubleTypes(stack)))
+                : "bauble." + getBaubleType(stack);
         list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot." + type));
 
         if (stack.hasTagCompound() && stack.getTagCompound().hasKey("title"))
@@ -161,12 +162,11 @@ public class ItemMagicalBaubles extends Item implements IBaubleExpanded, vazkii.
 
     @Override
     public String[] getBaubleTypes(ItemStack stack) {
-        return subNames[stack.getItemDamage()].startsWith("cloak") ? new String[] {"cape"}
-                : subNames[stack.getItemDamage()].startsWith("shoulders") ? new String[] {"amulet"}
-                : subNames[stack.getItemDamage()].startsWith("vambrace") ? new String[] {"gauntlet"}
-                : new String[] {""};
+        return subNames[stack.getItemDamage()].startsWith("cloak") ? new String[] { "cape" }
+                : subNames[stack.getItemDamage()].startsWith("shoulders") ? new String[] { "amulet" }
+                        : subNames[stack.getItemDamage()].startsWith("vambrace") ? new String[] { "gauntlet" }
+                                : new String[] { "" };
     }
-
 
     @Override
     public void onWornTick(ItemStack stack, EntityLivingBase living) {

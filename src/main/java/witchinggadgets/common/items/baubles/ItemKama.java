@@ -2,7 +2,6 @@ package witchinggadgets.common.items.baubles;
 
 import java.util.List;
 
-import baubles.api.expanded.IBaubleExpanded;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -13,7 +12,7 @@ import net.minecraft.util.StatCollector;
 
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
-import baubles.api.IBauble;
+import baubles.api.expanded.IBaubleExpanded;
 import baubles.common.container.InventoryBaubles;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;

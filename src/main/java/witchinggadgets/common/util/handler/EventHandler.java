@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-import baubles.api.BaublesApi;
-import cpw.mods.fml.common.eventhandler.Event;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -50,7 +48,9 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
+import baubles.api.BaublesApi;
 import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
@@ -539,82 +539,72 @@ public class EventHandler {
     }
 
     @SubscribeEvent
-    public void onPlayerAttacking(AttackEntityEvent event)
-    {
-        for(Object[] gear : buildEventItemList(event.entityPlayer))
-        {
-            ItemStack stack = (ItemStack)gear[0];
+    public void onPlayerAttacking(AttackEntityEvent event) {
+        for (Object[] gear : buildEventItemList(event.entityPlayer)) {
+            ItemStack stack = (ItemStack) gear[0];
             itemTriggerEvent(stack, (EntityPlayer) event.entityLiving, event);
         }
     }
+
     @SubscribeEvent
-    public void onPlayerJump(LivingJumpEvent event)
-    {
-        if(event.entityLiving instanceof EntityPlayer)
-            for(Object[] gear : buildEventItemList((EntityPlayer) event.entityLiving))
-            {
-                ItemStack stack = (ItemStack)gear[0];
-                itemTriggerEvent(stack, (EntityPlayer) event.entityLiving, event);
-            }
-    }
-    @SubscribeEvent
-    public void onPlayerFall(LivingFallEvent event)
-    {
-        if(event.entityLiving instanceof EntityPlayer)
-            for(Object[] gear : buildEventItemList((EntityPlayer) event.entityLiving))
-            {
-                ItemStack stack = (ItemStack)gear[0];
-                itemTriggerEvent(stack, (EntityPlayer) event.entityLiving, event);
-            }
-    }
-    @SubscribeEvent
-    public void onPlayerTargeted(LivingSetAttackTargetEvent event)
-    {
-        if(event.target instanceof EntityPlayer)
-            for(Object[] gear : buildEventItemList((EntityPlayer) event.target))
-            {
-                ItemStack stack = (ItemStack)gear[0];
+    public void onPlayerJump(LivingJumpEvent event) {
+        if (event.entityLiving instanceof EntityPlayer)
+            for (Object[] gear : buildEventItemList((EntityPlayer) event.entityLiving)) {
+                ItemStack stack = (ItemStack) gear[0];
                 itemTriggerEvent(stack, (EntityPlayer) event.entityLiving, event);
             }
     }
 
-    public Object[][] buildEventItemList(EntityPlayer player)
-    {
+    @SubscribeEvent
+    public void onPlayerFall(LivingFallEvent event) {
+        if (event.entityLiving instanceof EntityPlayer)
+            for (Object[] gear : buildEventItemList((EntityPlayer) event.entityLiving)) {
+                ItemStack stack = (ItemStack) gear[0];
+                itemTriggerEvent(stack, (EntityPlayer) event.entityLiving, event);
+            }
+    }
+
+    @SubscribeEvent
+    public void onPlayerTargeted(LivingSetAttackTargetEvent event) {
+        if (event.target instanceof EntityPlayer)
+            for (Object[] gear : buildEventItemList((EntityPlayer) event.target)) {
+                ItemStack stack = (ItemStack) gear[0];
+                itemTriggerEvent(stack, (EntityPlayer) event.entityLiving, event);
+            }
+    }
+
+    public Object[][] buildEventItemList(EntityPlayer player) {
         ArrayList<Object[]> list = new ArrayList<Object[]>();
 
         ItemStack[] is = player.inventory.armorInventory;
-        for(int armor=0; armor<is.length; armor++)
-            if(is[armor]!=null && is[armor].getItem() instanceof IItemEvent)
-                list.add( new Object[]{is[armor],9+armor});
+        for (int armor = 0; armor < is.length; armor++)
+            if (is[armor] != null && is[armor].getItem() instanceof IItemEvent)
+                list.add(new Object[] { is[armor], 9 + armor });
 
-        if(Loader.isModLoaded("Baubles"))
-        {
+        if (Loader.isModLoaded("Baubles")) {
             IInventory inv = BaublesApi.getBaubles(player);
-            if(inv!=null)
-                for(int i=0; i<inv.getSizeInventory(); i++)
-                    if(inv.getStackInSlot(i)!=null && inv.getStackInSlot(i).getItem() instanceof IItemEvent)
-                        list.add(new Object[]{inv.getStackInSlot(i),9+4+i});
+            if (inv != null) for (int i = 0; i < inv.getSizeInventory(); i++)
+                if (inv.getStackInSlot(i) != null && inv.getStackInSlot(i).getItem() instanceof IItemEvent)
+                    list.add(new Object[] { inv.getStackInSlot(i), 9 + 4 + i });
         }
-        if(player.getCurrentEquippedItem()!=null && player.getCurrentEquippedItem().getItem() instanceof IItemEvent)
-            list.add(list.size()/2, new Object[]{player.getCurrentEquippedItem(),player.inventory.currentItem});
+        if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof IItemEvent)
+            list.add(list.size() / 2, new Object[] { player.getCurrentEquippedItem(), player.inventory.currentItem });
 
         return list.toArray(new Object[0][]);
     }
 
-    static void itemTriggerEvent(ItemStack stack, EntityPlayer player, Event event)
-    {
-        if(stack!=null && stack.getItem() instanceof IItemEvent)
-        {
-            if(event instanceof LivingHurtEvent)
-                ((IItemEvent)stack.getItem()).onUserDamaged((LivingHurtEvent) event, stack);
-            if(event instanceof AttackEntityEvent)
-                ((IItemEvent)stack.getItem()).onUserAttacking((AttackEntityEvent) event, stack);
-            if(event instanceof LivingJumpEvent)
-                ((IItemEvent)stack.getItem()).onUserJump((LivingJumpEvent) event, stack);
-            if(event instanceof LivingFallEvent)
-                ((IItemEvent)stack.getItem()).onUserFall((LivingFallEvent) event, stack);
-            if(event instanceof LivingSetAttackTargetEvent)
-                ((IItemEvent)stack.getItem()).onUserTargeted((LivingSetAttackTargetEvent) event, stack);
+    static void itemTriggerEvent(ItemStack stack, EntityPlayer player, Event event) {
+        if (stack != null && stack.getItem() instanceof IItemEvent) {
+            if (event instanceof LivingHurtEvent)
+                ((IItemEvent) stack.getItem()).onUserDamaged((LivingHurtEvent) event, stack);
+            if (event instanceof AttackEntityEvent)
+                ((IItemEvent) stack.getItem()).onUserAttacking((AttackEntityEvent) event, stack);
+            if (event instanceof LivingJumpEvent)
+                ((IItemEvent) stack.getItem()).onUserJump((LivingJumpEvent) event, stack);
+            if (event instanceof LivingFallEvent)
+                ((IItemEvent) stack.getItem()).onUserFall((LivingFallEvent) event, stack);
+            if (event instanceof LivingSetAttackTargetEvent)
+                ((IItemEvent) stack.getItem()).onUserTargeted((LivingSetAttackTargetEvent) event, stack);
         }
 
     }
