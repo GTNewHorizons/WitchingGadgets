@@ -21,6 +21,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import baubles.api.BaubleType;
+import baubles.api.expanded.BaubleExpandedSlots;
 import baubles.api.expanded.IBaubleExpanded;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Optional;
@@ -156,16 +157,18 @@ public class ItemMagicalBaubles extends Item implements IBaubleExpanded, vazkii.
     public BaubleType getBaubleType(ItemStack stack) {
         return subNames[stack.getItemDamage()].startsWith("ring") ? BaubleType.RING
                 : subNames[stack.getItemDamage()].startsWith("belt") ? BaubleType.BELT
-                        : ItemMagicalBaubles.subNames[stack.getItemDamage()].startsWith("necklace") ? BaubleType.AMULET
-                                : null;
+                        : subNames[stack.getItemDamage()].startsWith("necklace") ? BaubleType.AMULET : null;
     }
 
     @Override
     public String[] getBaubleTypes(ItemStack stack) {
-        return subNames[stack.getItemDamage()].startsWith("cloak") ? new String[] { "cape" }
-                : subNames[stack.getItemDamage()].startsWith("shoulders") ? new String[] { "amulet" }
-                        : subNames[stack.getItemDamage()].startsWith("vambrace") ? new String[] { "gauntlet" }
-                                : new String[] { "" };
+        return subNames[stack.getItemDamage()].startsWith("cloak") ? new String[] { BaubleExpandedSlots.capeType }
+                : subNames[stack.getItemDamage()].startsWith("shoulders")
+                        ? new String[] { BaubleExpandedSlots.charmType }
+                        : subNames[stack.getItemDamage()].startsWith("vambrace")
+                                ? new String[] { BaubleExpandedSlots.gauntletType }
+                                : subNames[stack.getItemDamage()].startsWith("title") ? new String[] { "Title" }
+                                        : new String[] { "" };
     }
 
     @Override

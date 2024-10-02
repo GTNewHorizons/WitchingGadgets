@@ -88,6 +88,8 @@ public class WitchingGadgets {
 
         packetHandler = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
         BaubleExpandedSlots.tryAssignSlotOfType(BaubleExpandedSlots.capeType);
+        BaubleExpandedSlots.tryAssignSlotOfType(BaubleExpandedSlots.gauntletType);
+        BaubleExpandedSlots.tryAssignSlotOfType("Title");
         eventHandler = new EventHandler();
         MinecraftForge.EVENT_BUS.register(eventHandler);
         playerTickHandler = new PlayerTickHandler();
