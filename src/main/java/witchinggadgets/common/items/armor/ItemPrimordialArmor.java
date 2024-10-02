@@ -38,21 +38,21 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.config.Config;
 import thaumcraft.common.items.armor.Hover;
-import travellersgear.api.IActiveAbility;
-import travellersgear.api.IEventGear;
 import witchinggadgets.WitchingGadgets;
 import witchinggadgets.api.IPrimordialCrafting;
 import witchinggadgets.client.render.ModelPrimordialArmor;
 import witchinggadgets.common.WGContent;
+import witchinggadgets.common.items.interfaces.IItemEvent;
 import witchinggadgets.common.items.tools.IPrimordialGear;
-
-enum FlightStatus {
-    ON,
-    OFF
-}
+import witchinggadgets.common.util.WGKeyHandler;
 
 public class ItemPrimordialArmor extends ItemShadowFortressArmor
-        implements IActiveAbility, IPrimordialCrafting, IEventGear, IPrimordialGear, IRunicArmor {
+        implements IPrimordialCrafting, IPrimordialGear, IRunicArmor, IItemEvent {
+
+    enum FlightStatus {
+        ON,
+        OFF
+    }
 
     IIcon rune;
 
@@ -118,6 +118,10 @@ public class ItemPrimordialArmor extends ItemShadowFortressArmor
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
         if (!world.isRemote && stack.isItemDamaged() && player.ticksExisted % 20 == 0) stack.damageItem(-1, player);
+
+        if (player.isSneaking() && WGKeyHandler.jumpKey.isPressed() && !player.worldObj.isRemote) {
+            cycleAbilities(stack);
+        }
 
         byte amorcounter = 0;
         byte[] modescounter = { 0, 0, 0, 0, 0, 0 };
@@ -301,16 +305,6 @@ public class ItemPrimordialArmor extends ItemShadowFortressArmor
             ratio *= set;
         }
         return new ISpecialArmor.ArmorProperties(priority, ratio, Integer.MAX_VALUE);
-    }
-
-    @Override
-    public boolean canActivate(EntityPlayer player, ItemStack stack, boolean isInHand) {
-        return true;
-    }
-
-    @Override
-    public void activate(EntityPlayer player, ItemStack stack) {
-        if (!player.worldObj.isRemote) cycleAbilities(stack);
     }
 
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean par4) {

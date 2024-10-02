@@ -8,7 +8,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 
-import travellersgear.api.ITravellersGear;
+import baubles.api.expanded.IBaubleExpanded;
 import witchinggadgets.common.items.baubles.ItemMagicalBaubles;
 
 public class ModelMagicalBaubles extends ModelBiped {
@@ -23,13 +23,12 @@ public class ModelMagicalBaubles extends ModelBiped {
         this.bipedLeftLeg.isHidden = true;
         this.bipedRightLeg.isHidden = true;
 
-        int slot = ((ITravellersGear) stack.getItem()).getSlot(stack);
         int meta = stack.getItemDamage();
-        float sizeMod = stack.getItemDamage() == 6 ? .5f : slot == 1 ? 1.125f : .125f;
+        float sizeMod = .125f;
 
         int u = meta == 1 || meta == 2 ? 40 : 24;
         int v = meta == 2 || meta == 3 ? 24 : 16;
-        int yOff = slot == 2 ? 7 : 0;
+        int yOff = 0;
 
         this.boxList.clear();
         if (stack.getItemDamage() == 6) {
@@ -52,9 +51,7 @@ public class ModelMagicalBaubles extends ModelBiped {
     static ModelBiped[] modelMap = new ModelBiped[ItemMagicalBaubles.subNames.length];
 
     public static ModelBiped getModel(EntityLivingBase entity, ItemStack stack) {
-        if (stack == null || !(stack.getItem() instanceof ITravellersGear)) return null;
-        int slot = ((ITravellersGear) stack.getItem()).getSlot(stack);
-        if (slot < 1 || slot > 2) return null;
+        if (stack == null || !(stack.getItem() instanceof IBaubleExpanded)) return null;
         if (modelMap[stack.getItemDamage()] == null)
             modelMap[stack.getItemDamage()] = new ModelMagicalBaubles(entity, stack);
         return modelMap[stack.getItemDamage()];

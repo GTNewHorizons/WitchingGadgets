@@ -11,6 +11,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import baubles.api.BaublesApi;
+import baubles.api.expanded.BaubleExpandedSlots;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -18,7 +19,6 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import thaumcraft.client.fx.ParticleEngine;
 import thaumcraft.client.fx.particles.FXEssentiaTrail;
 import thaumcraft.client.fx.particles.FXWisp;
-import travellersgear.api.TravellersGearAPI;
 import witchinggadgets.client.fx.EntityFXSweat;
 import witchinggadgets.client.gui.GuiBag;
 import witchinggadgets.client.gui.GuiCloakBag;
@@ -130,8 +130,8 @@ public class ClientProxy extends CommonProxy {
         if (ID == 4 || ID == 5) return new GuiCloakBag(
                 player.inventory,
                 world,
-                ID == 4 ? TravellersGearAPI.getExtendedInventory(player)[0]
-                        : BaublesApi.getBaubles(player).getStackInSlot(3));
+                BaublesApi.getBaubles(player).getStackInSlot(
+                        BaubleExpandedSlots.getIndexOfTypeInRegisteredTypes(BaubleExpandedSlots.capeType)));
 
         if (ID == 6) return new GuiPatchedFocusPouch(player.inventory, world, x, y, z);
 

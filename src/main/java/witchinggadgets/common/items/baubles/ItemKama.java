@@ -9,10 +9,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
-import baubles.api.IBauble;
+import baubles.api.expanded.IBaubleExpanded;
 import baubles.common.container.InventoryBaubles;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
@@ -20,7 +21,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import witchinggadgets.client.render.ModelKama;
 import witchinggadgets.common.util.Lib;
 
-public class ItemKama extends ItemCloak implements IBauble {
+public class ItemKama extends ItemCloak implements IBaubleExpanded {
 
     IIcon overlay;
 
@@ -29,13 +30,13 @@ public class ItemKama extends ItemCloak implements IBauble {
     }
 
     @Override
-    public void activate(EntityPlayer player, ItemStack stack) {
-        super.activate(player, stack);
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         // 13116: Synchronize raven kama for client-authoritative player movement
         if (subNames[stack.getItemDamage()].equals("raven") && !player.worldObj.isRemote) {
             InventoryBaubles baubles = (InventoryBaubles) BaublesApi.getBaubles(player);
             baubles.syncSlotToClients(3);
         }
+        return super.onItemRightClick(stack, world, player);
     }
 
     @Override
@@ -75,11 +76,6 @@ public class ItemKama extends ItemCloak implements IBauble {
     }
 
     @Override
-    public int getSlot(ItemStack stack) {
-        return -1;
-    }
-
-    @Override
     public BaubleType getBaubleType(ItemStack stack) {
         return BaubleType.BELT;
     }
@@ -112,15 +108,6 @@ public class ItemKama extends ItemCloak implements IBauble {
     public void onWornTick(ItemStack stack, EntityLivingBase living) {
         if (living instanceof EntityPlayer) this.onItemTicked((EntityPlayer) living, stack);
     }
-
-    @Override
-    public void onTravelGearTick(EntityPlayer player, ItemStack stack) {}
-
-    @Override
-    public void onTravelGearEquip(EntityPlayer player, ItemStack stack) {}
-
-    @Override
-    public void onTravelGearUnequip(EntityPlayer player, ItemStack stack) {}
 
     @Override
     public boolean canEquip(ItemStack arg0, EntityLivingBase arg1) {

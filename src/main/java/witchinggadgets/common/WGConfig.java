@@ -13,10 +13,9 @@ import witchinggadgets.common.util.Utilities;
 public class WGConfig {
 
     public static boolean limitBookSearchToCategory, allowClusters, allowTransmutations, coremod_allowBootsRepair,
-            coremod_allowEnchantModifications, coremod_allowPotionApplicationMod, coremod_allowFocusPouchActive,
-            modulePrimal, moduleBag, bagVoid, bagEnder, bagHungry, moduleCloak, moduleKama, capeSpectral, capeStorage,
-            capeWolf, capeRaven, enableSearch, soulboundBaubles, soulboundGalacticraft, moduleGemcutting,
-            allowdropsfrommachinery, terraformer;
+            coremod_allowEnchantModifications, coremod_allowPotionApplicationMod, modulePrimal, moduleBag, bagVoid,
+            bagEnder, bagHungry, moduleCloak, moduleKama, capeSpectral, capeStorage, capeWolf, capeRaven, enableSearch,
+            soulboundBaubles, soulboundGalacticraft, moduleGemcutting, allowdropsfrommachinery, terraformer;
     public static String[] tripplingClusterList, blocksforWGBF;
     public static int smelteryResultForClusters, cloakAnimationMode;
     public static Block[] coremod_worldgenValidBase_HilltopStones, coremod_worldgenValidBase_EldritchRing;
@@ -96,12 +95,6 @@ public class WGConfig {
                 "Cloak Animation Mode",
                 2,
                 "0 = no animation, 1 = rotate cloak when legs move, 2 = stretch cloak when legs move").getInt();
-        coremod_allowFocusPouchActive = config.get(
-                "Other Options",
-                "Allow FocusPouch active ability",
-                true,
-                "Dis-/enable the IActiveAbiltiy on the FocusPouch. With this enabled, TGs active ability menu will allow you to open the pouch.")
-                .getBoolean(true);
 
         coremod_allowBootsRepair = config.get(
                 "Other Options",
