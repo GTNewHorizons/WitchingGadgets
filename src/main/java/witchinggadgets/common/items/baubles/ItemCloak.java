@@ -2,7 +2,9 @@ package witchinggadgets.common.items.baubles;
 
 import java.util.List;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -44,7 +46,6 @@ import witchinggadgets.common.WGModCompat;
 import witchinggadgets.common.items.interfaces.IItemEvent;
 import witchinggadgets.common.util.Lib;
 import witchinggadgets.common.util.Utilities;
-import witchinggadgets.common.util.WGKeyHandler;
 
 @Optional.Interface(iface = "vazkii.botania.api.item.ICosmeticAttachable", modid = "Botania")
 public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttachable, IItemEvent {
@@ -209,12 +210,9 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
     }
 
     public void onItemTicked(EntityPlayer player, ItemStack stack) {
-        if (player.isSneaking() && WGKeyHandler.jumpKey.isPressed() && stack.getItemDamage() == 4) {
-            if (stack.getTagCompound().getBoolean("noGlide")) {
-                stack.getTagCompound().setBoolean("noGlide", false);
-            } else {
-                stack.getTagCompound().setBoolean("noGlide", true);
-            }
+        GameSettings keybind = Minecraft.getMinecraft().gameSettings;
+        if (keybind.keyBindSneak.getIsKeyPressed() && keybind.keyBindJump.isPressed() && stack.getItemDamage() == 4) {
+            stack.getTagCompound().setBoolean("noGlide", !stack.getTagCompound().getBoolean("noGlide"));
         }
         if (player.ticksExisted < 1) {
             onItemUnequipped(player, stack);
