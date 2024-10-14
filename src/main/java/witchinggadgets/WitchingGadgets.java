@@ -86,7 +86,6 @@ public class WitchingGadgets {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         logger.log(Level.INFO, "Setting up 'WitchingGadgets'");
-
         WGConfig.loadConfig(event);
         WGContent.preInit();
 
@@ -111,11 +110,6 @@ public class WitchingGadgets {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        ClientRegistry.registerKeyBinding(
-                WGKeyHandler.activateKey = new KeyBinding(
-                        "wg.config.activateKey",
-                        Keyboard.KEY_NONE,
-                        WitchingGadgets.MODNAME));
         proxy.registerRenders();
         // WGPacketPipeline.INSTANCE.initialise();
 

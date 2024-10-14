@@ -17,19 +17,22 @@ public class WG_arcane_baubles {
     public static void registerArcaneBaubles() {
         registerArcaneRecipe(
                 "WGBAUBLES",
-                "",
+                "_BLANKCHARM",
                 new ItemStack(WGContent.ItemMagicalBaubles, 1, 7),
                 new AspectList().add(Aspect.ENTROPY, 15).add(Aspect.ORDER, 15).add(Aspect.AIR, 15),
-                " D ",
+                "SDS",
                 "PDP",
                 "P P",
                 'D',
                 "ringDamascusSteel",
                 'P',
-                new ItemStack(Items.leather, 1, 0));
+                new ItemStack(Items.leather, 1, 0),
+                'S',
+                new ItemStack(Items.string, 1, 0));
+
         registerArcaneRecipe(
                 "WGBAUBLES",
-                "",
+                "_BLANKVAMBRACES",
                 new ItemStack(WGContent.ItemMagicalBaubles, 1, 8),
                 new AspectList().add(Aspect.ENTROPY, 25).add(Aspect.ORDER, 25).add(Aspect.AIR, 25),
                 " P ",
@@ -39,6 +42,26 @@ public class WG_arcane_baubles {
                 "ringDamascusSteel",
                 'P',
                 new ItemStack(Items.leather, 1, 0));
+
+        registerArcaneRecipe(
+                "WGBAUBLES",
+                "_KNOCKBACKCHARM",
+                new ItemStack(WGContent.ItemMagicalBaubles, 1, 1),
+                new AspectList().add(Aspect.EARTH, 50).add(Aspect.AIR, 15),
+                "BSB",
+                "ETE",
+                "BHB",
+                'H',
+                "craftingToolHardHammer",
+                'E',
+                new ItemStack(ConfigBlocks.blockCrystal, 1, 3),
+                'B',
+                "boltStainlessSteel",
+                'S',
+                new ItemStack(WGContent.ItemMagicalBaubles, 1, 7),
+                'T',
+                "plateDenseLead");
+
         registerArcaneRecipe(
                 "WGBAUBLES",
                 "_WOLFVAMBRACES",
@@ -52,26 +75,7 @@ public class WG_arcane_baubles {
                 'P',
                 new ItemStack(WGContent.ItemMaterial, 1, 6),
                 'V',
-                new ItemStack(WGContent.ItemMaterial, 1, 8));
-
-        registerArcaneRecipe(
-                "WGBAUBLES",
-                "_KNOCKBACKSHOULDERS",
-                new ItemStack(WGContent.ItemMagicalBaubles, 1, 1),
-                new AspectList().add(Aspect.EARTH, 50).add(Aspect.AIR, 15),
-                "BSB",
-                "ETE",
-                "BHB",
-                'H',
-                "craftingToolHardHammer",
-                'E',
-                new ItemStack(ConfigBlocks.blockCrystal, 1, 3),
-                'B',
-                "boltStainlessSteel",
-                'S',
-                "travelgearShoulderBase",
-                'T',
-                "plateDenseLead");
+                new ItemStack(WGContent.ItemMagicalBaubles, 1, 8));
 
         ItemStack luckyCoin = new ItemStack(ConfigItems.itemResource, 1, 18);
         luckyCoin.addEnchantment(Enchantment.fortune, 1);

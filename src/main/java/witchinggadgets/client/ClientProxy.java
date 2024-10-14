@@ -1,6 +1,7 @@
 package witchinggadgets.client;
 
 import net.minecraft.client.particle.EntityLavaFX;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
@@ -9,6 +10,8 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.client.model.IModelCustom;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import org.lwjgl.input.Keyboard;
 
 import baubles.api.BaublesApi;
 import baubles.api.expanded.BaubleExpandedSlots;
@@ -19,6 +22,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import thaumcraft.client.fx.ParticleEngine;
 import thaumcraft.client.fx.particles.FXEssentiaTrail;
 import thaumcraft.client.fx.particles.FXWisp;
+import witchinggadgets.WitchingGadgets;
 import witchinggadgets.client.fx.EntityFXSweat;
 import witchinggadgets.client.gui.GuiBag;
 import witchinggadgets.client.gui.GuiCloakBag;
@@ -115,7 +119,11 @@ public class ClientProxy extends CommonProxy {
         MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
         FMLCommonHandler.instance().bus().register(new WGKeyHandler());
         FMLCommonHandler.instance().bus().register(new ClientTickHandler());
-
+        ClientRegistry.registerKeyBinding(
+                WGKeyHandler.activateKey = new KeyBinding(
+                        "wg.config.activateKey",
+                        Keyboard.KEY_NONE,
+                        WitchingGadgets.MODNAME));
         if (WGConfig.enableSearch) {
             ThaumonomiconIndexSearcher.init();
         }

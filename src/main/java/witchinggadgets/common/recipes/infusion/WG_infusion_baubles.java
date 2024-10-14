@@ -43,7 +43,7 @@ public class WG_infusion_baubles {
 
             registerInfusionRecipe(
                     "WGBAUBLES",
-                    "_DOUBLEJUMPSHOULDERS",
+                    "_DOUBLEJUMPCHARM",
                     new ItemStack(WGContent.ItemMagicalBaubles, 1, 0),
                     2,
                     new AspectList().add(Aspect.FLIGHT, 16).add(Aspect.MOTION, 8).add(Aspect.AIR, 16)
