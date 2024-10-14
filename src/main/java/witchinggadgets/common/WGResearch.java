@@ -304,7 +304,7 @@ public class WGResearch {
                 new ResearchPage((InfusionRecipe) WGContent.recipeList.get("WGBAUBLES_SNIPERRING")),
                 new ResearchPage("witchinggadgets_research_page.WGBAUBLES.7"),
                 new ResearchPage((InfusionRecipe) WGContent.recipeList.get("WGBAUBLES_LUCKRING")),
-                new ResearchPage("witchinggadgets_research_page.WGBAUBLES.7"),
+                new ResearchPage("witchinggadgets_research_page.WGBAUBLES.8"),
                 new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("WGBAUBLES_COIN")) };
         getResearchItem(
                 "WGBAUBLES",
