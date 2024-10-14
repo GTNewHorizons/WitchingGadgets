@@ -24,7 +24,7 @@ public class WGKeyHandler {
 
     public static KeyBinding thaumcraftFKey;
     public static KeyBinding jumpKey;
-
+    public static KeyBinding activateKey;
     public boolean[] keyDown = { false, false, false };
     public static float gemRadial;
     public static boolean gemLock = false;
@@ -46,6 +46,7 @@ public class WGKeyHandler {
                     }
                 }
             }
+
             if (jumpKey == null) jumpKey = Minecraft.getMinecraft().gameSettings.keyBindJump;
 
             EntityPlayer player = event.player;

@@ -1,6 +1,7 @@
 package witchinggadgets;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.world.gen.structure.MapGenStructureIO;
@@ -9,8 +10,10 @@ import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.lwjgl.input.Keyboard;
 
 import baubles.api.expanded.BaubleExpandedSlots;
+import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -32,6 +35,7 @@ import witchinggadgets.common.WGConfig;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.WGModCompat;
 import witchinggadgets.common.util.WGCreativeTab;
+import witchinggadgets.common.util.WGKeyHandler;
 import witchinggadgets.common.util.handler.EventHandler;
 import witchinggadgets.common.util.handler.PlayerTickHandler;
 import witchinggadgets.common.util.handler.WGWandManager;
@@ -107,6 +111,11 @@ public class WitchingGadgets {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
+        ClientRegistry.registerKeyBinding(
+                WGKeyHandler.activateKey = new KeyBinding(
+                        "wg.config.activateKey",
+                        Keyboard.KEY_NONE,
+                        WitchingGadgets.MODNAME));
         proxy.registerRenders();
         // WGPacketPipeline.INSTANCE.initialise();
 

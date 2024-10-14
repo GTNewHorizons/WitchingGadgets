@@ -1,5 +1,7 @@
 package witchinggadgets.common.items.baubles;
 
+import static witchinggadgets.common.util.WGKeyHandler.activateKey;
+
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
@@ -229,6 +231,17 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
             onItemEquipped(player, stack);
         }
 
+        if (activateKey.getIsKeyPressed() && Minecraft.getMinecraft().currentScreen == null) {
+            if (stack.getItemDamage() < subNames.length)
+                if (subNames[stack.getItemDamage()].equals("storage") && !player.worldObj.isRemote) player.openGui(
+                        WitchingGadgets.instance,
+                        this.equals(WGContent.ItemKama) ? 5 : 4,
+                        player.worldObj,
+                        MathHelper.floor_double(player.posX),
+                        MathHelper.floor_double(player.posY),
+                        MathHelper.floor_double(player.posZ));
+        }
+
         if (stack.getItemDamage() < subNames.length) {
             if (subNames[stack.getItemDamage()].equals("spectral") && !player.worldObj.isRemote
                     && stack.hasTagCompound()
@@ -324,7 +337,6 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
         if (playerEntity instanceof EntityPlayer) {
             onItemTicked((EntityPlayer) playerEntity, aItem);
         }
-
     }
 
     @Override
@@ -332,14 +344,7 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
         if (playerEntity instanceof EntityPlayer player) {
             onItemEquipped(playerEntity, stack);
             if (stack.getItemDamage() < subNames.length)
-                if (subNames[stack.getItemDamage()].equals("storage") && !player.worldObj.isRemote) player.openGui(
-                        WitchingGadgets.instance,
-                        this.equals(WGContent.ItemKama) ? 5 : 4,
-                        player.worldObj,
-                        MathHelper.floor_double(player.posX),
-                        MathHelper.floor_double(player.posY),
-                        MathHelper.floor_double(player.posZ));
-                else if (subNames[stack.getItemDamage()].equals("raven") && !player.worldObj.isRemote) {
+                if (subNames[stack.getItemDamage()].equals("raven") && !player.worldObj.isRemote) {
                     if (!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
                     stack.getTagCompound().setBoolean("noGlide", !stack.getTagCompound().getBoolean("noGlide"));
                 } else if (subNames[stack.getItemDamage()].equals("spectral") && !player.worldObj.isRemote

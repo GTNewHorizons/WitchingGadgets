@@ -17,6 +17,30 @@ public class WG_arcane_baubles {
     public static void registerArcaneBaubles() {
         registerArcaneRecipe(
                 "WGBAUBLES",
+                "",
+                new ItemStack(WGContent.ItemMagicalBaubles, 1, 7),
+                new AspectList().add(Aspect.ENTROPY, 15).add(Aspect.ORDER, 15).add(Aspect.AIR, 15),
+                " D ",
+                "PDP",
+                "P P",
+                'D',
+                "ringDamascusSteel",
+                'P',
+                new ItemStack(Items.leather, 1, 0));
+        registerArcaneRecipe(
+                "WGBAUBLES",
+                "",
+                new ItemStack(WGContent.ItemMagicalBaubles, 1, 8),
+                new AspectList().add(Aspect.ENTROPY, 25).add(Aspect.ORDER, 25).add(Aspect.AIR, 25),
+                " P ",
+                "PDP",
+                " P ",
+                'D',
+                "ringDamascusSteel",
+                'P',
+                new ItemStack(Items.leather, 1, 0));
+        registerArcaneRecipe(
+                "WGBAUBLES",
                 "_WOLFVAMBRACES",
                 new ItemStack(WGContent.ItemMagicalBaubles, 1, 2),
                 new AspectList().add(Aspect.ENTROPY, 25).add(Aspect.FIRE, 25).add(Aspect.AIR, 15),
@@ -28,7 +52,7 @@ public class WG_arcane_baubles {
                 'P',
                 new ItemStack(WGContent.ItemMaterial, 1, 6),
                 'V',
-                "travelgearVambraceBase");
+                new ItemStack(WGContent.ItemMaterial, 1, 8));
 
         registerArcaneRecipe(
                 "WGBAUBLES",
