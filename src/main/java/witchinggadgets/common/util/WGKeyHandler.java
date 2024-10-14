@@ -3,9 +3,12 @@ package witchinggadgets.common.util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.common.ForgeHooks;
 
+import baubles.api.BaublesApi;
+import baubles.api.expanded.BaubleExpandedSlots;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
@@ -60,9 +63,10 @@ public class WGKeyHandler {
                     if (!isJumping) {
                         multiJumps = 0;
                         isJumping = event.player.isAirBorne;
-                        if (player.getCurrentEquippedItem() != null
-                                && player.getCurrentEquippedItem().getItem() instanceof ItemMagicalBaubles
-                                && player.getCurrentEquippedItem().getItemDamage() == 0)
+                        ItemStack aItem = BaublesApi.getBaubles(player).getStackInSlot(
+                                BaubleExpandedSlots.getIndexesOfAssignedSlotsOfType(BaubleExpandedSlots.charmType)[0]);
+                        if (aItem != null && aItem.getItem() instanceof ItemMagicalBaubles
+                                && aItem.getItemDamage() == 0)
                             multiJumps += 1;
                     }
                     keyDown[2] = true;
