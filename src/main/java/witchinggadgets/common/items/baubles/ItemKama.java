@@ -2,8 +2,10 @@ package witchinggadgets.common.items.baubles;
 
 import java.util.List;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -82,9 +84,18 @@ public class ItemKama extends ItemCloak implements IBaubleExpanded {
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List<String> list, boolean par4) {
+        GameSettings keybind = Minecraft.getMinecraft().gameSettings;
+        list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Belt"));
+        list.add(
+                StatCollector.translateToLocal(Lib.DESCRIPTION + "enableCloak")
+                        .replaceAll(
+                                "%s1",
+                                StatCollector.translateToLocalFormatted(keybind.keyBindSneak.getKeyDescription()))
+                        .replaceAll(
+                                "%s2",
+                                StatCollector.translateToLocalFormatted(keybind.keyBindJump.getKeyDescription())));
         if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("noGlide"))
             list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide"));
-        list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Belt"));
 
         if (Loader.isModLoaded("Botania")) {
             ItemStack cosmetic = getCosmeticItem(stack);

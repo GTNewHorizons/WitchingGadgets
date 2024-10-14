@@ -160,6 +160,7 @@ wg.gui.buttonMigrate=Return to nest
 wg.gui.noFeathersToMigrate=You don't have the Items required to return to your nest
 
 wg.desc.noGlide=Gliding disabled
+wg.desc.enableCloak=§7Enable or disable by Holding §a%s1§7 and pressing §a%s2§7.
 
 wg.gui.visSize=Vis Capacity
 wg.gui.shiftForAspectList=§7Hold §aShift§7 for a list of Aspects§r

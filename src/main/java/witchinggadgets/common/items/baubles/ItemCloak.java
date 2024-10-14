@@ -197,9 +197,19 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
 
     @Override
     public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List<String> list, boolean par4) {
-        if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("noGlide"))
-            list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide"));
+        GameSettings keybind = Minecraft.getMinecraft().gameSettings;
         list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Cloak"));
+        list.add(
+                StatCollector.translateToLocal(Lib.DESCRIPTION + "enableCloak")
+                        .replaceAll(
+                                "%s1",
+                                StatCollector.translateToLocalFormatted(keybind.keyBindSneak.getKeyDescription()))
+                        .replaceAll(
+                                "%s2",
+                                StatCollector.translateToLocalFormatted(keybind.keyBindJump.getKeyDescription())));
+        if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("noGlide")) {
+            list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide"));
+        }
 
         if (Loader.isModLoaded("Botania")) {
             ItemStack cosmetic = getCosmeticItem(stack);
