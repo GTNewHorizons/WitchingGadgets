@@ -84,7 +84,7 @@ public class ItemKama extends ItemCloak implements IBaubleExpanded {
     public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List<String> list, boolean par4) {
         if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("noGlide"))
             list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide"));
-        list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble." + getBaubleType(stack)));
+        list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Belt"));
 
         if (Loader.isModLoaded("Botania")) {
             ItemStack cosmetic = getCosmeticItem(stack);

@@ -116,8 +116,10 @@ item.WG_PrimordialBoots.name=Primordial Boots
 item.WG_Baubles.ring_primordial.name=Primordial Ring
 item.WG_Baubles.ring_lifeProtection.name=Ring of Life Protection
 
-item.WG_Baubles.shouldersDoublejump.name=Seraph's Shoulders
-item.WG_Baubles.shouldersKnockback.name=Steadfast Spaulders
+item.WG_Baubles.charmEmpty.name=Empty Charm
+item.WG_Baubles.vambraceEmpty.name=Leather Vambraces
+item.WG_Baubles.charmDoublejump.name=Seraph's Charm
+item.WG_Baubles.charmKnockback.name=Steadfast Charm
 item.WG_Baubles.vambraceStrength.name=Berserker's Bracers
 item.WG_Baubles.vambraceHaste.name=Vambraces of Steady Progression
 item.WG_Baubles.titleCrimsonCult.name=Title: Crimson Cult
@@ -175,13 +177,13 @@ wg.desc.gemaversion=Natural Aversions:
 wg.desc.ctrlForAspectList=§7Hold §aCtrl§7 for a list of Aspects§r
 wg.desc.scanCompleted=Scan Completed
 
-wg.desc.gearSlot.tg.0=Equipped in the §aCloak§7 slot
-wg.desc.gearSlot.tg.1=Equipped in the §aPauldron§7 slot
-wg.desc.gearSlot.tg.2=Equipped in the §aVambrace§7 slot
-wg.desc.gearSlot.tg.3=Equipped in the §aTitle§7 slot
-wg.desc.gearSlot.bauble.RING=Equipped in the §aRing§7 slot
-wg.desc.gearSlot.bauble.BELT=Equipped in the §aBelt§7 slot
-wg.desc.gearSlot.bauble.AMULET=Equipped in the §aAmulet§7 slot
+wg.desc.gearSlot.bauble.Cloak=Equipped in the §aCloak§7 slot
+wg.desc.gearSlot.bauble.Charm=Equipped in the §aCharm§7 slot
+wg.desc.gearSlot.bauble.Gloves=Equipped in the §aGloves§7 slot
+wg.desc.gearSlot.bauble.Title=Equipped in the §aTitle§7 slot
+wg.desc.gearSlot.bauble.Ring=Equipped in the §aRing§7 slot
+wg.desc.gearSlot.bauble.Belt=Equipped in the §aBelt§7 slot
+wg.desc.gearSlot.bauble.Amulet=Equipped in the §aAmulet§7 slot
 
 wg.desc.filteredItems=Accepted Items:
 

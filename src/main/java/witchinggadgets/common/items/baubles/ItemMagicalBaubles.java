@@ -1,6 +1,5 @@
 package witchinggadgets.common.items.baubles;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
@@ -37,8 +36,8 @@ import witchinggadgets.common.util.Utilities;
 public class ItemMagicalBaubles extends Item implements IBaubleExpanded, vazkii.botania.api.item.ICosmeticAttachable {
 
     // String[] subNames = {"ringSocketed_gold","ringSocketed_thaumium","ringSocketed_silver"};
-    public static String[] subNames = { "shouldersDoublejump", "shouldersKnockback", "vambraceStrength",
-            "vambraceHaste", "ringLuck", "titleCrimsonCult", "ringSniper" };
+    public static String[] subNames = { "charmDoublejump", "charmKnockback", "vambraceStrength", "vambraceHaste",
+            "ringLuck", "titleCrimsonCult", "ringSniper", "charmEmpty", "vambraceEmpty" };
     IIcon[] icons = new IIcon[subNames.length];
     public static HashSet<String> bowSpeedPlayers = new HashSet<String>();
 
@@ -67,10 +66,14 @@ public class ItemMagicalBaubles extends Item implements IBaubleExpanded, vazkii.
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean par4) {
-        String type = getBaubleTypes(stack) != null ? ("tg." + Arrays.toString(getBaubleTypes(stack)))
-                : "bauble." + getBaubleType(stack);
-        list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot." + type));
-
+        if (subNames[stack.getItemDamage()].startsWith("charm"))
+            list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Charm"));
+        if (subNames[stack.getItemDamage()].startsWith("vambrace"))
+            list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Gloves"));
+        if (subNames[stack.getItemDamage()].startsWith("ring"))
+            list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Ring"));
+        if (subNames[stack.getItemDamage()].startsWith("title"))
+            list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Title"));
         if (stack.hasTagCompound() && stack.getTagCompound().hasKey("title"))
             list.add(StatCollector.translateToLocalFormatted(stack.getTagCompound().getString("title")));
 
@@ -163,8 +166,7 @@ public class ItemMagicalBaubles extends Item implements IBaubleExpanded, vazkii.
     @Override
     public String[] getBaubleTypes(ItemStack stack) {
         return subNames[stack.getItemDamage()].startsWith("cloak") ? new String[] { BaubleExpandedSlots.capeType }
-                : subNames[stack.getItemDamage()].startsWith("shoulders")
-                        ? new String[] { BaubleExpandedSlots.charmType }
+                : subNames[stack.getItemDamage()].startsWith("charm") ? new String[] { BaubleExpandedSlots.charmType }
                         : subNames[stack.getItemDamage()].startsWith("vambrace")
                                 ? new String[] { BaubleExpandedSlots.gauntletType }
                                 : subNames[stack.getItemDamage()].startsWith("title") ? new String[] { "Title" }

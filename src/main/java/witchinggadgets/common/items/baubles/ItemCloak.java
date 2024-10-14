@@ -199,7 +199,7 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
     public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List<String> list, boolean par4) {
         if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("noGlide"))
             list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide"));
-        list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.tg.0"));
+        list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Cloak"));
 
         if (Loader.isModLoaded("Botania")) {
             ItemStack cosmetic = getCosmeticItem(stack);
