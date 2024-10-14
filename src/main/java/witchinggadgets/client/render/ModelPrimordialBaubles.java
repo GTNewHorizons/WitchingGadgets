@@ -9,8 +9,6 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 
-import travellersgear.api.ITravellersGear;
-
 public class ModelPrimordialBaubles extends ModelBiped {
 
     List<ModelRenderer> parts = new ArrayList();
@@ -23,13 +21,12 @@ public class ModelPrimordialBaubles extends ModelBiped {
         this.bipedLeftLeg.isHidden = true;
         this.bipedRightLeg.isHidden = true;
 
-        int slot = ((ITravellersGear) stack.getItem()).getSlot(stack);
         int meta = stack.getItemDamage();
-        float sizeMod = slot == 1 ? 1.125f : .125f;
+        float sizeMod = .125f;
 
         int u = meta == 1 || meta == 2 ? 40 : 24;
         int v = meta == 2 || meta == 3 ? 24 : 16;
-        int yOff = slot == 2 ? 7 : 0;
+        int yOff = 0;
 
         this.boxList.clear();
         this.bipedRightArm = new ModelRenderer(this, u, v);
@@ -48,13 +45,5 @@ public class ModelPrimordialBaubles extends ModelBiped {
 
     public static ModelBiped getModel(EntityLivingBase entity, ItemStack stack) {
         return new ModelPrimordialBaubles(entity, stack);
-        // if(stack==null || !(stack.getItem() instanceof ITravellersGear))
-        // return null;
-        // int slot = ((ITravellersGear)stack.getItem()).getSlot(stack);
-        // if(slot<0 || slot>2)
-        // return null;
-        // if(!modelMap.containsKey(stack.getItemDamage()))
-        // modelMap.put(stack.getItemDamage(), new ModelPrimordialBaubles(entity,stack));
-        // return modelMap.get(stack.getItemDamage());
     }
 }
