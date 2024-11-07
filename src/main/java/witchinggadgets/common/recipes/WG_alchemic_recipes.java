@@ -2,15 +2,10 @@ package witchinggadgets.common.recipes;
 
 import net.minecraft.item.ItemStack;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import gregtech.api.util.GTUtility;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.crafting.CrucibleRecipe;
-import thaumcraft.api.research.ResearchCategories;
-import thaumcraft.api.research.ResearchItem;
-import thaumcraft.api.research.ResearchPage;
 import witchinggadgets.common.WGConfig;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.recipes.alchemic.WG_alchemic_clusters;
@@ -52,10 +47,5 @@ public class WG_alchemic_recipes {
                     && GTUtility.areStacksEqual(((CrucibleRecipe) recipe).getRecipeOutput(), output);
             return false;
         });
-    }
-
-    public static void addResearchPage(final String research, ResearchPage page) {
-        ResearchItem ri = ResearchCategories.getResearch(research);
-        ri.setPages(ArrayUtils.add(ri.getPages(), page));
     }
 }
