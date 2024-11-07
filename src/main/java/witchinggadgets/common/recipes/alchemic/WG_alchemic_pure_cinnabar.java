@@ -14,16 +14,18 @@ public class WG_alchemic_pure_cinnabar {
         registerAlchemyRecipe(
                 "PURECINNABAR",
                 "",
-                new ItemStack(ConfigItems.itemNugget, 1, 21),
+                new ItemStack(ConfigItems.itemNugget, 2, 21),
                 "oreCinnabar",
-                new AspectList().add(Aspect.METAL, 1).add(Aspect.ORDER, 1));
+                new AspectList().add(Aspect.METAL, 2).add(Aspect.EXCHANGE, 2).add(Aspect.EARTH, 1).add(Aspect.POISON, 1)
+                        .add(Aspect.ORDER, 1));
 
         registerAlchemyRecipe(
                 "PURECINNABAR",
                 "",
-                new ItemStack(ConfigItems.itemNugget, 1, 21),
+                new ItemStack(ConfigItems.itemNugget, 2, 21),
                 "rawOreCinnabar",
-                new AspectList().add(Aspect.METAL, 1).add(Aspect.ORDER, 1));
+                new AspectList().add(Aspect.METAL, 2).add(Aspect.EXCHANGE, 2).add(Aspect.EARTH, 1).add(Aspect.POISON, 1)
+                        .add(Aspect.ORDER, 1));
 
     }
 

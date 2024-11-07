@@ -186,13 +186,23 @@ public class WGContent {
         preInitItems();
         preInitBlocks();
     }
+
+    private static boolean clusterBlacklist(Materials material) {
+        return material.equals(Materials.Cinnabar) || material.equals(Materials.Iron)
+                || material.equals(Materials.Gold)
+                || material.equals(Materials.Tin)
+                || material.equals(Materials.Copper)
+                || material.equals(Materials.Silver)
+                || material.equals(Materials.Lead);
+    }
+
     // final static String UUIDBASE = "424C5553-5747-1694-4452-";
 
     private static void initClusters() {
         HashSet<String> L = new HashSet<>();
         for (Entry<String, Materials> entry : Materials.getMaterialsMap().entrySet()) {
             Materials material = entry.getValue();
-            if (!b.contains(material.mDefaultLocalName)
+            if (!b.contains(material.mDefaultLocalName) && !clusterBlacklist(material)
                     && !OreDictionary.getOres("ore" + material.mDefaultLocalName.replaceAll(" ", "")).isEmpty()) {
                 Integer rgb = ((material.getRGBA()[0] & 0x0ff) << 16) | ((material.getRGBA()[1] & 0x0ff) << 8)
                         | (material.getRGBA()[2] & 0x0ff);
