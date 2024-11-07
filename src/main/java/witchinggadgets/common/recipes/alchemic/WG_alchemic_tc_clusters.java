@@ -381,5 +381,4 @@ public class WG_alchemic_tc_clusters {
         addResearchPage("PUREGOLD", new ResearchPage((CrucibleRecipe) WGContent.recipeList.get("PUREGOLD.3")));
     }
 
-
 }
