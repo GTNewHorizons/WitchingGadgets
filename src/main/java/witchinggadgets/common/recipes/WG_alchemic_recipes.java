@@ -1,9 +1,10 @@
 package witchinggadgets.common.recipes;
 
-import gregtech.api.util.GTUtility;
 import net.minecraft.item.ItemStack;
 
 import org.apache.commons.lang3.ArrayUtils;
+
+import gregtech.api.util.GTUtility;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.crafting.CrucibleRecipe;
