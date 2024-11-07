@@ -188,12 +188,12 @@ public class WGContent {
     }
 
     private static boolean clusterBlacklist(Materials material) {
-        return material.equals(Materials.Cinnabar) || material.equals(Materials.Iron)
-                || material.equals(Materials.Gold)
+        return material.equals(Materials.Iron) || material.equals(Materials.Copper)
                 || material.equals(Materials.Tin)
-                || material.equals(Materials.Copper)
                 || material.equals(Materials.Silver)
-                || material.equals(Materials.Lead);
+                || material.equals(Materials.Lead)
+                || material.equals(Materials.Cinnabar)
+                || material.equals(Materials.Gold);
     }
 
     // final static String UUIDBASE = "424C5553-5747-1694-4452-";
