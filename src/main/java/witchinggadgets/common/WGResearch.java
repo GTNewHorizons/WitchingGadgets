@@ -629,7 +629,8 @@ public class WGResearch {
         // PURECINNABAR
         researchAspects = new AspectList().add(Aspect.METAL, 5).add(Aspect.ORDER, 1).add(Aspect.POISON, 1);
         pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.PURECINNABAR.1"),
-                new ResearchPage((CrucibleRecipe) WGContent.recipeList.get("PURECINNABAR")) };
+                new ResearchPage((CrucibleRecipe) WGContent.recipeList.get("PURECINNABAR")),
+                new ResearchPage((CrucibleRecipe) WGContent.recipeList.get("PURECINNABAR.2")) };
         getResearchItem(
                 "PURECINNABAR",
                 "WITCHGADG",
