@@ -79,9 +79,15 @@ public class WitchingGadgets {
 
     public static final boolean IS_DREAMCRAFT_LOADED = Loader.isModLoaded("dreamcraft");
 
+    public static boolean isBootsActive = false;
+    public static final String BOOTS = "thaumicboots";
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         logger.log(Level.INFO, "Setting up 'WitchingGadgets'");
+        if (Loader.isModLoaded(BOOTS)) {
+            isBootsActive = true;
+        }
 
         WGConfig.loadConfig(event);
         WGContent.preInit();

@@ -21,6 +21,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.oredict.OreDictionary;
@@ -499,6 +500,8 @@ public class WGContent {
             ItemPrimordialBoots = new ItemPrimordialArmor(primordialArmor, 4, 3)
                     .setUnlocalizedName("WG_PrimordialBoots");
             GameRegistry.registerItem(ItemPrimordialBoots, ItemPrimordialBoots.getUnlocalizedName());
+
+            MinecraftForge.EVENT_BUS.register(new ItemPrimordialArmor.abilityHandler());
         }
 
         if (WGConfig.moduleGemcutting) {
