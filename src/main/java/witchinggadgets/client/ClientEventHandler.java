@@ -40,8 +40,8 @@ import thaumcraft.api.research.ResearchCategories;
 import thaumcraft.client.gui.GuiResearchBrowser;
 import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.config.ConfigItems;
-import travellersgear.api.RenderTravellersGearEvent;
 import witchinggadgets.WitchingGadgets;
+import witchinggadgets.client.render.armor.RenderGearEvent;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.WGResearch;
 import witchinggadgets.common.blocks.tiles.TileEntitySaunaStove;
@@ -283,7 +283,7 @@ public class ClientEventHandler {
 
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
-    public void renderTravellersGear(RenderTravellersGearEvent event) {
+    public void renderTravellersGear(RenderGearEvent event) {
         int translucency = EnchantmentHelper.getEnchantmentLevel(WGContent.enc_invisibleGear.effectId, event.stack);
         if (event.stack != null && (translucency > 1 || (translucency > 0 && event.entityPlayer.isInvisible()))) {
             boolean unveiling = EnchantmentHelper.getEnchantmentLevel(

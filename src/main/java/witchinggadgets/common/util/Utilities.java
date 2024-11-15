@@ -32,6 +32,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import org.apache.logging.log4j.Level;
 
 import baubles.api.BaublesApi;
+import baubles.api.expanded.BaubleExpandedSlots;
 import cpw.mods.fml.common.Loader;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -43,7 +44,6 @@ import thaumcraft.common.items.ItemManaBean;
 import thaumcraft.common.items.baubles.ItemAmuletVis;
 import thaumcraft.common.items.wands.ItemWandCasting;
 import thaumcraft.common.tiles.TileNode;
-import travellersgear.api.TravellersGearAPI;
 import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.items.baubles.ItemCloak;
@@ -335,12 +335,12 @@ public class Utilities {
 
     public static ItemStack[] getActiveMagicalCloak(EntityPlayer player) {
         ArrayList<ItemStack> list = new ArrayList<>();
-        if (TravellersGearAPI.getExtendedInventory(player)[0] != null
-                && TravellersGearAPI.getExtendedInventory(player)[0].getItem() instanceof ItemCloak)
-            list.add(TravellersGearAPI.getExtendedInventory(player)[0]);
-        else if (BaublesApi.getBaubles(player).getStackInSlot(3) != null
-                && BaublesApi.getBaubles(player).getStackInSlot(3).getItem() instanceof ItemCloak)
-            list.add(BaublesApi.getBaubles(player).getStackInSlot(3));
+        if (BaublesApi.getBaubles(player).getStackInSlot(3) != null && BaublesApi.getBaubles(player)
+                .getStackInSlot(BaubleExpandedSlots.getIndexOfTypeInRegisteredTypes(BaubleExpandedSlots.capeType))
+                .getItem() instanceof ItemCloak)
+            list.add(
+                    BaublesApi.getBaubles(player).getStackInSlot(
+                            BaubleExpandedSlots.getIndexOfTypeInRegisteredTypes(BaubleExpandedSlots.capeType)));
         return list.toArray(new ItemStack[0]);
     }
 
@@ -352,12 +352,7 @@ public class Utilities {
                     BaublesApi.getBaubles(player).setInventorySlotContents(3, cloak);
                 BaublesApi.getBaubles(player).markDirty();
             }
-        } else if (TravellersGearAPI.getExtendedInventory(player)[0] != null
-                && TravellersGearAPI.getExtendedInventory(player)[0].getItem() instanceof ItemCloak) {
-                    ItemStack[] tgInv = TravellersGearAPI.getExtendedInventory(player);
-                    if (tgInv[0].getItemDamage() == cloak.getItemDamage()) tgInv[0] = cloak;
-                    TravellersGearAPI.setExtendedInventory(player, tgInv);
-                }
+        }
     }
 
     static Class<?> c_tconProjectileWeapon;

@@ -33,14 +33,13 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import thaumcraft.api.IRepairable;
 import thaumcraft.api.aspects.Aspect;
-import travellersgear.api.IActiveAbility;
-import travellersgear.api.IEventGear;
 import witchinggadgets.api.IPrimordialCrafting;
 import witchinggadgets.common.WGContent;
+import witchinggadgets.common.items.interfaces.IItemEvent;
 import witchinggadgets.common.util.Utilities;
 
 public class ItemPrimordialSword extends ItemSword
-        implements IPrimordialCrafting, IActiveAbility, IRepairable, IEventGear, IPrimordialGear {
+        implements IPrimordialCrafting, IRepairable, IItemEvent, IPrimordialGear {
 
     IIcon overlay;
 
@@ -153,13 +152,12 @@ public class ItemPrimordialSword extends ItemSword
     }
 
     @Override
-    public boolean canActivate(EntityPlayer player, ItemStack stack, boolean isInHand) {
-        return true;
-    }
-
-    @Override
-    public void activate(EntityPlayer player, ItemStack stack) {
-        if (!player.worldObj.isRemote) cycleAbilities(stack);
+    public boolean onItemUse(ItemStack aStack, EntityPlayer aPlayer, World aWorld, int aX, int aY, int aZ, int aSide,
+            float a, float b, float c) {
+        if (aPlayer.isSneaking() && !aPlayer.worldObj.isRemote) {
+            cycleAbilities(aStack);
+        }
+        return super.onItemUse(aStack, aPlayer, aWorld, aX, aY, aZ, aSide, a, b, c);
     }
 
     @Override
