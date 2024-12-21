@@ -20,6 +20,6 @@ dependencies {
 	compileOnly('com.github.GTNewHorizons:CraftTweaker:3.4.0:dev') {transitive=false}
 	compileOnly('com.github.GTNewHorizons:ZenScript:1.0.0-GTNH') {transitive=false}
 	compileOnly('com.github.GTNewHorizons:MagicBees:2.8.5-GTNH:api') {transitive=false}
-	compileOnly('com.github.GTNewHorizons:TinkersConstruct:1.12.13-GTNH:dev') {transitive=false}
+	compileOnly('com.github.GTNewHorizons:TinkersConstruct:1.12.14-GTNH:dev') {transitive=false}
 	compileOnly(deobfCurse('enviromine-230236:2269710'))
 }
