@@ -46,9 +46,9 @@ import witchinggadgets.common.world.VillageComponentPhotoshop;
         name = WitchingGadgets.MODNAME,
         version = WitchingGadgets.VERSION,
         dependencies = "required-after:Thaumcraft;" + "required-after:ForbiddenMagic;"
-                + "required-after:gregtech;"
                 + "required-after:TwilightForest;"
                 + "required-after:TaintedMagic;"
+                + "after:gregtech;"
                 + "after:miscutils;"
                 + "after:Mystcraft;"
                 + "after:TConstruct;"
