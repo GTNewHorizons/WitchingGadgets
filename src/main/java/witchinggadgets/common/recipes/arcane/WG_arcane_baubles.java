@@ -2,11 +2,11 @@ package witchinggadgets.common.recipes.arcane;
 
 import static witchinggadgets.common.recipes.WG_arcane_recipes.registerArcaneRecipe;
 
-import cpw.mods.fml.common.Loader;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
+import cpw.mods.fml.common.Loader;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.config.ConfigBlocks;
@@ -121,8 +121,7 @@ public class WG_arcane_baubles {
                     'B',
                     new ItemStack(Items.iron_ingot, 1, 0),
                     'S',
-                    new ItemStack(WGContent.ItemMagicalBaubles, 1, 7)
-            );
+                    new ItemStack(WGContent.ItemMagicalBaubles, 1, 7));
 
             registerArcaneRecipe(
                     "WGBAUBLES",
@@ -140,20 +139,20 @@ public class WG_arcane_baubles {
                     new ItemStack(WGContent.ItemMagicalBaubles, 1, 8));
         }
 
-            ItemStack luckyCoin = new ItemStack(ConfigItems.itemResource, 1, 18);
-            luckyCoin.addEnchantment(Enchantment.fortune, 1);
-            luckyCoin.addEnchantment(Enchantment.looting, 1);
-            registerArcaneRecipe(
-                    "WGBAUBLES",
-                    "_COIN",
-                    luckyCoin,
-                    new AspectList().add(Aspect.ORDER, 30),
-                    "BCB",
-                    "CCC",
-                    "BCB",
-                    'C',
-                    new ItemStack(ConfigItems.itemResource, 1, 18),
-                    'B',
-                    Items.enchanted_book);
+        ItemStack luckyCoin = new ItemStack(ConfigItems.itemResource, 1, 18);
+        luckyCoin.addEnchantment(Enchantment.fortune, 1);
+        luckyCoin.addEnchantment(Enchantment.looting, 1);
+        registerArcaneRecipe(
+                "WGBAUBLES",
+                "_COIN",
+                luckyCoin,
+                new AspectList().add(Aspect.ORDER, 30),
+                "BCB",
+                "CCC",
+                "BCB",
+                'C',
+                new ItemStack(ConfigItems.itemResource, 1, 18),
+                'B',
+                Items.enchanted_book);
     }
 }
