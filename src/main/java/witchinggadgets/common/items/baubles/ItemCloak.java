@@ -225,6 +225,7 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
     }
 
     public void onItemTicked(EntityPlayer player, ItemStack stack) {
+        boolean openStorageCloak = false;
         if (player.worldObj.isRemote) {
             GameSettings keybind = Minecraft.getMinecraft().gameSettings;
             if (keybind.keyBindSneak.getIsKeyPressed() && keybind.keyBindJump.getIsKeyPressed()
@@ -232,15 +233,8 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
                 stack.getTagCompound().setBoolean("noGlide", !stack.getTagCompound().getBoolean("noGlide"));
             }
 
-            if (activateKey.getIsKeyPressed() && Minecraft.getMinecraft().currentScreen == null) {
-                if (stack.getItemDamage() < subNames.length)
-                    if (subNames[stack.getItemDamage()].equals("storage") && !player.worldObj.isRemote) player.openGui(
-                            WitchingGadgets.instance,
-                            this.equals(WGContent.ItemKama) ? 5 : 4,
-                            player.worldObj,
-                            MathHelper.floor_double(player.posX),
-                            MathHelper.floor_double(player.posY),
-                            MathHelper.floor_double(player.posZ));
+            if (activateKey.getIsKeyPressed()) {
+                openStorageCloak = true;
             }
         }
 
@@ -248,6 +242,15 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
             onItemUnequipped(player, stack);
             onItemEquipped(player, stack);
         }
+
+        if (subNames[stack.getItemDamage()].equals("storage") && !player.worldObj.isRemote && openStorageCloak)
+            player.openGui(
+                    WitchingGadgets.instance,
+                    this.equals(WGContent.ItemKama) ? 5 : 4,
+                    player.worldObj,
+                    MathHelper.floor_double(player.posX),
+                    MathHelper.floor_double(player.posY),
+                    MathHelper.floor_double(player.posZ));
 
         if (stack.getItemDamage() < subNames.length) {
             if (subNames[stack.getItemDamage()].equals("spectral") && !player.worldObj.isRemote
