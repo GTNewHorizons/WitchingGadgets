@@ -227,7 +227,7 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
     public void onItemTicked(EntityPlayer player, ItemStack stack) {
         if (player.worldObj.isRemote) {
             GameSettings keybind = Minecraft.getMinecraft().gameSettings;
-            if (keybind.keyBindSneak.getIsKeyPressed() && keybind.keyBindJump.isPressed()
+            if (keybind.keyBindSneak.getIsKeyPressed() && keybind.keyBindJump.getIsKeyPressed()
                     && stack.getItemDamage() == 4) {
                 stack.getTagCompound().setBoolean("noGlide", !stack.getTagCompound().getBoolean("noGlide"));
             }
@@ -243,6 +243,7 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
                             MathHelper.floor_double(player.posZ));
             }
         }
+
         if (player.ticksExisted < 1) {
             onItemUnequipped(player, stack);
             onItemEquipped(player, stack);
