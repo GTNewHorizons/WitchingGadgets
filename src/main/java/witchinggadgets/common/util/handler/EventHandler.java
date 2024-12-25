@@ -49,6 +49,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
 import baubles.api.BaublesApi;
+import baubles.api.expanded.BaubleExpandedSlots;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.EventPriority;
@@ -184,9 +185,10 @@ public class EventHandler {
 
     @SubscribeEvent
     public void onPlayerBreaking(PlayerEvent.BreakSpeed event) {
-        if (event.entityPlayer.getItemInUse() != null
-                && event.entityPlayer.getItemInUse().getItem() instanceof ItemMagicalBaubles
-                && event.entityPlayer.getItemInUse().getItemDamage() == 3) {
+        ItemStack gauntletSlot = BaublesApi.getBaubles(event.entityPlayer).getStackInSlot(
+                BaubleExpandedSlots.getIndexesOfAssignedSlotsOfType(BaubleExpandedSlots.gauntletType)[0]);
+        if (gauntletSlot != null && gauntletSlot.getItem() instanceof ItemMagicalBaubles
+                && gauntletSlot.getItemDamage() == 3) {
             Block block = event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z);
             if (!event.entityPlayer.onGround) event.newSpeed *= 5.0F;
             if (event.entityPlayer.isInsideOfMaterial(Material.water)
