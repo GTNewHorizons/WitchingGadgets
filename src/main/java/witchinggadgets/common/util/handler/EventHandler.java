@@ -572,7 +572,7 @@ public class EventHandler {
         if (event.target instanceof EntityPlayer)
             for (Object[] gear : buildEventItemList((EntityPlayer) event.target)) {
                 ItemStack stack = (ItemStack) gear[0];
-                itemTriggerEvent(stack, (EntityPlayer) event.entityLiving, event);
+                itemTriggerEvent(stack, (EntityPlayer) event.target, event);
             }
     }
 
