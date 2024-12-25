@@ -198,48 +198,54 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
     }
 
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List<String> list, boolean par4) {
-        GameSettings keybind = Minecraft.getMinecraft().gameSettings;
-        list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Cloak"));
-        list.add(
-                StatCollector.translateToLocal(Lib.DESCRIPTION + "enableCloak")
-                        .replaceAll(
-                                "%s1",
-                                StatCollector.translateToLocalFormatted(keybind.keyBindSneak.getKeyDescription()))
-                        .replaceAll(
-                                "%s2",
-                                StatCollector.translateToLocalFormatted(keybind.keyBindJump.getKeyDescription())));
-        if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("noGlide")) {
-            list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide"));
-        }
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean par4) {
+        if (player.worldObj.isRemote) {
+            GameSettings keybind = Minecraft.getMinecraft().gameSettings;
+            list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Cloak"));
+            list.add(
+                    StatCollector.translateToLocal(Lib.DESCRIPTION + "enableCloak")
+                            .replaceAll(
+                                    "%s1",
+                                    StatCollector.translateToLocalFormatted(keybind.keyBindSneak.getKeyDescription()))
+                            .replaceAll(
+                                    "%s2",
+                                    StatCollector.translateToLocalFormatted(keybind.keyBindJump.getKeyDescription())));
+            if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("noGlide")) {
+                list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide"));
+            }
 
-        if (Loader.isModLoaded("Botania")) {
-            ItemStack cosmetic = getCosmeticItem(stack);
-            if (cosmetic != null) list.add(
-                    String.format(StatCollector.translateToLocal("botaniamisc.hasCosmetic"), cosmetic.getDisplayName())
-                            .replaceAll("&", "\u00a7"));
+            if (Loader.isModLoaded("Botania")) {
+                ItemStack cosmetic = getCosmeticItem(stack);
+                if (cosmetic != null) list.add(
+                        String.format(
+                                StatCollector.translateToLocal("botaniamisc.hasCosmetic"),
+                                cosmetic.getDisplayName()).replaceAll("&", "\u00a7"));
+            }
         }
     }
 
     public void onItemTicked(EntityPlayer player, ItemStack stack) {
-        GameSettings keybind = Minecraft.getMinecraft().gameSettings;
-        if (keybind.keyBindSneak.getIsKeyPressed() && keybind.keyBindJump.isPressed() && stack.getItemDamage() == 4) {
-            stack.getTagCompound().setBoolean("noGlide", !stack.getTagCompound().getBoolean("noGlide"));
+        if (player.worldObj.isRemote) {
+            GameSettings keybind = Minecraft.getMinecraft().gameSettings;
+            if (keybind.keyBindSneak.getIsKeyPressed() && keybind.keyBindJump.isPressed()
+                    && stack.getItemDamage() == 4) {
+                stack.getTagCompound().setBoolean("noGlide", !stack.getTagCompound().getBoolean("noGlide"));
+            }
+
+            if (activateKey.getIsKeyPressed() && Minecraft.getMinecraft().currentScreen == null) {
+                if (stack.getItemDamage() < subNames.length)
+                    if (subNames[stack.getItemDamage()].equals("storage") && !player.worldObj.isRemote) player.openGui(
+                            WitchingGadgets.instance,
+                            this.equals(WGContent.ItemKama) ? 5 : 4,
+                            player.worldObj,
+                            MathHelper.floor_double(player.posX),
+                            MathHelper.floor_double(player.posY),
+                            MathHelper.floor_double(player.posZ));
+            }
         }
         if (player.ticksExisted < 1) {
             onItemUnequipped(player, stack);
             onItemEquipped(player, stack);
-        }
-
-        if (activateKey.getIsKeyPressed() && Minecraft.getMinecraft().currentScreen == null) {
-            if (stack.getItemDamage() < subNames.length)
-                if (subNames[stack.getItemDamage()].equals("storage") && !player.worldObj.isRemote) player.openGui(
-                        WitchingGadgets.instance,
-                        this.equals(WGContent.ItemKama) ? 5 : 4,
-                        player.worldObj,
-                        MathHelper.floor_double(player.posX),
-                        MathHelper.floor_double(player.posY),
-                        MathHelper.floor_double(player.posZ));
         }
 
         if (stack.getItemDamage() < subNames.length) {

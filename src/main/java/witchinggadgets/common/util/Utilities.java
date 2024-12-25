@@ -335,21 +335,21 @@ public class Utilities {
 
     public static ItemStack[] getActiveMagicalCloak(EntityPlayer player) {
         ArrayList<ItemStack> list = new ArrayList<>();
-        if (BaublesApi.getBaubles(player).getStackInSlot(3) != null && BaublesApi.getBaubles(player)
-                .getStackInSlot(BaubleExpandedSlots.getIndexOfTypeInRegisteredTypes(BaubleExpandedSlots.capeType))
-                .getItem() instanceof ItemCloak)
-            list.add(
-                    BaublesApi.getBaubles(player).getStackInSlot(
-                            BaubleExpandedSlots.getIndexOfTypeInRegisteredTypes(BaubleExpandedSlots.capeType)));
+        ItemStack capeSlot = BaublesApi.getBaubles(player)
+                .getStackInSlot(BaubleExpandedSlots.getIndexesOfAssignedSlotsOfType(BaubleExpandedSlots.capeType)[0]);
+        if (capeSlot != null && capeSlot.getItem() instanceof ItemCloak) list.add(capeSlot);
         return list.toArray(new ItemStack[0]);
     }
 
     public static void updateActiveMagicalCloak(EntityPlayer player, ItemStack cloak) {
         if (cloak != null && cloak.getItem().equals(WGContent.ItemKama)) {
-            if (BaublesApi.getBaubles(player).getStackInSlot(3) != null
-                    && BaublesApi.getBaubles(player).getStackInSlot(3).getItem() instanceof ItemCloak) {
-                if (BaublesApi.getBaubles(player).getStackInSlot(3).getItemDamage() == cloak.getItemDamage())
-                    BaublesApi.getBaubles(player).setInventorySlotContents(3, cloak);
+            ItemStack capeSlot = BaublesApi.getBaubles(player).getStackInSlot(
+                    BaubleExpandedSlots.getIndexesOfAssignedSlotsOfType(BaubleExpandedSlots.capeType)[0]);
+            if (capeSlot != null && capeSlot.getItem() instanceof ItemCloak) {
+                if (capeSlot.getItemDamage() == cloak.getItemDamage())
+                    BaublesApi.getBaubles(player).setInventorySlotContents(
+                            BaubleExpandedSlots.getIndexesOfAssignedSlotsOfType(BaubleExpandedSlots.capeType)[0],
+                            cloak);
                 BaublesApi.getBaubles(player).markDirty();
             }
         }

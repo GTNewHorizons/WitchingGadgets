@@ -83,25 +83,28 @@ public class ItemKama extends ItemCloak implements IBaubleExpanded {
     }
 
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List<String> list, boolean par4) {
-        GameSettings keybind = Minecraft.getMinecraft().gameSettings;
-        list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Belt"));
-        list.add(
-                StatCollector.translateToLocal(Lib.DESCRIPTION + "enableCloak")
-                        .replaceAll(
-                                "%s1",
-                                StatCollector.translateToLocalFormatted(keybind.keyBindSneak.getKeyDescription()))
-                        .replaceAll(
-                                "%s2",
-                                StatCollector.translateToLocalFormatted(keybind.keyBindJump.getKeyDescription())));
-        if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("noGlide"))
-            list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide"));
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean par4) {
+        if (player.worldObj.isRemote) {
+            GameSettings keybind = Minecraft.getMinecraft().gameSettings;
+            list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Belt"));
+            list.add(
+                    StatCollector.translateToLocal(Lib.DESCRIPTION + "enableCloak")
+                            .replaceAll(
+                                    "%s1",
+                                    StatCollector.translateToLocalFormatted(keybind.keyBindSneak.getKeyDescription()))
+                            .replaceAll(
+                                    "%s2",
+                                    StatCollector.translateToLocalFormatted(keybind.keyBindJump.getKeyDescription())));
+            if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("noGlide"))
+                list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide"));
 
-        if (Loader.isModLoaded("Botania")) {
-            ItemStack cosmetic = getCosmeticItem(stack);
-            if (cosmetic != null) list.add(
-                    String.format(StatCollector.translateToLocal("botaniamisc.hasCosmetic"), cosmetic.getDisplayName())
-                            .replaceAll("&", "\u00a7"));
+            if (Loader.isModLoaded("Botania")) {
+                ItemStack cosmetic = getCosmeticItem(stack);
+                if (cosmetic != null) list.add(
+                        String.format(
+                                StatCollector.translateToLocal("botaniamisc.hasCosmetic"),
+                                cosmetic.getDisplayName()).replaceAll("&", "\u00a7"));
+            }
         }
     }
 
