@@ -35,7 +35,7 @@ public class WG_infusion_baubles {
                     2,
                     new AspectList().add(Aspect.MINE, 48).add(Aspect.TOOL, 24).add(Aspect.MOTION, 24)
                             .add(Aspect.AIR, 16).add((Aspect) gregtech.api.enums.TCAspects.NEBRISUM.mAspect, 8),
-                    OreDictionary.getOres("travelgearVambraceBase").get(0),
+                    new ItemStack(WGContent.ItemMagicalBaubles, 1, 8),
                     new ItemStack[] { Materials.Platinum.getIngots(1),
                             ItemList.IC2_CoffeePowder.get(1L, Materials.Coffee.getDust(1)),
                             new ItemStack(Items.potionitem, 1, 8194),
@@ -43,12 +43,12 @@ public class WG_infusion_baubles {
 
             registerInfusionRecipe(
                     "WGBAUBLES",
-                    "_DOUBLEJUMPSHOULDERS",
+                    "_DOUBLEJUMPCHARM",
                     new ItemStack(WGContent.ItemMagicalBaubles, 1, 0),
                     2,
                     new AspectList().add(Aspect.FLIGHT, 16).add(Aspect.MOTION, 8).add(Aspect.AIR, 16)
                             .add((Aspect) gregtech.api.enums.TCAspects.NEBRISUM.mAspect, 8),
-                    OreDictionary.getOres("travelgearShoulderBase").get(0),
+                    new ItemStack(WGContent.ItemMagicalBaubles, 1, 7),
                     new ItemStack[] { new ItemStack(WGModCompat.tfMagicMapFocus), ItemList.Electric_Piston_MV.get(1L),
                             new ItemStack(WGModCompat.tfMagicMapFocus), new ItemStack(ConfigItems.itemShard, 1, 0),
                             new ItemStack(WGModCompat.tfMagicMapFocus), ItemList.Electric_Piston_MV.get(1L) });
@@ -90,7 +90,7 @@ public class WG_infusion_baubles {
                     new ItemStack(WGContent.ItemMagicalBaubles, 1, 3),
                     2,
                     new AspectList().add(Aspect.MINE, 8).add(Aspect.TOOL, 4).add(Aspect.MOTION, 4).add(Aspect.AIR, 8),
-                    OreDictionary.getOres("travelgearVambraceBase").get(0),
+                    new ItemStack(WGContent.ItemMagicalBaubles, 1, 8),
                     new ItemStack[] { new ItemStack(Items.gold_ingot), new ItemStack(Items.sugar),
                             new ItemStack(Items.potionitem, 1, 8194), new ItemStack(Items.sugar) });
 
@@ -105,7 +105,7 @@ public class WG_infusion_baubles {
                     new ItemStack(WGContent.ItemMagicalBaubles, 1, 0),
                     2,
                     new AspectList().add(Aspect.FLIGHT, 16).add(Aspect.MOTION, 8).add(Aspect.AIR, 16),
-                    OreDictionary.getOres("travelgearShoulderBase").get(0),
+                    new ItemStack(WGContent.ItemMagicalBaubles, 1, 7),
                     new ItemStack[] { new ItemStack(Items.feather), stack_ingot, new ItemStack(Items.feather),
                             new ItemStack(ConfigItems.itemShard, 1, 0), new ItemStack(Items.feather), stack_ingot });
 

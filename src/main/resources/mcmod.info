@@ -11,6 +11,6 @@
   "credits": "",
   "logoFile": "assets/witchinggadgets/logo.png",
   "screenshots": [],
-  "dependencies": ["Thaumcraft","TravellersGear","gregtech","dreamcraft"]
+  "dependencies": ["Thaumcraft","gregtech","dreamcraft"]
 }
 ]

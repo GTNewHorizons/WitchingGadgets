@@ -9,12 +9,12 @@ tile.WG_StoneDevice.obsidianDecoration1.name=Obsidian Rune
 tile.WG_StoneDevice.obsidianDecoration2.name=Obsidian Rune
 tile.WG_StoneDevice.sarcophagus.name=Sarkophag
 tile.WG_StoneDevice.timeStone.name=Reifungsstein
-tile.WG_StoneDevice.blastFurnace.name=Höllischer Hochofen
+tile.WG_StoneDevice.blastFurnace.name=Hï¿½llischer Hochofen
 
 tile.WG_WoodenDevice.spinningWheel.name=Spinnrad
 tile.WG_WoodenDevice.loom.name=Webstuhl
 tile.WG_WoodenDevice.cobbleGen.name=Arkaner Stein Extrudierer
-tile.WG_WoodenDevice.armorStand.name=Rüstungsständer
+tile.WG_WoodenDevice.armorStand.name=Rï¿½stungsstï¿½nder
 tile.WG_WoodenDevice.cuttingTable.name=Schneidetisch
 tile.WG_WoodenDevice.saunaStove.name=Arkaner Sauna Ofen
 
@@ -22,9 +22,9 @@ tile.WG_MetalDevice.essentiaPump.name=Essentia Pumpe
 tile.WG_MetalDevice.terraformer.name=Arkaner Terrestrischer Erneuerer
 tile.WG_MetalDevice.tfFocusPlains.name=Terrestrischer Fokus: Ebene
 tile.WG_MetalDevice.tfFocusColdTaiga.name=Terrestrischer Fokus: Verschneite Taiga
-tile.WG_MetalDevice.tfFocusDesert.name=Terrestrischer Fokus: Wüste
+tile.WG_MetalDevice.tfFocusDesert.name=Terrestrischer Fokus: Wï¿½ste
 tile.WG_MetalDevice.tfFocusJungle.name=Terrestrischer Fokus: Dschungel
-tile.WG_MetalDevice.tfFocusHell.name=Terrestrischer Fokus: Hölle
+tile.WG_MetalDevice.tfFocusHell.name=Terrestrischer Fokus: Hï¿½lle
 tile.WG_RoseVine.name=Rose Vines
 tile.WG_CustomAir.name=Lichtfunkeln
 #
@@ -34,7 +34,7 @@ fluid.fzdarkiron.molten=Geschmolzenes Dunkeleisen
 item.WG_Material.threadSimple.name=Garn
 item.WG_Material.threadGold.name=Goldener Faden
 item.WG_Material.threadThaumium.name=Arkaner Faden
-item.WG_Material.clothSpace.name=Stoff der weiträumigen Falten
+item.WG_Material.clothSpace.name=Stoff der weitrï¿½umigen Falten
 item.WG_Material.clothGolden.name=Goldener Stoff
 item.WG_Material.clothBewitched.name=Verzauberter Pelz
 item.WG_Material.wolfPelt.name=Wolfpelz
@@ -48,7 +48,7 @@ item.WG_Material.clusterArdite.name=Nativer Arditklumpen
 item.WG_Material.clusterNickel.name=Nativer Nickelklumpen
 item.WG_Material.clusterFZDarkIron.name=Nativer Dunkeleisenklumpen
 item.WG_Material.guidingString.name=Wegzeigendes Garn
-item.WG_Material.primordialShard.name=Ursprüngliche Scherbe
+item.WG_Material.primordialShard.name=Ursprï¿½ngliche Scherbe
 item.WG_Material.gemstoneDust.name=Edelsteinstaub
 
 item.WG_Cluster.name=Nativer Klumpen
@@ -56,49 +56,49 @@ item.WG_Bag.normal.name=Trick-Beutel
 item.WG_Bag.void.name=Bag Beutel der Leerenverbindung
 item.WG_Bag.ender.name=Beutel der Enderverbindung
 item.WG_ThaumiumShears.name=Thaumium-Schere
-item.WG_MagicFood.sweetwart.name=Süßwarze
+item.WG_MagicFood.sweetwart.name=Sï¿½ï¿½warze
 item.WG_MagicFood.nethercake.name=Netherkuchen
 item.WG_MagicFood.brainjerky.name=Gehirn Trockenfleisch
 item.WG_AdvancedRobeChest.name=Verzauberte Robe
 item.WG_AdvancedRobeLegs.name=Verzauberte Hose
 item.WG_AdvancedScribingTools.name=Leuchtendes Schreibset
 item.WG_Cloak.standard.name=Mantel
-item.WG_Cloak.storage.name=Mantel der voluminösen Taschen
+item.WG_Cloak.storage.name=Mantel der voluminï¿½sen Taschen
 item.WG_Cloak.raven.name=Mantel des Raben
 item.WG_Cloak.spectral.name=Geisterhafter Mantel
-item.WG_Cloak.wolf.name=Wölfischer Mantel
+item.WG_Cloak.wolf.name=Wï¿½lfischer Mantel
 item.WG_Kama.standard.name=Kama
-item.WG_Kama.storage.name=Kama der voluminösen Taschen
+item.WG_Kama.storage.name=Kama der voluminï¿½sen Taschen
 item.WG_Kama.raven.name=Kama des Raben
 item.WG_Kama.spectral.name=Geisterhafter Kama
-item.WG_Kama.wolf.name=Wölfischer Kama
+item.WG_Kama.wolf.name=Wï¿½lfischer Kama
 
 item.WG_EliteArmorHelm.ANGELIC_0.name=Ophanischer Helm
-item.WG_EliteArmorChest.ANGELIC_1.name=Kürass der Seraphim
+item.WG_EliteArmorChest.ANGELIC_1.name=Kï¿½rass der Seraphim
 item.WG_EliteArmorLegs.ANGELIC_2.name=Beinschienen des Cheruben
-item.WG_EliteArmorBoots.ANGELIC_3.name=Bärlatsch der Valkyrie
+item.WG_EliteArmorBoots.ANGELIC_3.name=Bï¿½rlatsch der Valkyrie
 item.WG_EliteArmorHelm.DEMONIC_0.name=Helm des Levithian
-item.WG_EliteArmorChest.DEMONIC_1.name=Kürass des Asraels
+item.WG_EliteArmorChest.DEMONIC_1.name=Kï¿½rass des Asraels
 item.WG_EliteArmorLegs.DEMONIC_2.name=Beinschienen der Lycaner
 item.WG_EliteArmorBoots.DEMONIC_3.name=Klauen des Behemoths
 
 item.WG_InfusedGem.name=Infudierter Edelstein
 item.WG_InfusedGem.innert.name=Inaktiver Edelstein
 
-item.WG_PrimordialGlove.name=Ursprünglicher Panzerhandschuh
-item.WG_PrimordialHammer.name=Ursprünglicher Kriegshammer
-item.WG_PrimordialAxe.name=Ursprüngliche Kriegsaxt
-item.WG_PrimordialSword.name=Ursprüngliches Breitschwert
+item.WG_PrimordialGlove.name=Ursprï¿½nglicher Panzerhandschuh
+item.WG_PrimordialHammer.name=Ursprï¿½nglicher Kriegshammer
+item.WG_PrimordialAxe.name=Ursprï¿½ngliche Kriegsaxt
+item.WG_PrimordialSword.name=Ursprï¿½ngliches Breitschwert
 
-item.WG_Baubles.ring_primordial.name=Ursprünglicher Ring
+item.WG_Baubles.ring_primordial.name=Ursprï¿½nglicher Ring
 item.WG_Baubles.ring_lifeProtection.name=Ring des Lebensschutzes
 item.WG_Baubles.shouldersDoublejump.name=Schultern der Seraphim
-item.WG_Baubles.shouldersKnockback.name=Unerschütterliche Schulterschützer
+item.WG_Baubles.shouldersKnockback.name=Unerschï¿½tterliche Schulterschï¿½tzer
 item.WG_Baubles.vambraceStrength.name=Armschienen des Berserkers
 item.WG_Baubles.vambraceHaste.name=Armschienen des stetigen Fortschreiten
 item.WG_Baubles.titleCrimsonCult.name=Title: Crimson Cult Titel: Karmesinkult
 wg.title.crimsonKnight=Karmesin Ritter
-wg.title.crimsonPraetor=Karmesin Prätor
+wg.title.crimsonPraetor=Karmesin Prï¿½tor
 
 item.WG_ScanCamera.name=Thaumischer Ikonograph
 item.WG_CrystalFlask.name=Kristallkapsel
@@ -108,21 +108,21 @@ itemGroup.witchinggadgets=Witching Gadgets
 
 # -- Enchant --
 enchantment.wg.gemstonePotency=Brillianz
-enchantment.wg.gemstoneBrittle=Spröde
+enchantment.wg.gemstoneBrittle=Sprï¿½de
 enchantment.wg.invisibleGear=Durchsichtigkeit
-enchantment.wg.unveiling=Enthüllung
+enchantment.wg.unveiling=Enthï¿½llung
 enchantment.wg.stealth=Tarnung
-enchantment.wg.backstab=Hinterhältiges Stechen
+enchantment.wg.backstab=Hinterhï¿½ltiges Stechen
 #
 # -- Random bits of text --
-wg.chat.notyourbag=Â§7Dieser Beutel gehörtÂ§r %1$s! Â§7Du darfst ihn nicht öffnen!Â§r
-wg.chat.bagunlocked=Â§7Der Beutel wurde entriegelt, andere können ihn nun öffnen.Â§r
-wg.chat.baglocked=Â§7Der Beutel wurde vertriegelt, andere können ihn nicht öffnen.Â§r
+wg.chat.notyourbag=Â§7Dieser Beutel gehï¿½rtÂ§r %1$s! Â§7Du darfst ihn nicht ï¿½ffnen!Â§r
+wg.chat.bagunlocked=Â§7Der Beutel wurde entriegelt, andere kï¿½nnen ihn nun ï¿½ffnen.Â§r
+wg.chat.baglocked=Â§7Der Beutel wurde vertriegelt, andere kï¿½nnen ihn nicht ï¿½ffnen.Â§r
 
 wg.desc.noGlide=Gleiten abgeschaltet
 
-wg.gui.visSize=Vis Kapazität
-wg.gui.shiftForAspectList=Â§aShiftÂ§7 halten für eine Liste der AspekteÂ§r
+wg.gui.visSize=Vis Kapazitï¿½t
+wg.gui.shiftForAspectList=Â§aShiftÂ§7 halten fï¿½r eine Liste der AspekteÂ§r
 wg.gui.activeGem=Activer Stein
 wg.gui.passiveGem=Passiver Stein
 wg.chat.gem.shatter=Dein Infudierter Stein ist zersplittert!
@@ -131,21 +131,21 @@ wg.desc.gemcut.TABLE=Table Cut
 wg.desc.gemcut.STEP=Step Cut
 wg.desc.gemcut.ROSE=Rose Cut
 wg.desc.gemcut.OVAL=Oval Cut
-wg.desc.gemaffinity=Natürliche Affinitäten:
-wg.desc.gemaversion=Natürliche Aversionen:
+wg.desc.gemaffinity=Natï¿½rliche Affinitï¿½ten:
+wg.desc.gemaversion=Natï¿½rliche Aversionen:
 
-wg.desc.ctrlForAspectList=Â§aCtrlÂ§7 halten für eine Liste der AspekteÂ§r
+wg.desc.ctrlForAspectList=Â§aCtrlÂ§7 halten fï¿½r eine Liste der AspekteÂ§r
 wg.desc.scanCompleted=Scan Completed
 
-wg.desc.gearSlot.tg.0=Im Â§aUmhangsÂ§7 Slot ausrüsten
-wg.desc.gearSlot.tg.1=Im Â§aSchulterpanzerÂ§7 Slot ausrüsten
-wg.desc.gearSlot.tg.2=Im Â§aArmschienenÂ§7 Slot ausrüsten
-wg.desc.gearSlot.tg.3=Im Â§aTitelÂ§7 Slot ausrüsten
-wg.desc.gearSlot.bauble.RING=Im Â§aRingÂ§7 Slot ausrüsten
-wg.desc.gearSlot.bauble.BELT=Im Â§aGürtelÂ§7 Slot ausrüsten
-wg.desc.gearSlot.bauble.AMULET=Im Â§aAmuletÂ§7 Slot ausrüsten
+wg.desc.gearSlot.tg.0=Im Â§aUmhangsÂ§7 Slot ausrï¿½sten
+wg.desc.gearSlot.tg.1=Im Â§aSchulterpanzerÂ§7 Slot ausrï¿½sten
+wg.desc.gearSlot.tg.2=Im Â§aArmschienenÂ§7 Slot ausrï¿½sten
+wg.desc.gearSlot.tg.3=Im Â§aTitelÂ§7 Slot ausrï¿½sten
+wg.desc.gearSlot.bauble.RING=Im Â§aRingÂ§7 Slot ausrï¿½sten
+wg.desc.gearSlot.bauble.BELT=Im Â§aGï¿½rtelÂ§7 Slot ausrï¿½sten
+wg.desc.gearSlot.bauble.AMULET=Im Â§aAmuletÂ§7 Slot ausrï¿½sten
 
-wg.desc.filteredItems=Zugelassene Gegenstände:
+wg.desc.filteredItems=Zugelassene Gegenstï¿½nde:
 
 wg.gui.search=Search
 wg.chat.nodeContents.primal=Primal Aspects within this node: Â§eAer: %1$sÂ§f, Â§2Terra: %2$sÂ§f, Â§cIgnis: %3$sÂ§f, Â§3Aqua: %4$sÂ§f, Â§7Ordo: %5$sÂ§f, Â§8Perditio: %6$s
@@ -160,11 +160,11 @@ wg.potionKnockbackRes=Knockback Res.
 
 # -- Research --
 # Formatting:
-# §l 	Bold
-# §m 	Strikethrough
-# §n 	Underline
-# §o 	Italic
-# §r 	Reset
+# ï¿½l 	Bold
+# ï¿½m 	Strikethrough
+# ï¿½n 	Underline
+# ï¿½o 	Italic
+# ï¿½r 	Reset
 # <BR>  LineBreak
 # <LINE>Fancy LineBreak
 #
@@ -264,13 +264,6 @@ witchinggadgets_research_page.CLOAK_WOLF.1=The old tales tell of the beserkers, 
 witchinggadgets_research_name.ENDERBAG=Enderlinked Bag
 witchinggadgets_research_text.ENDERBAG=[WG] Everywhere and nowhere at once!
 witchinggadgets_research_page.ENDERBAG.1=By attuning your Bag of Tricks to the enderic frequencies of your personal Ender Chest, you now have access to its contents from anywhere in the world.<BR>Don't try to turn it inside out.
-#
-witchinggadgets_research_name.WGBAUBLES=Witching Wearables
-witchinggadgets_research_text.WGBAUBLES=[WG] It's like a magic boutique
-witchinggadgets_research_page.WGBAUBLES.1=What looks like catalogue pages from a wizarding equipment store actually proved to be arcane shematics for magical garments! Â§oAll of these are to be equipped in Baubles or Traveller's Gear slots. The default keybinding for the TG inventory is 'Numpad 7'.Â§r<BR>Â§lSteadfast Spaulders:Â§r<BR>These shoulderpads are not designed to be very fashionable, and their protection value is negligable. However, the magic infused into them is able to root you to the floor, so that you shall not waver when stuck by enemy attacks. Â§oGrants you 60% knockback resistance.Â§r
-witchinggadgets_research_page.WGBAUBLES.2=Â§lBeserkers Bracers:Â§r<BR>Covered in wolven fur, these vambraces wont hold off blades. But by the magic infused into them, they grant the user the ferociousness of a wolf. Also, they are incredibly fluffy. Â§oIncreases your attack damage by 2 points.Â§r
-witchinggadgets_research_page.WGBAUBLES.3=Â§lVambraces of Steady Progression:Â§r<BR>These vambraces, designed by dwarven thaumaturgists, are designed to grant you the ability of digging a hole at a steady pace without interruption. To achieve that, they react dynamically to the working conditions, increasing the user's dig speed while sumberged in water, flying in the air, or when confronted with highly resilient materials.<BR>They also increase the speed at which you climb ladders, for when you eventually need to outrun the thing you woke in the dark below.
-witchinggadgets_research_page.WGBAUBLES.4=Â§lSeraph's Shoulders:Â§r<BR>Flying is an ability many wish for. It is quite an advanced form of magic that allows users to fly, but a small jump in the air is within your possibilities.<BR>These shoulders spawn some powerful magical wings, which allow you to perform a second jump in midair.
 #
 witchinggadgets_research_name.CLOAKKAMA=Kama
 witchinggadgets_research_text.CLOAKKAMA=[WG] It's not a kilt!
