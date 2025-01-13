@@ -584,12 +584,11 @@ public class EventHandler {
             if (is[armor] != null && is[armor].getItem() instanceof IItemEvent)
                 list.add(new Object[] { is[armor], 9 + armor });
 
-        if (Loader.isModLoaded("Baubles")) {
-            IInventory inv = BaublesApi.getBaubles(player);
-            if (inv != null) for (int i = 0; i < inv.getSizeInventory(); i++)
-                if (inv.getStackInSlot(i) != null && inv.getStackInSlot(i).getItem() instanceof IItemEvent)
-                    list.add(new Object[] { inv.getStackInSlot(i), 9 + 4 + i });
-        }
+        IInventory inv = BaublesApi.getBaubles(player);
+        if (inv != null) for (int i = 0; i < inv.getSizeInventory(); i++)
+            if (inv.getStackInSlot(i) != null && inv.getStackInSlot(i).getItem() instanceof IItemEvent)
+                list.add(new Object[] { inv.getStackInSlot(i), 9 + 4 + i });
+
         if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof IItemEvent)
             list.add(list.size() / 2, new Object[] { player.getCurrentEquippedItem(), player.inventory.currentItem });
 
