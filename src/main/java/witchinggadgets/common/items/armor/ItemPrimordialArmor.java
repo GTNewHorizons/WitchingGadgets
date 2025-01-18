@@ -123,8 +123,15 @@ public class ItemPrimordialArmor extends ItemShadowFortressArmor
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
         if (!world.isRemote && stack.isItemDamaged() && player.ticksExisted % 20 == 0) stack.damageItem(-1, player);
+        boolean abilityCycle = false;
 
-        if (player.isSneaking() && WGKeyHandler.jumpKey.isPressed() && !player.worldObj.isRemote) {
+        if (player.worldObj.isRemote) {
+            if (player.isSneaking() && WGKeyHandler.jumpKey.isPressed()) {
+                abilityCycle = true;
+            }
+        }
+
+        if (abilityCycle && !player.worldObj.isRemote) {
             cycleAbilities(stack);
         }
 
