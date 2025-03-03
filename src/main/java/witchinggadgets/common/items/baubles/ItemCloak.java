@@ -4,7 +4,6 @@ import static witchinggadgets.common.util.WGKeyHandler.activateKey;
 
 import java.util.List;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.creativetab.CreativeTabs;
@@ -20,6 +19,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
@@ -200,18 +200,17 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean par4) {
         if (player.worldObj.isRemote) {
-            GameSettings keybind = Minecraft.getMinecraft().gameSettings;
             list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Cloak"));
             list.add(
-                    StatCollector.translateToLocal(Lib.DESCRIPTION + "enableCloak")
-                            .replaceAll(
-                                    "%s1",
-                                    StatCollector.translateToLocalFormatted(keybind.keyBindSneak.getKeyDescription()))
-                            .replaceAll(
-                                    "%s2",
-                                    StatCollector.translateToLocalFormatted(keybind.keyBindJump.getKeyDescription())));
+                    StatCollector.translateToLocal(Lib.DESCRIPTION + "enableCloak").replaceAll(
+                            "%s1",
+                            StatCollector.translateToLocalFormatted(
+                                    GameSettings.getKeyDisplayString(activateKey.getKeyCode()))));
             if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("noGlide")) {
                 list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide"));
+            }
+            if (stack.hasTagCompound() && !stack.getTagCompound().getBoolean("noGlide")) {
+                list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "glide"));
             }
 
             if (Loader.isModLoaded("Botania")) {
@@ -225,16 +224,28 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
     }
 
     public void onItemTicked(EntityPlayer player, ItemStack stack) {
-        boolean openStorageCloak = false;
         if (player.worldObj.isRemote) {
-            GameSettings keybind = Minecraft.getMinecraft().gameSettings;
-            if (keybind.keyBindSneak.getIsKeyPressed() && keybind.keyBindJump.getIsKeyPressed()
-                    && stack.getItemDamage() == 4) {
-                stack.getTagCompound().setBoolean("noGlide", !stack.getTagCompound().getBoolean("noGlide"));
+
+            if (activateKey.isPressed() && subNames[stack.getItemDamage()].equals("raven")) {
+                if (stack.getTagCompound().getBoolean("noGlide")) {
+                    stack.getTagCompound().setBoolean("noGlide", false);
+                    player.addChatMessage(
+                            new ChatComponentText(StatCollector.translateToLocal(Lib.DESCRIPTION + "glide")));
+                } else if (!stack.getTagCompound().getBoolean("noGlide")) {
+                    stack.getTagCompound().setBoolean("noGlide", true);
+                    player.addChatMessage(
+                            new ChatComponentText(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide")));
+                }
             }
 
-            if (activateKey.getIsKeyPressed()) {
-                openStorageCloak = true;
+            if (activateKey.isPressed() && subNames[stack.getItemDamage()].equals("storage")) {
+                player.openGui(
+                        WitchingGadgets.instance,
+                        this.equals(WGContent.ItemKama) ? 5 : 4,
+                        player.worldObj,
+                        MathHelper.floor_double(player.posX),
+                        MathHelper.floor_double(player.posY),
+                        MathHelper.floor_double(player.posZ));
             }
         }
 
@@ -242,15 +253,6 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
             onItemUnequipped(player, stack);
             onItemEquipped(player, stack);
         }
-
-        if (subNames[stack.getItemDamage()].equals("storage") && !player.worldObj.isRemote && openStorageCloak)
-            player.openGui(
-                    WitchingGadgets.instance,
-                    this.equals(WGContent.ItemKama) ? 5 : 4,
-                    player.worldObj,
-                    MathHelper.floor_double(player.posX),
-                    MathHelper.floor_double(player.posY),
-                    MathHelper.floor_double(player.posZ));
 
         if (stack.getItemDamage() < subNames.length) {
             if (subNames[stack.getItemDamage()].equals("spectral") && !player.worldObj.isRemote
@@ -356,7 +358,7 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
             if (stack.getItemDamage() < subNames.length)
                 if (subNames[stack.getItemDamage()].equals("raven") && !player.worldObj.isRemote) {
                     if (!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
-                    stack.getTagCompound().setBoolean("noGlide", !stack.getTagCompound().getBoolean("noGlide"));
+                    stack.getTagCompound().setBoolean("noGlide", false);
                 } else if (subNames[stack.getItemDamage()].equals("spectral") && !player.worldObj.isRemote
                         && Utilities
                                 .consumeVisFromInventoryWithoutDiscount(player, new AspectList().add(Aspect.AIR, 1))) {

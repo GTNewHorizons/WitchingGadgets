@@ -25,7 +25,6 @@ public class WGKeyHandler {
     public static KeyBinding thaumcraftFKey;
     public static KeyBinding jumpKey;
     public static KeyBinding activateKey;
-    public static KeyBinding armorKey;
     public boolean[] keyDown = { false, false, false };
     public static float gemRadial;
     public static boolean gemLock = false;

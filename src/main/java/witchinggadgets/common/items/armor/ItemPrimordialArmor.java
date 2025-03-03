@@ -3,8 +3,10 @@ package witchinggadgets.common.items.armor;
 import java.util.List;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IProjectile;
@@ -46,7 +48,7 @@ import witchinggadgets.client.render.ModelPrimordialArmor;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.items.interfaces.IItemEvent;
 import witchinggadgets.common.items.tools.IPrimordialGear;
-import witchinggadgets.common.util.WGKeyHandler;
+import witchinggadgets.common.util.Lib;
 
 @Optional.Interface(iface = "thaumicboots.api.IBoots", modid = "thaumicboots")
 public class ItemPrimordialArmor extends ItemShadowFortressArmor
@@ -93,6 +95,15 @@ public class ItemPrimordialArmor extends ItemShadowFortressArmor
             stack.damageItem(-1, (EntityLivingBase) entity);
     }
 
+    @Override
+    public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer player) {
+
+        if (player.isSneaking() && !player.worldObj.isRemote) {
+            cycleAbilities(itemStackIn);
+            return itemStackIn;
+        } else return super.onItemRightClick(itemStackIn, worldIn, player);
+    }
+
     @SubscribeEvent
     public void onLivingUpdateEvent(LivingUpdateEvent event) {
         if (event.entityLiving instanceof EntityPlayer player) {
@@ -123,19 +134,8 @@ public class ItemPrimordialArmor extends ItemShadowFortressArmor
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
         if (!world.isRemote && stack.isItemDamaged() && player.ticksExisted % 20 == 0) stack.damageItem(-1, player);
-        boolean abilityCycle = false;
 
-        if (player.worldObj.isRemote) {
-            if (player.isSneaking() && WGKeyHandler.armorKey.isPressed()) {
-                abilityCycle = true;
-            }
-        }
-
-        if (abilityCycle && !player.worldObj.isRemote) {
-            cycleAbilities(stack);
-        }
-
-        byte amorcounter = 0;
+        byte armorcounter = 0;
         byte[] modescounter = { 0, 0, 0, 0, 0, 0 };
 
         boolean helmet = player.getCurrentArmor(0) != null && isThis(player.getCurrentArmor(0));
@@ -148,10 +148,10 @@ public class ItemPrimordialArmor extends ItemShadowFortressArmor
                 leggings ? getAbility(player.getCurrentArmor(2)) : 0,
                 boots ? getAbility(player.getCurrentArmor(3)) : 0, };
 
-        if (helmet) ++amorcounter;
-        if (chestplate) ++amorcounter;
-        if (leggings) ++amorcounter;
-        if (boots) ++amorcounter;
+        if (helmet) ++armorcounter;
+        if (chestplate) ++armorcounter;
+        if (leggings) ++armorcounter;
+        if (boots) ++armorcounter;
 
         for (int i : modes) {
             if (i == 1) ++modescounter[0];
@@ -174,14 +174,14 @@ public class ItemPrimordialArmor extends ItemShadowFortressArmor
             if (player.fallDistance > 0.0F) player.fallDistance = 0.0F;
         }
 
-        if (amorcounter >= 2 && modescounter[2] >= 2 && player.isInsideOfMaterial(Material.lava)) {
+        if (armorcounter >= 2 && modescounter[2] >= 2 && player.isInsideOfMaterial(Material.lava)) {
             player.setAir(300);
             player.addPotionEffect(new PotionEffect(Potion.blindness.id, 202, 0, true));
             player.addPotionEffect(new PotionEffect(Potion.fireResistance.id, 202, 0, true));
         }
 
         // turn flight off or on
-        if ((amorcounter >= 2 && modescounter[0] >= 2)) {
+        if ((armorcounter >= 2 && modescounter[0] >= 2)) {
             flightStatus = FlightStatus.ON;
             player.capabilities.allowFlying = true;
         } else if (flightStatus == FlightStatus.ON) {
@@ -427,6 +427,17 @@ public class ItemPrimordialArmor extends ItemShadowFortressArmor
                 + EnumChatFormatting.RESET : "";
 
         list.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("wg.desc.primal") + add);
+        GameSettings keybind = Minecraft.getMinecraft().gameSettings;
+        list.add(
+                StatCollector.translateToLocal(Lib.DESCRIPTION + "cycleArmor")
+                        .replaceAll(
+                                "%s1",
+                                StatCollector.translateToLocalFormatted(
+                                        GameSettings.getKeyDisplayString(keybind.keyBindSneak.getKeyCode())))
+                        .replaceAll(
+                                "%s2",
+                                StatCollector.translateToLocalFormatted(
+                                        GameSettings.getKeyDisplayString(keybind.keyBindUseItem.getKeyCode()))));
         super.addInformation(stack, player, list, par4);
     }
 
@@ -511,7 +522,7 @@ public class ItemPrimordialArmor extends ItemShadowFortressArmor
     public void onUserDamaged(LivingHurtEvent event, ItemStack stack) {
         if (event.entityLiving instanceof EntityPlayer player) {
 
-            int amorcounter = 0;
+            int armorcounter = 0;
             int[] modescounter = { 0, 0, 0, 0, 0, 0 };
 
             boolean helmet = player.getCurrentArmor(0) != null && isThis(player.getCurrentArmor(0));
@@ -524,10 +535,10 @@ public class ItemPrimordialArmor extends ItemShadowFortressArmor
                     leggings ? getAbility(player.getCurrentArmor(2)) : 0,
                     boots ? getAbility(player.getCurrentArmor(3)) : 0, };
 
-            if (helmet) ++amorcounter;
-            if (chestplate) ++amorcounter;
-            if (leggings) ++amorcounter;
-            if (boots) ++amorcounter;
+            if (helmet) ++armorcounter;
+            if (chestplate) ++armorcounter;
+            if (leggings) ++armorcounter;
+            if (boots) ++armorcounter;
 
             for (int i : modes) {
                 if (i == 1) ++modescounter[0];
