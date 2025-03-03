@@ -92,7 +92,7 @@ public class WGKeyHandler {
                             }
                         }
             } else {
-                if (keyDown[1] && thaumcraftFKey != null && !thaumcraftFKey.getIsKeyPressed()) keyDown[1] = false;
+                if (keyDown[1] && thaumcraftFKey != null && !thaumcraftFKey.isPressed()) keyDown[1] = false;
                 if (!gemLock) {
                     if (gemRadial > 0) gemRadial -= step;
                     if (gemRadial < 0) gemRadial = 0f;

@@ -238,7 +238,7 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
                 }
             }
 
-            if (activateKey.isPressed() && subNames[stack.getItemDamage()].equals("storage")) {
+            if (activateKey.getIsKeyPressed() && subNames[stack.getItemDamage()].equals("storage")) {
                 player.openGui(
                         WitchingGadgets.instance,
                         this.equals(WGContent.ItemKama) ? 5 : 4,

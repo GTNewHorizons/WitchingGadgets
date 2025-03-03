@@ -2,7 +2,9 @@ package witchinggadgets.common.items.tools;
 
 import java.util.List;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -36,6 +38,7 @@ import thaumcraft.api.aspects.Aspect;
 import witchinggadgets.api.IPrimordialCrafting;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.items.interfaces.IItemEvent;
+import witchinggadgets.common.util.Lib;
 import witchinggadgets.common.util.Utilities;
 
 public class ItemPrimordialSword extends ItemSword
@@ -152,11 +155,17 @@ public class ItemPrimordialSword extends ItemSword
     }
 
     @Override
-    public boolean onItemUse(ItemStack aStack, EntityPlayer aPlayer, World aWorld, int aX, int aY, int aZ, int aSide,
-            float a, float b, float c) {
+    public ItemStack onItemRightClick(ItemStack aStack, World aWorld, EntityPlayer aPlayer) {
         if (aPlayer.isSneaking() && !aPlayer.worldObj.isRemote) {
             cycleAbilities(aStack);
-        }
+            return aStack;
+        } else return super.onItemRightClick(aStack, aWorld, aPlayer);
+    }
+
+    @Override
+    public boolean onItemUse(ItemStack aStack, EntityPlayer aPlayer, World aWorld, int aX, int aY, int aZ, int aSide,
+            float a, float b, float c) {
+
         return super.onItemUse(aStack, aPlayer, aWorld, aX, aY, aZ, aSide, a, b, c);
     }
 
@@ -174,6 +183,17 @@ public class ItemPrimordialSword extends ItemSword
                 + EnumChatFormatting.RESET : "";
 
         list.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("wg.desc.primal") + add);
+        GameSettings keybind = Minecraft.getMinecraft().gameSettings;
+        list.add(
+                StatCollector.translateToLocal(Lib.DESCRIPTION + "cycleArmor")
+                        .replaceAll(
+                                "%s1",
+                                StatCollector.translateToLocalFormatted(
+                                        GameSettings.getKeyDisplayString(keybind.keyBindSneak.getKeyCode())))
+                        .replaceAll(
+                                "%s2",
+                                StatCollector.translateToLocalFormatted(
+                                        GameSettings.getKeyDisplayString(keybind.keyBindUseItem.getKeyCode()))));
     }
 
     @Override

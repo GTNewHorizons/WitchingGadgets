@@ -174,7 +174,7 @@ wg.gui.noFeathersToMigrate=You don't have the Items required to return to your n
 wg.desc.noGlide=Gliding disabled
 wg.desc.glide=Gliding enabled
 wg.desc.enableCloak=§7Enable or disable by pressing §a%s1§7.
-wg.desc.cycleArmor=§7Cycle held Armor piece by Holding §a%s1§7 and pressing §a%s2§7.
+wg.desc.cycleArmor=§7Cycle this item by Holding §a%s1§7 and pressing §a%s2§7.
 
 wg.gui.visSize=Vis Capacity
 wg.gui.shiftForAspectList=§7Hold §aShift§7 for a list of Aspects§r
