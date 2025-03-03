@@ -124,6 +124,11 @@ public class ClientProxy extends CommonProxy {
                         "wg.config.activateKey",
                         Keyboard.KEY_NONE,
                         WitchingGadgets.MODNAME));
+        ClientRegistry.registerKeyBinding(
+                WGKeyHandler.armorKey = new KeyBinding(
+                        "wg.config.armorKey",
+                        Keyboard.KEY_NONE,
+                        WitchingGadgets.MODNAME));
         if (WGConfig.enableSearch) {
             ThaumonomiconIndexSearcher.init();
         }

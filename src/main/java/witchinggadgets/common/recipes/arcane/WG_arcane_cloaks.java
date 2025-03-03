@@ -101,7 +101,7 @@ public class WG_arcane_cloaks {
                             "SBS",
                             "RCR",
                             'B',
-                            "baubleBeltBase",
+                            new ItemStack(ConfigItems.itemBaubleBlanks, 1, 2),
                             'C',
                             new ItemStack(WGContent.ItemCloak, 1, cm),
                             'S',

@@ -161,6 +161,7 @@ enchantment.wg.soultether=Soul Tethered
 #
 # -- Random bits of text --
 wg.config.activateKey=Hotkey for activating some worn items.
+wg.config.armorKey=Hotkey for cycling the Primordial Armor worn items.
 
 wg.chat.notyourbag=§7This bag belongs to§r %1$s! §7You are not allowed to open it.§r
 wg.chat.bagunlocked=§7The bag was unlocked, others can now open it.§r

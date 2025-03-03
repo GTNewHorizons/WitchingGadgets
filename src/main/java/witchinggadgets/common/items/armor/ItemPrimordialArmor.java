@@ -97,7 +97,7 @@ public class ItemPrimordialArmor extends ItemShadowFortressArmor
     public void onLivingUpdateEvent(LivingUpdateEvent event) {
         if (event.entityLiving instanceof EntityPlayer player) {
 
-            int amorcounter = 0;
+            int armorcounter = 0;
             int modescounter = 0;
 
             boolean helmet = player.getCurrentArmor(0) != null && isThis(player.getCurrentArmor(0));
@@ -110,10 +110,10 @@ public class ItemPrimordialArmor extends ItemShadowFortressArmor
                     leggings ? getAbility(player.getCurrentArmor(2)) : 0,
                     boots ? getAbility(player.getCurrentArmor(3)) : 0, };
 
-            if (helmet) ++amorcounter;
-            if (chestplate) ++amorcounter;
-            if (leggings) ++amorcounter;
-            if (boots) ++amorcounter;
+            if (helmet) ++armorcounter;
+            if (chestplate) ++armorcounter;
+            if (leggings) ++armorcounter;
+            if (boots) ++armorcounter;
 
             for (int i : modes) if (i == 1) ++modescounter;
 
@@ -126,7 +126,7 @@ public class ItemPrimordialArmor extends ItemShadowFortressArmor
         boolean abilityCycle = false;
 
         if (player.worldObj.isRemote) {
-            if (player.isSneaking() && WGKeyHandler.jumpKey.isPressed()) {
+            if (player.isSneaking() && WGKeyHandler.armorKey.isPressed()) {
                 abilityCycle = true;
             }
         }
