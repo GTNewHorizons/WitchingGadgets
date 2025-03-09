@@ -47,9 +47,7 @@ public class WG_other_recipes {
 
     public static void registerCompoundRecipe(String tag, String tagAddon, AspectList creationAspects, int sizeX,
             int sizeY, int sizeZ, Object... recipe) {
-        List<Object> compoundRecipe = Arrays.asList(
-                new Object[] { creationAspects, Integer.valueOf(sizeX), Integer.valueOf(sizeY), Integer.valueOf(sizeZ),
-                        Arrays.asList(recipe) });
+        List<Object> compoundRecipe = Arrays.asList(creationAspects, sizeX, sizeY, sizeZ, Arrays.asList(recipe));
         WGContent.recipeList.put(tag + tagAddon, compoundRecipe);
     }
 

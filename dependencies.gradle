@@ -26,4 +26,5 @@ dependencies {
 	compileOnly(deobfCurse('enviromine-230236:2269710'))
 
 	runtimeOnly('com.github.GTNewHorizons:CodeChickenCore:1.4.1:dev')
+	runtimeOnly('com.github.GTNewHorizons:Railcraft:9.16.3:dev') {transitive=false}
 }
