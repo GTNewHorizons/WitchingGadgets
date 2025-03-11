@@ -1,5 +1,7 @@
 package witchinggadgets.common.items.baubles;
 
+import static witchinggadgets.common.util.WGKeyHandler.activateKey;
+
 import java.util.List;
 
 import net.minecraft.client.Minecraft;
@@ -15,6 +17,7 @@ import net.minecraft.world.World;
 
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
+import baubles.api.expanded.BaubleExpandedSlots;
 import baubles.api.expanded.IBaubleExpanded;
 import baubles.common.container.InventoryBaubles;
 import cpw.mods.fml.common.Loader;
@@ -78,8 +81,13 @@ public class ItemKama extends ItemCloak implements IBaubleExpanded {
     }
 
     @Override
-    public BaubleType getBaubleType(ItemStack stack) {
+    public BaubleType getBaubleType(ItemStack aStack) {
         return BaubleType.BELT;
+    }
+
+    @Override
+    public String[] getBaubleTypes(ItemStack aStack) {
+        return new String[] { BaubleExpandedSlots.beltType };
     }
 
     @Override
@@ -88,15 +96,16 @@ public class ItemKama extends ItemCloak implements IBaubleExpanded {
             GameSettings keybind = Minecraft.getMinecraft().gameSettings;
             list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Belt"));
             list.add(
-                    StatCollector.translateToLocal(Lib.DESCRIPTION + "enableCloak")
-                            .replaceAll(
-                                    "%s1",
-                                    StatCollector.translateToLocalFormatted(keybind.keyBindSneak.getKeyDescription()))
-                            .replaceAll(
-                                    "%s2",
-                                    StatCollector.translateToLocalFormatted(keybind.keyBindJump.getKeyDescription())));
-            if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("noGlide"))
+                    StatCollector.translateToLocal(Lib.DESCRIPTION + "enableCloak").replaceAll(
+                            "%s1",
+                            StatCollector.translateToLocalFormatted(
+                                    GameSettings.getKeyDisplayString(activateKey.getKeyCode()))));
+            if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("noGlide")) {
                 list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide"));
+            }
+            if (stack.hasTagCompound() && !stack.getTagCompound().getBoolean("noGlide")) {
+                list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "glide"));
+            }
 
             if (Loader.isModLoaded("Botania")) {
                 ItemStack cosmetic = getCosmeticItem(stack);
@@ -109,27 +118,12 @@ public class ItemKama extends ItemCloak implements IBaubleExpanded {
     }
 
     @Override
-    public void onEquipped(ItemStack stack, EntityLivingBase living) {
-        if (living instanceof EntityPlayer) this.onItemEquipped((EntityPlayer) living, stack);
-    }
-
-    @Override
-    public void onUnequipped(ItemStack stack, EntityLivingBase living) {
-        if (living instanceof EntityPlayer) this.onItemUnequipped((EntityPlayer) living, stack);
-    }
-
-    @Override
-    public void onWornTick(ItemStack stack, EntityLivingBase living) {
-        if (living instanceof EntityPlayer) this.onItemTicked((EntityPlayer) living, stack);
-    }
-
-    @Override
-    public boolean canEquip(ItemStack arg0, EntityLivingBase arg1) {
+    public boolean canEquip(ItemStack stack, EntityLivingBase living) {
         return true;
     }
 
     @Override
-    public boolean canUnequip(ItemStack arg0, EntityLivingBase arg1) {
+    public boolean canUnequip(ItemStack stack, EntityLivingBase living) {
         return true;
     }
 }

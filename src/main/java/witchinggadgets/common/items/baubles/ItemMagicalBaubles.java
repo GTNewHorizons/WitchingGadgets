@@ -165,12 +165,16 @@ public class ItemMagicalBaubles extends Item implements IBaubleExpanded, vazkii.
 
     @Override
     public String[] getBaubleTypes(ItemStack stack) {
-        return subNames[stack.getItemDamage()].startsWith("cloak") ? new String[] { BaubleExpandedSlots.capeType }
-                : subNames[stack.getItemDamage()].startsWith("charm") ? new String[] { BaubleExpandedSlots.charmType }
-                        : subNames[stack.getItemDamage()].startsWith("vambrace")
-                                ? new String[] { BaubleExpandedSlots.gauntletType }
-                                : subNames[stack.getItemDamage()].startsWith("title") ? new String[] { "Title" }
-                                        : new String[] { "" };
+        if (subNames[stack.getItemDamage()].startsWith("cloak")) return new String[] { BaubleExpandedSlots.capeType };
+        if (subNames[stack.getItemDamage()].startsWith("charm")) return new String[] { BaubleExpandedSlots.charmType };
+        if (subNames[stack.getItemDamage()].startsWith("ring")) return new String[] { BaubleExpandedSlots.ringType };
+        if (subNames[stack.getItemDamage()].startsWith("belt")) return new String[] { BaubleExpandedSlots.beltType };
+        if (subNames[stack.getItemDamage()].startsWith("necklace"))
+            return new String[] { BaubleExpandedSlots.amuletType };
+        if (subNames[stack.getItemDamage()].startsWith("vambrace"))
+            return new String[] { BaubleExpandedSlots.gauntletType };
+        if (subNames[stack.getItemDamage()].startsWith("title")) return new String[] { "Title" };
+        return new String[] { "" };
     }
 
     @Override

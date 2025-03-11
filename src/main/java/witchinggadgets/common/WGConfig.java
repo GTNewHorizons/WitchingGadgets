@@ -25,8 +25,8 @@ public class WGConfig {
             "Osmium", "Naquadah", "Niobium", "Americium", "Uranium", "Uranium235", "Thorium", "DeepIron", "Naquadria",
             "Plutonium", "Plutonium241", "Europium", "Tungsten", "BlackPlutonium", "CosmicNeutronium", "Titanium",
             "Trinium", "Yttrium", "Platinum", "Draconium", "Oriharukon", "Samarium", "Electrum", "Curium",
-            "Californium", "Flerovium", "Desh", "Ichorium", "InfusedGold", "Palladium", "Quantium" },
-            DEFAULTBLOCKS = { "Railcraft:brick.infernal", "Railcraft:stair" };
+            "Californium", "Flerovium", "Desh", "Ichorium", "InfusedGold", "Palladium", "Quantium" };
+    public static final String[] DEFAULTBLOCKS = { "Railcraft:brick.infernal", "Railcraft:stair" };
 
     static Configuration config;
 
