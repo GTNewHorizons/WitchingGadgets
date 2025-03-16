@@ -10,6 +10,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import baubles.api.expanded.BaubleExpandedSlots;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -45,10 +46,9 @@ import witchinggadgets.common.world.VillageComponentPhotoshop;
         name = WitchingGadgets.MODNAME,
         version = WitchingGadgets.VERSION,
         dependencies = "required-after:Thaumcraft;" + "required-after:ForbiddenMagic;"
-                + "required-after:TravellersGear@[1.16.4,);"
-                + "required-after:gregtech;"
                 + "required-after:TwilightForest;"
                 + "required-after:TaintedMagic;"
+                + "after:gregtech;"
                 + "after:miscutils;"
                 + "after:Mystcraft;"
                 + "after:TConstruct;"
@@ -85,6 +85,7 @@ public class WitchingGadgets {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         logger.log(Level.INFO, "Setting up 'WitchingGadgets'");
+
         if (Loader.isModLoaded(BOOTS)) {
             isBootsActive = true;
         }
@@ -93,7 +94,10 @@ public class WitchingGadgets {
         WGContent.preInit();
 
         packetHandler = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
-
+        BaubleExpandedSlots.tryAssignSlotOfType(BaubleExpandedSlots.capeType);
+        BaubleExpandedSlots.tryAssignSlotOfType(BaubleExpandedSlots.gauntletType);
+        BaubleExpandedSlots.tryAssignSlotOfType(BaubleExpandedSlots.charmType);
+        BaubleExpandedSlots.tryAssignSlotOfType("Title");
         eventHandler = new EventHandler();
         MinecraftForge.EVENT_BUS.register(eventHandler);
         playerTickHandler = new PlayerTickHandler();

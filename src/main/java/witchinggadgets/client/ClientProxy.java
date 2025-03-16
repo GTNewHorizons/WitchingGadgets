@@ -1,6 +1,7 @@
 package witchinggadgets.client;
 
 import net.minecraft.client.particle.EntityLavaFX;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
@@ -10,7 +11,10 @@ import net.minecraftforge.client.model.IModelCustom;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import org.lwjgl.input.Keyboard;
+
 import baubles.api.BaublesApi;
+import baubles.api.expanded.BaubleExpandedSlots;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -18,7 +22,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import thaumcraft.client.fx.ParticleEngine;
 import thaumcraft.client.fx.particles.FXEssentiaTrail;
 import thaumcraft.client.fx.particles.FXWisp;
-import travellersgear.api.TravellersGearAPI;
+import witchinggadgets.WitchingGadgets;
 import witchinggadgets.client.fx.EntityFXSweat;
 import witchinggadgets.client.gui.GuiBag;
 import witchinggadgets.client.gui.GuiCloakBag;
@@ -115,7 +119,11 @@ public class ClientProxy extends CommonProxy {
         MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
         FMLCommonHandler.instance().bus().register(new WGKeyHandler());
         FMLCommonHandler.instance().bus().register(new ClientTickHandler());
-
+        ClientRegistry.registerKeyBinding(
+                WGKeyHandler.activateKey = new KeyBinding(
+                        "wg.config.activateKey",
+                        Keyboard.KEY_NONE,
+                        WitchingGadgets.MODNAME));
         if (WGConfig.enableSearch) {
             ThaumonomiconIndexSearcher.init();
         }
@@ -130,8 +138,8 @@ public class ClientProxy extends CommonProxy {
         if (ID == 4 || ID == 5) return new GuiCloakBag(
                 player.inventory,
                 world,
-                ID == 4 ? TravellersGearAPI.getExtendedInventory(player)[0]
-                        : BaublesApi.getBaubles(player).getStackInSlot(3));
+                BaublesApi.getBaubles(player).getStackInSlot(
+                        BaubleExpandedSlots.getIndexOfTypeInRegisteredTypes(BaubleExpandedSlots.capeType)));
 
         if (ID == 6) return new GuiPatchedFocusPouch(player.inventory, world, x, y, z);
 

@@ -4,7 +4,9 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -38,14 +40,14 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import thaumcraft.api.IRepairable;
 import thaumcraft.api.aspects.Aspect;
-import travellersgear.api.IActiveAbility;
-import travellersgear.api.IEventGear;
 import witchinggadgets.api.IPrimordialCrafting;
 import witchinggadgets.common.WGContent;
+import witchinggadgets.common.items.interfaces.IItemEvent;
+import witchinggadgets.common.util.Lib;
 import witchinggadgets.common.util.Utilities;
 
 public class ItemPrimordialHammer extends ItemPickaxe
-        implements IPrimordialCrafting, IActiveAbility, IRepairable, IEventGear, IPrimordialGear {
+        implements IPrimordialCrafting, IRepairable, IItemEvent, IPrimordialGear {
 
     IIcon overlay;
     public static Material[] validMats = { Material.anvil, Material.clay, Material.craftedSnow, Material.glass,
@@ -165,16 +167,6 @@ public class ItemPrimordialHammer extends ItemPickaxe
     }
 
     @Override
-    public boolean canActivate(EntityPlayer player, ItemStack stack, boolean isInHand) {
-        return true;
-    }
-
-    @Override
-    public void activate(EntityPlayer player, ItemStack stack) {
-        if (!player.worldObj.isRemote) cycleAbilities(stack);
-    }
-
-    @Override
     public int getReturnedPearls(ItemStack stack) {
         return 2;
     }
@@ -188,6 +180,17 @@ public class ItemPrimordialHammer extends ItemPickaxe
                 + EnumChatFormatting.RESET : "";
 
         list.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal("wg.desc.primal") + add);
+        GameSettings keybind = Minecraft.getMinecraft().gameSettings;
+        list.add(
+                StatCollector.translateToLocal(Lib.DESCRIPTION + "cycleArmor")
+                        .replaceAll(
+                                "%s1",
+                                StatCollector.translateToLocalFormatted(
+                                        GameSettings.getKeyDisplayString(keybind.keyBindSneak.getKeyCode())))
+                        .replaceAll(
+                                "%s2",
+                                StatCollector.translateToLocalFormatted(
+                                        GameSettings.getKeyDisplayString(keybind.keyBindUseItem.getKeyCode()))));
     }
 
     @Override
@@ -292,6 +295,9 @@ public class ItemPrimordialHammer extends ItemPickaxe
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
+        if (player.isSneaking() && !player.worldObj.isRemote) {
+            cycleAbilities(stack);
+        }
         return stack;
     }
 

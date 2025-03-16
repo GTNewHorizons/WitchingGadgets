@@ -288,18 +288,23 @@ public class WGResearch {
 
         // WGBAUBLES
         researchAspects = new AspectList().add(Aspect.CLOTH, 1).add(Aspect.MAGIC, 1).add(Aspect.ARMOR, 1);
-        pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.WGBAUBLES.1"),
-                new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("WGBAUBLES_KNOCKBACKSHOULDERS")),
+        pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.WGBAUBLES.0"),
+                new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("WGBAUBLES_BLANKCHARM")),
+                new ResearchPage("witchinggadgets_research_page.WGBAUBLES.1"),
+                new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("WGBAUBLES_BLANKVAMBRACES")),
                 new ResearchPage("witchinggadgets_research_page.WGBAUBLES.2"),
-                new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("WGBAUBLES_WOLFVAMBRACES")),
+                new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("WGBAUBLES_KNOCKBACKCHARM")),
                 new ResearchPage("witchinggadgets_research_page.WGBAUBLES.3"),
-                new ResearchPage((InfusionRecipe) WGContent.recipeList.get("WGBAUBLES_HASTEVAMBRACES")),
+                new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("WGBAUBLES_WOLFVAMBRACES")),
                 new ResearchPage("witchinggadgets_research_page.WGBAUBLES.4"),
-                new ResearchPage((InfusionRecipe) WGContent.recipeList.get("WGBAUBLES_DOUBLEJUMPSHOULDERS")),
+                new ResearchPage((InfusionRecipe) WGContent.recipeList.get("WGBAUBLES_HASTEVAMBRACES")),
                 new ResearchPage("witchinggadgets_research_page.WGBAUBLES.5"),
-                new ResearchPage((InfusionRecipe) WGContent.recipeList.get("WGBAUBLES_SNIPERRING")),
+                new ResearchPage((InfusionRecipe) WGContent.recipeList.get("WGBAUBLES_DOUBLEJUMPCHARM")),
                 new ResearchPage("witchinggadgets_research_page.WGBAUBLES.6"),
+                new ResearchPage((InfusionRecipe) WGContent.recipeList.get("WGBAUBLES_SNIPERRING")),
+                new ResearchPage("witchinggadgets_research_page.WGBAUBLES.7"),
                 new ResearchPage((InfusionRecipe) WGContent.recipeList.get("WGBAUBLES_LUCKRING")),
+                new ResearchPage("witchinggadgets_research_page.WGBAUBLES.8"),
                 new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("WGBAUBLES_COIN")) };
         getResearchItem(
                 "WGBAUBLES",

@@ -310,15 +310,6 @@ witchinggadgets_research_page.ADVANCEDROBES.r1=<IMG>witchinggadgets:textures/gui
 #-----------------------#
 #TG ITEMS
 #-----------------------#
-witchinggadgets_research_name.WGBAUBLES=巫师装备
-witchinggadgets_research_text.WGBAUBLES=[WG]就像神奇的魔法
-witchinggadgets_research_page.WGBAUBLES.1=这几页看上去是从巫术装备商店取来的,实际上居然是魔法装备的制作图!§o所有的这些都可在Baubles或Traveller's Gear的装备栏中装备.TG默认的键位是'数字键7'.§r<BR>§l磐石肩铠:§r<BR>这些肩铠并没有设计得多么好看,保护作用也可以忽略不计.然而其中所蕴含的魔法能让你扎根于地面,从而不会被敌人的攻击所击退.§o赋予你60%的击退抗性.§r
-witchinggadgets_research_page.WGBAUBLES.2=§l狂战士护腕:§r<BR>这些覆盖着狼皮的护腕禁不住刀刃的攻击.但有了注入其中的魔力,就能让使用者如狼般的凶猛.另外,它们也是毛茸茸的.<BR>§o会让你的攻击伤害提升2点.§r
-witchinggadgets_research_page.WGBAUBLES.3=§l迅捷护腕:§r<BR>这些护腕由矮人中的神秘使所设计,能赋予你快速挖掘的能力.它们的效果随工作环境而变化,提升水下,空中以及对坚硬材料的挖掘速度.<BR>它们也会提升爬梯子的速度,以便你能快速从地下脱离.
-witchinggadgets_research_page.WGBAUBLES.4=§l炽天使肩铠:§r<BR>飞翔是许多人所向往的.让使用者飞行算是很高级的魔法了,但在空中继续跳跃还是力所能及的.<BR>这些肩铠会生成强力的魔法之翼,让你能在半空中进行第二次跳跃.
-witchinggadgets_research_page.WGBAUBLES.5=§l狙击指环:§r<BR>有些黑暗生物由于太过强大而最好不要和它们肉搏,因此和它们保持一定距离是一个明智的选择.使用狙击指环会使得这个任务更加容易.<BR>戴上这个指环的时候,你会提升拉开弓时候的移动速度.潜行时可以让你更容易瞄准一个目标.
-witchinggadgets_research_page.WGBAUBLES.6=§l贪婪指环:§r<BR>幸运万岁!但没人能一直保持好运气.你想出了一个办法来增加自己的运气,给戒指镶上一枚金币然后施以魔法.<BR>§o戴着这个指环时你的时运和抢夺等级就会提升2级.<BR>制作金币的附魔书所带的附魔种类不限.§r
-#
 witchinggadgets_research_name.CLOAK=斗篷
 witchinggadgets_research_text.CLOAK=[WG]飕飕!
 witchinggadgets_research_page.CLOAK.1=注意到附魔布匹"飕飕"的性质后,你想到它能用于制作斗篷.尽管这种普通的斗篷缺乏特殊能力,但制作所用的魔法布匹应该能作为高级符文的绝佳载体.<BR>§o它可以装备在旅行者装备栏中,默认的键位是'数字键7'.高级斗篷的特殊能力也能激活.只需要使用旅行者装备栏的'激活能力'菜单.默认的键位是'R'.§r

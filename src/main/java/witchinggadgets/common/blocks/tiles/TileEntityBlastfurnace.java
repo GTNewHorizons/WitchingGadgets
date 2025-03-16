@@ -29,6 +29,9 @@ import witchinggadgets.common.util.recipe.InfernalBlastfurnaceRecipe;
 
 public class TileEntityBlastfurnace extends TileEntityWGBase implements IEssentiaTransport {
 
+    public static Block[] brickBlock = new Block[18];
+    public static Block stairBlock;
+
     public byte position = -1;
     public int[] masterPos = { -1, -1, -1 };
     int speedupTick = 0;
@@ -399,9 +402,5 @@ public class TileEntityBlastfurnace extends TileEntityWGBase implements IEssenti
             case 22 -> icon_lava;
             default -> icon_bricks;
         };
-
     }
-
-    public static Block[] brickBlock = new Block[18];
-    public static Block stairBlock;
 }

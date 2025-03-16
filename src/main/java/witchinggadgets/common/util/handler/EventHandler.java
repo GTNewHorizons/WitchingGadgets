@@ -1,5 +1,6 @@
 package witchinggadgets.common.util.handler;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -35,6 +36,8 @@ import net.minecraft.util.Vec3;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
@@ -45,7 +48,10 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
+import baubles.api.BaublesApi;
+import baubles.api.expanded.BaubleExpandedSlots;
 import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemCraftedEvent;
@@ -59,13 +65,13 @@ import thaumcraft.common.lib.crafting.ThaumcraftCraftingManager;
 import thaumcraft.common.lib.research.ResearchManager;
 import thaumcraft.common.lib.utils.InventoryUtils;
 import thaumcraft.common.tiles.TileInfusionMatrix;
-import travellersgear.api.TravellersGearAPI;
 import witchinggadgets.WitchingGadgets;
 import witchinggadgets.api.IPrimordialCrafting;
 import witchinggadgets.common.WGConfig;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.items.ItemMaterials;
 import witchinggadgets.common.items.baubles.ItemMagicalBaubles;
+import witchinggadgets.common.items.interfaces.IItemEvent;
 import witchinggadgets.common.items.tools.IPrimordialGear;
 import witchinggadgets.common.items.tools.ItemBag;
 import witchinggadgets.common.magic.WGEnchantSoulbound;
@@ -179,9 +185,10 @@ public class EventHandler {
 
     @SubscribeEvent
     public void onPlayerBreaking(PlayerEvent.BreakSpeed event) {
-        if (TravellersGearAPI.getExtendedInventory(event.entityPlayer)[2] != null
-                && TravellersGearAPI.getExtendedInventory(event.entityPlayer)[2].getItem() instanceof ItemMagicalBaubles
-                && TravellersGearAPI.getExtendedInventory(event.entityPlayer)[2].getItemDamage() == 3) {
+        ItemStack gauntletSlot = BaublesApi.getBaubles(event.entityPlayer).getStackInSlot(
+                BaubleExpandedSlots.getIndexesOfAssignedSlotsOfType(BaubleExpandedSlots.gauntletType)[0]);
+        if (gauntletSlot != null && gauntletSlot.getItem() instanceof ItemMagicalBaubles
+                && gauntletSlot.getItemDamage() == 3) {
             Block block = event.entityPlayer.worldObj.getBlock(event.x, event.y, event.z);
             if (!event.entityPlayer.onGround) event.newSpeed *= 5.0F;
             if (event.entityPlayer.isInsideOfMaterial(Material.water)
@@ -532,5 +539,75 @@ public class EventHandler {
         }
 
         return false;
+    }
+
+    @SubscribeEvent
+    public void onPlayerAttacking(AttackEntityEvent event) {
+        for (Object[] gear : buildEventItemList(event.entityPlayer)) {
+            ItemStack stack = (ItemStack) gear[0];
+            itemTriggerEvent(stack, (EntityPlayer) event.entityLiving, event);
+        }
+    }
+
+    @SubscribeEvent
+    public void onPlayerJump(LivingJumpEvent event) {
+        if (event.entityLiving instanceof EntityPlayer)
+            for (Object[] gear : buildEventItemList((EntityPlayer) event.entityLiving)) {
+                ItemStack stack = (ItemStack) gear[0];
+                itemTriggerEvent(stack, (EntityPlayer) event.entityLiving, event);
+            }
+    }
+
+    @SubscribeEvent
+    public void onPlayerFall(LivingFallEvent event) {
+        if (event.entityLiving instanceof EntityPlayer)
+            for (Object[] gear : buildEventItemList((EntityPlayer) event.entityLiving)) {
+                ItemStack stack = (ItemStack) gear[0];
+                itemTriggerEvent(stack, (EntityPlayer) event.entityLiving, event);
+            }
+    }
+
+    @SubscribeEvent
+    public void onPlayerTargeted(LivingSetAttackTargetEvent event) {
+        if (event.target instanceof EntityPlayer)
+            for (Object[] gear : buildEventItemList((EntityPlayer) event.target)) {
+                ItemStack stack = (ItemStack) gear[0];
+                itemTriggerEvent(stack, (EntityPlayer) event.target, event);
+            }
+    }
+
+    public Object[][] buildEventItemList(EntityPlayer player) {
+        ArrayList<Object[]> list = new ArrayList<Object[]>();
+
+        ItemStack[] is = player.inventory.armorInventory;
+        for (int armor = 0; armor < is.length; armor++)
+            if (is[armor] != null && is[armor].getItem() instanceof IItemEvent)
+                list.add(new Object[] { is[armor], 9 + armor });
+
+        IInventory inv = BaublesApi.getBaubles(player);
+        if (inv != null) for (int i = 0; i < inv.getSizeInventory(); i++)
+            if (inv.getStackInSlot(i) != null && inv.getStackInSlot(i).getItem() instanceof IItemEvent)
+                list.add(new Object[] { inv.getStackInSlot(i), 9 + 4 + i });
+
+        if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() instanceof IItemEvent)
+            list.add(list.size() / 2, new Object[] { player.getCurrentEquippedItem(), player.inventory.currentItem });
+
+        return list.toArray(new Object[0][]);
+    }
+
+    static void itemTriggerEvent(ItemStack stack, EntityPlayer player, Event event) {
+        if (stack != null && stack.getItem() instanceof IItemEvent) {
+            if (event instanceof LivingHurtEvent)
+                ((IItemEvent) stack.getItem()).onUserDamaged((LivingHurtEvent) event, stack);
+            if (event instanceof AttackEntityEvent)
+                ((IItemEvent) stack.getItem()).onUserAttacking((AttackEntityEvent) event, stack);
+            if (event instanceof LivingJumpEvent)
+                ((IItemEvent) stack.getItem()).onUserJump((LivingJumpEvent) event, stack);
+            if (event instanceof LivingFallEvent)
+                ((IItemEvent) stack.getItem()).onUserFall((LivingFallEvent) event, stack);
+            if (event instanceof LivingSetAttackTargetEvent)
+                ((IItemEvent) stack.getItem()).onUserTargeted((LivingSetAttackTargetEvent) event, stack);
+        }
+
     }
 }

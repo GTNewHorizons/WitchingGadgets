@@ -1,18 +1,24 @@
 package witchinggadgets.common.items.baubles;
 
+import static witchinggadgets.common.util.WGKeyHandler.activateKey;
+
 import java.util.List;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
-import baubles.api.IBauble;
+import baubles.api.expanded.BaubleExpandedSlots;
+import baubles.api.expanded.IBaubleExpanded;
 import baubles.common.container.InventoryBaubles;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
@@ -20,7 +26,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import witchinggadgets.client.render.ModelKama;
 import witchinggadgets.common.util.Lib;
 
-public class ItemKama extends ItemCloak implements IBauble {
+public class ItemKama extends ItemCloak implements IBaubleExpanded {
 
     IIcon overlay;
 
@@ -29,13 +35,13 @@ public class ItemKama extends ItemCloak implements IBauble {
     }
 
     @Override
-    public void activate(EntityPlayer player, ItemStack stack) {
-        super.activate(player, stack);
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         // 13116: Synchronize raven kama for client-authoritative player movement
         if (subNames[stack.getItemDamage()].equals("raven") && !player.worldObj.isRemote) {
             InventoryBaubles baubles = (InventoryBaubles) BaublesApi.getBaubles(player);
             baubles.syncSlotToClients(3);
         }
+        return super.onItemRightClick(stack, world, player);
     }
 
     @Override
@@ -75,60 +81,49 @@ public class ItemKama extends ItemCloak implements IBauble {
     }
 
     @Override
-    public int getSlot(ItemStack stack) {
-        return -1;
-    }
-
-    @Override
-    public BaubleType getBaubleType(ItemStack stack) {
+    public BaubleType getBaubleType(ItemStack aStack) {
         return BaubleType.BELT;
     }
 
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer par2EntityPlayer, List<String> list, boolean par4) {
-        if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("noGlide"))
-            list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide"));
-        list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble." + getBaubleType(stack)));
+    public String[] getBaubleTypes(ItemStack aStack) {
+        return new String[] { BaubleExpandedSlots.beltType };
+    }
 
-        if (Loader.isModLoaded("Botania")) {
-            ItemStack cosmetic = getCosmeticItem(stack);
-            if (cosmetic != null) list.add(
-                    String.format(StatCollector.translateToLocal("botaniamisc.hasCosmetic"), cosmetic.getDisplayName())
-                            .replaceAll("&", "\u00a7"));
+    @Override
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean par4) {
+        if (player.worldObj.isRemote) {
+            GameSettings keybind = Minecraft.getMinecraft().gameSettings;
+            list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Belt"));
+            list.add(
+                    StatCollector.translateToLocal(Lib.DESCRIPTION + "enableCloak").replaceAll(
+                            "%s1",
+                            StatCollector.translateToLocalFormatted(
+                                    GameSettings.getKeyDisplayString(activateKey.getKeyCode()))));
+            if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("noGlide")) {
+                list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide"));
+            }
+            if (stack.hasTagCompound() && !stack.getTagCompound().getBoolean("noGlide")) {
+                list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "glide"));
+            }
+
+            if (Loader.isModLoaded("Botania")) {
+                ItemStack cosmetic = getCosmeticItem(stack);
+                if (cosmetic != null) list.add(
+                        String.format(
+                                StatCollector.translateToLocal("botaniamisc.hasCosmetic"),
+                                cosmetic.getDisplayName()).replaceAll("&", "\u00a7"));
+            }
         }
     }
 
     @Override
-    public void onEquipped(ItemStack stack, EntityLivingBase living) {
-        if (living instanceof EntityPlayer) this.onItemEquipped((EntityPlayer) living, stack);
-    }
-
-    @Override
-    public void onUnequipped(ItemStack stack, EntityLivingBase living) {
-        if (living instanceof EntityPlayer) this.onItemUnequipped((EntityPlayer) living, stack);
-    }
-
-    @Override
-    public void onWornTick(ItemStack stack, EntityLivingBase living) {
-        if (living instanceof EntityPlayer) this.onItemTicked((EntityPlayer) living, stack);
-    }
-
-    @Override
-    public void onTravelGearTick(EntityPlayer player, ItemStack stack) {}
-
-    @Override
-    public void onTravelGearEquip(EntityPlayer player, ItemStack stack) {}
-
-    @Override
-    public void onTravelGearUnequip(EntityPlayer player, ItemStack stack) {}
-
-    @Override
-    public boolean canEquip(ItemStack arg0, EntityLivingBase arg1) {
+    public boolean canEquip(ItemStack stack, EntityLivingBase living) {
         return true;
     }
 
     @Override
-    public boolean canUnequip(ItemStack arg0, EntityLivingBase arg1) {
+    public boolean canUnequip(ItemStack stack, EntityLivingBase living) {
         return true;
     }
 }

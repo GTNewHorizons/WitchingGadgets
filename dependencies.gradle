@@ -1,24 +1,30 @@
 // Add your dependencies here
 
 dependencies {
-	implementation('com.github.GTNewHorizons:Tainted-Magic:7.6.14:dev')
-	implementation('com.github.GTNewHorizons:GT5-Unofficial:5.09.51.48:dev')
-	implementation('com.github.GTNewHorizons:ForbiddenMagic:0.8.0-GTNH:dev')
-	implementation('com.github.GTNewHorizons:twilightforest:2.7.1:dev')
-	implementation('curse.maven:travellers-gear-224440:2262113')
-	implementation('thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev')
-	implementation('com.github.GTNewHorizons:NotEnoughItems:2.7.11-GTNH:dev')
-	api ('com.github.GTNewHorizons:ThaumicBoots:1.4.2:dev'){
-		exclude group: 'com.github.GTNewHorizons', module: 'WitchingGadgets'
-	}
 
-	compileOnly('com.github.GTNewHorizons:ForgeMultipart:1.6.0:dev') {transitive=false}
-	compileOnly('com.github.GTNewHorizons:Botania:1.12.3-GTNH:api') {transitive=false}
+	api ('com.github.GTNewHorizons:ThaumicBoots:1.4.4:dev'){transitive=false}
+  
+	implementation('com.github.GTNewHorizons:Baubles-Expanded:2.1.6-GTNH:dev')
+	implementation('com.github.GTNewHorizons:ThaumicBases:1.8.3:dev') {transitive=false}
+	implementation('com.github.GTNewHorizons:Tainted-Magic:7.6.15-GTNH:dev') {
+		// we don't want the old Baubles Messing stuff up so lets disable that
+		exclude module: "Baubles"
+	}
+	implementation('com.github.GTNewHorizons:GT5-Unofficial:5.09.51.173:dev') {exclude module: "Baubles" }
+	implementation('com.github.GTNewHorizons:ForbiddenMagic:0.8.0-GTNH:dev') {exclude module: "Baubles" }
+	implementation('com.github.GTNewHorizons:twilightforest:2.7.5:dev')
+	implementation('thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev') {transitive=false}
+	implementation('com.github.GTNewHorizons:NotEnoughItems:2.7.29-GTNH:dev')
+
+	compile('com.github.GTNewHorizons:DummyCore:1.19.0:dev')
+	compileOnly('com.github.GTNewHorizons:ForgeMultipart:1.6.2:dev') {transitive=false}
+	compileOnly('com.github.GTNewHorizons:Botania:1.12.6-GTNH:api') {transitive=false}
 	compileOnly('com.github.GTNewHorizons:CraftTweaker:3.4.0:dev') {transitive=false}
 	compileOnly('com.github.GTNewHorizons:ZenScript:1.0.0-GTNH') {transitive=false}
-	compileOnly('com.github.GTNewHorizons:MagicBees:2.9.0-GTNH:api') {transitive=false}
-	compileOnly('com.github.GTNewHorizons:TinkersConstruct:1.13.2-GTNH:dev') {transitive=false}
+	compileOnly('com.github.GTNewHorizons:MagicBees:2.9.1-GTNH:api') {transitive=false}
+	compileOnly('com.github.GTNewHorizons:TinkersConstruct:1.13.10-GTNH:dev') {transitive=false}
 	compileOnly(deobfCurse('enviromine-230236:2269710'))
 
-	runtimeOnly('com.github.GTNewHorizons:Baubles:1.0.4:dev')
+	runtimeOnly('com.github.GTNewHorizons:CodeChickenCore:1.4.1:dev')
+	runtimeOnly('com.github.GTNewHorizons:Railcraft:9.16.4:dev') {transitive=false}
 }
