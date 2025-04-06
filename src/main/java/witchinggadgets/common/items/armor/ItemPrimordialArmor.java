@@ -52,9 +52,8 @@ import witchinggadgets.common.items.interfaces.IItemEvent;
 import witchinggadgets.common.items.tools.IPrimordialGear;
 import witchinggadgets.common.util.Lib;
 
-@Optional.InterfaceList({
-    @Optional.Interface(iface = "thaumicboots.api.IBoots", modid = "thaumicboots"),
-    @Optional.Interface(iface = "gregtech.api.hazards.IHazardProtector", modid = "gregtech") })
+@Optional.InterfaceList({ @Optional.Interface(iface = "thaumicboots.api.IBoots", modid = "thaumicboots"),
+        @Optional.Interface(iface = "gregtech.api.hazards.IHazardProtector", modid = "gregtech") })
 public class ItemPrimordialArmor extends ItemShadowFortressArmor
         implements IPrimordialCrafting, IPrimordialGear, IRunicArmor, IItemEvent, IBoots, IHazardProtector {
 
