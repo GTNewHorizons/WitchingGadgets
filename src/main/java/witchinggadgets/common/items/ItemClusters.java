@@ -52,19 +52,37 @@ public class ItemClusters extends Item {
 
     @Override
     public int getColorFromItemStack(ItemStack stack, int pass) {
-        if (pass == 0 && stack.getItemDamage() < witchinggadgets.common.WGContent.GT_Cluster.length) {
-            if (WGContent.GT_Cluster_Color.get(witchinggadgets.common.WGContent.GT_Cluster[stack.getItemDamage()])
-                    != null)
-                return WGContent.GT_Cluster_Color
-                        .get(witchinggadgets.common.WGContent.GT_Cluster[stack.getItemDamage()])[0];
+        if (witchinggadgets.common.WGContent.GT_Cluster != null) {
+            if (pass == 0 && stack.getItemDamage() < witchinggadgets.common.WGContent.GT_Cluster.length) {
+                if (WGContent.GT_Cluster_Color.get(witchinggadgets.common.WGContent.GT_Cluster[stack.getItemDamage()])
+                        != null)
+                    return WGContent.GT_Cluster_Color
+                            .get(witchinggadgets.common.WGContent.GT_Cluster[stack.getItemDamage()])[0];
+            }
+        } else {
+            if (pass == 0) {
+                if (materialMap.get(subNames[stack.getItemDamage()]) != null) {
+                    Integer[] mat = materialMap.get(subNames[stack.getItemDamage()]);
+                    if (mat != null && mat.length > 0) {
+                        return mat[0];
+                    }
+                }
+            }
         }
         return 0xffffff;
     }
 
     public static ItemStack getCluster(String ore) {
-        if (WGConfig.allowClusters) for (int sn = 0; sn < witchinggadgets.common.WGContent.GT_Cluster.length; sn++)
-            if (witchinggadgets.common.WGContent.GT_Cluster[sn].equalsIgnoreCase(ore))
-                return new ItemStack(WGContent.ItemCluster, 1, sn);
+        if (WGConfig.allowClusters) {
+            if (witchinggadgets.common.WGContent.GT_Cluster != null) {
+                for (int sn = 0; sn < witchinggadgets.common.WGContent.GT_Cluster.length; sn++)
+                    if (witchinggadgets.common.WGContent.GT_Cluster[sn].equalsIgnoreCase(ore))
+                        return new ItemStack(WGContent.ItemCluster, 1, sn);
+            } else {
+                for (int sn = 0; sn < subNames.length; sn++)
+                    if (subNames[sn].equalsIgnoreCase(ore)) return new ItemStack(WGContent.ItemCluster, 1, sn);
+            }
+        }
         return null;
     }
 
@@ -83,12 +101,24 @@ public class ItemClusters extends Item {
 
     @Override
     public IIcon getIconFromDamageForRenderPass(int damage, int pass) {
-        if (pass == 0) return this.iconMetal;
-        else if (damage < witchinggadgets.common.WGContent.GT_Cluster.length
-                && WGContent.GT_Cluster_Color.get(witchinggadgets.common.WGContent.GT_Cluster[damage]) != null)
-            return this.iconOverlay[WGContent.GT_Cluster_Color
-                    .get(witchinggadgets.common.WGContent.GT_Cluster[damage])[1]];
-        else return this.iconOverlay[0];
+        if (pass == 0) {
+            return this.iconMetal;
+        }
+        if (witchinggadgets.common.WGContent.GT_Cluster != null) {
+            if (damage < witchinggadgets.common.WGContent.GT_Cluster.length
+                    && WGContent.GT_Cluster_Color.get(witchinggadgets.common.WGContent.GT_Cluster[damage]) != null) {
+                return this.iconOverlay[WGContent.GT_Cluster_Color
+                        .get(witchinggadgets.common.WGContent.GT_Cluster[damage])[1]];
+            } else {
+                return this.iconOverlay[0];
+            }
+        } else {
+            if (materialMap.get(subNames[damage]) != null) {
+                return this.iconOverlay[materialMap.get(subNames[damage])[1]];
+            } else {
+                return this.iconOverlay[0];
+            }
+        }
     }
 
     @Override
@@ -98,9 +128,21 @@ public class ItemClusters extends Item {
 
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
-        String ss = Materials.get(witchinggadgets.common.WGContent.GT_Cluster[stack.getItemDamage()]).mLocalizedName;
-        return StatCollector.translateToLocalFormatted(this.getUnlocalizedNameInefficiently(stack) + ".name", ss)
-                .trim();
+        if (witchinggadgets.common.WGContent.GT_Cluster != null) {
+            String ss = Materials
+                    .get(witchinggadgets.common.WGContent.GT_Cluster[stack.getItemDamage()]).mLocalizedName;
+            return StatCollector.translateToLocalFormatted(this.getUnlocalizedNameInefficiently(stack) + ".name", ss)
+                    .trim();
+        } else {
+            String ss = "";
+            if (!OreDictionary.getOres("ingot" + subNames[stack.getItemDamage()]).isEmpty()) {
+                ItemStack ingot = OreDictionary.getOres("ingot" + subNames[stack.getItemDamage()]).get(0);
+                int limit = ingot.getDisplayName().lastIndexOf(" ");
+                ss = ingot.getDisplayName().substring(0, Math.max(0, limit));
+            }
+            return StatCollector.translateToLocalFormatted(this.getUnlocalizedNameInefficiently(stack) + ".name", ss)
+                    .trim();
+        }
     }
 
     @Override
