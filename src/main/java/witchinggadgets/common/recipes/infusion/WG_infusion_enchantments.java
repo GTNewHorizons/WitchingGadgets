@@ -71,14 +71,27 @@ public class WG_infusion_enchantments {
                     new ItemStack[] { new ItemStack(Items.potionitem, 1, 8206),
                             new ItemStack(ConfigItems.itemResource, 1, 14), ItemList.Sensor_MV.get(1L) });
 
-            registerInfusionEnchantmentRecipe(
-                    "ENCH_BACKSTAB",
-                    "",
-                    WGContent.enc_backstab,
-                    3,
-                    new AspectList().add(Aspect.WEAPON, 48).add(DarkAspects.ENVY, 32).add(Aspect.MAGIC, 16),
-                    new ItemStack[] { GTModHandler.getModItem("TConstruct", "knifeBlade", 1L, 2),
-                            new ItemStack(Items.potionitem, 1, 8206), new ItemStack(ConfigItems.itemResource, 1, 14) });
+            if (Loader.isModLoaded("ForbiddenMagic")) {
+                registerInfusionEnchantmentRecipe(
+                        "ENCH_BACKSTAB",
+                        "",
+                        WGContent.enc_backstab,
+                        3,
+                        new AspectList().add(Aspect.WEAPON, 48).add(DarkAspects.ENVY, 32).add(Aspect.MAGIC, 16),
+                        new ItemStack[] { GTModHandler.getModItem("TConstruct", "knifeBlade", 1L, 2),
+                                new ItemStack(Items.potionitem, 1, 8206),
+                                new ItemStack(ConfigItems.itemResource, 1, 14) });
+            } else {
+                registerInfusionEnchantmentRecipe(
+                        "ENCH_BACKSTAB",
+                        "",
+                        WGContent.enc_backstab,
+                        3,
+                        new AspectList().add(Aspect.WEAPON, 48).add(Aspect.GREED, 32).add(Aspect.MAGIC, 16),
+                        new ItemStack[] { GTModHandler.getModItem("TConstruct", "knifeBlade", 1L, 2),
+                                new ItemStack(Items.potionitem, 1, 8206),
+                                new ItemStack(ConfigItems.itemResource, 1, 14) });
+            }
 
         } else {
             registerInfusionEnchantmentRecipe(
@@ -124,11 +137,19 @@ public class WG_infusion_enchantments {
                         .add(Aspect.GREED, 4),
                 "ENCH_STEALTH");
 
-        WGModCompat.thaumicTinkererRegisterEnchantment(
-                WGContent.enc_backstab,
-                "witchinggadgets:textures/gui/research/icon_ench_backstab.png",
-                new AspectList().add(Aspect.WEAPON, 12).add(DarkAspects.ENVY, 8).add(Aspect.MAGIC, 4),
-                "ENCH_BACKSTAB");
+        if (Loader.isModLoaded("ForbiddenMagic")) {
+            WGModCompat.thaumicTinkererRegisterEnchantment(
+                    WGContent.enc_backstab,
+                    "witchinggadgets:textures/gui/research/icon_ench_backstab.png",
+                    new AspectList().add(Aspect.WEAPON, 12).add(DarkAspects.ENVY, 8).add(Aspect.MAGIC, 4),
+                    "ENCH_BACKSTAB");
+        } else {
+            WGModCompat.thaumicTinkererRegisterEnchantment(
+                    WGContent.enc_backstab,
+                    "witchinggadgets:textures/gui/research/icon_ench_backstab.png",
+                    new AspectList().add(Aspect.WEAPON, 12).add(Aspect.ENTROPY, 20).add(Aspect.MAGIC, 4),
+                    "ENCH_BACKSTAB");
+        }
 
         registerInfusionEnchantmentRecipe(
                 "ENCH_RIDEPROTECT",

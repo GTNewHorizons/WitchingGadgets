@@ -21,6 +21,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fox.spiteful.forbidden.DarkAspects;
@@ -223,7 +224,8 @@ public class BlockWGMetalDevice extends BlockContainer implements ITerraformFocu
             if (subNames[meta].equalsIgnoreCase("tfFocusColdTaiga")) return Aspect.COLD;
             if (subNames[meta].equalsIgnoreCase("tfFocusDesert")) return Aspect.FIRE;
             if (subNames[meta].equalsIgnoreCase("tfFocusJungle")) return Aspect.TREE;
-            if (subNames[meta].equalsIgnoreCase("tfFocusHell")) return DarkAspects.NETHER;
+            if (subNames[meta].equalsIgnoreCase("tfFocusHell"))
+                return Loader.isModLoaded("ForbiddenMagic") ? DarkAspects.NETHER : Aspect.FIRE;
             if (subNames[meta].equalsIgnoreCase("tfFocusTaint")) return Aspect.TAINT;
             if (subNames[meta].equalsIgnoreCase("tfFocusMushroom")) return Aspect.SLIME;
             if (subNames[meta].equalsIgnoreCase("tfFocusRiver") || subNames[meta].equalsIgnoreCase("tfFocusOcean"))

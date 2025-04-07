@@ -3,7 +3,7 @@
 dependencies {
 
 	api ('com.github.GTNewHorizons:ThaumicBoots:1.4.4:dev'){transitive=false}
-  
+
 	implementation('com.github.GTNewHorizons:Baubles-Expanded:2.1.6-GTNH:dev')
 	implementation('com.github.GTNewHorizons:ThaumicBases:1.8.3:dev') {transitive=false}
 	implementation('com.github.GTNewHorizons:Tainted-Magic:7.6.15-GTNH:dev') {

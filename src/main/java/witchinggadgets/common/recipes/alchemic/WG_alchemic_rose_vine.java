@@ -14,7 +14,7 @@ import witchinggadgets.common.WGContent;
 public class WG_alchemic_rose_vine {
 
     public static void registerRoseWine() {
-        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi") && Loader.isModLoaded("TwilightForest")) {
             registerAlchemyRecipe(
                     "ROSEVINE",
                     ".1",

@@ -2,7 +2,6 @@ package witchinggadgets.common.recipes;
 
 import net.minecraft.item.ItemStack;
 
-import gregtech.api.util.GTUtility;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.crafting.CrucibleRecipe;
@@ -14,6 +13,7 @@ import witchinggadgets.common.recipes.alchemic.WG_alchemic_pure_cinnabar;
 import witchinggadgets.common.recipes.alchemic.WG_alchemic_rose_vine;
 import witchinggadgets.common.recipes.alchemic.WG_alchemic_tc_clusters;
 import witchinggadgets.common.recipes.alchemic.WG_alchemic_transmogrify;
+import witchinggadgets.common.util.Utilities;
 
 public class WG_alchemic_recipes {
 
@@ -44,7 +44,7 @@ public class WG_alchemic_recipes {
     public static void removeCrucibleRecipe(final ItemStack output) {
         ThaumcraftApi.getCraftingRecipes().removeIf(recipe -> {
             if (recipe instanceof CrucibleRecipe) return ((CrucibleRecipe) recipe).getRecipeOutput() != null
-                    && GTUtility.areStacksEqual(((CrucibleRecipe) recipe).getRecipeOutput(), output);
+                    && Utilities.areStacksEqual(((CrucibleRecipe) recipe).getRecipeOutput(), output);
             return false;
         });
     }

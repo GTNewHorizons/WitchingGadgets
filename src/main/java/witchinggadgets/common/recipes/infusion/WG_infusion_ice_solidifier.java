@@ -36,7 +36,7 @@ public class WG_infusion_ice_solidifier {
                     new ItemStack(WGContent.BlockWoodenDevice, 1, 6),
                     4,
                     new AspectList().add(Aspect.WEATHER, 16).add(Aspect.COLD, 32).add(Aspect.TOOL, 32),
-                    ItemList.Machine_HV_FluidSolidifier.get(1L),
+                    new ItemStack(Blocks.obsidian),
                     new ItemStack[] { new ItemStack(Blocks.sticky_piston),
                             new ItemStack(ConfigBlocks.blockCrystal, 1, 2), new ItemStack(Blocks.ice),
                             new ItemStack(ConfigBlocks.blockCrystal, 1, 4), new ItemStack(Items.redstone),

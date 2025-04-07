@@ -105,9 +105,15 @@ public class ItemClusters extends Item {
 
     @Override
     public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> itemList) {
-        if (WGConfig.allowClusters)
+        if (WGConfig.allowClusters) if (witchinggadgets.common.WGContent.GT_Cluster != null) {
             for (int iOre = 0; iOre < witchinggadgets.common.WGContent.GT_Cluster.length; iOre++)
                 if (!OreDictionary.getOres("ore" + witchinggadgets.common.WGContent.GT_Cluster[iOre]).isEmpty()) // &&
                     itemList.add(new ItemStack(item, 1, iOre));
+        } else {
+            for (int iOre = 0; iOre < subNames.length; iOre++)
+                if (!OreDictionary.getOres("ore" + subNames[iOre]).isEmpty()
+                        && !OreDictionary.getOres("ingot" + subNames[iOre]).isEmpty())
+                    itemList.add(new ItemStack(item, 1, iOre));
+        }
     }
 }

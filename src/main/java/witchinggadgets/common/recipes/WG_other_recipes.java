@@ -8,11 +8,14 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import thaumcraft.api.aspects.AspectList;
 import witchinggadgets.common.WGContent;
+import witchinggadgets.common.WGModCompat;
+import witchinggadgets.common.recipes.other.WG_GT_clusters;
+import witchinggadgets.common.recipes.other.WG_Tcon_clusters;
 import witchinggadgets.common.recipes.other.WG_other_camera;
-import witchinggadgets.common.recipes.other.WG_other_clusters;
 import witchinggadgets.common.recipes.other.WG_other_gemcutting;
 import witchinggadgets.common.recipes.other.WG_other_infernal_blast_furnace;
 import witchinggadgets.common.recipes.other.WG_other_loom;
@@ -28,7 +31,16 @@ public class WG_other_recipes {
         WG_other_spinning.registerSpinningRecipes();
         WG_other_loom.registerLoom();
         WG_other_infernal_blast_furnace.registerInfernalBlastFurnace();
-        WG_other_clusters.registerClusterRecipes();
+        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+            WG_GT_clusters.registerClusterRecipesGT();
+        } else {
+            for (String name : OreDictionary.getOreNames()) if (name.startsWith("cluster")) {
+                addBlastTrippling(name.substring("cluster".length()));
+            }
+        }
+        if (WGModCompat.loaded_TCon) {
+            WG_Tcon_clusters.registerClusterRecipesTcon();
+        }
     }
 
     public static boolean registerShapelessOreRecipe(String tag, String tagAddon, ItemStack result, Object... recipe) {
