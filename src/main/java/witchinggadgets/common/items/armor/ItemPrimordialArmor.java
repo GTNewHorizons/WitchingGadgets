@@ -35,6 +35,8 @@ import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gregtech.api.hazards.Hazard;
+import gregtech.api.hazards.IHazardProtector;
 import taintedmagic.common.items.equipment.ItemShadowFortressArmor;
 import thaumcraft.api.IRunicArmor;
 import thaumcraft.api.aspects.Aspect;
@@ -50,9 +52,10 @@ import witchinggadgets.common.items.interfaces.IItemEvent;
 import witchinggadgets.common.items.tools.IPrimordialGear;
 import witchinggadgets.common.util.Lib;
 
-@Optional.Interface(iface = "thaumicboots.api.IBoots", modid = "thaumicboots")
+@Optional.InterfaceList({ @Optional.Interface(iface = "thaumicboots.api.IBoots", modid = "thaumicboots"),
+        @Optional.Interface(iface = "gregtech.api.hazards.IHazardProtector", modid = "gregtech") })
 public class ItemPrimordialArmor extends ItemShadowFortressArmor
-        implements IPrimordialCrafting, IPrimordialGear, IRunicArmor, IItemEvent, IBoots {
+        implements IPrimordialCrafting, IPrimordialGear, IRunicArmor, IItemEvent, IBoots, IHazardProtector {
 
     enum FlightStatus {
         ON,
@@ -597,4 +600,10 @@ public class ItemPrimordialArmor extends ItemShadowFortressArmor
 
     @Override
     public void onUserTargeted(LivingSetAttackTargetEvent event, ItemStack stack) {}
+
+    @Override
+    @Optional.Method(modid = "gregtech")
+    public boolean protectsAgainst(ItemStack itemStack, Hazard hazard) {
+        return true;
+    }
 }
