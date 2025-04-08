@@ -70,14 +70,6 @@ public class ItemMagicalBaubles extends Item implements IBaubleExpanded, vazkii.
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean par4) {
-        // if (subNames[stack.getItemDamage()].startsWith("charm"))
-        // list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Charm"));
-        // if (subNames[stack.getItemDamage()].startsWith("vambrace"))
-        // list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Gloves"));
-        // if (subNames[stack.getItemDamage()].startsWith("ring"))
-        // list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Ring"));
-        // if (subNames[stack.getItemDamage()].startsWith("title"))
-        // list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Title"));
         BaubleItemHelper.addSlotInformation(list, getBaubleTypes(stack));
         if (stack.hasTagCompound() && stack.getTagCompound().hasKey(Title))
             list.add(StatCollector.translateToLocalFormatted(stack.getTagCompound().getString(Title)));

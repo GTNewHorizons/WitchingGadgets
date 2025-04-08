@@ -204,7 +204,6 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean par4) {
         if (player.worldObj.isRemote) {
             BaubleItemHelper.addSlotInformation(list, getBaubleTypes(stack));
-            // list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Cloak"));
             list.add(
                     StatCollector.translateToLocal(Lib.DESCRIPTION + "enableCloak").replaceAll(
                             "%s1",

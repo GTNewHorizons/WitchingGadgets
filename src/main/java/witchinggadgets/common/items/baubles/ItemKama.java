@@ -99,7 +99,6 @@ public class ItemKama extends ItemCloak implements IBaubleExpanded {
         if (player.worldObj.isRemote) {
             GameSettings keybind = Minecraft.getMinecraft().gameSettings;
             BaubleItemHelper.addSlotInformation(list, getBaubleTypes(stack));
-            // list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Belt"));
             list.add(
                     StatCollector.translateToLocal(Lib.DESCRIPTION + "enableCloak").replaceAll(
                             "%s1",
