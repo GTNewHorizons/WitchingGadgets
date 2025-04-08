@@ -43,7 +43,6 @@ import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.config.Config;
 import thaumcraft.common.items.armor.Hover;
 import thaumcraft.common.items.armor.ItemFortressArmor;
-
 import thaumicboots.api.IBoots;
 import witchinggadgets.WitchingGadgets;
 import witchinggadgets.api.IPrimordialCrafting;
