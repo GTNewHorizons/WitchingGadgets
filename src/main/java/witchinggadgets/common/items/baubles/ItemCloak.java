@@ -23,6 +23,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -31,6 +32,7 @@ import net.minecraftforge.event.entity.player.AttackEntityEvent;
 
 import baubles.api.BaubleType;
 import baubles.api.expanded.BaubleExpandedSlots;
+import baubles.api.expanded.BaubleItemHelper;
 import baubles.api.expanded.IBaubleExpanded;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Optional;
@@ -201,7 +203,7 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean par4) {
         if (player.worldObj.isRemote) {
-            list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Cloak"));
+            BaubleItemHelper.addSlotInformation(list, getBaubleTypes(stack));
             list.add(
                     StatCollector.translateToLocal(Lib.DESCRIPTION + "enableCloak").replaceAll(
                             "%s1",
@@ -412,5 +414,11 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
     @Override
     public BaubleType getBaubleType(ItemStack itemstack) {
         return null;
+    }
+
+    @Override
+    public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer player) {
+        BaubleItemHelper.onBaubleRightClick(itemStackIn, worldIn, player);
+        return super.onItemRightClick(itemStackIn, worldIn, player);
     }
 }

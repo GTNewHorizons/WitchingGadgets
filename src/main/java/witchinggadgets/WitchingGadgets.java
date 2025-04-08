@@ -1,5 +1,7 @@
 package witchinggadgets;
 
+import static witchinggadgets.common.util.Lib.Title;
+
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -94,10 +96,11 @@ public class WitchingGadgets {
         WGContent.preInit();
 
         packetHandler = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
+        BaubleExpandedSlots.tryRegisterType(Title);
         BaubleExpandedSlots.tryAssignSlotOfType(BaubleExpandedSlots.capeType);
         BaubleExpandedSlots.tryAssignSlotOfType(BaubleExpandedSlots.gauntletType);
         BaubleExpandedSlots.tryAssignSlotOfType(BaubleExpandedSlots.charmType);
-        BaubleExpandedSlots.tryAssignSlotOfType("Title");
+        BaubleExpandedSlots.tryAssignSlotOfType(Title);
         eventHandler = new EventHandler();
         MinecraftForge.EVENT_BUS.register(eventHandler);
         playerTickHandler = new PlayerTickHandler();
