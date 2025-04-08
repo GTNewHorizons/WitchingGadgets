@@ -35,12 +35,15 @@ import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import taintedmagic.common.items.equipment.ItemShadowFortressArmor;
 import thaumcraft.api.IRunicArmor;
+import thaumcraft.api.IVisDiscountGear;
+import thaumcraft.api.IWarpingGear;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.config.Config;
 import thaumcraft.common.items.armor.Hover;
+import thaumcraft.common.items.armor.ItemFortressArmor;
+
 import thaumicboots.api.IBoots;
 import witchinggadgets.WitchingGadgets;
 import witchinggadgets.api.IPrimordialCrafting;
@@ -51,8 +54,8 @@ import witchinggadgets.common.items.tools.IPrimordialGear;
 import witchinggadgets.common.util.Lib;
 
 @Optional.Interface(iface = "thaumicboots.api.IBoots", modid = "thaumicboots")
-public class ItemPrimordialArmor extends ItemShadowFortressArmor
-        implements IPrimordialCrafting, IPrimordialGear, IRunicArmor, IItemEvent, IBoots {
+public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordialCrafting, IPrimordialGear, IRunicArmor,
+        IItemEvent, IBoots, IWarpingGear, IVisDiscountGear {
 
     enum FlightStatus {
         ON,

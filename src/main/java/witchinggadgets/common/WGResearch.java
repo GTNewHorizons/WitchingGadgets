@@ -1307,32 +1307,32 @@ public class WGResearch {
                             .addWarp(25).setParents("PRIMORDIALGEARSET").setConcealed().setPages(pages)
                             .registerResearchItem();
 
-            if (Loader.isModLoaded("taintedmagic")) {
-                // PRIMORDIALHELMET
-                researchAspects = new AspectList().add(Aspect.ARMOR, 1).add(Aspect.MAGIC, 1).add(Aspect.AIR, 1)
-                        .add(Aspect.FIRE, 1).add(Aspect.WATER, 1).add(Aspect.EARTH, 1).add(Aspect.ORDER, 1)
-                        .add(Aspect.ENTROPY, 1);
-                pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.PRIMORDIALARMOR.1"),
-                        new ResearchPage("witchinggadgets_research_page.PRIMORDIALARMOR.2"),
-                        new ResearchPage((InfusionRecipe) WGContent.recipeList.get("PRIMORDIALARMOR_HELMET")),
-                        new ResearchPage((InfusionRecipe) WGContent.recipeList.get("PRIMORDIALARMOR_CUIRASS")),
-                        new ResearchPage((InfusionRecipe) WGContent.recipeList.get("PRIMORDIALARMOR_GREAVES")),
-                        new ResearchPage((InfusionRecipe) WGContent.recipeList.get("PRIMORDIALARMOR_BOOTS")),
-                        new ResearchPage((InfusionRecipe) WGContent.recipeList.get("HELMGOGGLES_PRIMORDIAL")),
-                        new ResearchPage((InfusionRecipe) WGContent.recipeList.get("MASKGRINNINGDEVIL_PRIMORDIAL")),
-                        new ResearchPage((InfusionRecipe) WGContent.recipeList.get("MASKANGRYGHOST_PRIMORDIAL")),
-                        new ResearchPage((InfusionRecipe) WGContent.recipeList.get("MASKSIPPINGFIEND_PRIMORDIAL")) };
-                getResearchItem(
-                        "PRIMORDIALARMOR",
-                        "WITCHGADG",
-                        researchAspects,
-                        2,
-                        7,
-                        10,
-                        new ResourceLocation("witchinggadgets:textures/gui/research/icon_primordialArmor.png"))
-                                .addWarp(25).setParents("PRIMORDIALGEARSET", "ARMORFORTRESS").setConcealed()
-                                .setPages(pages).registerResearchItem();
-            }
+            // if (Loader.isModLoaded("taintedmagic")) {
+            // PRIMORDIALHELMET
+            researchAspects = new AspectList().add(Aspect.ARMOR, 1).add(Aspect.MAGIC, 1).add(Aspect.AIR, 1)
+                    .add(Aspect.FIRE, 1).add(Aspect.WATER, 1).add(Aspect.EARTH, 1).add(Aspect.ORDER, 1)
+                    .add(Aspect.ENTROPY, 1);
+            pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.PRIMORDIALARMOR.1"),
+                    new ResearchPage("witchinggadgets_research_page.PRIMORDIALARMOR.2"),
+                    new ResearchPage((InfusionRecipe) WGContent.recipeList.get("PRIMORDIALARMOR_HELMET")),
+                    new ResearchPage((InfusionRecipe) WGContent.recipeList.get("PRIMORDIALARMOR_CUIRASS")),
+                    new ResearchPage((InfusionRecipe) WGContent.recipeList.get("PRIMORDIALARMOR_GREAVES")),
+                    new ResearchPage((InfusionRecipe) WGContent.recipeList.get("PRIMORDIALARMOR_BOOTS")),
+                    new ResearchPage((InfusionRecipe) WGContent.recipeList.get("HELMGOGGLES_PRIMORDIAL")),
+                    new ResearchPage((InfusionRecipe) WGContent.recipeList.get("MASKGRINNINGDEVIL_PRIMORDIAL")),
+                    new ResearchPage((InfusionRecipe) WGContent.recipeList.get("MASKANGRYGHOST_PRIMORDIAL")),
+                    new ResearchPage((InfusionRecipe) WGContent.recipeList.get("MASKSIPPINGFIEND_PRIMORDIAL")) };
+            getResearchItem(
+                    "PRIMORDIALARMOR",
+                    "WITCHGADG",
+                    researchAspects,
+                    2,
+                    7,
+                    10,
+                    new ResourceLocation("witchinggadgets:textures/gui/research/icon_primordialArmor.png")).addWarp(25)
+                            .setParents("PRIMORDIALGEARSET", "ARMORFORTRESS").setConcealed().setPages(pages)
+                            .registerResearchItem();
+            // }
         }
 
         if (Loader.isModLoaded("dreamcraft")) {
