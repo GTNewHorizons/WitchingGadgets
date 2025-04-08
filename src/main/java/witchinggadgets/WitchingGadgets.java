@@ -41,6 +41,8 @@ import witchinggadgets.common.util.network.message.MessagePrimordialGlove;
 import witchinggadgets.common.util.network.message.MessageTileUpdate;
 import witchinggadgets.common.world.VillageComponentPhotoshop;
 
+import static witchinggadgets.common.util.Lib.Title;
+
 @Mod(
         modid = WitchingGadgets.MODID,
         name = WitchingGadgets.MODNAME,
@@ -94,10 +96,11 @@ public class WitchingGadgets {
         WGContent.preInit();
 
         packetHandler = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
+        BaubleExpandedSlots.tryRegisterType(Title);
         BaubleExpandedSlots.tryAssignSlotOfType(BaubleExpandedSlots.capeType);
         BaubleExpandedSlots.tryAssignSlotOfType(BaubleExpandedSlots.gauntletType);
         BaubleExpandedSlots.tryAssignSlotOfType(BaubleExpandedSlots.charmType);
-        BaubleExpandedSlots.tryAssignSlotOfType("Title");
+        BaubleExpandedSlots.tryAssignSlotOfType(Title);
         eventHandler = new EventHandler();
         MinecraftForge.EVENT_BUS.register(eventHandler);
         playerTickHandler = new PlayerTickHandler();
