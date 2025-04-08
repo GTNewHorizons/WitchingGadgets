@@ -41,8 +41,9 @@ public class WG_arcane_advanced_scribing_tools {
                     new ItemStack(WGContent.ItemAdvancedScribingTools),
                     new AspectList().add(Aspect.AIR, 50).add(Aspect.FIRE, 50).add(Aspect.ORDER, 50)
                             .add(Aspect.ENTROPY, 50).add(Aspect.EARTH, 50).add(Aspect.WATER, 50),
-                    new Object[] { "dustGold", new ItemStack(Items.feather),
-                            thaumcraft.api.ItemApi.getItem("itemEssence", 0) });
+                    new ItemStack(Items.gold_nugget),
+                    new ItemStack(Items.feather),
+                    thaumcraft.api.ItemApi.getItem("itemEssence", 0));
         }
     }
 }

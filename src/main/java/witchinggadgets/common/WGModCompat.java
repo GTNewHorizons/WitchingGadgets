@@ -32,6 +32,7 @@ public class WGModCompat {
     public static Item tfMagicMapFocus;
     public static Block tfTowerWood;
 
+    public static boolean loaded_TaintedMagic;
     public static boolean loaded_TCon;
     public static boolean loaded_Twilight;
     public static boolean loaded_Enviromine;
@@ -53,6 +54,7 @@ public class WGModCompat {
 
         tConResource = GameRegistry.findItem("TConstruct", "materials");
 
+        loaded_TaintedMagic = Loader.isModLoaded("TaintedMagic");
         loaded_TCon = Loader.isModLoaded("TConstruct");
         loaded_Twilight = Loader.isModLoaded("TwilightForest");
         loaded_Enviromine = Loader.isModLoaded("enviromine");

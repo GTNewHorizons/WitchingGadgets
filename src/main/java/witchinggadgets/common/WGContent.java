@@ -500,22 +500,20 @@ public class WGContent {
             ItemPrimordialSword = new ItemPrimordialSword(primordialTool).setUnlocalizedName("WG_PrimordialSword");
             GameRegistry.registerItem(ItemPrimordialSword, ItemPrimordialSword.getUnlocalizedName());
 
-            if (Loader.isModLoaded("taintedmagic")) {
-                ItemPrimordialHelm = new ItemPrimordialArmor(primordialArmor, 4, 0)
-                        .setUnlocalizedName("WG_PrimordialHelm");
-                GameRegistry.registerItem(ItemPrimordialHelm, ItemPrimordialHelm.getUnlocalizedName());
-                ItemPrimordialChest = new ItemPrimordialArmor(primordialArmor, 4, 1)
-                        .setUnlocalizedName("WG_PrimordialChest");
-                GameRegistry.registerItem(ItemPrimordialChest, ItemPrimordialChest.getUnlocalizedName());
-                ItemPrimordialLegs = new ItemPrimordialArmor(primordialArmor, 4, 2)
-                        .setUnlocalizedName("WG_PrimordialLegs");
-                GameRegistry.registerItem(ItemPrimordialLegs, ItemPrimordialLegs.getUnlocalizedName());
-                ItemPrimordialBoots = new ItemPrimordialArmor(primordialArmor, 4, 3)
-                        .setUnlocalizedName("WG_PrimordialBoots");
-                GameRegistry.registerItem(ItemPrimordialBoots, ItemPrimordialBoots.getUnlocalizedName());
+            // if (WGModCompat.loaded_TaintedMagic) {
+            ItemPrimordialHelm = new ItemPrimordialArmor(primordialArmor, 4, 0).setUnlocalizedName("WG_PrimordialHelm");
+            GameRegistry.registerItem(ItemPrimordialHelm, ItemPrimordialHelm.getUnlocalizedName());
+            ItemPrimordialChest = new ItemPrimordialArmor(primordialArmor, 4, 1)
+                    .setUnlocalizedName("WG_PrimordialChest");
+            GameRegistry.registerItem(ItemPrimordialChest, ItemPrimordialChest.getUnlocalizedName());
+            ItemPrimordialLegs = new ItemPrimordialArmor(primordialArmor, 4, 2).setUnlocalizedName("WG_PrimordialLegs");
+            GameRegistry.registerItem(ItemPrimordialLegs, ItemPrimordialLegs.getUnlocalizedName());
+            ItemPrimordialBoots = new ItemPrimordialArmor(primordialArmor, 4, 3)
+                    .setUnlocalizedName("WG_PrimordialBoots");
+            GameRegistry.registerItem(ItemPrimordialBoots, ItemPrimordialBoots.getUnlocalizedName());
 
-                MinecraftForge.EVENT_BUS.register(new ItemPrimordialArmor.abilityHandler());
-            }
+            MinecraftForge.EVENT_BUS.register(new ItemPrimordialArmor.abilityHandler());
+            // }
         }
 
         if (WGConfig.moduleGemcutting) {

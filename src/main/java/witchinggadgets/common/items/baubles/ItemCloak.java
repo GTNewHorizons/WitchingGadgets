@@ -60,6 +60,7 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
     public ItemCloak() {
         this.setHasSubtypes(true);
         this.setCreativeTab(WitchingGadgets.tabWG);
+        maxStackSize = 1;
     }
 
     @Override
@@ -206,11 +207,13 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
                             "%s1",
                             StatCollector.translateToLocalFormatted(
                                     GameSettings.getKeyDisplayString(activateKey.getKeyCode()))));
-            if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("noGlide")) {
-                list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide"));
-            }
-            if (stack.hasTagCompound() && !stack.getTagCompound().getBoolean("noGlide")) {
-                list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "glide"));
+            if (subNames[stack.getItemDamage()].equals("raven")) {
+                if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("noGlide")) {
+                    list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide"));
+                }
+                if (stack.hasTagCompound() && !stack.getTagCompound().getBoolean("noGlide")) {
+                    list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "glide"));
+                }
             }
 
             if (Loader.isModLoaded("Botania")) {
@@ -238,6 +241,8 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
                 }
             }
 
+        }
+        if (!player.worldObj.isRemote) {
             if (activateKey.getIsKeyPressed() && subNames[stack.getItemDamage()].equals("storage")) {
                 player.openGui(
                         WitchingGadgets.instance,
