@@ -1,10 +1,11 @@
 package witchinggadgets.common.items.baubles;
 
+import static witchinggadgets.common.util.Lib.Title;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 
-import baubles.api.expanded.BaubleItemHelper;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -22,6 +23,7 @@ import net.minecraft.world.World;
 
 import baubles.api.BaubleType;
 import baubles.api.expanded.BaubleExpandedSlots;
+import baubles.api.expanded.BaubleItemHelper;
 import baubles.api.expanded.IBaubleExpanded;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Optional;
@@ -32,8 +34,6 @@ import witchinggadgets.client.render.ModelMagicalBaubles;
 import witchinggadgets.common.items.ItemInfusedGem;
 import witchinggadgets.common.util.Lib;
 import witchinggadgets.common.util.Utilities;
-
-import static witchinggadgets.common.util.Lib.Title;
 
 @Optional.Interface(iface = "vazkii.botania.api.item.ICosmeticAttachable", modid = "Botania")
 public class ItemMagicalBaubles extends Item implements IBaubleExpanded, vazkii.botania.api.item.ICosmeticAttachable {
@@ -63,22 +63,22 @@ public class ItemMagicalBaubles extends Item implements IBaubleExpanded, vazkii.
 
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-        BaubleItemHelper.onBaubleRightClick(stack,world,player);
+        BaubleItemHelper.onBaubleRightClick(stack, world, player);
         return super.onItemRightClick(stack, world, player);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean par4) {
-//        if (subNames[stack.getItemDamage()].startsWith("charm"))
-//            list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Charm"));
-//        if (subNames[stack.getItemDamage()].startsWith("vambrace"))
-//            list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Gloves"));
-//        if (subNames[stack.getItemDamage()].startsWith("ring"))
-//            list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Ring"));
-//        if (subNames[stack.getItemDamage()].startsWith("title"))
-//            list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Title"));
-        BaubleItemHelper.addSlotInformation(list,getBaubleTypes(stack));
+        // if (subNames[stack.getItemDamage()].startsWith("charm"))
+        // list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Charm"));
+        // if (subNames[stack.getItemDamage()].startsWith("vambrace"))
+        // list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Gloves"));
+        // if (subNames[stack.getItemDamage()].startsWith("ring"))
+        // list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Ring"));
+        // if (subNames[stack.getItemDamage()].startsWith("title"))
+        // list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Title"));
+        BaubleItemHelper.addSlotInformation(list, getBaubleTypes(stack));
         if (stack.hasTagCompound() && stack.getTagCompound().hasKey(Title))
             list.add(StatCollector.translateToLocalFormatted(stack.getTagCompound().getString(Title)));
 

@@ -1,5 +1,7 @@
 package witchinggadgets;
 
+import static witchinggadgets.common.util.Lib.Title;
+
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -40,8 +42,6 @@ import witchinggadgets.common.util.network.message.MessagePlaySound;
 import witchinggadgets.common.util.network.message.MessagePrimordialGlove;
 import witchinggadgets.common.util.network.message.MessageTileUpdate;
 import witchinggadgets.common.world.VillageComponentPhotoshop;
-
-import static witchinggadgets.common.util.Lib.Title;
 
 @Mod(
         modid = WitchingGadgets.MODID,
