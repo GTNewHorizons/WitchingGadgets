@@ -35,6 +35,8 @@ import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import gregtech.api.hazards.Hazard;
+import gregtech.api.hazards.IHazardProtector;
 import thaumcraft.api.IRunicArmor;
 import thaumcraft.api.IVisDiscountGear;
 import thaumcraft.api.IWarpingGear;
@@ -52,7 +54,8 @@ import witchinggadgets.common.items.interfaces.IItemEvent;
 import witchinggadgets.common.items.tools.IPrimordialGear;
 import witchinggadgets.common.util.Lib;
 
-@Optional.Interface(iface = "thaumicboots.api.IBoots", modid = "thaumicboots")
+@Optional.InterfaceList({ @Optional.Interface(iface = "thaumicboots.api.IBoots", modid = "thaumicboots"),
+        @Optional.Interface(iface = "gregtech.api.hazards.IHazardProtector", modid = "gregtech") })
 public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordialCrafting, IPrimordialGear, IRunicArmor,
         IItemEvent, IBoots, IWarpingGear, IVisDiscountGear {
 
@@ -599,4 +602,10 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
 
     @Override
     public void onUserTargeted(LivingSetAttackTargetEvent event, ItemStack stack) {}
+
+    @Override
+    @Optional.Method(modid = "gregtech")
+    public boolean protectsAgainst(ItemStack itemStack, Hazard hazard) {
+        return true;
+    }
 }
