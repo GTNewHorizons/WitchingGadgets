@@ -31,6 +31,7 @@ import thaumcraft.api.research.ResearchPage;
 import thaumcraft.common.config.Config;
 import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.config.ConfigItems;
+import witchinggadgets.common.items.ItemClusters;
 import witchinggadgets.common.items.baubles.ItemCloak;
 import witchinggadgets.common.util.Utilities;
 import witchinggadgets.common.util.research.WGResearchItem;
@@ -190,22 +191,41 @@ public class WGResearch {
         }
 
         // ADVANCEDSCRIBINGTOOLS
-        getResearchItem(
-                "ADVANCEDSCRIBINGTOOLS",
-                "WITCHGADG",
-                new AspectList().add(Aspect.MAGIC, 3).add(Aspect.LIGHT, 2).add(DarkAspects.GLUTTONY, 2)
-                        .add(Aspect.MIND, 3),
-                6,
-                5,
-                2,
-                new ItemStack(WGContent.ItemAdvancedScribingTools))
-                        .setParentsHidden("WGPOTIONS")
-                        .setPages(
-                                new ResearchPage("witchinggadgets_research_page.ADVANCEDSCRIBINGTOOLS.1"),
-                                new ResearchPage((IArcaneRecipe) WGContent.recipeList.get("ADVANCEDSCRIBINGTOOLS")),
-                                new ResearchPage(
-                                        (IArcaneRecipe) WGContent.recipeList.get("ADVANCEDSCRIBINGTOOLSrefill")))
-                        .registerResearchItem();
+        if (Loader.isModLoaded("ForbiddenMagic")) {
+            getResearchItem(
+                    "ADVANCEDSCRIBINGTOOLS",
+                    "WITCHGADG",
+                    new AspectList().add(Aspect.MAGIC, 3).add(Aspect.LIGHT, 2).add(DarkAspects.GLUTTONY, 2)
+                            .add(Aspect.MIND, 3),
+                    6,
+                    5,
+                    2,
+                    new ItemStack(WGContent.ItemAdvancedScribingTools))
+                            .setParentsHidden("WGPOTIONS")
+                            .setPages(
+                                    new ResearchPage("witchinggadgets_research_page.ADVANCEDSCRIBINGTOOLS.1"),
+                                    new ResearchPage((IArcaneRecipe) WGContent.recipeList.get("ADVANCEDSCRIBINGTOOLS")),
+                                    new ResearchPage(
+                                            (IArcaneRecipe) WGContent.recipeList.get("ADVANCEDSCRIBINGTOOLSrefill")))
+                            .registerResearchItem();
+        } else {
+            getResearchItem(
+                    "ADVANCEDSCRIBINGTOOLS",
+                    "WITCHGADG",
+                    new AspectList().add(Aspect.MAGIC, 3).add(Aspect.LIGHT, 2).add(Aspect.HUNGER, 2)
+                            .add(Aspect.MIND, 3),
+                    6,
+                    5,
+                    2,
+                    new ItemStack(WGContent.ItemAdvancedScribingTools))
+                            .setParentsHidden("WGPOTIONS")
+                            .setPages(
+                                    new ResearchPage("witchinggadgets_research_page.ADVANCEDSCRIBINGTOOLS.1"),
+                                    new ResearchPage((IArcaneRecipe) WGContent.recipeList.get("ADVANCEDSCRIBINGTOOLS")),
+                                    new ResearchPage(
+                                            (IArcaneRecipe) WGContent.recipeList.get("ADVANCEDSCRIBINGTOOLSrefill")))
+                            .registerResearchItem();
+        }
 
         if (WGConfig.moduleGemcutting) {
 
@@ -232,10 +252,20 @@ public class WGResearch {
 
             // CRYSTALCAPSULE
             researchAspects = new AspectList().add(Aspect.CRYSTAL, 3).add(Aspect.ORDER, 2).add(Aspect.VOID, 4);
-            pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.CRYSTALCAPSULE.1"),
-                    new ResearchPage((CrucibleRecipe) WGContent.recipeList.get("CRYSTALCAPSULE_Wax")),
-                    new ResearchPage((CrucibleRecipe) WGContent.recipeList.get("CRYSTALCAPSULE_Refractory")),
-                    new ResearchPage((CrucibleRecipe) WGContent.recipeList.get("CRYSTALCAPSULE_Cell")) };
+            List<ResearchPage> pageList = new ArrayList<>();
+            pageList.add(new ResearchPage("witchinggadgets_research_page.CRYSTALCAPSULE.1"));
+            if (WGContent.recipeList.get("CRYSTALCAPSULE_Wax") != null) {
+                pageList.add(new ResearchPage((CrucibleRecipe) WGContent.recipeList.get("CRYSTALCAPSULE_Wax")));
+            }
+            if (WGContent.recipeList.get("CRYSTALCAPSULE_Refractory") != null) {
+                pageList.add(new ResearchPage((CrucibleRecipe) WGContent.recipeList.get("CRYSTALCAPSULE_Refractory")));
+            }
+            if (WGContent.recipeList.get("CRYSTALCAPSULE_Cell") != null) {
+                pageList.add(new ResearchPage((CrucibleRecipe) WGContent.recipeList.get("CRYSTALCAPSULE_Cell")));
+            }
+            if (WGContent.recipeList.get("CRYSTALCAPSULE") != null) {
+                pageList.add(new ResearchPage((CrucibleRecipe) WGContent.recipeList.get("CRYSTALCAPSULE")));
+            }
             getResearchItem(
                     "CRYSTALCAPSULE",
                     "WITCHGADG",
@@ -243,8 +273,8 @@ public class WGResearch {
                     6,
                     4,
                     4,
-                    new ItemStack(WGContent.ItemCapsule)).setPages(pages).setParents("GEMCUTTING").setConcealed()
-                            .registerResearchItem();
+                    new ItemStack(WGContent.ItemCapsule)).setPages(pageList.toArray(new ResearchPage[0]))
+                            .setParents("GEMCUTTING").setConcealed().registerResearchItem();
         }
 
         // SCANCAMERA
@@ -288,24 +318,45 @@ public class WGResearch {
 
         // WGBAUBLES
         researchAspects = new AspectList().add(Aspect.CLOTH, 1).add(Aspect.MAGIC, 1).add(Aspect.ARMOR, 1);
-        pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.WGBAUBLES.0"),
-                new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("WGBAUBLES_BLANKCHARM")),
-                new ResearchPage("witchinggadgets_research_page.WGBAUBLES.1"),
-                new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("WGBAUBLES_BLANKVAMBRACES")),
-                new ResearchPage("witchinggadgets_research_page.WGBAUBLES.2"),
-                new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("WGBAUBLES_KNOCKBACKCHARM")),
-                new ResearchPage("witchinggadgets_research_page.WGBAUBLES.3"),
-                new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("WGBAUBLES_WOLFVAMBRACES")),
-                new ResearchPage("witchinggadgets_research_page.WGBAUBLES.4"),
-                new ResearchPage((InfusionRecipe) WGContent.recipeList.get("WGBAUBLES_HASTEVAMBRACES")),
-                new ResearchPage("witchinggadgets_research_page.WGBAUBLES.5"),
-                new ResearchPage((InfusionRecipe) WGContent.recipeList.get("WGBAUBLES_DOUBLEJUMPCHARM")),
-                new ResearchPage("witchinggadgets_research_page.WGBAUBLES.6"),
-                new ResearchPage((InfusionRecipe) WGContent.recipeList.get("WGBAUBLES_SNIPERRING")),
-                new ResearchPage("witchinggadgets_research_page.WGBAUBLES.7"),
-                new ResearchPage((InfusionRecipe) WGContent.recipeList.get("WGBAUBLES_LUCKRING")),
-                new ResearchPage("witchinggadgets_research_page.WGBAUBLES.8"),
-                new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("WGBAUBLES_COIN")) };
+
+        List<ResearchPage> pagesList = new ArrayList<>();
+        pagesList.add(new ResearchPage("witchinggadgets_research_page.WGBAUBLES.0"));
+        if (WGContent.recipeList.get("WGBAUBLES_BLANKCHARM") != null) {
+            pagesList.add(new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("WGBAUBLES_BLANKCHARM")));
+        }
+        if (WGContent.recipeList.get("WGBAUBLES_BLANKVAMBRACES") != null) {
+            pagesList.add(new ResearchPage("witchinggadgets_research_page.WGBAUBLES.1"));
+            pagesList.add(new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("WGBAUBLES_BLANKVAMBRACES")));
+        }
+        if (WGContent.recipeList.get("WGBAUBLES_KNOCKBACKCHARM") != null) {
+            pagesList.add(new ResearchPage("witchinggadgets_research_page.WGBAUBLES.2"));
+            pagesList.add(new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("WGBAUBLES_KNOCKBACKCHARM")));
+        }
+        if (WGContent.recipeList.get("WGBAUBLES_WOLFVAMBRACES") != null) {
+            pagesList.add(new ResearchPage("witchinggadgets_research_page.WGBAUBLES.3"));
+            pagesList.add(new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("WGBAUBLES_WOLFVAMBRACES")));
+        }
+        if (WGContent.recipeList.get("WGBAUBLES_HASTEVAMBRACES") != null) {
+            pagesList.add(new ResearchPage("witchinggadgets_research_page.WGBAUBLES.4"));
+            pagesList.add(new ResearchPage((InfusionRecipe) WGContent.recipeList.get("WGBAUBLES_HASTEVAMBRACES")));
+        }
+        if (WGContent.recipeList.get("WGBAUBLES_DOUBLEJUMPCHARM") != null) {
+            pagesList.add(new ResearchPage("witchinggadgets_research_page.WGBAUBLES.5"));
+            pagesList.add(new ResearchPage((InfusionRecipe) WGContent.recipeList.get("WGBAUBLES_DOUBLEJUMPCHARM")));
+        }
+        if (WGContent.recipeList.get("WGBAUBLES_SNIPERRING") != null) {
+            pagesList.add(new ResearchPage("witchinggadgets_research_page.WGBAUBLES.6"));
+            pagesList.add(new ResearchPage((InfusionRecipe) WGContent.recipeList.get("WGBAUBLES_SNIPERRING")));
+        }
+        if (WGContent.recipeList.get("WGBAUBLES_LUCKRING") != null) {
+            pagesList.add(new ResearchPage("witchinggadgets_research_page.WGBAUBLES.7"));
+            pagesList.add(new ResearchPage((InfusionRecipe) WGContent.recipeList.get("WGBAUBLES_LUCKRING")));
+        }
+        if (WGContent.recipeList.get("WGBAUBLES_COIN") != null) {
+            pagesList.add(new ResearchPage("witchinggadgets_research_page.WGBAUBLES.8"));
+            pagesList.add(new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("WGBAUBLES_COIN")));
+        }
+
         getResearchItem(
                 "WGBAUBLES",
                 "WITCHGADG",
@@ -314,7 +365,7 @@ public class WGResearch {
                 -1,
                 4,
                 new ItemStack(WGContent.ItemMagicalBaubles, 1, 2)).addWarp(4).setParents("THAUMIUM").setConcealed()
-                        .setPages(pages).registerResearchItem();
+                        .setPages(pagesList.toArray(new ResearchPage[0])).registerResearchItem();
 
         if (WGConfig.moduleCloak) {
 
@@ -372,7 +423,7 @@ public class WGResearch {
                                 .registerResearchItem();
             }
 
-            if (WGConfig.capeRaven) {
+            if (WGConfig.capeRaven && WGContent.recipeList.get("CLOAK_RAVEN") != null) {
                 researchAspects = new AspectList().add(Aspect.CLOTH, 4).add(Aspect.AIR, 4).add(Aspect.FLIGHT, 4)
                         .add(Aspect.TRAVEL, 2);
                 pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.CLOAK_RAVEN.1"),
@@ -606,12 +657,24 @@ public class WGResearch {
         // ROSEVINE
         researchAspects = new AspectList().add(Aspect.PLANT, 2).add(Aspect.AIR, 3).add(Aspect.ENTROPY, 2)
                 .add(Aspect.WEAPON, 4).add(Aspect.CROP, 8);
-        pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.ROSEVINE.1"),
-                new ResearchPage((CrucibleRecipe) WGContent.recipeList.get("ROSEVINE.1")),
-                new ResearchPage((CrucibleRecipe) WGContent.recipeList.get("ROSEVINE.2")),
-                new ResearchPage((CrucibleRecipe) WGContent.recipeList.get("ROSEVINE.3")) };
+
+        pagesList = new ArrayList<>();
+        pagesList.add(new ResearchPage("witchinggadgets_research_page.ROSEVINE.1"));
+        if (WGContent.recipeList.get("ROSEVINE.1") != null) {
+            pagesList.add(new ResearchPage((CrucibleRecipe) WGContent.recipeList.get("ROSEVINE.1")));
+        }
+        if (WGContent.recipeList.get("ROSEVINE.2") != null) {
+            pagesList.add(new ResearchPage((CrucibleRecipe) WGContent.recipeList.get("ROSEVINE.2")));
+        }
+        if (WGContent.recipeList.get("ROSEVINE.3") != null) {
+            pagesList.add(new ResearchPage((CrucibleRecipe) WGContent.recipeList.get("ROSEVINE.3")));
+        }
+        if (WGContent.recipeList.get("ROSEVINE") != null) {
+            pagesList.add(new ResearchPage((CrucibleRecipe) WGContent.recipeList.get("ROSEVINE")));
+        }
         getResearchItem("ROSEVINE", "WITCHGADG", researchAspects, -7, -4, 3, new ItemStack(WGContent.BlockRoseVine))
-                .setParents("WG.ALCHEMICALMANUFACTURE").setConcealed().setPages(pages).registerResearchItem();
+                .setParents("WG.ALCHEMICALMANUFACTURE").setConcealed().setPages(pagesList.toArray(new ResearchPage[0]))
+                .registerResearchItem();
 
         // ORIGINAL PUREIRON
         // getFakeResearchItem("PUREIRON", "ALCHEMY", -5, 0, new ItemStack(ConfigItems.itemNugget, 1,
@@ -628,9 +691,12 @@ public class WGResearch {
 
         // PURECINNABAR
         researchAspects = new AspectList().add(Aspect.METAL, 5).add(Aspect.ORDER, 1).add(Aspect.POISON, 1);
-        pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.PURECINNABAR.1"),
-                new ResearchPage((CrucibleRecipe) WGContent.recipeList.get("PURECINNABAR")),
-                new ResearchPage((CrucibleRecipe) WGContent.recipeList.get("PURECINNABAR.2")) };
+        pagesList = new ArrayList<>();
+        pagesList.add(new ResearchPage("witchinggadgets_research_page.PURECINNABAR.1"));
+        pagesList.add(new ResearchPage((CrucibleRecipe) WGContent.recipeList.get("PURECINNABAR")));
+        if (WGContent.recipeList.get("PURECINNABAR.2") != null) {
+            pagesList.add(new ResearchPage((CrucibleRecipe) WGContent.recipeList.get("PURECINNABAR.2")));
+        }
         getResearchItem(
                 "PURECINNABAR",
                 "WITCHGADG",
@@ -638,48 +704,63 @@ public class WGResearch {
                 -6,
                 1,
                 3,
-                new ItemStack(ConfigItems.itemNugget, 1, 21)).setConcealed().setParents("WG.PUREIRON").setPages(pages)
-                        .registerResearchItem();
+                new ItemStack(ConfigItems.itemNugget, 1, 21)).setConcealed().setParents("WG.PUREIRON")
+                        .setPages(pagesList.toArray(pagesList.toArray(new ResearchPage[0]))).registerResearchItem();
 
         // METALLURGICPERFECTION_CLUSTERS
         if (WGConfig.allowClusters) {
             ArrayList<ResearchPage> clusterPages = new ArrayList<ResearchPage>();
             clusterPages.add(new ResearchPage("witchinggadgets_research_page.METALLURGICPERFECTION_CLUSTERS.1"));
-            for (String ore : WGContent.GT_Cluster) {
+            if (WGContent.GT_Cluster != null) {
+                for (String ore : WGContent.GT_Cluster) {
 
-                if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_CLUSTERS_" + ore)) clusterPages.add(
-                        new ResearchPage(
-                                (CrucibleRecipe) WGContent.recipeList.get("METALLURGICPERFECTION_CLUSTERS_" + ore)));
+                    if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_CLUSTERS_" + ore)) clusterPages.add(
+                            new ResearchPage(
+                                    (CrucibleRecipe) WGContent.recipeList
+                                            .get("METALLURGICPERFECTION_CLUSTERS_" + ore)));
 
-                String vore = "Netherrack_" + ore;
-                if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_CLUSTERS_" + vore)) clusterPages.add(
-                        new ResearchPage(
-                                (CrucibleRecipe) WGContent.recipeList.get("METALLURGICPERFECTION_CLUSTERS_" + vore)));
+                    String vore = "Netherrack_" + ore;
+                    if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_CLUSTERS_" + vore)) clusterPages.add(
+                            new ResearchPage(
+                                    (CrucibleRecipe) WGContent.recipeList
+                                            .get("METALLURGICPERFECTION_CLUSTERS_" + vore)));
 
-                vore = "Endstone_" + ore;
-                if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_CLUSTERS_" + vore)) clusterPages.add(
-                        new ResearchPage(
-                                (CrucibleRecipe) WGContent.recipeList.get("METALLURGICPERFECTION_CLUSTERS_" + vore)));
+                    vore = "Endstone_" + ore;
+                    if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_CLUSTERS_" + vore)) clusterPages.add(
+                            new ResearchPage(
+                                    (CrucibleRecipe) WGContent.recipeList
+                                            .get("METALLURGICPERFECTION_CLUSTERS_" + vore)));
 
-                vore = "Blackgranite_" + ore;
-                if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_CLUSTERS_" + vore)) clusterPages.add(
-                        new ResearchPage(
-                                (CrucibleRecipe) WGContent.recipeList.get("METALLURGICPERFECTION_CLUSTERS_" + vore)));
+                    vore = "Blackgranite_" + ore;
+                    if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_CLUSTERS_" + vore)) clusterPages.add(
+                            new ResearchPage(
+                                    (CrucibleRecipe) WGContent.recipeList
+                                            .get("METALLURGICPERFECTION_CLUSTERS_" + vore)));
 
-                vore = "Redgranite_" + ore;
-                if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_CLUSTERS_" + vore)) clusterPages.add(
-                        new ResearchPage(
-                                (CrucibleRecipe) WGContent.recipeList.get("METALLURGICPERFECTION_CLUSTERS_" + vore)));
+                    vore = "Redgranite_" + ore;
+                    if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_CLUSTERS_" + vore)) clusterPages.add(
+                            new ResearchPage(
+                                    (CrucibleRecipe) WGContent.recipeList
+                                            .get("METALLURGICPERFECTION_CLUSTERS_" + vore)));
 
-                vore = "Marble_" + ore;
-                if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_CLUSTERS_" + vore)) clusterPages.add(
-                        new ResearchPage(
-                                (CrucibleRecipe) WGContent.recipeList.get("METALLURGICPERFECTION_CLUSTERS_" + vore)));
+                    vore = "Marble_" + ore;
+                    if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_CLUSTERS_" + vore)) clusterPages.add(
+                            new ResearchPage(
+                                    (CrucibleRecipe) WGContent.recipeList
+                                            .get("METALLURGICPERFECTION_CLUSTERS_" + vore)));
 
-                vore = "Basalt_" + ore;
-                if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_CLUSTERS_" + vore)) clusterPages.add(
-                        new ResearchPage(
-                                (CrucibleRecipe) WGContent.recipeList.get("METALLURGICPERFECTION_CLUSTERS_" + vore)));
+                    vore = "Basalt_" + ore;
+                    if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_CLUSTERS_" + vore)) clusterPages.add(
+                            new ResearchPage(
+                                    (CrucibleRecipe) WGContent.recipeList
+                                            .get("METALLURGICPERFECTION_CLUSTERS_" + vore)));
+                }
+            } else {
+                for (String ore : ItemClusters.subNames)
+                    if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_CLUSTERS_" + ore)) clusterPages.add(
+                            new ResearchPage(
+                                    (CrucibleRecipe) WGContent.recipeList
+                                            .get("METALLURGICPERFECTION_CLUSTERS_" + ore)));
             }
 
             pages = clusterPages.toArray(new ResearchPage[0]);
@@ -729,11 +810,21 @@ public class WGResearch {
             // METALLURGICPERFECTION_TRANSMUTATION
             ArrayList<ResearchPage> transmutePages = new ArrayList<ResearchPage>();
             transmutePages.add(new ResearchPage("witchinggadgets_research_page.METALLURGICPERFECTION_TRANSMUTATION.1"));
-            for (String ore : WGContent.GT_Cluster)
-                if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_TRANSMUTATION_" + ore)) transmutePages.add(
-                        new ResearchPage(
-                                (CrucibleRecipe) WGContent.recipeList
-                                        .get("METALLURGICPERFECTION_TRANSMUTATION_" + ore)));
+            if (WGContent.GT_Cluster != null) {
+                for (String ore : WGContent.GT_Cluster)
+                    if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_TRANSMUTATION_" + ore))
+                        transmutePages.add(
+                                new ResearchPage(
+                                        (CrucibleRecipe) WGContent.recipeList
+                                                .get("METALLURGICPERFECTION_TRANSMUTATION_" + ore)));
+            } else {
+                for (String ore : ItemClusters.subNames)
+                    if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_TRANSMUTATION_" + ore))
+                        transmutePages.add(
+                                new ResearchPage(
+                                        (CrucibleRecipe) WGContent.recipeList
+                                                .get("METALLURGICPERFECTION_TRANSMUTATION_" + ore)));
+            }
             pages = transmutePages.toArray(new ResearchPage[0]);
             if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
                 researchAspects = new AspectList().add(Aspect.METAL, 20).add(Aspect.ORDER, 10).add(Aspect.TOOL, 10)
@@ -921,87 +1012,139 @@ public class WGResearch {
 
             researchAspects = new AspectList().add(Aspect.PLANT, 8).add(Aspect.ORDER, 4).add(Aspect.EXCHANGE, 2)
                     .add(Aspect.ENERGY, 1);
-            pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_PLAINS.1"),
-                    new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_PLAINS")) };
-            getResearchItem(
-                    "TERRAFORMFOCUS_PLAINS",
-                    "WITCHGADG",
-                    researchAspects,
-                    -2,
-                    -6,
-                    3,
-                    new ItemStack(WGContent.BlockMetalDevice, 1, 3)).setPages(pages).setParents("TERRAFORMER")
-                            .setConcealed().registerResearchItem();
+            pages = null;
+            if (WGContent.recipeList.get("TERRAFORMFOCUS_PLAINS") instanceof InfusionRecipe) {
+                pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_PLAINS.1"),
+                        new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_PLAINS")) };
+            } else if (WGContent.recipeList.get("TERRAFORMFOCUS_PLAINS") instanceof ShapedArcaneRecipe) {
+                pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_PLAINS.1"),
+                        new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_PLAINS")) };
+            }
+            if (pages != null) {
+                getResearchItem(
+                        "TERRAFORMFOCUS_PLAINS",
+                        "WITCHGADG",
+                        researchAspects,
+                        -2,
+                        -6,
+                        3,
+                        new ItemStack(WGContent.BlockMetalDevice, 1, 3)).setPages(pages).setParents("TERRAFORMER")
+                                .setConcealed().registerResearchItem();
+            }
 
             researchAspects = new AspectList().add(Aspect.COLD, 8).add(Aspect.ORDER, 4).add(Aspect.EXCHANGE, 2)
                     .add(Aspect.ENERGY, 1);
-            pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_COLDTAIGA.1"),
-                    new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_COLDTAIGA")) };
-            getResearchItem(
-                    "TERRAFORMFOCUS_COLDTAIGA",
-                    "WITCHGADG",
-                    researchAspects,
-                    -2,
-                    -7,
-                    3,
-                    new ItemStack(WGContent.BlockMetalDevice, 1, 4)).setPages(pages).setParents("TERRAFORMER")
-                            .setConcealed().registerResearchItem();
+            pages = null;
+            if (WGContent.recipeList.get("TERRAFORMFOCUS_COLDTAIGA") instanceof InfusionRecipe) {
+                pages = new ResearchPage[] {
+                        new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_COLDTAIGA.1"),
+                        new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_COLDTAIGA")) };
+            } else if (WGContent.recipeList.get("TERRAFORMFOCUS_COLDTAIGA") instanceof ShapedArcaneRecipe) {
+                pages = new ResearchPage[] {
+                        new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_COLDTAIGA.1"),
+                        new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_COLDTAIGA")) };
+            }
+            if (pages != null) {
+                getResearchItem(
+                        "TERRAFORMFOCUS_COLDTAIGA",
+                        "WITCHGADG",
+                        researchAspects,
+                        -2,
+                        -7,
+                        3,
+                        new ItemStack(WGContent.BlockMetalDevice, 1, 4)).setPages(pages).setParents("TERRAFORMER")
+                                .setConcealed().registerResearchItem();
+            }
 
             researchAspects = new AspectList().add(Aspect.FIRE, 4).add(Aspect.ENTROPY, 8).add(Aspect.EXCHANGE, 2)
                     .add(Aspect.ENERGY, 1);
-            pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_DESERT.1"),
-                    new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_DESERT")) };
-            getResearchItem(
-                    "TERRAFORMFOCUS_DESERT",
-                    "WITCHGADG",
-                    researchAspects,
-                    -2,
-                    -8,
-                    3,
-                    new ItemStack(WGContent.BlockMetalDevice, 1, 5)).setPages(pages).setParents("TERRAFORMER")
-                            .setConcealed().registerResearchItem();
+            pages = null;
+            if (WGContent.recipeList.get("TERRAFORMFOCUS_DESERT") instanceof InfusionRecipe) {
+                pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_DESERT.1"),
+                        new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_DESERT")) };
+            } else if (WGContent.recipeList.get("TERRAFORMFOCUS_DESERT") instanceof ShapedArcaneRecipe) {
+                pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_DESERT.1"),
+                        new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_DESERT")) };
+            }
+            if (pages != null) {
+                getResearchItem(
+                        "TERRAFORMFOCUS_DESERT",
+                        "WITCHGADG",
+                        researchAspects,
+                        -2,
+                        -8,
+                        3,
+                        new ItemStack(WGContent.BlockMetalDevice, 1, 5)).setPages(pages).setParents("TERRAFORMER")
+                                .setConcealed().registerResearchItem();
+            }
 
             researchAspects = new AspectList().add(Aspect.TREE, 8).add(Aspect.PLANT, 4).add(Aspect.EXCHANGE, 2)
                     .add(Aspect.ENERGY, 1);
-            pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_JUNGLE.1"),
-                    new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_JUNGLE")) };
-            getResearchItem(
-                    "TERRAFORMFOCUS_JUNGLE",
-                    "WITCHGADG",
-                    researchAspects,
-                    -1,
-                    -9,
-                    3,
-                    new ItemStack(WGContent.BlockMetalDevice, 1, 6)).setPages(pages).setParents("TERRAFORMER")
-                            .setConcealed().registerResearchItem();
+            pages = null;
+            if (WGContent.recipeList.get("TERRAFORMFOCUS_JUNGLE") instanceof InfusionRecipe) {
+                pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_JUNGLE.1"),
+                        new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_JUNGLE")) };
+            } else if (WGContent.recipeList.get("TERRAFORMFOCUS_JUNGLE") instanceof ShapedArcaneRecipe) {
+                pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_JUNGLE.1"),
+                        new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_JUNGLE")) };
+            }
+            if (pages != null) {
+                getResearchItem(
+                        "TERRAFORMFOCUS_JUNGLE",
+                        "WITCHGADG",
+                        researchAspects,
+                        -1,
+                        -9,
+                        3,
+                        new ItemStack(WGContent.BlockMetalDevice, 1, 6)).setPages(pages).setParents("TERRAFORMER")
+                                .setConcealed().registerResearchItem();
+            }
 
             researchAspects = new AspectList().add(Aspect.DARKNESS, 8).add(Aspect.FIRE, 4).add(Aspect.EXCHANGE, 2)
                     .add(Aspect.ENERGY, 1);
-            pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_HELL.1"),
-                    new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_HELL")) };
-            getResearchItem(
-                    "TERRAFORMFOCUS_HELL",
-                    "WITCHGADG",
-                    researchAspects,
-                    0,
-                    -9,
-                    3,
-                    new ItemStack(WGContent.BlockMetalDevice, 1, 7)).addWarp(2).setPages(pages)
-                            .setParents("TERRAFORMER").setConcealed().registerResearchItem();
+            pages = null;
+            if (WGContent.recipeList.get("TERRAFORMFOCUS_HELL") instanceof InfusionRecipe) {
+                pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_HELL.1"),
+                        new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_HELL")) };
+            } else if (WGContent.recipeList.get("TERRAFORMFOCUS_HELL") instanceof ShapedArcaneRecipe) {
+                pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_HELL.1"),
+                        new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_HELL")) };
+            }
+            if (pages != null) {
+                getResearchItem(
+                        "TERRAFORMFOCUS_HELL",
+                        "WITCHGADG",
+                        researchAspects,
+                        0,
+                        -9,
+                        3,
+                        new ItemStack(WGContent.BlockMetalDevice, 1, 7)).addWarp(2).setPages(pages)
+                                .setParents("TERRAFORMER").setConcealed().registerResearchItem();
+            }
 
             researchAspects = new AspectList().add(Aspect.PLANT, 8).add(Aspect.EARTH, 4).add(Aspect.EXCHANGE, 2)
                     .add(Aspect.ENERGY, 1);
-            pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_MUSHROOM.1"),
-                    new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_MUSHROOM")) };
-            getResearchItem(
-                    "TERRAFORMFOCUS_MUSHROOM",
-                    "WITCHGADG",
-                    researchAspects,
-                    1,
-                    -9,
-                    3,
-                    new ItemStack(WGContent.BlockMetalDevice, 1, 9)).setPages(pages).setParents("TERRAFORMER")
-                            .setConcealed().registerResearchItem();
+            pages = null;
+            if (WGContent.recipeList.get("TERRAFORMFOCUS_MUSHROOM") instanceof InfusionRecipe) {
+                pages = new ResearchPage[] {
+                        new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_MUSHROOM.1"),
+                        new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_MUSHROOM")) };
+            } else if (WGContent.recipeList.get("TERRAFORMFOCUS_MUSHROOM") instanceof ShapedArcaneRecipe) {
+                pages = new ResearchPage[] {
+                        new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_MUSHROOM.1"),
+                        new ResearchPage((ShapedArcaneRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_MUSHROOM")) };
+            }
+            if (pages != null) {
+                getResearchItem(
+                        "TERRAFORMFOCUS_MUSHROOM",
+                        "WITCHGADG",
+                        researchAspects,
+                        1,
+                        -9,
+                        3,
+                        new ItemStack(WGContent.BlockMetalDevice, 1, 9)).setPages(pages).setParents("TERRAFORMER")
+                                .setConcealed().registerResearchItem();
+            }
 
             researchAspects = new AspectList().add(Aspect.TAINT, 8).add(Aspect.MAGIC, 4).add(Aspect.EXCHANGE, 2)
                     .add(Aspect.ENERGY, 1);
@@ -1059,19 +1202,21 @@ public class WGResearch {
                     new ItemStack(WGContent.BlockMetalDevice, 1, 12)).addWarp(3).setPages(pages)
                             .setParents("TERRAFORMER").setConcealed().registerResearchItem();
 
-            researchAspects = new AspectList().add(Aspect.HEAL, 8).add(Aspect.MAGIC, 4).add(Aspect.EXCHANGE, 2)
-                    .add(Aspect.ENERGY, 1);
-            pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_MAGIC.1"),
-                    new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_MAGIC")) };
-            getResearchItem(
-                    "TERRAFORMFOCUS_MAGIC",
-                    "WITCHGADG",
-                    researchAspects,
-                    -1,
-                    -10,
-                    3,
-                    new ItemStack(WGContent.BlockMetalDevice, 1, 13)).setPages(pages)
-                            .setParents("TERRAFORMFOCUS_JUNGLE").setConcealed().registerResearchItem();
+            if (WGContent.recipeList.get("TERRAFORMFOCUS_MAGIC") != null) {
+                researchAspects = new AspectList().add(Aspect.HEAL, 8).add(Aspect.MAGIC, 4).add(Aspect.EXCHANGE, 2)
+                        .add(Aspect.ENERGY, 1);
+                pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.TERRAFORMFOCUS_MAGIC.1"),
+                        new ResearchPage((InfusionRecipe) WGContent.recipeList.get("TERRAFORMFOCUS_MAGIC")) };
+                getResearchItem(
+                        "TERRAFORMFOCUS_MAGIC",
+                        "WITCHGADG",
+                        researchAspects,
+                        -1,
+                        -10,
+                        3,
+                        new ItemStack(WGContent.BlockMetalDevice, 1, 13)).setPages(pages)
+                                .setParents("TERRAFORMFOCUS_JUNGLE").setConcealed().registerResearchItem();
+            }
         }
 
         // TODO primal
@@ -1162,6 +1307,7 @@ public class WGResearch {
                             .addWarp(25).setParents("PRIMORDIALGEARSET").setConcealed().setPages(pages)
                             .registerResearchItem();
 
+            // if (Loader.isModLoaded("taintedmagic")) {
             // PRIMORDIALHELMET
             researchAspects = new AspectList().add(Aspect.ARMOR, 1).add(Aspect.MAGIC, 1).add(Aspect.AIR, 1)
                     .add(Aspect.FIRE, 1).add(Aspect.WATER, 1).add(Aspect.EARTH, 1).add(Aspect.ORDER, 1)
@@ -1186,6 +1332,7 @@ public class WGResearch {
                     new ResourceLocation("witchinggadgets:textures/gui/research/icon_primordialArmor.png")).addWarp(25)
                             .setParents("PRIMORDIALGEARSET", "ARMORFORTRESS").setConcealed().setPages(pages)
                             .registerResearchItem();
+            // }
         }
 
         if (Loader.isModLoaded("dreamcraft")) {

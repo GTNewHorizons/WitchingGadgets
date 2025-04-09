@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
 import baubles.api.expanded.BaubleExpandedSlots;
+import baubles.api.expanded.BaubleItemHelper;
 import baubles.api.expanded.IBaubleExpanded;
 import baubles.common.container.InventoryBaubles;
 import cpw.mods.fml.common.Loader;
@@ -37,6 +38,9 @@ public class ItemKama extends ItemCloak implements IBaubleExpanded {
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
         // 13116: Synchronize raven kama for client-authoritative player movement
+        if (!player.isSneaking()) {
+            BaubleItemHelper.onBaubleRightClick(stack, world, player);
+        }
         if (subNames[stack.getItemDamage()].equals("raven") && !player.worldObj.isRemote) {
             InventoryBaubles baubles = (InventoryBaubles) BaublesApi.getBaubles(player);
             baubles.syncSlotToClients(3);
@@ -94,7 +98,7 @@ public class ItemKama extends ItemCloak implements IBaubleExpanded {
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean par4) {
         if (player.worldObj.isRemote) {
             GameSettings keybind = Minecraft.getMinecraft().gameSettings;
-            list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot.bauble.Belt"));
+            BaubleItemHelper.addSlotInformation(list, getBaubleTypes(stack));
             list.add(
                     StatCollector.translateToLocal(Lib.DESCRIPTION + "enableCloak").replaceAll(
                             "%s1",

@@ -74,7 +74,7 @@ public class WG_arcane_cloaks {
                         new ItemStack(WGContent.ItemMaterial, 1, 6));
             }
 
-            if (WGConfig.capeRaven) {
+            if (WGConfig.capeRaven && Loader.isModLoaded("TwilightForest")) {
                 registerArcaneRecipe(
                         "CLOAK_RAVEN",
                         "",

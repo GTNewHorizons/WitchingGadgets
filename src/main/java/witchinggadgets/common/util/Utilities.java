@@ -1,5 +1,7 @@
 package witchinggadgets.common.util;
 
+import static gregtech.api.enums.GTValues.W;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -34,6 +37,7 @@ import org.apache.logging.log4j.Level;
 import baubles.api.BaublesApi;
 import baubles.api.expanded.BaubleExpandedSlots;
 import cpw.mods.fml.common.Loader;
+import gregtech.api.util.GTUtility;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.nodes.INode;
@@ -434,5 +438,24 @@ public class Utilities {
         public boolean matches(ItemStack stack) {
             return Utilities.compareToOreName(stack, key) && stack.stackSize >= amount;
         }
+    }
+
+    public static boolean areStacksEqual(ItemStack aStack1, ItemStack aStack2) {
+        if (Loader.isModLoaded("gregtech")) {
+            return (GTUtility.areStacksEqual(aStack1, aStack2, false));
+        } else {
+            return areStacksEqual(aStack1, aStack2, false);
+        }
+    }
+
+    public static boolean areStacksEqual(ItemStack aStack1, ItemStack aStack2, boolean aIgnoreNBT) {
+        return aStack1 != null && aStack2 != null
+                && aStack1.getItem() == aStack2.getItem()
+                && (Items.feather.getDamage(aStack1) == Items.feather.getDamage(aStack2)
+                        || Items.feather.getDamage(aStack1) == W
+                        || Items.feather.getDamage(aStack2) == W)
+                && (aIgnoreNBT || (((aStack1.getTagCompound() == null) == (aStack2.getTagCompound() == null))
+                        && (aStack1.getTagCompound() == null
+                                || aStack1.getTagCompound().equals(aStack2.getTagCompound()))));
     }
 }

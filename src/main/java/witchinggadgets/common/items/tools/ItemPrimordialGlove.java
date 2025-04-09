@@ -66,7 +66,9 @@ public class ItemPrimordialGlove extends Item implements IPrimordialCrafting {
                         .replaceAll(
                                 "%s2",
                                 StatCollector.translateToLocalFormatted(
-                                        GameSettings.getKeyDisplayString(thaumcraftFKey.getKeyCode()))));
+                                        thaumcraftFKey != null
+                                                ? GameSettings.getKeyDisplayString(thaumcraftFKey.getKeyCode())
+                                                : "")));
         super.addInformation(item, par2EntityPlayer, list, par4);
     }
 
