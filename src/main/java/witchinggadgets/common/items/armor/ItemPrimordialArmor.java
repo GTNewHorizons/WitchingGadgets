@@ -57,7 +57,7 @@ import witchinggadgets.common.util.Lib;
 @Optional.InterfaceList({ @Optional.Interface(iface = "thaumicboots.api.IBoots", modid = "thaumicboots"),
         @Optional.Interface(iface = "gregtech.api.hazards.IHazardProtector", modid = "gregtech") })
 public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordialCrafting, IPrimordialGear, IRunicArmor,
-        IItemEvent, IBoots, IWarpingGear, IVisDiscountGear {
+        IItemEvent, IBoots, IWarpingGear, IVisDiscountGear, IHazardProtector {
 
     enum FlightStatus {
         ON,

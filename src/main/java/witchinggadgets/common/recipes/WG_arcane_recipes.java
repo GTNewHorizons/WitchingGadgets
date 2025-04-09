@@ -3,6 +3,7 @@ package witchinggadgets.common.recipes;
 import net.minecraft.item.ItemStack;
 
 import thaumcraft.api.ThaumcraftApi;
+import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.crafting.ShapedArcaneRecipe;
 import thaumcraft.api.crafting.ShapelessArcaneRecipe;
@@ -51,6 +52,20 @@ public class WG_arcane_recipes {
 
     public static void registerArcaneRecipe(String research, String tagAddon, ItemStack result,
             AspectList craftingAspects, Object... recipe) {
+        if (result == null) {
+            throw new IllegalArgumentException(research + tagAddon + ": Result cannot be null");
+        }
+        if (craftingAspects == null) {
+            throw new IllegalArgumentException(research + tagAddon + ": craftingAspects cannot be null");
+        }
+        for (Aspect aspect : craftingAspects.aspects.keySet()) {
+            if (aspect == null) {
+                throw new IllegalArgumentException(research + tagAddon + ": Aspect in craftingAspects cannot be null");
+            }
+        }
+        if (recipe == null) {
+            throw new IllegalArgumentException(research + tagAddon + ": Recipe cannot be null");
+        }
         ShapedArcaneRecipe arcaneRecipe = ThaumcraftApi
                 .addArcaneCraftingRecipe(research, result, craftingAspects, recipe);
         WGContent.recipeList.put(research + tagAddon, arcaneRecipe);
@@ -58,6 +73,20 @@ public class WG_arcane_recipes {
 
     public static void registerShapelessArcaneRecipe(String research, String tagAddon, ItemStack result,
             AspectList craftingAspects, Object... recipe) {
+        if (result == null) {
+            throw new IllegalArgumentException(research + tagAddon + ": Result cannot be null");
+        }
+        if (craftingAspects == null) {
+            throw new IllegalArgumentException(research + tagAddon + ": craftingAspects cannot be null");
+        }
+        for (Aspect aspect : craftingAspects.aspects.keySet()) {
+            if (aspect == null) {
+                throw new IllegalArgumentException(research + tagAddon + ": Aspect in craftingAspects cannot be null");
+            }
+        }
+        if (recipe == null) {
+            throw new IllegalArgumentException(research + tagAddon + ": Recipe cannot be null");
+        }
         ShapelessArcaneRecipe arcaneRecipe = ThaumcraftApi
                 .addShapelessArcaneCraftingRecipe(research, result, craftingAspects, recipe);
         WGContent.recipeList.put(research + tagAddon, arcaneRecipe);
