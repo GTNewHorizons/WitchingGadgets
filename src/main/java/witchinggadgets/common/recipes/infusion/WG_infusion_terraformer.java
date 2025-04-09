@@ -25,7 +25,7 @@ public class WG_infusion_terraformer {
 
     public static void registerTerraformer() {
         ItemStack salisMundusIngredient = null;
-        if (Loader.isModLoaded("gregtech")) {
+        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
             salisMundusIngredient = GameRegistry.makeItemStack("Thaumcraft:ItemResource", 14, 1, null);
             if (Loader.isModLoaded("thaumicbases")) {
                 salisMundusIngredient = gregtech.api.util.GTModHandler

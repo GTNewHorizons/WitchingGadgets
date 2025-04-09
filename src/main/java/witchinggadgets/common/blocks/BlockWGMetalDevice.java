@@ -21,7 +21,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import fox.spiteful.forbidden.DarkAspects;
@@ -31,6 +30,7 @@ import thaumcraft.common.lib.world.ThaumcraftWorldGenerator;
 import witchinggadgets.WitchingGadgets;
 import witchinggadgets.api.ITerraformFocus;
 import witchinggadgets.client.render.BlockRenderMetalDevice;
+import witchinggadgets.common.WGModCompat;
 import witchinggadgets.common.blocks.tiles.TileEntityEssentiaPump;
 import witchinggadgets.common.blocks.tiles.TileEntityTerraformFocus;
 import witchinggadgets.common.blocks.tiles.TileEntityTerraformer;
@@ -225,7 +225,7 @@ public class BlockWGMetalDevice extends BlockContainer implements ITerraformFocu
             if (subNames[meta].equalsIgnoreCase("tfFocusDesert")) return Aspect.FIRE;
             if (subNames[meta].equalsIgnoreCase("tfFocusJungle")) return Aspect.TREE;
             if (subNames[meta].equalsIgnoreCase("tfFocusHell"))
-                return Loader.isModLoaded("ForbiddenMagic") ? DarkAspects.NETHER : Aspect.FIRE;
+                return WGModCompat.loaded_ForbiddenMagic ? DarkAspects.NETHER : Aspect.FIRE;
             if (subNames[meta].equalsIgnoreCase("tfFocusTaint")) return Aspect.TAINT;
             if (subNames[meta].equalsIgnoreCase("tfFocusMushroom")) return Aspect.SLIME;
             if (subNames[meta].equalsIgnoreCase("tfFocusRiver") || subNames[meta].equalsIgnoreCase("tfFocusOcean"))
