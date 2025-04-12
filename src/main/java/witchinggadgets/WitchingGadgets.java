@@ -37,7 +37,11 @@ import witchinggadgets.common.util.WGCreativeTab;
 import witchinggadgets.common.util.handler.EventHandler;
 import witchinggadgets.common.util.handler.PlayerTickHandler;
 import witchinggadgets.common.util.handler.WGWandManager;
-import witchinggadgets.common.util.network.message.*;
+import witchinggadgets.common.util.network.message.MessageOpenCloak;
+import witchinggadgets.common.util.network.message.MessageClientNotifier;
+import witchinggadgets.common.util.network.message.MessagePlaySound;
+import witchinggadgets.common.util.network.message.MessagePrimordialGlove;
+import witchinggadgets.common.util.network.message.MessageTileUpdate;
 import witchinggadgets.common.world.VillageComponentPhotoshop;
 
 @Mod(
