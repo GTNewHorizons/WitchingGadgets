@@ -234,6 +234,18 @@ public class WGContent {
         L.toArray(GT_Cluster);
     }
 
+    public static void checkPotionId(int id, String name) {
+        if (id >= Potion.potionTypes.length) {
+            throw new IllegalStateException(
+                    "Invalid potion ID: The " + name
+                            + " potion ID ("
+                            + id
+                            + ") is out of the potion array bounds ("
+                            + Potion.potionTypes.length
+                            + ").");
+        }
+    }
+
     public static void init() {
         initializeItems();
         initializeBlocks();
@@ -244,13 +256,16 @@ public class WGContent {
         if (k < 128 - l) Utilities.extendPotionArray(l);
         String s = new UUID(109406002307L, 01L).toString();
         int potionId = WGConfig.getPotionID(32, "Knockback Resistance");
+        checkPotionId(potionId, "Knockback Resistance");
         if (potionId > 0) pot_knockbackRes = new WGPotion(potionId, false, 0x6e6e6e, 0, false, 1)
                 .setPotionName("wg.potionKnockbackRes")
                 .func_111184_a(SharedMonsterAttributes.knockbackResistance, s, 0.34D, 0);
         potionId = WGConfig.getPotionID(potionId, "Dissolve");
+        checkPotionId(potionId, "Dissolve");
         if (potionId > 0)
             pot_dissolve = new WGPotion(potionId, true, 0x450b45, 40, true, 2).setPotionName("wg.potionDissolve");
         potionId = WGConfig.getPotionID(potionId, "Cinder Coat");
+        checkPotionId(potionId, "Cinder Coat");
         if (potionId > 0)
             pot_cinderCoat = new WGPotion(potionId, true, 0x8f3f1f, 0, false, 3).setPotionName("wg.potionCinderCoat");
 

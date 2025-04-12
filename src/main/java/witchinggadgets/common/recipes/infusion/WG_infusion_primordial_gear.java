@@ -414,7 +414,7 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemWispEssence),
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemResource, 1, 16),
-                            GameRegistry.findItemStack("TaintedMagic", "ItemShadowFortressLeggins", 1),
+                            GameRegistry.findItemStack("TaintedMagic", "ItemShadowFortressLeggings", 1),
                             new ItemStack(ConfigItems.itemResource, 1, 16),
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),

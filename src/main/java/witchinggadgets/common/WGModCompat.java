@@ -38,6 +38,7 @@ public class WGModCompat {
     public static boolean loaded_Enviromine;
     public static boolean loaded_Railcraft;
     public static boolean loaded_TT;
+    public static boolean loaded_ForbiddenMagic;
 
     public static boolean loadedTG;
 
@@ -60,6 +61,7 @@ public class WGModCompat {
         loaded_Enviromine = Loader.isModLoaded("enviromine");
         loaded_Railcraft = Loader.isModLoaded("Railcraft");
         loaded_TT = Loader.isModLoaded("ThaumicTinkerer");
+        loaded_ForbiddenMagic = Loader.isModLoaded("ForbiddenMagic");
         loaded_EnderIO = Loader.isModLoaded("EnderIO");
 
         loadedTG = Loader.isModLoaded("TravellersGear");
