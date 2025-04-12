@@ -50,6 +50,7 @@ import witchinggadgets.common.WGModCompat;
 import witchinggadgets.common.items.interfaces.IItemEvent;
 import witchinggadgets.common.util.Lib;
 import witchinggadgets.common.util.Utilities;
+import witchinggadgets.common.util.network.message.MessageOpenCloak;
 
 @Optional.Interface(iface = "vazkii.botania.api.item.ICosmeticAttachable", modid = "Botania")
 public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttachable, IItemEvent {
@@ -242,17 +243,16 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
                             new ChatComponentText(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide")));
                 }
             }
-
-        }
-        if (!player.worldObj.isRemote) {
             if (activateKey.getIsKeyPressed() && subNames[stack.getItemDamage()].equals("storage")) {
+                int kama = this.equals(WGContent.ItemKama) ? 5 : 4;
                 player.openGui(
                         WitchingGadgets.instance,
-                        this.equals(WGContent.ItemKama) ? 5 : 4,
+                        kama,
                         player.worldObj,
                         MathHelper.floor_double(player.posX),
                         MathHelper.floor_double(player.posY),
                         MathHelper.floor_double(player.posZ));
+                WitchingGadgets.packetHandler.sendToServer(new MessageOpenCloak(player, kama));
             }
         }
 
