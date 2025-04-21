@@ -199,7 +199,7 @@ public class ItemInfusedGem extends Item implements IInfusedGem {
                             }
             }
             if (aspect.equals(Aspect.EARTH)) {
-                if (!Loader.isModLoaded("gregtech") && mop != null
+                if (!(Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) && mop != null
                         && mop.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
                     List<ChunkCoordinates> ores = this.getOres(world, mop.blockX, mop.blockY, mop.blockZ);
                     if (world.isRemote)
