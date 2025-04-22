@@ -55,7 +55,7 @@ import witchinggadgets.common.items.tools.IPrimordialGear;
 import witchinggadgets.common.util.Lib;
 
 @Optional.InterfaceList({ @Optional.Interface(iface = "thaumicboots.api.IBoots", modid = "thaumicboots"),
-        @Optional.Interface(iface = "gregtech.api.hazards.IHazardProtector", modid = "dreamcraft") })
+        @Optional.Interface(iface = "gregtech.api.hazards.IHazardProtector", modid = "gregtechNH") })
 public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordialCrafting, IPrimordialGear, IRunicArmor,
         IItemEvent, IBoots, IWarpingGear, IVisDiscountGear, IHazardProtector {
 
@@ -604,7 +604,7 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
     public void onUserTargeted(LivingSetAttackTargetEvent event, ItemStack stack) {}
 
     @Override
-    @Optional.Method(modid = "dreamcraft")
+    @Optional.Method(modid = "gregtechNH")
     public boolean protectsAgainst(ItemStack itemStack, Hazard hazard) {
         return true;
     }
