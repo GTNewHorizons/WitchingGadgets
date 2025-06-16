@@ -346,14 +346,20 @@ public class TileEntityBlastfurnace extends TileEntityWGBase implements IEssenti
 
         if (eventNum == 5) {
             for (int i = 0; i < 3; i++) {
+                float xx = xCoord + .5f + facing.offsetX * 1.66f + worldObj.rand.nextFloat() * .3f;
+                float zz = zCoord + .5f + facing.offsetZ * 1.66f + worldObj.rand.nextFloat() * .3f;
+                float mx = facing.offsetX != 0 ? (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * .5f
+                        : facing.offsetX * worldObj.rand.nextFloat();
+                float mz = facing.offsetZ != 0 ? (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * .5f
+                        : facing.offsetZ * worldObj.rand.nextFloat();
                 worldObj.spawnParticle(
                         "lava",
-                        xCoord + 0.5 + worldObj.rand.nextFloat() * 0.3,
+                        xx + 0.5 + worldObj.rand.nextFloat() * 0.3,
                         yCoord + 0.9,
-                        zCoord + 0.5 + worldObj.rand.nextFloat() * .3,
-                        (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * 0.5 * 0.15,
-                        0.2,
-                        (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * 0.5 * 0.15);
+                        zz + 0.5 + worldObj.rand.nextFloat() * .3,
+                        0.15 * mx,
+                        .2f * worldObj.rand.nextFloat(),
+                        0.15 * mz);
             }
 
             worldObj.playSound(
