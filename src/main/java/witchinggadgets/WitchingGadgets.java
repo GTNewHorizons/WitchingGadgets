@@ -51,7 +51,7 @@ import witchinggadgets.common.world.VillageComponentPhotoshop;
         dependencies = "required-after:Thaumcraft;" + "after:ForbiddenMagic;"
                 + "after:TwilightForest;"
                 + "after:TaintedMagic;"
-                + "after:gregtech;"
+                + "after:gregtech_nh;"
                 + "after:miscutils;"
                 + "after:Mystcraft;"
                 + "after:TConstruct;"
