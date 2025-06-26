@@ -443,6 +443,11 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
                                 "%s2",
                                 StatCollector.translateToLocalFormatted(
                                         GameSettings.getKeyDisplayString(keybind.keyBindUseItem.getKeyCode()))));
+        list.add(
+                EnumChatFormatting.DARK_PURPLE + StatCollector.translateToLocal("tc.visdiscount")
+                        + ": "
+                        + this.getVisDiscount(stack, player, null)
+                        + "%");
         super.addInformation(stack, player, list, par4);
     }
 
