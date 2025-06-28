@@ -3,7 +3,6 @@ package witchinggadgets.common;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 import baubles.api.BaublesApi;
 import baubles.api.expanded.BaubleExpandedSlots;
@@ -62,8 +61,4 @@ public class CommonProxy implements IGuiHandler {
             int color, float scale, float gravity, boolean tinkle, boolean noClip) {}
 
     public void createSweatFx(EntityPlayer player) {}
-
-    public void createFurnaceOutputBlobFx(World worldObj, int x, int y, int z, ForgeDirection facing) {}
-
-    public void createFurnaceDestructionBlobFx(World worldObj, int x, int y, int z) {}
 }

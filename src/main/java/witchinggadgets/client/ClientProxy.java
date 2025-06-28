@@ -1,6 +1,5 @@
 package witchinggadgets.client;
 
-import net.minecraft.client.particle.EntityLavaFX;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -9,7 +8,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.client.model.IModelCustom;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.input.Keyboard;
 
@@ -189,31 +187,4 @@ public class ClientProxy extends CommonProxy {
         FMLClientHandler.instance().getClient().effectRenderer.addEffect(fx);
     }
 
-    @Override
-    public void createFurnaceOutputBlobFx(World worldObj, int x, int y, int z, ForgeDirection facing) {
-        float xx = x + .5f + facing.offsetX * 1.66f + worldObj.rand.nextFloat() * .3f;
-        float zz = z + .5f + facing.offsetZ * 1.66f + worldObj.rand.nextFloat() * .3f;
-
-        EntityLavaFX fb = new EntityLavaFX(worldObj, xx, y + 1.3f, zz);
-        fb.motionY = .2f * worldObj.rand.nextFloat();
-        float mx = facing.offsetX != 0 ? (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * .5f
-                : facing.offsetX * worldObj.rand.nextFloat();
-        float mz = facing.offsetZ != 0 ? (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * .5f
-                : facing.offsetZ * worldObj.rand.nextFloat();
-        fb.motionX = (0.15f * mx);
-        fb.motionZ = (0.15f * mz);
-        FMLClientHandler.instance().getClient().effectRenderer.addEffect(fb);
-    }
-
-    @Override
-    public void createFurnaceDestructionBlobFx(World worldObj, int x, int y, int z) {
-        float xx = x + .5f + worldObj.rand.nextFloat() * .3f;
-        float zz = z + .5f + worldObj.rand.nextFloat() * .3f;
-
-        EntityLavaFX fb = new EntityLavaFX(worldObj, xx, y + 1.5f, zz);
-        fb.motionY = .2F;
-        fb.motionX = (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * .5f * .15f;
-        fb.motionZ = (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * .5f * .15f;
-        FMLClientHandler.instance().getClient().effectRenderer.addEffect(fb);
-    }
 }
