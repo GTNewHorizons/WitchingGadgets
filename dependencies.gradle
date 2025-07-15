@@ -15,7 +15,7 @@ dependencies {
     implementation('com.github.GTNewHorizons:twilightforest:2.7.8:dev')
     implementation('thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev') {transitive=false}
     implementation('com.github.GTNewHorizons:NotEnoughItems:2.7.64-GTNH:dev')
-    implementation('com.github.GTNewHorizons:Railcraft:9.16.30:dev')
+    implementation('com.github.GTNewHorizons:Railcraft:9.16.30:dev') {transitive=false}
 
     compile('com.github.GTNewHorizons:DummyCore:1.19.0:dev')
     compileOnly('com.github.GTNewHorizons:ForgeMultipart:1.6.7:dev') {transitive=false}
