@@ -303,11 +303,10 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
     }
 
     public void movementEffects(EntityPlayer player, float bonus, ItemStack itemStack) {
-        if (player.moveForward != 0.0F || player.moveStrafing != 0.0F) {
+        if (player.moveForward != 0.0F || player.moveStrafing != 0.0F || player.motionY != 0.0F) {
             if (WitchingGadgets.isBootsActive) {
                 boolean omniMode = isOmniEnabled(itemStack);
-                if ((player.moveForward == 0F && player.moveStrafing == 0F && omniMode)
-                        || (player.moveForward <= 0F && !omniMode)) {
+                if (player.moveForward <= 0F && !omniMode) {
                     return;
                 }
             }
@@ -332,7 +331,6 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
                 player.jumpMovementFactor = 0.00002F;
             } else if (Hover.getHover(player.getEntityId())) {
                 player.jumpMovementFactor = 0.03F * speedMod;
-
             } else {
                 player.jumpMovementFactor = 0.05F * speedMod;
             }
@@ -346,8 +344,21 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
         if (player.moveForward != 0.0) {
             player.moveFlying(0.0F, player.moveForward, bonus);
         }
-        if (player.moveStrafing != 0.0 && getOmniState(itemStack)) {
-            player.moveFlying(player.moveStrafing, 0.0F, bonus);
+        if (getOmniState(itemStack)) {
+            if (player.moveStrafing != 0.0) {
+                player.moveFlying(player.moveStrafing, 0.0F, bonus);
+            }
+            boolean jumping = Minecraft.getMinecraft().gameSettings.keyBindJump.getIsKeyPressed();
+            boolean sneaking = player.isSneaking();
+            float rise = Math.abs((float) player.motionY);
+            if (sneaking && !jumping && !player.onGround) { //no moveFlying for vertical so this extracts the internals
+                rise *= bonus / rise;
+                player.motionY -= rise;
+                }
+            if (!sneaking && jumping) {
+                rise *= bonus / rise;
+                player.motionY += rise;
+            }
         }
     }
 
