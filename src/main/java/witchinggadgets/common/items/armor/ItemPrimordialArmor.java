@@ -351,10 +351,10 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
             boolean jumping = Minecraft.getMinecraft().gameSettings.keyBindJump.getIsKeyPressed();
             boolean sneaking = player.isSneaking();
             float rise = Math.abs((float) player.motionY);
-            if (sneaking && !jumping && !player.onGround) { //no moveFlying for vertical so this extracts the internals
+            if (sneaking && !jumping && !player.onGround) { // no moveFlying for vertical so this extracts the internals
                 rise *= bonus / rise;
                 player.motionY -= rise;
-                }
+            }
             if (!sneaking && jumping) {
                 rise *= bonus / rise;
                 player.motionY += rise;
