@@ -11,12 +11,15 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
 
+import cpw.mods.fml.common.Optional;
 import gregtech.api.enums.Materials;
+import mods.railcraft.common.items.firestone.IItemFirestoneBurning;
 import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.WGConfig;
 import witchinggadgets.common.WGContent;
 
-public class ItemClusters extends Item {
+@Optional.Interface(iface = "mods.railcraft.common.items.firestone.IItemFirestoneBurning", modid = "Railcraft")
+public class ItemClusters extends Item implements IItemFirestoneBurning {
 
     @Deprecated
     public static String[] subNames = {
@@ -157,5 +160,19 @@ public class ItemClusters extends Item {
                         && !OreDictionary.getOres("ingot" + subNames[iOre]).isEmpty())
                     itemList.add(new ItemStack(item, 1, iOre));
         }
+    }
+
+    @Override
+    @Optional.Method(modid = "Railcraft")
+    public boolean shouldBurn(ItemStack itemStack) {
+        if (itemStack != null) {
+            int dmg = itemStack.getItemDamage();
+            // This should be safe since mDefaultLocalName gets inserted into GT_Cluster at
+            // {@link WGContent#initGTClusters()} directly and the firestone Material name
+            // is a literal inside gregtechs MaterialsInit1 class
+            return (dmg < witchinggadgets.common.WGContent.GT_Cluster.length
+                    && witchinggadgets.common.WGContent.GT_Cluster[dmg] == Materials.Firestone.mDefaultLocalName);
+        }
+        return false;
     }
 }
