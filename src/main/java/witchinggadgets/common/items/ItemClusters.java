@@ -167,6 +167,9 @@ public class ItemClusters extends Item implements IItemFirestoneBurning {
     public boolean shouldBurn(ItemStack itemStack) {
         if (itemStack != null) {
             int dmg = itemStack.getItemDamage();
+            // This should be safe since mDefaultLocalName gets inserted into GT_Cluster at
+            // {@link WGContent#initGTClusters()} directly and the firestone Material name
+            // is a literal inside gregtechs MaterialsInit1 class
             return (dmg < witchinggadgets.common.WGContent.GT_Cluster.length
                     && witchinggadgets.common.WGContent.GT_Cluster[dmg] == Materials.Firestone.mDefaultLocalName);
         }
