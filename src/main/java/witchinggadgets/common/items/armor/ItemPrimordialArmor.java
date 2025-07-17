@@ -2,6 +2,7 @@ package witchinggadgets.common.items.armor;
 
 import java.util.List;
 
+import baubles.common.lib.PlayerHandler;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
@@ -50,6 +51,7 @@ import witchinggadgets.WitchingGadgets;
 import witchinggadgets.api.IPrimordialCrafting;
 import witchinggadgets.client.render.ModelPrimordialArmor;
 import witchinggadgets.common.WGContent;
+import witchinggadgets.common.WGModCompat;
 import witchinggadgets.common.items.interfaces.IItemEvent;
 import witchinggadgets.common.items.tools.IPrimordialGear;
 import witchinggadgets.common.util.Lib;
@@ -319,6 +321,8 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
 
             float speedMod = (float) getSpeedModifier(itemStack);
             if (player.onGround || player.capabilities.isFlying || player.isOnLadder()) {
+
+                bonus += sashBuff(player);
                 bonus *= speedMod;
                 if (WitchingGadgets.isBootsActive) {
                     applyOmniState(player, bonus, itemStack);
@@ -335,6 +339,20 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
                 player.jumpMovementFactor = 0.05F * speedMod;
             }
         }
+    }
+
+    public float sashBuff(final EntityPlayer player) {
+        final ItemStack sash = PlayerHandler.getPlayerBaubles(player).getStackInSlot(3);
+        if (sash != null && sash.getItem() == WGModCompat.tmVoidSash && sashHasSpeedBoost(sash)) {
+            return 0.4F; //sash speed buff
+        }
+        return 0.0F;
+    }
+
+    public boolean sashHasSpeedBoost(ItemStack s) {
+        if (s.stackTagCompound == null) return true;
+
+        else return s.stackTagCompound.getBoolean("mode");
     }
 
     // Thaumic Boots Methods:
