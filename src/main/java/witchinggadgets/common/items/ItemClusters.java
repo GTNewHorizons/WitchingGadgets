@@ -57,8 +57,8 @@ public class ItemClusters extends Item implements IItemFirestoneBurning {
     public int getColorFromItemStack(ItemStack stack, int pass) {
         if (witchinggadgets.common.WGContent.GT_Cluster != null) {
             if (pass == 0 && stack.getItemDamage() < witchinggadgets.common.WGContent.GT_Cluster.length) {
-                if (WGContent.GT_Cluster_Color
-                        .get(witchinggadgets.common.WGContent.GT_Cluster[stack.getItemDamage()]) != null)
+                if (WGContent.GT_Cluster_Color.get(witchinggadgets.common.WGContent.GT_Cluster[stack.getItemDamage()])
+                        != null)
                     return WGContent.GT_Cluster_Color
                             .get(witchinggadgets.common.WGContent.GT_Cluster[stack.getItemDamage()])[0];
             }
@@ -83,8 +83,7 @@ public class ItemClusters extends Item implements IItemFirestoneBurning {
                         return new ItemStack(WGContent.ItemCluster, 1, sn);
             } else {
                 for (int sn = 0; sn < subNames.length; sn++)
-                    if (subNames[sn].equalsIgnoreCase(ore))
-                        return new ItemStack(WGContent.ItemCluster, 1, sn);
+                    if (subNames[sn].equalsIgnoreCase(ore)) return new ItemStack(WGContent.ItemCluster, 1, sn);
             }
         }
         return null;
@@ -151,17 +150,16 @@ public class ItemClusters extends Item implements IItemFirestoneBurning {
 
     @Override
     public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> itemList) {
-        if (WGConfig.allowClusters)
-            if (witchinggadgets.common.WGContent.GT_Cluster != null) {
-                for (int iOre = 0; iOre < witchinggadgets.common.WGContent.GT_Cluster.length; iOre++)
-                    if (!OreDictionary.getOres("ore" + witchinggadgets.common.WGContent.GT_Cluster[iOre]).isEmpty()) // &&
-                        itemList.add(new ItemStack(item, 1, iOre));
-            } else {
-                for (int iOre = 0; iOre < subNames.length; iOre++)
-                    if (!OreDictionary.getOres("ore" + subNames[iOre]).isEmpty()
-                            && !OreDictionary.getOres("ingot" + subNames[iOre]).isEmpty())
-                        itemList.add(new ItemStack(item, 1, iOre));
-            }
+        if (WGConfig.allowClusters) if (witchinggadgets.common.WGContent.GT_Cluster != null) {
+            for (int iOre = 0; iOre < witchinggadgets.common.WGContent.GT_Cluster.length; iOre++)
+                if (!OreDictionary.getOres("ore" + witchinggadgets.common.WGContent.GT_Cluster[iOre]).isEmpty()) // &&
+                    itemList.add(new ItemStack(item, 1, iOre));
+        } else {
+            for (int iOre = 0; iOre < subNames.length; iOre++)
+                if (!OreDictionary.getOres("ore" + subNames[iOre]).isEmpty()
+                        && !OreDictionary.getOres("ingot" + subNames[iOre]).isEmpty())
+                    itemList.add(new ItemStack(item, 1, iOre));
+        }
     }
 
     @Override
