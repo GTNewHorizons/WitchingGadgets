@@ -2,6 +2,7 @@ package witchinggadgets.common.items.armor;
 
 import java.util.List;
 
+import baubles.common.lib.PlayerHandler;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
@@ -50,6 +51,7 @@ import witchinggadgets.WitchingGadgets;
 import witchinggadgets.api.IPrimordialCrafting;
 import witchinggadgets.client.render.ModelPrimordialArmor;
 import witchinggadgets.common.WGContent;
+import witchinggadgets.common.WGModCompat;
 import witchinggadgets.common.items.interfaces.IItemEvent;
 import witchinggadgets.common.items.tools.IPrimordialGear;
 import witchinggadgets.common.util.Lib;
@@ -303,11 +305,10 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
     }
 
     public void movementEffects(EntityPlayer player, float bonus, ItemStack itemStack) {
-        if (player.moveForward != 0.0F || player.moveStrafing != 0.0F) {
+        if (player.moveForward != 0.0F || player.moveStrafing != 0.0F || player.motionY != 0.0F) {
             if (WitchingGadgets.isBootsActive) {
                 boolean omniMode = isOmniEnabled(itemStack);
-                if ((player.moveForward == 0F && player.moveStrafing == 0F && omniMode)
-                        || (player.moveForward <= 0F && !omniMode)) {
+                if (player.moveForward <= 0F && !omniMode) {
                     return;
                 }
             }
@@ -320,6 +321,8 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
 
             float speedMod = (float) getSpeedModifier(itemStack);
             if (player.onGround || player.capabilities.isFlying || player.isOnLadder()) {
+
+                bonus += sashBuff(player);
                 bonus *= speedMod;
                 if (WitchingGadgets.isBootsActive) {
                     applyOmniState(player, bonus, itemStack);
@@ -331,12 +334,25 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
                 }
                 player.jumpMovementFactor = 0.00002F;
             } else if (Hover.getHover(player.getEntityId())) {
-                player.jumpMovementFactor = 0.03F * speedMod;
-
+                player.jumpMovementFactor = 0.03F;
             } else {
-                player.jumpMovementFactor = 0.05F * speedMod;
+                player.jumpMovementFactor = 0.05F;
             }
         }
+    }
+
+    public float sashBuff(final EntityPlayer player) {
+        final ItemStack sash = PlayerHandler.getPlayerBaubles(player).getStackInSlot(3);
+        if (sash != null && sash.getItem() == WGModCompat.tmVoidSash && sashHasSpeedBoost(sash)) {
+            return 0.4F; //sash speed buff
+        }
+        return 0.0F;
+    }
+
+    public boolean sashHasSpeedBoost(ItemStack s) {
+        if (s.stackTagCompound == null) return true;
+
+        else return s.stackTagCompound.getBoolean("mode");
     }
 
     // Thaumic Boots Methods:
@@ -346,8 +362,21 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
         if (player.moveForward != 0.0) {
             player.moveFlying(0.0F, player.moveForward, bonus);
         }
-        if (player.moveStrafing != 0.0 && getOmniState(itemStack)) {
-            player.moveFlying(player.moveStrafing, 0.0F, bonus);
+        if (getOmniState(itemStack)) {
+            if (player.moveStrafing != 0.0) {
+                player.moveFlying(player.moveStrafing, 0.0F, bonus);
+            }
+            boolean jumping = Minecraft.getMinecraft().gameSettings.keyBindJump.getIsKeyPressed();
+            boolean sneaking = player.isSneaking();
+            float rise = Math.abs((float) player.motionY);
+            if (sneaking && !jumping && !player.onGround) { //no moveFlying for vertical so this extracts the internals
+                rise *= bonus / rise;
+                player.motionY -= rise;
+                }
+            if (!sneaking && jumping) {
+                rise *= bonus / rise;
+                player.motionY += rise;
+            }
         }
     }
 

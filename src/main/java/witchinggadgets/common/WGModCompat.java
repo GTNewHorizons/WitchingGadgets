@@ -25,6 +25,8 @@ import witchinggadgets.common.minetweaker.WGMinetweaker;
 
 public class WGModCompat {
 
+    public static Item tmVoidSash;
+
     public static Item tConResource;
 
     public static Item natBarleyFood;
@@ -67,6 +69,11 @@ public class WGModCompat {
         loadedTG = Loader.isModLoaded("TravellersGear");
 
         if (Loader.isModLoaded("MineTweaker3")) WGMinetweaker.init();
+
+        if (Loader.isModLoaded("TaintedMagic")) {
+            tmVoidSash = GameRegistry.findItem("TaintedMagic", "ItemVoidwalkerSash");
+
+        }
     }
 
     public static void addTags() {
