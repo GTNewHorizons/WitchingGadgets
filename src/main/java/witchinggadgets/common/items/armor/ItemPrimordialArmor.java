@@ -2,7 +2,6 @@ package witchinggadgets.common.items.armor;
 
 import java.util.List;
 
-import baubles.common.lib.PlayerHandler;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
@@ -32,6 +31,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 
+import baubles.common.lib.PlayerHandler;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -344,7 +344,7 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
     public float sashBuff(final EntityPlayer player) {
         final ItemStack sash = PlayerHandler.getPlayerBaubles(player).getStackInSlot(3);
         if (sash != null && sash.getItem() == WGModCompat.tmVoidSash && sashHasSpeedBoost(sash)) {
-            return 0.4F; //sash speed buff
+            return 0.4F; // sash speed buff
         }
         return 0.0F;
     }
@@ -368,14 +368,10 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
             }
             boolean jumping = Minecraft.getMinecraft().gameSettings.keyBindJump.getIsKeyPressed();
             boolean sneaking = player.isSneaking();
-            float rise = Math.abs((float) player.motionY);
-            if (sneaking && !jumping && !player.onGround) { //no moveFlying for vertical so this extracts the internals
-                rise *= bonus / rise;
-                player.motionY -= rise;
-                }
-            if (!sneaking && jumping) {
-                rise *= bonus / rise;
-                player.motionY += rise;
+            if (sneaking && !jumping && !player.onGround) {
+                player.motionY -= bonus;
+            } else if (jumping && !sneaking) {
+                player.motionY += bonus;
             }
         }
     }
