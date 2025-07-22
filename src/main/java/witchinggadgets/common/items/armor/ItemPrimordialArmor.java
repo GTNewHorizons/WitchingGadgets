@@ -1,5 +1,7 @@
 package witchinggadgets.common.items.armor;
 
+import static taintedmagic.common.items.equipment.ItemVoidwalkerBoots.sashBuff;
+
 import java.util.List;
 
 import net.minecraft.block.material.Material;
@@ -31,13 +33,13 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 
-import baubles.common.lib.PlayerHandler;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gregtech.api.hazards.Hazard;
 import gregtech.api.hazards.IHazardProtector;
+import taintedmagic.api.IVoidwalker;
 import thaumcraft.api.IRunicArmor;
 import thaumcraft.api.IVisDiscountGear;
 import thaumcraft.api.IWarpingGear;
@@ -56,10 +58,11 @@ import witchinggadgets.common.items.interfaces.IItemEvent;
 import witchinggadgets.common.items.tools.IPrimordialGear;
 import witchinggadgets.common.util.Lib;
 
-@Optional.InterfaceList({ @Optional.Interface(iface = "thaumicboots.api.IBoots", modid = "thaumicboots"),
+@Optional.InterfaceList({ @Optional.Interface(iface = "taintedmagic.api.IVoidwalker", modid = "TaintedMagic"),
+        @Optional.Interface(iface = "thaumicboots.api.IBoots", modid = "thaumicboots"),
         @Optional.Interface(iface = "gregtech.api.hazards.IHazardProtector", modid = "gregtech_nh") })
 public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordialCrafting, IPrimordialGear, IRunicArmor,
-        IItemEvent, IBoots, IWarpingGear, IVisDiscountGear, IHazardProtector {
+        IItemEvent, IBoots, IWarpingGear, IVisDiscountGear, IHazardProtector, IVoidwalker {
 
     enum FlightStatus {
         ON,
@@ -322,7 +325,9 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
             float speedMod = (float) getSpeedModifier(itemStack);
             if (player.onGround || player.capabilities.isFlying || player.isOnLadder()) {
 
-                bonus += sashBuff(player);
+                if (WGModCompat.loaded_TaintedMagic) {
+                    bonus += sashBuffLocal(player);
+                }
                 bonus *= speedMod;
                 if (WitchingGadgets.isBootsActive) {
                     applyOmniState(player, bonus, itemStack);
@@ -341,18 +346,9 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
         }
     }
 
-    public float sashBuff(final EntityPlayer player) {
-        final ItemStack sash = PlayerHandler.getPlayerBaubles(player).getStackInSlot(3);
-        if (sash != null && sash.getItem() == WGModCompat.tmVoidSash && sashHasSpeedBoost(sash)) {
-            return 0.4F; // sash speed buff
-        }
-        return 0.0F;
-    }
-
-    public boolean sashHasSpeedBoost(ItemStack s) {
-        if (s.stackTagCompound == null) return true;
-
-        else return s.stackTagCompound.getBoolean("mode");
+    @Optional.Method(modid = "TaintedMagic")
+    private float sashBuffLocal(final EntityPlayer player) {
+        return sashBuff(player);
     }
 
     // Thaumic Boots Methods:
