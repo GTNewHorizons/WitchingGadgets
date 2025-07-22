@@ -326,7 +326,7 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
             if (player.onGround || player.capabilities.isFlying || player.isOnLadder()) {
 
                 if (WGModCompat.loaded_TaintedMagic) {
-                    bonus += sashBuffLocal(player);
+                    bonus += sashBuff(player);
                 }
                 bonus *= speedMod;
                 if (WitchingGadgets.isBootsActive) {
