@@ -346,11 +346,6 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
         }
     }
 
-    @Optional.Method(modid = "TaintedMagic")
-    private float sashBuffLocal(final EntityPlayer player) {
-        return sashBuff(player);
-    }
-
     // Thaumic Boots Methods:
 
     @Optional.Method(modid = "thaumicboots")
