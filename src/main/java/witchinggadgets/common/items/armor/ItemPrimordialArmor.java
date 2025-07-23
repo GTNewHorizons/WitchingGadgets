@@ -1,5 +1,7 @@
 package witchinggadgets.common.items.armor;
 
+import static taintedmagic.common.items.equipment.ItemVoidwalkerBoots.sashBuff;
+
 import java.util.List;
 
 import net.minecraft.block.material.Material;
@@ -37,6 +39,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import gregtech.api.hazards.Hazard;
 import gregtech.api.hazards.IHazardProtector;
+import taintedmagic.api.IVoidwalker;
 import thaumcraft.api.IRunicArmor;
 import thaumcraft.api.IVisDiscountGear;
 import thaumcraft.api.IWarpingGear;
@@ -50,14 +53,16 @@ import witchinggadgets.WitchingGadgets;
 import witchinggadgets.api.IPrimordialCrafting;
 import witchinggadgets.client.render.ModelPrimordialArmor;
 import witchinggadgets.common.WGContent;
+import witchinggadgets.common.WGModCompat;
 import witchinggadgets.common.items.interfaces.IItemEvent;
 import witchinggadgets.common.items.tools.IPrimordialGear;
 import witchinggadgets.common.util.Lib;
 
-@Optional.InterfaceList({ @Optional.Interface(iface = "thaumicboots.api.IBoots", modid = "thaumicboots"),
+@Optional.InterfaceList({ @Optional.Interface(iface = "taintedmagic.api.IVoidwalker", modid = "TaintedMagic"),
+        @Optional.Interface(iface = "thaumicboots.api.IBoots", modid = "thaumicboots"),
         @Optional.Interface(iface = "gregtech.api.hazards.IHazardProtector", modid = "gregtech_nh") })
 public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordialCrafting, IPrimordialGear, IRunicArmor,
-        IItemEvent, IBoots, IWarpingGear, IVisDiscountGear, IHazardProtector {
+        IItemEvent, IBoots, IWarpingGear, IVisDiscountGear, IHazardProtector, IVoidwalker {
 
     enum FlightStatus {
         ON,
@@ -303,11 +308,10 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
     }
 
     public void movementEffects(EntityPlayer player, float bonus, ItemStack itemStack) {
-        if (player.moveForward != 0.0F || player.moveStrafing != 0.0F) {
+        if (player.moveForward != 0.0F || player.moveStrafing != 0.0F || player.motionY != 0.0F) {
             if (WitchingGadgets.isBootsActive) {
                 boolean omniMode = isOmniEnabled(itemStack);
-                if ((player.moveForward == 0F && player.moveStrafing == 0F && omniMode)
-                        || (player.moveForward <= 0F && !omniMode)) {
+                if (player.moveForward <= 0F && !omniMode) {
                     return;
                 }
             }
@@ -320,6 +324,10 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
 
             float speedMod = (float) getSpeedModifier(itemStack);
             if (player.onGround || player.capabilities.isFlying || player.isOnLadder()) {
+
+                if (WGModCompat.loaded_TaintedMagic) {
+                    bonus += sashBuff(player);
+                }
                 bonus *= speedMod;
                 if (WitchingGadgets.isBootsActive) {
                     applyOmniState(player, bonus, itemStack);
@@ -331,10 +339,9 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
                 }
                 player.jumpMovementFactor = 0.00002F;
             } else if (Hover.getHover(player.getEntityId())) {
-                player.jumpMovementFactor = 0.03F * speedMod;
-
+                player.jumpMovementFactor = 0.03F;
             } else {
-                player.jumpMovementFactor = 0.05F * speedMod;
+                player.jumpMovementFactor = 0.05F;
             }
         }
     }
@@ -346,8 +353,17 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
         if (player.moveForward != 0.0) {
             player.moveFlying(0.0F, player.moveForward, bonus);
         }
-        if (player.moveStrafing != 0.0 && getOmniState(itemStack)) {
-            player.moveFlying(player.moveStrafing, 0.0F, bonus);
+        if (getOmniState(itemStack)) {
+            if (player.moveStrafing != 0.0) {
+                player.moveFlying(player.moveStrafing, 0.0F, bonus);
+            }
+            boolean jumping = Minecraft.getMinecraft().gameSettings.keyBindJump.getIsKeyPressed();
+            boolean sneaking = player.isSneaking();
+            if (sneaking && !jumping && !player.onGround) {
+                player.motionY -= bonus;
+            } else if (jumping && !sneaking) {
+                player.motionY += bonus;
+            }
         }
     }
 
