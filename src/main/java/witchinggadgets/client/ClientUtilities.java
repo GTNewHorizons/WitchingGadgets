@@ -222,46 +222,46 @@ public class ClientUtilities {
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
         GL11.glDisable(GL11.GL_CULL_FACE);
-        Tessellator localTessellator = Tessellator.instance;
-        localTessellator.startDrawingQuads();
-        localTessellator.setNormal(0.0F, 0.0F, 1.0F);
+        final Tessellator tess = Tessellator.instance;
+        tess.startDrawingQuads();
+        tess.setNormal(0.0F, 0.0F, 1.0F);
         if (paramItemRenderType.equals(IItemRenderer.ItemRenderType.INVENTORY)) {
 
-            Tessellator.instance.addVertexWithUV(0.0D, 16.0D, 10.0D, mask.getMinU(), mask.getMaxV());
-            Tessellator.instance.addVertexWithUV(16.0D, 16.0D, 10.0D, mask.getMaxU(), mask.getMaxV());
-            Tessellator.instance.addVertexWithUV(16.0D, 0.0D, 10.0D, mask.getMaxU(), mask.getMinV());
-            Tessellator.instance.addVertexWithUV(0.0D, 0.0D, 10.0D, mask.getMinU(), mask.getMinV());
+            tess.addVertexWithUV(0.0D, 16.0D, 10.0D, mask.getMinU(), mask.getMaxV());
+            tess.addVertexWithUV(16.0D, 16.0D, 10.0D, mask.getMaxU(), mask.getMaxV());
+            tess.addVertexWithUV(16.0D, 0.0D, 10.0D, mask.getMaxU(), mask.getMinV());
+            tess.addVertexWithUV(0.0D, 0.0D, 10.0D, mask.getMinU(), mask.getMinV());
 
             // preRenderIconInv(mask, 10.0D);
         } else {
 
-            Tessellator.instance.addVertexWithUV(0.0D, 1.0D, 0.001D, mask.getMinU(), mask.getMaxV());
-            Tessellator.instance.addVertexWithUV(1.0D, 1.0D, 0.001D, mask.getMaxU(), mask.getMaxV());
-            Tessellator.instance.addVertexWithUV(1.0D, 0.0D, 0.001D, mask.getMaxU(), mask.getMinV());
-            Tessellator.instance.addVertexWithUV(0.0D, 0.0D, 0.001D, mask.getMinU(), mask.getMinV());
+            tess.addVertexWithUV(0.0D, 1.0D, 0.001D, mask.getMinU(), mask.getMaxV());
+            tess.addVertexWithUV(1.0D, 1.0D, 0.001D, mask.getMaxU(), mask.getMaxV());
+            tess.addVertexWithUV(1.0D, 0.0D, 0.001D, mask.getMaxU(), mask.getMinV());
+            tess.addVertexWithUV(0.0D, 0.0D, 0.001D, mask.getMinU(), mask.getMinV());
             // preRenderIconWorld(mask, 0.001D);
         }
-        localTessellator.draw();
+        tess.draw();
 
-        localTessellator.startDrawingQuads();
-        localTessellator.setNormal(0.0F, 0.0F, -1.0F);
+        tess.startDrawingQuads();
+        tess.setNormal(0.0F, 0.0F, -1.0F);
         if (paramItemRenderType.equals(IItemRenderer.ItemRenderType.INVENTORY)) {
 
-            Tessellator.instance.addVertexWithUV(0.0D, 16.0D, -0.0635D, mask.getMinU(), mask.getMaxV());
-            Tessellator.instance.addVertexWithUV(16.0D, 16.0D, -0.0635D, mask.getMaxU(), mask.getMaxV());
-            Tessellator.instance.addVertexWithUV(16.0D, 0.0D, -0.0635D, mask.getMaxU(), mask.getMinV());
-            Tessellator.instance.addVertexWithUV(0.0D, 0.0D, -0.0635D, mask.getMinU(), mask.getMinV());
+            tess.addVertexWithUV(0.0D, 16.0D, -0.0635D, mask.getMinU(), mask.getMaxV());
+            tess.addVertexWithUV(16.0D, 16.0D, -0.0635D, mask.getMaxU(), mask.getMaxV());
+            tess.addVertexWithUV(16.0D, 0.0D, -0.0635D, mask.getMaxU(), mask.getMinV());
+            tess.addVertexWithUV(0.0D, 0.0D, -0.0635D, mask.getMinU(), mask.getMinV());
             // preRenderIconInv(mask, -0.0635D);
         } else {
 
-            Tessellator.instance.addVertexWithUV(0.0D, 1.0D, -0.0635D, mask.getMinU(), mask.getMaxV());
-            Tessellator.instance.addVertexWithUV(1.0D, 1.0D, -0.0635D, mask.getMaxU(), mask.getMaxV());
-            Tessellator.instance.addVertexWithUV(1.0D, 0.0D, -0.0635D, mask.getMaxU(), mask.getMinV());
-            Tessellator.instance.addVertexWithUV(0.0D, 0.0D, -0.0635D, mask.getMinU(), mask.getMinV());
+            tess.addVertexWithUV(0.0D, 1.0D, -0.0635D, mask.getMinU(), mask.getMaxV());
+            tess.addVertexWithUV(1.0D, 1.0D, -0.0635D, mask.getMaxU(), mask.getMaxV());
+            tess.addVertexWithUV(1.0D, 0.0D, -0.0635D, mask.getMaxU(), mask.getMinV());
+            tess.addVertexWithUV(0.0D, 0.0D, -0.0635D, mask.getMinU(), mask.getMinV());
 
             // preRenderIconWorld(mask, -0.0635D);
         }
-        localTessellator.draw();
+        tess.draw();
 
         // RenderHelper.setBlockTextureSheet();
         bindTexture("textures/atlas/blocks.png");
@@ -269,45 +269,45 @@ public class ClientUtilities {
         GL11.glDepthFunc(GL11.GL_EQUAL);
         GL11.glDepthMask(false);
 
-        localTessellator.startDrawingQuads();
-        localTessellator.setNormal(0.0F, 0.0F, 1.0F);
+        tess.startDrawingQuads();
+        tess.setNormal(0.0F, 0.0F, 1.0F);
         if (paramItemRenderType.equals(IItemRenderer.ItemRenderType.INVENTORY)) {
 
-            Tessellator.instance.addVertexWithUV(0.0D, 16.0D, 10.0D, icon.getMinU(), icon.getMaxV());
-            Tessellator.instance.addVertexWithUV(16.0D, 16.0D, 10.0D, icon.getMaxU(), icon.getMaxV());
-            Tessellator.instance.addVertexWithUV(16.0D, 0.0D, 10.0D, icon.getMaxU(), icon.getMinV());
-            Tessellator.instance.addVertexWithUV(0.0D, 0.0D, 10.0D, icon.getMinU(), icon.getMinV());
+            tess.addVertexWithUV(0.0D, 16.0D, 10.0D, icon.getMinU(), icon.getMaxV());
+            tess.addVertexWithUV(16.0D, 16.0D, 10.0D, icon.getMaxU(), icon.getMaxV());
+            tess.addVertexWithUV(16.0D, 0.0D, 10.0D, icon.getMaxU(), icon.getMinV());
+            tess.addVertexWithUV(0.0D, 0.0D, 10.0D, icon.getMinU(), icon.getMinV());
 
             // preRenderIconInv(icon, 10.0D);
         } else {
 
-            Tessellator.instance.addVertexWithUV(0.0D, 1.0D, 0.001D, icon.getMinU(), icon.getMaxV());
-            Tessellator.instance.addVertexWithUV(1.0D, 1.0D, 0.001D, icon.getMaxU(), icon.getMaxV());
-            Tessellator.instance.addVertexWithUV(1.0D, 0.0D, 0.001D, icon.getMaxU(), icon.getMinV());
-            Tessellator.instance.addVertexWithUV(0.0D, 0.0D, 0.001D, icon.getMinU(), icon.getMinV());
+            tess.addVertexWithUV(0.0D, 1.0D, 0.001D, icon.getMinU(), icon.getMaxV());
+            tess.addVertexWithUV(1.0D, 1.0D, 0.001D, icon.getMaxU(), icon.getMaxV());
+            tess.addVertexWithUV(1.0D, 0.0D, 0.001D, icon.getMaxU(), icon.getMinV());
+            tess.addVertexWithUV(0.0D, 0.0D, 0.001D, icon.getMinU(), icon.getMinV());
             // preRenderIconWorld(icon, 0.001D);
         }
-        localTessellator.draw();
+        tess.draw();
 
-        localTessellator.startDrawingQuads();
-        localTessellator.setNormal(0.0F, 0.0F, -1.0F);
+        tess.startDrawingQuads();
+        tess.setNormal(0.0F, 0.0F, -1.0F);
         if (paramItemRenderType.equals(IItemRenderer.ItemRenderType.INVENTORY)) {
 
-            Tessellator.instance.addVertexWithUV(0.0D, 16.0D, -0.0635D, icon.getMinU(), icon.getMaxV());
-            Tessellator.instance.addVertexWithUV(16.0D, 16.0D, -0.0635D, icon.getMaxU(), icon.getMaxV());
-            Tessellator.instance.addVertexWithUV(16.0D, 0.0D, -0.0635D, icon.getMaxU(), icon.getMinV());
-            Tessellator.instance.addVertexWithUV(0.0D, 0.0D, -0.0635D, icon.getMinU(), icon.getMinV());
+            tess.addVertexWithUV(0.0D, 16.0D, -0.0635D, icon.getMinU(), icon.getMaxV());
+            tess.addVertexWithUV(16.0D, 16.0D, -0.0635D, icon.getMaxU(), icon.getMaxV());
+            tess.addVertexWithUV(16.0D, 0.0D, -0.0635D, icon.getMaxU(), icon.getMinV());
+            tess.addVertexWithUV(0.0D, 0.0D, -0.0635D, icon.getMinU(), icon.getMinV());
 
             // preRenderIconInv(icon, -0.0635D);
         } else {
 
-            Tessellator.instance.addVertexWithUV(0.0D, 1.0D, -0.0635D, icon.getMinU(), icon.getMaxV());
-            Tessellator.instance.addVertexWithUV(1.0D, 1.0D, -0.0635D, icon.getMaxU(), icon.getMaxV());
-            Tessellator.instance.addVertexWithUV(1.0D, 0.0D, -0.0635D, icon.getMaxU(), icon.getMinV());
-            Tessellator.instance.addVertexWithUV(0.0D, 0.0D, -0.0635D, icon.getMinU(), icon.getMinV());
+            tess.addVertexWithUV(0.0D, 1.0D, -0.0635D, icon.getMinU(), icon.getMaxV());
+            tess.addVertexWithUV(1.0D, 1.0D, -0.0635D, icon.getMaxU(), icon.getMaxV());
+            tess.addVertexWithUV(1.0D, 0.0D, -0.0635D, icon.getMaxU(), icon.getMinV());
+            tess.addVertexWithUV(0.0D, 0.0D, -0.0635D, icon.getMinU(), icon.getMinV());
             // preRenderIconWorld(icon, -0.0635D);
         }
-        localTessellator.draw();
+        tess.draw();
 
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glDepthMask(true);
@@ -387,14 +387,15 @@ public class ClientUtilities {
         GL11.glDisable(GL11.GL_ALPHA_TEST);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glShadeModel(GL11.GL_SMOOTH);
-        Tessellator.instance.startDrawingQuads();
-        Tessellator.instance.setColorRGBA_F(f1, f2, f3, f);
-        Tessellator.instance.addVertex(par3, par2, 500);
-        Tessellator.instance.addVertex(par1, par2, 500);
-        Tessellator.instance.setColorRGBA_F(f5, f6, f7, f4);
-        Tessellator.instance.addVertex(par1, par4, 500);
-        Tessellator.instance.addVertex(par3, par4, 500);
-        Tessellator.instance.draw();
+        final Tessellator tess = Tessellator.instance;
+        tess.startDrawingQuads();
+        tess.setColorRGBA_F(f1, f2, f3, f);
+        tess.addVertex(par3, par2, 500);
+        tess.addVertex(par1, par2, 500);
+        tess.setColorRGBA_F(f5, f6, f7, f4);
+        tess.addVertex(par1, par4, 500);
+        tess.addVertex(par3, par4, 500);
+        tess.draw();
         GL11.glShadeModel(GL11.GL_FLAT);
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glEnable(GL11.GL_ALPHA_TEST);
