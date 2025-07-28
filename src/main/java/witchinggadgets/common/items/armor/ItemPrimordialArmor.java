@@ -327,7 +327,7 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
             if (player.moveStrafing != 0.0) {
                 player.moveFlying(player.moveStrafing, 0.0F, bonus);
             }
-            boolean jumping = ((EntityLivingBaseAccessor)player).getIsJumping();
+            boolean jumping = ((EntityLivingBaseAccessor) player).getIsJumping();
             boolean sneaking = player.isSneaking();
             if (sneaking && !jumping && !player.onGround) {
                 player.motionY -= bonus;
