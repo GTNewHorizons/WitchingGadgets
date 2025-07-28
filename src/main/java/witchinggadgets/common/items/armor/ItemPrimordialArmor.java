@@ -1,7 +1,5 @@
 package witchinggadgets.common.items.armor;
 
-import static taintedmagic.common.items.equipment.ItemVoidwalkerBoots.sashBuff;
-
 import java.util.List;
 
 import net.minecraft.block.material.Material;
@@ -39,6 +37,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import gregtech.api.hazards.Hazard;
 import gregtech.api.hazards.IHazardProtector;
 import taintedmagic.api.IVoidwalker;
+import taintedmagic.common.items.equipment.ItemVoidwalkerBoots;
 import thaumcraft.api.IRunicArmor;
 import thaumcraft.api.IVisDiscountGear;
 import thaumcraft.api.IWarpingGear;
@@ -56,6 +55,7 @@ import witchinggadgets.common.WGModCompat;
 import witchinggadgets.common.items.interfaces.IItemEvent;
 import witchinggadgets.common.items.tools.IPrimordialGear;
 import witchinggadgets.common.util.Lib;
+import witchinggadgets.mixins.early.minecraft.EntityLivingBaseAccessor;
 
 @Optional.InterfaceList({ @Optional.Interface(iface = "taintedmagic.api.IVoidwalker", modid = "TaintedMagic"),
         @Optional.Interface(iface = "thaumicboots.api.IBoots", modid = "thaumicboots"),
@@ -296,7 +296,7 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
             if (player.onGround || player.capabilities.isFlying || player.isOnLadder()) {
 
                 if (WGModCompat.loaded_TaintedMagic) {
-                    bonus += sashBuff(player);
+                    bonus += ItemVoidwalkerBoots.sashBuff(player);
                 }
                 bonus *= speedMod;
                 if (WitchingGadgets.isBootsActive) {
@@ -327,7 +327,7 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
             if (player.moveStrafing != 0.0) {
                 player.moveFlying(player.moveStrafing, 0.0F, bonus);
             }
-            boolean jumping = Minecraft.getMinecraft().gameSettings.keyBindJump.getIsKeyPressed();
+            boolean jumping = ((EntityLivingBaseAccessor)player).getIsJumping();
             boolean sneaking = player.isSneaking();
             if (sneaking && !jumping && !player.onGround) {
                 player.motionY -= bonus;
@@ -543,7 +543,6 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
                 if (i == 4) ++modescounter[3];
                 if (i == 5) ++modescounter[4];
                 if (i == 6) ++modescounter[5];
-                if (i == 7) ++modescounter[6];
             }
 
             switch (getAbility(stack)) {
