@@ -27,7 +27,6 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ISpecialArmor;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
@@ -68,8 +67,6 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
         ON,
         OFF
     }
-
-    public double jumpBonus = 0.55D;
 
     IIcon rune;
 
@@ -112,33 +109,6 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
             cycleAbilities(itemStackIn);
             return itemStackIn;
         } else return super.onItemRightClick(itemStackIn, worldIn, player);
-    }
-
-    @SubscribeEvent
-    public void onLivingUpdateEvent(LivingUpdateEvent event) {
-        if (event.entityLiving instanceof EntityPlayer player) {
-
-            int armorcounter = 0;
-            int modescounter = 0;
-
-            boolean helmet = player.getCurrentArmor(0) != null && isThis(player.getCurrentArmor(0));
-            boolean chestplate = player.getCurrentArmor(1) != null && isThis(player.getCurrentArmor(1));
-            boolean leggings = player.getCurrentArmor(2) != null && isThis(player.getCurrentArmor(2));
-            boolean boots = player.getCurrentArmor(3) != null && isThis(player.getCurrentArmor(3));
-
-            int[] modes = new int[] { helmet ? getAbility(player.getCurrentArmor(0)) : 0,
-                    chestplate ? getAbility(player.getCurrentArmor(1)) : 0,
-                    leggings ? getAbility(player.getCurrentArmor(2)) : 0,
-                    boots ? getAbility(player.getCurrentArmor(3)) : 0, };
-
-            if (helmet) ++armorcounter;
-            if (chestplate) ++armorcounter;
-            if (leggings) ++armorcounter;
-            if (boots) ++armorcounter;
-
-            for (int i : modes) if (i == 1) ++modescounter;
-
-        }
     }
 
     @Override
