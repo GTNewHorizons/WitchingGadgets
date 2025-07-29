@@ -6,7 +6,7 @@ dependencies {
 
     implementation('com.github.GTNewHorizons:Baubles-Expanded:2.1.9-GTNH:dev')
     implementation('com.github.GTNewHorizons:ThaumicBases:1.8.11:dev') {transitive=false}
-    implementation('com.github.GTNewHorizons:Tainted-Magic:7.6.23-GTNH:dev') {
+    implementation('com.github.GTNewHorizons:Tainted-Magic:7.6.25-GTNH:dev') {
      //we don't want the old Baubles Messing stuff up so lets disable that
         exclude module: "Baubles"
     }
