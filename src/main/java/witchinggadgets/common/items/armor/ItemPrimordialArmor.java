@@ -47,6 +47,7 @@ import thaumcraft.common.config.Config;
 import thaumcraft.common.items.armor.Hover;
 import thaumcraft.common.items.armor.ItemFortressArmor;
 import thaumicboots.api.IBoots;
+import thaumicboots.mixins.early.minecraft.EntityLivingBaseAccessor;
 import witchinggadgets.WitchingGadgets;
 import witchinggadgets.api.IPrimordialCrafting;
 import witchinggadgets.client.render.ModelPrimordialArmor;
@@ -55,7 +56,6 @@ import witchinggadgets.common.WGModCompat;
 import witchinggadgets.common.items.interfaces.IItemEvent;
 import witchinggadgets.common.items.tools.IPrimordialGear;
 import witchinggadgets.common.util.Lib;
-import witchinggadgets.mixins.early.minecraft.EntityLivingBaseAccessor;
 
 @Optional.InterfaceList({ @Optional.Interface(iface = "taintedmagic.api.IVoidwalker", modid = "TaintedMagic"),
         @Optional.Interface(iface = "thaumicboots.api.IBoots", modid = "thaumicboots"),
