@@ -37,5 +37,8 @@ public class EtherealWallMaster {
 
     public void integrateOtherNet(EtherealWallMaster net) {
         this.tileMap.addAll(net.tileMap);
+        for (TileEntityEtherealWall other : net.tileMap) {
+            other.master = this;
+        }
     }
 }
