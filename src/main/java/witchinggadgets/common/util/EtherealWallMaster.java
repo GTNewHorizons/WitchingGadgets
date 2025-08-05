@@ -1,18 +1,16 @@
 package witchinggadgets.common.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import net.minecraft.tileentity.TileEntity;
 
 import witchinggadgets.common.blocks.tiles.TileEntityEtherealWall;
 
 public class EtherealWallMaster {
 
-    public List<TileEntityEtherealWall> tileMap;
+    private ObjectOpenHashSet<TileEntityEtherealWall> tileMap;
 
     public EtherealWallMaster() {
-        this.tileMap = new ArrayList<TileEntityEtherealWall>();
+        this.tileMap = new ObjectOpenHashSet<>();
     }
 
     public boolean isAnyTileInNetPowered() {
@@ -42,7 +40,7 @@ public class EtherealWallMaster {
         for (TileEntityEtherealWall tile : tileMap) {
             tile.master = null;
         }
-        this.tileMap = new ArrayList<TileEntityEtherealWall>();
+        this.tileMap = new ObjectOpenHashSet<>();
     }
 
     public TileEntityEtherealWall[] sortTilesByDistanceTo(int x, int y, int z) {

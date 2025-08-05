@@ -1,5 +1,7 @@
 package witchinggadgets.common.blocks.tiles;
 
+import java.util.Objects;
+
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -120,5 +122,16 @@ public class TileEntityEtherealWall extends TileEntityWGBase {
         if (renderType == ConfigBlocks.blockMetalDeviceRI) return blockMeta == 9;
         if (renderType == ConfigBlocks.blockCustomOreRI) return blockMeta == 0 || blockMeta == 7;
         return renderType == ConfigBlocks.blockCosmeticOpaqueRI;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof TileEntityEtherealWall that)) return false;
+        return xCoord == that.xCoord && yCoord == that.yCoord && zCoord == that.zCoord;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(xCoord, yCoord, zCoord);
     }
 }
