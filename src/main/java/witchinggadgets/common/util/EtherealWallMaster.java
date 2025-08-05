@@ -1,18 +1,14 @@
 package witchinggadgets.common.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.minecraft.tileentity.TileEntity;
-
+import it.unimi.dsi.fastutil.objects.ObjectOpenHashSet;
 import witchinggadgets.common.blocks.tiles.TileEntityEtherealWall;
 
 public class EtherealWallMaster {
 
-    public List<TileEntityEtherealWall> tileMap;
+    private ObjectOpenHashSet<TileEntityEtherealWall> tileMap;
 
     public EtherealWallMaster() {
-        this.tileMap = new ArrayList<TileEntityEtherealWall>();
+        this.tileMap = new ObjectOpenHashSet<>();
     }
 
     public boolean isAnyTileInNetPowered() {
@@ -28,12 +24,6 @@ public class EtherealWallMaster {
         return true;
     }
 
-    public boolean removeTileFromNet(TileEntityEtherealWall tile) {
-        this.tileMap.remove(tile);
-        tile.master = null;
-        return true;
-    }
-
     /**
      * Disbands Net and sets every Tile's master to null. Allows Tiles to form new nets. Used to allow an Net to be
      * split.
@@ -42,39 +32,13 @@ public class EtherealWallMaster {
         for (TileEntityEtherealWall tile : tileMap) {
             tile.master = null;
         }
-        this.tileMap = new ArrayList<TileEntityEtherealWall>();
-    }
-
-    public TileEntityEtherealWall[] sortTilesByDistanceTo(int x, int y, int z) {
-        TileEntityEtherealWall[] result = new TileEntityEtherealWall[tileMap.size()];
-        int counter = 0;
-        for (TileEntityEtherealWall tile : tileMap) {
-            result[counter] = tile;
-            counter++;
-        }
-        return result;
-    }
-
-    private boolean areTilesAdjacent(TileEntity par1, TileEntity par2) {
-        boolean sameX = par1.xCoord == par2.xCoord;
-        boolean sameY = par1.yCoord == par2.yCoord;
-        boolean sameZ = par1.zCoord == par2.zCoord;
-        if (sameX && sameY) {
-            if (Math.abs(par1.zCoord - par2.zCoord) == 1) return true;
-            return false;
-        }
-        if (sameZ && sameY) {
-            if (Math.abs(par1.xCoord - par2.xCoord) == 1) return true;
-            return false;
-        }
-        if (sameX && sameZ) {
-            if (Math.abs(par1.yCoord - par2.yCoord) == 1) return true;
-            return false;
-        }
-        return false;
+        this.tileMap = new ObjectOpenHashSet<>();
     }
 
     public void integrateOtherNet(EtherealWallMaster net) {
         this.tileMap.addAll(net.tileMap);
+        for (TileEntityEtherealWall other : net.tileMap) {
+            other.master = this;
+        }
     }
 }
