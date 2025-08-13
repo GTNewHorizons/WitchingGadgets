@@ -111,8 +111,7 @@ public class ContainerPrimordialGlove extends Container {
 
     @Override
     public void detectAndSendChanges() {
-        if (!this.bracelet.equals(this.player.getCurrentEquippedItem()))
-            this.player.closeScreen();
+        if (!this.bracelet.equals(this.player.getCurrentEquippedItem())) this.player.closeScreen();
         super.detectAndSendChanges();
     }
 }

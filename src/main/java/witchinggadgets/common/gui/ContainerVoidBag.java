@@ -105,8 +105,7 @@ public class ContainerVoidBag extends ContainerGhostSlots {
 
     @Override
     public void detectAndSendChanges() {
-        if (!this.pouch.equals(this.player.getCurrentEquippedItem()))
-            player.closeScreen();
+        if (!this.pouch.equals(this.player.getCurrentEquippedItem())) player.closeScreen();
         super.detectAndSendChanges();
     }
 }
