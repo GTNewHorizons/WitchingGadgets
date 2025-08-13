@@ -105,9 +105,14 @@ public class ContainerPrimordialGlove extends Container {
             map.remove(player.getEntityId());
             ItemPrimordialGlove.setSetGems(this.bracelet, ((InventoryPrimordialGlove) this.input).stackList);
 
-            if (!this.bracelet.equals(this.player.getCurrentEquippedItem()))
-                this.player.setCurrentItemOrArmor(0, this.bracelet);
             this.player.inventory.markDirty();
         }
+    }
+
+    @Override
+    public void detectAndSendChanges() {
+        if (!this.bracelet.equals(this.player.getCurrentEquippedItem()))
+            this.player.closeScreen();
+        super.detectAndSendChanges();
     }
 }

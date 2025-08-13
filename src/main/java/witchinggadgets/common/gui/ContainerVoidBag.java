@@ -12,12 +12,12 @@ import witchinggadgets.common.items.tools.ItemBag;
 
 public class ContainerVoidBag extends ContainerGhostSlots {
 
-    private World worldObj;
-    private int blockedSlot;
+    private final World worldObj;
+    private final int blockedSlot;
     public IInventory input = new InventoryBag(this);
-    ItemStack pouch = null;
-    EntityPlayer player = null;
-    private int pouchSlotAmount = 18;
+    ItemStack pouch;
+    EntityPlayer player;
+    private final int pouchSlotAmount = 18;
     private final int hotbarSlot;
 
     public ContainerVoidBag(InventoryPlayer iinventory, World world) {
@@ -34,7 +34,7 @@ public class ContainerVoidBag extends ContainerGhostSlots {
         bindPlayerInventory(iinventory);
 
         if (!world.isRemote) try {
-            ((InventoryBag) this.input).stackList = ((ItemBag) this.pouch.getItem()).getStoredItems(this.pouch);
+            ((InventoryBag) this.input).stackList = ItemBag.getStoredItems(this.pouch);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -97,11 +97,16 @@ public class ContainerVoidBag extends ContainerGhostSlots {
     public void onContainerClosed(EntityPlayer par1EntityPlayer) {
         super.onContainerClosed(par1EntityPlayer);
         if (!this.worldObj.isRemote) {
-            ((ItemBag) this.pouch.getItem()).setStoredItems(this.pouch, ((InventoryBag) this.input).stackList);
+            ItemBag.setStoredItems(this.pouch, ((InventoryBag) this.input).stackList);
 
-            if (!this.player.getCurrentEquippedItem().equals(this.pouch))
-                this.player.setCurrentItemOrArmor(0, this.pouch);
             this.player.inventory.markDirty();
         }
+    }
+
+    @Override
+    public void detectAndSendChanges() {
+        if (!this.pouch.equals(this.player.getCurrentEquippedItem()))
+            player.closeScreen();
+        super.detectAndSendChanges();
     }
 }

@@ -166,7 +166,7 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
             if (i != 4 || WGModCompat.loaded_Twilight) itemList.add(new ItemStack(item, 1, i));
     }
 
-    public ItemStack[] getStoredItems(ItemStack item) {
+    public static ItemStack[] getStoredItems(ItemStack item) {
         ItemStack[] stackList = new ItemStack[27];
 
         if (item.hasTagCompound()) {
@@ -184,7 +184,7 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
         return stackList;
     }
 
-    public void setStoredItems(ItemStack item, ItemStack[] stackList) {
+    public static void setStoredItems(ItemStack item, ItemStack[] stackList) {
         NBTTagList inv = new NBTTagList();
 
         for (int i = 0; i < stackList.length; i++) {

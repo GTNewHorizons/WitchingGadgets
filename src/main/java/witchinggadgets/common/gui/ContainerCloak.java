@@ -13,11 +13,11 @@ import witchinggadgets.common.util.Utilities;
 
 public class ContainerCloak extends Container {
 
-    private World worldObj;
+    private final World worldObj;
     public IInventory input = new InventoryCloak(this);
     ItemStack cloak = null;
     EntityPlayer player = null;
-    private int pouchSlotAmount = 27;
+    private final int pouchSlotAmount = 27;
 
     public ContainerCloak(InventoryPlayer iinventory, World world, ItemStack cloak) {
         this.worldObj = world;
@@ -30,7 +30,7 @@ public class ContainerCloak extends Container {
         bindPlayerInventory(iinventory);
 
         if (!world.isRemote) try {
-            ((InventoryCloak) this.input).stackList = ((ItemCloak) this.cloak.getItem()).getStoredItems(this.cloak);
+            ((InventoryCloak) this.input).stackList = ItemCloak.getStoredItems(this.cloak);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -75,7 +75,7 @@ public class ContainerCloak extends Container {
     public void onContainerClosed(EntityPlayer par1EntityPlayer) {
         super.onContainerClosed(par1EntityPlayer);
         if (!this.worldObj.isRemote) {
-            ((ItemCloak) this.cloak.getItem()).setStoredItems(this.cloak, ((InventoryCloak) this.input).stackList);
+            ItemCloak.setStoredItems(this.cloak, ((InventoryCloak) this.input).stackList);
 
             Utilities.updateActiveMagicalCloak(player, cloak);
         }

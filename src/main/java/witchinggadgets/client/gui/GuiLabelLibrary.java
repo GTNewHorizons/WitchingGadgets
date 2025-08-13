@@ -17,8 +17,8 @@ import witchinggadgets.common.util.network.message.MessageTileUpdate;
 
 public class GuiLabelLibrary extends GuiContainer {
 
-    private TileEntityLabelLibrary tile;
-    private EntityPlayer player;
+    private final TileEntityLabelLibrary tile;
+    private final EntityPlayer player;
 
     public GuiLabelLibrary(InventoryPlayer inventoryPlayer, TileEntityLabelLibrary tileEntity) {
         super(new ContainerLabelLibrary(inventoryPlayer, tileEntity));

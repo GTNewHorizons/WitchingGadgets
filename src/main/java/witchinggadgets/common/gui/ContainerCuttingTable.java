@@ -13,7 +13,7 @@ import witchinggadgets.common.blocks.tiles.TileEntityCuttingTable;
 public class ContainerCuttingTable extends Container {
 
     protected final TileEntityCuttingTable tileEntity;
-    private int slotCount;
+    private final int slotCount;
 
     public ContainerCuttingTable(InventoryPlayer inventoryPlayer, TileEntityCuttingTable te) {
         this.tileEntity = te;

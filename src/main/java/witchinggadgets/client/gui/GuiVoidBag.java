@@ -12,11 +12,8 @@ import witchinggadgets.common.gui.ContainerVoidBag;
 
 public class GuiVoidBag extends GuiContainer {
 
-    InventoryPlayer test;
-
     public GuiVoidBag(InventoryPlayer inventoryPlayer, World world) {
         super(new ContainerVoidBag(inventoryPlayer, world));
-        test = inventoryPlayer;
         this.xSize = 176;
         this.ySize = 166;
     }
