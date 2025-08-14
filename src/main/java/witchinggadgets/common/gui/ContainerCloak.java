@@ -15,16 +15,16 @@ public class ContainerCloak extends Container {
 
     private final World worldObj;
     public IInventory input = new InventoryCloak(this);
-    ItemStack cloak = null;
-    EntityPlayer player = null;
-    private final int pouchSlotAmount = 27;
+    ItemStack cloak;
+    EntityPlayer player;
+    private static final int POUCH_SLOT_AMOUNT = 27;
 
     public ContainerCloak(InventoryPlayer iinventory, World world, ItemStack cloak) {
         this.worldObj = world;
         this.player = iinventory.player;
         this.cloak = cloak;
 
-        for (int a = 0; a < pouchSlotAmount; a++)
+        for (int a = 0; a < POUCH_SLOT_AMOUNT; a++)
             this.addSlotToContainer(new Slot(this.input, a, 8 + a % 9 * 18, 9 + a / 9 * 18));
 
         bindPlayerInventory(iinventory);
@@ -53,9 +53,9 @@ public class ContainerCloak extends Container {
             ItemStack stackInSlot = slotObject.getStack();
             stack = stackInSlot.copy();
 
-            if (slot < pouchSlotAmount) {
-                if (!this.mergeItemStack(stackInSlot, pouchSlotAmount, this.inventorySlots.size(), true)) return null;
-            } else if (!this.mergeItemStack(stackInSlot, 0, pouchSlotAmount, false)) {
+            if (slot < POUCH_SLOT_AMOUNT) {
+                if (!this.mergeItemStack(stackInSlot, POUCH_SLOT_AMOUNT, this.inventorySlots.size(), true)) return null;
+            } else if (!this.mergeItemStack(stackInSlot, 0, POUCH_SLOT_AMOUNT, false)) {
                 return null;
             }
 

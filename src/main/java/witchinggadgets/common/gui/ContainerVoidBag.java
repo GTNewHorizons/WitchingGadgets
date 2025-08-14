@@ -17,8 +17,8 @@ public class ContainerVoidBag extends ContainerGhostSlots {
     public IInventory input = new InventoryBag(this);
     ItemStack pouch;
     EntityPlayer player;
-    private final int pouchSlotAmount = 18;
     private final int hotbarSlot;
+    private static final int POUCH_SLOT_AMOUNT = 18;
 
     public ContainerVoidBag(InventoryPlayer iinventory, World world) {
         this.worldObj = world;
@@ -27,7 +27,7 @@ public class ContainerVoidBag extends ContainerGhostSlots {
         this.blockedSlot = iinventory.currentItem + 45;
         this.hotbarSlot = iinventory.currentItem;
 
-        for (int a = 0; a < pouchSlotAmount; a++) {
+        for (int a = 0; a < POUCH_SLOT_AMOUNT; a++) {
             this.addSlotToContainer(new SlotGhostSingleItem(this.input, a, 29 + a % 6 * 20, 7 + a / 6 * 20));
         }
 
@@ -54,17 +54,17 @@ public class ContainerVoidBag extends ContainerGhostSlots {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int slot) {
         ItemStack stack = null;
-        Slot slotObject = (Slot) this.inventorySlots.get(slot);
+        Slot slotObject = this.inventorySlots.get(slot);
 
         if ((slotObject != null) && (slotObject.getHasStack())) {
             ItemStack stackInSlot = slotObject.getStack();
             stack = stackInSlot.copy();
 
-            if (slot < pouchSlotAmount) {
-                if (!this.mergeItemStack(stackInSlot, pouchSlotAmount, this.inventorySlots.size(), true)) {
+            if (slot < POUCH_SLOT_AMOUNT) {
+                if (!this.mergeItemStack(stackInSlot, POUCH_SLOT_AMOUNT, this.inventorySlots.size(), true)) {
                     return null;
                 }
-            } else if (!this.mergeItemStack(stackInSlot, 0, pouchSlotAmount, false)) {
+            } else if (!this.mergeItemStack(stackInSlot, 0, POUCH_SLOT_AMOUNT, false)) {
                 return null;
             }
 

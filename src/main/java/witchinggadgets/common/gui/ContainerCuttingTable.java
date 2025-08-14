@@ -13,7 +13,7 @@ import witchinggadgets.common.blocks.tiles.TileEntityCuttingTable;
 public class ContainerCuttingTable extends Container {
 
     protected final TileEntityCuttingTable tileEntity;
-    private final int slotCount;
+    private static final int SLOT_AMOUNT = 5;
 
     public ContainerCuttingTable(InventoryPlayer inventoryPlayer, TileEntityCuttingTable te) {
         this.tileEntity = te;
@@ -51,7 +51,6 @@ public class ContainerCuttingTable extends Container {
                 this.inventory.decrStackSize(3, 1);
             }
         });
-        this.slotCount = 5;
         // commonly used vanilla code that adds the player's inventory
         this.bindPlayerInventory(inventoryPlayer);
     }
@@ -84,7 +83,7 @@ public class ContainerCuttingTable extends Container {
             stack = stackInSlot.copy();
 
             // merges the item into player inventory since its in the tileEntity
-            if (slot < slotCount) {
+            if (slot < SLOT_AMOUNT) {
                 if (slot == 4) {
                     int maxStuff = inventorySlots.get(0).getHasStack() ? inventorySlots.get(0).getStack().stackSize : 0;
                     if (inventorySlots.get(1).getHasStack())
@@ -96,11 +95,11 @@ public class ContainerCuttingTable extends Container {
 
                     stackInSlot.stackSize = maxStuff;
 
-                    if (!this.mergeItemStack(stackInSlot, slotCount, (slotCount + 36), true)) return null;
+                    if (!this.mergeItemStack(stackInSlot, SLOT_AMOUNT, (SLOT_AMOUNT + 36), true)) return null;
                     else {
                         for (int i = 0; i <= 4; i++) this.tileEntity.decrStackSize(i, maxStuff);
                     }
-                } else if (!this.mergeItemStack(stackInSlot, slotCount, (slotCount + 36), true)) return null;
+                } else if (!this.mergeItemStack(stackInSlot, SLOT_AMOUNT, (SLOT_AMOUNT + 36), true)) return null;
             }
             // places it into the tileEntity is possible since its in the player inventory
             else {
