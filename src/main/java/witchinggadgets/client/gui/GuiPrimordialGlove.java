@@ -7,7 +7,6 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.StatCollector;
@@ -26,14 +25,11 @@ import witchinggadgets.common.gui.ContainerPrimordialGlove;
 
 public class GuiPrimordialGlove extends GuiContainer {
 
-    InventoryPlayer invPlayer;
-    EntityPlayer player;
-    protected Slot theSlot;
+    private final EntityPlayer player;
 
     public GuiPrimordialGlove(InventoryPlayer inventoryPlayer, World world, int x, int y, int z) {
         super(new ContainerPrimordialGlove(inventoryPlayer, world, x, y, z));
-        invPlayer = inventoryPlayer;
-        player = invPlayer.player;
+        player = inventoryPlayer.player;
         this.xSize = 176;
         this.ySize = 166;
     }

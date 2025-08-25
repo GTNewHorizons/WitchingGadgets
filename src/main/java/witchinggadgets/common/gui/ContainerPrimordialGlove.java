@@ -14,12 +14,12 @@ import witchinggadgets.common.items.tools.ItemPrimordialGlove;
 
 public class ContainerPrimordialGlove extends Container {
 
-    private World worldObj;
-    private int blockedSlot;
+    private final World worldObj;
+    private final int blockedSlot;
     public IInventory input = new InventoryPrimordialGlove(this);
-    ItemStack bracelet = null;
-    EntityPlayer player = null;
-    private int slotAmount = 5;
+    ItemStack bracelet;
+    EntityPlayer player;
+    private static final int SLOT_AMOUNT = 5;
 
     public static HashMap<Integer, ContainerPrimordialGlove> map = new HashMap();
 
@@ -27,7 +27,7 @@ public class ContainerPrimordialGlove extends Container {
         this.worldObj = world;
         this.player = iinventory.player;
         this.bracelet = iinventory.getCurrentItem();
-        this.blockedSlot = (iinventory.currentItem + slotAmount
+        this.blockedSlot = (iinventory.currentItem + SLOT_AMOUNT
                 + iinventory.mainInventory.length
                 - InventoryPlayer.getHotbarSize());
 
@@ -68,11 +68,11 @@ public class ContainerPrimordialGlove extends Container {
             ItemStack stackInSlot = slotObject.getStack();
             stack = stackInSlot.copy();
 
-            if (slot < slotAmount) {
-                if (!this.mergeItemStack(stackInSlot, slotAmount, this.inventorySlots.size(), true)) {
+            if (slot < SLOT_AMOUNT) {
+                if (!this.mergeItemStack(stackInSlot, SLOT_AMOUNT, this.inventorySlots.size(), true)) {
                     return null;
                 }
-            } else if (!this.mergeItemStack(stackInSlot, 0, slotAmount, false)) {
+            } else if (!this.mergeItemStack(stackInSlot, 0, SLOT_AMOUNT, false)) {
                 return null;
             }
 
@@ -105,9 +105,13 @@ public class ContainerPrimordialGlove extends Container {
             map.remove(player.getEntityId());
             ItemPrimordialGlove.setSetGems(this.bracelet, ((InventoryPrimordialGlove) this.input).stackList);
 
-            if (!this.bracelet.equals(this.player.getCurrentEquippedItem()))
-                this.player.setCurrentItemOrArmor(0, this.bracelet);
             this.player.inventory.markDirty();
         }
+    }
+
+    @Override
+    public void detectAndSendChanges() {
+        if (!this.bracelet.equals(this.player.getCurrentEquippedItem())) this.player.closeScreen();
+        super.detectAndSendChanges();
     }
 }

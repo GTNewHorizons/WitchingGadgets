@@ -11,7 +11,7 @@ import witchinggadgets.common.blocks.tiles.TileEntitySpinningWheel;
 public class ContainerSpinningWheel extends Container {
 
     protected TileEntitySpinningWheel tileEntity;
-    private int slotCount;
+    private static final int SLOT_AMOUNT = 6;
 
     public ContainerSpinningWheel(InventoryPlayer inventoryPlayer, TileEntitySpinningWheel te) {
         this.tileEntity = te;
@@ -22,7 +22,6 @@ public class ContainerSpinningWheel extends Container {
             this.addSlotToContainer(new Slot(tileEntity, i, 16, 16 + 24 * i));
         }
         this.addSlotToContainer(new SlotOutput(tileEntity, 5, 142, 64));
-        this.slotCount = 6;
         // commonly used vanilla code that adds the player's inventory
         this.bindPlayerInventory(inventoryPlayer);
     }
@@ -55,13 +54,13 @@ public class ContainerSpinningWheel extends Container {
             stack = stackInSlot.copy();
 
             // merges the item into player inventory since its in the tileEntity
-            if (slot < slotCount) {
-                if (!this.mergeItemStack(stackInSlot, slotCount, (slotCount + 36), true)) {
+            if (slot < SLOT_AMOUNT) {
+                if (!this.mergeItemStack(stackInSlot, SLOT_AMOUNT, (SLOT_AMOUNT + 36), true)) {
                     return null;
                 }
             }
             // places it into the tileEntity is possible since its in the player inventory
-            else if (!this.mergeItemStack(stackInSlot, 0, slotCount, false)) {
+            else if (!this.mergeItemStack(stackInSlot, 0, SLOT_AMOUNT, false)) {
                 return null;
             }
 
