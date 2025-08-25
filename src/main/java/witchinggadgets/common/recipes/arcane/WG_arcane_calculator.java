@@ -26,9 +26,9 @@ public class WG_arcane_calculator {
                     's',
                     "stickThaumium",
                     'r',
-                    ItemList.Sensor_HV.get(1L),
+                    ItemList.Sensor_MV.get(1L),
                     'b',
-                    "circuitAdvanced",
+                    "circuitGood",
                     'g',
                     new ItemStack(ConfigBlocks.blockStoneDevice, 1, 2));
         } else {
