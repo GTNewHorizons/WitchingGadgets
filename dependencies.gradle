@@ -2,7 +2,7 @@
 
 dependencies {
 
-    api('com.github.GTNewHorizons:ThaumicBoots:1.4.13:dev'){transitive=false}
+    api('com.github.GTNewHorizons:ThaumicBoots:1.4.14:dev'){transitive=false}
 
     implementation('com.github.GTNewHorizons:Baubles-Expanded:2.1.13-GTNH:dev')
     implementation('com.github.GTNewHorizons:ThaumicBases:1.8.13:dev') {transitive=false}
@@ -26,6 +26,6 @@ dependencies {
     compileOnly(deobfCurse('enviromine-230236:2269710'))
 
     runtimeOnly('com.github.GTNewHorizons:CodeChickenCore:1.4.7:dev')
-    runtimeOnly('com.github.GTNewHorizons:Railcraft:9.16.32:dev') {transitive=false}
+    runtimeOnly('com.github.GTNewHorizons:Railcraft:9.16.33:dev') {transitive=false}
 
 }
