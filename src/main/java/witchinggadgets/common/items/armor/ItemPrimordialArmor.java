@@ -235,6 +235,9 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
                     if (!world.isDaytime() || player.getBrightness(0) < 4)
                         player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 202, 0, true));
                 }
+                if (player.isBurning()) {
+                    player.extinguish();
+                }
                 break;
             case 4: // water|aqua
                 if (this.armorType == 0) {
@@ -385,9 +388,6 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
             priority = 1;
             ratio = this.damageReduceAmount / 15.0D;
         } else if (source.isFireDamage() || source.isExplosion()) {
-            if (source.isFireDamage() && getAbility(armor) == 3) {
-                if (player.isBurning()) player.extinguish();
-            }
             priority = 1;
             ratio = getAbility(armor) == 3 ? .75f : (this.damageReduceAmount / 10.0D);
         } else if (source.isUnblockable()) {
@@ -518,7 +518,6 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
     public void onUserDamaged(LivingHurtEvent event, ItemStack stack) {
         if (event.entityLiving instanceof EntityPlayer player) {
 
-            int armorcounter = 0;
             int[] modescounter = { 0, 0, 0, 0, 0, 0 };
 
             boolean helmet = player.getCurrentArmor(0) != null && isThis(player.getCurrentArmor(0));
@@ -530,11 +529,6 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
                     chestplate ? getAbility(player.getCurrentArmor(1)) : 0,
                     leggings ? getAbility(player.getCurrentArmor(2)) : 0,
                     boots ? getAbility(player.getCurrentArmor(3)) : 0, };
-
-            if (helmet) ++armorcounter;
-            if (chestplate) ++armorcounter;
-            if (leggings) ++armorcounter;
-            if (boots) ++armorcounter;
 
             for (int i : modes) {
                 if (i == 1) ++modescounter[0];
