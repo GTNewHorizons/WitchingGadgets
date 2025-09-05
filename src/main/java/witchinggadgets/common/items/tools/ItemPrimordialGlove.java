@@ -35,8 +35,6 @@ import witchinggadgets.WitchingGadgets;
 import witchinggadgets.api.IInfusedGem;
 import witchinggadgets.api.IPrimordialCrafting;
 import witchinggadgets.common.WGContent;
-import witchinggadgets.common.gui.ContainerPrimordialGlove;
-import witchinggadgets.common.gui.InventoryPrimordialGlove;
 import witchinggadgets.common.items.ItemInfusedGem;
 import witchinggadgets.common.util.Lib;
 
@@ -120,23 +118,18 @@ public class ItemPrimordialGlove extends Item implements IPrimordialCrafting {
             al.readFromNBT(nodeTag);
 
             ItemStack[] gems = ItemPrimordialGlove.getSetGems(stack);
-            if (!world.isRemote && ContainerPrimordialGlove.map.containsKey(entity.getEntityId()))
-                gems = ((InventoryPrimordialGlove) ContainerPrimordialGlove.map
-                        .get(entity.getEntityId()).input).stackList;
 
-            for (ItemStack g : gems) if (g != null && g.isItemDamaged()) {
-                int restored = al.getAmount(ItemInfusedGem.getAspect(g));
-                int newDmg = Math.max(g.getItemDamage() - restored, 0);
-                g.setItemDamage(newDmg);
+            boolean modified = false;
+            for (ItemStack g : gems) {
+                if (g != null && g.isItemDamaged()) {
+                    int restored = al.getAmount(ItemInfusedGem.getAspect(g));
+                    int newDmg = Math.max(g.getItemDamage() - restored, 0);
+                    g.setItemDamage(newDmg);
+                    modified = true;
+                }
             }
-            ItemPrimordialGlove.setSetGems(stack, gems);
-
-            if (!world.isRemote && ContainerPrimordialGlove.map.containsKey(entity.getEntityId())) {
-                ContainerPrimordialGlove c = ContainerPrimordialGlove.map.get(entity.getEntityId());
-
-                ((InventoryPrimordialGlove) c.input).stackList = gems;
-                ContainerPrimordialGlove.map.get(entity.getEntityId()).onCraftMatrixChanged(c.input);
-                c.detectAndSendChanges();
+            if (modified) {
+                ItemPrimordialGlove.setSetGems(stack, gems);
             }
         }
     }

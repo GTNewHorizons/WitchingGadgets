@@ -2,7 +2,6 @@ package witchinggadgets.common.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -14,7 +13,7 @@ public class ContainerVoidBag extends ContainerGhostSlots {
 
     private final World worldObj;
     private final int blockedSlot;
-    public IInventory input = new InventoryBag(this);
+    public final InventoryBag input = new InventoryBag(this);
     ItemStack pouch;
     EntityPlayer player;
     private final int hotbarSlot;
@@ -33,12 +32,11 @@ public class ContainerVoidBag extends ContainerGhostSlots {
 
         bindPlayerInventory(iinventory);
 
-        if (!world.isRemote) try {
-            ((InventoryBag) this.input).stackList = ItemBag.getStoredItems(this.pouch);
+        try {
+            this.input.stackList = ItemBag.getStoredItems(this.pouch);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        this.onCraftMatrixChanged(this.input);
     }
 
     protected void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
@@ -88,24 +86,27 @@ public class ContainerVoidBag extends ContainerGhostSlots {
                 || mode == 2 && clickedButton == hotbarSlot) {
             return null;
         }
-        ItemBag.setStoredItems(this.pouch, ((InventoryBag) this.input).stackList);
-
-        return super.slotClick(slotId, clickedButton, mode, player);
-    }
-
-    @Override
-    public void onContainerClosed(EntityPlayer par1EntityPlayer) {
-        super.onContainerClosed(par1EntityPlayer);
-        if (!this.worldObj.isRemote) {
-            ItemBag.setStoredItems(this.pouch, ((InventoryBag) this.input).stackList);
-
-            this.player.inventory.markDirty();
+        ItemStack held = player.getHeldItem();
+        if (!worldObj.isRemote && !ItemStack.areItemStacksEqual(this.pouch, held)) {
+            player.closeScreen();
+            return null;
         }
+
+        ItemStack stack = super.slotClick(slotId, clickedButton, mode, player);
+
+        ItemBag.setStoredItems(this.pouch, this.input.stackList);
+        if (!ItemStack.areItemStacksEqual(this.pouch, held)) {
+            held.setTagCompound(this.pouch.getTagCompound());
+        }
+        return stack;
     }
 
     @Override
     public void detectAndSendChanges() {
-        if (!this.pouch.equals(this.player.getCurrentEquippedItem())) player.closeScreen();
+        if (!ItemStack.areItemStacksEqual(player.getHeldItem(), this.pouch)) {
+            player.closeScreen();
+            return;
+        }
         super.detectAndSendChanges();
     }
 }

@@ -3,7 +3,6 @@ package witchinggadgets.common.gui;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -17,7 +16,7 @@ public class ContainerBag extends Container {
     private final int blockedSlot;
     private final ItemStack pouch;
     private final EntityPlayer player;
-    public IInventory input = new InventoryBag(this);
+    public InventoryBag input = new InventoryBag(this);
     private final int hotbarSlot;
     private static final int POUCH_SLOT_AMOUNT = 18;
 
@@ -34,12 +33,11 @@ public class ContainerBag extends Container {
 
         bindPlayerInventory(iinventory);
 
-        if (!world.isRemote) try {
-            ((InventoryBag) this.input).stackList = ItemBag.getStoredItems(this.pouch);
+        try {
+            this.input.stackList = ItemBag.getStoredItems(this.pouch);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        this.onCraftMatrixChanged(this.input);
     }
 
     protected void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
@@ -89,18 +87,19 @@ public class ContainerBag extends Container {
                 || mode == 2 && clickedButton == hotbarSlot) {
             return null;
         }
-        ItemBag.setStoredItems(this.pouch, ((InventoryBag) this.input).stackList);
-
-        return super.slotClick(slotId, clickedButton, mode, player);
-    }
-
-    @Override
-    public void onContainerClosed(EntityPlayer par1EntityPlayer) {
-        super.onContainerClosed(par1EntityPlayer);
-        if (!this.worldObj.isRemote) {
-            ItemBag.setStoredItems(this.pouch, ((InventoryBag) this.input).stackList);
-            this.player.inventory.markDirty();
+        ItemStack held = player.getHeldItem();
+        if (!worldObj.isRemote && !ItemStack.areItemStacksEqual(this.pouch, held)) {
+            player.closeScreen();
+            return null;
         }
+
+        ItemStack stack = super.slotClick(slotId, clickedButton, mode, player);
+
+        ItemBag.setStoredItems(this.pouch, this.input.stackList);
+        if (!ItemStack.areItemStacksEqual(this.pouch, held)) {
+            held.setTagCompound(this.pouch.getTagCompound());
+        }
+        return stack;
     }
 
     private boolean isHoldingPouch() {
@@ -109,10 +108,11 @@ public class ContainerBag extends Container {
     }
 
     public void detectAndSendChanges() {
-        super.detectAndSendChanges();
         if ((!this.player.worldObj.isRemote) && (!isHoldingPouch())) {
             this.player.closeScreen();
+            return;
         }
+        super.detectAndSendChanges();
     }
 
     public void saveCharmPouch() {

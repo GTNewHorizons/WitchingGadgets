@@ -53,8 +53,6 @@ public class InventoryPrimordialGlove implements IInventory {
             if (this.stackList[i].stackSize == 0) {
                 this.stackList[i] = null;
             }
-
-            this.container.onCraftMatrixChanged(this);
             return itemstack;
         }
         return null;
@@ -67,9 +65,6 @@ public class InventoryPrimordialGlove implements IInventory {
         if (stack != null && stack.stackSize > this.getInventoryStackLimit()) {
             stack.stackSize = this.getInventoryStackLimit();
         }
-
-        this.container.onCraftMatrixChanged(this);
-        // this.onInventoryChanged();
     }
 
     @Override
