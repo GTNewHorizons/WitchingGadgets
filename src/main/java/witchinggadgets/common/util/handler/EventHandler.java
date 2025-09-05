@@ -87,6 +87,11 @@ public class EventHandler {
             event.ammount *= 2 + event.entityLiving.getActivePotionEffect(WGContent.pot_cinderCoat).getAmplifier();
         }
 
+        if (event.entityLiving instanceof EntityPlayer player) {
+            for (Object[] gear : buildEventItemList(player)) {
+                itemTriggerEvent((ItemStack) gear[0], player, event);
+            }
+        }
         if (event.source.getSourceOfDamage() instanceof EntityPlayer player
                 && ((EntityPlayer) event.source.getSourceOfDamage()).getCurrentEquippedItem() != null) {
             if (WGContent.ItemPrimordialHammer.equals(player.getCurrentEquippedItem().getItem())
@@ -577,7 +582,7 @@ public class EventHandler {
     }
 
     public Object[][] buildEventItemList(EntityPlayer player) {
-        ArrayList<Object[]> list = new ArrayList<Object[]>();
+        ArrayList<Object[]> list = new ArrayList<>();
 
         ItemStack[] is = player.inventory.armorInventory;
         for (int armor = 0; armor < is.length; armor++)
@@ -608,6 +613,5 @@ public class EventHandler {
             if (event instanceof LivingSetAttackTargetEvent)
                 ((IItemEvent) stack.getItem()).onUserTargeted((LivingSetAttackTargetEvent) event, stack);
         }
-
     }
 }

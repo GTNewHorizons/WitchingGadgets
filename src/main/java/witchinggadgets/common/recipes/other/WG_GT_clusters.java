@@ -238,7 +238,7 @@ public class WG_GT_clusters {
                                                 GTOreDictUnificator.get(OrePrefixes.gemFlawed, aMaterial, tGem, 1L),
                                                 GTOreDictUnificator.get(OrePrefixes.gemChipped, aMaterial, tGem, 1L),
                                                 GTOreDictUnificator.get(OrePrefixes.dust, aMaterial, tGem, 1L))
-                                        .outputChances(600, 2400, 9000, 2400, 5600, 7000).duration(80 * SECONDS).eut(30)
+                                        .outputChances(600, 2400, 9000, 2800, 5600, 7000).duration(80 * SECONDS).eut(30)
                                         .addTo(sifterRecipes);
                                 break;
                             }
@@ -287,7 +287,7 @@ public class WG_GT_clusters {
                                                 GTOreDictUnificator.get(OrePrefixes.gemFlawed, aMaterial, tGem, 2L),
                                                 GTOreDictUnificator.get(OrePrefixes.gemChipped, aMaterial, tGem, 2L),
                                                 GTOreDictUnificator.get(OrePrefixes.dust, aMaterial, tGem, 2L))
-                                        .outputChances(600, 2400, 9000, 2400, 5600, 7000).duration(160 * SECONDS)
+                                        .outputChances(600, 2400, 9000, 2800, 5600, 7000).duration(160 * SECONDS)
                                         .eut(30).addTo(sifterRecipes);
                                 break;
                             }

@@ -1,5 +1,7 @@
 package witchinggadgets.common.blocks.tiles;
 
+import java.util.Objects;
+
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -61,29 +63,20 @@ public class TileEntityEtherealWall extends TileEntityWGBase {
         else if (masterXmin != null) masterOV = masterXmin;
         else if (masterXmax != null) masterOV = masterXmax;
         // unify where necessary
-        if (masterYmin != null && masterYmin != masterOV) {
-            masterOV.integrateOtherNet(masterYmin);
-            ((TileEntityEtherealWall) worldObj.getTileEntity(xCoord, yCoord - 1, zCoord)).master = masterOV;
-        }
         if (masterYmax != null && masterYmax != masterOV) {
             masterOV.integrateOtherNet(masterYmax);
-            ((TileEntityEtherealWall) worldObj.getTileEntity(xCoord, yCoord + 1, zCoord)).master = masterOV;
         }
         if (masterZmin != null && masterZmin != masterOV) {
             masterOV.integrateOtherNet(masterZmin);
-            ((TileEntityEtherealWall) worldObj.getTileEntity(xCoord, yCoord, zCoord - 1)).master = masterOV;
         }
         if (masterZmax != null && masterZmax != masterOV) {
             masterOV.integrateOtherNet(masterZmax);
-            ((TileEntityEtherealWall) worldObj.getTileEntity(xCoord, yCoord, zCoord + 1)).master = masterOV;
         }
         if (masterXmin != null && masterXmin != masterOV) {
             masterOV.integrateOtherNet(masterXmin);
-            ((TileEntityEtherealWall) worldObj.getTileEntity(xCoord - 1, yCoord, zCoord)).master = masterOV;
         }
         if (masterXmax != null && masterXmax != masterOV) {
             masterOV.integrateOtherNet(masterXmax);
-            ((TileEntityEtherealWall) worldObj.getTileEntity(xCoord + 1, yCoord, zCoord)).master = masterOV;
         }
 
         return masterOV;
@@ -120,5 +113,16 @@ public class TileEntityEtherealWall extends TileEntityWGBase {
         if (renderType == ConfigBlocks.blockMetalDeviceRI) return blockMeta == 9;
         if (renderType == ConfigBlocks.blockCustomOreRI) return blockMeta == 0 || blockMeta == 7;
         return renderType == ConfigBlocks.blockCosmeticOpaqueRI;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof TileEntityEtherealWall that)) return false;
+        return xCoord == that.xCoord && yCoord == that.yCoord && zCoord == that.zCoord;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(xCoord, yCoord, zCoord);
     }
 }
