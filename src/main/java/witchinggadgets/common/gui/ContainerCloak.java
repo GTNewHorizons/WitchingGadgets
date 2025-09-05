@@ -3,7 +3,6 @@ package witchinggadgets.common.gui;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -14,7 +13,7 @@ import witchinggadgets.common.util.Utilities;
 public class ContainerCloak extends Container {
 
     private final World worldObj;
-    public IInventory input = new InventoryCloak(this);
+    public InventoryCloak input = new InventoryCloak(this);
     ItemStack cloak;
     EntityPlayer player;
     private static final int POUCH_SLOT_AMOUNT = 27;
@@ -30,11 +29,10 @@ public class ContainerCloak extends Container {
         bindPlayerInventory(iinventory);
 
         if (!world.isRemote) try {
-            ((InventoryCloak) this.input).stackList = ItemCloak.getStoredItems(this.cloak);
+            this.input.stackList = ItemCloak.getStoredItems(this.cloak);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        this.onCraftMatrixChanged(this.input);
     }
 
     protected void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
@@ -47,7 +45,7 @@ public class ContainerCloak extends Container {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int slot) {
         ItemStack stack = null;
-        Slot slotObject = (Slot) this.inventorySlots.get(slot);
+        Slot slotObject = this.inventorySlots.get(slot);
 
         if ((slotObject != null) && (slotObject.getHasStack())) {
             ItemStack stackInSlot = slotObject.getStack();
@@ -75,7 +73,7 @@ public class ContainerCloak extends Container {
     public void onContainerClosed(EntityPlayer par1EntityPlayer) {
         super.onContainerClosed(par1EntityPlayer);
         if (!this.worldObj.isRemote) {
-            ItemCloak.setStoredItems(this.cloak, ((InventoryCloak) this.input).stackList);
+            ItemCloak.setStoredItems(this.cloak, this.input.stackList);
 
             Utilities.updateActiveMagicalCloak(player, cloak);
         }
