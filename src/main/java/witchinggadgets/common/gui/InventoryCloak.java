@@ -53,9 +53,6 @@ public class InventoryCloak implements IInventory {
             if (this.stackList[i].stackSize == 0) {
                 this.stackList[i] = null;
             }
-
-            this.container.onCraftMatrixChanged(this);
-            // this.onInventoryChanged();
             return itemstack;
         }
         return null;
@@ -67,9 +64,6 @@ public class InventoryCloak implements IInventory {
 
         if (stack != null && stack.stackSize > this.getInventoryStackLimit())
             stack.stackSize = this.getInventoryStackLimit();
-
-        this.container.onCraftMatrixChanged(this);
-        // this.onInventoryChanged();
     }
 
     @Override
