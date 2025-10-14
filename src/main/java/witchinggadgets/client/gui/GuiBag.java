@@ -12,11 +12,8 @@ import witchinggadgets.common.gui.ContainerBag;
 
 public class GuiBag extends GuiContainer {
 
-    InventoryPlayer test;
-
     public GuiBag(InventoryPlayer inventoryPlayer, World world) {
         super(new ContainerBag(inventoryPlayer, world));
-        test = inventoryPlayer;
         this.xSize = 176;
         this.ySize = 166;
     }

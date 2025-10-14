@@ -3,7 +3,6 @@ package witchinggadgets.common.gui;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -13,28 +12,27 @@ import witchinggadgets.common.util.Utilities;
 
 public class ContainerCloak extends Container {
 
-    private World worldObj;
-    public IInventory input = new InventoryCloak(this);
-    ItemStack cloak = null;
-    EntityPlayer player = null;
-    private int pouchSlotAmount = 27;
+    private final World worldObj;
+    public InventoryCloak input = new InventoryCloak(this);
+    ItemStack cloak;
+    EntityPlayer player;
+    private static final int POUCH_SLOT_AMOUNT = 27;
 
     public ContainerCloak(InventoryPlayer iinventory, World world, ItemStack cloak) {
         this.worldObj = world;
         this.player = iinventory.player;
         this.cloak = cloak;
 
-        for (int a = 0; a < pouchSlotAmount; a++)
+        for (int a = 0; a < POUCH_SLOT_AMOUNT; a++)
             this.addSlotToContainer(new Slot(this.input, a, 8 + a % 9 * 18, 9 + a / 9 * 18));
 
         bindPlayerInventory(iinventory);
 
         if (!world.isRemote) try {
-            ((InventoryCloak) this.input).stackList = ((ItemCloak) this.cloak.getItem()).getStoredItems(this.cloak);
+            this.input.stackList = ItemCloak.getStoredItems(this.cloak);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        this.onCraftMatrixChanged(this.input);
     }
 
     protected void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
@@ -47,15 +45,15 @@ public class ContainerCloak extends Container {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int slot) {
         ItemStack stack = null;
-        Slot slotObject = (Slot) this.inventorySlots.get(slot);
+        Slot slotObject = this.inventorySlots.get(slot);
 
         if ((slotObject != null) && (slotObject.getHasStack())) {
             ItemStack stackInSlot = slotObject.getStack();
             stack = stackInSlot.copy();
 
-            if (slot < pouchSlotAmount) {
-                if (!this.mergeItemStack(stackInSlot, pouchSlotAmount, this.inventorySlots.size(), true)) return null;
-            } else if (!this.mergeItemStack(stackInSlot, 0, pouchSlotAmount, false)) {
+            if (slot < POUCH_SLOT_AMOUNT) {
+                if (!this.mergeItemStack(stackInSlot, POUCH_SLOT_AMOUNT, this.inventorySlots.size(), true)) return null;
+            } else if (!this.mergeItemStack(stackInSlot, 0, POUCH_SLOT_AMOUNT, false)) {
                 return null;
             }
 
@@ -75,7 +73,7 @@ public class ContainerCloak extends Container {
     public void onContainerClosed(EntityPlayer par1EntityPlayer) {
         super.onContainerClosed(par1EntityPlayer);
         if (!this.worldObj.isRemote) {
-            ((ItemCloak) this.cloak.getItem()).setStoredItems(this.cloak, ((InventoryCloak) this.input).stackList);
+            ItemCloak.setStoredItems(this.cloak, this.input.stackList);
 
             Utilities.updateActiveMagicalCloak(player, cloak);
         }

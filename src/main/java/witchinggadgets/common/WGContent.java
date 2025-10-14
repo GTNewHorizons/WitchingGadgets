@@ -12,6 +12,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
@@ -21,6 +22,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.oredict.OreDictionary;
@@ -182,7 +184,9 @@ public class WGContent {
     public static void preInit() {
         Collections.addAll(b, bannedMaterials);
         Collections.addAll(b, WGConfig.tripplingClusterList);
-        initClusters();
+        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+            initGTClusters();
+        }
         preInitItems();
         preInitBlocks();
     }
@@ -198,7 +202,7 @@ public class WGContent {
 
     // final static String UUIDBASE = "424C5553-5747-1694-4452-";
 
-    private static void initClusters() {
+    private static void initGTClusters() {
         HashSet<String> L = new HashSet<>();
         for (Entry<String, Materials> entry : Materials.getMaterialsMap().entrySet()) {
             Materials material = entry.getValue();
@@ -230,6 +234,18 @@ public class WGContent {
         L.toArray(GT_Cluster);
     }
 
+    public static void checkPotionId(int id, String name) {
+        if (id >= Potion.potionTypes.length) {
+            throw new IllegalStateException(
+                    "Invalid potion ID: The " + name
+                            + " potion ID ("
+                            + id
+                            + ") is out of the potion array bounds ("
+                            + Potion.potionTypes.length
+                            + ").");
+        }
+    }
+
     public static void init() {
         initializeItems();
         initializeBlocks();
@@ -240,13 +256,16 @@ public class WGContent {
         if (k < 128 - l) Utilities.extendPotionArray(l);
         String s = new UUID(109406002307L, 01L).toString();
         int potionId = WGConfig.getPotionID(32, "Knockback Resistance");
+        checkPotionId(potionId, "Knockback Resistance");
         if (potionId > 0) pot_knockbackRes = new WGPotion(potionId, false, 0x6e6e6e, 0, false, 1)
                 .setPotionName("wg.potionKnockbackRes")
                 .func_111184_a(SharedMonsterAttributes.knockbackResistance, s, 0.34D, 0);
         potionId = WGConfig.getPotionID(potionId, "Dissolve");
+        checkPotionId(potionId, "Dissolve");
         if (potionId > 0)
             pot_dissolve = new WGPotion(potionId, true, 0x450b45, 40, true, 2).setPotionName("wg.potionDissolve");
         potionId = WGConfig.getPotionID(potionId, "Cinder Coat");
+        checkPotionId(potionId, "Cinder Coat");
         if (potionId > 0)
             pot_cinderCoat = new WGPotion(potionId, true, 0x8f3f1f, 0, false, 3).setPotionName("wg.potionCinderCoat");
 
@@ -414,14 +433,21 @@ public class WGContent {
     }
 
     private static void postInitBlocks() {
+        Block configBlock = GameRegistry
+                .findBlock(WGConfig.blocksforWGBF[0].split(":")[0], WGConfig.blocksforWGBF[0].split(":")[1]);
         for (int yy = 0; yy <= 1; yy++) for (int zz = 0; zz <= 2; zz++) for (int xx = 0; xx <= 2; xx++) {
             int pos = yy * 9 + zz * 3 + xx;
-            TileEntityBlastfurnace.brickBlock[pos] = GameRegistry
-                    .findBlock(WGConfig.blocksforWGBF[0].split(":")[0], WGConfig.blocksforWGBF[0].split(":")[1]);
+            if (configBlock != null) TileEntityBlastfurnace.brickBlock[pos] = configBlock;
+            else TileEntityBlastfurnace.brickBlock[pos] = pos < 9 && pos != 4 ? Blocks.nether_brick
+                    : pos == 10 || pos == 12 || pos == 13 || pos == 14 || pos == 16 ? Blocks.soul_sand
+                            : Blocks.obsidian;
         }
 
         TileEntityBlastfurnace.stairBlock = GameRegistry
                 .findBlock(WGConfig.blocksforWGBF[1].split(":")[0], WGConfig.blocksforWGBF[1].split(":")[1]);
+        if (TileEntityBlastfurnace.stairBlock == null) {
+            TileEntityBlastfurnace.stairBlock = Blocks.nether_brick_stairs;
+        }
 
         OreDictionary.registerOre("blockVoid", new ItemStack(BlockMetalDevice, 1, 1));
         OreDictionary.registerOre("blockVoidmetal", new ItemStack(BlockMetalDevice, 1, 1));
@@ -489,6 +515,7 @@ public class WGContent {
             ItemPrimordialSword = new ItemPrimordialSword(primordialTool).setUnlocalizedName("WG_PrimordialSword");
             GameRegistry.registerItem(ItemPrimordialSword, ItemPrimordialSword.getUnlocalizedName());
 
+            // if (WGModCompat.loaded_TaintedMagic) {
             ItemPrimordialHelm = new ItemPrimordialArmor(primordialArmor, 4, 0).setUnlocalizedName("WG_PrimordialHelm");
             GameRegistry.registerItem(ItemPrimordialHelm, ItemPrimordialHelm.getUnlocalizedName());
             ItemPrimordialChest = new ItemPrimordialArmor(primordialArmor, 4, 1)
@@ -499,6 +526,9 @@ public class WGContent {
             ItemPrimordialBoots = new ItemPrimordialArmor(primordialArmor, 4, 3)
                     .setUnlocalizedName("WG_PrimordialBoots");
             GameRegistry.registerItem(ItemPrimordialBoots, ItemPrimordialBoots.getUnlocalizedName());
+
+            MinecraftForge.EVENT_BUS.register(new ItemPrimordialArmor.abilityHandler());
+            // }
         }
 
         if (WGConfig.moduleGemcutting) {
@@ -577,8 +607,13 @@ public class WGContent {
                 true);
 
         if (WGConfig.allowClusters) {
-            for (int iOre = 0; iOre < GT_Cluster.length; iOre++)
-                OreDictionary.registerOre("cluster" + GT_Cluster[iOre], new ItemStack(ItemCluster, 1, iOre));
+            if (GT_Cluster != null) {
+                for (int iOre = 0; iOre < GT_Cluster.length; iOre++)
+                    OreDictionary.registerOre("cluster" + GT_Cluster[iOre], new ItemStack(ItemCluster, 1, iOre));
+            } else {
+                for (int iOre = 0; iOre < ItemClusters.subNames.length; iOre++) OreDictionary
+                        .registerOre("cluster" + ItemClusters.subNames[iOre], new ItemStack(ItemCluster, 1, iOre));
+            }
         }
 
         // FMLInterModComms.sendMessage("TravellersGear", "registerTravellersGear_0", new ItemStack(ItemCloak));

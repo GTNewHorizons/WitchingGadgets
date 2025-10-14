@@ -1,5 +1,7 @@
 package witchinggadgets.common.util;
 
+import static gregtech.api.enums.GTValues.W;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -32,7 +35,9 @@ import net.minecraftforge.oredict.OreDictionary;
 import org.apache.logging.log4j.Level;
 
 import baubles.api.BaublesApi;
+import baubles.api.expanded.BaubleExpandedSlots;
 import cpw.mods.fml.common.Loader;
+import gregtech.api.util.GTUtility;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.nodes.INode;
@@ -43,7 +48,6 @@ import thaumcraft.common.items.ItemManaBean;
 import thaumcraft.common.items.baubles.ItemAmuletVis;
 import thaumcraft.common.items.wands.ItemWandCasting;
 import thaumcraft.common.tiles.TileNode;
-import travellersgear.api.TravellersGearAPI;
 import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.items.baubles.ItemCloak;
@@ -335,29 +339,24 @@ public class Utilities {
 
     public static ItemStack[] getActiveMagicalCloak(EntityPlayer player) {
         ArrayList<ItemStack> list = new ArrayList<>();
-        if (TravellersGearAPI.getExtendedInventory(player)[0] != null
-                && TravellersGearAPI.getExtendedInventory(player)[0].getItem() instanceof ItemCloak)
-            list.add(TravellersGearAPI.getExtendedInventory(player)[0]);
-        else if (BaublesApi.getBaubles(player).getStackInSlot(3) != null
-                && BaublesApi.getBaubles(player).getStackInSlot(3).getItem() instanceof ItemCloak)
-            list.add(BaublesApi.getBaubles(player).getStackInSlot(3));
+        ItemStack capeSlot = BaublesApi.getBaubles(player)
+                .getStackInSlot(BaubleExpandedSlots.getIndexesOfAssignedSlotsOfType(BaubleExpandedSlots.capeType)[0]);
+        if (capeSlot != null && capeSlot.getItem() instanceof ItemCloak) list.add(capeSlot);
         return list.toArray(new ItemStack[0]);
     }
 
     public static void updateActiveMagicalCloak(EntityPlayer player, ItemStack cloak) {
         if (cloak != null && cloak.getItem().equals(WGContent.ItemKama)) {
-            if (BaublesApi.getBaubles(player).getStackInSlot(3) != null
-                    && BaublesApi.getBaubles(player).getStackInSlot(3).getItem() instanceof ItemCloak) {
-                if (BaublesApi.getBaubles(player).getStackInSlot(3).getItemDamage() == cloak.getItemDamage())
-                    BaublesApi.getBaubles(player).setInventorySlotContents(3, cloak);
+            ItemStack capeSlot = BaublesApi.getBaubles(player).getStackInSlot(
+                    BaubleExpandedSlots.getIndexesOfAssignedSlotsOfType(BaubleExpandedSlots.capeType)[0]);
+            if (capeSlot != null && capeSlot.getItem() instanceof ItemCloak) {
+                if (capeSlot.getItemDamage() == cloak.getItemDamage())
+                    BaublesApi.getBaubles(player).setInventorySlotContents(
+                            BaubleExpandedSlots.getIndexesOfAssignedSlotsOfType(BaubleExpandedSlots.capeType)[0],
+                            cloak);
                 BaublesApi.getBaubles(player).markDirty();
             }
-        } else if (TravellersGearAPI.getExtendedInventory(player)[0] != null
-                && TravellersGearAPI.getExtendedInventory(player)[0].getItem() instanceof ItemCloak) {
-                    ItemStack[] tgInv = TravellersGearAPI.getExtendedInventory(player);
-                    if (tgInv[0].getItemDamage() == cloak.getItemDamage()) tgInv[0] = cloak;
-                    TravellersGearAPI.setExtendedInventory(player, tgInv);
-                }
+        }
     }
 
     static Class<?> c_tconProjectileWeapon;
@@ -439,5 +438,24 @@ public class Utilities {
         public boolean matches(ItemStack stack) {
             return Utilities.compareToOreName(stack, key) && stack.stackSize >= amount;
         }
+    }
+
+    public static boolean areStacksEqual(ItemStack aStack1, ItemStack aStack2) {
+        if (Loader.isModLoaded("gregtech_nh")) {
+            return (GTUtility.areStacksEqual(aStack1, aStack2, false));
+        } else {
+            return areStacksEqual(aStack1, aStack2, false);
+        }
+    }
+
+    public static boolean areStacksEqual(ItemStack aStack1, ItemStack aStack2, boolean aIgnoreNBT) {
+        return aStack1 != null && aStack2 != null
+                && aStack1.getItem() == aStack2.getItem()
+                && (Items.feather.getDamage(aStack1) == Items.feather.getDamage(aStack2)
+                        || Items.feather.getDamage(aStack1) == W
+                        || Items.feather.getDamage(aStack2) == W)
+                && (aIgnoreNBT || (((aStack1.getTagCompound() == null) == (aStack2.getTagCompound() == null))
+                        && (aStack1.getTagCompound() == null
+                                || aStack1.getTagCompound().equals(aStack2.getTagCompound()))));
     }
 }

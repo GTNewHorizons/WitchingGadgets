@@ -3,18 +3,20 @@ package witchinggadgets.common.util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.common.ForgeHooks;
 
+import baubles.api.BaublesApi;
+import baubles.api.expanded.BaubleExpandedSlots;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import travellersgear.api.TravellersGearAPI;
 import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.WGConfig;
-import witchinggadgets.common.WGContent;
+import witchinggadgets.common.items.baubles.ItemMagicalBaubles;
 import witchinggadgets.common.items.tools.ItemPrimordialGlove;
 import witchinggadgets.common.util.network.message.MessagePrimordialGlove;
 
@@ -22,7 +24,7 @@ public class WGKeyHandler {
 
     public static KeyBinding thaumcraftFKey;
     public static KeyBinding jumpKey;
-
+    public static KeyBinding activateKey;
     public boolean[] keyDown = { false, false, false };
     public static float gemRadial;
     public static boolean gemLock = false;
@@ -44,6 +46,7 @@ public class WGKeyHandler {
                     }
                 }
             }
+
             if (jumpKey == null) jumpKey = Minecraft.getMinecraft().gameSettings.keyBindJump;
 
             EntityPlayer player = event.player;
@@ -61,11 +64,10 @@ public class WGKeyHandler {
                     if (!isJumping) {
                         multiJumps = 0;
                         isJumping = event.player.isAirBorne;
-
-                        if (TravellersGearAPI.getExtendedInventory(event.player)[1] != null
-                                && TravellersGearAPI.getExtendedInventory(event.player)[1].getItem()
-                                        .equals(WGContent.ItemMagicalBaubles)
-                                && TravellersGearAPI.getExtendedInventory(event.player)[1].getItemDamage() == 0)
+                        ItemStack aItem = BaublesApi.getBaubles(player).getStackInSlot(
+                                BaubleExpandedSlots.getIndexesOfAssignedSlotsOfType(BaubleExpandedSlots.charmType)[0]);
+                        if (aItem != null && aItem.getItem() instanceof ItemMagicalBaubles
+                                && aItem.getItemDamage() == 0)
                             multiJumps += 1;
                     }
                     keyDown[2] = true;
@@ -90,7 +92,7 @@ public class WGKeyHandler {
                             }
                         }
             } else {
-                if (keyDown[1] && thaumcraftFKey != null && !thaumcraftFKey.getIsKeyPressed()) keyDown[1] = false;
+                if (keyDown[1] && thaumcraftFKey != null && !thaumcraftFKey.isPressed()) keyDown[1] = false;
                 if (!gemLock) {
                     if (gemRadial > 0) gemRadial -= step;
                     if (gemRadial < 0) gemRadial = 0f;

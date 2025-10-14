@@ -74,7 +74,7 @@ public class WG_arcane_cloaks {
                         new ItemStack(WGContent.ItemMaterial, 1, 6));
             }
 
-            if (WGConfig.capeRaven) {
+            if (WGConfig.capeRaven && Loader.isModLoaded("TwilightForest")) {
                 registerArcaneRecipe(
                         "CLOAK_RAVEN",
                         "",
@@ -101,7 +101,7 @@ public class WG_arcane_cloaks {
                             "SBS",
                             "RCR",
                             'B',
-                            "baubleBeltBase",
+                            new ItemStack(ConfigItems.itemBaubleBlanks, 1, 2),
                             'C',
                             new ItemStack(WGContent.ItemCloak, 1, cm),
                             'S',

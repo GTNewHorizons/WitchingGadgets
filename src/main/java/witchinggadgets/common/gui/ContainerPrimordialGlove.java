@@ -1,11 +1,8 @@
 package witchinggadgets.common.gui;
 
-import java.util.HashMap;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -14,22 +11,18 @@ import witchinggadgets.common.items.tools.ItemPrimordialGlove;
 
 public class ContainerPrimordialGlove extends Container {
 
-    private World worldObj;
-    private int blockedSlot;
-    public IInventory input = new InventoryPrimordialGlove(this);
-    ItemStack bracelet = null;
-    EntityPlayer player = null;
-    private int slotAmount = 5;
-
-    public static HashMap<Integer, ContainerPrimordialGlove> map = new HashMap();
+    private final World worldObj;
+    private final int blockedSlot;
+    public InventoryPrimordialGlove input = new InventoryPrimordialGlove(this);
+    ItemStack bracelet;
+    EntityPlayer player;
+    private static final int SLOT_AMOUNT = 5;
 
     public ContainerPrimordialGlove(InventoryPlayer iinventory, World world, int x, int y, int z) {
         this.worldObj = world;
         this.player = iinventory.player;
         this.bracelet = iinventory.getCurrentItem();
-        this.blockedSlot = (iinventory.currentItem + slotAmount
-                + iinventory.mainInventory.length
-                - InventoryPlayer.getHotbarSize());
+        this.blockedSlot = iinventory.currentItem + SLOT_AMOUNT + 27;
 
         this.addSlotToContainer(new SlotInfusedGem(this.input, 0, 60, 06));
         this.addSlotToContainer(new SlotInfusedGem(this.input, 1, 100, 06));
@@ -40,13 +33,11 @@ public class ContainerPrimordialGlove extends Container {
 
         bindPlayerInventory(iinventory);
 
-        if (!world.isRemote) try {
-            map.put(player.getEntityId(), this);
-            ((InventoryPrimordialGlove) this.input).stackList = ItemPrimordialGlove.getSetGems(this.bracelet);
+        try {
+            this.input.stackList = ItemPrimordialGlove.getSetGems(this.bracelet);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        this.onCraftMatrixChanged(this.input);
     }
 
     protected void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
@@ -62,17 +53,17 @@ public class ContainerPrimordialGlove extends Container {
     @Override
     public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int slot) {
         ItemStack stack = null;
-        Slot slotObject = (Slot) this.inventorySlots.get(slot);
+        Slot slotObject = this.inventorySlots.get(slot);
 
         if ((slotObject != null) && (slotObject.getHasStack())) {
             ItemStack stackInSlot = slotObject.getStack();
             stack = stackInSlot.copy();
 
-            if (slot < slotAmount) {
-                if (!this.mergeItemStack(stackInSlot, slotAmount, this.inventorySlots.size(), true)) {
+            if (slot < SLOT_AMOUNT) {
+                if (!this.mergeItemStack(stackInSlot, SLOT_AMOUNT, this.inventorySlots.size(), true)) {
                     return null;
                 }
-            } else if (!this.mergeItemStack(stackInSlot, 0, slotAmount, false)) {
+            } else if (!this.mergeItemStack(stackInSlot, 0, SLOT_AMOUNT, false)) {
                 return null;
             }
 
@@ -91,23 +82,29 @@ public class ContainerPrimordialGlove extends Container {
     }
 
     @Override
-    public ItemStack slotClick(int par1, int par2, int par3, EntityPlayer par4EntityPlayer) {
+    public ItemStack slotClick(int par1, int par2, int par3, EntityPlayer player) {
         if (par1 == this.blockedSlot || (par2 == 0 && par3 == blockedSlot)) return null;
-        ItemPrimordialGlove.setSetGems(this.bracelet, ((InventoryPrimordialGlove) this.input).stackList);
+        ItemStack held = player.getHeldItem();
+        if (!worldObj.isRemote && !ItemStack.areItemStacksEqual(this.bracelet, held)) {
+            player.closeScreen();
+            return null;
+        }
 
-        return super.slotClick(par1, par2, par3, par4EntityPlayer);
+        ItemStack stack = super.slotClick(par1, par2, par3, player);
+
+        ItemPrimordialGlove.setSetGems(this.bracelet, this.input.stackList);
+        if (!ItemStack.areItemStacksEqual(this.bracelet, held)) {
+            held.setTagCompound(this.bracelet.getTagCompound());
+        }
+        return stack;
     }
 
     @Override
-    public void onContainerClosed(EntityPlayer par1EntityPlayer) {
-        super.onContainerClosed(par1EntityPlayer);
-        if (!this.worldObj.isRemote) {
-            map.remove(player.getEntityId());
-            ItemPrimordialGlove.setSetGems(this.bracelet, ((InventoryPrimordialGlove) this.input).stackList);
-
-            if (!this.bracelet.equals(this.player.getCurrentEquippedItem()))
-                this.player.setCurrentItemOrArmor(0, this.bracelet);
-            this.player.inventory.markDirty();
+    public void detectAndSendChanges() {
+        if (!ItemStack.areItemStacksEqual(player.getHeldItem(), this.bracelet)) {
+            this.player.closeScreen();
+            return;
         }
+        super.detectAndSendChanges();
     }
 }

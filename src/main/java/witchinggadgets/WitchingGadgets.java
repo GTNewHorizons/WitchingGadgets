@@ -1,5 +1,7 @@
 package witchinggadgets;
 
+import static witchinggadgets.common.util.Lib.Title;
+
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -10,6 +12,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import baubles.api.expanded.BaubleExpandedSlots;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
@@ -35,6 +38,7 @@ import witchinggadgets.common.util.handler.EventHandler;
 import witchinggadgets.common.util.handler.PlayerTickHandler;
 import witchinggadgets.common.util.handler.WGWandManager;
 import witchinggadgets.common.util.network.message.MessageClientNotifier;
+import witchinggadgets.common.util.network.message.MessageOpenCloak;
 import witchinggadgets.common.util.network.message.MessagePlaySound;
 import witchinggadgets.common.util.network.message.MessagePrimordialGlove;
 import witchinggadgets.common.util.network.message.MessageTileUpdate;
@@ -44,11 +48,10 @@ import witchinggadgets.common.world.VillageComponentPhotoshop;
         modid = WitchingGadgets.MODID,
         name = WitchingGadgets.MODNAME,
         version = WitchingGadgets.VERSION,
-        dependencies = "required-after:Thaumcraft;" + "required-after:ForbiddenMagic;"
-                + "required-after:TravellersGear@[1.16.4,);"
-                + "required-after:gregtech;"
-                + "required-after:TwilightForest;"
-                + "required-after:TaintedMagic;"
+        dependencies = "required-after:Thaumcraft;" + "after:ForbiddenMagic;"
+                + "after:TwilightForest;"
+                + "after:TaintedMagic;"
+                + "after:gregtech_nh;"
                 + "after:miscutils;"
                 + "after:Mystcraft;"
                 + "after:TConstruct;"
@@ -79,15 +82,26 @@ public class WitchingGadgets {
 
     public static final boolean IS_DREAMCRAFT_LOADED = Loader.isModLoaded("dreamcraft");
 
+    public static boolean isBootsActive = false;
+    public static final String BOOTS = "thaumicboots";
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         logger.log(Level.INFO, "Setting up 'WitchingGadgets'");
+
+        if (Loader.isModLoaded(BOOTS)) {
+            isBootsActive = true;
+        }
 
         WGConfig.loadConfig(event);
         WGContent.preInit();
 
         packetHandler = NetworkRegistry.INSTANCE.newSimpleChannel(MODID);
-
+        BaubleExpandedSlots.tryRegisterType(Title);
+        BaubleExpandedSlots.tryAssignSlotOfType(BaubleExpandedSlots.capeType);
+        BaubleExpandedSlots.tryAssignSlotOfType(BaubleExpandedSlots.gauntletType);
+        BaubleExpandedSlots.tryAssignSlotOfType(BaubleExpandedSlots.charmType);
+        BaubleExpandedSlots.tryAssignSlotOfType(Title);
         eventHandler = new EventHandler();
         MinecraftForge.EVENT_BUS.register(eventHandler);
         playerTickHandler = new PlayerTickHandler();
@@ -125,6 +139,9 @@ public class WitchingGadgets {
                 Side.SERVER);
         packetHandler.registerMessage(MessageTileUpdate.HandlerClient.class, MessageTileUpdate.class, 3, Side.CLIENT);
         packetHandler.registerMessage(MessageTileUpdate.HandlerServer.class, MessageTileUpdate.class, 4, Side.SERVER);
+
+        packetHandler.registerMessage(MessageOpenCloak.HandlerClient.class, MessageOpenCloak.class, 5, Side.CLIENT);
+        packetHandler.registerMessage(MessageOpenCloak.HandlerServer.class, MessageOpenCloak.class, 6, Side.SERVER);
     }
 
     @Mod.EventHandler

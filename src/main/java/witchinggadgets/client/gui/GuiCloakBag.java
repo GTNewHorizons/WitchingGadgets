@@ -13,11 +13,8 @@ import witchinggadgets.common.gui.ContainerCloak;
 
 public class GuiCloakBag extends GuiContainer {
 
-    InventoryPlayer test;
-
     public GuiCloakBag(InventoryPlayer inventoryPlayer, World world, ItemStack cloak) {
         super(new ContainerCloak(inventoryPlayer, world, cloak));
-        test = inventoryPlayer;
         this.xSize = 176;
         this.ySize = 166;
     }

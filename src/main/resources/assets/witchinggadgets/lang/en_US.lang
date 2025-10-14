@@ -1,6 +1,7 @@
 # -- Blocks --
 tile.WG_WallMirror.name=Mirror on the Wall
 tile.WG_VoidWalkway.name=Void Walkway
+tile.WG_StoneDevice.name=Stone Device
 tile.WG_StoneDevice.etherealWall.name=Ethereal Wall
 tile.WG_StoneDevice.magicTileLock.name=Magical Lock
 tile.WG_StoneDevice.obsidianPlate.name=Obsidian Plate
@@ -11,6 +12,7 @@ tile.WG_StoneDevice.sarcophagus.name=Sarcophagus
 tile.WG_StoneDevice.timeStone.name=Ageing Stone
 tile.WG_StoneDevice.blastFurnace.name=Infernal Blast Furnace
 
+tile.WG_WoodenDevice.name=Wooden Device
 tile.WG_WoodenDevice.spinningWheel.name=Spinning Wheel
 tile.WG_WoodenDevice.loom.name=Loom
 tile.WG_WoodenDevice.snowGen.name=Thaumic Snowballer
@@ -21,8 +23,9 @@ tile.WG_WoodenDevice.cuttingTable.name=Cutting Table
 tile.WG_WoodenDevice.saunaStove.name=Thaumic Sauna Stove
 tile.WG_WoodenDevice.labelLibrary.name=Aspect Library
 
+tile.WG_MetalDevice.name=Metal Device
 tile.WG_MetalDevice.essentiaPump.name=Essentia Pump
-tile.WG_MetalDevice.voidmetalBlock.name=Void metal Block
+tile.WG_MetalDevice.voidmetalBlock.name=Void Metal Block
 tile.WG_MetalDevice.terraformer.name=Arcane Terrestrial Reformer
 tile.WG_MetalDevice.tfFocusPlains.name=Terrestrial Focus: Plains
 tile.WG_MetalDevice.tfFocusColdTaiga.name=Terrestrial Focus: Cold Taiga
@@ -41,6 +44,7 @@ tile.WG_CustomAir.name=Glimmer of Light
 
 #
 # -- Items --
+item.WG_Material.name=Material
 item.WG_Material.threadSimple.name=Yarn
 item.WG_Material.threadGold.name=Golden Thread
 item.WG_Material.threadThaumium.name=Thaumium Thread
@@ -52,7 +56,7 @@ item.WG_Material.calculator.name=Arcane Abacus
 item.WG_Material.cuttingTools.name=Gemcutter's Tools
 item.WG_Material.photoPlate.name=Iconographic Plate
 item.WG_Material.developedPhoto.name=Developed Iconograph
-item.WG_Material.clusterAluminum.name=Aluminum Cluster
+item.WG_Material.clusterAluminum.name=Aluminium Cluster
 item.WG_Material.clusterCobalt.name=Cobalt Cluster
 item.WG_Material.clusterArdite.name=Ardite Cluster
 item.WG_Material.clusterNickel.name=Nickel Cluster
@@ -63,12 +67,14 @@ item.WG_Material.gemstoneDust.name=Gemstone Dust
 
 item.WG_Cluster.name=Native %1$s Cluster
 
+item.WG_Bag.name=Bag
 item.WG_Bag.normal.name=Bag of Tricks
 item.WG_Bag.void.name=Voidlinked Bag
 item.WG_Bag.ender.name=Enderlinked Bag
 item.WG_Bag.hungry.name=Hungry Bag
 
 item.WG_ThaumiumShears.name=Thaumium Shears
+item.WG_MagicFood.name=Magic Food
 item.WG_MagicFood.sweetwart.name=Sweetwart
 item.WG_MagicFood.nethercake.name=Nethercake
 item.WG_MagicFood.brainjerky.name=Brain Jerky
@@ -77,17 +83,21 @@ item.WG_AdvancedRobeLegs.name=Bewitched Leggings
 
 item.WG_AdvancedScribingTools.name=Illuminated Scribing Tools
 
+item.WG_Cloak.name=Cloak
 item.WG_Cloak.standard.name=Cloak
 item.WG_Cloak.storage.name=Cloak of Voluminous Pockets
 item.WG_Cloak.raven.name=Mantle of the Raven
 item.WG_Cloak.spectral.name=Spectral Mantle
 item.WG_Cloak.wolf.name=Wolven Cloak
 
+item.WG_Kama.name=Kama
 item.WG_Kama.standard.name=Kama
 item.WG_Kama.storage.name=Kama of Voluminous Pockets
 item.WG_Kama.raven.name=Kama of the Raven
 item.WG_Kama.spectral.name=Spectral Kama
 item.WG_Kama.wolf.name=Wolven Kama
+
+item.WG_Baubles.name=Bauble
 
 #unused
 item.WG_EliteArmorHelm.ANGELIC_0.name=Ophanic Helm
@@ -116,8 +126,10 @@ item.WG_PrimordialBoots.name=Primordial Boots
 item.WG_Baubles.ring_primordial.name=Primordial Ring
 item.WG_Baubles.ring_lifeProtection.name=Ring of Life Protection
 
-item.WG_Baubles.shouldersDoublejump.name=Seraph's Shoulders
-item.WG_Baubles.shouldersKnockback.name=Steadfast Spaulders
+item.WG_Baubles.charmEmpty.name=Empty Leather Charm
+item.WG_Baubles.vambraceEmpty.name=Leather Vambraces
+item.WG_Baubles.charmDoublejump.name=Seraph's Charm
+item.WG_Baubles.charmKnockback.name=Steadfast Charm
 item.WG_Baubles.vambraceStrength.name=Berserker's Bracers
 item.WG_Baubles.vambraceHaste.name=Vambraces of Steady Progression
 item.WG_Baubles.titleCrimsonCult.name=Title: Crimson Cult
@@ -148,6 +160,8 @@ enchantment.wg.soulbound=Soul Tethered
 enchantment.wg.soultether=Soul Tethered
 #
 # -- Random bits of text --
+wg.config.activateKey=Hotkey for activating some worn items.
+
 wg.chat.notyourbag=§7This bag belongs to§r %1$s! §7You are not allowed to open it.§r
 wg.chat.bagunlocked=§7The bag was unlocked, others can now open it.§r
 wg.chat.baglocked=§7The bag was locked, no one but you can open it.§r
@@ -158,6 +172,9 @@ wg.gui.buttonMigrate=Return to nest
 wg.gui.noFeathersToMigrate=You don't have the Items required to return to your nest
 
 wg.desc.noGlide=Gliding disabled
+wg.desc.glide=Gliding enabled
+wg.desc.enableCloak=§7Enable or disable by pressing §a%s1§7.
+wg.desc.cycleArmor=§7Cycle this item by Holding §a%s1§7 and pressing §a%s2§7.
 
 wg.gui.visSize=Vis Capacity
 wg.gui.shiftForAspectList=§7Hold §aShift§7 for a list of Aspects§r
@@ -175,13 +192,13 @@ wg.desc.gemaversion=Natural Aversions:
 wg.desc.ctrlForAspectList=§7Hold §aCtrl§7 for a list of Aspects§r
 wg.desc.scanCompleted=Scan Completed
 
-wg.desc.gearSlot.tg.0=Equipped in the §aCloak§7 slot
-wg.desc.gearSlot.tg.1=Equipped in the §aPauldron§7 slot
-wg.desc.gearSlot.tg.2=Equipped in the §aVambrace§7 slot
-wg.desc.gearSlot.tg.3=Equipped in the §aTitle§7 slot
-wg.desc.gearSlot.bauble.RING=Equipped in the §aRing§7 slot
-wg.desc.gearSlot.bauble.BELT=Equipped in the §aBelt§7 slot
-wg.desc.gearSlot.bauble.AMULET=Equipped in the §aAmulet§7 slot
+wg.desc.gearSlot.bauble.Cloak=Equipped in the §aCloak§7 slot
+wg.desc.gearSlot.bauble.Charm=Equipped in the §aCharm§7 slot
+wg.desc.gearSlot.bauble.Gloves=Equipped in the §aGloves§7 slot
+wg.desc.gearSlot.bauble.Title=Equipped in the §aTitle§7 slot
+wg.desc.gearSlot.bauble.Ring=Equipped in the §aRing§7 slot
+wg.desc.gearSlot.bauble.Belt=Equipped in the §aBelt§7 slot
+wg.desc.gearSlot.bauble.Amulet=Equipped in the §aAmulet§7 slot
 
 wg.desc.filteredItems=Accepted Items:
 
@@ -309,12 +326,16 @@ witchinggadgets_research_page.ADVANCEDROBES.r1=<IMG>witchinggadgets:textures/gui
 #-----------------------#
 witchinggadgets_research_name.WGBAUBLES=Witching Wearables
 witchinggadgets_research_text.WGBAUBLES=[WG] It's like a magic boutique
-witchinggadgets_research_page.WGBAUBLES.1=What looks like catalogue pages from a wizarding equipment store actually proved to be arcane schematics for magical garments! §oAll of these are to be equipped in Baubles or Traveller's Gear slots. The default keybinding for the TG inventory is 'Numpad 7'.§r<BR>§lSteadfast Spaulders:§r<BR>These shoulderpads are not designed to be very fashionable, and their protection value is negligible. However, the magic infused into them is able to root you to the floor, so that you shall not waver when stuck by enemy attacks. §oGrants you 60% knockback resistance.§r
-witchinggadgets_research_page.WGBAUBLES.2=§lBerserker's Bracers:§r<BR>Covered in wolven fur, these vambraces wont hold off blades. But by the magic infused into them, they grant the user the ferociousness of a wolf. Also, they are incredibly fluffy.<BR>§oIncreases your attack damage by 2 points.§r
-witchinggadgets_research_page.WGBAUBLES.3=§lVambraces of Steady Progression:§r<BR>These vambraces, designed by dwarven thaumaturgists, are designed to grant you the ability of digging a hole at a steady pace without interruption. To achieve that, they react dynamically to the working conditions, increasing the user's dig speed while submerged in water, flying in the air, or when confronted with highly resilient materials.<BR>They also increase the speed at which you climb ladders, for when you eventually need to outrun the thing you woke in the dark below.
-witchinggadgets_research_page.WGBAUBLES.4=§lSeraph's Shoulders:§r<BR>Flying is an ability many wish for. It is quite an advanced form of magic that allows users to fly, but a small jump in the air is within your possibilities.<BR>These shoulders spawn some powerful magical wings, which allow you to perform a second jump in midair.
-witchinggadgets_research_page.WGBAUBLES.5=§lRing of the Sniper:§r<BR>Some creatures of the dark are just too strong to face in melee combat, so taking them out from the distance seems more advisable. With the ring of the Sniper, this task is made much easier.<BR>As long as you wear the ring, you will be able to move quicker while drawing a bow. Sneaking with an arrow knocked will allow you to focus on target is in the distance.
-witchinggadgets_research_page.WGBAUBLES.6=§lRing of the Covetous Coin:§r<BR>It's great to be lucky! But one can never have enough luck. You've devised a way to boost your own luck, by socketing a golden coin in a ring and loading it with magic.<BR>§oWearing the ring will increase your fortune and looting by two levels.<BR>The enchanted books used to make the coin can carry any enchantment.§r
+witchinggadgets_research_page.WGBAUBLES.0=What looks like catalogue pages from a wizarding equipment store actually proved to be arcane schematics for magical garments! §oAll of these are to be equipped in Baubles slots.§r<BR>§lEmpty Leather Charm:§r<BR>This basic leather charm is ready to be enchanted.§r
+witchinggadgets_research_page.WGBAUBLES.1=§lLeather Vambraces:§r<BR>Theese basic Vambraces are primed for further enchantments.
+witchinggadgets_research_page.WGBAUBLES.2=§lSteadfast Charm:§r<BR>This charm is not designed to be very fashionable, and the protection value is negligible. However, the magic infused into them is able to root you to the floor, so that you shall not waver when stuck by enemy attacks. §oGrants you 60% knockback resistance.§r
+witchinggadgets_research_page.WGBAUBLES.3=§lBerserker's Bracers:§r<BR>Covered in wolven fur, these vambraces wont hold off blades. But by the magic infused into them, they grant the user the ferociousness of a wolf. Also, they are incredibly fluffy.<BR>§oIncreases your attack damage by 2 points.§r
+witchinggadgets_research_page.WGBAUBLES.4=§lVambraces of Steady Progression:§r<BR>These vambraces, designed by dwarven thaumaturgists, are designed to grant you the ability of digging a hole at a steady pace without interruption. To achieve that, they react dynamically to the working conditions, increasing the user's dig speed while submerged in water, flying in the air, or when confronted with highly resilient materials.<BR>They also increase the speed at which you climb ladders, for when you eventually need to outrun the thing you woke in the dark below.
+witchinggadgets_research_page.WGBAUBLES.5=§lSeraph's Charm:§r<BR>Flying is an ability many wish for. It is quite an advanced form of magic that allows users to fly, but a small jump in the air is within your possibilities.<BR>This charm spawns some powerful magical wings, which allow you to perform a second jump in midair.
+witchinggadgets_research_page.WGBAUBLES.6=§lRing of the Sniper:§r<BR>Some creatures of the dark are just too strong to face in melee combat, so taking them out from the distance seems more advisable. With the ring of the Sniper, this task is made much easier.<BR>As long as you wear the ring, you will be able to move quicker while drawing a bow. Sneaking with an arrow knocked will allow you to focus on target is in the distance.
+witchinggadgets_research_page.WGBAUBLES.7=§lRing of the Covetous Coin:§r<BR>It's great to be lucky! But one can never have enough luck. You've devised a way to boost your own luck, by socketing a golden coin in a ring and loading it with magic.<BR>§oWearing the ring will increase your fortune and looting by two levels.<BR>The enchanted books used to make the coin can carry any enchantment.§r
+witchinggadgets_research_page.WGBAUBLES.8=§lLucky Gold Coin:§r<BR>An enchanted Lucky Coin, ready to be used.§r
+
 #
 witchinggadgets_research_name.CLOAK=Cloak
 witchinggadgets_research_text.CLOAK=[WG] Swish!
@@ -359,13 +380,13 @@ witchinggadgets_research_name.METALLURGICPERFECTION_CLUSTERS=Metallurgic Perfect
 witchinggadgets_research_text.METALLURGICPERFECTION_CLUSTERS=[WG] Purifying most ores into native clusters
 witchinggadgets_research_page.METALLURGICPERFECTION_CLUSTERS.1=The process of metal purification has proven to be very similar for every metal you have tried it on so far.<BR>Following this logic, you have created a general theory for the process, allowing you to transform the majority of ores you encounter into purified clusters, richer in their metal concentration. Your knowledge has enabled you too higher the efficiency of the procedure as well.
 #
-witchinggadgets_research_name.METALLURGICPERFECTION_TRANSMUTATION=[WiP] Metallurgic Perfection: Transmutation
+witchinggadgets_research_name.METALLURGICPERFECTION_TRANSMUTATION=Metallurgic Perfection: Transmutation
 witchinggadgets_research_text.METALLURGICPERFECTION_TRANSMUTATION=[WG] Transforming most metals into others
 witchinggadgets_research_page.METALLURGICPERFECTION_TRANSMUTATION.1=The process of metallic transmutation has proven to be very similar for every metal you have tried it on so far.<BR>Following this logic, you have created a general theory for the process, allowing you to synthesize additional nuggets from an essential mix of §5metallum§0 and the respective aspects that identify the metal.
 #
-witchinggadgets_research_name.PUREALUMINUM=Aluminum Purification
-witchinggadgets_research_text.PUREALUMINUM=[WG] Purification of aluminum into native clusters
-witchinggadgets_research_page.PUREALUMINUM.1=Native clusters are rare concentrations of metals in its purest form. You have discovered a way to purify and concentrate normal aluminum ore into a native aluminum cluster.<BR>When smelted these clusters produces twice the normal amount of aluminum ingots.
+witchinggadgets_research_name.PUREALUMINUM=Aluminium Purification
+witchinggadgets_research_text.PUREALUMINUM=[WG] Purification of aluminium into native clusters
+witchinggadgets_research_page.PUREALUMINUM.1=Native clusters are rare concentrations of metals in its purest form. You have discovered a way to purify and concentrate normal aluminium ore into a native aluminium cluster.<BR>When smelted these clusters produces twice the normal amount of aluminium ingots.
 #
 witchinggadgets_research_name.PURECOBALT=Cobalt Purification
 witchinggadgets_research_text.PURECOBALT=[WG] Purification of cobalt into native clusters
@@ -384,12 +405,12 @@ witchinggadgets_research_text.PUREFZDARKIRON=[WG] Purification of dark iron into
 witchinggadgets_research_page.PUREFZDARKIRON.1=Native clusters are rare concentrations of metals in its purest form. You have discovered a way to purify and concentrate normal dark iron ore into a native dark iron cluster.<BR>When smelted these clusters produces twice the normal amount of dark iron ingots.
 
 #
-witchinggadgets_research_name.TRANSALUMINUM=Aluminum Transmutation
-witchinggadgets_research_text.TRANSALUMINUM=[WG] Transformation of metals into aluminum
-witchinggadgets_research_page.TRANSALUMINUM.1=You have discovered a way to multiply aluminum by steeping aluminum nuggets in §5metallum§0 harvested from other metals.
+witchinggadgets_research_name.TRANSALUMINUM=Aluminium Transmutation
+witchinggadgets_research_text.TRANSALUMINUM=[WG] Transformation of metals into aluminium
+witchinggadgets_research_page.TRANSALUMINUM.1=You have discovered a way to multiply aluminium by steeping aluminium nuggets in §5metallum§0 harvested from other metals.
 
 #INFERNALBLASTFURNACE
-witchinggadgets_research_name.INFERNALBLASTFURNACE=[WiP] Infernal Blast Furnace
+witchinggadgets_research_name.INFERNALBLASTFURNACE=Infernal Blast Furnace
 witchinggadgets_research_text.INFERNALBLASTFURNACE=[WG] IT BURNS!...it smelts, actually...
 witchinggadgets_research_page.INFERNALBLASTFURNACE.1=Burning with an intensely hot magical flame, this furnace is the Thaumaturge's response to the engineer's tedious steps of cleaning their ores. It will smelt any clusters of metal thrown within it into three ingots, which the occasional nugget added to that.<BR>Furthermore, should you require steel for other operations, the impure flame of this devilish artifact is a surefire way to get it. Simply throw in iron ingots or blocks and place Ignis essentia jars aside and wait.<BR>The speed of this construct can be increased by the same means as on the Infernal Furnace.
 witchinggadgets_research_page.INFERNALBLASTFURNACE.2=For normal smelting purposes however, this flame is far too hot, so don't try throwing chicken into it.<BR>Disclaimer: Though the lava in this furnace has been enhanced by magic, it is still just as (if not more) dangerous. Any items not supposed to go into this furnace will be vapourized, as will any Thaumaturge stupid enough to fall into it.
@@ -499,11 +520,11 @@ witchinggadgets_research_page.PRIMORDIALGLOVE.2=It should be noted that the sock
 #PRIMORDIALGEARSET
 witchinggadgets_research_name.PRIMORDIALGEARSET=Primal Revelation
 witchinggadgets_research_text.PRIMORDIALGEARSET=[WG] War on the Eldritch!
-witchinggadgets_research_page.PRIMORDIALGEARSET.1=Like a flash of lightning, the scribbles unrecognizable before now seem crystal clear. You have restored the pages on Primordial Smithing, the art of highenergetic infusion. With it you shall create pieces of gear that surpass your current by lengths. It's designs indicate clearly that these items were not meant for travelling Thaumaturges. This is preparation for the unavoidable conflict with the creatures of the Void. And what's best to combat them than the metal created with their knowledge?<BR>You shall mold items from full blocks of Void metal, items of raw primal power, to protect and arm you.
+witchinggadgets_research_page.PRIMORDIALGEARSET.1=Like a flash of lightning, the scribbles unrecognizable before now seem crystal clear. You have restored the pages on Primordial Smithing, the art of highenergetic infusion. With it you shall create pieces of gear that surpass your current by lengths. It's designs indicate clearly that these items were not meant for travelling Thaumaturges. This is preparation for the unavoidable conflict with the creatures of the Void. And what's best to combat them than the metal created with their knowledge?<BR>You shall mold items from full blocks of Void Metal, items of raw primal power, to protect and arm you.
 witchinggadgets_research_page.PRIMORDIALGEARSET.2=But that's not all! The runes and sockets on said gear will be the perfect for imbuing processes, strengthening their potential even further. Each piece is infused with elemental abilities, increasing their potential immensely!
 
 #PRIMORDIALWEAPONRY
-witchinggadgets_research_name.PRIMORDIALWEAPONRY=[WiP] Primordial Weaponry
+witchinggadgets_research_name.PRIMORDIALWEAPONRY=Primordial Weaponry
 witchinggadgets_research_text.PRIMORDIALWEAPONRY=[WG] Mobile primal launch platform
 witchinggadgets_research_page.PRIMORDIALWEAPONRY.1=Designed only to slay creatures of evil, the Primordial Weapons have surpassed any magical weapon you may have crafted before. Not only do all carry a unique inert ability, each is tunable to a primal affinity, granting it further effects. And don't be scared by their massive appearance, for their wielder does not feel their weight, unlike the target upon which they are swung.
 witchinggadgets_research_page.PRIMORDIALWEAPONRY.2=The Primordial Claymore seems to assist you in aiming your strikes. The blade commonly hits your foe's neck, resulting in decapitation.<BR>The Primordial Warhammer uses its immense weight to literally squash your foes. This results in double damage done to slimes and spiders, and a chance of heavy concussions among all others. It also breaks blocks in a 3x3 when digging, unless you're sneaking. <BR>The Primordial Greataxe cleaves through foliage like a hot knife through butter, but splits apart armor just as well. The damage of the weapon increases based on the armor of the enemy, and the armor itself suffers from increased damage as well.
@@ -524,9 +545,9 @@ witchinggadgets_research_name.PRIMORDIALGREATAXE=Primordial Greataxe
 witchinggadgets_research_text.PRIMORDIALGREATAXE=[WG] Cleave them apart
 witchinggadgets_research_page.PRIMORDIALGREATAXE.1=The Primordial Greataxe cleaves through foliage and wood like a hot knife through butter. But it's sharp edges cut through much more than wood.
 
-witchinggadgets_research_name.PRIMORDIALARMOR=[WiP] Primordial Armor
+witchinggadgets_research_name.PRIMORDIALARMOR=Primordial Armor
 witchinggadgets_research_text.PRIMORDIALARMOR=[WG] Bipedal tank
-witchinggadgets_research_page.PRIMORDIALARMOR.1=Primordial Armor perfects your protection against foes. It will block quite a lot of damage on its own, but it is also receptive for runic enhancements, allowing you to strengthen it even further. In addition to that, it has different effects based on its primal affinity, which you can switch in the active ability menu. §o(Default Hotkey: R)§r<BR>Just like Fortress Armor, it can also be outfitted with Goggles of Revealing and the respective faceplates.
+witchinggadgets_research_page.PRIMORDIALARMOR.1=Primordial Armor perfects your protection against foes. It will block quite a lot of damage on its own, but it is also receptive for runic enhancements, allowing you to strengthen it even further. In addition to that, it has different effects based on its primal affinity, which you can switch between. §o(Default Hotkey: Shift + Right-Click)§r<BR>Just like Fortress Armor, it can also be outfitted with Goggles of Revealing and the respective faceplates.
 witchinggadgets_research_page.PRIMORDIALARMOR.2=§l§n     Primal Affinities:     §r<BR>§nAer:§r Any projectile shot at you is caught by a gust of air and propelled right back at the shooter. §nTerra:§r Increased protection against attacks that would normally penetrate your armor.                        §nIgnis:§r The damage you sustain from flames and explosions is reduced immensely and you will be extinguished when necessary.     §nAqua:§r Minor maladies like (taint) poison, blindness, withering and nausea are cured. Will not work on warp effects.                       §nOrdo:§r The severity and duration of all warp-based status effects is reduced.                    §nPerditio:§r Most hits on the user are avenged by striking the attacker with blindness and slowness. 
 #witchinggadgets_research_name.PRIMORDIALHELMET=Primordial Helm
 #witchinggadgets_research_text.PRIMORDIALHELMET=[WG] 

@@ -1,5 +1,7 @@
 package witchinggadgets.common.items.baubles;
 
+import static witchinggadgets.common.util.Lib.Title;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
@@ -20,12 +22,13 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import baubles.api.BaubleType;
-import baubles.api.IBauble;
+import baubles.api.expanded.BaubleExpandedSlots;
+import baubles.api.expanded.BaubleItemHelper;
+import baubles.api.expanded.IBaubleExpanded;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import travellersgear.api.ITravellersGear;
 import witchinggadgets.WitchingGadgets;
 import witchinggadgets.client.render.ModelMagicalBaubles;
 import witchinggadgets.common.items.ItemInfusedGem;
@@ -33,12 +36,11 @@ import witchinggadgets.common.util.Lib;
 import witchinggadgets.common.util.Utilities;
 
 @Optional.Interface(iface = "vazkii.botania.api.item.ICosmeticAttachable", modid = "Botania")
-public class ItemMagicalBaubles extends Item
-        implements IBauble, ITravellersGear, vazkii.botania.api.item.ICosmeticAttachable {
+public class ItemMagicalBaubles extends Item implements IBaubleExpanded, vazkii.botania.api.item.ICosmeticAttachable {
 
     // String[] subNames = {"ringSocketed_gold","ringSocketed_thaumium","ringSocketed_silver"};
-    public static String[] subNames = { "shouldersDoublejump", "shouldersKnockback", "vambraceStrength",
-            "vambraceHaste", "ringLuck", "titleCrimsonCult", "ringSniper" };
+    public static String[] subNames = { "charmDoublejump", "charmKnockback", "vambraceStrength", "vambraceHaste",
+            "ringLuck", "titleCrimsonCult", "ringSniper", "charmEmpty", "vambraceEmpty" };
     IIcon[] icons = new IIcon[subNames.length];
     public static HashSet<String> bowSpeedPlayers = new HashSet<String>();
 
@@ -61,17 +63,16 @@ public class ItemMagicalBaubles extends Item
 
     @Override
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+        BaubleItemHelper.onBaubleRightClick(stack, world, player);
         return super.onItemRightClick(stack, world, player);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean par4) {
-        String type = getSlot(stack) > 0 ? ("tg." + getSlot(stack)) : "bauble." + getBaubleType(stack);
-        list.add(StatCollector.translateToLocalFormatted(Lib.DESCRIPTION + "gearSlot." + type));
-
-        if (stack.hasTagCompound() && stack.getTagCompound().hasKey("title"))
-            list.add(StatCollector.translateToLocalFormatted(stack.getTagCompound().getString("title")));
+        BaubleItemHelper.addSlotInformation(list, getBaubleTypes(stack));
+        if (stack.hasTagCompound() && stack.getTagCompound().hasKey(Title))
+            list.add(StatCollector.translateToLocalFormatted(stack.getTagCompound().getString(Title)));
 
         if (Loader.isModLoaded("Botania")) {
             ItemStack cosmetic = getCosmeticItem(stack);
@@ -156,16 +157,21 @@ public class ItemMagicalBaubles extends Item
     public BaubleType getBaubleType(ItemStack stack) {
         return subNames[stack.getItemDamage()].startsWith("ring") ? BaubleType.RING
                 : subNames[stack.getItemDamage()].startsWith("belt") ? BaubleType.BELT
-                        : ItemMagicalBaubles.subNames[stack.getItemDamage()].startsWith("necklace") ? BaubleType.AMULET
-                                : null;
+                        : subNames[stack.getItemDamage()].startsWith("necklace") ? BaubleType.AMULET : null;
     }
 
     @Override
-    public int getSlot(ItemStack stack) {
-        return subNames[stack.getItemDamage()].startsWith("cloak") ? 0
-                : subNames[stack.getItemDamage()].startsWith("shoulders") ? 1
-                        : ItemMagicalBaubles.subNames[stack.getItemDamage()].startsWith("vambrace") ? 2
-                                : ItemMagicalBaubles.subNames[stack.getItemDamage()].startsWith("title") ? 3 : -1;
+    public String[] getBaubleTypes(ItemStack stack) {
+        if (subNames[stack.getItemDamage()].startsWith("cloak")) return new String[] { BaubleExpandedSlots.capeType };
+        if (subNames[stack.getItemDamage()].startsWith("charm")) return new String[] { BaubleExpandedSlots.charmType };
+        if (subNames[stack.getItemDamage()].startsWith("ring")) return new String[] { BaubleExpandedSlots.ringType };
+        if (subNames[stack.getItemDamage()].startsWith("belt")) return new String[] { BaubleExpandedSlots.beltType };
+        if (subNames[stack.getItemDamage()].startsWith("necklace"))
+            return new String[] { BaubleExpandedSlots.amuletType };
+        if (subNames[stack.getItemDamage()].startsWith("vambrace"))
+            return new String[] { BaubleExpandedSlots.gauntletType };
+        if (subNames[stack.getItemDamage()].startsWith("title")) return new String[] { "title" };
+        return new String[] { "" };
     }
 
     @Override
@@ -174,28 +180,13 @@ public class ItemMagicalBaubles extends Item
     }
 
     @Override
-    public void onTravelGearTick(EntityPlayer player, ItemStack stack) {
-        onItemTicked(player, stack);
-    }
-
-    @Override
     public void onEquipped(ItemStack stack, EntityLivingBase living) {
         onItemEquipped(living, stack);
     }
 
     @Override
-    public void onTravelGearEquip(EntityPlayer player, ItemStack stack) {
-        onItemEquipped(player, stack);
-    }
-
-    @Override
     public void onUnequipped(ItemStack stack, EntityLivingBase living) {
         onItemUnequipped(living, stack);
-    }
-
-    @Override
-    public void onTravelGearUnequip(EntityPlayer player, ItemStack stack) {
-        onItemUnequipped(player, stack);
     }
 
     public void onItemTicked(EntityLivingBase living, ItemStack stack) {

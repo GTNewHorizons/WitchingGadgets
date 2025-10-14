@@ -3,11 +3,10 @@ package witchinggadgets.common;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 import baubles.api.BaublesApi;
+import baubles.api.expanded.BaubleExpandedSlots;
 import cpw.mods.fml.common.network.IGuiHandler;
-import travellersgear.api.TravellersGearAPI;
 import witchinggadgets.common.blocks.tiles.TileEntityCuttingTable;
 import witchinggadgets.common.blocks.tiles.TileEntityLabelLibrary;
 import witchinggadgets.common.blocks.tiles.TileEntitySpinningWheel;
@@ -35,8 +34,8 @@ public class CommonProxy implements IGuiHandler {
         if (ID == 4 || ID == 5) return new ContainerCloak(
                 player.inventory,
                 world,
-                ID == 4 ? TravellersGearAPI.getExtendedInventory(player)[0]
-                        : BaublesApi.getBaubles(player).getStackInSlot(3));
+                BaublesApi.getBaubles(player).getStackInSlot(
+                        BaubleExpandedSlots.getIndexesOfAssignedSlotsOfType(BaubleExpandedSlots.capeType)[0]));
 
         if (ID == 6) return new ContainerPatchedFocusPouch(player.inventory, world, x, y, z);
 
@@ -62,8 +61,4 @@ public class CommonProxy implements IGuiHandler {
             int color, float scale, float gravity, boolean tinkle, boolean noClip) {}
 
     public void createSweatFx(EntityPlayer player) {}
-
-    public void createFurnaceOutputBlobFx(World worldObj, int x, int y, int z, ForgeDirection facing) {}
-
-    public void createFurnaceDestructionBlobFx(World worldObj, int x, int y, int z) {}
 }

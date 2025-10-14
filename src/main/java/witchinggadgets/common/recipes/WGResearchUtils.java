@@ -6,7 +6,6 @@ import net.minecraft.item.crafting.IRecipe;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import gregtech.api.util.GTUtility;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.crafting.CrucibleRecipe;
 import thaumcraft.api.crafting.IArcaneRecipe;
@@ -14,6 +13,7 @@ import thaumcraft.api.crafting.InfusionRecipe;
 import thaumcraft.api.research.ResearchCategories;
 import thaumcraft.api.research.ResearchItem;
 import thaumcraft.api.research.ResearchPage;
+import witchinggadgets.common.util.Utilities;
 
 public class WGResearchUtils {
 
@@ -33,7 +33,7 @@ public class WGResearchUtils {
                         if (craft instanceof IRecipe) {
                             IRecipe theCraft = (IRecipe) craft;
                             if (theCraft.getRecipeOutput() != null
-                                    && GTUtility.areStacksEqual(theCraft.getRecipeOutput(), recipe.getRecipeOutput())) {
+                                    && Utilities.areStacksEqual(theCraft.getRecipeOutput(), recipe.getRecipeOutput())) {
                                 pages[x] = new ResearchPage(theCraft);
                                 break;
                             }
@@ -45,7 +45,7 @@ public class WGResearchUtils {
                         if (craft instanceof IArcaneRecipe) {
                             IArcaneRecipe theCraft = (IArcaneRecipe) craft;
                             if (theCraft.getRecipeOutput() != null
-                                    && GTUtility.areStacksEqual(theCraft.getRecipeOutput(), recipe.getRecipeOutput())) {
+                                    && Utilities.areStacksEqual(theCraft.getRecipeOutput(), recipe.getRecipeOutput())) {
                                 pages[x] = new ResearchPage(theCraft);
                                 break;
                             }
@@ -57,7 +57,7 @@ public class WGResearchUtils {
                         if (craft instanceof CrucibleRecipe) {
                             CrucibleRecipe theCraft = (CrucibleRecipe) craft;
                             if (theCraft.getRecipeOutput() != null
-                                    && GTUtility.areStacksEqual(theCraft.getRecipeOutput(), recipe.getRecipeOutput())) {
+                                    && Utilities.areStacksEqual(theCraft.getRecipeOutput(), recipe.getRecipeOutput())) {
                                 pages[x] = new ResearchPage(theCraft);
                                 break;
                             }
@@ -69,7 +69,7 @@ public class WGResearchUtils {
                         for (Object craft : ThaumcraftApi.getCraftingRecipes()) {
                             if (craft instanceof InfusionRecipe) {
                                 InfusionRecipe theCraft = (InfusionRecipe) craft;
-                                if (theCraft.getRecipeOutput() instanceof ItemStack && GTUtility.areStacksEqual(
+                                if (theCraft.getRecipeOutput() instanceof ItemStack && Utilities.areStacksEqual(
                                         ((ItemStack) theCraft.getRecipeOutput()),
                                         (ItemStack) recipe.getRecipeOutput())) {
                                     pages[x] = new ResearchPage(theCraft);

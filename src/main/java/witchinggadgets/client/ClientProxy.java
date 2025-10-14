@@ -1,6 +1,6 @@
 package witchinggadgets.client;
 
-import net.minecraft.client.particle.EntityLavaFX;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
@@ -8,9 +8,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.client.model.IModelCustom;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.util.ForgeDirection;
+
+import org.lwjgl.input.Keyboard;
 
 import baubles.api.BaublesApi;
+import baubles.api.expanded.BaubleExpandedSlots;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -18,7 +20,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import thaumcraft.client.fx.ParticleEngine;
 import thaumcraft.client.fx.particles.FXEssentiaTrail;
 import thaumcraft.client.fx.particles.FXWisp;
-import travellersgear.api.TravellersGearAPI;
+import witchinggadgets.WitchingGadgets;
 import witchinggadgets.client.fx.EntityFXSweat;
 import witchinggadgets.client.gui.GuiBag;
 import witchinggadgets.client.gui.GuiCloakBag;
@@ -115,7 +117,11 @@ public class ClientProxy extends CommonProxy {
         MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
         FMLCommonHandler.instance().bus().register(new WGKeyHandler());
         FMLCommonHandler.instance().bus().register(new ClientTickHandler());
-
+        ClientRegistry.registerKeyBinding(
+                WGKeyHandler.activateKey = new KeyBinding(
+                        "wg.config.activateKey",
+                        Keyboard.KEY_NONE,
+                        WitchingGadgets.MODNAME));
         if (WGConfig.enableSearch) {
             ThaumonomiconIndexSearcher.init();
         }
@@ -130,8 +136,8 @@ public class ClientProxy extends CommonProxy {
         if (ID == 4 || ID == 5) return new GuiCloakBag(
                 player.inventory,
                 world,
-                ID == 4 ? TravellersGearAPI.getExtendedInventory(player)[0]
-                        : BaublesApi.getBaubles(player).getStackInSlot(3));
+                BaublesApi.getBaubles(player).getStackInSlot(
+                        BaubleExpandedSlots.getIndexOfTypeInRegisteredTypes(BaubleExpandedSlots.capeType)));
 
         if (ID == 6) return new GuiPatchedFocusPouch(player.inventory, world, x, y, z);
 
@@ -181,31 +187,4 @@ public class ClientProxy extends CommonProxy {
         FMLClientHandler.instance().getClient().effectRenderer.addEffect(fx);
     }
 
-    @Override
-    public void createFurnaceOutputBlobFx(World worldObj, int x, int y, int z, ForgeDirection facing) {
-        float xx = x + .5f + facing.offsetX * 1.66f + worldObj.rand.nextFloat() * .3f;
-        float zz = z + .5f + facing.offsetZ * 1.66f + worldObj.rand.nextFloat() * .3f;
-
-        EntityLavaFX fb = new EntityLavaFX(worldObj, xx, y + 1.3f, zz);
-        fb.motionY = .2f * worldObj.rand.nextFloat();
-        float mx = facing.offsetX != 0 ? (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * .5f
-                : facing.offsetX * worldObj.rand.nextFloat();
-        float mz = facing.offsetZ != 0 ? (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * .5f
-                : facing.offsetZ * worldObj.rand.nextFloat();
-        fb.motionX = (0.15f * mx);
-        fb.motionZ = (0.15f * mz);
-        FMLClientHandler.instance().getClient().effectRenderer.addEffect(fb);
-    }
-
-    @Override
-    public void createFurnaceDestructionBlobFx(World worldObj, int x, int y, int z) {
-        float xx = x + .5f + worldObj.rand.nextFloat() * .3f;
-        float zz = z + .5f + worldObj.rand.nextFloat() * .3f;
-
-        EntityLavaFX fb = new EntityLavaFX(worldObj, xx, y + 1.5f, zz);
-        fb.motionY = .2F;
-        fb.motionX = (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * .5f * .15f;
-        fb.motionZ = (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * .5f * .15f;
-        FMLClientHandler.instance().getClient().effectRenderer.addEffect(fb);
-    }
 }

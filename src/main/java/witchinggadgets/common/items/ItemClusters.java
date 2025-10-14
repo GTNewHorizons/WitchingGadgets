@@ -11,12 +11,15 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.OreDictionary;
 
+import cpw.mods.fml.common.Optional;
 import gregtech.api.enums.Materials;
+import mods.railcraft.common.items.firestone.IItemFirestoneBurning;
 import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.WGConfig;
 import witchinggadgets.common.WGContent;
 
-public class ItemClusters extends Item {
+@Optional.Interface(iface = "mods.railcraft.common.items.firestone.IItemFirestoneBurning", modid = "Railcraft")
+public class ItemClusters extends Item implements IItemFirestoneBurning {
 
     public static HashMap<String, String> loccodename = new HashMap<>();
 
@@ -34,19 +37,37 @@ public class ItemClusters extends Item {
 
     @Override
     public int getColorFromItemStack(ItemStack stack, int pass) {
-        if (pass == 0 && stack.getItemDamage() < witchinggadgets.common.WGContent.GT_Cluster.length) {
-            if (WGContent.GT_Cluster_Color.get(witchinggadgets.common.WGContent.GT_Cluster[stack.getItemDamage()])
-                    != null)
-                return WGContent.GT_Cluster_Color
-                        .get(witchinggadgets.common.WGContent.GT_Cluster[stack.getItemDamage()])[0];
+        if (witchinggadgets.common.WGContent.GT_Cluster != null) {
+            if (pass == 0 && stack.getItemDamage() < witchinggadgets.common.WGContent.GT_Cluster.length) {
+                if (WGContent.GT_Cluster_Color.get(witchinggadgets.common.WGContent.GT_Cluster[stack.getItemDamage()])
+                        != null)
+                    return WGContent.GT_Cluster_Color
+                            .get(witchinggadgets.common.WGContent.GT_Cluster[stack.getItemDamage()])[0];
+            }
+        } else {
+            if (pass == 0) {
+                if (materialMap.get(subNames[stack.getItemDamage()]) != null) {
+                    Integer[] mat = materialMap.get(subNames[stack.getItemDamage()]);
+                    if (mat != null && mat.length > 0) {
+                        return mat[0];
+                    }
+                }
+            }
         }
         return 0xffffff;
     }
 
     public static ItemStack getCluster(String ore) {
-        if (WGConfig.allowClusters) for (int sn = 0; sn < witchinggadgets.common.WGContent.GT_Cluster.length; sn++)
-            if (witchinggadgets.common.WGContent.GT_Cluster[sn].equalsIgnoreCase(ore))
-                return new ItemStack(WGContent.ItemCluster, 1, sn);
+        if (WGConfig.allowClusters) {
+            if (witchinggadgets.common.WGContent.GT_Cluster != null) {
+                for (int sn = 0; sn < witchinggadgets.common.WGContent.GT_Cluster.length; sn++)
+                    if (witchinggadgets.common.WGContent.GT_Cluster[sn].equalsIgnoreCase(ore))
+                        return new ItemStack(WGContent.ItemCluster, 1, sn);
+            } else {
+                for (int sn = 0; sn < subNames.length; sn++)
+                    if (subNames[sn].equalsIgnoreCase(ore)) return new ItemStack(WGContent.ItemCluster, 1, sn);
+            }
+        }
         return null;
     }
 
@@ -65,12 +86,24 @@ public class ItemClusters extends Item {
 
     @Override
     public IIcon getIconFromDamageForRenderPass(int damage, int pass) {
-        if (pass == 0) return this.iconMetal;
-        else if (damage < witchinggadgets.common.WGContent.GT_Cluster.length
-                && WGContent.GT_Cluster_Color.get(witchinggadgets.common.WGContent.GT_Cluster[damage]) != null)
-            return this.iconOverlay[WGContent.GT_Cluster_Color
-                    .get(witchinggadgets.common.WGContent.GT_Cluster[damage])[1]];
-        else return this.iconOverlay[0];
+        if (pass == 0) {
+            return this.iconMetal;
+        }
+        if (witchinggadgets.common.WGContent.GT_Cluster != null) {
+            if (damage < witchinggadgets.common.WGContent.GT_Cluster.length
+                    && WGContent.GT_Cluster_Color.get(witchinggadgets.common.WGContent.GT_Cluster[damage]) != null) {
+                return this.iconOverlay[WGContent.GT_Cluster_Color
+                        .get(witchinggadgets.common.WGContent.GT_Cluster[damage])[1]];
+            } else {
+                return this.iconOverlay[0];
+            }
+        } else {
+            if (materialMap.get(subNames[damage]) != null) {
+                return this.iconOverlay[materialMap.get(subNames[damage])[1]];
+            } else {
+                return this.iconOverlay[0];
+            }
+        }
     }
 
     @Override
@@ -80,16 +113,48 @@ public class ItemClusters extends Item {
 
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
-        String ss = Materials.get(witchinggadgets.common.WGContent.GT_Cluster[stack.getItemDamage()]).mLocalizedName;
-        return StatCollector.translateToLocalFormatted(this.getUnlocalizedNameInefficiently(stack) + ".name", ss)
-                .trim();
+        if (witchinggadgets.common.WGContent.GT_Cluster != null) {
+            String ss = Materials
+                    .get(witchinggadgets.common.WGContent.GT_Cluster[stack.getItemDamage()]).mLocalizedName;
+            return StatCollector.translateToLocalFormatted(this.getUnlocalizedNameInefficiently(stack) + ".name", ss)
+                    .trim();
+        } else {
+            String ss = "";
+            if (!OreDictionary.getOres("ingot" + subNames[stack.getItemDamage()]).isEmpty()) {
+                ItemStack ingot = OreDictionary.getOres("ingot" + subNames[stack.getItemDamage()]).get(0);
+                int limit = ingot.getDisplayName().lastIndexOf(" ");
+                ss = ingot.getDisplayName().substring(0, Math.max(0, limit));
+            }
+            return StatCollector.translateToLocalFormatted(this.getUnlocalizedNameInefficiently(stack) + ".name", ss)
+                    .trim();
+        }
     }
 
     @Override
     public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> itemList) {
-        if (WGConfig.allowClusters)
+        if (WGConfig.allowClusters) if (witchinggadgets.common.WGContent.GT_Cluster != null) {
             for (int iOre = 0; iOre < witchinggadgets.common.WGContent.GT_Cluster.length; iOre++)
                 if (!OreDictionary.getOres("ore" + witchinggadgets.common.WGContent.GT_Cluster[iOre]).isEmpty()) // &&
                     itemList.add(new ItemStack(item, 1, iOre));
+        } else {
+            for (int iOre = 0; iOre < subNames.length; iOre++)
+                if (!OreDictionary.getOres("ore" + subNames[iOre]).isEmpty()
+                        && !OreDictionary.getOres("ingot" + subNames[iOre]).isEmpty())
+                    itemList.add(new ItemStack(item, 1, iOre));
+        }
+    }
+
+    @Override
+    @Optional.Method(modid = "Railcraft")
+    public boolean shouldBurn(ItemStack itemStack) {
+        if (itemStack != null) {
+            int dmg = itemStack.getItemDamage();
+            // This should be safe since mDefaultLocalName gets inserted into GT_Cluster at
+            // {@link WGContent#initGTClusters()} directly and the firestone Material name
+            // is a literal inside gregtechs MaterialsInit1 class
+            return (dmg < witchinggadgets.common.WGContent.GT_Cluster.length
+                    && witchinggadgets.common.WGContent.GT_Cluster[dmg] == Materials.Firestone.mDefaultLocalName);
+        }
+        return false;
     }
 }

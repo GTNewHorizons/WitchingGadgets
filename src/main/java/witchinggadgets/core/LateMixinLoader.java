@@ -20,7 +20,6 @@ public class LateMixinLoader implements ILateMixinLoader {
         final List<String> mixins = new ArrayList<>();
         mixins.add("thaumcraft.ContainerFocusPouchAccessor");
         mixins.add("thaumcraft.MixinItemBootsTraveller");
-        mixins.add("thaumcraft.MixinItemFocusPouchBauble");
         mixins.add("thaumcraft.MixinWorldGenEldritchRing");
         mixins.add("thaumcraft.MixinWorldGenHilltopStones");
         return mixins;

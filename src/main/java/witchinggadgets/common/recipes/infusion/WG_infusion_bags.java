@@ -17,7 +17,7 @@ import witchinggadgets.common.WGContent;
 public class WG_infusion_bags {
 
     public static void registerBags() {
-        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+        if (Loader.isModLoaded("Railcraft") && Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
             if (WGConfig.bagEnder) {
                 registerInfusionRecipe(
                         "ENDERBAG",

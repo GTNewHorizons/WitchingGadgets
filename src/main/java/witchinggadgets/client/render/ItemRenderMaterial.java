@@ -37,19 +37,10 @@ public class ItemRenderMaterial implements IItemRenderer {
     public boolean handleRenderType(ItemStack stack, ItemRenderType type) {
         int meta = stack.getItemDamage();
         if (meta != 9 && meta != 10) return false;
-        switch (type) {
-            case ENTITY:
-                return true;
-            case EQUIPPED:
-                return false;
-            case EQUIPPED_FIRST_PERSON:
-                return true;
-            case FIRST_PERSON_MAP:
-                return false;
-            case INVENTORY:
-                return false;
-        }
-        return false;
+        return switch (type) {
+            case ENTITY, EQUIPPED_FIRST_PERSON -> true;
+            case EQUIPPED, FIRST_PERSON_MAP, INVENTORY -> false;
+        };
     }
 
     @Override

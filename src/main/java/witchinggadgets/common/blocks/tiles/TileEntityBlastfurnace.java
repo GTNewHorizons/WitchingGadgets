@@ -22,12 +22,14 @@ import thaumcraft.common.lib.network.PacketHandler;
 import thaumcraft.common.lib.network.fx.PacketFXEssentiaSource;
 import thaumcraft.common.lib.utils.InventoryUtils;
 import thaumcraft.common.tiles.TileBellows;
-import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.util.Utilities;
 import witchinggadgets.common.util.Utilities.OreDictStack;
 import witchinggadgets.common.util.recipe.InfernalBlastfurnaceRecipe;
 
 public class TileEntityBlastfurnace extends TileEntityWGBase implements IEssentiaTransport {
+
+    public static Block[] brickBlock = new Block[18];
+    public static Block stairBlock;
 
     public byte position = -1;
     public int[] masterPos = { -1, -1, -1 };
@@ -65,7 +67,7 @@ public class TileEntityBlastfurnace extends TileEntityWGBase implements IEssenti
         if (tick <= 80) ++tick;
         else tick = 0;
 
-        if (fuel < 256) storeFuel();
+        if (fuel < 32) storeFuel();
 
         boolean cooking = false;
 
@@ -316,7 +318,20 @@ public class TileEntityBlastfurnace extends TileEntityWGBase implements IEssenti
             this.specialFuel = arg == 1;
             worldObj.markBlockRangeForRenderUpdate(xCoord - 1, yCoord, zCoord - 1, xCoord + 1, yCoord + 2, zCoord + 1);
             for (int i = 0; i < 5; i++) {
-                WitchingGadgets.proxy.createFurnaceOutputBlobFx(worldObj, xCoord, yCoord, zCoord, facing);
+                float xx = xCoord + .5f + facing.offsetX * 1.66f + worldObj.rand.nextFloat() * .3f;
+                float zz = zCoord + .5f + facing.offsetZ * 1.66f + worldObj.rand.nextFloat() * .3f;
+                float mx = facing.offsetX != 0 ? (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * .5f
+                        : facing.offsetX * worldObj.rand.nextFloat();
+                float mz = facing.offsetZ != 0 ? (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * .5f
+                        : facing.offsetZ * worldObj.rand.nextFloat();
+                worldObj.spawnParticle(
+                        "lava",
+                        xx,
+                        yCoord + 0.9,
+                        zz,
+                        0.15 * mx,
+                        .2f * worldObj.rand.nextFloat(),
+                        0.15 * mz);
             }
             worldObj.playSound(
                     xCoord + .5f + facing.offsetX * 1.66f,
@@ -337,7 +352,14 @@ public class TileEntityBlastfurnace extends TileEntityWGBase implements IEssenti
 
         if (eventNum == 5) {
             for (int i = 0; i < 3; i++) {
-                worldObj.spawnParticle("lava", xCoord + .5, yCoord + .9, zCoord + .5, 0.0D, 0.0D, 0.0D);
+                worldObj.spawnParticle(
+                        "lava",
+                        xCoord + 0.5 + worldObj.rand.nextFloat() * 0.3,
+                        yCoord + 0.9,
+                        zCoord + 0.5 + worldObj.rand.nextFloat() * .3,
+                        (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * 0.5 * 0.15,
+                        0.2,
+                        (worldObj.rand.nextFloat() - worldObj.rand.nextFloat()) * 0.5 * 0.15);
             }
 
             worldObj.playSound(
@@ -399,9 +421,5 @@ public class TileEntityBlastfurnace extends TileEntityWGBase implements IEssenti
             case 22 -> icon_lava;
             default -> icon_bricks;
         };
-
     }
-
-    public static Block[] brickBlock = new Block[18];
-    public static Block stairBlock;
 }

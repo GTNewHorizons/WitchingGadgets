@@ -1,8 +1,12 @@
 package witchinggadgets.common.items.tools;
 
+import static witchinggadgets.common.util.WGKeyHandler.thaumcraftFKey;
+
 import java.util.List;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -15,6 +19,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Multimap;
@@ -30,9 +35,8 @@ import witchinggadgets.WitchingGadgets;
 import witchinggadgets.api.IInfusedGem;
 import witchinggadgets.api.IPrimordialCrafting;
 import witchinggadgets.common.WGContent;
-import witchinggadgets.common.gui.ContainerPrimordialGlove;
-import witchinggadgets.common.gui.InventoryPrimordialGlove;
 import witchinggadgets.common.items.ItemInfusedGem;
+import witchinggadgets.common.util.Lib;
 
 public class ItemPrimordialGlove extends Item implements IPrimordialCrafting {
 
@@ -50,6 +54,19 @@ public class ItemPrimordialGlove extends Item implements IPrimordialCrafting {
 
     @Override
     public void addInformation(ItemStack item, EntityPlayer par2EntityPlayer, List<String> list, boolean par4) {
+        GameSettings keybind = Minecraft.getMinecraft().gameSettings;
+        list.add(
+                StatCollector.translateToLocal(Lib.DESCRIPTION + "cycleArmor")
+                        .replaceAll(
+                                "%s1",
+                                StatCollector.translateToLocalFormatted(
+                                        GameSettings.getKeyDisplayString(keybind.keyBindSneak.getKeyCode())))
+                        .replaceAll(
+                                "%s2",
+                                StatCollector.translateToLocalFormatted(
+                                        thaumcraftFKey != null
+                                                ? GameSettings.getKeyDisplayString(thaumcraftFKey.getKeyCode())
+                                                : "")));
         super.addInformation(item, par2EntityPlayer, list, par4);
     }
 
@@ -101,23 +118,18 @@ public class ItemPrimordialGlove extends Item implements IPrimordialCrafting {
             al.readFromNBT(nodeTag);
 
             ItemStack[] gems = ItemPrimordialGlove.getSetGems(stack);
-            if (!world.isRemote && ContainerPrimordialGlove.map.containsKey(entity.getEntityId()))
-                gems = ((InventoryPrimordialGlove) ContainerPrimordialGlove.map
-                        .get(entity.getEntityId()).input).stackList;
 
-            for (ItemStack g : gems) if (g != null && g.isItemDamaged()) {
-                int restored = al.getAmount(ItemInfusedGem.getAspect(g));
-                int newDmg = Math.max(g.getItemDamage() - restored, 0);
-                g.setItemDamage(newDmg);
+            boolean modified = false;
+            for (ItemStack g : gems) {
+                if (g != null && g.isItemDamaged()) {
+                    int restored = al.getAmount(ItemInfusedGem.getAspect(g));
+                    int newDmg = Math.max(g.getItemDamage() - restored, 0);
+                    g.setItemDamage(newDmg);
+                    modified = true;
+                }
             }
-            ItemPrimordialGlove.setSetGems(stack, gems);
-
-            if (!world.isRemote && ContainerPrimordialGlove.map.containsKey(entity.getEntityId())) {
-                ContainerPrimordialGlove c = ContainerPrimordialGlove.map.get(entity.getEntityId());
-
-                ((InventoryPrimordialGlove) c.input).stackList = gems;
-                ContainerPrimordialGlove.map.get(entity.getEntityId()).onCraftMatrixChanged(c.input);
-                c.detectAndSendChanges();
+            if (modified) {
+                ItemPrimordialGlove.setSetGems(stack, gems);
             }
         }
     }
