@@ -18,23 +18,6 @@ import witchinggadgets.common.WGContent;
 
 public class ItemClusters extends Item {
 
-    @Deprecated
-    public static String[] subNames = {
-            // TCon
-            "Aluminum", "Cobalt", "Ardite",
-            // ThermalFoundation
-            "Nickel",
-            // Factorization
-            "FZDarkIron",
-            // Metallurgy
-            "Manganese", "Zinc", "Platinum", "Ignatius", "ShadowIron", "Lemurite", "Midasium", "Vyroxeres", "Ceruclase",
-            "Alduorite", "Kalendrite", "Vulcanite", "Sanguinite", "Prometheum", "DeepIron", "Infuscolium", "Oureclase",
-            "AstralSilver", "Carmot", "Mithril", "Rubracium", "Orichalcum", "Adamantine", "Atlarus", "Eximite",
-            "Meutoite",
-            // Gregtech
-            "Beryllium", "Cobalt", "Iridium", "Molybdenum", "Naquadah", "Neodymium", "Nickel", "Palladium", "Platinum",
-            "Thorium", "Uranium235", "Uranium238", "Zinc", "Casserite" };
-
     public static HashMap<String, String> loccodename = new HashMap<>();
 
     @Deprecated
@@ -45,7 +28,6 @@ public class ItemClusters extends Item {
 
     public ItemClusters() {
         super();
-        maxStackSize = 64;
         setCreativeTab(WitchingGadgets.tabWG);
         setHasSubtypes(true);
     }
