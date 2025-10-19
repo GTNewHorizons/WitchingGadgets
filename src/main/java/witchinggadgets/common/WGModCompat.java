@@ -3,7 +3,6 @@ package witchinggadgets.common;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -153,23 +152,30 @@ public class WGModCompat {
         if (!OreDictionary.getOres(oreName).isEmpty()) ThaumcraftApi.registerObjectTag(oreName, aspects);
     }
 
-    public static void addTConSmelteryRecipe(String oreName, String blockName, int temperature, String fluidName,
-            int fluidAmount) {
+    public static void addTConSmelteryRecipe(String oreName, String blockName, int temperature, String fluidName, int fluidAmount) {
         if (!OreDictionary.getOres(blockName).isEmpty()) {
             ItemStack blockStack = OreDictionary.getOres(blockName).get(0);
-            if (blockStack == null || Block.getBlockFromItem(blockStack.getItem()) == null)
-                blockStack = new ItemStack(Blocks.iron_block);
-            Block b = Block.getBlockFromItem(blockStack.getItem());
-            if (!OreDictionary.getOres(oreName).isEmpty())
-                for (ItemStack oreStack : OreDictionary.getOres(oreName)) if (oreStack != null)
-                    addTConSmelteryRecipe(oreStack, b, blockStack.getItemDamage(), temperature, fluidName, fluidAmount);
+
+            if (blockStack == null) return;
+
+            Block block = Block.getBlockFromItem(blockStack.getItem());
+
+            if (block == null) return;
+
+            for (ItemStack oreStack : OreDictionary.getOres(oreName)) {
+                if (oreStack != null) {
+                    addTConSmelteryRecipe(oreStack, block, blockStack.getItemDamage(), temperature, fluidName, fluidAmount);
+                }
+            }
         }
     }
 
     public static void addTConSmelteryRecipe(ItemStack ore, Block block, int blockMeta, int temperature,
             String fluidName, int fluidAmount) {
         if (!loaded_TCon || FluidRegistry.getFluid(fluidName) == null) return;
+
         FluidStack fluid = new FluidStack(FluidRegistry.getFluid(fluidName), fluidAmount);
+
         Smeltery.addMelting(ore, block, blockMeta, temperature, fluid);
     }
 

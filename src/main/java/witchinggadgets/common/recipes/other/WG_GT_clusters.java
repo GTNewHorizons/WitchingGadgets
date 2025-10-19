@@ -5,355 +5,210 @@ import static gregtech.api.recipe.RecipeMaps.fluidExtractionRecipes;
 import static gregtech.api.recipe.RecipeMaps.maceratorRecipes;
 import static gregtech.api.recipe.RecipeMaps.sifterRecipes;
 import static gregtech.api.util.GTRecipeBuilder.SECONDS;
-import static witchinggadgets.common.recipes.WG_other_recipes.addBlastTrippling;
+import static witchinggadgets.common.recipes.WG_other_recipes.addBlastTripling;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import cpw.mods.fml.common.Loader;
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
+import gregtech.api.enums.SubTag;
+import gregtech.api.enums.TierEU;
+import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTOreDictUnificator;
-import witchinggadgets.common.WGContent;
+import witchinggadgets.common.recipes.alchemic.WG_alchemic_clusters;
+import witchinggadgets.common.recipes.alchemic.WG_alchemic_clusters.ClusterInfo;
+import witchinggadgets.common.util.Utilities;
 
 public class WG_GT_clusters {
 
     public static void registerClusterRecipesGT() {
-        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
-            for (String name : OreDictionary.getOreNames()) {
-                if (name.startsWith("cluster")) {
-                    String aMaterial = name.substring("cluster".length());
-                    ItemStack[] outputs;
-                    if (!OreDictionary.getOres(name).isEmpty()
-                            && !OreDictionary.getOres("dustTiny" + aMaterial).isEmpty())
-                        if (WGContent.ClusterEBF.get(aMaterial) == null || !WGContent.ClusterEBF.get(aMaterial)) {
-                            addBlastTrippling(aMaterial);
-                            if (!OreDictionary.getOres(name).isEmpty()
-                                    && !OreDictionary.getOres("dustTiny" + aMaterial).isEmpty()) {
-                                switch (aMaterial) {
-                                    // x2
-                                    case "Salt":
-                                    case "RockSalt":
-                                    case "CassiteriteSand":
-                                    case "Cassiterite":
-                                    case "CertusQuartz":
-                                    case "Amber":
-                                    case "NetherQuartz":
-                                    case "Tungstate":
-                                    case "Scheelite": {
-                                        outputs = new ItemStack[] {
-                                                OreDictionary.getOres("dust" + aMaterial).get(0).copy().splitStack(4),
-                                                OreDictionary.getOres("dustTiny" + aMaterial).get(0).copy()
-                                                        .splitStack(8) };
-                                        break;
-                                    }
-                                    // x3
-                                    case "Phosphorus": {
-                                        outputs = new ItemStack[] {
-                                                OreDictionary.getOres("dust" + aMaterial).get(0).copy().splitStack(7),
-                                                OreDictionary.getOres("dustTiny" + aMaterial).get(0).copy()
-                                                        .splitStack(3) };
-                                        break;
-                                    }
-                                    // x4
-                                    case "Saltpeter":
-                                    case "Apatite": {
-                                        outputs = new ItemStack[] {
-                                                OreDictionary.getOres("dust" + aMaterial).get(0).copy().splitStack(9),
-                                                OreDictionary.getOres("dustTiny" + aMaterial).get(0).copy()
-                                                        .splitStack(7) };
-                                        break;
-                                    }
-                                    // x5
-                                    case "Redstone":
-                                    case "Electrotine":
-                                    case "Cryolite": {
-                                        outputs = new ItemStack[] {
-                                                OreDictionary.getOres("dust" + aMaterial).get(0).copy().splitStack(12),
-                                                OreDictionary.getOres("dustTiny" + aMaterial).get(0).copy()
-                                                        .splitStack(2) };
-                                        break;
-                                    }
-                                    // x6
-                                    case "Lapis":
-                                    case "Sodalite":
-                                    case "Lazurite": {
-                                        outputs = new ItemStack[] {
-                                                OreDictionary.getOres("dust" + aMaterial).get(0).copy().splitStack(14),
-                                                OreDictionary.getOres("dustTiny" + aMaterial).get(0).copy()
-                                                        .splitStack(6) };
-                                        break;
-                                    }
-                                    // x8
-                                    case "Monazite": {
-                                        outputs = new ItemStack[] {
-                                                OreDictionary.getOres("dust" + aMaterial).get(0).copy().splitStack(19),
-                                                OreDictionary.getOres("dustTiny" + aMaterial).get(0).copy()
-                                                        .splitStack(5) };
-                                        break;
-                                    }
-                                    default: {
-                                        outputs = new ItemStack[] { OreDictionary.getOres("dustTiny" + aMaterial).get(0)
-                                                .copy().splitStack(22) };
-                                        break;
-                                    }
-                                }
+        for (String oredict : OreDictionary.getOreNames()) {
+            if (!oredict.startsWith("cluster")) continue;
 
-                                if (!aMaterial.equalsIgnoreCase("Oilsands")) {
-                                    GTValues.RA.stdBuilder().itemInputs(OreDictionary.getOres(name).get(0).copy())
-                                            .itemOutputs(outputs).eut(30).duration(30 * SECONDS)
-                                            .addTo(maceratorRecipes);
-                                }
+            String matName = oredict.substring("cluster".length());
 
-                                if (WGContent.ClusterSmeltable.get(aMaterial) != null
-                                        || aMaterial.equalsIgnoreCase("Oilsands")) {
-                                    if (aMaterial.equals("Redstone") || aMaterial.equals("Electrotine")) {
-                                        GTValues.RA.stdBuilder().itemInputs(OreDictionary.getOres(name).get(0).copy())
-                                                .fluidOutputs(
-                                                        new FluidStack(WGContent.ClusterSmeltable.get(aMaterial), 1720))
-                                                .eut(120).duration(60 * SECONDS).addTo(fluidExtractionRecipes);
+            ClusterInfo clusterInfo = WG_alchemic_clusters.CLUSTER_INFO.get(matName);
 
-                                    } else if (!aMaterial.equalsIgnoreCase("Oilsands")) {
-                                        GTValues.RA.stdBuilder().itemInputs(OreDictionary.getOres(name).get(0).copy())
-                                                .fluidOutputs(
-                                                        new FluidStack(WGContent.ClusterSmeltable.get(aMaterial), 344))
-                                                .eut(120).duration(60 * SECONDS).addTo(fluidExtractionRecipes);
+            addBlastTripling(matName);
 
-                                    } else {
-                                        GTValues.RA.stdBuilder().itemInputs(OreDictionary.getOres(name).get(0).copy())
-                                                .fluidOutputs(Materials.OilHeavy.getFluid(4000L)).eut(120)
-                                                .duration(60 * SECONDS).addTo(centrifugeRecipes);
-                                    }
-                                }
-                            }
-                        } else if (!OreDictionary.getOres(name).isEmpty()
-                                && !OreDictionary.getOres("dustTiny" + aMaterial).isEmpty()) {
-                                    switch (aMaterial) {
-                                        // x2
-                                        case "Salt":
-                                        case "RockSalt":
-                                        case "CassiteriteSand":
-                                        case "Cassiterite":
-                                        case "CertusQuartz":
-                                        case "Amber":
-                                        case "NetherQuartz":
-                                        case "Tungstate":
-                                        case "Scheelite": {
-                                            outputs = new ItemStack[] {
-                                                    OreDictionary.getOres("dust" + aMaterial).get(0).copy()
-                                                            .splitStack(4),
-                                                    OreDictionary.getOres("dustTiny" + aMaterial).get(0).copy()
-                                                            .splitStack(8) };
-                                            break;
-                                        }
-                                        // x3
-                                        case "Phosphorus": {
-                                            outputs = new ItemStack[] {
-                                                    OreDictionary.getOres("dust" + aMaterial).get(0).copy()
-                                                            .splitStack(7),
-                                                    OreDictionary.getOres("dustTiny" + aMaterial).get(0).copy()
-                                                            .splitStack(3) };
-                                            break;
-                                        }
-                                        // x4
-                                        case "Saltpeter":
-                                        case "Apatite": {
-                                            outputs = new ItemStack[] {
-                                                    OreDictionary.getOres("dust" + aMaterial).get(0).copy()
-                                                            .splitStack(9),
-                                                    OreDictionary.getOres("dustTiny" + aMaterial).get(0).copy()
-                                                            .splitStack(7) };
-                                            break;
-                                        }
-                                        // x5
-                                        case "Redstone":
-                                        case "Electrotine": {
-                                            outputs = new ItemStack[] {
-                                                    OreDictionary.getOres("dust" + aMaterial).get(0).copy()
-                                                            .splitStack(12),
-                                                    OreDictionary.getOres("dustTiny" + aMaterial).get(0).copy()
-                                                            .splitStack(2) };
-                                            break;
-                                        }
-                                        // x6
-                                        case "Lapis":
-                                        case "Sodalite":
-                                        case "Lazurite": {
-                                            outputs = new ItemStack[] {
-                                                    OreDictionary.getOres("dust" + aMaterial).get(0).copy()
-                                                            .splitStack(14),
-                                                    OreDictionary.getOres("dustTiny" + aMaterial).get(0).copy()
-                                                            .splitStack(6) };
-                                            break;
-                                        }
-                                        // x8
-                                        case "Monazite": {
-                                            outputs = new ItemStack[] {
-                                                    OreDictionary.getOres("dust" + aMaterial).get(0).copy()
-                                                            .splitStack(19),
-                                                    OreDictionary.getOres("dustTiny" + aMaterial).get(0).copy()
-                                                            .splitStack(5) };
-                                            break;
-                                        }
-                                        default: {
-                                            outputs = new ItemStack[] { OreDictionary.getOres("dustTiny" + aMaterial)
-                                                    .get(0).copy().splitStack(22) };
-                                            break;
-                                        }
-                                    }
-                                    GTValues.RA.stdBuilder().itemInputs(OreDictionary.getOres(name).get(0).copy())
-                                            .itemOutputs(outputs).eut(30).duration(30 * SECONDS)
-                                            .addTo(maceratorRecipes);
-                                }
+            Materials material = Materials.getMaterialsMap().get(matName);
 
-                    if (!OreDictionary.getOres(name).isEmpty() && !OreDictionary.getOres("gem" + aMaterial).isEmpty()) {
+            int oreMultiplier = material == null ? 1 : material.mOreMultiplier;
 
-                        switch (aMaterial) {
-                            case "Tanzanite":
-                            case "Sapphire":
-                            case "Olivine":
-                            case "GreenSapphire":
-                            case "Opal":
-                            case "Amethyst":
-                            case "Emerald":
-                            case "Ruby":
-                            case "Diamond":
-                            case "FoolsRuby":
-                            case "BlueTopaz":
-                            case "GarnetRed":
-                            case "Topaz":
-                            case "Jasper":
-                            case "GarnetYellow": {
+            ItemStack cluster = Utilities.getOredict("cluster" + matName, 1);
+            assert cluster != null;
 
-                                ItemStack tGem = GTOreDictUnificator.get(OrePrefixes.gem, aMaterial, 1L);
+            if (matName.equals("Oilsands")) {
+                GTValues.RA.stdBuilder()
+                    .itemInputs(Utilities.copyStackWithSize(cluster, 1))
+                    .fluidOutputs(Materials.OilHeavy.getFluid(4000L))
+                    .eut(120)
+                    .duration(60 * SECONDS)
+                    .addTo(centrifugeRecipes);
+            } else if (material != null && material.contains(SubTag.ICE_ORE)) {
+                GTValues.RA.stdBuilder()
+                    .itemInputs(cluster.copy())
+                    .fluidOutputs(material.getGas(1000L * material.mOreMultiplier))
+                    .duration(5 * SECONDS)
+                    .eut(TierEU.RECIPE_MV)
+                    .addTo(RecipeMaps.fluidExtractionRecipes);
+            } else {
+                ItemStack dusts = Utilities.getOredict("dust" + matName, 1);
+                ItemStack tinyDusts = Utilities.getOredict("dustTiny" + matName, 1);
+                ItemStack gems = Utilities.getOredict("gem" + matName, 1);
 
-                                GTValues.RA.stdBuilder().itemInputs(OreDictionary.getOres(name).get(0).copy())
-                                        .itemOutputs(
-                                                GTOreDictUnificator.get(OrePrefixes.gemExquisite, aMaterial, tGem, 1L),
-                                                GTOreDictUnificator.get(OrePrefixes.gemFlawless, aMaterial, tGem, 1L),
-                                                tGem,
-                                                GTOreDictUnificator.get(OrePrefixes.gemFlawed, aMaterial, tGem, 1L),
-                                                GTOreDictUnificator.get(OrePrefixes.gemChipped, aMaterial, tGem, 1L),
-                                                GTOreDictUnificator.get(OrePrefixes.dust, aMaterial, tGem, 1L))
-                                        .outputChances(600, 2400, 9000, 2800, 5600, 7000).duration(80 * SECONDS).eut(30)
-                                        .addTo(sifterRecipes);
-                                break;
-                            }
-                            case "CertusQuartz":
-                            case "NetherQuartz": {
+                if (dusts != null && tinyDusts != null) {
+                    int tinyDustCount = oreMultiplier * 22;
 
-                                ItemStack tGem = GTOreDictUnificator.get(OrePrefixes.gem, aMaterial, 2L);
+                    int dustCount = tinyDustCount / 9;
+                    tinyDustCount -= dustCount * 9;
 
-                                GTValues.RA.stdBuilder().itemInputs(OreDictionary.getOres(name).get(0).copy())
-                                        .itemOutputs(
-                                                GTOreDictUnificator.get(OrePrefixes.gemExquisite, aMaterial, tGem, 2L),
-                                                GTOreDictUnificator.get(OrePrefixes.gemFlawless, aMaterial, tGem, 2L),
-                                                tGem,
-                                                GTOreDictUnificator.get(OrePrefixes.gemFlawed, aMaterial, tGem, 2L),
-                                                GTOreDictUnificator.get(OrePrefixes.gemChipped, aMaterial, tGem, 2L),
-                                                GTOreDictUnificator.get(OrePrefixes.dust, aMaterial, tGem, 2L))
-                                        .outputChances(200, 400, 3000, 4000, 8000, 10000).duration(160 * SECONDS)
-                                        .eut(30).addTo(sifterRecipes);
-                                break;
-                            }
-                            case "Apatite": {
+                    GTValues.RA.stdBuilder()
+                        .itemInputs(cluster.copy())
+                        .itemOutputs(
+                            Utilities.copyStackWithSize(dusts, dustCount),
+                            Utilities.copyStackWithSize(tinyDusts, tinyDustCount))
+                        .eut(30)
+                        .duration(30 * SECONDS)
+                        .addTo(maceratorRecipes);
+                }
 
-                                ItemStack tGem = GTOreDictUnificator.get(OrePrefixes.gem, aMaterial, 4L);
+                if (clusterInfo != null && !clusterInfo.ebf() && clusterInfo.liquid() != null) {
+                    int moltenAmount = oreMultiplier * 22 * (144 / 9);
 
-                                GTValues.RA.stdBuilder().itemInputs(OreDictionary.getOres(name).get(0).copy())
-                                        .itemOutputs(
-                                                GTOreDictUnificator.get(OrePrefixes.gemExquisite, aMaterial, tGem, 4L),
-                                                GTOreDictUnificator.get(OrePrefixes.gemFlawless, aMaterial, tGem, 4L),
-                                                tGem,
-                                                GTOreDictUnificator.get(OrePrefixes.gemFlawed, aMaterial, tGem, 4L),
-                                                GTOreDictUnificator.get(OrePrefixes.gemChipped, aMaterial, tGem, 4L),
-                                                GTOreDictUnificator.get(OrePrefixes.dust, aMaterial, tGem, 4L))
-                                        .outputChances(200, 400, 3000, 4000, 8000, 10000).duration(32 * SECONDS).eut(30)
-                                        .addTo(sifterRecipes);
-                                break;
-                            }
-                            case "Amber": {
+                    GTValues.RA.stdBuilder()
+                        .itemInputs(cluster.copy())
+                        .fluidOutputs(Utilities.copyStackWithAmount(clusterInfo.liquid(), moltenAmount))
+                        .eut(120)
+                        .duration(60 * SECONDS)
+                        .addTo(fluidExtractionRecipes);
+                }
 
-                                ItemStack tGem = GTOreDictUnificator.get(OrePrefixes.gem, aMaterial, 2L);
-
-                                GTValues.RA.stdBuilder().itemInputs(OreDictionary.getOres(name).get(0).copy())
-                                        .itemOutputs(
-                                                GTOreDictUnificator.get(OrePrefixes.gemExquisite, aMaterial, tGem, 2L),
-                                                GTOreDictUnificator.get(OrePrefixes.gemFlawless, aMaterial, tGem, 2L),
-                                                tGem,
-                                                GTOreDictUnificator.get(OrePrefixes.gemFlawed, aMaterial, tGem, 2L),
-                                                GTOreDictUnificator.get(OrePrefixes.gemChipped, aMaterial, tGem, 2L),
-                                                GTOreDictUnificator.get(OrePrefixes.dust, aMaterial, tGem, 2L))
-                                        .outputChances(600, 2400, 9000, 2800, 5600, 7000).duration(160 * SECONDS)
-                                        .eut(30).addTo(sifterRecipes);
-                                break;
-                            }
-                            case "Lapis":
-                            case "Sodalite":
-                            case "Lazurite": {
-
-                                ItemStack tGem = GTOreDictUnificator.get(OrePrefixes.gem, aMaterial, 6L);
-
-                                GTValues.RA.stdBuilder().itemInputs(OreDictionary.getOres(name).get(0).copy())
-                                        .itemOutputs(
-                                                GTOreDictUnificator.get(OrePrefixes.gemExquisite, aMaterial, tGem, 6L),
-                                                GTOreDictUnificator.get(OrePrefixes.gemFlawless, aMaterial, tGem, 6L),
-                                                tGem,
-                                                GTOreDictUnificator.get(OrePrefixes.gemFlawed, aMaterial, tGem, 6L),
-                                                GTOreDictUnificator.get(OrePrefixes.gemChipped, aMaterial, tGem, 6L),
-                                                GTOreDictUnificator.get(OrePrefixes.dust, aMaterial, tGem, 6L))
-                                        .outputChances(200, 400, 3000, 4000, 8000, 10000).duration(480 * SECONDS)
-                                        .eut(30).addTo(sifterRecipes);
-                                break;
-                            }
-                            case "Monazite": {
-
-                                ItemStack tGem = GTOreDictUnificator.get(OrePrefixes.gem, aMaterial, 8L);
-
-                                GTValues.RA.stdBuilder().itemInputs(OreDictionary.getOres(name).get(0).copy())
-                                        .itemOutputs(
-                                                GTOreDictUnificator.get(OrePrefixes.gemExquisite, aMaterial, tGem, 8L),
-                                                GTOreDictUnificator.get(OrePrefixes.gemFlawless, aMaterial, tGem, 8L),
-                                                tGem,
-                                                GTOreDictUnificator.get(OrePrefixes.gemFlawed, aMaterial, tGem, 8L),
-                                                GTOreDictUnificator.get(OrePrefixes.gemChipped, aMaterial, tGem, 8L),
-                                                GTOreDictUnificator.get(OrePrefixes.dust, aMaterial, tGem, 8L))
-                                        .outputChances(200, 400, 3000, 4000, 8000, 10000).duration(640 * SECONDS)
-                                        .eut(30).addTo(sifterRecipes);
-                                break;
-                            }
-                            case "Coal": {
-                                GTValues.RA.stdBuilder().itemInputs(OreDictionary.getOres(name).get(0).copy())
-                                        .itemOutputs(
-                                                new ItemStack(Items.coal, 2, 0),
-                                                new ItemStack(Items.coal, 2, 0),
-                                                new ItemStack(Items.coal, 2, 0),
-                                                new ItemStack(Items.coal, 2, 0),
-                                                new ItemStack(Items.coal, 2, 0),
-                                                GTOreDictUnificator.get(OrePrefixes.dust, Materials.Coal, 2L))
-                                        .outputChances(10000, 9000, 8000, 7000, 6000, 5000).duration(60 * SECONDS)
-                                        .eut(30).addTo(sifterRecipes);
-                                break;
-                            }
-                            default: {
-
-                                ItemStack tGem = GTOreDictUnificator.get(OrePrefixes.gem, aMaterial, 1L);
-
-                                GTValues.RA.stdBuilder().itemInputs(OreDictionary.getOres(name).get(0).copy())
-                                        .itemOutputs(
-                                                GTOreDictUnificator.get(OrePrefixes.gemExquisite, aMaterial, tGem, 1L),
-                                                GTOreDictUnificator.get(OrePrefixes.gemFlawless, aMaterial, tGem, 1L),
-                                                tGem,
-                                                GTOreDictUnificator.get(OrePrefixes.gemFlawed, aMaterial, tGem, 1L),
-                                                GTOreDictUnificator.get(OrePrefixes.gemChipped, aMaterial, tGem, 1L),
-                                                GTOreDictUnificator.get(OrePrefixes.dust, aMaterial, tGem, 1L))
-                                        .outputChances(200, 400, 3000, 4000, 8000, 10000).duration(80 * SECONDS).eut(30)
-                                        .addTo(sifterRecipes);
-                                break;
-                            }
+                if (gems != null) {
+                    switch (matName) {
+                        case "Tanzanite", "Sapphire", "Olivine", "GreenSapphire", "Opal", "Amethyst", "Emerald", "Ruby",
+                             "Diamond", "FoolsRuby", "BlueTopaz", "GarnetRed", "Topaz", "Jasper", "GarnetYellow" -> {
+                            GTValues.RA.stdBuilder()
+                                .itemInputs(cluster.copy())
+                                .itemOutputs(
+                                    GTOreDictUnificator.get(OrePrefixes.gemExquisite, material, gems, 1L),
+                                    GTOreDictUnificator.get(OrePrefixes.gemFlawless, material, gems, 1L),
+                                    gems,
+                                    GTOreDictUnificator.get(OrePrefixes.gemFlawed, material, gems, 1L),
+                                    GTOreDictUnificator.get(OrePrefixes.gemChipped, material, gems, 1L),
+                                    GTOreDictUnificator.get(OrePrefixes.dust, material, gems, 1L))
+                                .outputChances(600, 2400, 9000, 2800, 5600, 7000)
+                                .duration(80 * SECONDS)
+                                .eut(30)
+                                .addTo(sifterRecipes);
+                        }
+                        case "CertusQuartz", "NetherQuartz" -> {
+                            GTValues.RA.stdBuilder()
+                                .itemInputs(cluster.copy())
+                                .itemOutputs(
+                                    GTOreDictUnificator.get(OrePrefixes.gemExquisite, material, gems, 2L),
+                                    GTOreDictUnificator.get(OrePrefixes.gemFlawless, material, gems, 2L),
+                                    gems,
+                                    GTOreDictUnificator.get(OrePrefixes.gemFlawed, material, gems, 2L),
+                                    GTOreDictUnificator.get(OrePrefixes.gemChipped, material, gems, 2L),
+                                    GTOreDictUnificator.get(OrePrefixes.dust, material, gems, 2L))
+                                .outputChances(200, 400, 3000, 4000, 8000, 10000)
+                                .duration(160 * SECONDS)
+                                .eut(30)
+                                .addTo(sifterRecipes);
+                        }
+                        case "Apatite" -> {
+                            GTValues.RA.stdBuilder()
+                                .itemInputs(cluster.copy())
+                                .itemOutputs(
+                                    GTOreDictUnificator.get(OrePrefixes.gemExquisite, material, gems, 4L),
+                                    GTOreDictUnificator.get(OrePrefixes.gemFlawless, material, gems, 4L),
+                                    gems,
+                                    GTOreDictUnificator.get(OrePrefixes.gemFlawed, material, gems, 4L),
+                                    GTOreDictUnificator.get(OrePrefixes.gemChipped, material, gems, 4L),
+                                    GTOreDictUnificator.get(OrePrefixes.dust, material, gems, 4L))
+                                .outputChances(200, 400, 3000, 4000, 8000, 10000)
+                                .duration(32 * SECONDS)
+                                .eut(30)
+                                .addTo(sifterRecipes);
+                        }
+                        case "Amber" -> {
+                            GTValues.RA.stdBuilder()
+                                .itemInputs(cluster.copy())
+                                .itemOutputs(
+                                    GTOreDictUnificator.get(OrePrefixes.gemExquisite, material, gems, 2L),
+                                    GTOreDictUnificator.get(OrePrefixes.gemFlawless, material, gems, 2L),
+                                    gems,
+                                    GTOreDictUnificator.get(OrePrefixes.gemFlawed, material, gems, 2L),
+                                    GTOreDictUnificator.get(OrePrefixes.gemChipped, material, gems, 2L),
+                                    GTOreDictUnificator.get(OrePrefixes.dust, material, gems, 2L))
+                                .outputChances(600, 2400, 9000, 2800, 5600, 7000)
+                                .duration(160 * SECONDS)
+                                .eut(30)
+                                .addTo(sifterRecipes);
+                        }
+                        case "Lapis", "Sodalite", "Lazurite" -> {
+                            GTValues.RA.stdBuilder()
+                                .itemInputs(cluster.copy())
+                                .itemOutputs(
+                                    GTOreDictUnificator.get(OrePrefixes.gemExquisite, material, gems, 6L),
+                                    GTOreDictUnificator.get(OrePrefixes.gemFlawless, material, gems, 6L),
+                                    gems,
+                                    GTOreDictUnificator.get(OrePrefixes.gemFlawed, material, gems, 6L),
+                                    GTOreDictUnificator.get(OrePrefixes.gemChipped, material, gems, 6L),
+                                    GTOreDictUnificator.get(OrePrefixes.dust, material, gems, 6L))
+                                .outputChances(200, 400, 3000, 4000, 8000, 10000)
+                                .duration(480 * SECONDS)
+                                .eut(30)
+                                .addTo(sifterRecipes);
+                        }
+                        case "Monazite" -> {
+                            GTValues.RA.stdBuilder()
+                                .itemInputs(cluster.copy())
+                                .itemOutputs(
+                                    GTOreDictUnificator.get(OrePrefixes.gemExquisite, material, gems, 8L),
+                                    GTOreDictUnificator.get(OrePrefixes.gemFlawless, material, gems, 8L),
+                                    gems,
+                                    GTOreDictUnificator.get(OrePrefixes.gemFlawed, material, gems, 8L),
+                                    GTOreDictUnificator.get(OrePrefixes.gemChipped, material, gems, 8L),
+                                    GTOreDictUnificator.get(OrePrefixes.dust, material, gems, 8L))
+                                .outputChances(200, 400, 3000, 4000, 8000, 10000)
+                                .duration(640 * SECONDS)
+                                .eut(30)
+                                .addTo(sifterRecipes);
+                        }
+                        case "Coal" -> {
+                            GTValues.RA.stdBuilder()
+                                .itemInputs(cluster.copy())
+                                .itemOutputs(
+                                    new ItemStack(Items.coal, 2, 0),
+                                    new ItemStack(Items.coal, 2, 0),
+                                    new ItemStack(Items.coal, 2, 0),
+                                    new ItemStack(Items.coal, 2, 0),
+                                    new ItemStack(Items.coal, 2, 0),
+                                    GTOreDictUnificator.get(OrePrefixes.dust, Materials.Coal, 2L))
+                                .outputChances(10000, 9000, 8000, 7000, 6000, 5000)
+                                .duration(60 * SECONDS)
+                                .eut(30)
+                                .addTo(sifterRecipes);
+                        }
+                        default -> {
+                            GTValues.RA.stdBuilder()
+                                .itemInputs(cluster.copy())
+                                .itemOutputs(
+                                    GTOreDictUnificator.get(OrePrefixes.gemExquisite, material, gems, 1L),
+                                    GTOreDictUnificator.get(OrePrefixes.gemFlawless, material, gems, 1L),
+                                    gems,
+                                    GTOreDictUnificator.get(OrePrefixes.gemFlawed, material, gems, 1L),
+                                    GTOreDictUnificator.get(OrePrefixes.gemChipped, material, gems, 1L),
+                                    GTOreDictUnificator.get(OrePrefixes.dust, material, gems, 1L))
+                                .outputChances(200, 400, 3000, 4000, 8000, 10000)
+                                .duration(80 * SECONDS)
+                                .eut(30)
+                                .addTo(sifterRecipes);
                         }
                     }
                 }

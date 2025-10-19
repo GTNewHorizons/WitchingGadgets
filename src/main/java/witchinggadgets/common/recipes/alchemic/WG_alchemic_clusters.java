@@ -2,265 +2,389 @@ package witchinggadgets.common.recipes.alchemic;
 
 import static witchinggadgets.common.recipes.WG_alchemic_recipes.registerAlchemyRecipe;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Map.Entry;
+import java.util.HashSet;
+import java.util.List;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.github.bsideup.jabel.Desugar;
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
+import com.gtnewhorizons.postea.api.ItemStackReplacementManager;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.Optional;
+import gregtech.GTMod;
+import gregtech.api.GregTechAPI;
+import gregtech.api.enums.Materials;
+import gregtech.api.enums.OreMixes;
+import gregtech.api.enums.OrePrefixes;
+import gregtech.api.enums.SubTag;
+import gregtech.api.enums.TCAspects;
+import gregtech.api.util.GTOreDictUnificator;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
+import thaumcraft.api.crafting.CrucibleRecipe;
 import thaumcraft.common.lib.utils.Utils;
 import witchinggadgets.WitchingGadgets;
+import witchinggadgets.client.ClientUtilities;
 import witchinggadgets.common.WGConfig;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.WGModCompat;
 import witchinggadgets.common.items.ItemClusters;
 import witchinggadgets.common.util.Utilities;
-import witchinggadgets.common.util.registry.MetalFluidData;
 
 public class WG_alchemic_clusters {
 
+    public static final BiMap<String, Integer> legacyClusters = HashBiMap.create();
+    public static final List<CrucibleRecipe> CLUSTER_RECIPES = new ArrayList<>(), TRANSMUTE_RECIPES = new ArrayList<>();
+
+    public static String[] subNames = {
+            // TCon
+            "Aluminum", "Cobalt", "Ardite",
+            // ThermalFoundation
+            "Nickel",
+            // Factorization
+            "FZDarkIron",
+            // Metallurgy
+            "Manganese", "Zinc", "Platinum", "Ignatius", "ShadowIron", "Lemurite", "Midasium", "Vyroxeres", "Ceruclase",
+            "Alduorite", "Kalendrite", "Vulcanite", "Sanguinite", "Prometheum", "DeepIron", "Infuscolium", "Oureclase",
+            "AstralSilver", "Carmot", "Mithril", "Rubracium", "Orichalcum", "Adamantine", "Atlarus", "Eximite",
+            "Meutoite",
+            // Gregtech
+            "Beryllium", "Cobalt", "Iridium", "Molybdenum", "Naquadah", "Neodymium", "Nickel", "Palladium", "Platinum",
+            "Thorium", "Uranium235", "Uranium238", "Zinc", "Casserite" };
+
+    public enum ClusterOverlay {
+        Overworld,
+        Nether,
+        End;
+
+        public static ClusterOverlay fromRGB(int rgb) {
+            int r = (rgb >> 16) & 0xFF;
+            int g = (rgb >> 8) & 0xFF;
+            int b = rgb & 0xFF;
+
+            if (r > b && g > b) {
+                return ClusterOverlay.End;
+            } else if (r > g && r > b) {
+                return ClusterOverlay.Nether;
+            } else {
+                return ClusterOverlay.Overworld;
+            }
+        }
+    }
+
+    @Desugar
+    public record ClusterInfo(String matName, ItemClusters.MetaInfo meta, boolean ebf, FluidStack liquid, int vibrant, ClusterOverlay clusterOverlay) {
+
+        @Optional.Method(modid = "gregtech_nh")
+        public Materials getGT5uMaterial() {
+            return Materials.getMaterialsMap().get(matName);
+        }
+
+        public ItemStack getPart(String prefix, int amount) {
+            return Utilities.getOredict(prefix + matName, amount);
+        }
+    }
+
+    public static final Object2ObjectOpenHashMap<String, ClusterInfo> CLUSTER_INFO = new Object2ObjectOpenHashMap<>();
+    public static final Int2ObjectOpenHashMap<ClusterInfo> CLUSTER_INFO_BY_META = new Int2ObjectOpenHashMap<>();
+
     public static void registerClusters() {
+        if (Loader.isModLoaded("postea")) {
+            registerPosteaTransformer();
+        }
 
-        AspectList alchemyAspects;
-
-        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
-            for (int iOre = 0; iOre < WGContent.GT_Cluster.length; iOre++) {
-                if (WGConfig.allowClusters) {
-                    ItemStack ingot = OreDictionary.getOres("ore" + WGContent.GT_Cluster[iOre]).get(0);
-
-                    if (ingot == null) {
-                        WitchingGadgets.logger.error(WGContent.GT_Cluster[iOre] + " == null! This should not happen!");
-                        continue;
-                    }
-
-                    try {
-                        alchemyAspects = ThaumcraftApi.objectTags
-                                .get(Arrays.asList(ingot.getItem(), ingot.getItemDamage())).add(Aspect.ORDER, 1);
-                    } catch (NullPointerException e) {
-                        WitchingGadgets.logger.error("Could not get the objectTags for" + WGContent.GT_Cluster[iOre]);
-                        alchemyAspects = new AspectList().add(Aspect.METAL, 2).add(Aspect.ORDER, 1)
-                                .add((Aspect) gregtech.api.enums.TCAspects.NEBRISUM.mAspect, 2);
-                    }
-
-                    if (alchemyAspects == null || alchemyAspects.equals(new AspectList()) || alchemyAspects.size() < 3)
-                        alchemyAspects = new AspectList().add(Aspect.METAL, 2).add(Aspect.ORDER, 1)
-                                .add(Aspect.GREED, 2); // Default aspect for unset (Cryolite, Oilsands, etc) is now the
-                                                       // same as if it had too many aspects (Lucrum instead of
-                                                       // Nebrisum). In the future for stuff like Callisto Ice , etc
-                                                       // that is not aspected, either aspects can be added to the
-                                                       // material or those special cases can be manually set here.
-                    else if (alchemyAspects.size() > 6) alchemyAspects = new AspectList().add(Aspect.METAL, 2)
-                            .add(Aspect.ORDER, 1).add(Aspect.GREED, 2);
-
-                    if (!OreDictionary.getOres("ore" + WGContent.GT_Cluster[iOre]).isEmpty()) registerAlchemyRecipe(
-                            "METALLURGICPERFECTION_CLUSTERS",
-                            "_" + WGContent.GT_Cluster[iOre],
-                            new ItemStack(WGContent.ItemCluster, 2, iOre),
-                            "ore" + WGContent.GT_Cluster[iOre],
-                            alchemyAspects);
-
-                    if (!OreDictionary.getOres("oreNetherrack" + WGContent.GT_Cluster[iOre]).isEmpty())
-                        registerAlchemyRecipe(
-                                "METALLURGICPERFECTION_CLUSTERS",
-                                "_Netherrack_" + WGContent.GT_Cluster[iOre],
-                                new ItemStack(WGContent.ItemCluster, 4, iOre),
-                                "oreNetherrack" + WGContent.GT_Cluster[iOre],
-                                alchemyAspects);
-
-                    if (!OreDictionary.getOres("oreEndstone" + WGContent.GT_Cluster[iOre]).isEmpty())
-                        registerAlchemyRecipe(
-                                "METALLURGICPERFECTION_CLUSTERS",
-                                "_Endstone_" + WGContent.GT_Cluster[iOre],
-                                new ItemStack(WGContent.ItemCluster, 4, iOre),
-                                "oreEndstone" + WGContent.GT_Cluster[iOre],
-                                alchemyAspects).hash += 1;
-
-                    if (!OreDictionary.getOres("oreBlackgranite" + WGContent.GT_Cluster[iOre]).isEmpty())
-                        registerAlchemyRecipe(
-                                "METALLURGICPERFECTION_CLUSTERS",
-                                "_Blackgranite_" + WGContent.GT_Cluster[iOre],
-                                new ItemStack(WGContent.ItemCluster, 2, iOre),
-                                "oreBlackgranite" + WGContent.GT_Cluster[iOre],
-                                alchemyAspects).hash += 1;
-
-                    if (!OreDictionary.getOres("oreRedgranite" + WGContent.GT_Cluster[iOre]).isEmpty())
-                        registerAlchemyRecipe(
-                                "METALLURGICPERFECTION_CLUSTERS",
-                                "_Redgranite_" + WGContent.GT_Cluster[iOre],
-                                new ItemStack(WGContent.ItemCluster, 2, iOre),
-                                "oreRedgranite" + WGContent.GT_Cluster[iOre],
-                                alchemyAspects).hash += 2;
-
-                    if (!OreDictionary.getOres("oreMarble" + WGContent.GT_Cluster[iOre]).isEmpty())
-                        registerAlchemyRecipe(
-                                "METALLURGICPERFECTION_CLUSTERS",
-                                "_Marble_" + WGContent.GT_Cluster[iOre],
-                                new ItemStack(WGContent.ItemCluster, 2, iOre),
-                                "oreMarble" + WGContent.GT_Cluster[iOre],
-                                alchemyAspects).hash += 3;
-
-                    if (!OreDictionary.getOres("oreBasalt" + WGContent.GT_Cluster[iOre]).isEmpty())
-                        registerAlchemyRecipe(
-                                "METALLURGICPERFECTION_CLUSTERS",
-                                "_Basalt_" + WGContent.GT_Cluster[iOre],
-                                new ItemStack(WGContent.ItemCluster, 2, iOre),
-                                "oreBasalt" + WGContent.GT_Cluster[iOre],
-                                alchemyAspects).hash += 4;
-
-                    if (!OreDictionary.getOres("rawOre" + WGContent.GT_Cluster[iOre]).isEmpty()) registerAlchemyRecipe(
-                            "METALLURGICPERFECTION_CLUSTERS",
-                            "_Raw_" + WGContent.GT_Cluster[iOre],
-                            new ItemStack(WGContent.ItemCluster, 2, iOre),
-                            "rawOre" + WGContent.GT_Cluster[iOre],
-                            alchemyAspects).hash += 5;
-                    // I blame Bart.
-                    if (!OreDictionary.getOres("ore" + WGContent.GT_Cluster[iOre]).isEmpty()
-                            || !OreDictionary.getOres("oreNetherrack" + WGContent.GT_Cluster[iOre]).isEmpty()
-                            || !OreDictionary.getOres("oreEndstone" + WGContent.GT_Cluster[iOre]).isEmpty()
-                            || !OreDictionary.getOres("oreBlackgranite" + WGContent.GT_Cluster[iOre]).isEmpty()
-                            || !OreDictionary.getOres("oreRedgranite" + WGContent.GT_Cluster[iOre]).isEmpty()
-                            || !OreDictionary.getOres("oreMarble" + WGContent.GT_Cluster[iOre]).isEmpty()
-                            || !OreDictionary.getOres("oreBasalt" + WGContent.GT_Cluster[iOre]).isEmpty()
-                            || !OreDictionary.getOres("rawOre" + WGContent.GT_Cluster[iOre]).isEmpty())
-
-                        setupCluster(WGContent.GT_Cluster[iOre]);
-                }
-                if (WGConfig.allowTransmutations) {
-                    boolean bb = !OreDictionary.getOres("nugget" + WGContent.GT_Cluster[iOre]).isEmpty()
-                            && !OreDictionary.getOres("ingot" + WGContent.GT_Cluster[iOre]).isEmpty();
-                    if (bb) {
-                        ItemStack ingot = OreDictionary.getOres("ingot" + WGContent.GT_Cluster[iOre]).get(0);
-
-                        if (ingot == null) {
-                            WitchingGadgets.logger
-                                    .error(WGContent.GT_Cluster[iOre] + " == null! This should not happen!");
-                            continue;
-                        }
-                        try {
-                            alchemyAspects = ThaumcraftApi.objectTags
-                                    .get(Arrays.asList(ingot.getItem(), ingot.getItemDamage())).add(Aspect.EXCHANGE, 1);
-                        } catch (NullPointerException e) {
-                            WitchingGadgets.logger
-                                    .error("Could not get the objectTags for" + WGContent.GT_Cluster[iOre]);
-                            alchemyAspects = new AspectList().add(Aspect.METAL, 2).add(Aspect.ORDER, 1)
-                                    .add((Aspect) gregtech.api.enums.TCAspects.NEBRISUM.mAspect, 2);
-                        }
-
-                        if (alchemyAspects == null || alchemyAspects.equals(new AspectList())
-                                || alchemyAspects.size() < 3)
-                            alchemyAspects = new AspectList().add(Aspect.METAL, 2).add(Aspect.ORDER, 1)
-                                    .add((Aspect) gregtech.api.enums.TCAspects.NEBRISUM.mAspect, 2);
-                        alchemyAspects.remove(Aspect.METAL);
-                        alchemyAspects.add(Aspect.METAL, 2);
-                        alchemyAspects.aspects.entrySet()
-                                .removeIf(e -> e.getKey() == null || e.getValue() == null || e.getValue() <= 0);
-                        int f = 0;
-                        ItemStack rawnuggets = OreDictionary.getOres("nugget" + WGContent.GT_Cluster[iOre]).get(f)
-                                .copy();
-                        if (rawnuggets.getDisplayName().contains("Oreberry")) ++f;
-                        rawnuggets = OreDictionary.getOres("nugget" + WGContent.GT_Cluster[iOre]).get(f).copy();
-                        ItemStack nuggets = Utilities.copyStackWithSize(rawnuggets, 3);
-                        registerAlchemyRecipe(
-                                "METALLURGICPERFECTION_TRANSMUTATION",
-                                "_" + WGContent.GT_Cluster[iOre],
-                                nuggets,
-                                "nugget" + WGContent.GT_Cluster[iOre],
-                                alchemyAspects);
-                    }
-                }
-            }
+        if (WitchingGadgets.isGT5uLoaded) {
+            loadGT5uClusters();
         } else {
-            for (int iOre = 0; iOre < ItemClusters.subNames.length; iOre++) {
-                if (WGConfig.allowClusters) {
-                    alchemyAspects = new AspectList().add(Aspect.METAL, 1).add(Aspect.ORDER, 1);
-                    if (!OreDictionary.getOres("ore" + ItemClusters.subNames[iOre]).isEmpty()
-                            && !OreDictionary.getOres("ingot" + ItemClusters.subNames[iOre]).isEmpty()) {
-                        registerAlchemyRecipe(
-                                "METALLURGICPERFECTION_CLUSTERS",
-                                "_" + ItemClusters.subNames[iOre],
-                                new ItemStack(WGContent.ItemCluster, 1, iOre),
-                                "ore" + ItemClusters.subNames[iOre],
-                                alchemyAspects);
-                        setupCluster(ItemClusters.subNames[iOre]);
-                    }
-                }
+            loadMiscClusters();
+        }
 
-                if (WGConfig.allowTransmutations) {
-                    boolean bb = !OreDictionary.getOres("nugget" + ItemClusters.subNames[iOre]).isEmpty()
-                            && !OreDictionary.getOres("ingot" + ItemClusters.subNames[iOre]).isEmpty();
-                    if (bb) {
-                        ItemStack ingot = OreDictionary.getOres("ingot" + ItemClusters.subNames[iOre]).get(0);
-                        alchemyAspects = ThaumcraftApi.objectTags.get(
-                                Arrays.asList(
-                                        new Object[] { ingot.getItem(), Integer.valueOf(ingot.getItemDamage()) }));
-                        if (alchemyAspects == null) alchemyAspects = new AspectList();
-                        alchemyAspects.remove(Aspect.METAL);
-                        alchemyAspects.add(Aspect.METAL, 2);
-                        Iterator<Entry<Aspect, Integer>> it = alchemyAspects.aspects.entrySet().iterator();
-                        while (it.hasNext()) {
-                            Entry<Aspect, Integer> e = it.next();
-                            if (e.getKey() == null || e.getValue() == null) it.remove();
-                        }
-                        ItemStack nuggets = Utilities.copyStackWithSize(
-                                OreDictionary.getOres("nugget" + ItemClusters.subNames[iOre]).get(0),
-                                3);
-                        registerAlchemyRecipe(
-                                "METALLURGICPERFECTION_TRANSMUTATION",
-                                "_" + ItemClusters.subNames[iOre],
-                                nuggets,
-                                "nugget" + ItemClusters.subNames[iOre],
-                                alchemyAspects);
+        CLUSTER_INFO.forEach((name, clusterInfo) -> {
+            CLUSTER_INFO_BY_META.put(clusterInfo.meta.getMeta(), clusterInfo);
+
+            setupCluster(clusterInfo);
+        });
+    }
+
+    private static boolean clusterBlacklist(Materials material) {
+        if (material == Materials.Iron) return true;
+        if (material == Materials.Copper) return true;
+        if (material == Materials.Tin) return true;
+        if (material == Materials.Silver) return true;
+        if (material == Materials.Lead) return true;
+        if (material == Materials.Cinnabar) return true;
+        if (material == Materials.Gold) return true;
+        if (material == Materials.AnyCopper) return true;
+        if (material == Materials.AnyIron) return true;
+        // Idk what this is supposed to do, but this is what the old code did
+        if (ObjectArrayList.wrap(WGConfig.triplingClusterList).contains(material.mName)) return true;
+
+        return false;
+    }
+
+    private static void loadMiscClusters() {
+        for (int iOre = 0; iOre < subNames.length; iOre++) {
+            String subName = subNames[iOre];
+
+            if (WGConfig.allowClusters) {
+                if (hasItem("ore", subName) && hasItem("ingot", subName)) {
+                    AspectList alchemyAspects = new AspectList().add(Aspect.METAL, 1).add(Aspect.ORDER, 1);
+
+                    CLUSTER_RECIPES.add(registerAlchemyRecipe(
+                            "METALLURGICPERFECTION_CLUSTERS",
+                            "_" + subName,
+                            new ItemStack(WGContent.ItemCluster, 1, iOre),
+                            "ore" + subName,
+                            alchemyAspects));
+
+                    ItemClusters.MetaInfo metaInfo = new ItemClusters.MetaInfo(ItemClusters.Series.Misc, iOre);
+
+                    ItemStack ingot = OreDictionary.getOres("ingot" + subName).get(0);
+
+                    int rgb = 0;
+
+                    ClusterOverlay clusterOverlay = ClusterOverlay.Overworld;
+
+                    if (FMLCommonHandler.instance().getEffectiveSide().isClient()) {
+                        rgb = ingot.getItem().getColorFromItemStack(ingot, 0);
+
+                        clusterOverlay = ClusterOverlay.fromRGB(rgb);
+
+                        rgb = ClientUtilities.getVibrantColourToInt(rgb);
                     }
+
+                    ClusterInfo clusterInfo = new ClusterInfo(subName, metaInfo, false, null, rgb, clusterOverlay);
+                    CLUSTER_INFO.put(subName, clusterInfo);
+
+                    setupCluster(clusterInfo);
+                }
+            }
+
+            if (WGConfig.allowTransmutations) {
+                if (hasItem("nugget", subName) && hasItem("ingot", subName)) {
+                    ItemStack ingot = OreDictionary.getOres("ingot" + subName).get(0);
+
+                    AspectList alchemyAspects = ThaumcraftApi.objectTags.get(Arrays.asList(ingot.getItem(), ingot.getItemDamage()));
+                    if (alchemyAspects == null) alchemyAspects = new AspectList();
+                    alchemyAspects.remove(Aspect.METAL);
+                    alchemyAspects.add(Aspect.METAL, 2);
+
+                    alchemyAspects.aspects.entrySet().removeIf(e -> e.getKey() == null || e.getValue() == null);
+
+                    ItemStack nuggets = Utilities.copyStackWithSize(
+                            OreDictionary.getOres("nugget" + subName).get(0),
+                            3);
+
+                    TRANSMUTE_RECIPES.add(registerAlchemyRecipe(
+                            "METALLURGICPERFECTION_TRANSMUTATION",
+                            "_" + subName,
+                            nuggets,
+                            "nugget" + subName,
+                            alchemyAspects));
                 }
             }
         }
     }
 
-    public static void setupCluster(String name) {
-        String fluid = MetalFluidData.getOreFluidName(name);
-        int fluidTemp = MetalFluidData.getOreFluidTemp(name);
-        fluidTemp = fluidTemp > 0 ? fluidTemp : 550;
+    private static boolean hasItem(String prefix, String matName) {
+        return !OreDictionary.getOres(prefix + matName).isEmpty();
+    }
 
-        String ore = "ore" + name;
-        String cluster = "cluster" + name;
-        String ingot = "ingot" + name;
-        String nugget = "nugget" + name;
-        ItemStack clusterStack = ItemClusters.getCluster(name);
+    private static void loadGT5uClusters() {
+        HashSet<Materials> oresInVeins = new HashSet<>();
 
-        if (!OreDictionary.getOres(nugget).isEmpty()) {
-            if (!OreDictionary.getOres(ore).isEmpty())
-                ThaumcraftApi.addSmeltingBonus(ore, OreDictionary.getOres(nugget).get(0));
-            if (!OreDictionary.getOres(cluster).isEmpty())
-                ThaumcraftApi.addSmeltingBonus(cluster, OreDictionary.getOres(nugget).get(0));
+        // Only generate clusters for ores that are actually used in veins
+        // This only makes them show up in NEI and adds the recipes for them
+        for (OreMixes oreMix : OreMixes.values()) {
+            if (oreMix.oreMixBuilder.primary instanceof Materials gtMat) {
+                oresInVeins.add(gtMat);
+            }
+
+            if (oreMix.oreMixBuilder.between instanceof Materials gtMat) {
+                oresInVeins.add(gtMat);
+            }
+
+            if (oreMix.oreMixBuilder.secondary instanceof Materials gtMat) {
+                oresInVeins.add(gtMat);
+            }
+
+            if (oreMix.oreMixBuilder.sporadic instanceof Materials gtMat) {
+                oresInVeins.add(gtMat);
+            }
         }
 
-        if (!OreDictionary.getOres(cluster).isEmpty()) {
-            if (!OreDictionary.getOres(ingot).isEmpty()) {
-                ItemStack ingots = OreDictionary.getOres(ingot).get(0);
-                if (clusterStack != null) {
+        OrePrefixes[] orePrefixes = {
+            OrePrefixes.ore,
+            OrePrefixes.oreNetherrack,
+            OrePrefixes.oreEndstone,
+            OrePrefixes.rawOre,
+        };
 
-                    if (!OreDictionary.getOres(ore).isEmpty())
-                        Utils.addSpecialMiningResult(OreDictionary.getOres(ore).get(0), clusterStack, 1f);
-                    if (WGContent.ClusterEBF.get(name) == null || !WGContent.ClusterEBF.get(name)) FurnaceRecipes
-                            .smelting().func_151394_a(clusterStack, Utilities.copyStackWithSize(ingots, 2), 1.0F);
+        for (Materials material : GregTechAPI.sGeneratedMaterials) {
+            final AspectList baseAspects = new AspectList();
+
+            material.mAspects.forEach(stack -> baseAspects.add(stack.mAspect.getAspect(), (int) stack.mAmount));
+
+            if (WGConfig.allowClusters && !clusterBlacklist(material) && oresInVeins.contains(material) && hasItem("ore", material.mName)) {
+                legacyClusters.put(material.mName, legacyClusters.size());
+
+                int rgb = ((material.getRGBA()[0] & 0xff) << 16) | ((material.getRGBA()[1] & 0xff) << 8) | (material.getRGBA()[2] & 0xff);
+
+                ClusterOverlay clusterOverlay = ClusterOverlay.fromRGB(rgb);
+
+                rgb = ClientUtilities.getVibrantColourToInt(rgb);
+
+                FluidStack liquid = null;
+
+                if (!material.mBlastFurnaceRequired) {
+                    liquid = material.getMolten(288);
+
+                    if (liquid == null) {
+                        liquid = material.getFluid(288);
+                    }
+                }
+
+                ItemClusters.MetaInfo metaInfo = new ItemClusters.MetaInfo(ItemClusters.Series.GT5u, material.mMetaItemSubID);
+
+                ClusterInfo clusterInfo = new ClusterInfo(
+                    material.mName, metaInfo,
+                    material.mBlastFurnaceRequired,
+                    liquid, rgb,
+                    clusterOverlay);
+
+                CLUSTER_INFO.put(material.mName, clusterInfo);
+
+                AspectList alchemyAspects = baseAspects.copy().add(Aspect.ORDER, 1);
+
+                if (alchemyAspects.size() < 3) {
+                    // Default aspect for unset (Cryolite, Oilsands, etc) is now the
+                    // same as if it had too many aspects (Lucrum instead of
+                    // Nebrisum). In the future for stuff like Callisto Ice , etc
+                    // that is not aspected, either aspects can be added to the
+                    // material or those special cases can be manually set here.
+                    alchemyAspects = new AspectList()
+                        .add(Aspect.METAL, 2)
+                        .add(Aspect.ORDER, 1)
+                        .add(Aspect.GREED, 2);
+                } else if (alchemyAspects.size() > 6) {
+                    alchemyAspects = new AspectList()
+                        .add(Aspect.METAL, 2)
+                        .add(Aspect.ORDER, 1)
+                        .add(Aspect.GREED, 2);
+                }
+
+                for (OrePrefixes prefix : orePrefixes) {
+                    List<ItemStack> candidates = OreDictionary.getOres(prefix.name() + material.mName);
+
+                    if (candidates.isEmpty()) continue;
+
+                    boolean isRich = prefix == OrePrefixes.oreNetherrack && GTMod.proxy.mNetherOreYieldMultiplier || prefix == OrePrefixes.oreEndstone && GTMod.proxy.mEndOreYieldMultiplier;
+
+                    candidates = new ArrayList<>(candidates);
+
+                    candidates.replaceAll(ItemStack::copy);
+
+                    CLUSTER_RECIPES.add(registerAlchemyRecipe(
+                        "METALLURGICPERFECTION_CLUSTERS",
+                        "_" + prefix.name() + material.mName,
+                        new ItemStack(WGContent.ItemCluster, isRich ? 4 : 2, metaInfo.getMeta()),
+                        candidates,
+                        alchemyAspects));
                 }
             }
-            if (WGModCompat.loaded_TCon && WGConfig.smelteryResultForClusters > 0
-                    && FluidRegistry.getFluid(fluid) != null)
-                WGModCompat.addTConSmelteryRecipe(
-                        cluster,
-                        "block" + name,
-                        fluidTemp,
-                        fluid,
-                        WGConfig.smelteryResultForClusters);
+
+            ItemStack nugget = GTOreDictUnificator.get(OrePrefixes.nugget, material, 1);
+
+            if (WGConfig.allowTransmutations && nugget != null && material.contains(SubTag.TRANSMUTABLE_NUGGETS)) {
+                AspectList transmuteAspects = baseAspects.copy();
+
+                if (transmuteAspects.aspects.isEmpty() || transmuteAspects.size() < 3) {
+                    transmuteAspects = new AspectList().add(Aspect.METAL, 2)
+                        .add(Aspect.ORDER, 1)
+                        .add(TCAspects.NEBRISUM.getAspect(), 2);
+                } else {
+                    transmuteAspects.remove(Aspect.METAL);
+                    transmuteAspects.add(Aspect.METAL, 2);
+                }
+
+                transmuteAspects.aspects.entrySet().removeIf(e -> e.getKey() == null || e.getValue() == null || e.getValue() <= 0);
+
+                TRANSMUTE_RECIPES.add(registerAlchemyRecipe(
+                        "METALLURGICPERFECTION_TRANSMUTATION",
+                        "_" + material.mName,
+                        Utilities.copyStackWithSize(nugget, 3),
+                    Utilities.copyStackWithSize(nugget, 1),
+                    transmuteAspects));
+            }
         }
     }
 
+    private static void setupCluster(ClusterInfo clusterInfo) {
+        ItemStack cluster = new ItemStack(WGContent.ItemCluster, 1, clusterInfo.meta().getMeta());
+        OreDictionary.registerOre("cluster" + clusterInfo.matName, cluster.copy());
+
+        ItemStack nugget = clusterInfo.getPart("nugget", 1);
+        ItemStack ingot = clusterInfo.getPart("ingot", 1);
+        ItemStack ore = clusterInfo.getPart("ore", 1);
+
+        assert ore != null;
+
+        if (nugget != null) {
+            ThaumcraftApi.addSmeltingBonus(ore.copy(), nugget.copy());
+
+            ThaumcraftApi.addSmeltingBonus(cluster.copy(), nugget.copy());
+        }
+
+        if (ingot != null) {
+            Utils.addSpecialMiningResult(ore.copy(), cluster.copy(), 1f);
+
+            if (!clusterInfo.ebf || !WitchingGadgets.isGT5uLoaded || clusterInfo.getGT5uMaterial() == null) {
+                FurnaceRecipes.smelting().func_151394_a(
+                    cluster.copy(),
+                    Utilities.copyStackWithSize(ingot, 2),
+                    1.0F);
+            }
+        }
+
+        if (WGModCompat.loaded_TCon && WGConfig.smelteryResultForClusters > 0 && clusterInfo.liquid != null) {
+            int fluidTemp = clusterInfo.liquid.getFluid().getTemperature(clusterInfo.liquid);
+
+            if (fluidTemp <= 0) fluidTemp = 550;
+
+            WGModCompat.addTConSmelteryRecipe(
+                "cluster" + clusterInfo.matName,
+                "block" + clusterInfo.matName,
+                fluidTemp,
+                clusterInfo.liquid.getFluid().getName(),
+                WGConfig.smelteryResultForClusters);
+        }
+    }
+
+    @Optional.Method(modid = "postea")
+    private static void registerPosteaTransformer() {
+        ItemStackReplacementManager.addItemReplacement(
+            "WitchingGadgets:item.WG_Cluster",
+            tag -> {
+                ItemClusters.MetaInfo metaInfo = ItemClusters.MetaInfo.fromMeta(tag.getInteger("Damage"));
+
+                if (metaInfo.series() == ItemClusters.Series.Legacy) {
+                    // Set the damage to error, which will alert the player that this cluster is no longer valid
+                    tag.setInteger("Damage", new ItemClusters.MetaInfo(ItemClusters.Series.Error, 0).getMeta());
+                }
+
+                return tag;
+            });
+    }
 }

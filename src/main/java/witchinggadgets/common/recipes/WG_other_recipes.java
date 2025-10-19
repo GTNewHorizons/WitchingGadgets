@@ -31,11 +31,11 @@ public class WG_other_recipes {
         WG_other_spinning.registerSpinningRecipes();
         WG_other_loom.registerLoom();
         WG_other_infernal_blast_furnace.registerInfernalBlastFurnace();
-        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+        if (Loader.isModLoaded("gregtech_nh")) {
             WG_GT_clusters.registerClusterRecipesGT();
         } else {
             for (String name : OreDictionary.getOreNames()) if (name.startsWith("cluster")) {
-                addBlastTrippling(name.substring("cluster".length()));
+                addBlastTripling(name.substring("cluster".length()));
             }
         }
         if (WGModCompat.loaded_TCon) {
@@ -63,16 +63,21 @@ public class WG_other_recipes {
         WGContent.recipeList.put(tag + tagAddon, compoundRecipe);
     }
 
-    public static void addBlastTrippling(String name) {
-        if (!OreDictionary.getOres("ingot" + name).isEmpty()) {
-            InfernalBlastfurnaceRecipe r = InfernalBlastfurnaceRecipe.addRecipe(
-                    Utilities.copyStackWithSize(OreDictionary.getOres("ingot" + name).get(0), 3),
-                    "cluster" + name,
+    public static void addBlastTripling(String matName) {
+        ItemStack ingot = Utilities.getOredict("ingot" + matName, 3);
+        ItemStack nugget = Utilities.getOredict("nugget" + matName, 1);
+
+        if (ingot != null) {
+            InfernalBlastfurnaceRecipe recipe = InfernalBlastfurnaceRecipe.addRecipe(
+                    ingot,
+                    "cluster" + matName,
                     1,
                     440,
                     false);
-            if (r != null && !OreDictionary.getOres("nugget" + name).isEmpty())
-                r.addBonus(OreDictionary.getOres("nugget" + name).get(0));
+
+            if (recipe != null && nugget != null) {
+                recipe.addBonus(nugget);
+            }
         }
     }
 }
