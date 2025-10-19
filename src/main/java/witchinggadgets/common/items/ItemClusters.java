@@ -13,6 +13,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 
 import com.github.bsideup.jabel.Desugar;
+
 import cpw.mods.fml.common.Optional;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Materials;
@@ -50,7 +51,7 @@ public class ItemClusters extends Item implements IItemFirestoneBurning {
         }
 
         public String getMaterialName() {
-            return switch(series) {
+            return switch (series) {
                 case Legacy -> null;
                 case GT5u -> GregTechAPI.sGeneratedMaterials[matId].mName;
                 case Misc -> WG_alchemic_clusters.subNames[matId];
@@ -90,7 +91,8 @@ public class ItemClusters extends Item implements IItemFirestoneBurning {
     public int getColorFromItemStack(ItemStack stack, int pass) {
         if (pass != 0) return 0xFFFFFF;
 
-        WG_alchemic_clusters.ClusterInfo clusterInfo = WG_alchemic_clusters.CLUSTER_INFO_BY_META.get(stack.getItemDamage());
+        WG_alchemic_clusters.ClusterInfo clusterInfo = WG_alchemic_clusters.CLUSTER_INFO_BY_META
+                .get(stack.getItemDamage());
 
         return clusterInfo == null ? 0xFFFFFF : clusterInfo.vibrant();
     }
@@ -133,10 +135,13 @@ public class ItemClusters extends Item implements IItemFirestoneBurning {
                 return "Legacy Cluster";
             }
             case GT5u -> {
-                return StatCollector.translateToLocalFormatted("item.WG_Cluster.name", WitchingGadgets.isGT5uLoaded ? metaInfo.getGT5uMatName() : "NULL");
+                return StatCollector.translateToLocalFormatted(
+                        "item.WG_Cluster.name",
+                        WitchingGadgets.isGT5uLoaded ? metaInfo.getGT5uMatName() : "NULL");
             }
             case Misc -> {
-                WG_alchemic_clusters.ClusterInfo clusterInfo = WG_alchemic_clusters.CLUSTER_INFO_BY_META.get(stack.getItemDamage());
+                WG_alchemic_clusters.ClusterInfo clusterInfo = WG_alchemic_clusters.CLUSTER_INFO_BY_META
+                        .get(stack.getItemDamage());
 
                 if (clusterInfo == null) return "Invalid Cluster";
 
@@ -172,7 +177,8 @@ public class ItemClusters extends Item implements IItemFirestoneBurning {
 
         if (metaInfo.series == Series.Error) {
             tooltip.add("This cluster was erased while upgrading, it should be discarded");
-            tooltip.add("Clusters from GTNH 2.8 are incompatible with GTNH 2.9+, you should not receive Error Clusters outside of that migration.");
+            tooltip.add(
+                    "Clusters from GTNH 2.8 are incompatible with GTNH 2.9+, you should not receive Error Clusters outside of that migration.");
         }
     }
 
@@ -192,7 +198,8 @@ public class ItemClusters extends Item implements IItemFirestoneBurning {
     @Override
     @Optional.Method(modid = "Railcraft")
     public boolean shouldBurn(ItemStack itemStack) {
-        WG_alchemic_clusters.ClusterInfo clusterInfo = WG_alchemic_clusters.CLUSTER_INFO_BY_META.get(itemStack.getItemDamage());
+        WG_alchemic_clusters.ClusterInfo clusterInfo = WG_alchemic_clusters.CLUSTER_INFO_BY_META
+                .get(itemStack.getItemDamage());
 
         return clusterInfo != null && clusterInfo.matName().equals("Firestone");
     }

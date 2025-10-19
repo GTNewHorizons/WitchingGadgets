@@ -16,6 +16,7 @@ import com.github.bsideup.jabel.Desugar;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.gtnewhorizons.postea.api.ItemStackReplacementManager;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Optional;
@@ -65,6 +66,7 @@ public class WG_alchemic_clusters {
             "Thorium", "Uranium235", "Uranium238", "Zinc", "Casserite" };
 
     public enum ClusterOverlay {
+
         Overworld,
         Nether,
         End;
@@ -85,7 +87,8 @@ public class WG_alchemic_clusters {
     }
 
     @Desugar
-    public record ClusterInfo(String matName, ItemClusters.MetaInfo meta, boolean ebf, FluidStack liquid, int vibrant, ClusterOverlay clusterOverlay) {
+    public record ClusterInfo(String matName, ItemClusters.MetaInfo meta, boolean ebf, FluidStack liquid, int vibrant,
+            ClusterOverlay clusterOverlay) {
 
         @Optional.Method(modid = "gregtech_nh")
         public Materials getGT5uMaterial() {
@@ -142,12 +145,13 @@ public class WG_alchemic_clusters {
                 if (hasItem("ore", subName) && hasItem("ingot", subName)) {
                     AspectList alchemyAspects = new AspectList().add(Aspect.METAL, 1).add(Aspect.ORDER, 1);
 
-                    CLUSTER_RECIPES.add(registerAlchemyRecipe(
-                            "METALLURGICPERFECTION_CLUSTERS",
-                            "_" + subName,
-                            new ItemStack(WGContent.ItemCluster, 1, iOre),
-                            "ore" + subName,
-                            alchemyAspects));
+                    CLUSTER_RECIPES.add(
+                            registerAlchemyRecipe(
+                                    "METALLURGICPERFECTION_CLUSTERS",
+                                    "_" + subName,
+                                    new ItemStack(WGContent.ItemCluster, 1, iOre),
+                                    "ore" + subName,
+                                    alchemyAspects));
 
                     ItemClusters.MetaInfo metaInfo = new ItemClusters.MetaInfo(ItemClusters.Series.Misc, iOre);
 
@@ -176,23 +180,24 @@ public class WG_alchemic_clusters {
                 if (hasItem("nugget", subName) && hasItem("ingot", subName)) {
                     ItemStack ingot = OreDictionary.getOres("ingot" + subName).get(0);
 
-                    AspectList alchemyAspects = ThaumcraftApi.objectTags.get(Arrays.asList(ingot.getItem(), ingot.getItemDamage()));
+                    AspectList alchemyAspects = ThaumcraftApi.objectTags
+                            .get(Arrays.asList(ingot.getItem(), ingot.getItemDamage()));
                     if (alchemyAspects == null) alchemyAspects = new AspectList();
                     alchemyAspects.remove(Aspect.METAL);
                     alchemyAspects.add(Aspect.METAL, 2);
 
                     alchemyAspects.aspects.entrySet().removeIf(e -> e.getKey() == null || e.getValue() == null);
 
-                    ItemStack nuggets = Utilities.copyStackWithSize(
-                            OreDictionary.getOres("nugget" + subName).get(0),
-                            3);
+                    ItemStack nuggets = Utilities
+                            .copyStackWithSize(OreDictionary.getOres("nugget" + subName).get(0), 3);
 
-                    TRANSMUTE_RECIPES.add(registerAlchemyRecipe(
-                            "METALLURGICPERFECTION_TRANSMUTATION",
-                            "_" + subName,
-                            nuggets,
-                            "nugget" + subName,
-                            alchemyAspects));
+                    TRANSMUTE_RECIPES.add(
+                            registerAlchemyRecipe(
+                                    "METALLURGICPERFECTION_TRANSMUTATION",
+                                    "_" + subName,
+                                    nuggets,
+                                    "nugget" + subName,
+                                    alchemyAspects));
                 }
             }
         }
@@ -225,22 +230,21 @@ public class WG_alchemic_clusters {
             }
         }
 
-        OrePrefixes[] orePrefixes = {
-            OrePrefixes.ore,
-            OrePrefixes.oreNetherrack,
-            OrePrefixes.oreEndstone,
-            OrePrefixes.rawOre,
-        };
+        OrePrefixes[] orePrefixes = { OrePrefixes.ore, OrePrefixes.oreNetherrack, OrePrefixes.oreEndstone,
+                OrePrefixes.rawOre, };
 
         for (Materials material : GregTechAPI.sGeneratedMaterials) {
             final AspectList baseAspects = new AspectList();
 
             material.mAspects.forEach(stack -> baseAspects.add(stack.mAspect.getAspect(), (int) stack.mAmount));
 
-            if (WGConfig.allowClusters && !clusterBlacklist(material) && oresInVeins.contains(material) && hasItem("ore", material.mName)) {
+            if (WGConfig.allowClusters && !clusterBlacklist(material)
+                    && oresInVeins.contains(material)
+                    && hasItem("ore", material.mName)) {
                 legacyClusters.put(material.mName, legacyClusters.size());
 
-                int rgb = ((material.getRGBA()[0] & 0xff) << 16) | ((material.getRGBA()[1] & 0xff) << 8) | (material.getRGBA()[2] & 0xff);
+                int rgb = ((material.getRGBA()[0] & 0xff) << 16) | ((material.getRGBA()[1] & 0xff) << 8)
+                        | (material.getRGBA()[2] & 0xff);
 
                 ClusterOverlay clusterOverlay = ClusterOverlay.fromRGB(rgb);
 
@@ -256,13 +260,17 @@ public class WG_alchemic_clusters {
                     }
                 }
 
-                ItemClusters.MetaInfo metaInfo = new ItemClusters.MetaInfo(ItemClusters.Series.GT5u, material.mMetaItemSubID);
+                ItemClusters.MetaInfo metaInfo = new ItemClusters.MetaInfo(
+                        ItemClusters.Series.GT5u,
+                        material.mMetaItemSubID);
 
                 ClusterInfo clusterInfo = new ClusterInfo(
-                    material.mName, metaInfo,
-                    material.mBlastFurnaceRequired,
-                    liquid, rgb,
-                    clusterOverlay);
+                        material.mName,
+                        metaInfo,
+                        material.mBlastFurnaceRequired,
+                        liquid,
+                        rgb,
+                        clusterOverlay);
 
                 CLUSTER_INFO.put(material.mName, clusterInfo);
 
@@ -274,15 +282,9 @@ public class WG_alchemic_clusters {
                     // Nebrisum). In the future for stuff like Callisto Ice , etc
                     // that is not aspected, either aspects can be added to the
                     // material or those special cases can be manually set here.
-                    alchemyAspects = new AspectList()
-                        .add(Aspect.METAL, 2)
-                        .add(Aspect.ORDER, 1)
-                        .add(Aspect.GREED, 2);
+                    alchemyAspects = new AspectList().add(Aspect.METAL, 2).add(Aspect.ORDER, 1).add(Aspect.GREED, 2);
                 } else if (alchemyAspects.size() > 6) {
-                    alchemyAspects = new AspectList()
-                        .add(Aspect.METAL, 2)
-                        .add(Aspect.ORDER, 1)
-                        .add(Aspect.GREED, 2);
+                    alchemyAspects = new AspectList().add(Aspect.METAL, 2).add(Aspect.ORDER, 1).add(Aspect.GREED, 2);
                 }
 
                 for (OrePrefixes prefix : orePrefixes) {
@@ -290,18 +292,20 @@ public class WG_alchemic_clusters {
 
                     if (candidates.isEmpty()) continue;
 
-                    boolean isRich = prefix == OrePrefixes.oreNetherrack && GTMod.proxy.mNetherOreYieldMultiplier || prefix == OrePrefixes.oreEndstone && GTMod.proxy.mEndOreYieldMultiplier;
+                    boolean isRich = prefix == OrePrefixes.oreNetherrack && GTMod.proxy.mNetherOreYieldMultiplier
+                            || prefix == OrePrefixes.oreEndstone && GTMod.proxy.mEndOreYieldMultiplier;
 
                     candidates = new ArrayList<>(candidates);
 
                     candidates.replaceAll(ItemStack::copy);
 
-                    CLUSTER_RECIPES.add(registerAlchemyRecipe(
-                        "METALLURGICPERFECTION_CLUSTERS",
-                        "_" + prefix.name() + material.mName,
-                        new ItemStack(WGContent.ItemCluster, isRich ? 4 : 2, metaInfo.getMeta()),
-                        candidates,
-                        alchemyAspects));
+                    CLUSTER_RECIPES.add(
+                            registerAlchemyRecipe(
+                                    "METALLURGICPERFECTION_CLUSTERS",
+                                    "_" + prefix.name() + material.mName,
+                                    new ItemStack(WGContent.ItemCluster, isRich ? 4 : 2, metaInfo.getMeta()),
+                                    candidates,
+                                    alchemyAspects));
                 }
             }
 
@@ -311,22 +315,23 @@ public class WG_alchemic_clusters {
                 AspectList transmuteAspects = baseAspects.copy();
 
                 if (transmuteAspects.aspects.isEmpty() || transmuteAspects.size() < 3) {
-                    transmuteAspects = new AspectList().add(Aspect.METAL, 2)
-                        .add(Aspect.ORDER, 1)
-                        .add(TCAspects.NEBRISUM.getAspect(), 2);
+                    transmuteAspects = new AspectList().add(Aspect.METAL, 2).add(Aspect.ORDER, 1)
+                            .add(TCAspects.NEBRISUM.getAspect(), 2);
                 } else {
                     transmuteAspects.remove(Aspect.METAL);
                     transmuteAspects.add(Aspect.METAL, 2);
                 }
 
-                transmuteAspects.aspects.entrySet().removeIf(e -> e.getKey() == null || e.getValue() == null || e.getValue() <= 0);
+                transmuteAspects.aspects.entrySet()
+                        .removeIf(e -> e.getKey() == null || e.getValue() == null || e.getValue() <= 0);
 
-                TRANSMUTE_RECIPES.add(registerAlchemyRecipe(
-                        "METALLURGICPERFECTION_TRANSMUTATION",
-                        "_" + material.mName,
-                        Utilities.copyStackWithSize(nugget, 3),
-                    Utilities.copyStackWithSize(nugget, 1),
-                    transmuteAspects));
+                TRANSMUTE_RECIPES.add(
+                        registerAlchemyRecipe(
+                                "METALLURGICPERFECTION_TRANSMUTATION",
+                                "_" + material.mName,
+                                Utilities.copyStackWithSize(nugget, 3),
+                                Utilities.copyStackWithSize(nugget, 1),
+                                transmuteAspects));
             }
         }
     }
@@ -351,10 +356,7 @@ public class WG_alchemic_clusters {
             Utils.addSpecialMiningResult(ore.copy(), cluster.copy(), 1f);
 
             if (!clusterInfo.ebf || !WitchingGadgets.isGT5uLoaded || clusterInfo.getGT5uMaterial() == null) {
-                FurnaceRecipes.smelting().func_151394_a(
-                    cluster.copy(),
-                    Utilities.copyStackWithSize(ingot, 2),
-                    1.0F);
+                FurnaceRecipes.smelting().func_151394_a(cluster.copy(), Utilities.copyStackWithSize(ingot, 2), 1.0F);
             }
         }
 
@@ -364,27 +366,25 @@ public class WG_alchemic_clusters {
             if (fluidTemp <= 0) fluidTemp = 550;
 
             WGModCompat.addTConSmelteryRecipe(
-                "cluster" + clusterInfo.matName,
-                "block" + clusterInfo.matName,
-                fluidTemp,
-                clusterInfo.liquid.getFluid().getName(),
-                WGConfig.smelteryResultForClusters);
+                    "cluster" + clusterInfo.matName,
+                    "block" + clusterInfo.matName,
+                    fluidTemp,
+                    clusterInfo.liquid.getFluid().getName(),
+                    WGConfig.smelteryResultForClusters);
         }
     }
 
     @Optional.Method(modid = "postea")
     private static void registerPosteaTransformer() {
-        ItemStackReplacementManager.addItemReplacement(
-            "WitchingGadgets:item.WG_Cluster",
-            tag -> {
-                ItemClusters.MetaInfo metaInfo = ItemClusters.MetaInfo.fromMeta(tag.getInteger("Damage"));
+        ItemStackReplacementManager.addItemReplacement("WitchingGadgets:item.WG_Cluster", tag -> {
+            ItemClusters.MetaInfo metaInfo = ItemClusters.MetaInfo.fromMeta(tag.getInteger("Damage"));
 
-                if (metaInfo.series() == ItemClusters.Series.Legacy) {
-                    // Set the damage to error, which will alert the player that this cluster is no longer valid
-                    tag.setInteger("Damage", new ItemClusters.MetaInfo(ItemClusters.Series.Error, 0).getMeta());
-                }
+            if (metaInfo.series() == ItemClusters.Series.Legacy) {
+                // Set the damage to error, which will alert the player that this cluster is no longer valid
+                tag.setInteger("Damage", new ItemClusters.MetaInfo(ItemClusters.Series.Error, 0).getMeta());
+            }
 
-                return tag;
-            });
+            return tag;
+        });
     }
 }

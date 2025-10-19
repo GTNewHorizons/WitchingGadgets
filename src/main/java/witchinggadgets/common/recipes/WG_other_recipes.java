@@ -68,12 +68,8 @@ public class WG_other_recipes {
         ItemStack nugget = Utilities.getOredict("nugget" + matName, 1);
 
         if (ingot != null) {
-            InfernalBlastfurnaceRecipe recipe = InfernalBlastfurnaceRecipe.addRecipe(
-                    ingot,
-                    "cluster" + matName,
-                    1,
-                    440,
-                    false);
+            InfernalBlastfurnaceRecipe recipe = InfernalBlastfurnaceRecipe
+                    .addRecipe(ingot, "cluster" + matName, 1, 440, false);
 
             if (recipe != null && nugget != null) {
                 recipe.addBonus(nugget);

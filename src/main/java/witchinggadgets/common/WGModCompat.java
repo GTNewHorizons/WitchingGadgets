@@ -152,7 +152,8 @@ public class WGModCompat {
         if (!OreDictionary.getOres(oreName).isEmpty()) ThaumcraftApi.registerObjectTag(oreName, aspects);
     }
 
-    public static void addTConSmelteryRecipe(String oreName, String blockName, int temperature, String fluidName, int fluidAmount) {
+    public static void addTConSmelteryRecipe(String oreName, String blockName, int temperature, String fluidName,
+            int fluidAmount) {
         if (!OreDictionary.getOres(blockName).isEmpty()) {
             ItemStack blockStack = OreDictionary.getOres(blockName).get(0);
 
@@ -164,7 +165,13 @@ public class WGModCompat {
 
             for (ItemStack oreStack : OreDictionary.getOres(oreName)) {
                 if (oreStack != null) {
-                    addTConSmelteryRecipe(oreStack, block, blockStack.getItemDamage(), temperature, fluidName, fluidAmount);
+                    addTConSmelteryRecipe(
+                            oreStack,
+                            block,
+                            blockStack.getItemDamage(),
+                            temperature,
+                            fluidName,
+                            fluidAmount);
                 }
             }
         }
