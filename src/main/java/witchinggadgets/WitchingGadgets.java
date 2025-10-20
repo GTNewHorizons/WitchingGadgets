@@ -143,7 +143,7 @@ public class WitchingGadgets {
 
         packetHandler.registerMessage(MessageOpenCloak.HandlerClient.class, MessageOpenCloak.class, 5, Side.CLIENT);
         packetHandler.registerMessage(MessageOpenCloak.HandlerServer.class, MessageOpenCloak.class, 6, Side.SERVER);
-        
+
         packetHandler.registerMessage(MessageSyncGlide.HandlerServer.class, MessageSyncGlide.class, 7, Side.SERVER);
     }
 

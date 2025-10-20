@@ -36,8 +36,6 @@ import baubles.api.expanded.BaubleItemHelper;
 import baubles.api.expanded.IBaubleExpanded;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import thaumcraft.api.IGoggles;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -62,8 +60,8 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
     int[] defaultColours = {};
     IIcon iconRaven;
     IIcon iconWolf;
-    
-    private boolean lastKeybindState = false; 
+
+    private boolean lastKeybindState = false;
 
     public ItemCloak() {
         this.setHasSubtypes(true);
@@ -233,25 +231,25 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
             }
         }
     }
-    
+
     /**
-     * The method {@link net.minecraft.client.settings.KeyBinding#isPressed} changes the
-     * keybind state so that it only works once per keybind. This alternative instead works
-     * by comparing the current tick and last tick state of the keybind. Cloak and Kama items
-     * track last state separately, so that it can be updated from within the item's code
-     * order-independently, and is tracked as an Item field, because it's only used on the
-     * client. Updates only happen while the item is equipped.
+     * The method {@link net.minecraft.client.settings.KeyBinding#isPressed} changes the keybind state so that it only
+     * works once per keybind. This alternative instead works by comparing the current tick and last tick state of the
+     * keybind. Cloak and Kama items track last state separately, so that it can be updated from within the item's code
+     * order-independently, and is tracked as an Item field, because it's only used on the client. Updates only happen
+     * while the item is equipped.
+     * 
      * @return Whether this is a tick when the activateKey was pressed down.
      */
     private boolean shouldActivate() {
-    	return !lastKeybindState && activateKey.getIsKeyPressed();
+        return !lastKeybindState && activateKey.getIsKeyPressed();
     }
 
     public void onItemTicked(EntityPlayer player, ItemStack stack) {
         if (player.worldObj.isRemote) {
 
             if (shouldActivate() && subNames[stack.getItemDamage()].equals("raven")) {
-            	int slot = BaubleExpandedSlots.getIndexesOfAssignedSlotsOfType(getBaubleTypes(stack)[0])[0];
+                int slot = BaubleExpandedSlots.getIndexesOfAssignedSlotsOfType(getBaubleTypes(stack)[0])[0];
                 if (stack.getTagCompound().getBoolean("noGlide")) {
                     stack.getTagCompound().setBoolean("noGlide", false);
                     WitchingGadgets.packetHandler.sendToServer(new MessageSyncGlide(slot, false));
@@ -275,7 +273,7 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
                         MathHelper.floor_double(player.posZ));
                 WitchingGadgets.packetHandler.sendToServer(new MessageOpenCloak(player, kama));
             }
-            
+
             lastKeybindState = activateKey.getIsKeyPressed();
         }
 
