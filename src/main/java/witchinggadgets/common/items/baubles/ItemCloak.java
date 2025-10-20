@@ -53,6 +53,7 @@ import witchinggadgets.common.items.interfaces.IItemEvent;
 import witchinggadgets.common.util.Lib;
 import witchinggadgets.common.util.Utilities;
 import witchinggadgets.common.util.network.message.MessageOpenCloak;
+import witchinggadgets.common.util.network.message.MessageSyncGlide;
 
 @Optional.Interface(iface = "vazkii.botania.api.item.ICosmeticAttachable", modid = "Botania")
 public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttachable, IItemEvent {
@@ -250,12 +251,15 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
         if (player.worldObj.isRemote) {
 
             if (shouldActivate() && subNames[stack.getItemDamage()].equals("raven")) {
+            	int slot = BaubleExpandedSlots.getIndexesOfAssignedSlotsOfType(getBaubleTypes(stack)[0])[0];
                 if (stack.getTagCompound().getBoolean("noGlide")) {
                     stack.getTagCompound().setBoolean("noGlide", false);
+                    WitchingGadgets.packetHandler.sendToServer(new MessageSyncGlide(slot, false));
                     player.addChatMessage(
                             new ChatComponentText(StatCollector.translateToLocal(Lib.DESCRIPTION + "glide")));
                 } else if (!stack.getTagCompound().getBoolean("noGlide")) {
                     stack.getTagCompound().setBoolean("noGlide", true);
+                    WitchingGadgets.packetHandler.sendToServer(new MessageSyncGlide(slot, true));
                     player.addChatMessage(
                             new ChatComponentText(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide")));
                 }
