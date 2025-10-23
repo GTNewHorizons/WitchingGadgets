@@ -31,6 +31,7 @@ import thaumcraft.api.research.ResearchPage;
 import thaumcraft.common.config.Config;
 import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.config.ConfigItems;
+import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.items.baubles.ItemCloak;
 import witchinggadgets.common.recipes.alchemic.WG_alchemic_clusters;
 import witchinggadgets.common.util.Utilities;
@@ -717,7 +718,7 @@ public class WGResearch {
             }
 
             pages = clusterPages.toArray(new ResearchPage[0]);
-            if (Loader.isModLoaded("gregtech_nh")) {
+            if (WitchingGadgets.isGT5uLoaded) {
                 researchAspects = new AspectList().add(Aspect.METAL, 20).add(Aspect.ORDER, 10).add(Aspect.CRYSTAL, 10)
                         .add(Aspect.EXCHANGE, 20).add(Aspect.MINE, 10).add(Aspect.MIND, 5).add(Aspect.GREED, 4)
                         .add((Aspect) gregtech.api.enums.TCAspects.NEBRISUM.mAspect, 8);
@@ -769,7 +770,7 @@ public class WGResearch {
             }
 
             pages = transmutePages.toArray(new ResearchPage[0]);
-            if (Loader.isModLoaded("gregtech_nh")) {
+            if (WitchingGadgets.isGT5uLoaded) {
                 researchAspects = new AspectList().add(Aspect.METAL, 20).add(Aspect.ORDER, 10).add(Aspect.TOOL, 10)
                         .add(Aspect.MAGIC, 10).add(Aspect.MIND, 5).add(Aspect.EXCHANGE, 20).add(Aspect.GREED, 4)
                         .add((Aspect) gregtech.api.enums.TCAspects.NEBRISUM.mAspect, 8);

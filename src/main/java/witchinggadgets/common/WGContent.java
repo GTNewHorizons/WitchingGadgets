@@ -247,7 +247,7 @@ public class WGContent {
     }
 
     private static void add_infernal_recipes() {
-        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+        if (WitchingGadgets.isGT5uLoaded) {
             if (!devbuild) for (Materials aMaterial : gregtech.api.enums.Materials.getMaterialsMap().values()) {
                 if (!aMaterial.contains(SubTag.NO_SMELTING)) {
                     if ((aMaterial.mBlastFurnaceRequired) || (aMaterial.mDirectSmelting.mBlastFurnaceRequired)) {

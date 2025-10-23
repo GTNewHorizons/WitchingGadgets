@@ -8,9 +8,9 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import thaumcraft.api.aspects.AspectList;
+import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.WGModCompat;
 import witchinggadgets.common.recipes.other.WG_GT_clusters;
@@ -31,7 +31,7 @@ public class WG_other_recipes {
         WG_other_spinning.registerSpinningRecipes();
         WG_other_loom.registerLoom();
         WG_other_infernal_blast_furnace.registerInfernalBlastFurnace();
-        if (Loader.isModLoaded("gregtech_nh")) {
+        if (WitchingGadgets.isGT5uLoaded) {
             WG_GT_clusters.registerClusterRecipesGT();
         } else {
             for (String name : OreDictionary.getOreNames()) if (name.startsWith("cluster")) {

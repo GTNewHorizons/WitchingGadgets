@@ -8,6 +8,7 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
+import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.WGModCompat;
 import witchinggadgets.common.util.recipe.SpinningRecipe;
@@ -15,7 +16,7 @@ import witchinggadgets.common.util.recipe.SpinningRecipe;
 public class WG_other_spinning {
 
     public static void registerSpinningRecipes() {
-        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+        if (WitchingGadgets.isGT5uLoaded) {
             if (Loader.isModLoaded("Natura")) {
                 SpinningRecipe spin_String = new SpinningRecipe(
                         new ItemStack(Items.string, 5),

@@ -12,6 +12,7 @@ import gregtech.api.util.GTOreDictUnificator;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.config.ConfigItems;
+import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.WGConfig;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.WGModCompat;
@@ -23,7 +24,7 @@ public class WG_arcane_cloaks {
 
         ItemStack standardCloak = new ItemStack(WGContent.ItemCloak, 1, 0);
 
-        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+        if (WitchingGadgets.isGT5uLoaded) {
             registerArcaneRecipe(
                     "CLOAK",
                     "",
