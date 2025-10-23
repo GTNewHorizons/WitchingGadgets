@@ -14,6 +14,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.gtnewhorizons.postea.api.ItemStackReplacementManager;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Optional;
@@ -333,31 +334,31 @@ public class WG_alchemic_clusters {
                 }
 
                 List<ItemStack> normalOre = notRich.stream()
-                    .flatMap(prefix -> Utilities.oredictStream(prefix.name() + material.mName))
-                    .collect(Collectors.toList());
+                        .flatMap(prefix -> Utilities.oredictStream(prefix.name() + material.mName))
+                        .collect(Collectors.toList());
 
                 if (!normalOre.isEmpty()) {
                     CLUSTER_RECIPES.add(
-                        registerAlchemyRecipe(
-                            "METALLURGICPERFECTION_CLUSTERS",
-                            "_" + material.mName + "_Normal",
-                            new ItemStack(WGContent.ItemCluster, 2, metaInfo.getMeta()),
-                            normalOre,
-                            alchemyAspects));
+                            registerAlchemyRecipe(
+                                    "METALLURGICPERFECTION_CLUSTERS",
+                                    "_" + material.mName + "_Normal",
+                                    new ItemStack(WGContent.ItemCluster, 2, metaInfo.getMeta()),
+                                    normalOre,
+                                    alchemyAspects));
                 }
 
                 List<ItemStack> richOre = rich.stream()
-                    .flatMap(prefix -> Utilities.oredictStream(prefix.name() + material.mName))
-                    .collect(Collectors.toList());
+                        .flatMap(prefix -> Utilities.oredictStream(prefix.name() + material.mName))
+                        .collect(Collectors.toList());
 
                 if (!richOre.isEmpty()) {
                     CLUSTER_RECIPES.add(
-                        registerAlchemyRecipe(
-                            "METALLURGICPERFECTION_CLUSTERS",
-                            "_" + material.mName + "_Rich",
-                            new ItemStack(WGContent.ItemCluster, 4, metaInfo.getMeta()),
-                            richOre,
-                            alchemyAspects));
+                            registerAlchemyRecipe(
+                                    "METALLURGICPERFECTION_CLUSTERS",
+                                    "_" + material.mName + "_Rich",
+                                    new ItemStack(WGContent.ItemCluster, 4, metaInfo.getMeta()),
+                                    richOre,
+                                    alchemyAspects));
                 }
             }
 
