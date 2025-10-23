@@ -481,10 +481,7 @@ public class Utilities {
 
         if (stacks == null || stacks.isEmpty()) return Stream.empty();
 
-        return new ArrayList<>(stacks)
-            .stream()
-            .filter(Objects::nonNull)
-            .map(ItemStack::copy);
+        return new ArrayList<>(stacks).stream().filter(Objects::nonNull).map(ItemStack::copy);
     }
 
     public static boolean areStacksEqual(ItemStack aStack1, ItemStack aStack2, boolean aIgnoreNBT) {
