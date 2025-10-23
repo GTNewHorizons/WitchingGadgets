@@ -134,7 +134,7 @@ public class ItemClusters extends Item implements IItemFirestoneBurning {
 
         switch (metaInfo.series) {
             case Legacy -> {
-                return "Legacy Cluster";
+                return StatCollector.translateToLocal("item.WG_Material.clusterLegacy.name");
             }
             case GT5u -> {
                 return StatCollector.translateToLocalFormatted(
@@ -145,7 +145,9 @@ public class ItemClusters extends Item implements IItemFirestoneBurning {
                 WG_alchemic_clusters.ClusterInfo clusterInfo = WG_alchemic_clusters.CLUSTER_INFO_BY_META
                         .get(stack.getItemDamage());
 
-                if (clusterInfo == null) return "Invalid Cluster";
+                if (clusterInfo == null) {
+                    return StatCollector.translateToLocal("item.WG_Material.clusterInvalid.name");
+                }
 
                 String key = "item.WG_Material.cluster" + clusterInfo.matName() + ".name";
 
@@ -155,7 +157,9 @@ public class ItemClusters extends Item implements IItemFirestoneBurning {
 
                 ItemStack ingot = Utilities.getOredict("ingot" + clusterInfo.matName(), 1);
 
-                if (ingot == null) return "Invalid Cluster";
+                if (ingot == null) {
+                    return StatCollector.translateToLocal("item.WG_Material.clusterInvalid.name");
+                }
 
                 String name = ingot.getDisplayName();
 
@@ -164,11 +168,11 @@ public class ItemClusters extends Item implements IItemFirestoneBurning {
                 return StatCollector.translateToLocalFormatted("item.WG_Cluster.name", name);
             }
             case Error -> {
-                return "Invalid Cluster";
+                return StatCollector.translateToLocal("item.WG_Material.clusterInvalid.name");
             }
         }
 
-        return "Invalid Cluster";
+        return StatCollector.translateToLocal("item.WG_Material.clusterInvalid.name");
     }
 
     @Override
@@ -178,9 +182,8 @@ public class ItemClusters extends Item implements IItemFirestoneBurning {
         MetaInfo metaInfo = MetaInfo.fromMeta(stack.getItemDamage());
 
         if (metaInfo.series == Series.Error) {
-            tooltip.add("This cluster was erased while upgrading, it should be discarded");
-            tooltip.add(
-                    "Clusters from GTNH 2.8 are incompatible with GTNH 2.9+, you should not receive Error Clusters outside of that migration.");
+            tooltip.add(StatCollector.translateToLocal("tooltip.WitchingGadgets.cluster.error1"));
+            tooltip.add(StatCollector.translateToLocal("tooltip.WitchingGadgets.cluster.error2"));
         }
     }
 
