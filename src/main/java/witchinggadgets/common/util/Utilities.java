@@ -466,7 +466,7 @@ public class Utilities {
     }
 
     public static boolean areStacksEqual(ItemStack aStack1, ItemStack aStack2) {
-        if (Loader.isModLoaded("gregtech_nh")) {
+        if (WitchingGadgets.isGT5uLoaded) {
             return (GTUtility.areStacksEqual(aStack1, aStack2, false));
         } else {
             return areStacksEqual(aStack1, aStack2, false);
