@@ -710,7 +710,7 @@ public class WGResearch {
 
         // METALLURGICPERFECTION_CLUSTERS
         if (WGConfig.allowClusters) {
-            ArrayList<ResearchPage> clusterPages = new ArrayList<ResearchPage>();
+            ArrayList<ResearchPage> clusterPages = new ArrayList<>();
             clusterPages.add(new ResearchPage("witchinggadgets_research_page.METALLURGICPERFECTION_CLUSTERS.1"));
 
             for (CrucibleRecipe clusterRecipe : WG_alchemic_clusters.CLUSTER_RECIPES) {

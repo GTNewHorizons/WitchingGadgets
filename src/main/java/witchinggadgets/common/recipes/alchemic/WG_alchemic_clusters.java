@@ -12,10 +12,7 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
 import com.gtnewhorizons.postea.api.ItemStackReplacementManager;
-
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Optional;
@@ -44,11 +41,11 @@ import witchinggadgets.common.WGConfig;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.WGModCompat;
 import witchinggadgets.common.items.ItemClusters;
+import witchinggadgets.common.items.ItemClusters.MetaInfo;
 import witchinggadgets.common.util.Utilities;
 
 public class WG_alchemic_clusters {
 
-    public static final BiMap<String, Integer> legacyClusters = HashBiMap.create();
     public static final List<CrucibleRecipe> CLUSTER_RECIPES = new ArrayList<>(), TRANSMUTE_RECIPES = new ArrayList<>();
 
     public static String[] subNames = {
@@ -94,7 +91,7 @@ public class WG_alchemic_clusters {
     public static final class ClusterInfo {
 
         private final String matName;
-        private final ItemClusters.MetaInfo meta;
+        private final MetaInfo meta;
         private final boolean ebf;
         private final FluidStack liquid;
         private final int vibrant;
@@ -113,7 +110,7 @@ public class WG_alchemic_clusters {
             return matName;
         }
 
-        public ItemClusters.MetaInfo meta() {
+        public MetaInfo meta() {
             return meta;
         }
 
@@ -187,7 +184,7 @@ public class WG_alchemic_clusters {
                                     "ore" + subName,
                                     alchemyAspects));
 
-                    ItemClusters.MetaInfo metaInfo = new ItemClusters.MetaInfo(ItemClusters.Series.Misc, iOre);
+                    MetaInfo metaInfo = new MetaInfo(ItemClusters.Series.Misc, iOre);
 
                     ItemStack ingot = OreDictionary.getOres("ingot" + subName).get(0);
 
@@ -268,6 +265,8 @@ public class WG_alchemic_clusters {
                 OrePrefixes.rawOre, };
 
         for (Materials material : GregTechAPI.sGeneratedMaterials) {
+            if (material == null) continue;
+
             final AspectList baseAspects = new AspectList();
 
             material.mAspects.forEach(stack -> baseAspects.add(stack.mAspect.getAspect(), (int) stack.mAmount));
@@ -275,8 +274,6 @@ public class WG_alchemic_clusters {
             if (WGConfig.allowClusters && !clusterBlacklist(material)
                     && oresInVeins.contains(material)
                     && hasItem("ore", material.mName)) {
-                legacyClusters.put(material.mName, legacyClusters.size());
-
                 int rgb = ((material.getRGBA()[0] & 0xff) << 16) | ((material.getRGBA()[1] & 0xff) << 8)
                         | (material.getRGBA()[2] & 0xff);
 
@@ -294,9 +291,7 @@ public class WG_alchemic_clusters {
                     }
                 }
 
-                ItemClusters.MetaInfo metaInfo = new ItemClusters.MetaInfo(
-                        ItemClusters.Series.GT5u,
-                        material.mMetaItemSubID);
+                MetaInfo metaInfo = new MetaInfo(ItemClusters.Series.GT5u, material.mMetaItemSubID);
 
                 ClusterInfo clusterInfo = new ClusterInfo(
                         material.mName,
@@ -411,11 +406,11 @@ public class WG_alchemic_clusters {
     @Optional.Method(modid = "postea")
     private static void registerPosteaTransformer() {
         ItemStackReplacementManager.addItemReplacement("WitchingGadgets:item.WG_Cluster", tag -> {
-            ItemClusters.MetaInfo metaInfo = ItemClusters.MetaInfo.fromMeta(tag.getInteger("Damage"));
+            MetaInfo metaInfo = MetaInfo.fromMeta(tag.getInteger("Damage"));
 
             if (metaInfo.series == ItemClusters.Series.Legacy) {
                 // Set the damage to error, which will alert the player that this cluster is no longer valid
-                tag.setInteger("Damage", new ItemClusters.MetaInfo(ItemClusters.Series.Error, 0).getMeta());
+                tag.setInteger("Damage", new MetaInfo(ItemClusters.Series.Error, 0).getMeta());
             }
 
             return tag;
