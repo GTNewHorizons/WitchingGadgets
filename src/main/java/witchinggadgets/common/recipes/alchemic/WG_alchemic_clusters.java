@@ -12,7 +12,6 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.github.bsideup.jabel.Desugar;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.gtnewhorizons.postea.api.ItemStackReplacementManager;
@@ -31,6 +30,9 @@ import gregtech.api.util.GTOreDictUnificator;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -86,9 +88,17 @@ public class WG_alchemic_clusters {
         }
     }
 
-    @Desugar
-    public record ClusterInfo(String matName, ItemClusters.MetaInfo meta, boolean ebf, FluidStack liquid, int vibrant,
-            ClusterOverlay clusterOverlay) {
+    @EqualsAndHashCode
+    @ToString
+    @AllArgsConstructor
+    public static final class ClusterInfo {
+
+        private final String matName;
+        private final ItemClusters.MetaInfo meta;
+        private final boolean ebf;
+        private final FluidStack liquid;
+        private final int vibrant;
+        private final ClusterOverlay clusterOverlay;
 
         @Optional.Method(modid = "gregtech_nh")
         public Materials getGT5uMaterial() {
@@ -97,6 +107,30 @@ public class WG_alchemic_clusters {
 
         public ItemStack getPart(String prefix, int amount) {
             return Utilities.getOredict(prefix + matName, amount);
+        }
+
+        public String matName() {
+            return matName;
+        }
+
+        public ItemClusters.MetaInfo meta() {
+            return meta;
+        }
+
+        public boolean ebf() {
+            return ebf;
+        }
+
+        public FluidStack liquid() {
+            return liquid;
+        }
+
+        public int vibrant() {
+            return vibrant;
+        }
+
+        public ClusterOverlay clusterOverlay() {
+            return clusterOverlay;
         }
     }
 
@@ -379,7 +413,7 @@ public class WG_alchemic_clusters {
         ItemStackReplacementManager.addItemReplacement("WitchingGadgets:item.WG_Cluster", tag -> {
             ItemClusters.MetaInfo metaInfo = ItemClusters.MetaInfo.fromMeta(tag.getInteger("Damage"));
 
-            if (metaInfo.series() == ItemClusters.Series.Legacy) {
+            if (metaInfo.series == ItemClusters.Series.Legacy) {
                 // Set the damage to error, which will alert the player that this cluster is no longer valid
                 tag.setInteger("Damage", new ItemClusters.MetaInfo(ItemClusters.Series.Error, 0).getMeta());
             }

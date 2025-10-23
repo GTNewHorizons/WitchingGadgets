@@ -12,11 +12,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 
-import com.github.bsideup.jabel.Desugar;
-
 import cpw.mods.fml.common.Optional;
 import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Materials;
+import lombok.Data;
 import mods.railcraft.common.items.firestone.IItemFirestoneBurning;
 import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.recipes.alchemic.WG_alchemic_clusters;
@@ -41,8 +40,11 @@ public class ItemClusters extends Item implements IItemFirestoneBurning {
         Error
     }
 
-    @Desugar
-    public record MetaInfo(Series series, int matId) {
+    @Data
+    public static class MetaInfo {
+
+        public final Series series;
+        public final int matId;
 
         public int getMeta() {
             if (series == Series.Error) return 0;
