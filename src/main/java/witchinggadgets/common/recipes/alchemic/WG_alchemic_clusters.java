@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
@@ -261,8 +262,23 @@ public class WG_alchemic_clusters {
             }
         }
 
-        OrePrefixes[] orePrefixes = { OrePrefixes.ore, OrePrefixes.oreNetherrack, OrePrefixes.oreEndstone,
-                OrePrefixes.rawOre, };
+        List<OrePrefixes> notRich = new ArrayList<>();
+        List<OrePrefixes> rich = new ArrayList<>();
+
+        notRich.add(OrePrefixes.ore);
+        notRich.add(OrePrefixes.rawOre);
+
+        if (GTMod.proxy.mNetherOreYieldMultiplier) {
+            rich.add(OrePrefixes.oreNetherrack);
+        } else {
+            notRich.add(OrePrefixes.oreNetherrack);
+        }
+
+        if (GTMod.proxy.mEndOreYieldMultiplier) {
+            rich.add(OrePrefixes.oreEndstone);
+        } else {
+            notRich.add(OrePrefixes.oreEndstone);
+        }
 
         for (Materials material : GregTechAPI.sGeneratedMaterials) {
             if (material == null) continue;
@@ -316,25 +332,32 @@ public class WG_alchemic_clusters {
                     alchemyAspects = new AspectList().add(Aspect.METAL, 2).add(Aspect.ORDER, 1).add(Aspect.GREED, 2);
                 }
 
-                for (OrePrefixes prefix : orePrefixes) {
-                    List<ItemStack> candidates = OreDictionary.getOres(prefix.name() + material.mName);
+                List<ItemStack> normalOre = notRich.stream()
+                    .flatMap(prefix -> Utilities.oredictStream(prefix.name() + material.mName))
+                    .collect(Collectors.toList());
 
-                    if (candidates.isEmpty()) continue;
-
-                    boolean isRich = prefix == OrePrefixes.oreNetherrack && GTMod.proxy.mNetherOreYieldMultiplier
-                            || prefix == OrePrefixes.oreEndstone && GTMod.proxy.mEndOreYieldMultiplier;
-
-                    candidates = new ArrayList<>(candidates);
-
-                    candidates.replaceAll(ItemStack::copy);
-
+                if (!normalOre.isEmpty()) {
                     CLUSTER_RECIPES.add(
-                            registerAlchemyRecipe(
-                                    "METALLURGICPERFECTION_CLUSTERS",
-                                    "_" + prefix.name() + material.mName,
-                                    new ItemStack(WGContent.ItemCluster, isRich ? 4 : 2, metaInfo.getMeta()),
-                                    candidates,
-                                    alchemyAspects));
+                        registerAlchemyRecipe(
+                            "METALLURGICPERFECTION_CLUSTERS",
+                            "_" + material.mName + "_Normal",
+                            new ItemStack(WGContent.ItemCluster, 2, metaInfo.getMeta()),
+                            normalOre,
+                            alchemyAspects));
+                }
+
+                List<ItemStack> richOre = rich.stream()
+                    .flatMap(prefix -> Utilities.oredictStream(prefix.name() + material.mName))
+                    .collect(Collectors.toList());
+
+                if (!richOre.isEmpty()) {
+                    CLUSTER_RECIPES.add(
+                        registerAlchemyRecipe(
+                            "METALLURGICPERFECTION_CLUSTERS",
+                            "_" + material.mName + "_Rich",
+                            new ItemStack(WGContent.ItemCluster, 4, metaInfo.getMeta()),
+                            richOre,
+                            alchemyAspects));
                 }
             }
 

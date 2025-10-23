@@ -7,7 +7,9 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -471,6 +473,18 @@ public class Utilities {
         } else {
             return areStacksEqual(aStack1, aStack2, false);
         }
+    }
+
+    /// For some reason [OreDictionary#getOres(String)]'s returned list returns an empty stream from [List#stream()].
+    public static Stream<ItemStack> oredictStream(String name) {
+        List<ItemStack> stacks = OreDictionary.getOres(name);
+
+        if (stacks == null || stacks.isEmpty()) return Stream.empty();
+
+        return new ArrayList<>(stacks)
+            .stream()
+            .filter(Objects::nonNull)
+            .map(ItemStack::copy);
     }
 
     public static boolean areStacksEqual(ItemStack aStack1, ItemStack aStack2, boolean aIgnoreNBT) {
