@@ -44,7 +44,8 @@ public class MessageSyncGlide implements IMessage {
             // so that if this fails for any reason, state will re-sync on next activation
             if (stack != null && stack.getItem() instanceof ItemCloak
                     && stack.getItemDamage() < ItemCloak.subNames.length
-                    && ItemCloak.subNames[stack.getItemDamage()] == "raven") {
+                    && ItemCloak.subNames[stack.getItemDamage()].equals("raven")
+                    && stack.hasTagCompound()) {
                 // This if/else shouldn't actually be needed, but I kept it from the client-side code
                 // Preferably the same methods should run on the client and server to be sure
                 // If this elseif is refactored into an else, same should be done in the client code
