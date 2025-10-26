@@ -106,6 +106,11 @@ public class WG_alchemic_clusters {
             return Utilities.getOredict(prefix + matName, amount);
         }
 
+        @Optional.Method(modid = "gregtech_nh")
+        public ItemStack getPart(OrePrefixes prefix, int amount) {
+            return GTOreDictUnificator.get(prefix, getGT5uMaterial(), amount);
+        }
+
         public String matName() {
             return matName;
         }

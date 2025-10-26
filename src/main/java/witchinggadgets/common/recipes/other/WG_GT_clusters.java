@@ -25,7 +25,7 @@ public class WG_GT_clusters {
 
     public static void registerClusterRecipesGT() {
         for (ClusterInfo clusterInfo : WG_alchemic_clusters.CLUSTER_INFO.values()) {
-            ItemStack cluster = clusterInfo.getPart("cluster", 1);
+            ItemStack cluster = clusterInfo.getPart(OrePrefixes.cluster, 1);
 
             if (cluster == null) continue;
 
@@ -44,9 +44,9 @@ public class WG_GT_clusters {
                         .fluidOutputs(material.getGas(1000L * material.mOreMultiplier)).duration(5 * SECONDS)
                         .eut(TierEU.RECIPE_MV).addTo(RecipeMaps.fluidExtractionRecipes);
             } else {
-                ItemStack dusts = clusterInfo.getPart("dust", 1);
-                ItemStack tinyDusts = clusterInfo.getPart("dustTiny", 1);
-                ItemStack gems = clusterInfo.getPart("gem", 1);
+                ItemStack dusts = clusterInfo.getPart(OrePrefixes.dust, 1);
+                ItemStack tinyDusts = clusterInfo.getPart(OrePrefixes.dustTiny, 1);
+                ItemStack gems = clusterInfo.getPart(OrePrefixes.gem, 1);
 
                 if (dusts != null && tinyDusts != null) {
                     int tinyDustCount = oreMultiplier * 22;
