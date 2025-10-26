@@ -14,7 +14,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.gtnewhorizons.postea.api.ItemStackReplacementManager;
-
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Optional;
@@ -28,7 +27,6 @@ import gregtech.api.enums.TCAspects;
 import gregtech.api.util.GTOreDictUnificator;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -164,8 +162,9 @@ public class WG_alchemic_clusters {
         if (material == Materials.Gold) return true;
         if (material == Materials.AnyCopper) return true;
         if (material == Materials.AnyIron) return true;
-        // Idk what this is supposed to do, but this is what the old code did
-        if (ObjectArrayList.wrap(WGConfig.triplingClusterList).contains(material.mName)) return true;
+        for (String name : WGConfig.triplingClusterList) {
+            if (material.mName.equals(name)) return true;
+        }
 
         return false;
     }
@@ -374,9 +373,6 @@ public class WG_alchemic_clusters {
                     transmuteAspects.remove(Aspect.METAL);
                     transmuteAspects.add(Aspect.METAL, 2);
                 }
-
-                transmuteAspects.aspects.entrySet()
-                        .removeIf(e -> e.getKey() == null || e.getValue() == null || e.getValue() <= 0);
 
                 TRANSMUTE_RECIPES.add(
                         registerAlchemyRecipe(

@@ -9,7 +9,6 @@ import static witchinggadgets.common.recipes.WG_other_recipes.addBlastTripling;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
@@ -25,22 +24,18 @@ import witchinggadgets.common.util.Utilities;
 public class WG_GT_clusters {
 
     public static void registerClusterRecipesGT() {
-        for (String oredict : OreDictionary.getOreNames()) {
-            if (!oredict.startsWith("cluster")) continue;
-
-            String matName = oredict.substring("cluster".length());
-
-            ItemStack cluster = Utilities.getOredict(oredict, 1);
+        for (ClusterInfo clusterInfo : WG_alchemic_clusters.CLUSTER_INFO.values()) {
+            ItemStack cluster = clusterInfo.getPart("cluster", 1);
 
             if (cluster == null) continue;
 
-            addBlastTripling(matName);
+            addBlastTripling(clusterInfo.matName());
 
-            Materials material = Materials.getMaterialsMap().get(matName);
+            Materials material = clusterInfo.getGT5uMaterial();
 
             int oreMultiplier = material == null ? 1 : material.mOreMultiplier;
 
-            if (matName.equals("Oilsands")) {
+            if (material == Materials.Oilsands) {
                 GTValues.RA.stdBuilder().itemInputs(Utilities.copyStackWithSize(cluster, 1))
                         .fluidOutputs(Materials.OilHeavy.getFluid(4000L)).eut(120).duration(60 * SECONDS)
                         .addTo(centrifugeRecipes);
@@ -49,9 +44,9 @@ public class WG_GT_clusters {
                         .fluidOutputs(material.getGas(1000L * material.mOreMultiplier)).duration(5 * SECONDS)
                         .eut(TierEU.RECIPE_MV).addTo(RecipeMaps.fluidExtractionRecipes);
             } else {
-                ItemStack dusts = Utilities.getOredict("dust" + matName, 1);
-                ItemStack tinyDusts = Utilities.getOredict("dustTiny" + matName, 1);
-                ItemStack gems = Utilities.getOredict("gem" + matName, 1);
+                ItemStack dusts = clusterInfo.getPart("dust", 1);
+                ItemStack tinyDusts = clusterInfo.getPart("dustTiny", 1);
+                ItemStack gems = clusterInfo.getPart("gem", 1);
 
                 if (dusts != null && tinyDusts != null) {
                     int tinyDustCount = oreMultiplier * 22;
@@ -66,9 +61,7 @@ public class WG_GT_clusters {
                             .eut(30).duration(30 * SECONDS).addTo(maceratorRecipes);
                 }
 
-                ClusterInfo clusterInfo = WG_alchemic_clusters.CLUSTER_INFO.get(matName);
-
-                if (clusterInfo != null && !clusterInfo.ebf() && clusterInfo.liquid() != null) {
+                if (!clusterInfo.ebf() && clusterInfo.liquid() != null) {
                     int moltenAmount = oreMultiplier * 22 * (144 / 9);
 
                     GTValues.RA.stdBuilder().itemInputs(cluster.copy())
@@ -77,7 +70,7 @@ public class WG_GT_clusters {
                 }
 
                 if (gems != null) {
-                    switch (matName) {
+                    switch (clusterInfo.matName()) {
                         case "Tanzanite", "Sapphire", "Olivine", "GreenSapphire", "Opal", "Amethyst", "Emerald", "Ruby", "Diamond", "FoolsRuby", "BlueTopaz", "GarnetRed", "Topaz", "Jasper", "GarnetYellow" -> {
                             GTValues.RA.stdBuilder().itemInputs(cluster.copy())
                                     .itemOutputs(
