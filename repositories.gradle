@@ -17,9 +17,9 @@ repositories {
         filter {
             includeGroup('CoreTweaks')
         }
-		    mavenLocal()
     }
-	exclusiveContent {
+    
+    exclusiveContent {
         forRepository {
             maven {
                 name = 'glease'
@@ -30,4 +30,6 @@ repositories {
             includeGroup('net.glease')
         }
     }
+    
+    mavenLocal()  
 }
