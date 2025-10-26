@@ -30,16 +30,15 @@ public class WG_GT_clusters {
 
             String matName = oredict.substring("cluster".length());
 
-            ClusterInfo clusterInfo = WG_alchemic_clusters.CLUSTER_INFO.get(matName);
+            ItemStack cluster = Utilities.getOredict(oredict, 1);
+
+            if (cluster == null) continue;
 
             addBlastTripling(matName);
 
             Materials material = Materials.getMaterialsMap().get(matName);
 
             int oreMultiplier = material == null ? 1 : material.mOreMultiplier;
-
-            ItemStack cluster = Utilities.getOredict("cluster" + matName, 1);
-            assert cluster != null;
 
             if (matName.equals("Oilsands")) {
                 GTValues.RA.stdBuilder().itemInputs(Utilities.copyStackWithSize(cluster, 1))
@@ -66,6 +65,8 @@ public class WG_GT_clusters {
                                     Utilities.copyStackWithSize(tinyDusts, tinyDustCount))
                             .eut(30).duration(30 * SECONDS).addTo(maceratorRecipes);
                 }
+
+                ClusterInfo clusterInfo = WG_alchemic_clusters.CLUSTER_INFO.get(matName);
 
                 if (clusterInfo != null && !clusterInfo.ebf() && clusterInfo.liquid() != null) {
                     int moltenAmount = oreMultiplier * 22 * (144 / 9);
