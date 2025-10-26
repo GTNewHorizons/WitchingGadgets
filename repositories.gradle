@@ -19,9 +19,7 @@ repositories {
         }
     }
     
-    mavenLocal()
-repositories {    
-  exclusiveContent {
+    exclusiveContent {
         forRepository {
             maven {
                 name = 'glease'
@@ -32,4 +30,6 @@ repositories {
             includeGroup('net.glease')
         }
     }
+    
+    mavenLocal()  
 }
