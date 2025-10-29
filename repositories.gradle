@@ -18,7 +18,7 @@ repositories {
             includeGroup('CoreTweaks')
         }
     }
-    
+
     exclusiveContent {
         forRepository {
             maven {
@@ -30,6 +30,7 @@ repositories {
             includeGroup('net.glease')
         }
     }
+
     
-    mavenLocal()  
+    mavenLocal()
 }
