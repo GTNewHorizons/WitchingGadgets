@@ -43,7 +43,6 @@ import witchinggadgets.common.WGContent;
 import witchinggadgets.common.WGModCompat;
 import witchinggadgets.common.items.ItemClusters;
 import witchinggadgets.common.items.ItemClusters.MetaInfo;
-import witchinggadgets.common.items.ItemClusters.Series;
 import witchinggadgets.common.util.Utilities;
 
 public class WG_alchemic_clusters {
@@ -185,15 +184,15 @@ public class WG_alchemic_clusters {
                 if (hasItem("ore", subName) && hasItem("ingot", subName)) {
                     AspectList alchemyAspects = new AspectList().add(Aspect.METAL, 1).add(Aspect.ORDER, 1);
 
+                    MetaInfo metaInfo = new MetaInfo(ItemClusters.Series.Misc, iOre);
+
                     CLUSTER_RECIPES.add(
                             registerAlchemyRecipe(
                                     "METALLURGICPERFECTION_CLUSTERS",
                                     "_" + subName,
-                                    new ItemStack(WGContent.ItemCluster, 1, new MetaInfo(Series.Misc, iOre).getMeta()),
+                                    new ItemStack(WGContent.ItemCluster, 1, metaInfo.getMeta()),
                                     "ore" + subName,
                                     alchemyAspects));
-
-                    MetaInfo metaInfo = new MetaInfo(ItemClusters.Series.Misc, iOre);
 
                     ItemStack ingot = Utilities.getOredict("ingot" + subName, 1);
 
