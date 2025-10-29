@@ -11,12 +11,13 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.config.ConfigItems;
+import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.WGContent;
 
 public class WG_arcane_ageingstone {
 
     public static void registerAgeingStone() {
-        if (Loader.isModLoaded("MagicBees") && Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+        if (Loader.isModLoaded("MagicBees") && WitchingGadgets.isGT5uLoaded) {
             registerArcaneRecipe(
                     "AGEINGSTONE",
                     "",

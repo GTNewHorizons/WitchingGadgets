@@ -9,12 +9,13 @@ import cpw.mods.fml.common.Loader;
 import gregtech.api.util.GTModHandler;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
+import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.WGContent;
 
 public class WG_alchemic_rose_vine {
 
     public static void registerRoseWine() {
-        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi") && Loader.isModLoaded("TwilightForest")) {
+        if (WitchingGadgets.isGT5uLoaded && Loader.isModLoaded("TwilightForest")) {
             registerAlchemyRecipe(
                     "ROSEVINE",
                     ".1",

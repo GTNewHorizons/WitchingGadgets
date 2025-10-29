@@ -4,17 +4,17 @@ import static witchinggadgets.common.recipes.WG_arcane_recipes.registerArcaneRec
 
 import net.minecraft.item.ItemStack;
 
-import cpw.mods.fml.common.Loader;
 import gregtech.api.enums.ItemList;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.config.ConfigBlocks;
+import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.WGContent;
 
 public class WG_arcane_calculator {
 
     public static void registerScanCamera() {
-        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+        if (WitchingGadgets.isGT5uLoaded) {
             registerArcaneRecipe(
                     "CALCULATOR",
                     "",

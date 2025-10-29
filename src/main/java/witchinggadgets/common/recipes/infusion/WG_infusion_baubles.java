@@ -7,7 +7,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import cpw.mods.fml.common.Loader;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
@@ -15,6 +14,7 @@ import gregtech.api.util.GTOreDictUnificator;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.config.ConfigItems;
+import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.WGModCompat;
 
@@ -32,7 +32,7 @@ public class WG_infusion_baubles {
         luckyCoin.addEnchantment(Enchantment.fortune, 1);
         luckyCoin.addEnchantment(Enchantment.looting, 1);
 
-        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+        if (WitchingGadgets.isGT5uLoaded) {
             registerInfusionRecipe(
                     "WGBAUBLES",
                     "_HASTEVAMBRACES",

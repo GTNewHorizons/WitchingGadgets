@@ -1,7 +1,25 @@
 // Add any additional repositories for your dependencies here
 
-repositories {    
-  exclusiveContent {
+repositories {
+    exclusiveContent {
+        forRepository {
+            ivy {
+                name = 'CoreTweaks releases'
+                url = 'https://github.com/makamys/CoreTweaks/releases/download/'
+                patternLayout {
+                    artifact '[revision]/[module]-1.7.10-[revision]+nomixin(-[classifier])(.[ext])'
+                }
+                metadataSources {
+                    artifact()
+                }
+            }
+        }
+        filter {
+            includeGroup('CoreTweaks')
+        }
+    }
+
+    exclusiveContent {
         forRepository {
             maven {
                 name = 'glease'
@@ -12,4 +30,7 @@ repositories {
             includeGroup('net.glease')
         }
     }
+
+    
+    mavenLocal()
 }

@@ -5,17 +5,17 @@ import static witchinggadgets.common.recipes.WG_alchemic_recipes.registerAlchemy
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-import cpw.mods.fml.common.Loader;
 import gregtech.api.enums.ItemList;
 import gregtech.api.enums.Materials;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
+import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.WGContent;
 
 public class WG_alchemic_crystal_capsule {
 
     public static void registerCrystalCapsule() {
-        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+        if (WitchingGadgets.isGT5uLoaded) {
             registerAlchemyRecipe(
                     "CRYSTALCAPSULE",
                     "_Wax",
