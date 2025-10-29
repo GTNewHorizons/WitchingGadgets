@@ -43,6 +43,7 @@ import witchinggadgets.common.WGContent;
 import witchinggadgets.common.WGModCompat;
 import witchinggadgets.common.items.ItemClusters;
 import witchinggadgets.common.items.ItemClusters.MetaInfo;
+import witchinggadgets.common.items.ItemClusters.Series;
 import witchinggadgets.common.util.Utilities;
 
 public class WG_alchemic_clusters {
@@ -158,6 +159,7 @@ public class WG_alchemic_clusters {
         });
     }
 
+    @Optional.Method(modid = "gregtech_nh")
     private static boolean clusterBlacklist(Materials material) {
         if (material == Materials.Iron) return true;
         if (material == Materials.Copper) return true;
@@ -187,13 +189,13 @@ public class WG_alchemic_clusters {
                             registerAlchemyRecipe(
                                     "METALLURGICPERFECTION_CLUSTERS",
                                     "_" + subName,
-                                    new ItemStack(WGContent.ItemCluster, 1, iOre),
+                                    new ItemStack(WGContent.ItemCluster, 1, new MetaInfo(Series.Misc, iOre).getMeta()),
                                     "ore" + subName,
                                     alchemyAspects));
 
                     MetaInfo metaInfo = new MetaInfo(ItemClusters.Series.Misc, iOre);
 
-                    ItemStack ingot = OreDictionary.getOres("ingot" + subName).get(0);
+                    ItemStack ingot = Utilities.getOredict("ingot" + subName, 1);
 
                     int rgb = 0;
 
@@ -216,7 +218,7 @@ public class WG_alchemic_clusters {
 
             if (WGConfig.allowTransmutations) {
                 if (hasItem("nugget", subName) && hasItem("ingot", subName)) {
-                    ItemStack ingot = OreDictionary.getOres("ingot" + subName).get(0);
+                    ItemStack ingot = Utilities.getOredict("ingot" + subName, 1);
 
                     AspectList alchemyAspects = ThaumcraftApi.objectTags
                             .get(Arrays.asList(ingot.getItem(), ingot.getItemDamage()));
@@ -226,8 +228,7 @@ public class WG_alchemic_clusters {
 
                     alchemyAspects.aspects.entrySet().removeIf(e -> e.getKey() == null || e.getValue() == null);
 
-                    ItemStack nuggets = Utilities
-                            .copyStackWithSize(OreDictionary.getOres("nugget" + subName).get(0), 3);
+                    ItemStack nuggets = Utilities.getOredict("nugget" + subName, 3);
 
                     TRANSMUTE_RECIPES.add(
                             registerAlchemyRecipe(
@@ -245,6 +246,7 @@ public class WG_alchemic_clusters {
         return !OreDictionary.getOres(prefix + matName).isEmpty();
     }
 
+    @Optional.Method(modid = "gregtech_nh")
     private static void loadGT5uClusters() {
         HashSet<Materials> oresInVeins = new HashSet<>();
 

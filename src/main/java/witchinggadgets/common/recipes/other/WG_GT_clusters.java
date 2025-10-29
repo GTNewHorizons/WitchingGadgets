@@ -14,7 +14,6 @@ import gregtech.api.enums.GTValues;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.SubTag;
-import gregtech.api.enums.TierEU;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTOreDictUnificator;
 import witchinggadgets.common.recipes.alchemic.WG_alchemic_clusters;
@@ -41,8 +40,8 @@ public class WG_GT_clusters {
                         .addTo(centrifugeRecipes);
             } else if (material != null && material.contains(SubTag.ICE_ORE)) {
                 GTValues.RA.stdBuilder().itemInputs(cluster.copy())
-                        .fluidOutputs(material.getGas(1000L * material.mOreMultiplier)).duration(5 * SECONDS)
-                        .eut(TierEU.RECIPE_MV).addTo(RecipeMaps.fluidExtractionRecipes);
+                        .fluidOutputs(material.getGas(1000L * material.mOreMultiplier)).duration(5 * SECONDS).eut(120)
+                        .addTo(RecipeMaps.fluidExtractionRecipes);
             } else {
                 ItemStack dusts = clusterInfo.getPart(OrePrefixes.dust, 1);
                 ItemStack tinyDusts = clusterInfo.getPart(OrePrefixes.dustTiny, 1);
