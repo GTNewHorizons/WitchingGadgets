@@ -29,7 +29,6 @@ import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import thaumcraft.api.aspects.Aspect;
@@ -199,7 +198,7 @@ public class ItemInfusedGem extends Item implements IInfusedGem {
                             }
             }
             if (aspect.equals(Aspect.EARTH)) {
-                if (!Loader.isModLoaded("gregtech_nh") && mop != null
+                if (WitchingGadgets.isGT5uLoaded && mop != null
                         && mop.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
                     List<ChunkCoordinates> ores = this.getOres(world, mop.blockX, mop.blockY, mop.blockZ);
                     if (world.isRemote)

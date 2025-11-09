@@ -16,7 +16,7 @@ public class WGConfig {
             coremod_allowEnchantModifications, coremod_allowPotionApplicationMod, modulePrimal, moduleBag, bagVoid,
             bagEnder, bagHungry, moduleCloak, moduleKama, capeSpectral, capeStorage, capeWolf, capeRaven, enableSearch,
             soulboundBaubles, soulboundGalacticraft, moduleGemcutting, allowdropsfrommachinery, terraformer;
-    public static String[] tripplingClusterList, blocksforWGBF;
+    public static String[] triplingClusterList, blocksforWGBF;
     public static int smelteryResultForClusters, cloakAnimationMode;
     public static Block[] coremod_worldgenValidBase_HilltopStones, coremod_worldgenValidBase_EldritchRing;
 
@@ -59,7 +59,7 @@ public class WGConfig {
                         "Set this to false to disable nugget transmutations, this should fix the infinite loop glitch")
                 .getBoolean(true);
         terraformer = config.getBoolean("Enable Terraformer", "Other Options", true, "If the Terraformer is enabled");
-        tripplingClusterList = config.get(
+        triplingClusterList = config.get(
                 "Ore/Crucible",
                 "Not Trippling Cluster List",
                 DEFAULTCLUSTERS,

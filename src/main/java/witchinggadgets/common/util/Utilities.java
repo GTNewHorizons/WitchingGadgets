@@ -5,8 +5,11 @@ import static gregtech.api.enums.GTValues.W;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Stream;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -30,6 +33,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import org.apache.logging.log4j.Level;
@@ -37,6 +41,7 @@ import org.apache.logging.log4j.Level;
 import baubles.api.BaublesApi;
 import baubles.api.expanded.BaubleExpandedSlots;
 import cpw.mods.fml.common.Loader;
+import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTUtility;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -402,9 +407,31 @@ public class Utilities {
     }
 
     public static ItemStack copyStackWithSize(ItemStack stack, int i) {
-        ItemStack s = new ItemStack(stack.getItem(), i, stack.getItemDamage());
-        if (stack.hasTagCompound()) s.setTagCompound(stack.getTagCompound());
-        return s;
+        if (stack == null) return null;
+
+        ItemStack copy = stack.copy();
+        copy.stackSize = i;
+        return copy;
+    }
+
+    public static FluidStack copyStackWithAmount(FluidStack stack, int i) {
+        if (stack == null) return null;
+
+        FluidStack copy = stack.copy();
+        copy.amount = i;
+        return copy;
+    }
+
+    public static ItemStack getOredict(String name, int amount) {
+        if (WitchingGadgets.isGT5uLoaded) {
+            return GTOreDictUnificator.get(name, amount);
+        } else {
+            List<ItemStack> stack = OreDictionary.getOres(name);
+
+            if (stack.isEmpty() || stack.get(0) == null) return null;
+
+            return copyStackWithSize(stack.get(0), amount);
+        }
     }
 
     public static void setAttackTarget(EntityLiving living, EntityLivingBase target) {
@@ -441,11 +468,20 @@ public class Utilities {
     }
 
     public static boolean areStacksEqual(ItemStack aStack1, ItemStack aStack2) {
-        if (Loader.isModLoaded("gregtech_nh")) {
-            return (GTUtility.areStacksEqual(aStack1, aStack2, false));
+        if (WitchingGadgets.isGT5uLoaded) {
+            return GTUtility.areStacksEqual(aStack1, aStack2, false);
         } else {
             return areStacksEqual(aStack1, aStack2, false);
         }
+    }
+
+    /// For some reason [OreDictionary#getOres(String)]'s returned list returns an empty stream from [List#stream()].
+    public static Stream<ItemStack> oredictStream(String name) {
+        List<ItemStack> stacks = OreDictionary.getOres(name);
+
+        if (stacks == null || stacks.isEmpty()) return Stream.empty();
+
+        return new ArrayList<>(stacks).stream().filter(Objects::nonNull).map(ItemStack::copy);
     }
 
     public static boolean areStacksEqual(ItemStack aStack1, ItemStack aStack2, boolean aIgnoreNBT) {

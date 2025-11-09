@@ -31,8 +31,9 @@ import thaumcraft.api.research.ResearchPage;
 import thaumcraft.common.config.Config;
 import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.config.ConfigItems;
-import witchinggadgets.common.items.ItemClusters;
+import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.items.baubles.ItemCloak;
+import witchinggadgets.common.recipes.alchemic.WG_alchemic_clusters;
 import witchinggadgets.common.util.Utilities;
 import witchinggadgets.common.util.research.WGResearchItem;
 
@@ -709,62 +710,15 @@ public class WGResearch {
 
         // METALLURGICPERFECTION_CLUSTERS
         if (WGConfig.allowClusters) {
-            ArrayList<ResearchPage> clusterPages = new ArrayList<ResearchPage>();
+            ArrayList<ResearchPage> clusterPages = new ArrayList<>();
             clusterPages.add(new ResearchPage("witchinggadgets_research_page.METALLURGICPERFECTION_CLUSTERS.1"));
-            if (WGContent.GT_Cluster != null) {
-                for (String ore : WGContent.GT_Cluster) {
 
-                    if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_CLUSTERS_" + ore)) clusterPages.add(
-                            new ResearchPage(
-                                    (CrucibleRecipe) WGContent.recipeList
-                                            .get("METALLURGICPERFECTION_CLUSTERS_" + ore)));
-
-                    String vore = "Netherrack_" + ore;
-                    if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_CLUSTERS_" + vore)) clusterPages.add(
-                            new ResearchPage(
-                                    (CrucibleRecipe) WGContent.recipeList
-                                            .get("METALLURGICPERFECTION_CLUSTERS_" + vore)));
-
-                    vore = "Endstone_" + ore;
-                    if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_CLUSTERS_" + vore)) clusterPages.add(
-                            new ResearchPage(
-                                    (CrucibleRecipe) WGContent.recipeList
-                                            .get("METALLURGICPERFECTION_CLUSTERS_" + vore)));
-
-                    vore = "Blackgranite_" + ore;
-                    if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_CLUSTERS_" + vore)) clusterPages.add(
-                            new ResearchPage(
-                                    (CrucibleRecipe) WGContent.recipeList
-                                            .get("METALLURGICPERFECTION_CLUSTERS_" + vore)));
-
-                    vore = "Redgranite_" + ore;
-                    if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_CLUSTERS_" + vore)) clusterPages.add(
-                            new ResearchPage(
-                                    (CrucibleRecipe) WGContent.recipeList
-                                            .get("METALLURGICPERFECTION_CLUSTERS_" + vore)));
-
-                    vore = "Marble_" + ore;
-                    if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_CLUSTERS_" + vore)) clusterPages.add(
-                            new ResearchPage(
-                                    (CrucibleRecipe) WGContent.recipeList
-                                            .get("METALLURGICPERFECTION_CLUSTERS_" + vore)));
-
-                    vore = "Basalt_" + ore;
-                    if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_CLUSTERS_" + vore)) clusterPages.add(
-                            new ResearchPage(
-                                    (CrucibleRecipe) WGContent.recipeList
-                                            .get("METALLURGICPERFECTION_CLUSTERS_" + vore)));
-                }
-            } else {
-                for (String ore : ItemClusters.subNames)
-                    if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_CLUSTERS_" + ore)) clusterPages.add(
-                            new ResearchPage(
-                                    (CrucibleRecipe) WGContent.recipeList
-                                            .get("METALLURGICPERFECTION_CLUSTERS_" + ore)));
+            for (CrucibleRecipe clusterRecipe : WG_alchemic_clusters.CLUSTER_RECIPES) {
+                clusterPages.add(new ResearchPage(clusterRecipe));
             }
 
             pages = clusterPages.toArray(new ResearchPage[0]);
-            if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+            if (WitchingGadgets.isGT5uLoaded) {
                 researchAspects = new AspectList().add(Aspect.METAL, 20).add(Aspect.ORDER, 10).add(Aspect.CRYSTAL, 10)
                         .add(Aspect.EXCHANGE, 20).add(Aspect.MINE, 10).add(Aspect.MIND, 5).add(Aspect.GREED, 4)
                         .add((Aspect) gregtech.api.enums.TCAspects.NEBRISUM.mAspect, 8);
@@ -810,23 +764,13 @@ public class WGResearch {
             // METALLURGICPERFECTION_TRANSMUTATION
             ArrayList<ResearchPage> transmutePages = new ArrayList<ResearchPage>();
             transmutePages.add(new ResearchPage("witchinggadgets_research_page.METALLURGICPERFECTION_TRANSMUTATION.1"));
-            if (WGContent.GT_Cluster != null) {
-                for (String ore : WGContent.GT_Cluster)
-                    if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_TRANSMUTATION_" + ore))
-                        transmutePages.add(
-                                new ResearchPage(
-                                        (CrucibleRecipe) WGContent.recipeList
-                                                .get("METALLURGICPERFECTION_TRANSMUTATION_" + ore)));
-            } else {
-                for (String ore : ItemClusters.subNames)
-                    if (WGContent.recipeList.containsKey("METALLURGICPERFECTION_TRANSMUTATION_" + ore))
-                        transmutePages.add(
-                                new ResearchPage(
-                                        (CrucibleRecipe) WGContent.recipeList
-                                                .get("METALLURGICPERFECTION_TRANSMUTATION_" + ore)));
+
+            for (CrucibleRecipe clusterRecipe : WG_alchemic_clusters.TRANSMUTE_RECIPES) {
+                transmutePages.add(new ResearchPage(clusterRecipe));
             }
+
             pages = transmutePages.toArray(new ResearchPage[0]);
-            if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+            if (WitchingGadgets.isGT5uLoaded) {
                 researchAspects = new AspectList().add(Aspect.METAL, 20).add(Aspect.ORDER, 10).add(Aspect.TOOL, 10)
                         .add(Aspect.MAGIC, 10).add(Aspect.MIND, 5).add(Aspect.EXCHANGE, 20).add(Aspect.GREED, 4)
                         .add((Aspect) gregtech.api.enums.TCAspects.NEBRISUM.mAspect, 8);

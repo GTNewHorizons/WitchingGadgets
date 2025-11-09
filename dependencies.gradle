@@ -2,30 +2,46 @@
 
 dependencies {
 
-    api('com.github.GTNewHorizons:ThaumicBoots:1.5.0:dev'){transitive=false}
-
+    implementation("com.github.GTNewHorizons:GTNHLib:0.7.3:dev")
     implementation('com.github.GTNewHorizons:Baubles-Expanded:2.2.2-GTNH:dev')
-    implementation('com.github.GTNewHorizons:ThaumicBases:1.9.0:dev') {transitive=false}
-    implementation('com.github.GTNewHorizons:Tainted-Magic:7.7.0-GTNH:dev') {
-     //we don't want the old Baubles Messing stuff up so lets disable that
-        exclude module: "Baubles"
-    }
-    implementation('com.github.GTNewHorizons:GT5-Unofficial:5.09.52.70:dev') {exclude module: "Baubles" }
+    compileOnly('com.github.GTNewHorizons:GT5-Unofficial:5.09.52.85:dev') {exclude module: "Baubles" }
     implementation('com.github.GTNewHorizons:ForbiddenMagic:0.9.4-GTNH:dev') {exclude module: "Baubles" }
     implementation('com.github.GTNewHorizons:twilightforest:2.7.13:dev')
     implementation('thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev') {transitive=false}
-    implementation('com.github.GTNewHorizons:NotEnoughItems:2.8.21-GTNH:dev')
+    implementation('com.github.GTNewHorizons:NotEnoughItems:2.8.26-GTNH:dev')
+    compileOnly("com.github.GTNewHorizons:Postea:1.1.3:dev")
 
-    compile('com.github.GTNewHorizons:DummyCore:1.20.0:dev')
+    compileOnly('com.github.GTNewHorizons:ThaumicBoots:1.5.0:dev') {transitive=false}
+    compileOnly('com.github.GTNewHorizons:ThaumicBases:1.9.0:dev') {transitive=false}
     compileOnly('com.github.GTNewHorizons:ForgeMultipart:1.7.0:dev') {transitive=false}
     compileOnly('com.github.GTNewHorizons:Botania:1.13.3-GTNH:api') {transitive=false}
     compileOnly('com.github.GTNewHorizons:CraftTweaker:3.4.2:dev') {transitive=false}
     compileOnly('com.github.GTNewHorizons:ZenScript:1.0.0-GTNH') {transitive=false}
     compileOnly('com.github.GTNewHorizons:MagicBees:2.10.0-GTNH:api') {transitive=false}
     compileOnly('com.github.GTNewHorizons:TinkersConstruct:1.14.6-GTNH:dev') {transitive=false}
+    compileOnly('com.github.GTNewHorizons:MagicBees:2.10.0-GTNH:api') {transitive=false}
+    compileOnly('com.github.GTNewHorizons:TinkersConstruct:1.14.6-GTNH:dev') {transitive=false}
     compileOnly(deobfCurse('enviromine-230236:2269710'))
+
+    compileOnly('org.projectlombok:lombok:1.18.34')
+    annotationProcessor('org.projectlombok:lombok:1.18.34')
 
     runtimeOnly('com.github.GTNewHorizons:CodeChickenCore:1.4.7:dev')
     runtimeOnly('com.github.GTNewHorizons:Railcraft:9.17.0:dev') {transitive=false}
 
+    // Adds various useful features
+    runtimeOnlyNonPublishable("com.github.GTNewHorizons:EnderCore:0.5.0:dev") { transitive = false }
+    // Speeds up startup
+    runtimeOnlyNonPublishable(rfg.deobf("CoreTweaks:CoreTweaks:0.3.3.2")) { transitive = false }
+
+    // For cluster testing and other gt5u integration
+//    runtimeOnlyNonPublishable('com.github.GTNewHorizons:GT5-Unofficial:5.09.52.85:dev') {
+//        exclude module: "Baubles"
+//    }
+
+    var tasks = project.gradle.startParameter.taskNames
+
+    if (tasks.contains("runClient17") || tasks.contains("runClient21")) {
+        runtimeOnlyNonPublishable('com.github.GTNewHorizons:Angelica:1.0.0-beta63:dev') { transitive = false }
+    }
 }

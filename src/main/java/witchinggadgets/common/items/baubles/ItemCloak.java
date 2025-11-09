@@ -360,34 +360,83 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
 
     @Override
     public void onEquipped(ItemStack stack, EntityLivingBase playerEntity) {
-        if (playerEntity instanceof EntityPlayer player) {
-            onItemEquipped(playerEntity, stack);
-            if (stack.getItemDamage() < subNames.length)
-                if (subNames[stack.getItemDamage()].equals("raven") && !player.worldObj.isRemote) {
-                    if (!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
-                    stack.getTagCompound().setBoolean("noGlide", false);
-                } else if (subNames[stack.getItemDamage()].equals("spectral") && !player.worldObj.isRemote
-                        && Utilities
-                                .consumeVisFromInventoryWithoutDiscount(player, new AspectList().add(Aspect.AIR, 1))) {
-                                    if (!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
-                                    stack.getTagCompound()
-                                            .setBoolean("isSpectral", !stack.getTagCompound().getBoolean("isSpectral"));
-                                    if (stack.getTagCompound().getBoolean("isSpectral")) {
-                                        for (EntityCreature e : (List<EntityCreature>) player.worldObj
-                                                .getEntitiesWithinAABB(
-                                                        EntityCreature.class,
-                                                        AxisAlignedBB.getBoundingBox(
-                                                                player.posX - 16,
-                                                                player.posY - 16,
-                                                                player.posZ - 16,
-                                                                player.posX + 16,
-                                                                player.posY + 16,
-                                                                player.posZ + 16)))
-                                            if (e != null && !(e instanceof IBossDisplayData)
-                                                    && player.equals(e.getAttackTarget()))
-                                                Utilities.setAttackTarget(e, null);
-                                    }
-                                }
+        // Must be a EntityPlayer
+        if (!(playerEntity instanceof EntityPlayer player)) {
+            return;
+        }
+
+        onItemEquipped(playerEntity, stack);
+
+        // All logic following is server-side
+        if (player.worldObj.isRemote) {
+            return;
+        }
+
+        // The meta match a valid type of cloak
+        int meta = stack.getItemDamage();
+        if (meta >= subNames.length) {
+            return;
+        }
+
+        String type = subNames[meta];
+
+        if (type.equals("raven")) {
+            handleRavenEquip(stack);
+        } else if (type.equals("spectral")) {
+            handleSpectralEquip(stack, player);
+        }
+    }
+
+    /**
+     * Helper method to handle equipping the Raven Mantle. Sets the default 'noGlide' state.
+     *
+     * @param stack The cloak's ItemStack.
+     */
+    private void handleRavenEquip(ItemStack stack) {
+        if (!stack.hasTagCompound()) {
+            stack.setTagCompound(new NBTTagCompound());
+        }
+
+        stack.getTagCompound().setBoolean("noGlide", false);
+    }
+
+    /**
+     * Helper method to handle equipping the Spectral Mantle. Consumes vis and toggles the spectral state, de-aggroing
+     * mobs.
+     *
+     * @param stack  The cloak's ItemStack.
+     * @param player The player equipping the cloak.
+     */
+    private void handleSpectralEquip(ItemStack stack, EntityPlayer player) {
+        // Check for vis consumption
+        if (!Utilities.consumeVisFromInventoryWithoutDiscount(player, new AspectList().add(Aspect.AIR, 1))) {
+            return;
+        }
+
+        if (!stack.hasTagCompound()) {
+            stack.setTagCompound(new NBTTagCompound());
+        }
+
+        // Toggle spectral state
+        boolean isSpectral = !stack.getTagCompound().getBoolean("isSpectral");
+        stack.getTagCompound().setBoolean("isSpectral", isSpectral);
+
+        if (isSpectral) {
+            AxisAlignedBB bounds = AxisAlignedBB.getBoundingBox(
+                    player.posX - 16,
+                    player.posY - 16,
+                    player.posZ - 16,
+                    player.posX + 16,
+                    player.posY + 16,
+                    player.posZ + 16);
+
+            List<EntityCreature> mobs = player.worldObj.getEntitiesWithinAABB(EntityCreature.class, bounds);
+
+            for (EntityCreature e : mobs) {
+                if (e != null && !(e instanceof IBossDisplayData) && player.equals(e.getAttackTarget())) {
+                    Utilities.setAttackTarget(e, null);
+                }
+            }
         }
     }
 

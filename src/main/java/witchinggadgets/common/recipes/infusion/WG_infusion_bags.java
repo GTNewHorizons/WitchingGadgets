@@ -11,13 +11,14 @@ import gregtech.api.util.GTModHandler;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.config.ConfigItems;
+import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.WGConfig;
 import witchinggadgets.common.WGContent;
 
 public class WG_infusion_bags {
 
     public static void registerBags() {
-        if (Loader.isModLoaded("Railcraft") && Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+        if (Loader.isModLoaded("Railcraft") && WitchingGadgets.isGT5uLoaded) {
             if (WGConfig.bagEnder) {
                 registerInfusionRecipe(
                         "ENDERBAG",

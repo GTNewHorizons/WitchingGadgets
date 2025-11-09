@@ -13,6 +13,7 @@ import gregtech.api.util.GTModHandler;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.config.ConfigItems;
+import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.WGConfig;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.WGModCompat;
@@ -50,7 +51,7 @@ public class WG_infusion_enchantments {
                         .add(Aspect.ARMOR, 6).add(Aspect.AURA, 4).add(Aspect.SOUL, 2),
                 "ENCH_INVISIBLEGEAR");
 
-        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+        if (WitchingGadgets.isGT5uLoaded) {
             registerInfusionEnchantmentRecipe(
                     "ENCH_UNVEILING",
                     "",
