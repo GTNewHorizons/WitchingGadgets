@@ -2,10 +2,7 @@ package witchinggadgets.common;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map.Entry;
 import java.util.UUID;
 
 import net.minecraft.block.Block;
@@ -24,7 +21,6 @@ import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.RecipeSorter;
 
@@ -40,7 +36,6 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.config.ConfigItems;
 import witchinggadgets.WitchingGadgets;
-import witchinggadgets.client.ClientUtilities;
 import witchinggadgets.common.blocks.BlockModifiedAiry;
 import witchinggadgets.common.blocks.BlockRoseVines;
 import witchinggadgets.common.blocks.BlockVoidWalkway;
@@ -172,66 +167,11 @@ public class WGContent {
     public static ArmorMaterial primordialArmor = EnumHelper
             .addArmorMaterial("WG:PRIMORDIALARMOR", 3000, new int[] { 6, 12, 8, 6 }, 30);
     // public static HashMap<String,Cloak> cloakRegistry = new HashMap<String, Cloak>();
-    public static HashMap<String, Object> recipeList = new HashMap<String, Object>();
-    public static String[] GT_Cluster;
-    public static HashMap<String, Integer[]> GT_Cluster_Color = new HashMap<String, Integer[]>();
-    public static HashMap<String, Boolean> ClusterEBF = new HashMap<String, Boolean>();
-    public static HashMap<String, Fluid> ClusterSmeltable = new HashMap<String, Fluid>();
-    public static String[] bannedMaterials = { "AnyIron", "AnyCopper" };
-
-    public static ArrayList<String> b = new ArrayList<>();
+    public static HashMap<String, Object> recipeList = new HashMap<>();
 
     public static void preInit() {
-        Collections.addAll(b, bannedMaterials);
-        Collections.addAll(b, WGConfig.tripplingClusterList);
-        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
-            initGTClusters();
-        }
         preInitItems();
         preInitBlocks();
-    }
-
-    private static boolean clusterBlacklist(Materials material) {
-        return material.equals(Materials.Iron) || material.equals(Materials.Copper)
-                || material.equals(Materials.Tin)
-                || material.equals(Materials.Silver)
-                || material.equals(Materials.Lead)
-                || material.equals(Materials.Cinnabar)
-                || material.equals(Materials.Gold);
-    }
-
-    // final static String UUIDBASE = "424C5553-5747-1694-4452-";
-
-    private static void initGTClusters() {
-        HashSet<String> L = new HashSet<>();
-        for (Entry<String, Materials> entry : Materials.getMaterialsMap().entrySet()) {
-            Materials material = entry.getValue();
-            if (!b.contains(material.mDefaultLocalName) && !clusterBlacklist(material)
-                    && !OreDictionary.getOres("ore" + material.mDefaultLocalName.replaceAll(" ", "")).isEmpty()) {
-                Integer rgb = ((material.getRGBA()[0] & 0x0ff) << 16) | ((material.getRGBA()[1] & 0x0ff) << 8)
-                        | (material.getRGBA()[2] & 0x0ff);
-                L.add(material.mDefaultLocalName.replaceAll(" ", ""));
-                GT_Cluster_Color
-                        .put(
-                                material.mDefaultLocalName.replaceAll(" ", ""),
-                                new Integer[] { ClientUtilities.getVibrantColourToInt(rgb),
-                                        material.getRGBA()[0] > material.getRGBA()[2]
-                                                && material.getRGBA()[1] > material.getRGBA()[2]
-                                                        ? 2
-                                                        : material.getRGBA()[0] > material.getRGBA()[1]
-                                                                && material.getRGBA()[0] > material.getRGBA()[2] ? 1
-                                                                        : 0 });
-                ClusterEBF.put(material.mDefaultLocalName.replaceAll(" ", ""), material.mBlastFurnaceRequired);
-                if (!material.mBlastFurnaceRequired
-                        && (material.getMolten(144) != null || material.getFluid(144) != null))
-                    if (material.getMolten(144) != null) ClusterSmeltable
-                            .put(material.mLocalizedName.replaceAll(" ", ""), material.getMolten(288).getFluid());
-                    else if (material.getMolten(144) == null) ClusterSmeltable
-                            .put(material.mLocalizedName.replaceAll(" ", ""), material.getFluid(288).getFluid());
-            }
-        }
-        GT_Cluster = new String[L.size()];
-        L.toArray(GT_Cluster);
     }
 
     public static void checkPotionId(int id, String name) {
@@ -307,7 +247,7 @@ public class WGContent {
     }
 
     private static void add_infernal_recipes() {
-        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+        if (WitchingGadgets.isGT5uLoaded) {
             if (!devbuild) for (Materials aMaterial : gregtech.api.enums.Materials.getMaterialsMap().values()) {
                 if (!aMaterial.contains(SubTag.NO_SMELTING)) {
                     if ((aMaterial.mBlastFurnaceRequired) || (aMaterial.mDirectSmelting.mBlastFurnaceRequired)) {
@@ -540,7 +480,7 @@ public class WGContent {
         }
 
         if (WGConfig.allowClusters) {
-            ItemCluster = new ItemClusters().setUnlocalizedName("WG_Cluster");
+            ItemCluster = new ItemClusters();
             GameRegistry.registerItem(ItemCluster, ItemCluster.getUnlocalizedName());
         }
 
@@ -605,16 +545,6 @@ public class WGContent {
                 64,
                 1,
                 true);
-
-        if (WGConfig.allowClusters) {
-            if (GT_Cluster != null) {
-                for (int iOre = 0; iOre < GT_Cluster.length; iOre++)
-                    OreDictionary.registerOre("cluster" + GT_Cluster[iOre], new ItemStack(ItemCluster, 1, iOre));
-            } else {
-                for (int iOre = 0; iOre < ItemClusters.subNames.length; iOre++) OreDictionary
-                        .registerOre("cluster" + ItemClusters.subNames[iOre], new ItemStack(ItemCluster, 1, iOre));
-            }
-        }
 
         // FMLInterModComms.sendMessage("TravellersGear", "registerTravellersGear_0", new ItemStack(ItemCloak));
     }

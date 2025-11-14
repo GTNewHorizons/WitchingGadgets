@@ -8,9 +8,9 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import thaumcraft.api.aspects.AspectList;
+import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.WGModCompat;
 import witchinggadgets.common.recipes.other.WG_GT_clusters;
@@ -31,11 +31,11 @@ public class WG_other_recipes {
         WG_other_spinning.registerSpinningRecipes();
         WG_other_loom.registerLoom();
         WG_other_infernal_blast_furnace.registerInfernalBlastFurnace();
-        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+        if (WitchingGadgets.isGT5uLoaded) {
             WG_GT_clusters.registerClusterRecipesGT();
         } else {
             for (String name : OreDictionary.getOreNames()) if (name.startsWith("cluster")) {
-                addBlastTrippling(name.substring("cluster".length()));
+                addBlastTripling(name.substring("cluster".length()));
             }
         }
         if (WGModCompat.loaded_TCon) {
@@ -63,16 +63,17 @@ public class WG_other_recipes {
         WGContent.recipeList.put(tag + tagAddon, compoundRecipe);
     }
 
-    public static void addBlastTrippling(String name) {
-        if (!OreDictionary.getOres("ingot" + name).isEmpty()) {
-            InfernalBlastfurnaceRecipe r = InfernalBlastfurnaceRecipe.addRecipe(
-                    Utilities.copyStackWithSize(OreDictionary.getOres("ingot" + name).get(0), 3),
-                    "cluster" + name,
-                    1,
-                    440,
-                    false);
-            if (r != null && !OreDictionary.getOres("nugget" + name).isEmpty())
-                r.addBonus(OreDictionary.getOres("nugget" + name).get(0));
+    public static void addBlastTripling(String matName) {
+        ItemStack ingot = Utilities.getOredict("ingot" + matName, 3);
+        ItemStack nugget = Utilities.getOredict("nugget" + matName, 1);
+
+        if (ingot != null) {
+            InfernalBlastfurnaceRecipe recipe = InfernalBlastfurnaceRecipe
+                    .addRecipe(ingot, "cluster" + matName, 1, 440, false);
+
+            if (recipe != null && nugget != null) {
+                recipe.addBonus(nugget);
+            }
         }
     }
 }

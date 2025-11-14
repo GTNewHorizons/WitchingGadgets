@@ -19,13 +19,14 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.config.ConfigItems;
+import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.WGContent;
 
 public class WG_infusion_terraformer {
 
     public static void registerTerraformer() {
         ItemStack salisMundusIngredient = null;
-        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+        if (WitchingGadgets.isGT5uLoaded) {
             salisMundusIngredient = GameRegistry.makeItemStack("Thaumcraft:ItemResource", 14, 1, null);
             if (Loader.isModLoaded("thaumicbases")) {
                 salisMundusIngredient = gregtech.api.util.GTModHandler
@@ -33,7 +34,7 @@ public class WG_infusion_terraformer {
             }
         }
 
-        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+        if (WitchingGadgets.isGT5uLoaded) {
             if (Loader.isModLoaded("dreamcraft")) {
                 registerInfusionRecipe(
                         "TERRAFORMER",

@@ -1,92 +1,102 @@
 package witchinggadgets.common.items;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
-import net.minecraftforge.oredict.OreDictionary;
 
 import cpw.mods.fml.common.Optional;
+import gregtech.api.GregTechAPI;
 import gregtech.api.enums.Materials;
+import lombok.Data;
 import mods.railcraft.common.items.firestone.IItemFirestoneBurning;
 import witchinggadgets.WitchingGadgets;
-import witchinggadgets.common.WGConfig;
-import witchinggadgets.common.WGContent;
+import witchinggadgets.common.recipes.alchemic.WG_alchemic_clusters;
+import witchinggadgets.common.util.Utilities;
 
 @Optional.Interface(iface = "mods.railcraft.common.items.firestone.IItemFirestoneBurning", modid = "Railcraft")
 public class ItemClusters extends Item implements IItemFirestoneBurning {
 
-    @Deprecated
-    public static String[] subNames = {
-            // TCon
-            "Aluminum", "Cobalt", "Ardite",
-            // ThermalFoundation
-            "Nickel",
-            // Factorization
-            "FZDarkIron",
-            // Metallurgy
-            "Manganese", "Zinc", "Platinum", "Ignatius", "ShadowIron", "Lemurite", "Midasium", "Vyroxeres", "Ceruclase",
-            "Alduorite", "Kalendrite", "Vulcanite", "Sanguinite", "Prometheum", "DeepIron", "Infuscolium", "Oureclase",
-            "AstralSilver", "Carmot", "Mithril", "Rubracium", "Orichalcum", "Adamantine", "Atlarus", "Eximite",
-            "Meutoite",
-            // Gregtech
-            "Beryllium", "Cobalt", "Iridium", "Molybdenum", "Naquadah", "Neodymium", "Nickel", "Palladium", "Platinum",
-            "Thorium", "Uranium235", "Uranium238", "Zinc", "Casserite" };
-
-    public static HashMap<String, String> loccodename = new HashMap<>();
-
-    @Deprecated
-    public static HashMap<String, Integer[]> materialMap = new HashMap<>();
-
-    IIcon iconMetal;
-    IIcon[] iconOverlay = new IIcon[3];
+    private IIcon iconMetal;
+    private final IIcon[] iconOverlay = new IIcon[3];
 
     public ItemClusters() {
-        super();
-        maxStackSize = 64;
-        setCreativeTab(WitchingGadgets.tabWG);
+        setUnlocalizedName("WG_Cluster");
         setHasSubtypes(true);
+        setCreativeTab(WitchingGadgets.tabWG);
+    }
+
+    public enum Series {
+        Legacy,
+        GT5u,
+        Misc,
+        Error
+    }
+
+    @Data
+    public static class MetaInfo {
+
+        public final Series series;
+        public final int matId;
+
+        public int getMeta() {
+            if (series == Series.Error) return 0;
+
+            return series.ordinal() * 1000 + matId;
+        }
+
+        public String getMaterialName() {
+            return switch (series) {
+                case Legacy -> null;
+                case GT5u -> GregTechAPI.sGeneratedMaterials[matId].mName;
+                case Misc -> WG_alchemic_clusters.subNames[matId];
+                case Error -> null;
+            };
+        }
+
+        @Optional.Method(modid = "gregtech_nh")
+        public Materials getGT5uMaterial() {
+            if (series == Series.Legacy) return null;
+            if (series == Series.GT5u) return GregTechAPI.sGeneratedMaterials[matId];
+            if (series == Series.Error) return null;
+
+            return Materials.get(getMaterialName());
+        }
+
+        @Optional.Method(modid = "gregtech_nh")
+        public String getGT5uMatName() {
+            Materials mat = getGT5uMaterial();
+
+            return mat == null ? "NULL" : mat.getLocalizedName();
+        }
+
+        public static MetaInfo fromMeta(int metadata) {
+            Series series = switch (metadata / 1000) {
+                case 0 -> Series.Legacy;
+                case 1 -> Series.GT5u;
+                case 2 -> Series.Misc;
+                default -> Series.Error;
+            };
+
+            return new MetaInfo(series, metadata % 1000);
+        }
     }
 
     @Override
     public int getColorFromItemStack(ItemStack stack, int pass) {
-        if (witchinggadgets.common.WGContent.GT_Cluster != null) {
-            if (pass == 0 && stack.getItemDamage() < witchinggadgets.common.WGContent.GT_Cluster.length) {
-                if (WGContent.GT_Cluster_Color.get(witchinggadgets.common.WGContent.GT_Cluster[stack.getItemDamage()])
-                        != null)
-                    return WGContent.GT_Cluster_Color
-                            .get(witchinggadgets.common.WGContent.GT_Cluster[stack.getItemDamage()])[0];
-            }
-        } else {
-            if (pass == 0) {
-                if (materialMap.get(subNames[stack.getItemDamage()]) != null) {
-                    Integer[] mat = materialMap.get(subNames[stack.getItemDamage()]);
-                    if (mat != null && mat.length > 0) {
-                        return mat[0];
-                    }
-                }
-            }
-        }
-        return 0xffffff;
-    }
+        if (pass != 0) return 0xFFFFFF;
 
-    public static ItemStack getCluster(String ore) {
-        if (WGConfig.allowClusters) {
-            if (witchinggadgets.common.WGContent.GT_Cluster != null) {
-                for (int sn = 0; sn < witchinggadgets.common.WGContent.GT_Cluster.length; sn++)
-                    if (witchinggadgets.common.WGContent.GT_Cluster[sn].equalsIgnoreCase(ore))
-                        return new ItemStack(WGContent.ItemCluster, 1, sn);
-            } else {
-                for (int sn = 0; sn < subNames.length; sn++)
-                    if (subNames[sn].equalsIgnoreCase(ore)) return new ItemStack(WGContent.ItemCluster, 1, sn);
-            }
-        }
-        return null;
+        WG_alchemic_clusters.ClusterInfo clusterInfo = WG_alchemic_clusters.CLUSTER_INFO_BY_META
+                .get(stack.getItemDamage());
+
+        return clusterInfo == null ? 0xFFFFFF : clusterInfo.vibrant();
     }
 
     @Override
@@ -107,21 +117,10 @@ public class ItemClusters extends Item implements IItemFirestoneBurning {
         if (pass == 0) {
             return this.iconMetal;
         }
-        if (witchinggadgets.common.WGContent.GT_Cluster != null) {
-            if (damage < witchinggadgets.common.WGContent.GT_Cluster.length
-                    && WGContent.GT_Cluster_Color.get(witchinggadgets.common.WGContent.GT_Cluster[damage]) != null) {
-                return this.iconOverlay[WGContent.GT_Cluster_Color
-                        .get(witchinggadgets.common.WGContent.GT_Cluster[damage])[1]];
-            } else {
-                return this.iconOverlay[0];
-            }
-        } else {
-            if (materialMap.get(subNames[damage]) != null) {
-                return this.iconOverlay[materialMap.get(subNames[damage])[1]];
-            } else {
-                return this.iconOverlay[0];
-            }
-        }
+
+        WG_alchemic_clusters.ClusterInfo clusterInfo = WG_alchemic_clusters.CLUSTER_INFO_BY_META.get(damage);
+
+        return clusterInfo == null ? this.iconOverlay[0] : this.iconOverlay[clusterInfo.clusterOverlay().ordinal()];
     }
 
     @Override
@@ -131,48 +130,82 @@ public class ItemClusters extends Item implements IItemFirestoneBurning {
 
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
-        if (witchinggadgets.common.WGContent.GT_Cluster != null) {
-            String ss = Materials
-                    .get(witchinggadgets.common.WGContent.GT_Cluster[stack.getItemDamage()]).mLocalizedName;
-            return StatCollector.translateToLocalFormatted(this.getUnlocalizedNameInefficiently(stack) + ".name", ss)
-                    .trim();
-        } else {
-            String ss = "";
-            if (!OreDictionary.getOres("ingot" + subNames[stack.getItemDamage()]).isEmpty()) {
-                ItemStack ingot = OreDictionary.getOres("ingot" + subNames[stack.getItemDamage()]).get(0);
-                int limit = ingot.getDisplayName().lastIndexOf(" ");
-                ss = ingot.getDisplayName().substring(0, Math.max(0, limit));
+        MetaInfo metaInfo = MetaInfo.fromMeta(stack.getItemDamage());
+
+        switch (metaInfo.series) {
+            case Legacy -> {
+                return StatCollector.translateToLocal("item.WG_Material.clusterLegacy.name");
             }
-            return StatCollector.translateToLocalFormatted(this.getUnlocalizedNameInefficiently(stack) + ".name", ss)
-                    .trim();
+            case GT5u -> {
+                return StatCollector.translateToLocalFormatted(
+                        "item.WG_Cluster.name",
+                        WitchingGadgets.isGT5uLoaded ? metaInfo.getGT5uMatName() : "NULL");
+            }
+            case Misc -> {
+                WG_alchemic_clusters.ClusterInfo clusterInfo = WG_alchemic_clusters.CLUSTER_INFO_BY_META
+                        .get(stack.getItemDamage());
+
+                if (clusterInfo == null) {
+                    return StatCollector.translateToLocal("item.WG_Material.clusterInvalid.name");
+                }
+
+                String key = "item.WG_Material.cluster" + clusterInfo.matName() + ".name";
+
+                if (StatCollector.canTranslate(key)) {
+                    return StatCollector.translateToLocal(key);
+                }
+
+                ItemStack ingot = Utilities.getOredict("ingot" + clusterInfo.matName(), 1);
+
+                if (ingot == null) {
+                    return StatCollector.translateToLocal("item.WG_Material.clusterInvalid.name");
+                }
+
+                String name = ingot.getDisplayName();
+
+                name = name.substring(0, name.lastIndexOf(' ')).trim();
+
+                return StatCollector.translateToLocalFormatted("item.WG_Cluster.name", name);
+            }
+            case Error -> {
+                return StatCollector.translateToLocal("item.WG_Material.clusterInvalid.name");
+            }
+        }
+
+        return StatCollector.translateToLocal("item.WG_Material.clusterInvalid.name");
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, EntityPlayer player, List<String> tooltip, boolean advancedTooltips) {
+        super.addInformation(stack, player, tooltip, advancedTooltips);
+
+        MetaInfo metaInfo = MetaInfo.fromMeta(stack.getItemDamage());
+
+        if (metaInfo.series == Series.Error) {
+            tooltip.add(StatCollector.translateToLocal("tooltip.WitchingGadgets.cluster.error1"));
+            tooltip.add(StatCollector.translateToLocal("tooltip.WitchingGadgets.cluster.error2"));
         }
     }
 
     @Override
     public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> itemList) {
-        if (WGConfig.allowClusters) if (witchinggadgets.common.WGContent.GT_Cluster != null) {
-            for (int iOre = 0; iOre < witchinggadgets.common.WGContent.GT_Cluster.length; iOre++)
-                if (!OreDictionary.getOres("ore" + witchinggadgets.common.WGContent.GT_Cluster[iOre]).isEmpty()) // &&
-                    itemList.add(new ItemStack(item, 1, iOre));
-        } else {
-            for (int iOre = 0; iOre < subNames.length; iOre++)
-                if (!OreDictionary.getOres("ore" + subNames[iOre]).isEmpty()
-                        && !OreDictionary.getOres("ingot" + subNames[iOre]).isEmpty())
-                    itemList.add(new ItemStack(item, 1, iOre));
+        List<ItemStack> out = new ArrayList<>();
+
+        for (WG_alchemic_clusters.ClusterInfo clusterInfo : WG_alchemic_clusters.CLUSTER_INFO.values()) {
+            out.add(new ItemStack(this, 1, clusterInfo.meta().getMeta()));
         }
+
+        out.sort(Comparator.comparingInt(ItemStack::getItemDamage));
+
+        itemList.addAll(out);
     }
 
     @Override
     @Optional.Method(modid = "Railcraft")
     public boolean shouldBurn(ItemStack itemStack) {
-        if (itemStack != null) {
-            int dmg = itemStack.getItemDamage();
-            // This should be safe since mDefaultLocalName gets inserted into GT_Cluster at
-            // {@link WGContent#initGTClusters()} directly and the firestone Material name
-            // is a literal inside gregtechs MaterialsInit1 class
-            return (dmg < witchinggadgets.common.WGContent.GT_Cluster.length
-                    && witchinggadgets.common.WGContent.GT_Cluster[dmg] == Materials.Firestone.mDefaultLocalName);
-        }
-        return false;
+        WG_alchemic_clusters.ClusterInfo clusterInfo = WG_alchemic_clusters.CLUSTER_INFO_BY_META
+                .get(itemStack.getItemDamage());
+
+        return clusterInfo != null && clusterInfo.matName().equals("Firestone");
     }
 }

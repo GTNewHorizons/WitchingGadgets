@@ -1,6 +1,6 @@
 package witchinggadgets.common.recipes.other;
 
-import static witchinggadgets.common.recipes.WG_other_recipes.addBlastTrippling;
+import static witchinggadgets.common.recipes.WG_other_recipes.addBlastTripling;
 import static witchinggadgets.common.recipes.WG_other_recipes.registerCompoundRecipe;
 
 import net.minecraft.init.Blocks;
@@ -89,7 +89,7 @@ public class WG_other_infernal_blast_furnace {
                 TileEntityBlastfurnace.stairBlock,
                 -1);
 
-        addBlastTrippling("Cinnabar");
+        addBlastTripling("Cinnabar");
         InfernalBlastfurnaceRecipe
                 .addRecipe(new ItemStack(ConfigItems.itemResource, 3, 3), "clusterCinnabar", 1, 440, false)
                 .addBonus(new ItemStack(ConfigItems.itemNugget, 1, 5));

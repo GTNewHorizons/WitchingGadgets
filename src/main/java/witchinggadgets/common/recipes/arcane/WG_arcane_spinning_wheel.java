@@ -5,19 +5,19 @@ import static witchinggadgets.common.recipes.WG_arcane_recipes.registerArcaneRec
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-import cpw.mods.fml.common.Loader;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GTOreDictUnificator;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.config.ConfigBlocks;
+import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.WGContent;
 
 public class WG_arcane_spinning_wheel {
 
     public static void registerSpinningWheel() {
-        if (Loader.isModLoaded("gregtech") && !Loader.isModLoaded("gregapi")) {
+        if (WitchingGadgets.isGT5uLoaded) {
             registerArcaneRecipe(
                     "SPINNINGWHEEL",
                     "",
