@@ -296,6 +296,7 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
             }
 
             float speedMod = (float) getSpeedModifier(itemStack);
+            float JUMP_BONUS = 0.55F / 0.2750000059604645F;
             if (player.onGround || player.capabilities.isFlying || player.isOnLadder()) {
 
                 if (WGModCompat.loaded_TaintedMagic) {
@@ -312,9 +313,9 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
                 }
                 player.jumpMovementFactor = 0.00002F;
             } else if (Hover.getHover(player.getEntityId())) {
-                player.jumpMovementFactor = 0.03F;
+                player.jumpMovementFactor = (0.03F * JUMP_BONUS - 0.02F) * speedMod + 0.02F;
             } else {
-                player.jumpMovementFactor = 0.05F;
+                player.jumpMovementFactor = (0.05F * JUMP_BONUS - 0.02F) * speedMod + 0.02F;
             }
         }
     }
