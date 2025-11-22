@@ -28,12 +28,11 @@ public class WG_GT_clusters {
             ItemStack cluster = clusterInfo.getPart(OrePrefixes.cluster, 1);
 
             if (cluster == null) continue;
-            
+
             Materials material = clusterInfo.getGT5uMaterial();
-            if(material != null && !material.mBlastFurnaceRequired) {
+            if (material != null && !material.mBlastFurnaceRequired) {
                 addBlastTripling(clusterInfo.matName());
             }
-
 
             int oreMultiplier = material == null ? 1 : material.mOreMultiplier;
 
