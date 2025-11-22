@@ -30,7 +30,7 @@ public class WG_GT_clusters {
             if (cluster == null) continue;
 
             Materials material = clusterInfo.getGT5uMaterial();
-            if (material != null && !material.mBlastFurnaceRequired) {
+            if (!clusterInfo.ebf()) {
                 addBlastTripling(clusterInfo.matName());
             }
 
