@@ -222,7 +222,10 @@ public class WG_alchemic_clusters {
                     AspectList alchemyAspects = ThaumcraftApi.objectTags
                             .get(Arrays.asList(ingot.getItem(), ingot.getItemDamage()));
                     if (alchemyAspects == null) alchemyAspects = new AspectList();
-                    alchemyAspects.remove(Aspect.METAL);
+                    if (Arrays.asList(alchemyAspects.getAspects()).contains(Aspect.METAL)
+                            && alchemyAspects.size() > 1) {
+                        alchemyAspects.remove(Aspect.METAL);
+                    }
                     alchemyAspects.add(Aspect.METAL, 2);
 
                     alchemyAspects.aspects.entrySet().removeIf(e -> e.getKey() == null || e.getValue() == null);
@@ -373,11 +376,14 @@ public class WG_alchemic_clusters {
             if (WGConfig.allowTransmutations && nugget != null && material.contains(SubTag.TRANSMUTABLE_NUGGETS)) {
                 AspectList transmuteAspects = baseAspects.copy();
 
-                if (transmuteAspects.aspects.isEmpty() || transmuteAspects.size() < 3) {
+                if (Arrays.asList(transmuteAspects.getAspects()).contains(null)) {
                     transmuteAspects = new AspectList().add(Aspect.METAL, 2).add(Aspect.ORDER, 1)
                             .add(TCAspects.NEBRISUM.getAspect(), 2);
                 } else {
-                    transmuteAspects.remove(Aspect.METAL);
+                    if (Arrays.asList(transmuteAspects.getAspects()).contains(Aspect.METAL)
+                            && transmuteAspects.size() > 1) {
+                        transmuteAspects.remove(Aspect.METAL);
+                    }
                     transmuteAspects.add(Aspect.METAL, 2);
                 }
 

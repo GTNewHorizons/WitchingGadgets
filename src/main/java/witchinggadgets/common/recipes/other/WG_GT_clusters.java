@@ -29,9 +29,10 @@ public class WG_GT_clusters {
 
             if (cluster == null) continue;
 
-            addBlastTripling(clusterInfo.matName());
-
             Materials material = clusterInfo.getGT5uMaterial();
+            if (!clusterInfo.ebf()) {
+                addBlastTripling(clusterInfo.matName());
+            }
 
             int oreMultiplier = material == null ? 1 : material.mOreMultiplier;
 
