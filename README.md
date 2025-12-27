@@ -18,5 +18,5 @@ Original code Copyright (c) 2014-2015 BluSunrize
 
 License per https://www.curseforge.com/minecraft/mc-mods/witching-gadgets:
 
-The mod is open source and can be found on [Github](https://github.com/BluSunrize/WitchingGadgets/)
+The mod is open source and can be found on [GitHub](https://github.com/BluSunrize/WitchingGadgets/)
 Feel free to look at my code, and even take parts of it, but please follow Wheaton's Law and "Don't be a douche". If you use my code, be so kind and tell people where you got it.
