@@ -29,7 +29,7 @@ public class ContainerLabelLibrary extends Container {
 
             @Override
             public boolean isItemValid(ItemStack stack) {
-                return isLabel(stack);
+                return tileEntity.isLabel(stack);
             }
         });
         this.addSlotToContainer(new SlotOutput(tileEntity, LABEL_OUTPUT_SLOT, 8, 51) {
@@ -43,9 +43,6 @@ public class ContainerLabelLibrary extends Container {
         this.bindPlayerInventory(inventoryPlayer);
     }
 
-    private boolean isLabel(ItemStack stack) {
-        return stack != null && stack.getItem().equals(ConfigItems.itemResource) && stack.getItemDamage() == 13;
-    }
 
     @Override
     public boolean canInteractWith(EntityPlayer player) {
@@ -80,7 +77,7 @@ public class ContainerLabelLibrary extends Container {
 
     private void transferInventoryToLabels(Slot clickedSlot) {
         ItemStack clickedItem = clickedSlot.getStack();
-        if (isLabel(clickedItem)) {
+        if (tileEntity.isLabel(clickedItem)) {
             Slot labelSlot = inventorySlots.get(LABEL_INPUT_SLOT);
             ItemStack labels = labelSlot.getStack();
             if (labels == null) {
