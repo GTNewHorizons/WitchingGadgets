@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.IEssentiaContainerItem;
-import thaumcraft.common.config.ConfigItems;
 import witchinggadgets.common.blocks.tiles.TileEntityLabelLibrary;
 
 public class ContainerLabelLibrary extends Container {
@@ -42,7 +41,6 @@ public class ContainerLabelLibrary extends Container {
 
         this.bindPlayerInventory(inventoryPlayer);
     }
-
 
     @Override
     public boolean canInteractWith(EntityPlayer player) {
