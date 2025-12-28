@@ -138,7 +138,7 @@ public class TileEntityLabelLibrary extends TileEntityWGBase implements IInvento
     }
 
     public boolean isLabel(ItemStack stack) {
-        return stack != null && stack.getItem().equals(ConfigItems.itemResource) && stack.getItemDamage() == 13;
+        return stack != null && stack.getItem() == ConfigItems.itemResource && stack.getItemDamage() == 13;
     }
 
     public boolean clearLabelAspects(ItemStack stack) {
