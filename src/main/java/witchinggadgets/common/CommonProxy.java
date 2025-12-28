@@ -35,7 +35,7 @@ public class CommonProxy implements IGuiHandler {
                 player.inventory,
                 world,
                 BaublesApi.getBaubles(player).getStackInSlot(
-                        BaubleExpandedSlots.getIndexesOfAssignedSlotsOfType(BaubleExpandedSlots.capeType)[0]));
+                        BaubleExpandedSlots.getIndexesOfAssignedSlotsOfType(BaubleExpandedSlots.beltType)[0]));
 
         if (ID == 6) return new ContainerPatchedFocusPouch(player.inventory, world, x, y, z);
 
