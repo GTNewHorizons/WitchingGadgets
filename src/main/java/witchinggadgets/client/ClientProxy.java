@@ -137,7 +137,7 @@ public class ClientProxy extends CommonProxy {
                 player.inventory,
                 world,
                 BaublesApi.getBaubles(player).getStackInSlot(
-                        BaubleExpandedSlots.getIndexOfTypeInRegisteredTypes(BaubleExpandedSlots.capeType)));
+                        BaubleExpandedSlots.getIndexOfTypeInRegisteredTypes(BaubleExpandedSlots.beltType)));
 
         if (ID == 6) return new GuiPatchedFocusPouch(player.inventory, world, x, y, z);
 
