@@ -67,7 +67,7 @@ public class ContainerLabelLibrary extends Container {
         Slot clickedSlot = inventorySlots.get(slot);
         switch (slot) {
             case LABEL_INPUT_SLOT:
-                return transferLabelsWithAspect(new AspectList());
+                return transferLabelsWithAspect(null);
             case LABEL_OUTPUT_SLOT:
                 if ((clickedSlot).getHasStack()) {
                     ItemStack clickedStack = clickedSlot.getStack();
