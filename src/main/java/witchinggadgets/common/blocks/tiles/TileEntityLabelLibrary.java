@@ -137,7 +137,7 @@ public class TileEntityLabelLibrary extends TileEntityWGBase implements IInvento
         return slot == 0 && isLabel(itemstack);
     }
 
-    public boolean isLabel(ItemStack stack) {
+    public static boolean isLabel(ItemStack stack) {
         return stack != null && stack.getItem() == ConfigItems.itemResource && stack.getItemDamage() == 13;
     }
 }

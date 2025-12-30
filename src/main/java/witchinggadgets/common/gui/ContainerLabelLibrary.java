@@ -28,7 +28,7 @@ public class ContainerLabelLibrary extends Container {
 
             @Override
             public boolean isItemValid(ItemStack stack) {
-                return tileEntity.isLabel(stack);
+                return TileEntityLabelLibrary.isLabel(stack);
             }
         });
         this.addSlotToContainer(new SlotOutput(tileEntity, LABEL_OUTPUT_SLOT, 8, 51) {
@@ -75,7 +75,7 @@ public class ContainerLabelLibrary extends Container {
 
     private void transferInventoryToLabels(Slot clickedSlot) {
         ItemStack clickedItem = clickedSlot.getStack();
-        if (tileEntity.isLabel(clickedItem)) {
+        if (TileEntityLabelLibrary.isLabel(clickedItem)) {
             Slot labelSlot = inventorySlots.get(LABEL_INPUT_SLOT);
             ItemStack labels = labelSlot.getStack();
             if (labels == null) {
