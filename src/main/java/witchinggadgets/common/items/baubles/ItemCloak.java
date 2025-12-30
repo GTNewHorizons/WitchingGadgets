@@ -61,6 +61,9 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
     IIcon iconRaven;
     IIcon iconWolf;
 
+    private static final String TAG_NO_GLIDE = "noGlide";
+    private static final String TAG_SPECTRAL = "isSpectral";
+
     private boolean lastKeybindState = false;
 
     public ItemCloak() {
@@ -214,10 +217,10 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
                             StatCollector.translateToLocalFormatted(
                                     GameSettings.getKeyDisplayString(activateKey.getKeyCode()))));
             if (subNames[stack.getItemDamage()].equals("raven")) {
-                if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("noGlide")) {
+                if (stack.hasTagCompound() && stack.getTagCompound().getBoolean(TAG_NO_GLIDE)) {
                     list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide"));
                 }
-                if (stack.hasTagCompound() && !stack.getTagCompound().getBoolean("noGlide")) {
+                if (stack.hasTagCompound() && !stack.getTagCompound().getBoolean(TAG_NO_GLIDE)) {
                     list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "glide"));
                 }
             }
@@ -250,13 +253,13 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
 
             if (shouldActivate() && subNames[stack.getItemDamage()].equals("raven")) {
                 int slot = BaubleExpandedSlots.getIndexesOfAssignedSlotsOfType(getBaubleTypes(stack)[0])[0];
-                if (stack.getTagCompound().getBoolean("noGlide")) {
-                    stack.getTagCompound().setBoolean("noGlide", false);
+                if (stack.getTagCompound().getBoolean(TAG_NO_GLIDE)) {
+                    stack.getTagCompound().setBoolean(TAG_NO_GLIDE, false);
                     WitchingGadgets.packetHandler.sendToServer(new MessageSyncGlide(slot, false));
                     player.addChatMessage(
                             new ChatComponentText(StatCollector.translateToLocal(Lib.DESCRIPTION + "glide")));
-                } else if (!stack.getTagCompound().getBoolean("noGlide")) {
-                    stack.getTagCompound().setBoolean("noGlide", true);
+                } else if (!stack.getTagCompound().getBoolean(TAG_NO_GLIDE)) {
+                    stack.getTagCompound().setBoolean(TAG_NO_GLIDE, true);
                     WitchingGadgets.packetHandler.sendToServer(new MessageSyncGlide(slot, true));
                     player.addChatMessage(
                             new ChatComponentText(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide")));
@@ -285,17 +288,17 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
         if (stack.getItemDamage() < subNames.length) {
             if (subNames[stack.getItemDamage()].equals("spectral") && !player.worldObj.isRemote
                     && stack.hasTagCompound()
-                    && stack.getTagCompound().getBoolean("isSpectral"))
+                    && stack.getTagCompound().getBoolean(TAG_SPECTRAL))
                 if (player.ticksExisted % 100 == 0)
                     if (!Utilities.consumeVisFromInventoryWithoutDiscount(player, new AspectList().add(Aspect.AIR, 1)))
-                        stack.getTagCompound().setBoolean("isSpectral", false);
+                        stack.getTagCompound().setBoolean(TAG_SPECTRAL, false);
             if (subNames[stack.getItemDamage()].equals("raven")) {
                 if (!player.onGround && !player.isOnLadder()) {
                     if (player.capabilities.isFlying || Hover.getHover(player.getEntityId())) {
                         if (player.moveForward > 0) player.moveFlying(0, 1, .05f);
                         player.motionY *= 1.125;
                     } else if (player.motionY < 0
-                            && (!stack.hasTagCompound() || !stack.getTagCompound().getBoolean("noGlide"))) {
+                            && (!stack.hasTagCompound() || !stack.getTagCompound().getBoolean(TAG_NO_GLIDE))) {
                                 float mod = player.isSneaking() ? .1f : .05f;
                                 player.motionY *= player.isSneaking() ? .75 : .5;
                                 double x = Math.cos(Math.toRadians(player.rotationYawHead + 90)) * mod;
@@ -322,8 +325,11 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
     public void onItemEquipped(EntityLivingBase player, ItemStack stack) {}
 
     public void onItemUnequipped(EntityLivingBase player, ItemStack stack) {
-        if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("isSpectral"))
-            stack.getTagCompound().setBoolean("isSpectral", false);
+        if (stack.hasTagCompound() && stack.getTagCompound().hasKey(TAG_NO_GLIDE))
+            stack.getTagCompound().setBoolean(TAG_NO_GLIDE, true);
+
+        if (stack.hasTagCompound() && stack.getTagCompound().getBoolean(TAG_SPECTRAL))
+            stack.getTagCompound().setBoolean(TAG_SPECTRAL, false);
     }
 
     @Override
@@ -348,7 +354,7 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
 
     @Override
     public void onUserTargeted(LivingSetAttackTargetEvent event, ItemStack stack) {
-        if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("isSpectral")
+        if (stack.hasTagCompound() && stack.getTagCompound().getBoolean(TAG_SPECTRAL)
                 && event.entityLiving instanceof EntityCreature) {
             boolean goggles = event.entityLiving.getEquipmentInSlot(4) != null
                     && (event.entityLiving.getEquipmentInSlot(4).getItem() instanceof IRevealer
@@ -414,11 +420,9 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
      * @param stack The cloak's ItemStack.
      */
     private void handleRavenEquip(ItemStack stack) {
-        if (!stack.hasTagCompound()) {
-            stack.setTagCompound(new NBTTagCompound());
-        }
+        if (!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
 
-        stack.getTagCompound().setBoolean("noGlide", false);
+        if (!stack.getTagCompound().hasKey(TAG_NO_GLIDE)) stack.getTagCompound().setBoolean(TAG_NO_GLIDE, true);
     }
 
     /**
@@ -439,8 +443,8 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
         }
 
         // Toggle spectral state
-        boolean isSpectral = !stack.getTagCompound().getBoolean("isSpectral");
-        stack.getTagCompound().setBoolean("isSpectral", isSpectral);
+        boolean isSpectral = !stack.getTagCompound().getBoolean(TAG_SPECTRAL);
+        stack.getTagCompound().setBoolean(TAG_SPECTRAL, isSpectral);
 
         if (isSpectral) {
             AxisAlignedBB bounds = AxisAlignedBB.getBoundingBox(
