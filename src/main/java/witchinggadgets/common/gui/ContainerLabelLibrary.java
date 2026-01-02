@@ -1,5 +1,7 @@
 package witchinggadgets.common.gui;
 
+import javax.annotation.Nullable;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -12,6 +14,7 @@ import witchinggadgets.common.blocks.tiles.TileEntityLabelLibrary;
 
 public class ContainerLabelLibrary extends Container {
 
+    private static final String TAG_ASPECTS = "Aspects";
     private static final int LABEL_INPUT_SLOT = 0;
     private static final int LABEL_OUTPUT_SLOT = 1;
     private static final int SLOT_COUNT = 2;
@@ -59,7 +62,7 @@ public class ContainerLabelLibrary extends Container {
         Slot clickedSlot = inventorySlots.get(slot);
         switch (slot) {
             case LABEL_INPUT_SLOT:
-                return transferLabelsWithAspect(new AspectList());
+                return transferLabelsWithAspect(null);
             case LABEL_OUTPUT_SLOT:
                 if ((clickedSlot).getHasStack()) {
                     ItemStack clickedStack = clickedSlot.getStack();
@@ -79,7 +82,9 @@ public class ContainerLabelLibrary extends Container {
             Slot labelSlot = inventorySlots.get(LABEL_INPUT_SLOT);
             ItemStack labels = labelSlot.getStack();
             if (labels == null) {
-                ((IEssentiaContainerItem) clickedItem.getItem()).setAspects(clickedItem, new AspectList());
+                if (clickedItem.hasTagCompound() && clickedItem.stackTagCompound.hasKey(TAG_ASPECTS)) {
+                    clickedItem.stackTagCompound.removeTag(TAG_ASPECTS);
+                }
                 labelSlot.putStack(clickedItem);
                 clickedSlot.decrStackSize(clickedItem.stackSize);
             } else {
@@ -95,17 +100,19 @@ public class ContainerLabelLibrary extends Container {
         }
     }
 
-    private ItemStack transferLabelsWithAspect(AspectList aspects) {
+    private ItemStack transferLabelsWithAspect(@Nullable AspectList aspects) {
         Slot labelSlot = inventorySlots.get(LABEL_INPUT_SLOT);
         ItemStack labels = labelSlot.getStack();
         ItemStack returnStack = null;
         if (labelSlot.getHasStack()) {
-            // Set the labels to the given aspect (Empty list is none)
-            ((IEssentiaContainerItem) labels.getItem()).setAspects(labels, aspects);
+            // Set the labels to the given aspect if one is given
+            if (aspects != null) ((IEssentiaContainerItem) labels.getItem()).setAspects(labels, aspects);
             returnStack = labels.copy();
             if (!this.mergeItemStack(labels, SLOT_COUNT, this.inventorySlots.size(), true)) {
                 // Set un-transferred labels back to no aspects
-                ((IEssentiaContainerItem) labels.getItem()).setAspects(labels, new AspectList());
+                if (labels.hasTagCompound() && labels.stackTagCompound.hasKey(TAG_ASPECTS)) {
+                    labels.stackTagCompound.removeTag(TAG_ASPECTS);
+                }
                 return null;
             }
             if (labels.stackSize == 0) {
@@ -114,7 +121,9 @@ public class ContainerLabelLibrary extends Container {
                 labelSlot.onSlotChanged();
             }
             // Set un-transferred labels back to no aspects
-            ((IEssentiaContainerItem) labels.getItem()).setAspects(labels, new AspectList());
+            if (labels.hasTagCompound() && labels.stackTagCompound.hasKey(TAG_ASPECTS)) {
+                labels.stackTagCompound.removeTag(TAG_ASPECTS);
+            }
         }
         return returnStack;
     }
@@ -128,7 +137,9 @@ public class ContainerLabelLibrary extends Container {
             // Accept all label items no matter their aspect, and clear their aspect
             if (labelSlot.isItemValid(heldStack)) {
                 if (labels == null) {
-                    ((IEssentiaContainerItem) heldStack.getItem()).setAspects(heldStack, new AspectList());
+                    if (heldStack.hasTagCompound() && heldStack.stackTagCompound.hasKey(TAG_ASPECTS)) {
+                        heldStack.stackTagCompound.removeTag(TAG_ASPECTS);
+                    }
                     labelSlot.putStack(heldStack);
                     heldStack = null;
                 } else {
