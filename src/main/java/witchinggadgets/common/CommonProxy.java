@@ -28,22 +28,23 @@ public class CommonProxy implements IGuiHandler {
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         TileEntity tile = world.getTileEntity(x, y, z);
-        if (ID == 0) return new ContainerSpinningWheel(player.inventory, (TileEntitySpinningWheel) tile);
 
+        if (ID == 0) return new ContainerSpinningWheel(player.inventory, (TileEntitySpinningWheel) tile);
         if (ID == 3) return new ContainerBag(player.inventory, world);
-        if (ID == 4 || ID == 5) return new ContainerCloak(
-                player.inventory,
-                world,
-                BaublesApi.getBaubles(player).getStackInSlot(
-                        BaubleExpandedSlots.getIndexesOfAssignedSlotsOfType(BaubleExpandedSlots.capeType)[0]));
+
+        if (ID == 4 || ID == 5) {
+            String baubleSlot = ID == 4 ? BaubleExpandedSlots.capeType : BaubleExpandedSlots.beltType;
+            return new ContainerCloak(
+                    player.inventory,
+                    world,
+                    BaublesApi.getBaubles(player)
+                            .getStackInSlot(BaubleExpandedSlots.getIndexesOfAssignedSlotsOfType(baubleSlot)[0]));
+        }
 
         if (ID == 6) return new ContainerPatchedFocusPouch(player.inventory, world, x, y, z);
-
         if (ID == 7) return new ContainerPrimordialGlove(player.inventory, world, x, y, z);
         if (ID == 8) return new ContainerLabelLibrary(player.inventory, (TileEntityLabelLibrary) tile);
-
         if (ID == 9) return new ContainerCuttingTable(player.inventory, (TileEntityCuttingTable) tile);
-
         if (ID == 11) return new ContainerVoidBag(player.inventory, world);
 
         return null;
