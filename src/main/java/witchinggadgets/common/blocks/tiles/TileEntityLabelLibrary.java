@@ -133,7 +133,11 @@ public class TileEntityLabelLibrary extends TileEntityWGBase implements IInvento
     public void closeInventory() {}
 
     @Override
-    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-        return true;
+    public boolean isItemValidForSlot(int slot, ItemStack itemstack) {
+        return slot == 0 && isLabel(itemstack);
+    }
+
+    public static boolean isLabel(ItemStack stack) {
+        return stack != null && stack.getItem() == ConfigItems.itemResource && stack.getItemDamage() == 13;
     }
 }
