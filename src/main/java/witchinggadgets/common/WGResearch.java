@@ -814,7 +814,9 @@ public class WGResearch {
         // INFERNALBLASTFURNACE
         researchAspects = new AspectList().add(Aspect.FIRE, 2).add(Aspect.METAL, 1).add(Aspect.CRAFT, 1)
                 .add(Aspect.DARKNESS, 1).add(Aspect.TAINT, 1);
-        pages = new ResearchPage[] { new ResearchPage("witchinggadgets_research_page.INFERNALBLASTFURNACE.1"),
+        String firstPage = WitchingGadgets.isGT5uLoaded ? "witchinggadgets_research_page.INFERNALBLASTFURNACE.1.GT5u"
+                : "witchinggadgets_research_page.INFERNALBLASTFURNACE.1.External";
+        pages = new ResearchPage[] { new ResearchPage(firstPage),
                 new ResearchPage("witchinggadgets_research_page.INFERNALBLASTFURNACE.2"),
                 new ResearchPage((List<?>) WGContent.recipeList.get("INFERNALBLASTFURNACE")),
                 new ResearchPage("witchinggadgets_research_page.INFERNALBLASTFURNACE.3") };
