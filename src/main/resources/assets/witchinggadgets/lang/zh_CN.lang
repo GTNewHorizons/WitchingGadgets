@@ -387,7 +387,8 @@ witchinggadgets_research_page.TRANSALUMINUM.1=你发现了一种方法让你能�
 #INFERNALBLASTFURNACE
 witchinggadgets_research_name.INFERNALBLASTFURNACE=炼狱高炉
 witchinggadgets_research_text.INFERNALBLASTFURNACE=[WG]火焰跃动...
-witchinggadgets_research_page.INFERNALBLASTFURNACE.1=研究科技的人们想尽各种办法来提纯它们的矿物,而这个炉子就是神秘使对他们的嘲讽.那其中摇曳着的魔法火焰,会将任何矿簇熔为三份金属锭,同时这也不会影响金属粒的生成.<BR>其次,如果你需要钢材,它那高纯度的烈焰也能助你一臂之力,你只需要投入铁锭或铁块然后静待即可.<BR>你也能将加速炼狱熔炉的方法用在这个结构上.
+witchinggadgets_research_page.INFERNALBLASTFURNACE.1.GT5u=研究科技的人们想尽各种办法来提纯它们的矿物,而这个炉子就是神秘使对他们的嘲讽.那其中摇曳着的魔法火焰,会将任何矿簇熔为三份金属锭,同时这也不会影响金属粒的生成.<BR>你也能将加速炼狱熔炉的方法用在这个结构上.
+witchinggadgets_research_page.INFERNALBLASTFURNACE.1.External=研究科技的人们想尽各种办法来提纯它们的矿物,而这个炉子就是神秘使对他们的嘲讽.那其中摇曳着的魔法火焰,会将任何矿簇熔为三份金属锭,同时这也不会影响金属粒的生成.<BR>其次,如果你需要钢材,它那高纯度的烈焰也能助你一臂之力,你只需要投入铁锭或铁块然后静待即可.<BR>你也能将加速炼狱熔炉的方法用在这个结构上.
 witchinggadgets_research_page.INFERNALBLASTFURNACE.2=对于普通的烧制而言,它的火焰温度实在是太高了,因此请不要将鸡肉投入炼狱高炉.<BR>免责声明:尽管炉子中的岩浆经过了魔法的增强,危险性依然存在.任何不该投入的物品在炉中都会被气化,包括那些蠢到掉进炉子的神秘使.
 witchinggadgets_research_page.INFERNALBLASTFURNACE.3=§o魔导手册中对于建造结构的显示不太准确.该结构顶部的楼梯方块需要对着中心放置,四角的则与其相适.§r
 
