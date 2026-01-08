@@ -143,7 +143,7 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
         }
 
         if (this.armorType == 3) {
-            if (getIntertialState(stack) && player.moveForward == 0
+            if (getInertiaState(stack) && player.moveForward == 0
                     && player.moveStrafing == 0
                     && player.capabilities.isFlying) {
                 player.motionX *= 0.5;
@@ -269,8 +269,7 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
 
         @SubscribeEvent
         public void jumpBoost(LivingJumpEvent event) {
-            if (event.entityLiving instanceof EntityPlayer) {
-                EntityPlayer player = (EntityPlayer) event.entityLiving;
+            if (event.entityLiving instanceof EntityPlayer player) {
                 ItemStack boots = player.getCurrentArmor(0);
                 if (playerHasFoot(player)) {
                     player.motionY += 0.55f * getJumpModifier(boots);
@@ -283,12 +282,12 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
     public void movementEffects(EntityPlayer player, float bonus, ItemStack itemStack) {
         if (player.moveForward != 0.0F || player.moveStrafing != 0.0F || player.motionY != 0.0F) {
             if (WitchingGadgets.isBootsActive) {
-                boolean omniMode = isOmniEnabled(itemStack);
+                boolean omniMode = getOmniState(itemStack);
                 if (player.moveForward <= 0F && !omniMode) {
                     return;
                 }
             }
-            if (player.worldObj.isRemote && !player.isSneaking()) {
+            if (player.worldObj.isRemote && !player.isSneaking() && getStepAssistState(itemStack)) {
                 if (!Thaumcraft.instance.entityEventHandler.prevStep.containsKey(player.getEntityId())) {
                     Thaumcraft.instance.entityEventHandler.prevStep.put(player.getEntityId(), player.stepHeight);
                 }
@@ -362,13 +361,20 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
     }
 
     public boolean getOmniState(ItemStack stack) {
-        if (stack.stackTagCompound != null) {
+        if (stack.stackTagCompound != null && stack.stackTagCompound.hasKey("omni")) {
             return stack.stackTagCompound.getBoolean("omni");
         }
-        return false;
+        return true;
     }
 
-    public boolean getIntertialState(ItemStack stack) {
+    public boolean getStepAssistState(ItemStack stack) {
+        if (stack.stackTagCompound != null && stack.stackTagCompound.hasKey("step")) {
+            return stack.stackTagCompound.getBoolean("step");
+        }
+        return true;
+    }
+
+    public boolean getInertiaState(ItemStack stack) {
         if (stack.stackTagCompound != null) {
             return stack.stackTagCompound.getBoolean("inertiacanceling");
         }
