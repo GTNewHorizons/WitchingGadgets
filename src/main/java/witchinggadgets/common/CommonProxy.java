@@ -28,25 +28,25 @@ public class CommonProxy implements IGuiHandler {
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         TileEntity tile = world.getTileEntity(x, y, z);
-        if (ID == 0) return new ContainerSpinningWheel(player.inventory, (TileEntitySpinningWheel) tile);
 
-        if (ID == 3) return new ContainerBag(player.inventory, world);
-        if (ID == 4 || ID == 5) return new ContainerCloak(
-                player.inventory,
-                world,
-                BaublesApi.getBaubles(player).getStackInSlot(
-                        BaubleExpandedSlots.getIndexesOfAssignedSlotsOfType(BaubleExpandedSlots.capeType)[0]));
-
-        if (ID == 6) return new ContainerPatchedFocusPouch(player.inventory, world, x, y, z);
-
-        if (ID == 7) return new ContainerPrimordialGlove(player.inventory, world, x, y, z);
-        if (ID == 8) return new ContainerLabelLibrary(player.inventory, (TileEntityLabelLibrary) tile);
-
-        if (ID == 9) return new ContainerCuttingTable(player.inventory, (TileEntityCuttingTable) tile);
-
-        if (ID == 11) return new ContainerVoidBag(player.inventory, world);
-
-        return null;
+        return switch (ID) {
+            case 0 -> new ContainerSpinningWheel(player.inventory, (TileEntitySpinningWheel) tile);
+            case 3 -> new ContainerBag(player.inventory, world);
+            case 4, 5 -> {
+                String baubleSlot = ID == 4 ? BaubleExpandedSlots.capeType : BaubleExpandedSlots.beltType;
+                yield new ContainerCloak(
+                        player.inventory,
+                        world,
+                        BaublesApi.getBaubles(player)
+                                .getStackInSlot(BaubleExpandedSlots.getIndexesOfAssignedSlotsOfType(baubleSlot)[0]));
+            }
+            case 6 -> new ContainerPatchedFocusPouch(player.inventory, world, x, y, z);
+            case 7 -> new ContainerPrimordialGlove(player.inventory, world, x, y, z);
+            case 8 -> new ContainerLabelLibrary(player.inventory, (TileEntityLabelLibrary) tile);
+            case 9 -> new ContainerCuttingTable(player.inventory, (TileEntityCuttingTable) tile);
+            case 11 -> new ContainerVoidBag(player.inventory, world);
+            default -> null;
+        };
     }
 
     @Override
