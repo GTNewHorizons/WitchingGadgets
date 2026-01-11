@@ -130,26 +130,25 @@ public class ClientProxy extends CommonProxy {
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         TileEntity tile = world.getTileEntity(x, y, z);
-        if (ID == 0) return new GuiSpinningWheel(player.inventory, (TileEntitySpinningWheel) tile);
 
-        if (ID == 3) return new GuiBag(player.inventory, world);
-        if (ID == 4 || ID == 5) return new GuiCloakBag(
-                player.inventory,
-                world,
-                BaublesApi.getBaubles(player).getStackInSlot(
-                        BaubleExpandedSlots.getIndexOfTypeInRegisteredTypes(BaubleExpandedSlots.capeType)));
-
-        if (ID == 6) return new GuiPatchedFocusPouch(player.inventory, world, x, y, z);
-
-        if (ID == 7) return new GuiPrimordialGlove(player.inventory, world, x, y, z);
-
-        if (ID == 8) return new GuiLabelLibrary(player.inventory, (TileEntityLabelLibrary) tile);
-
-        if (ID == 9) return new GuiCuttingTable(player.inventory, (TileEntityCuttingTable) tile);
-
-        if (ID == 11) return new GuiVoidBag(player.inventory, world);
-
-        return null;
+        return switch (ID) {
+            case 0 -> new GuiSpinningWheel(player.inventory, (TileEntitySpinningWheel) tile);
+            case 3 -> new GuiBag(player.inventory, world);
+            case 4, 5 -> {
+                String baubleSlot = ID == 4 ? BaubleExpandedSlots.capeType : BaubleExpandedSlots.beltType;
+                yield new GuiCloakBag(
+                        player.inventory,
+                        world,
+                        BaublesApi.getBaubles(player)
+                                .getStackInSlot(BaubleExpandedSlots.getIndexOfTypeInRegisteredTypes(baubleSlot)));
+            }
+            case 6 -> new GuiPatchedFocusPouch(player.inventory, world, x, y, z);
+            case 7 -> new GuiPrimordialGlove(player.inventory, world, x, y, z);
+            case 8 -> new GuiLabelLibrary(player.inventory, (TileEntityLabelLibrary) tile);
+            case 9 -> new GuiCuttingTable(player.inventory, (TileEntityCuttingTable) tile);
+            case 11 -> new GuiVoidBag(player.inventory, world);
+            default -> null;
+        };
     }
 
     @Override
