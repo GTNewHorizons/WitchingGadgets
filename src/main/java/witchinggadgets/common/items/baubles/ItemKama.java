@@ -1,6 +1,6 @@
 package witchinggadgets.common.items.baubles;
 
-import static witchinggadgets.common.util.WGKeyHandler.activateKey;
+import static witchinggadgets.common.util.WGKeyHandler.activateBeltKey;
 
 import java.util.List;
 
@@ -103,7 +103,7 @@ public class ItemKama extends ItemCloak implements IBaubleExpanded {
                     StatCollector.translateToLocal(Lib.DESCRIPTION + "enableCloak").replaceAll(
                             "%s1",
                             StatCollector.translateToLocalFormatted(
-                                    GameSettings.getKeyDisplayString(activateKey.getKeyCode()))));
+                                    GameSettings.getKeyDisplayString(activateBeltKey.getKeyCode()))));
             if (stack.hasTagCompound() && stack.getTagCompound().getBoolean("noGlide")) {
                 list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide"));
             }

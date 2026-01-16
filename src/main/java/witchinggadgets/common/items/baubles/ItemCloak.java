@@ -1,6 +1,7 @@
 package witchinggadgets.common.items.baubles;
 
-import static witchinggadgets.common.util.WGKeyHandler.activateKey;
+import static witchinggadgets.common.util.WGKeyHandler.activateBeltKey;
+import static witchinggadgets.common.util.WGKeyHandler.activateCapeKey;
 
 import java.util.List;
 
@@ -215,7 +216,7 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
                     StatCollector.translateToLocal(Lib.DESCRIPTION + "enableCloak").replaceAll(
                             "%s1",
                             StatCollector.translateToLocalFormatted(
-                                    GameSettings.getKeyDisplayString(activateKey.getKeyCode()))));
+                                    GameSettings.getKeyDisplayString(activateCapeKey.getKeyCode()))));
             if (subNames[stack.getItemDamage()].equals("raven")) {
                 if (stack.hasTagCompound() && stack.getTagCompound().getBoolean(TAG_NO_GLIDE)) {
                     list.add(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide"));
@@ -235,6 +236,10 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
         }
     }
 
+    private boolean isActivationKeyPressed() {
+        return this.equals(WGContent.ItemKama) ? activateBeltKey.getIsKeyPressed() : activateCapeKey.getIsKeyPressed();
+    }
+
     /**
      * The method {@link net.minecraft.client.settings.KeyBinding#isPressed} changes the keybind state so that it only
      * works once per keybind. This alternative instead works by comparing the current tick and last tick state of the
@@ -245,12 +250,11 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
      * @return Whether this is a tick when the activateKey was pressed down.
      */
     private boolean shouldActivate() {
-        return !lastKeybindState && activateKey.getIsKeyPressed();
+        return !lastKeybindState && isActivationKeyPressed();
     }
 
     public void onItemTicked(EntityPlayer player, ItemStack stack) {
         if (player.worldObj.isRemote) {
-
             if (shouldActivate() && subNames[stack.getItemDamage()].equals("raven")) {
                 int slot = BaubleExpandedSlots.getIndexesOfAssignedSlotsOfType(getBaubleTypes(stack)[0])[0];
                 if (stack.getTagCompound().getBoolean(TAG_NO_GLIDE)) {
@@ -265,6 +269,7 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
                             new ChatComponentText(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide")));
                 }
             }
+
             if (shouldActivate() && subNames[stack.getItemDamage()].equals("storage")) {
                 int kama = this.equals(WGContent.ItemKama) ? 5 : 4;
                 player.openGui(
@@ -277,7 +282,7 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
                 WitchingGadgets.packetHandler.sendToServer(new MessageOpenCloak(player, kama));
             }
 
-            lastKeybindState = activateKey.getIsKeyPressed();
+            lastKeybindState = isActivationKeyPressed();
         }
 
         if (player.ticksExisted < 1) {
