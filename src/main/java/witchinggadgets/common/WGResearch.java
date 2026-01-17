@@ -1291,7 +1291,7 @@ public class WGResearch {
                     GTModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L, 3),
                     20,
                     researchAspects,
-                    GTModHandler.getModItem("dreamcraft", "item.PrimordialPearlFragment", 1L),
+                    GTModHandler.getModItem("dreamcraft", "PrimordialPearlFragment", 1L),
                     new ItemStack[] { GTModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L),
                             GTModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L, 6),
                             GTOreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L),
