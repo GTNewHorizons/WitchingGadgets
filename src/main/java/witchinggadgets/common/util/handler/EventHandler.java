@@ -59,6 +59,7 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
+import thaumcraft.common.entities.EntityPermanentItem;
 import thaumcraft.common.entities.EntitySpecialItem;
 import thaumcraft.common.items.wands.ItemWandCasting;
 import thaumcraft.common.lib.crafting.ThaumcraftCraftingManager;
@@ -395,7 +396,7 @@ public class EventHandler {
                                 iY = event.player.posY + yy - .5;
                                 iZ = event.player.posZ + zz;
                             }
-                EntitySpecialItem entityitem = new EntitySpecialItem(
+                EntitySpecialItem entityitem = new EntityPermanentItem(
                         event.player.worldObj,
                         iX,
                         iY,
@@ -405,7 +406,6 @@ public class EventHandler {
                                 ((IPrimordialCrafting) output.getItem()).getReturnedPearls(output),
                                 12));
                 entityitem.motionX = entityitem.motionY = entityitem.motionZ = 0;
-                entityitem.lifespan = 72000;
                 // TODO pearl tags
                 if (output.getTagCompound() == null) output.setTagCompound(new NBTTagCompound());
                 output.getTagCompound().setBoolean("wasCrafted", true);
