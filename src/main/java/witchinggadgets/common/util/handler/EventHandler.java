@@ -405,6 +405,7 @@ public class EventHandler {
                                 ((IPrimordialCrafting) output.getItem()).getReturnedPearls(output),
                                 12));
                 entityitem.motionX = entityitem.motionY = entityitem.motionZ = 0;
+                entityitem.lifespan = 72000;
                 // TODO pearl tags
                 if (output.getTagCompound() == null) output.setTagCompound(new NBTTagCompound());
                 output.getTagCompound().setBoolean("wasCrafted", true);
