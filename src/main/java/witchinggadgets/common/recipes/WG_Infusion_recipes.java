@@ -1,13 +1,18 @@
 package witchinggadgets.common.recipes;
 
+import java.util.List;
+
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemStack;
+
+import com.gtnewhorizon.gtnhlib.api.thaumcraft.EnhancedInfusionRecipe;
 
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.crafting.InfusionEnchantmentRecipe;
 import thaumcraft.api.crafting.InfusionRecipe;
+import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.config.Config;
 import witchinggadgets.common.WGConfig;
 import witchinggadgets.common.WGContent;
@@ -62,38 +67,86 @@ public class WG_Infusion_recipes {
         WG_infusion_enchantments.registerInfusionEnchantments();
     }
 
-    public static void registerInfusionRecipe(String tag, String tagAddon, Object result, int difficulty,
+    public static void registerInfusionRecipe(String research, String tagAddon, Object result, int difficulty,
             AspectList infusionAspects, ItemStack centralIngredient, ItemStack[] otherIngredients) {
         if (result == null) {
-            throw new IllegalArgumentException(tag + tagAddon + ": Result cannot be null");
+            throw new IllegalArgumentException(research + tagAddon + ": Result cannot be null");
         }
         if (infusionAspects == null) {
-            throw new IllegalArgumentException(tag + tagAddon + ": Infusion aspects cannot be null");
+            throw new IllegalArgumentException(research + tagAddon + ": Infusion aspects cannot be null");
         }
         for (Aspect aspect : infusionAspects.aspects.keySet()) {
             if (aspect == null) {
-                throw new IllegalArgumentException(tag + tagAddon + ": Aspect in the AspectList cannot be null");
+                throw new IllegalArgumentException(research + tagAddon + ": Aspect in the AspectList cannot be null");
             }
         }
         if (centralIngredient == null) {
-            throw new IllegalArgumentException(tag + tagAddon + ": Central ingredient cannot be null");
+            throw new IllegalArgumentException(research + tagAddon + ": Central ingredient cannot be null");
         }
         if (otherIngredients == null) {
-            throw new IllegalArgumentException(tag + tagAddon + ": Other ingredients cannot be null");
+            throw new IllegalArgumentException(research + tagAddon + ": Other ingredients cannot be null");
         }
         for (ItemStack ingredient : otherIngredients) {
             if (ingredient == null) {
-                throw new IllegalArgumentException(tag + tagAddon + ": One of the other ingredients is null");
+                throw new IllegalArgumentException(research + tagAddon + ": One of the other ingredients is null");
             }
         }
         InfusionRecipe infusionRecipe = ThaumcraftApi.addInfusionCraftingRecipe(
-                tag,
+                research,
                 result,
                 difficulty,
                 infusionAspects,
                 centralIngredient,
                 otherIngredients);
-        WGContent.recipeList.put(tag + tagAddon, infusionRecipe);
+        WGContent.recipeList.put(research + tagAddon, infusionRecipe);
+    }
+
+    public static void registerEnhancedInfusionRecipe(String research, String tagAddon, Object result, int difficulty,
+            AspectList infusionAspects, ItemStack centralIngredient, ItemStack[] otherIngredients,
+            List<EnhancedInfusionRecipe.Replacement> replacements) {
+        if (result == null) {
+            throw new IllegalArgumentException(research + tagAddon + ": Result cannot be null");
+        }
+        if (infusionAspects == null) {
+            throw new IllegalArgumentException(research + tagAddon + ": Infusion aspects cannot be null");
+        }
+        for (Aspect aspect : infusionAspects.aspects.keySet()) {
+            if (aspect == null) {
+                throw new IllegalArgumentException(research + tagAddon + ": Aspect in the AspectList cannot be null");
+            }
+        }
+        if (centralIngredient == null) {
+            throw new IllegalArgumentException(research + tagAddon + ": Central ingredient cannot be null");
+        }
+        if (otherIngredients == null) {
+            throw new IllegalArgumentException(research + tagAddon + ": Other ingredients cannot be null");
+        }
+        for (ItemStack ingredient : otherIngredients) {
+            if (ingredient == null) {
+                throw new IllegalArgumentException(research + tagAddon + ": One of the other ingredients is null");
+            }
+        }
+        if (replacements == null) {
+            registerInfusionRecipe(
+                    research,
+                    tagAddon,
+                    result,
+                    difficulty,
+                    infusionAspects,
+                    centralIngredient,
+                    otherIngredients);
+        } else {
+            EnhancedInfusionRecipe eInfusionRecipe = new EnhancedInfusionRecipe(
+                    research,
+                    result,
+                    difficulty,
+                    infusionAspects,
+                    centralIngredient,
+                    otherIngredients,
+                    replacements);
+            ThaumcraftApi.getCraftingRecipes().add(eInfusionRecipe);
+            WGContent.recipeList.put(research + tagAddon, eInfusionRecipe);
+        }
     }
 
     public static void registerInfusionEnchantmentRecipe(String tag, String tagAddon, Enchantment enchantment,
