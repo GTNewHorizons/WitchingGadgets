@@ -178,7 +178,7 @@ public class WG_infusion_primordial_gear {
     }
 
     private static void RegisterCrafts() {
-        registerEnhancedInfusionRecipe(
+        registerInfusionRecipe(
                 "EMPOWERPEARL",
                 "",
                 new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
@@ -189,8 +189,7 @@ public class WG_infusion_primordial_gear {
                 new ItemStack[] { new ItemStack(ConfigItems.itemShard, 1, 0),
                         new ItemStack(ConfigItems.itemShard, 1, 1), new ItemStack(ConfigItems.itemShard, 1, 2),
                         new ItemStack(ConfigItems.itemShard, 1, 3), new ItemStack(ConfigItems.itemShard, 1, 4),
-                        new ItemStack(ConfigItems.itemShard, 1, 5) },
-                WG_infusion_primordial_gear.replacePearl);
+                        new ItemStack(ConfigItems.itemShard, 1, 5) });
 
         if (WGConfig.moduleGemcutting) {
             registerEnhancedInfusionRecipe(
