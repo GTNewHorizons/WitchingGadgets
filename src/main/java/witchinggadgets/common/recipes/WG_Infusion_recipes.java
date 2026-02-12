@@ -12,7 +12,6 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.crafting.InfusionEnchantmentRecipe;
 import thaumcraft.api.crafting.InfusionRecipe;
-import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.config.Config;
 import witchinggadgets.common.WGConfig;
 import witchinggadgets.common.WGContent;
