@@ -16,7 +16,6 @@ dependencies {
     compileOnly('com.github.GTNewHorizons:ForgeMultipart:1.7.2:dev') {transitive=false}
     compileOnly('com.github.GTNewHorizons:Botania:1.13.14-GTNH:api') {transitive=false}
     compileOnly('com.github.GTNewHorizons:CraftTweaker:3.4.2:dev') {transitive=false}
-    compileOnly('com.github.GTNewHorizons:ZenScript:1.0.0-GTNH') {transitive=false}
     compileOnly('com.github.GTNewHorizons:MagicBees:2.10.4-GTNH:api') {transitive=false}
     compileOnly('com.github.GTNewHorizons:TinkersConstruct:1.14.27-GTNH:dev') {transitive=false}
     compileOnly('com.github.GTNewHorizons:MagicBees:2.10.4-GTNH:api') {transitive=false}
