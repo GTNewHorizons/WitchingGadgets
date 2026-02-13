@@ -59,15 +59,11 @@ import cpw.mods.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
-import thaumcraft.common.entities.EntityPermanentItem;
-import thaumcraft.common.entities.EntitySpecialItem;
 import thaumcraft.common.items.wands.ItemWandCasting;
 import thaumcraft.common.lib.crafting.ThaumcraftCraftingManager;
 import thaumcraft.common.lib.research.ResearchManager;
 import thaumcraft.common.lib.utils.InventoryUtils;
-import thaumcraft.common.tiles.TileInfusionMatrix;
 import witchinggadgets.WitchingGadgets;
-import witchinggadgets.api.IPrimordialCrafting;
 import witchinggadgets.common.WGConfig;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.items.ItemMaterials;
@@ -379,37 +375,6 @@ public class EventHandler {
                     stackInMatrix.stackSize += 1;
                     craftMatrix.setInventorySlotContents(matrixSlot, stackInMatrix);
                 }
-            }
-        }
-        if (output.getItem() instanceof IPrimordialCrafting && !event.player.worldObj.isRemote
-                && (!output.hasTagCompound())) {
-            if (((IPrimordialCrafting) output.getItem()).getReturnedPearls(output) > 0) {
-                double iX = event.player.posX;
-                double iY = event.player.posY + 1;
-                double iZ = event.player.posZ;
-                for (int yy = -16; yy <= 16; yy++) for (int zz = -16; zz <= 16; zz++)
-                    for (int xx = -16; xx <= 16; xx++) if (event.player.worldObj.getTileEntity(
-                            (int) event.player.posX + xx,
-                            (int) event.player.posY + yy,
-                            (int) event.player.posZ + zz) instanceof TileInfusionMatrix) {
-                                iX = event.player.posX + xx;
-                                iY = event.player.posY + yy - .5;
-                                iZ = event.player.posZ + zz;
-                            }
-                EntitySpecialItem entityitem = new EntityPermanentItem(
-                        event.player.worldObj,
-                        iX,
-                        iY,
-                        iZ,
-                        new ItemStack(
-                                WGContent.ItemMaterial,
-                                ((IPrimordialCrafting) output.getItem()).getReturnedPearls(output),
-                                12));
-                entityitem.motionX = entityitem.motionY = entityitem.motionZ = 0;
-                // TODO pearl tags
-                if (output.getTagCompound() == null) output.setTagCompound(new NBTTagCompound());
-                output.getTagCompound().setBoolean("wasCrafted", true);
-                event.player.worldObj.spawnEntityInWorld(entityitem);
             }
         }
     }
