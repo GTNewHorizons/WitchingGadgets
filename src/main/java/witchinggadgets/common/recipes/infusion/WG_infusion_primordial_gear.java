@@ -31,13 +31,12 @@ public class WG_infusion_primordial_gear {
     private static List<EnhancedInfusionRecipe.Replacement> replacePearl;
 
     public static void registerPrimordialGear() {
-        List<EnhancedInfusionRecipe.Replacement> replacePearl = new ArrayList<>();
+        WG_infusion_primordial_gear.replacePearl = new ArrayList<>();
         replacePearl.add(
                 new EnhancedInfusionRecipe.Replacement(
                         new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                         new ItemStack(WGContent.ItemMaterial, 1, 12),
                         true));
-        WG_infusion_primordial_gear.replacePearl = replacePearl;
 
         if (WitchingGadgets.isGT5uLoaded) {
             RegisterGregCrafts();
@@ -78,7 +77,7 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             GTOreDictUnificator.get(OrePrefixes.plate, Materials.Shadow, 1L),
                             new ItemStack(ConfigItems.itemResource, 1, 17) },
-                    WG_infusion_primordial_gear.replacePearl);
+                    replacePearl);
         }
 
         registerEnhancedInfusionRecipe(
@@ -96,7 +95,7 @@ public class WG_infusion_primordial_gear {
                         new ItemStack(ConfigItems.itemWandRod, 1, 0), new ItemStack(ConfigItems.itemResource, 1, 15),
                         new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                         new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemSwordVoid) },
-                WG_infusion_primordial_gear.replacePearl);
+                replacePearl);
 
         registerEnhancedInfusionRecipe(
                 "PRIMORDIALWEAPONRY",
@@ -113,7 +112,7 @@ public class WG_infusion_primordial_gear {
                         new ItemStack(ConfigItems.itemWandRod, 1, 0), new ItemStack(ConfigItems.itemResource, 1, 15),
                         new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                         new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemSwordVoid) },
-                WG_infusion_primordial_gear.replacePearl);
+                replacePearl);
 
         registerEnhancedInfusionRecipe(
                 "PRIMORDIALWEAPONRY",
@@ -130,7 +129,7 @@ public class WG_infusion_primordial_gear {
                         new ItemStack(ConfigItems.itemWandRod, 1, 0), new ItemStack(ConfigItems.itemResource, 1, 15),
                         new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                         new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemAxeVoid) },
-                WG_infusion_primordial_gear.replacePearl);
+                replacePearl);
 
         RegisterPrimordialArmor(true);
 
@@ -207,7 +206,7 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemResource, 1, 16),
                             new ItemStack(ConfigItems.itemResource, 1, 17) },
-                    WG_infusion_primordial_gear.replacePearl);
+                    replacePearl);
         }
 
         registerEnhancedInfusionRecipe(
@@ -225,7 +224,7 @@ public class WG_infusion_primordial_gear {
                         new ItemStack(ConfigItems.itemWandRod, 1, 0), new ItemStack(ConfigItems.itemResource, 1, 15),
                         new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                         new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemSwordVoid) },
-                WG_infusion_primordial_gear.replacePearl);
+                replacePearl);
 
         registerEnhancedInfusionRecipe(
                 "PRIMORDIALWEAPONRY",
@@ -242,7 +241,7 @@ public class WG_infusion_primordial_gear {
                         new ItemStack(ConfigItems.itemWandRod, 1, 0), new ItemStack(ConfigItems.itemResource, 1, 15),
                         new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                         new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemSwordVoid) },
-                WG_infusion_primordial_gear.replacePearl);
+                replacePearl);
 
         registerEnhancedInfusionRecipe(
                 "PRIMORDIALWEAPONRY",
@@ -259,7 +258,7 @@ public class WG_infusion_primordial_gear {
                         new ItemStack(ConfigItems.itemWandRod, 1, 0), new ItemStack(ConfigItems.itemResource, 1, 15),
                         new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                         new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemAxeVoid) },
-                WG_infusion_primordial_gear.replacePearl);
+                replacePearl);
 
         RegisterPrimordialArmor(false);
         registerInfusionRecipe(
@@ -326,7 +325,7 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence) },
-                    WG_infusion_primordial_gear.replacePearl);
+                    replacePearl);
 
             registerEnhancedInfusionRecipe(
                     "PRIMORDIALARMOR",
@@ -347,7 +346,7 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence) },
-                    WG_infusion_primordial_gear.replacePearl);
+                    replacePearl);
 
             registerEnhancedInfusionRecipe(
                     "PRIMORDIALARMOR",
@@ -367,7 +366,7 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence) },
-                    WG_infusion_primordial_gear.replacePearl);
+                    replacePearl);
 
             registerEnhancedInfusionRecipe(
                     "PRIMORDIALARMOR",
@@ -388,7 +387,7 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence) },
-                    WG_infusion_primordial_gear.replacePearl);
+                    replacePearl);
         } else if (WGModCompat.loaded_TaintedMagic && !greg) {
             registerEnhancedInfusionRecipe(
                     "PRIMORDIALARMOR",
@@ -409,7 +408,7 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence) },
-                    WG_infusion_primordial_gear.replacePearl);
+                    replacePearl);
 
             registerEnhancedInfusionRecipe(
                     "PRIMORDIALARMOR",
@@ -430,7 +429,7 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence) },
-                    WG_infusion_primordial_gear.replacePearl);
+                    replacePearl);
 
             registerEnhancedInfusionRecipe(
                     "PRIMORDIALARMOR",
@@ -451,7 +450,7 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence) },
-                    WG_infusion_primordial_gear.replacePearl);
+                    replacePearl);
 
             registerEnhancedInfusionRecipe(
                     "PRIMORDIALARMOR",
@@ -472,7 +471,7 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence) },
-                    WG_infusion_primordial_gear.replacePearl);
+                    replacePearl);
 
         } else if (WGModCompat.loaded_TaintedMagic && greg) {
             registerEnhancedInfusionRecipe(
@@ -494,7 +493,7 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence) },
-                    WG_infusion_primordial_gear.replacePearl);
+                    replacePearl);
 
             registerEnhancedInfusionRecipe(
                     "PRIMORDIALARMOR",
@@ -515,7 +514,7 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence) },
-                    WG_infusion_primordial_gear.replacePearl);
+                    replacePearl);
 
             registerEnhancedInfusionRecipe(
                     "PRIMORDIALARMOR",
@@ -536,7 +535,7 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence) },
-                    WG_infusion_primordial_gear.replacePearl);
+                    replacePearl);
 
             registerEnhancedInfusionRecipe(
                     "PRIMORDIALARMOR",
@@ -557,7 +556,7 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence) },
-                    WG_infusion_primordial_gear.replacePearl);
+                    replacePearl);
 
         } else {
             registerEnhancedInfusionRecipe(
@@ -579,7 +578,7 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence) },
-                    WG_infusion_primordial_gear.replacePearl);
+                    replacePearl);
 
             registerEnhancedInfusionRecipe(
                     "PRIMORDIALARMOR",
@@ -600,7 +599,7 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence) },
-                    WG_infusion_primordial_gear.replacePearl);
+                    replacePearl);
 
             registerEnhancedInfusionRecipe(
                     "PRIMORDIALARMOR",
@@ -621,7 +620,7 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence) },
-                    WG_infusion_primordial_gear.replacePearl);
+                    replacePearl);
 
             registerEnhancedInfusionRecipe(
                     "PRIMORDIALARMOR",
@@ -642,7 +641,7 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence) },
-                    WG_infusion_primordial_gear.replacePearl);
+                    replacePearl);
 
         }
     }
