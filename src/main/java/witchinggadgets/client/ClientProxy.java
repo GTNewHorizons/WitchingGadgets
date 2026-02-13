@@ -117,11 +117,19 @@ public class ClientProxy extends CommonProxy {
         MinecraftForge.EVENT_BUS.register(new ClientEventHandler());
         FMLCommonHandler.instance().bus().register(new WGKeyHandler());
         FMLCommonHandler.instance().bus().register(new ClientTickHandler());
+
         ClientRegistry.registerKeyBinding(
-                WGKeyHandler.activateKey = new KeyBinding(
-                        "wg.config.activateKey",
+                WGKeyHandler.activateCapeKey = new KeyBinding(
+                        "wg.config.activateCapeKey",
                         Keyboard.KEY_NONE,
                         WitchingGadgets.MODNAME));
+
+        ClientRegistry.registerKeyBinding(
+                WGKeyHandler.activateBeltKey = new KeyBinding(
+                        "wg.config.activateBeltKey",
+                        Keyboard.KEY_NONE,
+                        WitchingGadgets.MODNAME));
+
         if (WGConfig.enableSearch) {
             ThaumonomiconIndexSearcher.init();
         }

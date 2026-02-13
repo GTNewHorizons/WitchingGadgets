@@ -115,6 +115,9 @@ enchantment.wg.stealth=Tarnung
 enchantment.wg.backstab=Hinterh�ltiges Stechen
 #
 # -- Random bits of text --
+wg.config.activateCapeKey=Hotkey for activating items worn in the cape slot.
+wg.config.activateBeltKey=Hotkey for activating items worn in the belt slot.
+
 wg.chat.notyourbag=§7Dieser Beutel geh�rt§r %1$s! §7Du darfst ihn nicht �ffnen!§r
 wg.chat.bagunlocked=§7Der Beutel wurde entriegelt, andere k�nnen ihn nun �ffnen.§r
 wg.chat.baglocked=§7Der Beutel wurde vertriegelt, andere k�nnen ihn nicht �ffnen.§r

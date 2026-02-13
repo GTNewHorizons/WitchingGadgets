@@ -151,6 +151,9 @@ enchantment.wg.soulbound=灵魂绑定
 enchantment.wg.soultether=灵魂绑定
 #
 # -- Random bits of text --
+wg.config.activateCapeKey=Hotkey for activating items worn in the cape slot.
+wg.config.activateBeltKey=Hotkey for activating items worn in the belt slot.
+
 wg.chat.notyourbag=§7这个口袋属于§r %1$s! §7你不能打开它.§r
 wg.chat.bagunlocked=§7口袋已解锁,其他人可以打开.§r
 wg.chat.baglocked=§7口袋已锁定,除你以外没人能打开.§r
