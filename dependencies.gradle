@@ -2,7 +2,7 @@
 
 dependencies {
 
-    implementation("com.github.GTNewHorizons:GTNHLib:0.9.15:dev")
+    implementation("com.github.GTNewHorizons:GTNHLib:0.9.19:dev")
     implementation('com.github.GTNewHorizons:Baubles-Expanded:2.2.6-GTNH:dev')
     compileOnly('com.github.GTNewHorizons:GT5-Unofficial:5.09.52.197:dev') {exclude module: "Baubles" }
     implementation('com.github.GTNewHorizons:ForbiddenMagic:0.9.7-GTNH:dev') {exclude module: "Baubles" }
@@ -33,6 +33,8 @@ dependencies {
     runtimeOnlyNonPublishable("com.github.GTNewHorizons:EnderCore:0.5.0:dev") { transitive = false }
     // Speeds up startup
     runtimeOnlyNonPublishable(rfg.deobf("CoreTweaks:CoreTweaks:0.3.3.2")) { transitive = false }
+    // For /nbtEdit command
+    //devOnlyNonPublishable("com.github.GTNewHorizons:ServerUtilities:2.2.16")
 
     // For cluster testing and other gt5u integration
 //    runtimeOnlyNonPublishable('com.github.GTNewHorizons:GT5-Unofficial:5.09.52.197:dev') {
