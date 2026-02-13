@@ -2,13 +2,13 @@
 
 dependencies {
 
-    implementation("com.github.GTNewHorizons:GTNHLib:0.9.15:dev")
+    implementation("com.github.GTNewHorizons:GTNHLib:0.9.16:dev")
     implementation('com.github.GTNewHorizons:Baubles-Expanded:2.2.6-GTNH:dev')
-    compileOnly('com.github.GTNewHorizons:GT5-Unofficial:5.09.52.278-pre:dev') {exclude module: "Baubles" }
+    compileOnly('com.github.GTNewHorizons:GT5-Unofficial:5.09.52.284-pre:dev') {exclude module: "Baubles" }
     implementation('com.github.GTNewHorizons:ForbiddenMagic:0.9.7-GTNH:dev') {exclude module: "Baubles" }
     implementation('com.github.GTNewHorizons:twilightforest:2.7.19:dev')
     implementation('thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev') {transitive=false}
-    implementation('com.github.GTNewHorizons:NotEnoughItems:2.8.67-GTNH:dev')
+    implementation('com.github.GTNewHorizons:NotEnoughItems:2.8.68-GTNH:dev')
     compileOnly("com.github.GTNewHorizons:Postea:1.2.1-pre:dev")
 
     devOnlyNonPublishable('com.github.GTNewHorizons:ThaumicBoots:1.5.8:dev') {transitive=false}
@@ -34,7 +34,7 @@ dependencies {
     runtimeOnlyNonPublishable(rfg.deobf("CoreTweaks:CoreTweaks:0.3.3.2")) { transitive = false }
 
     // For cluster testing and other gt5u integration
-//    runtimeOnlyNonPublishable('com.github.GTNewHorizons:GT5-Unofficial:5.09.52.277:dev') {
+//    runtimeOnlyNonPublishable('com.github.GTNewHorizons:GT5-Unofficial:5.09.52.283:dev') {
 //        exclude module: "Baubles"
 //    }
 
