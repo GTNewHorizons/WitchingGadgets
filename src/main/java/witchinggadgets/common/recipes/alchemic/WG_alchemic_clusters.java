@@ -438,7 +438,7 @@ public class WG_alchemic_clusters {
 
     @Optional.Method(modid = "postea")
     private static void registerPosteaTransformer() {
-        ItemStackReplacementManager.addItemReplacement("WitchingGadgets:item.WG_Cluster", tag -> {
+        ItemStackReplacementManager.addTransformationHandler("WitchingGadgets:item.WG_Cluster", (originalName, tag) -> {
             MetaInfo metaInfo = MetaInfo.fromMeta(tag.getInteger("Damage"));
 
             if (metaInfo.series == ItemClusters.Series.Legacy) {
@@ -446,7 +446,7 @@ public class WG_alchemic_clusters {
                 tag.setInteger("Damage", new MetaInfo(ItemClusters.Series.Error, 0).getMeta());
             }
 
-            return tag;
+            return true;
         });
     }
 }
