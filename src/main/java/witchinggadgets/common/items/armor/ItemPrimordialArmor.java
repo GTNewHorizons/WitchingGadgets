@@ -248,7 +248,8 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
                 }
 
                 int[] curedPotions = { Potion.blindness.id, Potion.poison.id, Potion.wither.id, Potion.confusion.id,
-                        Config.potionTaintPoisonID, Potion.digSlowdown.id, Potion.hunger.id, Potion.weakness.id };
+                        Config.potionTaintPoisonID, Potion.digSlowdown.id, Potion.hunger.id, Potion.weakness.id,
+                        Potion.moveSlowdown.id };
                 for (int c : curedPotions) if (world.isRemote) player.removePotionEffectClient(c);
                 else player.removePotionEffect(c);
                 break;
