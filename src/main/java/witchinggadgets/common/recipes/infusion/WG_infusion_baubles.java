@@ -42,9 +42,9 @@ public class WG_infusion_baubles {
                             .add(Aspect.AIR, 16).add((Aspect) gregtech.api.enums.TCAspects.NEBRISUM.mAspect, 8),
                     new ItemStack(WGContent.ItemMagicalBaubles, 1, 8),
                     new ItemStack[] { Materials.Platinum.getIngots(1),
-                            ItemList.IC2_CoffeePowder.get(1L, Materials.Coffee.getDust(1)),
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Coffee, 1L),
                             new ItemStack(Items.potionitem, 1, 8194),
-                            ItemList.IC2_CoffeePowder.get(1L, Materials.Coffee.getDust(1)) });
+                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Coffee, 1L) });
 
             if (WGModCompat.loaded_Twilight) {
                 registerInfusionRecipe(
