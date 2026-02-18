@@ -19,7 +19,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
@@ -29,6 +29,8 @@ import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingSetAttackTargetEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
+
+import com.gtnewhorizon.gtnhlib.GTNHLib;
 
 import baubles.api.BaubleType;
 import baubles.api.expanded.BaubleExpandedSlots;
@@ -256,13 +258,15 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
                 if (stack.getTagCompound().getBoolean(TAG_NO_GLIDE)) {
                     stack.getTagCompound().setBoolean(TAG_NO_GLIDE, false);
                     WitchingGadgets.packetHandler.sendToServer(new MessageSyncGlide(slot, false));
-                    player.addChatMessage(
-                            new ChatComponentText(StatCollector.translateToLocal(Lib.DESCRIPTION + "glide")));
+                    String message = EnumChatFormatting.GOLD
+                            + StatCollector.translateToLocal(Lib.DESCRIPTION + "glide");
+                    GTNHLib.proxy.printMessageAboveHotbar(message, 60, true, true);
                 } else if (!stack.getTagCompound().getBoolean(TAG_NO_GLIDE)) {
                     stack.getTagCompound().setBoolean(TAG_NO_GLIDE, true);
                     WitchingGadgets.packetHandler.sendToServer(new MessageSyncGlide(slot, true));
-                    player.addChatMessage(
-                            new ChatComponentText(StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide")));
+                    String message = EnumChatFormatting.GOLD
+                            + StatCollector.translateToLocal(Lib.DESCRIPTION + "noGlide");
+                    GTNHLib.proxy.printMessageAboveHotbar(message, 60, true, true);
                 }
             }
             if (shouldActivate() && subNames[stack.getItemDamage()].equals("storage")) {
