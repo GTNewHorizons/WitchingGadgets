@@ -46,7 +46,7 @@ public class WG_infusion_terraformer {
                         new ItemStack(ConfigBlocks.blockMetalDevice, 1, 9),
                         new ItemStack[] { Materials.Blaze.getBlocks(1),
                                 GTOreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L),
-                                GTModHandler.getModItem("dreamcraft", "tile.CallistoColdIce", 1L),
+                                GTModHandler.getModItem("dreamcraft", "CallistoColdIce", 1L),
                                 Materials.Knightmetal.getBlocks(1),
                                 gregtech.api.enums.ItemList.Field_Generator_MV.get(1L),
                                 GTOreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L) });

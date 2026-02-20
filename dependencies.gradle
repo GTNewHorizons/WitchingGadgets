@@ -2,7 +2,7 @@
 
 dependencies {
 
-    implementation("com.github.GTNewHorizons:GTNHLib:0.9.0:dev")
+    implementation("com.github.GTNewHorizons:GTNHLib:0.9.19:dev")
     implementation('com.github.GTNewHorizons:Baubles-Expanded:2.2.6-GTNH:dev')
     compileOnly('com.github.GTNewHorizons:GT5-Unofficial:5.09.52.197:dev') {exclude module: "Baubles" }
     implementation('com.github.GTNewHorizons:ForbiddenMagic:0.9.7-GTNH:dev') {exclude module: "Baubles" }
@@ -16,7 +16,6 @@ dependencies {
     compileOnly('com.github.GTNewHorizons:ForgeMultipart:1.7.2:dev') {transitive=false}
     compileOnly('com.github.GTNewHorizons:Botania:1.13.10-GTNH:api') {transitive=false}
     compileOnly('com.github.GTNewHorizons:CraftTweaker:3.4.2:dev') {transitive=false}
-    compileOnly('com.github.GTNewHorizons:ZenScript:1.0.0-GTNH') {transitive=false}
     compileOnly('com.github.GTNewHorizons:MagicBees:2.10.2-GTNH:api') {transitive=false}
     compileOnly('com.github.GTNewHorizons:TinkersConstruct:1.14.17-GTNH:dev') {transitive=false}
     compileOnly('com.github.GTNewHorizons:MagicBees:2.10.2-GTNH:api') {transitive=false}
@@ -32,7 +31,10 @@ dependencies {
     // Adds various useful features
     runtimeOnlyNonPublishable("com.github.GTNewHorizons:EnderCore:0.5.0:dev") { transitive = false }
     // Speeds up startup
-    runtimeOnlyNonPublishable(rfg.deobf("CoreTweaks:CoreTweaks:0.3.3.2")) { transitive = false }
+    runtimeOnlyNonPublishable("com.github.GTNewHorizons:CoreTweaks:0.3.4.0-GTNH:dev")
+    runtimeOnlyNonPublishable("com.github.GTNewHorizons:waila:1.19.22:dev")
+    // For /nbtEdit command
+    //devOnlyNonPublishable("com.github.GTNewHorizons:ServerUtilities:2.2.16")
 
     // For cluster testing and other gt5u integration
 //    runtimeOnlyNonPublishable('com.github.GTNewHorizons:GT5-Unofficial:5.09.52.197:dev') {
@@ -42,6 +44,6 @@ dependencies {
     var tasks = project.gradle.startParameter.taskNames
 
     if (tasks.contains("runClient17") || tasks.contains("runClient21")) {
-        runtimeOnlyNonPublishable('com.github.GTNewHorizons:Angelica:2.0.0-alpha3:dev') { transitive = false }
+        runtimeOnlyNonPublishable('com.github.GTNewHorizons:Angelica:2.0.0-alpha21:dev')
     }
 }
