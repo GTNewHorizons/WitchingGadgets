@@ -9,7 +9,7 @@ dependencies {
     implementation('com.github.GTNewHorizons:twilightforest:2.7.19:dev')
     implementation('thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev') {transitive=false}
     implementation('com.github.GTNewHorizons:NotEnoughItems:2.8.71-GTNH:dev')
-    compileOnly("com.github.GTNewHorizons:Postea:1.2.2:dev")
+    compileOnly("com.github.GTNewHorizons:Postea:1.2.3:dev")
 
     devOnlyNonPublishable('com.github.GTNewHorizons:ThaumicBoots:1.5.8:dev') {transitive=false}
     compileOnly('com.github.GTNewHorizons:ThaumicBases:1.9.7:dev') {transitive=false}
