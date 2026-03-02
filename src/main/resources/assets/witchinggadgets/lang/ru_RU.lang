@@ -151,6 +151,9 @@ enchantment.wg.soulbound=Привязка души
 enchantment.wg.soultether=Привязка души
 #
 # -- Random bits of text --
+wg.config.activateCapeKey=Hotkey for activating items worn in the cape slot.
+wg.config.activateBeltKey=Hotkey for activating items worn in the belt slot.
+
 wg.chat.notyourbag=§7Эта сумка принадлежит§r %1$s! §7Вам не разрешено его открывать.§r
 wg.chat.bagunlocked=§7Сумка была разблокирована, теперь ее могут открыть другие.§r
 wg.chat.baglocked=§7Сумка была заперта, никто, кроме вас, не может ее открыть.§r
