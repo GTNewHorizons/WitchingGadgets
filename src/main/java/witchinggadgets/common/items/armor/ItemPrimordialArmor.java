@@ -167,7 +167,6 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
         } else if (flightStatus == FlightStatus.ON) {
             flightStatus = FlightStatus.OFF;
             player.capabilities.allowFlying = false;
-            player.capabilities.isFlying = false;
         }
 
         switch (getAbility(stack))
