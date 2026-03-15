@@ -172,7 +172,7 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
         switch (getAbility(stack))
         // cur 1 = aer,2=terra,3=ignis, 4=aqua, 5=ordo, 6=perdidito,
         {
-            case 1:
+            case 1: // aer
                 // Thanks WayOfFlowingTime =P
                 AxisAlignedBB aabb = AxisAlignedBB.getBoundingBox(
                         player.posX - .5,
@@ -224,12 +224,12 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
                     projectile.motionZ = newVel * delZ;
                 }
                 break;
-            case 2:
+            case 2: // terra
                 if (this.armorType == 3) {
                     player.addPotionEffect(new PotionEffect(WGContent.pot_knockbackRes.id, 202, 0, true));
                 }
                 break;
-            case 3:
+            case 3: // ignis
                 if (this.armorType == 0) {
                     if (!world.isDaytime() || player.getBrightness(0) < 4)
                         player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 202, 0, true));
@@ -252,7 +252,7 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
                 for (int c : curedPotions) if (world.isRemote) player.removePotionEffectClient(c);
                 else player.removePotionEffect(c);
                 break;
-            case 5:
+            case 5: // perditio
                 player.addPotionEffect(new PotionEffect(Potion.regeneration.id, 202, 0, true));
                 break;
             default:
