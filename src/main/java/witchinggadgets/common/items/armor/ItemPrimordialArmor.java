@@ -75,7 +75,6 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
     public ItemPrimordialArmor(ArmorMaterial mat, int idx, int type) {
         super(mat, idx, type);
         this.setCreativeTab(WitchingGadgets.tabWG);
-        flightStatus = FlightStatus.OFF;
     }
 
     @Override
@@ -167,6 +166,7 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
         } else if (flightStatus == FlightStatus.ON) {
             flightStatus = FlightStatus.OFF;
             player.capabilities.allowFlying = false;
+            player.capabilities.isFlying = false;
         }
 
         switch (getAbility(stack))
