@@ -17,6 +17,7 @@ public class ContainerPrimordialGlove extends Container {
     ItemStack bracelet;
     EntityPlayer player;
     private static final int SLOT_AMOUNT = 5;
+    public static final int ID = 7;
 
     public ContainerPrimordialGlove(InventoryPlayer iinventory, World world, int x, int y, int z) {
         this.worldObj = world;

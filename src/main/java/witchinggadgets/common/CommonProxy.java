@@ -30,8 +30,12 @@ public class CommonProxy implements IGuiHandler {
         TileEntity tile = world.getTileEntity(x, y, z);
 
         return switch (ID) {
-            case 0 -> new ContainerSpinningWheel(player.inventory, (TileEntitySpinningWheel) tile);
-            case 3 -> new ContainerBag(player.inventory, world);
+            // 0
+            case ContainerSpinningWheel.ID -> new ContainerSpinningWheel(
+                    player.inventory,
+                    (TileEntitySpinningWheel) tile);
+            // 3
+            case ContainerBag.ID -> new ContainerBag(player.inventory, world);
             case 4, 5 -> {
                 String baubleSlot = ID == 4 ? BaubleExpandedSlots.capeType : BaubleExpandedSlots.beltType;
                 yield new ContainerCloak(
@@ -40,11 +44,16 @@ public class CommonProxy implements IGuiHandler {
                         BaublesApi.getBaubles(player)
                                 .getStackInSlot(BaubleExpandedSlots.getIndexesOfAssignedSlotsOfType(baubleSlot)[0]));
             }
-            case 6 -> new ContainerPatchedFocusPouch(player.inventory, world, x, y, z);
-            case 7 -> new ContainerPrimordialGlove(player.inventory, world, x, y, z);
-            case 8 -> new ContainerLabelLibrary(player.inventory, (TileEntityLabelLibrary) tile);
-            case 9 -> new ContainerCuttingTable(player.inventory, (TileEntityCuttingTable) tile);
-            case 11 -> new ContainerVoidBag(player.inventory, world);
+            // 6
+            case ContainerPatchedFocusPouch.ID -> new ContainerPatchedFocusPouch(player.inventory, world, x, y, z);
+            // 7
+            case ContainerPrimordialGlove.ID -> new ContainerPrimordialGlove(player.inventory, world, x, y, z);
+            // 8
+            case ContainerLabelLibrary.ID -> new ContainerLabelLibrary(player.inventory, (TileEntityLabelLibrary) tile);
+            // 9
+            case ContainerCuttingTable.ID -> new ContainerCuttingTable(player.inventory, (TileEntityCuttingTable) tile);
+            // 11
+            case ContainerVoidBag.ID -> new ContainerVoidBag(player.inventory, world);
             default -> null;
         };
     }

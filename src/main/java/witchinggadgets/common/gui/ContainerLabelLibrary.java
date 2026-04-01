@@ -18,6 +18,7 @@ public class ContainerLabelLibrary extends Container {
     private static final int LABEL_INPUT_SLOT = 0;
     private static final int LABEL_OUTPUT_SLOT = 1;
     private static final int SLOT_COUNT = 2;
+    public static final int ID = 8;
     protected final TileEntityLabelLibrary tileEntity;
     // private int slotCount;
 

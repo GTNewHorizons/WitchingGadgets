@@ -14,6 +14,8 @@ import witchinggadgets.mixins.late.thaumcraft.ContainerFocusPouchAccessor;
 
 public class ContainerPatchedFocusPouch extends ContainerFocusPouch {
 
+    public static final int ID = 6;
+
     public ContainerPatchedFocusPouch(InventoryPlayer iinventory, World world, int par3, int par4, int par5) {
         super(iinventory, world, par3, par4, par5);
         ((ContainerFocusPouchAccessor) this).setBlockSlot(-1);
