@@ -1,5 +1,20 @@
 package witchinggadgets.api;
 
+/** 
+ * Implements O(1) lookup in enums that have an integer .meta field
+ */
+ // needs this stuff in the definition:
+ //
+ // private static final enumName[] LOOKUP = IMetaEnum.createLookup(values());
+ // 
+ // @Override
+ // public int getMeta() {
+ //     return meta;
+ // }
+ // 
+ // public static enumName fromMeta(int meta) {
+ //     return IMetaEnum.fromLookup(LOOKUP, meta);
+ // }
 public interface IMetaEnum<T extends Enum<T> & IMetaEnum<T>> {
 
     int getMeta();
