@@ -72,6 +72,10 @@ public class BlockWGMetalDevice extends BlockContainer implements ITerraformFocu
             this.aspect = aspect;
         }
 
+        public static boolean isTFFocus(int meta) {
+            return meta >= TF_FOCUS_PLAINS.meta && meta <= TF_FOCUS_MAGIC.meta;
+        }
+
         private static final SubID[] LOOKUP = IMetaEnum.createLookup(values());
 
         @Override
