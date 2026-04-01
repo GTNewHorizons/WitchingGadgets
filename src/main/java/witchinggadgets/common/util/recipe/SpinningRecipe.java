@@ -86,52 +86,27 @@ public class SpinningRecipe {
     }
 
     // commented in case it becomes useful later; i just switched my impl to a cache rather than constant checking
-    /* public void inputsMatchPartial(ItemStack[] query, ItemStack query2) {
-        if (query2 == null || input != null && query != null && query.length > input.length) return false;
-        if (input == null || query == null || input.length == 0) return true;
-
-        boolean[] unused = {true, true, true, true, true};
-        // boolean match = false;
-
-        outer: for (Itemstack q : query) {
-            for (byte i = 0;i < input.length && unused[i];i++) {
-                Object ind = input[i];
-                if (ind instanceof ItemStack stack) {
-                    if (OreDictionary.itemMatches(stack, q, false)) {
-                        unused[i] = false;
-                        continue outer;
-                    }
-                } else if (ind instanceof ArrayList) {
-                    ArrayList<ItemStack> oreDict = (ArrayList<ItemStack>) ind;
-                    for (ItemStack oreStack : oreDict) if (OreDictionary.itemMatches(oreStack, q, false)) {
-                        unused[i] = false;
-                        continue outer;
-                    }
-                }
-            }
-            return false;
-        }
-
-        for (byte i = 0;i<input.length&&unused[i];i++) {
-            Object ind = input[i];
-            if (ind instanceof ItemStack stack) {
-                if (OreDictionary.itemMatches(stack, query2, false) return true;
-            } else if (ind instanceof ArrayList) {
-                ArrayList<ItemStack> oreDict = (ArrayList<ItemStack>) ind;
-                for ((ItemStack) oreStack : oreDict) if (OreDictionary.itemMatches(oreStack, query2, false)) return true;
-            }
-        }
-
-        return false;
-    }*/
+    /*
+     * public void inputsMatchPartial(ItemStack[] query, ItemStack query2) { if (query2 == null || input != null &&
+     * query != null && query.length > input.length) return false; if (input == null || query == null || input.length ==
+     * 0) return true; boolean[] unused = {true, true, true, true, true}; // boolean match = false; outer: for
+     * (Itemstack q : query) { for (byte i = 0;i < input.length && unused[i];i++) { Object ind = input[i]; if (ind
+     * instanceof ItemStack stack) { if (OreDictionary.itemMatches(stack, q, false)) { unused[i] = false; continue
+     * outer; } } else if (ind instanceof ArrayList) { ArrayList<ItemStack> oreDict = (ArrayList<ItemStack>) ind; for
+     * (ItemStack oreStack : oreDict) if (OreDictionary.itemMatches(oreStack, q, false)) { unused[i] = false; continue
+     * outer; } } } return false; } for (byte i = 0;i<input.length&&unused[i];i++) { Object ind = input[i]; if (ind
+     * instanceof ItemStack stack) { if (OreDictionary.itemMatches(stack, query2, false) return true; } else if (ind
+     * instanceof ArrayList) { ArrayList<ItemStack> oreDict = (ArrayList<ItemStack>) ind; for ((ItemStack) oreStack :
+     * oreDict) if (OreDictionary.itemMatches(oreStack, query2, false)) return true; } } return false; }
+     */
 
     public void addRemainingValidPatterns(List<Object> list, ItemStack[] query) {
         if (list == null || query == null) return;
 
-        boolean[] unused = {true, true, true, true, true};
+        boolean[] unused = { true, true, true, true, true };
 
-        outer: for (Itemstack q : query) {
-            for (byte i = 0;i < input.length && unused[i];i++) {
+        outer: for (ItemStack q : query) {
+            for (byte i = 0; i < input.length && unused[i]; i++) {
                 Object ind = input[i];
                 if (ind instanceof ItemStack stack) {
                     if (OreDictionary.itemMatches(stack, q, false)) {
@@ -149,7 +124,7 @@ public class SpinningRecipe {
             return;
         }
 
-        for (byte i = 0;i<input.length&&unused[i];i++) list.add(input[i]);
+        for (byte i = 0; i < input.length && unused[i]; i++) list.add(input[i]);
     }
 
     public ItemStack getOutput() {
@@ -215,18 +190,18 @@ public class SpinningRecipe {
     public static List<Object> getCompatibleEntries(ItemStack[] slots) {
         List<Object> ret = new ArrayList<>();
         Iterator<SpinningRecipe> i = recipeList.iterator();
-        while (i.hasNext()) i.addRemainingValidPatterns(ret, slots);
+        while (i.hasNext()) i.next().addRemainingValidPatterns(ret, slots);
         return ret;
     }
 
-    public static boolean isCompatible(Iterable<Object> check, ItemStack query2) {
-        if (check == null || check.size() == 0 || query2 == null || query2.stackSize() == 0) return true;
-        for (ind : check) {
+    public static boolean isCompatible(List<Object> check, ItemStack query2) {
+        if (check == null || check.size() == 0 || query2 == null || query2.stackSize == 0) return true;
+        for (Object ind : check) {
             if (ind instanceof ItemStack stack) {
-                if (OreDictionary.itemMatches(stack, query2, false) return true;
+                if (OreDictionary.itemMatches(stack, query2, false)) return true;
             } else if (ind instanceof ArrayList) {
                 ArrayList<ItemStack> oreDict = (ArrayList<ItemStack>) ind;
-                for ((ItemStack) oreStack : oreDict) if (OreDictionary.itemMatches(oreStack, query2, false)) return true;
+                for (ItemStack oreStack : oreDict) if (OreDictionary.itemMatches(oreStack, query2, false)) return true;
             }
         }
 
