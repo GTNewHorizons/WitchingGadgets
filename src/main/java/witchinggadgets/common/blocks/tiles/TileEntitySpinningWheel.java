@@ -1,6 +1,5 @@
 package witchinggadgets.common.blocks.tiles;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,10 +20,11 @@ public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedI
     public ItemStack[] inv = new ItemStack[6];
     public ItemStack[] prevInv = new ItemStack[5];
 
-    public List<Object> cachedAllowedForRecipe = new ArrayList<>();
+    public List<Object> cachedAllowedForRecipe;
 
     public TileEntitySpinningWheel() {
         super();
+        updateAllowedItemCache();
     }
 
     public void updateEntity() {
@@ -195,7 +195,9 @@ public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedI
 
     @Override
     public boolean isItemValidForSlot(int s, ItemStack in) {
-        return cachedAllowedForRecipe.size() == 0 || SpinningRecipe.isCompatible(cachedAllowedForRecipe, in);
+        return inv[s] != null && in != null && inv[s].isItemEqual(in)
+                && inv[s].stackSize + in.stackSize <= Math.min(in.getMaxStackSize(), getInventoryStackLimit())
+                || cachedAllowedForRecipe.size() != 0 && SpinningRecipe.isCompatible(cachedAllowedForRecipe, in);
     }
 
     public static int[] InSlots = { 0, 1, 2, 3, 4 };
