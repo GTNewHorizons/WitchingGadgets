@@ -65,6 +65,8 @@ public class WitchingGadgets {
     public static final String MODNAME = "Witching Gadgets";
     public static final String VERSION = Tags.VERSION;
 
+    public static final boolean isNaturaPresent = Loader.isModLoaded("Natura");
+
     public PlayerTickHandler playerTickHandler;
 
     public WGWandManager wgWandManager = new WGWandManager();
