@@ -28,6 +28,7 @@ import thaumcraft.api.aspects.Aspect;
 import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.lib.world.ThaumcraftWorldGenerator;
 import witchinggadgets.WitchingGadgets;
+import witchinggadgets.api.IMetaEnum;
 import witchinggadgets.api.ITerraformFocus;
 import witchinggadgets.client.render.BlockRenderMetalDevice;
 import witchinggadgets.common.WGModCompat;
@@ -37,7 +38,7 @@ import witchinggadgets.common.blocks.tiles.TileEntityTerraformer;
 
 public class BlockWGMetalDevice extends BlockContainer implements ITerraformFocus {
 
-    public enum SubID {
+    public enum SubID implements IMetaEnum {
 
         ESSENTIA_PUMP(0, "essentiaPump", null, null, null),
         VOIDMETAL_BLOCK(1, "voidmetalBlock", null, null, null),
@@ -71,16 +72,15 @@ public class BlockWGMetalDevice extends BlockContainer implements ITerraformFocu
             this.aspect = aspect;
         }
 
-        private static final SubID[] LOOKUP = new SubID[values().length];
+        private static final SubID[] LOOKUP = IMetaEnum.createLookup(values());
 
-        static {
-            for (SubID s : values()) {
-                LOOKUP[s.meta] = s;
-            }
+        @Override
+        public int getMeta() {
+            return meta;
         }
 
         public static SubID fromMeta(int meta) {
-            return meta >= 0 && meta < LOOKUP.length ? LOOKUP[meta] : null;
+            return IMetaEnum.fromLookup(LOOKUP, meta);
         }
     }
 
