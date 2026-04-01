@@ -5,14 +5,11 @@ import java.util.List;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import mods.natura.items.PlantItem;
-import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.util.recipe.SpinningRecipe;
 
 public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedInventory {
@@ -197,10 +194,8 @@ public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedI
     public void closeInventory() {}
 
     @Override
-    public boolean isItemValidForSlot(int s, ItemStack itemstack) {
-        Item i = itemstack.getItem();
-        int m = ;
-        return WitchingGadgets.isNaturaLoaded && i instanceof PlantItem ? itemstack.getItemDamage() == 3 : i == Items.string ? s != 4 : (WitchingGadgets.isGT5uLoaded ? : ) && (s == 2 || s == 3);
+    public boolean isItemValidForSlot(int s, ItemStack in) {
+        return cachedAllowedForRecipe.size() == 0 || SpinningRecipe.isCompatible(cachedAllowedForRecipe, in);
     }
 
     public static int[] InSlots = { 0, 1, 2, 3, 4 };
@@ -213,7 +208,7 @@ public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedI
 
     @Override
     public boolean canInsertItem(int p_102007_1_, ItemStack in, int side) {
-        return side != ForgeDirection.DOWN.ordinal() && (cachedAllowedForRecipe.size() == 0 || SpinningRecipe.isCompatible(cachedAllowedForRecipe, in));
+        return side != ForgeDirection.DOWN.ordinal();
     }
 
     @Override
@@ -223,12 +218,13 @@ public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedI
 
     public boolean invChanged() {
         boolean changed = false;
-        for (byte i = 0;i < 5;i++) if (prevInv[i] != (prevInv[i] = inv[i])) changed = true;
+        for (byte i = 0; i < 5; i++) if (prevInv[i] != (prevInv[i] = inv[i])) changed = true;
         return changed;
     }
 
     public void updateAllowedItemCache() {
-        //prevInv is already updated by the time this is called and it contains only the input slots so it can be treated as such
+        // prevInv is already updated by the time this is called and it contains only the input slots so it can be
+        // treated as such
         cachedAllowedForRecipe = SpinningRecipe.getCompatibleEntries(prevInv);
     }
 
