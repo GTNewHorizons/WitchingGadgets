@@ -26,6 +26,7 @@ import witchinggadgets.common.gui.ContainerPrimordialGlove;
 public class GuiPrimordialGlove extends GuiContainer {
 
     private final EntityPlayer player;
+    public static final int GUI_ID = 7;
 
     public GuiPrimordialGlove(InventoryPlayer inventoryPlayer, World world, int x, int y, int z) {
         super(new ContainerPrimordialGlove(inventoryPlayer, world, x, y, z));

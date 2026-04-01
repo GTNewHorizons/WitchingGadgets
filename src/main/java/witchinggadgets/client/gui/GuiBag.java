@@ -12,6 +12,8 @@ import witchinggadgets.common.gui.ContainerBag;
 
 public class GuiBag extends GuiContainer {
 
+    public static final int GUI_ID = 3;
+
     public GuiBag(InventoryPlayer inventoryPlayer, World world) {
         super(new ContainerBag(inventoryPlayer, world));
         this.xSize = 176;
@@ -20,7 +22,7 @@ public class GuiBag extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-        this.fontRendererObj.drawString(I18n.format("container.inventory"), 4, this.ySize - 92, 4210752);
+        this.fontRendererObj.drawString(I18n.format("container.inventory"), 4, this.ySize - 92, ClientUtilities.colour_GuiGrey);
     }
 
     @Override
