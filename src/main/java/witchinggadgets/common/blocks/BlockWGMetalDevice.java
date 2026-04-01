@@ -42,29 +42,18 @@ public class BlockWGMetalDevice extends BlockContainer implements ITerraformFocu
         ESSENTIA_PUMP(0, "essentiaPump", null, null, null),
         VOIDMETAL_BLOCK(1, "voidmetalBlock", null, null, null),
         TERRAFORMER(2, "terraformer", null, null, null),
-
         TF_FOCUS_PLAINS(3, "tfFocusPlains", BiomeGenBase.plains, new ItemStack(Blocks.grass), Aspect.PLANT),
-
         TF_FOCUS_TAIGA(4, "tfFocusColdTaiga", BiomeGenBase.coldTaiga, new ItemStack(Blocks.ice), Aspect.COLD),
-
         TF_FOCUS_DESERT(5, "tfFocusDesert", BiomeGenBase.desert, new ItemStack(Blocks.sand), Aspect.FIRE),
-
         TF_FOCUS_JUNGLE(6, "tfFocusJungle", BiomeGenBase.jungle, new ItemStack(Blocks.log, 1, 3), Aspect.TREE),
-
         TF_FOCUS_HELL(7, "tfFocusHell", BiomeGenBase.hell, new ItemStack(Blocks.nether_brick), Aspect.FIRE),
-
         TF_FOCUS_TAINT(8, "tfFocusTaint", ThaumcraftWorldGenerator.biomeTaint, new ItemStack(ConfigBlocks.blockTaint),
                 Aspect.TAINT),
-
         TF_FOCUS_MUSHROOM(9, "tfFocusMushroom", BiomeGenBase.mushroomIsland, new ItemStack(Blocks.mycelium),
                 Aspect.SLIME),
-
         TF_FOCUS_RIVER(10, "tfFocusRiver", BiomeGenBase.river, new ItemStack(Blocks.lapis_block), Aspect.WATER),
-
         TF_FOCUS_OCEAN(11, "tfFocusOcean", BiomeGenBase.ocean, new ItemStack(Blocks.lapis_block), Aspect.WATER),
-
         TF_FOCUS_END(12, "tfFocusEnd", BiomeGenBase.sky, new ItemStack(Blocks.end_stone), Aspect.ELDRITCH),
-
         TF_FOCUS_MAGIC(13, "tfFocusMagic", ThaumcraftWorldGenerator.biomeMagicalForest,
                 new ItemStack(ConfigBlocks.blockMagicalLog, 1, 1), Aspect.HEAL);
 
