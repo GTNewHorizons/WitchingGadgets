@@ -95,7 +95,7 @@ public class BlockWGMetalDevice extends BlockContainer implements ITerraformFocu
 
     @Override
     public boolean isBeaconBase(IBlockAccess worldObj, int x, int y, int z, int beaconX, int beaconY, int beaconZ) {
-        return worldObj.getBlockMetadata(x, y, z) == 1;
+        return worldObj.getBlockMetadata(x, y, z) == SubID.VOIDMETAL_BLOCK.meta;
     }
 
     @Override
@@ -169,19 +169,21 @@ public class BlockWGMetalDevice extends BlockContainer implements ITerraformFocu
                     fd == ForgeDirection.WEST ? .75f : 1,
                     fd == ForgeDirection.DOWN ? .75f : 1,
                     fd == ForgeDirection.SOUTH ? .75f : 1);
-        } else if (world.getBlockMetadata(x, y, z) > 2) this.setBlockBounds(.125f, 0, .125f, .875f, .75f, .875f);
-        else if (world.getBlockMetadata(x, y, z) == 1 || world.getBlockMetadata(x, y, z) == 2)
-            this.setBlockBounds(0, 0, 0, 1, 1, 1);
+        }
+        int meta = world.getBlockMetadata(x, y, z);
+        if (meta == SubID.VOIDMETAL_BLOCK.meta || meta == SubID.TERRAFORMER.meta) this.setBlockBounds(0, 0, 0, 1, 1, 1);
+        else this.setBlockBounds(.125f, 0, .125f, .875f, .75f, .875f);
     }
 
     @Override
     public TileEntity createNewTileEntity(World world, int metadata) {
-        switch (metadata) {
-            case 0:
+        SubID sub = SubID.fromMeta(metadata);
+        switch (sub) {
+            case ESSENTIA_PUMP:
                 return new TileEntityEssentiaPump();
-            case 1:
+            case VOIDMETAL_BLOCK:
                 return null;
-            case 2:
+            case TERRAFORMER:
                 return new TileEntityTerraformer();
             default:
                 return new TileEntityTerraformFocus();
@@ -200,8 +202,9 @@ public class BlockWGMetalDevice extends BlockContainer implements ITerraformFocu
         int playerViewQuarter = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
         int meta = world.getBlockMetadata(x, y, z);
         int f = playerViewQuarter == 0 ? 2 : playerViewQuarter == 1 ? 5 : playerViewQuarter == 2 ? 3 : 4;
-        if (meta == 0) ((TileEntityEssentiaPump) world.getTileEntity(x, y, z)).facing = ForgeDirection.getOrientation(f)
-                .getOpposite();
+        if (meta == SubID.ESSENTIA_PUMP.getMeta())
+            ((TileEntityEssentiaPump) world.getTileEntity(x, y, z)).facing = ForgeDirection.getOrientation(f)
+                    .getOpposite();
     }
 
     @Override
@@ -225,18 +228,6 @@ public class BlockWGMetalDevice extends BlockContainer implements ITerraformFocu
     }
 
     @Override
-    public BiomeGenBase getCreatedBiome(World world, int x, int y, int z) {
-        SubID id = SubID.fromMeta(world.getBlockMetadata(x, y, z));
-        return id != null ? id.biome : null;
-    }
-
-    @Override
-    public ItemStack getDisplayedBlock(World world, int x, int y, int z) {
-        SubID id = SubID.fromMeta(world.getBlockMetadata(x, y, z));
-        return id != null ? id.display : null;
-    }
-
-    @Override
     public Aspect requiredAspect(int meta) {
         SubID id = SubID.fromMeta(meta);
         if (id == null) return null;
@@ -246,5 +237,17 @@ public class BlockWGMetalDevice extends BlockContainer implements ITerraformFocu
         }
 
         return id.aspect;
+    }
+
+    @Override
+    public BiomeGenBase getCreatedBiome(World world, int x, int y, int z) {
+        SubID id = SubID.fromMeta(world.getBlockMetadata(x, y, z));
+        return id != null ? id.biome : null;
+    }
+
+    @Override
+    public ItemStack getDisplayedBlock(World world, int x, int y, int z) {
+        SubID id = SubID.fromMeta(world.getBlockMetadata(x, y, z));
+        return id != null ? id.display : null;
     }
 }
