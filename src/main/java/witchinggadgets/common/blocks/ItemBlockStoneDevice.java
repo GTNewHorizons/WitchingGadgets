@@ -22,12 +22,12 @@ public class ItemBlockStoneDevice extends ItemBlock {
 
     @Override
     public void getSubItems(Item item, CreativeTabs tab, List<ItemStack> itemList) {
-        itemList.add(new ItemStack(item, 1, 0));
-        itemList.add(new ItemStack(item, 1, 1));
+        itemList.add(new ItemStack(item, 1, BlockWGStoneDevice.SubID.ETHEREAL_WALL.getMeta()));
+        itemList.add(new ItemStack(item, 1, BlockWGStoneDevice.SubID.TIME_STONE.getMeta()));
     }
 
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
-        return getUnlocalizedName() + "." + BlockWGStoneDevice.subNames[itemstack.getItemDamage()];
+        return getUnlocalizedName() + "." + BlockWGStoneDevice.SubID.fromMeta(itemstack.getItemDamage()).name;
     }
 }

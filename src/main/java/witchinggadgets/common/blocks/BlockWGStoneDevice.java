@@ -28,6 +28,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import witchinggadgets.WitchingGadgets;
+import witchinggadgets.api.IMetaEnum;
 import witchinggadgets.client.render.BlockRenderStoneDevice;
 import witchinggadgets.common.blocks.tiles.TileEntityAgeingStone;
 import witchinggadgets.common.blocks.tiles.TileEntityBlastfurnace;
@@ -36,8 +37,33 @@ import witchinggadgets.common.util.recipe.InfernalBlastfurnaceRecipe;
 
 public class BlockWGStoneDevice extends BlockContainer {
 
-    public static String[] subNames = { "etherealWall", "timeStone", "blastFurnace" };
-    IIcon[] icons = new IIcon[subNames.length];
+    public static enum SubID implements IMetaEnum {
+
+        ETHEREAL_WALL(0, "etherealWall"),
+        TIME_STONE(1, "timeStone"),
+        BLAST_FURNACE(2, "blastFurnace");
+
+        final int meta;
+        final String name;
+
+        SubID(int meta, String name) {
+            this.meta = meta;
+            this.name = name;
+        }
+
+        private static final SubID[] LOOKUP = IMetaEnum.createLookup(values());
+
+        @Override
+        public int getMeta() {
+            return meta;
+        }
+
+        public static SubID fromMeta(int meta) {
+            return IMetaEnum.fromLookup(LOOKUP, meta);
+        }
+    }
+
+    IIcon[] icons = new IIcon[SubID.values().length];
 
     public BlockWGStoneDevice() {
         super(Material.rock);
@@ -53,7 +79,8 @@ public class BlockWGStoneDevice extends BlockContainer {
 
     @Override
     public void registerBlockIcons(IIconRegister iconRegister) {
-        for (int i = 0; i < icons.length; i++) icons[i] = iconRegister.registerIcon("witchinggadgets:" + subNames[i]);
+        for (int i = 0; i < icons.length; i++)
+            icons[i] = iconRegister.registerIcon("witchinggadgets:" + SubID.fromMeta(i).name);
         TileEntityBlastfurnace.icon_bricks = iconRegister.registerIcon("witchinggadgets:blastFurnace");
         TileEntityBlastfurnace.icon_cornerBottomL = new IIcon[] {
                 iconRegister.registerIcon("witchinggadgets:blastFurnace_cornerBottomL_off"),
