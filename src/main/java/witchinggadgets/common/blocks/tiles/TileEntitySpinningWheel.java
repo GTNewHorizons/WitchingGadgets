@@ -1,12 +1,18 @@
 package witchinggadgets.common.blocks.tiles;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import mods.natura.items.PlantItem;
+import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.util.recipe.SpinningRecipe;
 
 public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedInventory {
@@ -16,6 +22,9 @@ public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedI
     public int progress = 0;
     public int maxProgress = 120;
     public ItemStack[] inv = new ItemStack[6];
+    public ItemStack[] prevInv = new ItemStack[5];
+
+    public List<Object> cachedAllowedForRecipe = new ArrayList<>();
 
     public TileEntitySpinningWheel() {
         super();
@@ -23,6 +32,7 @@ public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedI
 
     public void updateEntity() {
         super.updateEntity();
+        if (invChanged()) updateAllowedItemCache();
         if (isActive()) {
             if (animation < 63) animation++;
             else animation = 0;
@@ -187,8 +197,10 @@ public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedI
     public void closeInventory() {}
 
     @Override
-    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-        return true;
+    public boolean isItemValidForSlot(int s, ItemStack itemstack) {
+        Item i = itemstack.getItem();
+        int m = ;
+        return WitchingGadgets.isNaturaLoaded && i instanceof PlantItem ? itemstack.getItemDamage() == 3 : i == Items.string ? s != 4 : (WitchingGadgets.isGT5uLoaded ? : ) && (s == 2 || s == 3);
     }
 
     public static int[] InSlots = { 0, 1, 2, 3, 4 };
@@ -200,12 +212,24 @@ public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedI
     }
 
     @Override
-    public boolean canInsertItem(int p_102007_1_, ItemStack p_102007_2_, int p_102007_3_) {
-        return p_102007_3_ != ForgeDirection.DOWN.ordinal();
+    public boolean canInsertItem(int p_102007_1_, ItemStack in, int side) {
+        return side != ForgeDirection.DOWN.ordinal() && (cachedAllowedForRecipe.size() == 0 || SpinningRecipe.isCompatible(cachedAllowedForRecipe, in));
     }
 
     @Override
     public boolean canExtractItem(int p_102008_1_, ItemStack p_102008_2_, int p_102008_3_) {
         return p_102008_3_ == ForgeDirection.DOWN.ordinal();
     }
+
+    public boolean invChanged() {
+        boolean changed = false;
+        for (byte i = 0;i < 5;i++) if (prevInv[i] != (prevInv[i] = inv[i])) changed = true;
+        return changed;
+    }
+
+    public void updateAllowedItemCache() {
+        //prevInv is already updated by the time this is called and it contains only the input slots so it can be treated as such
+        cachedAllowedForRecipe = SpinningRecipe.getCompatibleEntries(prevInv);
+    }
+
 }
