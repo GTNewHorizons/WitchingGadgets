@@ -142,18 +142,18 @@ public class BlockWGWoodenDevice extends BlockContainer implements IWandable {
         int meta = world.getBlockMetadata(x, y, z);
         SubID sub = SubID.fromMeta(meta);
         switch (sub) {
-            case SPINNING_WHEEL: {
+            case SPINNING_WHEEL -> {
                 TileEntitySpinningWheel tile = (TileEntitySpinningWheel) world.getTileEntity(x, y, z);
                 if (tile == null || player.isSneaking()) return false;
                 player.openGui(WitchingGadgets.instance, GuiSpinningWheel.GUI_ID, world, x, y, z);
                 return true;
             }
-            case CUTTING_TABLE:
+            case CUTTING_TABLE ->
                 if (!player.isSneaking()) {
                     player.openGui(WitchingGadgets.instance, GuiCuttingTable.GUI_ID, world, x, y, z);
                     return true;
                 }
-            case SAUNA_STOVE: {
+            case SAUNA_STOVE -> {
                 FluidStack fs = FluidContainerRegistry.getFluidForFilledItem(player.inventory.getCurrentItem());
                 if (fs == null || world.isRemote) return false;
                 TileEntitySaunaStove tile = (TileEntitySaunaStove) world.getTileEntity(x, y, z);
@@ -187,13 +187,13 @@ public class BlockWGWoodenDevice extends BlockContainer implements IWandable {
                             1.0F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.3F);
                 }
             }
-            case LABEL_LIBRARY:
+            case LABEL_LIBRARY ->
                 if (!player.isSneaking()) {
                     if (!world.isRemote)
                         player.openGui(WitchingGadgets.instance, GuiLabelLibrary.GUI_ID, world, x, y, z);
                     return true;
                 }
-            default:
+            default ->
                 return false;
         }
     }
