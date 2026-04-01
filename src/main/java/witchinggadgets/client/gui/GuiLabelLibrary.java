@@ -19,6 +19,7 @@ public class GuiLabelLibrary extends GuiContainer {
 
     private final TileEntityLabelLibrary tile;
     private final EntityPlayer player;
+    public static final int GUI_ID = 8;
 
     public GuiLabelLibrary(InventoryPlayer inventoryPlayer, TileEntityLabelLibrary tileEntity) {
         super(new ContainerLabelLibrary(inventoryPlayer, tileEntity));

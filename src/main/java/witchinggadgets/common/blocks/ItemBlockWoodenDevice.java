@@ -27,6 +27,6 @@ public class ItemBlockWoodenDevice extends ItemBlock {
 
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
-        return getUnlocalizedName() + "." + BlockWGWoodenDevice.subNames[itemstack.getItemDamage()];
+        return getUnlocalizedName() + "." + BlockWGWoodenDevice.SubID.fromMeta(itemstack.getItemDamage()).name;
     }
 }

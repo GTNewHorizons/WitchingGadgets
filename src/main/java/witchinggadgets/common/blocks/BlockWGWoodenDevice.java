@@ -30,6 +30,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 import thaumcraft.api.wands.IWandable;
 import thaumcraft.common.Thaumcraft;
 import witchinggadgets.WitchingGadgets;
+import witchinggadgets.api.IMetaEnum;
+import witchinggadgets.client.gui.GuiCuttingTable;
+import witchinggadgets.client.gui.GuiLabelLibrary;
+import witchinggadgets.client.gui.GuiSpinningWheel;
 import witchinggadgets.client.render.BlockRenderWoodenDevice;
 import witchinggadgets.common.blocks.tiles.TileEntityCobbleGen;
 import witchinggadgets.common.blocks.tiles.TileEntityCuttingTable;
@@ -41,9 +45,37 @@ import witchinggadgets.common.blocks.tiles.TileEntitySpinningWheel;
 
 public class BlockWGWoodenDevice extends BlockContainer implements IWandable {
 
-    public static String[] subNames = { "spinningWheel", "snowGen", "cobbleGen", "cuttingTable", "saunaStove",
-            "labelLibrary", "iceGen", };
-    IIcon[] icons = new IIcon[subNames.length];
+    public enum SubID implements IMetaEnum {
+
+        SPINNING_WHEEL(0, "spinningWheel"),
+        SNOW_GEN(1, "snowGen"),
+        COBBLE_GEN(2, "cobbleGen"),
+        CUTTING_TABLE(3, "cuttingTable"),
+        SAUNA_STOVE(4, "saunaStove"),
+        LABEL_LIBRARY(5, "labelLibrary"),
+        ICE_GEN(6, "iceGen");
+
+        final int meta;
+        final String name;
+
+        SubID(int meta, String name) {
+            this.meta = meta;
+            this.name = name;
+        }
+
+        private static final SubID[] LOOKUP = IMetaEnum.createLookup(values());
+
+        @Override
+        public int getMeta() {
+            return meta;
+        }
+
+        public static SubID fromMeta(int meta) {
+            return IMetaEnum.fromLookup(LOOKUP, meta);
+        }
+    }
+
+    IIcon[] icons = new IIcon[SubID.values().length];
     IIcon saunaTop;
 
     public BlockWGWoodenDevice() {
@@ -69,8 +101,8 @@ public class BlockWGWoodenDevice extends BlockContainer implements IWandable {
 
     @Override
     public IIcon getIcon(int side, int metadata) {
-        if (metadata == 4) return side == 1 ? saunaTop : icons[4];
-        if (metadata == 1) return icons[1];
+        if (metadata == SubID.SAUNA_STOVE.meta) return side == 1 ? saunaTop : icons[4];
+        if (metadata == SubID.SNOW_GEN.meta) return icons[1];
         return icons[0];
     }
 
@@ -95,34 +127,35 @@ public class BlockWGWoodenDevice extends BlockContainer implements IWandable {
                 x - (side == 4 ? -1 : side == 5 ? 1 : 0),
                 y - (side == 0 ? -1 : side == 1 ? 1 : 0),
                 z - (side == 2 ? -1 : side == 3 ? 1 : 0));
-        if (meta == 3 || meta == 4) return true;
+        if (meta == SubID.CUTTING_TABLE.meta || meta == SubID.SAUNA_STOVE.meta) return true;
         return super.shouldSideBeRendered(world, x, y, z, side);
     }
 
     @Override
     public void getSubBlocks(Item item, CreativeTabs par2CreativeTabs, List<ItemStack> list) {
-        for (int i = 0; i < subNames.length; i++) list.add(new ItemStack(item, 1, i));
+        for (int i = 0; i < SubID.values().length; i++) list.add(new ItemStack(item, 1, i));
     }
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int idk, float what,
             float these, float are) {
         int meta = world.getBlockMetadata(x, y, z);
-        if (meta == 0) {
-            TileEntitySpinningWheel tile = (TileEntitySpinningWheel) world.getTileEntity(x, y, z);
-            if (tile == null || player.isSneaking()) return false;
-            player.openGui(WitchingGadgets.instance, 0, world, x, y, z);
-            return true;
-        }
-        if (meta == 3) {
-            if (!player.isSneaking()) {
-                player.openGui(WitchingGadgets.instance, 9, world, x, y, z);
+        SubID sub = SubID.fromMeta(meta);
+        switch (sub) {
+            case SPINNING_WHEEL: {
+                TileEntitySpinningWheel tile = (TileEntitySpinningWheel) world.getTileEntity(x, y, z);
+                if (tile == null || player.isSneaking()) return false;
+                player.openGui(WitchingGadgets.instance, GuiSpinningWheel.GUI_ID, world, x, y, z);
                 return true;
             }
-        }
-        if (meta == 4) {
-            FluidStack fs = FluidContainerRegistry.getFluidForFilledItem(player.inventory.getCurrentItem());
-            if (fs != null && !world.isRemote) {
+            case CUTTING_TABLE:
+                if (!player.isSneaking()) {
+                    player.openGui(WitchingGadgets.instance, GuiCuttingTable.GUI_ID, world, x, y, z);
+                    return true;
+                }
+            case SAUNA_STOVE: {
+                FluidStack fs = FluidContainerRegistry.getFluidForFilledItem(player.inventory.getCurrentItem());
+                if (fs == null || world.isRemote) return false;
                 TileEntitySaunaStove tile = (TileEntitySaunaStove) world.getTileEntity(x, y, z);
                 if (tile.tank.getFluidAmount() < tile.tank.getCapacity() && tile.tank.getFluid() == null
                         || tile.tank.getFluid().isFluidEqual(fs)) {
@@ -154,18 +187,22 @@ public class BlockWGWoodenDevice extends BlockContainer implements IWandable {
                             1.0F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.3F);
                 }
             }
+            case LABEL_LIBRARY:
+                if (!player.isSneaking()) {
+                    if (!world.isRemote)
+                        player.openGui(WitchingGadgets.instance, GuiLabelLibrary.GUI_ID, world, x, y, z);
+                    return true;
+                }
+            default:
+                return false;
         }
-        if (meta == 5 && !player.isSneaking()) {
-            if (!world.isRemote) player.openGui(WitchingGadgets.instance, 8, world, x, y, z);
-            return true;
-        }
-        return false;
     }
 
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess iBlockAccess, int x, int y, int z) {
         int meta = iBlockAccess.getBlockMetadata(x, y, z);
-        if (meta == 0 && iBlockAccess.getTileEntity(x, y, z) instanceof TileEntitySpinningWheel spinningWheel) {
+        if (meta == SubID.SPINNING_WHEEL.meta
+                && iBlockAccess.getTileEntity(x, y, z) instanceof TileEntitySpinningWheel spinningWheel) {
             switch (spinningWheel.facing) {
                 case 2:
                 default:
@@ -175,7 +212,7 @@ public class BlockWGWoodenDevice extends BlockContainer implements IWandable {
                     this.setBlockBounds(0.3125F, 0F, 0F, 0.6875F, 1.25F, 1F);
                     break;
             }
-        } else if (meta == 3) this.setBlockBounds(0, 0, 0, 1, .875f, 1);
+        } else if (meta == SubID.CUTTING_TABLE.meta) this.setBlockBounds(0, 0, 0, 1, .875f, 1);
         else this.setBlockBounds(0, 0, 0, 1, 1, 1);
     }
 
@@ -194,25 +231,32 @@ public class BlockWGWoodenDevice extends BlockContainer implements IWandable {
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack stack) {
         int playerViewQuarter = MathHelper.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+        TileEntity te = world.getTileEntity(x, y, z);
         int meta = world.getBlockMetadata(x, y, z);
-        int f = playerViewQuarter == 0 ? 2 : playerViewQuarter == 1 ? 5 : playerViewQuarter == 2 ? 3 : 4;
+        SubID sub = SubID.fromMeta(meta);
+        int f;
+        switch (playerViewQuarter) {
+            case 0 -> f = 2;
+            case 1 -> f = 5;
+            case 2 -> f = 3;
+            default -> f = 4;
+        }
 
-        if (meta == 0) ((TileEntitySpinningWheel) world.getTileEntity(x, y, z)).facing = f;
-        else if (meta == 1)
-            ((TileEntitySnowGen) world.getTileEntity(x, y, z)).facing = ForgeDirection.getOrientation(f);
-        else if (meta == 2)
-            ((TileEntityCobbleGen) world.getTileEntity(x, y, z)).facing = ForgeDirection.getOrientation(f);
-        else if (meta == 3) ((TileEntityCuttingTable) world.getTileEntity(x, y, z)).facing = f;
-        else if (meta == 4) {
-            TileEntitySaunaStove tile = (TileEntitySaunaStove) world.getTileEntity(x, y, z);
-            tile.prepareAreaCheck();
-        } else if (meta == 5) ((TileEntityLabelLibrary) world.getTileEntity(x, y, z)).facing = f;
-        else if (meta == 6) ((TileEntityIceGen) world.getTileEntity(x, y, z)).facing = ForgeDirection.getOrientation(f);
+        switch (sub) {
+            case SPINNING_WHEEL -> ((TileEntitySpinningWheel) te).facing = f;
+            case SNOW_GEN -> ((TileEntitySnowGen) te).facing = ForgeDirection.getOrientation(f);
+            case COBBLE_GEN -> ((TileEntityCobbleGen) te).facing = ForgeDirection.getOrientation(f);
+            case CUTTING_TABLE -> ((TileEntityCuttingTable) te).facing = f;
+            case SAUNA_STOVE -> ((TileEntitySaunaStove) te).prepareAreaCheck();
+            case LABEL_LIBRARY -> ((TileEntityLabelLibrary) te).facing = f;
+            case ICE_GEN -> ((TileEntityIceGen) te).facing = ForgeDirection.getOrientation(f);
+            default -> {} // fall through
+        }
     }
 
     @Override
     public int getLightValue(IBlockAccess world, int x, int y, int z) {
-        if (world.getBlockMetadata(x, y, z) == 4) return 8;
+        if (world.getBlockMetadata(x, y, z) == SubID.SAUNA_STOVE.meta) return 8;
         return 0;
     }
 
@@ -359,39 +403,20 @@ public class BlockWGWoodenDevice extends BlockContainer implements IWandable {
 
     @Override
     public int onWandRightClick(World world, ItemStack wandstack, EntityPlayer player, int x, int y, int z, int side,
-            int md) {
-        if (md == 1) {
-            ((TileEntitySnowGen) world.getTileEntity(x, y, z)).facing = player.isSneaking()
-                    ? ForgeDirection.getOrientation(side).getOpposite()
+            int metadata) {
+        TileEntity te = world.getTileEntity(x, y, z);
+        if (te == null) return 0;
+        SubID sub = SubID.fromMeta(metadata);
+        if (sub == SubID.SNOW_GEN || sub == SubID.COBBLE_GEN || sub == SubID.ICE_GEN) {
+            ForgeDirection dir = player.isSneaking() ? ForgeDirection.getOrientation(side).getOpposite()
                     : ForgeDirection.getOrientation(side);
-            player.worldObj.playSound(
-                    x + 0.5D,
-                    y + 0.5D,
-                    z + 0.5D,
-                    "thaumcraft:tool",
-                    0.3F,
-                    1.9F + player.worldObj.rand.nextFloat() * 0.2F,
-                    false);
-            player.swingItem();
-        }
-        if (md == 2) {
-            ((TileEntityCobbleGen) world.getTileEntity(x, y, z)).facing = player.isSneaking()
-                    ? ForgeDirection.getOrientation(side).getOpposite()
-                    : ForgeDirection.getOrientation(side);
-            player.worldObj.playSound(
-                    x + 0.5D,
-                    y + 0.5D,
-                    z + 0.5D,
-                    "thaumcraft:tool",
-                    0.3F,
-                    1.9F + player.worldObj.rand.nextFloat() * 0.2F,
-                    false);
-            player.swingItem();
-        }
-        if (md == 6) {
-            ((TileEntityIceGen) world.getTileEntity(x, y, z)).facing = player.isSneaking()
-                    ? ForgeDirection.getOrientation(side).getOpposite()
-                    : ForgeDirection.getOrientation(side);
+
+            switch (sub) {
+                case SNOW_GEN -> ((TileEntitySnowGen) te).facing = dir;
+                case COBBLE_GEN -> ((TileEntityCobbleGen) te).facing = dir;
+                case ICE_GEN -> ((TileEntityIceGen) te).facing = dir;
+            }
+
             player.worldObj.playSound(
                     x + 0.5D,
                     y + 0.5D,

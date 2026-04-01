@@ -17,6 +17,7 @@ import witchinggadgets.common.util.network.message.MessageTileUpdate;
 public class GuiCuttingTable extends GuiContainer {
 
     private final TileEntityCuttingTable tile;
+    public static final int GUI_ID = 9;
 
     public GuiCuttingTable(InventoryPlayer inventoryPlayer, TileEntityCuttingTable tileEntity) {
         super(new ContainerCuttingTable(inventoryPlayer, tileEntity));
