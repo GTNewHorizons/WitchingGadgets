@@ -124,13 +124,14 @@ public class BlockWGStoneDevice extends BlockContainer {
 
     @Override
     public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
-        if (world.getTileEntity(x, y, z) instanceof TileEntityEtherealWall tile) {
+        TileEntity te = world.getTileEntity(x, y, z);
+        if (te instanceof TileEntityEtherealWall tile) {
             if (tile.camoID != null && tile.isRenderTypeValid(tile.camoID.getRenderType(), tile.camoMeta)) {
                 return tile.camoID.getIcon(side, tile.camoMeta);
             }
         }
 
-        if (world.getTileEntity(x, y, z) instanceof TileEntityBlastfurnace blastfurnace) {
+        if (te instanceof TileEntityBlastfurnace blastfurnace) {
             return blastfurnace.getTexture(side);
         }
 
@@ -139,10 +140,11 @@ public class BlockWGStoneDevice extends BlockContainer {
 
     @Override
     public int getLightValue(IBlockAccess world, int x, int y, int z) {
-        if (world.getTileEntity(x, y, z) instanceof TileEntityEtherealWall tile) {
+        TileEntity te = world.getTileEntity(x, y, z);
+        if (te instanceof TileEntityEtherealWall tile) {
             if (tile.camoID != null) return tile.camoID.getLightValue();
         }
-        if (world.getTileEntity(x, y, z) instanceof TileEntityBlastfurnace blastfurnace) {
+        if (te instanceof TileEntityBlastfurnace blastfurnace) {
             int pos = blastfurnace.position;
             return pos == 10 || pos == 12 || pos == 14 || pos == 16 ? 13 : pos == 22 ? 15 : 0;
         }
@@ -170,7 +172,8 @@ public class BlockWGStoneDevice extends BlockContainer {
         int xx = x - ForgeDirection.getOrientation(side).offsetX;
         int yy = y - ForgeDirection.getOrientation(side).offsetY;
         int zz = z - ForgeDirection.getOrientation(side).offsetZ;
-        if (iBlockAccess.getTileEntity(xx, yy, zz) instanceof TileEntityEtherealWall tile) {
+        TileEntity te = iBlockAccess.getTileEntity(xx, yy, zz);
+        if (te instanceof TileEntityEtherealWall tile) {
             boolean sameBlock = iBlockAccess.getBlock(x, y, z).equals(this)
                     && iBlockAccess.getBlockMetadata(x, y, z) == iBlockAccess.getBlockMetadata(xx, yy, zz);
             boolean sameRenderBlock = tile.camoID != null && (iBlockAccess.getBlock(x, y, z).equals(tile.camoID)
@@ -182,8 +185,7 @@ public class BlockWGStoneDevice extends BlockContainer {
             }
 
             return !sameBlock;
-        }
-        if (iBlockAccess.getTileEntity(xx, yy, zz) instanceof TileEntityBlastfurnace) {
+        } else if (te instanceof TileEntityBlastfurnace) {
             return true;
         }
         return super.shouldSideBeRendered(iBlockAccess, x, y, z, side);
@@ -192,11 +194,11 @@ public class BlockWGStoneDevice extends BlockContainer {
     @Override
     public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB aabb, List<AxisAlignedBB> list,
             Entity entity) {
-        if (world.getTileEntity(x, y, z) instanceof TileEntityEtherealWall tile) {
+        TileEntity te = world.getTileEntity(x, y, z);
+        if (te instanceof TileEntityEtherealWall tile) {
 
             if (tile.master != null && tile.master.isAnyTileInNetPowered()) return;
-        }
-        if (world.getTileEntity(x, y, z) instanceof TileEntityBlastfurnace) {
+        } else if (te instanceof TileEntityBlastfurnace) {
             int pos = ((TileEntityBlastfurnace) world.getTileEntity(x, y, z)).position;
             if (pos > 17 && pos != 22) {
                 pos -= 18;
@@ -221,8 +223,8 @@ public class BlockWGStoneDevice extends BlockContainer {
 
     @Override
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
-        if (world.getTileEntity(x, y, z) instanceof TileEntityBlastfurnace
-                && ((TileEntityBlastfurnace) world.getTileEntity(x, y, z)).position == 22) {
+        TileEntity te = world.getTileEntity(x, y, z);
+        if (te instanceof TileEntityBlastfurnace && ((TileEntityBlastfurnace) te).position == 22) {
             return null;
         }
         return super.getCollisionBoundingBoxFromPool(world, x, y, z);
@@ -230,9 +232,8 @@ public class BlockWGStoneDevice extends BlockContainer {
 
     @Override
     public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z) {
-
-        if (world.getTileEntity(x, y, z) instanceof TileEntityBlastfurnace
-                && ((TileEntityBlastfurnace) world.getTileEntity(x, y, z)).position == 22) {
+        TileEntity te = world.getTileEntity(x, y, z);
+        if (te instanceof TileEntityBlastfurnace && ((TileEntityBlastfurnace) te).position == 22) {
             return AxisAlignedBB.getBoundingBox(x, y, z, x, y, z);
         }
         return super.getSelectedBoundingBoxFromPool(world, x, y, z);
@@ -268,10 +269,11 @@ public class BlockWGStoneDevice extends BlockContainer {
 
     @Override
     public TileEntity createNewTileEntity(World world, int metadata) {
-        return switch (metadata) {
-            case 0 -> new TileEntityEtherealWall();
-            case 1 -> new TileEntityAgeingStone();
-            case 2 -> new TileEntityBlastfurnace();
+        SubID sub = SubID.fromMeta(metadata);
+        return switch (sub) {
+            case ETHEREAL_WALL -> new TileEntityEtherealWall();
+            case TIME_STONE -> new TileEntityAgeingStone();
+            case BLAST_FURNACE -> new TileEntityBlastfurnace();
             default -> null;
         };
     }
@@ -391,8 +393,9 @@ public class BlockWGStoneDevice extends BlockContainer {
         world.markBlockForUpdate(x, y, z);
 
         for (int yy = 0; yy <= 2; yy++) for (int xx = -1; xx <= 1; xx++) for (int zz = -1; zz <= 1; zz++)
-            if ((yy != 0 || xx != 0 || zz != 0) && (x + xx != hitX || y + yy != hitY || z + zz != hitZ))
-                if (world.getTileEntity(x + xx, y + yy, z + zz) instanceof TileEntityBlastfurnace) {
+            if ((yy != 0 || xx != 0 || zz != 0) && (x + xx != hitX || y + yy != hitY || z + zz != hitZ)) {
+                TileEntity tile = world.getTileEntity(x + xx, y + yy, z + zz);
+                if (tile instanceof TileEntityBlastfurnace) {
                     if (yy != 2) world.setBlock(
                             x + xx,
                             y + yy,
@@ -404,8 +407,7 @@ public class BlockWGStoneDevice extends BlockContainer {
                     else {
                         int md = xx == -1 ? 0 : xx == 1 ? 1 : zz == -1 ? 2 : 3;
                         world.setBlock(x + xx, y + yy, z + zz, TileEntityBlastfurnace.stairBlock, md, 3);
-                        if (world.getTileEntity(x + xx, y + yy, z + zz) != null) {
-                            TileEntity tile = world.getTileEntity(x + xx, y + yy, z + zz);
+                        if (tile != null) {
                             NBTTagCompound tag = new NBTTagCompound();
                             tile.writeToNBT(tag);
                             tag.setString("stair", "INFERNAL_BRICK");
@@ -414,6 +416,7 @@ public class BlockWGStoneDevice extends BlockContainer {
                     }
                     world.markBlockForUpdate(x + xx, y + yy, z + zz);
                 }
+            }
     }
 
     @Override
