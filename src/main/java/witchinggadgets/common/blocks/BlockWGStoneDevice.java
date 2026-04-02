@@ -63,6 +63,16 @@ public class BlockWGStoneDevice extends BlockContainer {
         }
     }
 
+    private static final int BF_LAVA_POS = 22;
+
+    private static boolean isBFPosWindow(int pos) {
+        return pos == 10 || pos == 12 || pos == 14 || pos == 16;
+    }
+
+    private static boolean isBFPosTop(int pos) {
+        return pos >= 18 && pos != BF_LAVA_POS;
+    }
+
     IIcon[] icons = new IIcon[SubID.values().length];
 
     public BlockWGStoneDevice() {
@@ -146,7 +156,7 @@ public class BlockWGStoneDevice extends BlockContainer {
         }
         if (te instanceof TileEntityBlastfurnace blastfurnace) {
             int pos = blastfurnace.position;
-            return pos == 10 || pos == 12 || pos == 14 || pos == 16 ? 13 : pos == 22 ? 15 : 0;
+            return isBFPosWindow(pos) ? 13 : pos == BF_LAVA_POS ? 15 : 0;
         }
         return 0;
     }
@@ -200,7 +210,7 @@ public class BlockWGStoneDevice extends BlockContainer {
             if (tile.master != null && tile.master.isAnyTileInNetPowered()) return;
         } else if (te instanceof TileEntityBlastfurnace) {
             int pos = ((TileEntityBlastfurnace) world.getTileEntity(x, y, z)).position;
-            if (pos > 17 && pos != 22) {
+            if (isBFPosTop(pos)) {
                 pos -= 18;
                 this.setBlockBounds(0f, 0f, 0f, 1f, .5f, 1f);
                 super.addCollisionBoxesToList(world, x, y, z, aabb, list, entity);
@@ -242,13 +252,13 @@ public class BlockWGStoneDevice extends BlockContainer {
     @Override
     public boolean isSideSolid(IBlockAccess world, int x, int y, int z, ForgeDirection side) {
         return !(world.getTileEntity(x, y, z) instanceof TileEntityBlastfurnace blastfurnace)
-                || blastfurnace.position != 22;
+                || blastfurnace.position != BF_LAVA_POS;
     }
 
     @Override
     public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
         if (!world.isRemote && world.getTileEntity(x, y, z) instanceof TileEntityBlastfurnace blastfurnace
-                && blastfurnace.position == 22)
+                && blastfurnace.position == BF_LAVA_POS)
             if (entity instanceof EntityItem entityItem) {
                 ItemStack input = entityItem.getEntityItem();
                 if (InfernalBlastfurnaceRecipe.getRecipeForInput(input) == null) {
@@ -287,13 +297,13 @@ public class BlockWGStoneDevice extends BlockContainer {
             if (mPos != null && mPos.length > 2 && world.getBlock(mPos[0], mPos[1], mPos[2]).equals(this)) {
                 byte pos = blastFurnace.position;
                 removeBlastfurnace(world, mPos[0], mPos[1], mPos[2], x, y, z);
-                if (pos != 22) {
+                if (pos != BF_LAVA_POS) {
                     EntityItem blockDrop = new EntityItem(
                             world,
                             x + .5,
                             y + .5,
                             z + .5,
-                            pos < 18 ? new ItemStack(TileEntityBlastfurnace.brickBlock[pos], 1, 0)
+                            !isBFPosTop(pos) ? new ItemStack(TileEntityBlastfurnace.brickBlock[pos], 1, 0)
                                     : new ItemStack(
                                             TileEntityBlastfurnace.stairBlock,
                                             1,
@@ -310,7 +320,7 @@ public class BlockWGStoneDevice extends BlockContainer {
 
     @Override
     public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune) {
-        if (metadata == 2) return new ArrayList<>();
+        if (metadata == SubID.BLAST_FURNACE.meta) return new ArrayList<>();
         return super.getDrops(world, x, y, z, metadata, fortune);
     }
 
