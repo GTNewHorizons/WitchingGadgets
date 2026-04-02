@@ -12,6 +12,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -148,17 +149,18 @@ public class BlockWGWoodenDevice extends BlockContainer implements IWandable {
                 player.openGui(WitchingGadgets.instance, GuiSpinningWheel.GUI_ID, world, x, y, z);
                 return true;
             }
-            case CUTTING_TABLE ->
+            case CUTTING_TABLE -> {
                 if (!player.isSneaking()) {
                     player.openGui(WitchingGadgets.instance, GuiCuttingTable.GUI_ID, world, x, y, z);
                     return true;
-                }
+                } else return false;
+            }
             case SAUNA_STOVE -> {
                 FluidStack fs = FluidContainerRegistry.getFluidForFilledItem(player.inventory.getCurrentItem());
                 if (fs == null || world.isRemote) return false;
                 TileEntitySaunaStove tile = (TileEntitySaunaStove) world.getTileEntity(x, y, z);
-                if (tile.tank.getFluidAmount() < tile.tank.getCapacity() && tile.tank.getFluid() == null
-                        || tile.tank.getFluid().isFluidEqual(fs)) {
+                if (tile.tank.getFluidAmount() < tile.tank.getCapacity()
+                        && (tile.tank.getFluid() == null || tile.tank.getFluid().isFluidEqual(fs))) {
                     tile.fill(
                             ForgeDirection.UNKNOWN,
                             FluidContainerRegistry.getFluidForFilledItem(player.inventory.getCurrentItem()),
@@ -185,16 +187,20 @@ public class BlockWGWoodenDevice extends BlockContainer implements IWandable {
                             "game.neutral.swim",
                             0.33F,
                             1.0F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.3F);
+                    return true;
                 }
+                return false;
             }
-            case LABEL_LIBRARY ->
+            case LABEL_LIBRARY -> {
                 if (!player.isSneaking()) {
                     if (!world.isRemote)
                         player.openGui(WitchingGadgets.instance, GuiLabelLibrary.GUI_ID, world, x, y, z);
                     return true;
-                }
-            default ->
+                } else return false;
+            }
+            default -> {
                 return false;
+            }
         }
     }
 
@@ -305,100 +311,46 @@ public class BlockWGWoodenDevice extends BlockContainer implements IWandable {
 
     @Override
     public void breakBlock(World world, int x, int y, int z, Block par5, int par6) {
-        if (world.getTileEntity(x, y, z) instanceof TileEntitySpinningWheel tile) {
-
-            for (int i = 0; i < 4; i++) {
-                ItemStack stack = tile.getStackInSlot(i);
-                if (stack != null) {
-                    float f = world.rand.nextFloat() * 0.8F + 0.1F;
-                    float f1 = world.rand.nextFloat() * 0.8F + 0.1F;
-                    EntityItem entityitem;
-                    for (float f2 = world.rand.nextFloat() * 0.8F + 0.1F; stack.stackSize > 0; world
-                            .spawnEntityInWorld(entityitem)) {
-                        int k1 = world.rand.nextInt(21) + 10;
-                        if (k1 > stack.stackSize) k1 = stack.stackSize;
-                        stack.stackSize -= k1;
-                        entityitem = new EntityItem(
-                                world,
-                                x + f,
-                                y + f1,
-                                z + f2,
-                                new ItemStack(stack.getItem(), k1, stack.getItemDamage()));
-                        float f3 = 0.05F;
-                        entityitem.motionX = (float) world.rand.nextGaussian() * f3;
-                        entityitem.motionY = (float) world.rand.nextGaussian() * f3 + 0.2F;
-                        entityitem.motionZ = (float) world.rand.nextGaussian() * f3;
-
-                        if (stack.hasTagCompound()) {
-                            entityitem.getEntityItem().setTagCompound((NBTTagCompound) stack.getTagCompound().copy());
-                        }
-                    }
-                }
-            }
-        }
-        if (world.getTileEntity(x, y, z) instanceof TileEntityCuttingTable tile) {
-
-            for (int i = 0; i < tile.getSizeInventory(); i++) {
-                ItemStack stack = tile.getStackInSlot(i);
-                if (stack != null) {
-                    float f = world.rand.nextFloat() * 0.8F + 0.1F;
-                    float f1 = world.rand.nextFloat() * 0.8F + 0.1F;
-                    EntityItem entityitem;
-                    for (float f2 = world.rand.nextFloat() * 0.8F + 0.1F; stack.stackSize > 0; world
-                            .spawnEntityInWorld(entityitem)) {
-                        int k1 = world.rand.nextInt(21) + 10;
-                        if (k1 > stack.stackSize) k1 = stack.stackSize;
-                        stack.stackSize -= k1;
-                        entityitem = new EntityItem(
-                                world,
-                                x + f,
-                                y + f1,
-                                z + f2,
-                                new ItemStack(stack.getItem(), k1, stack.getItemDamage()));
-                        float f3 = 0.05F;
-                        entityitem.motionX = (float) world.rand.nextGaussian() * f3;
-                        entityitem.motionY = (float) world.rand.nextGaussian() * f3 + 0.2F;
-                        entityitem.motionZ = (float) world.rand.nextGaussian() * f3;
-
-                        if (stack.hasTagCompound()) {
-                            entityitem.getEntityItem().setTagCompound((NBTTagCompound) stack.getTagCompound().copy());
-                        }
-                    }
-                }
-            }
-        }
-        if (world.getTileEntity(x, y, z) instanceof TileEntityLabelLibrary tile) {
-
-            for (int i = 0; i < tile.getSizeInventory(); i++) {
-                ItemStack stack = tile.getStackInSlot(i);
-                if (stack != null) {
-                    float f = world.rand.nextFloat() * 0.8F + 0.1F;
-                    float f1 = world.rand.nextFloat() * 0.8F + 0.1F;
-                    EntityItem entityitem;
-                    for (float f2 = world.rand.nextFloat() * 0.8F + 0.1F; stack.stackSize > 0; world
-                            .spawnEntityInWorld(entityitem)) {
-                        int k1 = world.rand.nextInt(21) + 10;
-                        if (k1 > stack.stackSize) k1 = stack.stackSize;
-                        stack.stackSize -= k1;
-                        entityitem = new EntityItem(
-                                world,
-                                x + f,
-                                y + f1,
-                                z + f2,
-                                new ItemStack(stack.getItem(), k1, stack.getItemDamage()));
-                        float f3 = 0.05F;
-                        entityitem.motionX = (float) world.rand.nextGaussian() * f3;
-                        entityitem.motionY = (float) world.rand.nextGaussian() * f3 + 0.2F;
-                        entityitem.motionZ = (float) world.rand.nextGaussian() * f3;
-
-                        if (stack.hasTagCompound()) {
-                            entityitem.getEntityItem().setTagCompound((NBTTagCompound) stack.getTagCompound().copy());
-                        }
-                    }
-                }
-            }
+        TileEntity te = world.getTileEntity(x, y, z);
+        if (te instanceof TileEntitySpinningWheel tile) {
+            dropInventory(world, (IInventory) tile, x, y, z, 4);
+        } else if (te instanceof TileEntityCuttingTable tile) {
+            dropInventory(world, (IInventory) tile, x, y, z, tile.getSizeInventory());
+        } else if (te instanceof TileEntityLabelLibrary tile) {
+            dropInventory(world, (IInventory) tile, x, y, z, tile.getSizeInventory());
         }
         super.breakBlock(world, x, y, z, par5, par6);
+    }
+
+    private void dropInventory(World world, IInventory inventory, int x, int y, int z, int invSize) {
+        for (int i = 0; i < invSize; i++) {
+            ItemStack stack = inventory.getStackInSlot(i);
+            if (stack != null) {
+                float f = world.rand.nextFloat() * 0.8F + 0.1F;
+                float f1 = world.rand.nextFloat() * 0.8F + 0.1F;
+                EntityItem entityitem;
+                for (float f2 = world.rand.nextFloat() * 0.8F + 0.1F; stack.stackSize > 0; world
+                        .spawnEntityInWorld(entityitem)) {
+                    int k1 = world.rand.nextInt(21) + 10;
+                    if (k1 > stack.stackSize) k1 = stack.stackSize;
+                    stack.stackSize -= k1;
+                    entityitem = new EntityItem(
+                            world,
+                            x + f,
+                            y + f1,
+                            z + f2,
+                            new ItemStack(stack.getItem(), k1, stack.getItemDamage()));
+                    float f3 = 0.05F;
+                    entityitem.motionX = (float) world.rand.nextGaussian() * f3;
+                    entityitem.motionY = (float) world.rand.nextGaussian() * f3 + 0.2F;
+                    entityitem.motionZ = (float) world.rand.nextGaussian() * f3;
+
+                    if (stack.hasTagCompound()) {
+                        entityitem.getEntityItem().setTagCompound((NBTTagCompound) stack.getTagCompound().copy());
+                    }
+                }
+            }
+        }
     }
 
     @Override
