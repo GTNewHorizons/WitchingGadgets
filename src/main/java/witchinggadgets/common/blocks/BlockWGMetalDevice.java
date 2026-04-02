@@ -8,12 +8,10 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
@@ -73,7 +71,11 @@ public class BlockWGMetalDevice extends BlockContainer implements ITerraformFocu
         }
 
         public static boolean isTFFocus(int meta) {
-            return meta >= TF_FOCUS_PLAINS.meta && meta <= TF_FOCUS_MAGIC.meta;
+            return isTFFocus(SubID.fromMeta(meta));
+        }
+
+        public static boolean isTFFocus(SubID sub) {
+            return sub != null && sub.biome != null;
         }
 
         private static final SubID[] LOOKUP = IMetaEnum.createLookup(values());
@@ -127,8 +129,7 @@ public class BlockWGMetalDevice extends BlockContainer implements ITerraformFocu
     @Override
     public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
         int meta = world.getBlockMetadata(x, y, z);
-        if (meta < icons.length) return icons[meta];
-        return null;
+        return getIcon(side, meta);
     }
 
     @Override
@@ -153,19 +154,11 @@ public class BlockWGMetalDevice extends BlockContainer implements ITerraformFocu
     }
 
     @Override
-    public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z) {
-        return super.getCollisionBoundingBoxFromPool(world, x, y, z);
-    }
-
-    @Override
-    public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z) {
-        return super.getSelectedBoundingBoxFromPool(world, x, y, z);
-    }
-
-    @Override
     public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
-        if (world.getTileEntity(x, y, z) instanceof TileEntityEssentiaPump) {
-            ForgeDirection fd = ((TileEntityEssentiaPump) world.getTileEntity(x, y, z)).facing;
+        TileEntity te = world.getTileEntity(x, y, z);
+        int meta = world.getBlockMetadata(x, y, z);
+        if (te instanceof TileEntityEssentiaPump) {
+            ForgeDirection fd = ((TileEntityEssentiaPump) te).facing;
             this.setBlockBounds(
                     fd == ForgeDirection.EAST ? .25f : 0,
                     fd == ForgeDirection.UP ? .25f : 0,
@@ -173,9 +166,8 @@ public class BlockWGMetalDevice extends BlockContainer implements ITerraformFocu
                     fd == ForgeDirection.WEST ? .75f : 1,
                     fd == ForgeDirection.DOWN ? .75f : 1,
                     fd == ForgeDirection.SOUTH ? .75f : 1);
-        }
-        int meta = world.getBlockMetadata(x, y, z);
-        if (meta == SubID.VOIDMETAL_BLOCK.meta || meta == SubID.TERRAFORMER.meta) this.setBlockBounds(0, 0, 0, 1, 1, 1);
+        } else if (meta == SubID.VOIDMETAL_BLOCK.meta || meta == SubID.TERRAFORMER.meta)
+            this.setBlockBounds(0, 0, 0, 1, 1, 1);
         else this.setBlockBounds(.125f, 0, .125f, .875f, .75f, .875f);
     }
 
@@ -190,7 +182,7 @@ public class BlockWGMetalDevice extends BlockContainer implements ITerraformFocu
             case TERRAFORMER:
                 return new TileEntityTerraformer();
             default:
-                return new TileEntityTerraformFocus();
+                return SubID.isTFFocus(sub) ? new TileEntityTerraformFocus() : null;
         }
     }
 
@@ -209,12 +201,6 @@ public class BlockWGMetalDevice extends BlockContainer implements ITerraformFocu
         if (meta == SubID.ESSENTIA_PUMP.getMeta())
             ((TileEntityEssentiaPump) world.getTileEntity(x, y, z)).facing = ForgeDirection.getOrientation(f)
                     .getOpposite();
-    }
-
-    @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX,
-            float hitY, float hitZ) {
-        return super.onBlockActivated(world, x, y, z, player, side, hitX, hitY, hitZ);
     }
 
     @Override
