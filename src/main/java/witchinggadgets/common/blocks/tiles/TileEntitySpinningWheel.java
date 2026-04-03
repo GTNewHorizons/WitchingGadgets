@@ -162,7 +162,7 @@ public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedI
         if (stack != null && stack.stackSize > getInventoryStackLimit()) {
             stack.stackSize = getInventoryStackLimit();
         }
-        cachedAllowedForRecipe = SpinningRecipe.getCompatibleEntries(inv);
+        updateAllowedItemCache();
     }
 
     @Override
@@ -216,6 +216,10 @@ public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedI
     @Override
     public boolean canExtractItem(int p_102008_1_, ItemStack p_102008_2_, int p_102008_3_) {
         return p_102008_3_ == ForgeDirection.DOWN.ordinal();
+    }
+
+    public void updateAllowedItemCache() {
+        cachedAllowedForRecipe = SpinningRecipe.getCompatibleEntries(inv);
     }
 
 }
