@@ -18,9 +18,8 @@ public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedI
     public int progress = 0;
     public int maxProgress = 120;
     public ItemStack[] inv = new ItemStack[6];
-    public ItemStack[] prevInv = new ItemStack[5];
 
-    public List<Object> cachedAllowedForRecipe;
+    public List<Object> cachedAllowedForRecipe; // does NOT update on direct inv access
 
     public TileEntitySpinningWheel() {
         super();
@@ -29,7 +28,6 @@ public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedI
 
     public void updateEntity() {
         super.updateEntity();
-        if (invChanged()) updateAllowedItemCache();
         if (isActive()) {
             if (animation < 63) animation++;
             else animation = 0;
@@ -164,6 +162,7 @@ public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedI
         if (stack != null && stack.stackSize > getInventoryStackLimit()) {
             stack.stackSize = getInventoryStackLimit();
         }
+        cachedAllowedForRecipe = SpinningRecipe.getCompatibleEntries(inv);
     }
 
     @Override
@@ -195,7 +194,8 @@ public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedI
 
     @Override
     public boolean isItemValidForSlot(int s, ItemStack in) {
-        return inv[s] != null && in != null && inv[s].isItemEqual(in)
+        return inv[s] != null && in != null
+                && inv[s].isItemEqual(in)
                 && inv[s].stackSize + in.stackSize <= Math.min(in.getMaxStackSize(), getInventoryStackLimit())
                 || cachedAllowedForRecipe.size() != 0 && SpinningRecipe.isCompatible(cachedAllowedForRecipe, in);
     }
@@ -216,18 +216,6 @@ public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedI
     @Override
     public boolean canExtractItem(int p_102008_1_, ItemStack p_102008_2_, int p_102008_3_) {
         return p_102008_3_ == ForgeDirection.DOWN.ordinal();
-    }
-
-    public boolean invChanged() {
-        boolean changed = false;
-        for (byte i = 0; i < 5; i++) if (prevInv[i] != (prevInv[i] = inv[i])) changed = true;
-        return changed;
-    }
-
-    public void updateAllowedItemCache() {
-        // prevInv is already updated by the time this is called and it contains only the input slots so it can be
-        // treated as such
-        cachedAllowedForRecipe = SpinningRecipe.getCompatibleEntries(prevInv);
     }
 
 }
