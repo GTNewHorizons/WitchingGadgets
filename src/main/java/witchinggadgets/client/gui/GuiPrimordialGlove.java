@@ -72,6 +72,7 @@ public class GuiPrimordialGlove extends GuiContainer {
     @Override
     protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3) {
         GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         ClientUtilities.bindTexture("witchinggadgets:textures/gui/primordialGlove.png");
         int k = (this.width - this.xSize) / 2;

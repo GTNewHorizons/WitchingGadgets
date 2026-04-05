@@ -29,6 +29,8 @@ public class GuiLabelLibrary extends GuiContainer {
     @Override
     protected void drawGuiContainerBackgroundLayer(float par1, int mX, int mY) {
         // draw your Gui here, only thing you need to change is the path
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         ClientUtilities.bindTexture("witchinggadgets:textures/gui/labelLibrary.png");
         // Inventory
@@ -49,6 +51,7 @@ public class GuiLabelLibrary extends GuiContainer {
         GL11.glScalef(1 / scale, 1 / scale, 1);
 
         UtilsFX.drawTag(guiLeft + 8, guiTop + 30, tile.aspect, 0.0F, 0, zLevel);
+        GL11.glDisable(GL11.GL_BLEND);
     }
 
     @Override

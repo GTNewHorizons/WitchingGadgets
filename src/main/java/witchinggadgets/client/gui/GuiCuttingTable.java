@@ -26,6 +26,8 @@ public class GuiCuttingTable extends GuiContainer {
     @Override
     protected void drawGuiContainerBackgroundLayer(float par1, int mX, int mY) {
         // draw your Gui here, only thing you need to change is the path
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         ClientUtilities.bindTexture("witchinggadgets:textures/gui/cuttingTable.png");
         // Inventory
@@ -35,7 +37,6 @@ public class GuiCuttingTable extends GuiContainer {
         int xOff = this.tile.targetGemCut == 0 ? 0 : 80;
         int yOff = this.tile.targetGemCut == 0 ? 0 : 80;
         Tessellator tes = Tessellator.instance;
-        GL11.glEnable(GL11.GL_BLEND);
         tes.startDrawingQuads();
         tes.addVertexWithUV(guiLeft + 73, guiTop + 17, 0, (xOff) / 255f, (yOff) / 255f);
         tes.addVertexWithUV(guiLeft + 73, guiTop + 47, 0, (xOff) / 255f, (yOff + 80) / 255f);
@@ -44,6 +45,7 @@ public class GuiCuttingTable extends GuiContainer {
         tes.draw();
 
         UtilsFX.drawTag(guiLeft + 118, guiTop + 41, this.tile.getInfusingAspect(), 0.0F, 0, this.zLevel);
+        GL11.glDisable(GL11.GL_BLEND);
     }
 
     @Override
