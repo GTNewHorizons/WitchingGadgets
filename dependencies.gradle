@@ -20,6 +20,7 @@ dependencies {
     compileOnly('com.github.GTNewHorizons:TinkersConstruct:1.14.50-GTNH:dev') {transitive=false}
     compileOnly('com.github.GTNewHorizons:MagicBees:2.10.7-GTNH:api') {transitive=false}
     compileOnly('com.github.GTNewHorizons:TinkersConstruct:1.14.50-GTNH:dev') {transitive=false}
+	compileOnly('com.github.GTNewHorizons:Tainted-Magic:7.7.7-GTNH:dev') {transitive=false}
     compileOnly(deobfCurse('enviromine-230236:2269710'))
 
     compileOnly('org.projectlombok:lombok:1.18.34')
