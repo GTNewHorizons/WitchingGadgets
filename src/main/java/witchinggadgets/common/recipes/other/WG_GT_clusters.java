@@ -47,6 +47,11 @@ public class WG_GT_clusters {
             } else {
                 ItemStack dusts = clusterInfo.getPart(OrePrefixes.dust, 1);
                 ItemStack tinyDusts = clusterInfo.getPart(OrePrefixes.dustTiny, 1);
+
+                if ("NaquadahEnriched".equals(clusterInfo.matName())) {
+                    dusts = Utilities.getOredict("dustEnriched-NaquadahOxideMixture", 1);
+                    tinyDusts = Utilities.getOredict("dustTinyEnriched-NaquadahOxideMixture", 1);;
+                }
                 ItemStack gems = clusterInfo.getPart(OrePrefixes.gem, 1);
 
                 if (dusts != null && tinyDusts != null) {
