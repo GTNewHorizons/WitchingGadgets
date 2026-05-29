@@ -1,37 +1,31 @@
 package witchinggadgets.common.util.network.message;
 
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.world.World;
 
 import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
+import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.aspects.Aspect;
-import witchinggadgets.common.blocks.tiles.TileEntityLabelLibrary;
+import witchinggadgets.common.gui.ContainerLabelLibrary;
 
 public class MessageChangeAspect implements IMessage {
 
-    int x;
-    int y;
-    int z;
+    int windowId;
     Aspect aspect;
 
     public MessageChangeAspect() {}
 
-    public MessageChangeAspect(TileEntityLabelLibrary te) {
-        this.x = te.xCoord;
-        this.y = te.yCoord;
-        this.z = te.zCoord;
-        this.aspect = te.aspect;
+    public MessageChangeAspect(int windowId, Aspect aspect) {
+        this.windowId = windowId;
+        this.aspect = aspect;
     }
 
     @Override
     public void fromBytes(ByteBuf buffer) {
-        this.x = buffer.readInt();
-        this.y = buffer.readInt();
-        this.z = buffer.readInt();
+        this.windowId = buffer.readInt();
         if (buffer.readBoolean()) {
             this.aspect = Aspect.getAspect(ByteBufUtils.readUTF8String(buffer));
         }
@@ -39,9 +33,7 @@ public class MessageChangeAspect implements IMessage {
 
     @Override
     public void toBytes(ByteBuf buffer) {
-        buffer.writeInt(x);
-        buffer.writeInt(y);
-        buffer.writeInt(z);
+        buffer.writeInt(windowId);
         buffer.writeBoolean(aspect != null);
         if (aspect != null) {
             ByteBufUtils.writeUTF8String(buffer, aspect.getTag());
@@ -54,11 +46,10 @@ public class MessageChangeAspect implements IMessage {
         public IMessage onMessage(MessageChangeAspect message, MessageContext ctx) {
             EntityPlayerMP player = ctx.getServerHandler().playerEntity;
             if (player == null) return null;
-            World world = player.worldObj;
-            if (world != null
-                    && world.getTileEntity(message.x, message.y, message.z) instanceof TileEntityLabelLibrary tile) {
-                if (tile.isUseableByPlayer(player)) {
-                    tile.aspect = message.aspect;
+            if (player.openContainer instanceof ContainerLabelLibrary labelLibrary
+                    && labelLibrary.windowId == message.windowId) {
+                if (ThaumcraftApiHelper.hasDiscoveredAspect(player.getCommandSenderName(), message.aspect)) {
+                    labelLibrary.setAspect(message.aspect);
                 }
             }
             return null;

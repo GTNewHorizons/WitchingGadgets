@@ -71,6 +71,7 @@ public class GuiLabelLibrary extends GuiContainer {
                     if (mY >= size * (i / row) && mY < size * ((i + row) / row)) tile.aspect = a;
                 i++;
             }
-        if (tile.aspect != old) WitchingGadgets.packetHandler.sendToServer(new MessageChangeAspect(this.tile));
+        if (tile.aspect != old)
+            WitchingGadgets.packetHandler.sendToServer(new MessageChangeAspect(inventorySlots.windowId, tile.aspect));
     }
 }

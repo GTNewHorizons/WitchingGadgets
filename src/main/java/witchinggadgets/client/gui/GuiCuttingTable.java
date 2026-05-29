@@ -60,7 +60,8 @@ public class GuiCuttingTable extends GuiContainer {
             if (this.tile.targetGemCut < 0) this.tile.targetGemCut = (byte) (ItemInfusedGem.GemCut.values().length - 1);
             else if (this.tile.targetGemCut >= ItemInfusedGem.GemCut.values().length) this.tile.targetGemCut = 0;
 
-            if (this.tile.targetGemCut != old) WitchingGadgets.packetHandler.sendToServer(new MessageCutGem(this.tile));
+            if (this.tile.targetGemCut != old) WitchingGadgets.packetHandler
+                    .sendToServer(new MessageCutGem(this.inventorySlots.windowId, this.tile.targetGemCut));
         }
     }
 }

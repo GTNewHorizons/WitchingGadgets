@@ -8,6 +8,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
+import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.IEssentiaContainerItem;
 import witchinggadgets.common.blocks.tiles.TileEntityLabelLibrary;
@@ -157,5 +158,11 @@ public class ContainerLabelLibrary extends Container {
             return heldStack;
         }
         return super.slotClick(slotId, dragType, clickTypeIn, player);
+    }
+
+    public void setAspect(Aspect aspect) {
+        tileEntity.aspect = aspect;
+        tileEntity.markDirty();
+        tileEntity.getWorldObj().markBlockForUpdate(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
     }
 }
