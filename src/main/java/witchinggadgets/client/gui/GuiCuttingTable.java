@@ -12,7 +12,7 @@ import witchinggadgets.client.ClientUtilities;
 import witchinggadgets.common.blocks.tiles.TileEntityCuttingTable;
 import witchinggadgets.common.gui.ContainerCuttingTable;
 import witchinggadgets.common.items.ItemInfusedGem;
-import witchinggadgets.common.util.network.message.MessageTileUpdate;
+import witchinggadgets.common.util.network.message.MessageCutGem;
 
 public class GuiCuttingTable extends GuiContainer {
 
@@ -60,8 +60,8 @@ public class GuiCuttingTable extends GuiContainer {
             if (this.tile.targetGemCut < 0) this.tile.targetGemCut = (byte) (ItemInfusedGem.GemCut.values().length - 1);
             else if (this.tile.targetGemCut >= ItemInfusedGem.GemCut.values().length) this.tile.targetGemCut = 0;
 
-            if (this.tile.targetGemCut != old)
-                WitchingGadgets.packetHandler.sendToServer(new MessageTileUpdate(this.tile));
+            if (this.tile.targetGemCut != old) WitchingGadgets.packetHandler
+                    .sendToServer(new MessageCutGem(this.inventorySlots.windowId, this.tile.targetGemCut));
         }
     }
 }

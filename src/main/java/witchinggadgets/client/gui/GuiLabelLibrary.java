@@ -13,7 +13,7 @@ import witchinggadgets.WitchingGadgets;
 import witchinggadgets.client.ClientUtilities;
 import witchinggadgets.common.blocks.tiles.TileEntityLabelLibrary;
 import witchinggadgets.common.gui.ContainerLabelLibrary;
-import witchinggadgets.common.util.network.message.MessageTileUpdate;
+import witchinggadgets.common.util.network.message.MessageChangeAspect;
 
 public class GuiLabelLibrary extends GuiContainer {
 
@@ -71,6 +71,7 @@ public class GuiLabelLibrary extends GuiContainer {
                     if (mY >= size * (i / row) && mY < size * ((i + row) / row)) tile.aspect = a;
                 i++;
             }
-        if (tile.aspect != old) WitchingGadgets.packetHandler.sendToServer(new MessageTileUpdate(this.tile));
+        if (tile.aspect != old)
+            WitchingGadgets.packetHandler.sendToServer(new MessageChangeAspect(inventorySlots.windowId, tile.aspect));
     }
 }
