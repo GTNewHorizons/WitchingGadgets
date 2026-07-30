@@ -120,4 +120,14 @@ public class ContainerBag extends Container {
             this.player.setCurrentItemOrArmor(0, this.pouch);
         }
     }
+
+    @Override
+    public void onContainerClosed(EntityPlayer player) {
+        // also save the items NBT on close in case something else
+        // (e.g. Bogo Sorter) messed with it without us knowing
+        super.onContainerClosed(player);
+        if (!this.player.worldObj.isRemote && this.isHoldingPouch()) {
+            ItemBag.setStoredItems(this.pouch, this.input.stackList);
+        }
+    }
 }
