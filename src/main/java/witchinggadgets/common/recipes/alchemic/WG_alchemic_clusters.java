@@ -14,17 +14,22 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.gtnewhorizons.postea.api.ItemStackReplacementManager;
+import com.ruling_0.materiallib.api.Material;
+import com.ruling_0.materiallib.api.MaterialLibAPI;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Optional;
 import gregtech.GTMod;
-import gregtech.api.GregTechAPI;
-import gregtech.api.enums.Materials;
 import gregtech.api.enums.OreMixes;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.SubTag;
 import gregtech.api.enums.TCAspects;
+import gregtech.api.enums.materials.MaterialFacades;
+import gregtech.api.enums.materials.Materials;
+import gregtech.api.material.AspectRefStack;
+import gregtech.api.material.LegacyNameDomain;
+import gregtech.api.material.MaterialUtils;
 import gregtech.api.util.GTOreDictUnificator;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
@@ -99,8 +104,8 @@ public class WG_alchemic_clusters {
         private final ClusterOverlay clusterOverlay;
 
         @Optional.Method(modid = "gregtech_nh")
-        public Materials getGT5uMaterial() {
-            return Materials.getMaterialsMap().get(matName);
+        public Material getGT5uMaterial() {
+            return LegacyNameDomain.lookup(matName);
         }
 
         public ItemStack getPart(String prefix, int amount) {
@@ -159,7 +164,7 @@ public class WG_alchemic_clusters {
     }
 
     @Optional.Method(modid = "gregtech_nh")
-    private static boolean clusterBlacklist(Materials material) {
+    private static boolean clusterBlacklist(Material material) {
         if (material == Materials.Iron) return true;
         if (material == Materials.Copper) return true;
         if (material == Materials.Tin) return true;
@@ -167,10 +172,10 @@ public class WG_alchemic_clusters {
         if (material == Materials.Lead) return true;
         if (material == Materials.Cinnabar) return true;
         if (material == Materials.Gold) return true;
-        if (material == Materials.AnyCopper) return true;
-        if (material == Materials.AnyIron) return true;
+        if (material == MaterialFacades.AnyCopper) return true;
+        if (material == MaterialFacades.AnyIron) return true;
         for (String name : WGConfig.triplingClusterList) {
-            if (material.mName.equals(name)) return true;
+            if (name.equals(MaterialUtils.internalName(material))) return true;
         }
 
         return false;
@@ -249,27 +254,21 @@ public class WG_alchemic_clusters {
     }
 
     @Optional.Method(modid = "gregtech_nh")
+    private static void addIfPresent(HashSet<Material> materials, Material material) {
+        if (material != null) materials.add(material);
+    }
+
+    @Optional.Method(modid = "gregtech_nh")
     private static void loadGT5uClusters() {
-        HashSet<Materials> oresInVeins = new HashSet<>();
+        HashSet<Material> oresInVeins = new HashSet<>();
 
         // Only generate clusters for ores that are actually used in veins
         // This only makes them show up in NEI and adds the recipes for them
         for (OreMixes oreMix : OreMixes.values()) {
-            if (oreMix.oreMixBuilder.primary instanceof Materials gtMat) {
-                oresInVeins.add(gtMat);
-            }
-
-            if (oreMix.oreMixBuilder.between instanceof Materials gtMat) {
-                oresInVeins.add(gtMat);
-            }
-
-            if (oreMix.oreMixBuilder.secondary instanceof Materials gtMat) {
-                oresInVeins.add(gtMat);
-            }
-
-            if (oreMix.oreMixBuilder.sporadic instanceof Materials gtMat) {
-                oresInVeins.add(gtMat);
-            }
+            addIfPresent(oresInVeins, oreMix.oreMixBuilder.primary);
+            addIfPresent(oresInVeins, oreMix.oreMixBuilder.between);
+            addIfPresent(oresInVeins, oreMix.oreMixBuilder.secondary);
+            addIfPresent(oresInVeins, oreMix.oreMixBuilder.sporadic);
         }
 
         List<OrePrefixes> notRich = new ArrayList<>();
@@ -290,18 +289,24 @@ public class WG_alchemic_clusters {
             notRich.add(OrePrefixes.oreEndstone);
         }
 
-        for (Materials material : GregTechAPI.sGeneratedMaterials) {
-            if (material == null) continue;
+        for (Material material : MaterialLibAPI.getMaterials()) {
+            // MetaInfo packs the cluster meta out of the legacy 1000-entry sub-id space, so a material with no
+            // slot in it has no representable cluster.
+            if (MaterialUtils.oldSubId(material) < 0) continue;
 
+            final String materialName = MaterialUtils.internalName(material);
+            final short[] rgba = MaterialUtils.rgba(material);
             final AspectList baseAspects = new AspectList();
 
-            material.mAspects.forEach(stack -> baseAspects.add(stack.mAspect.getAspect(), (int) stack.mAmount));
+            for (AspectRefStack aspect : MaterialUtils.aspects(material)) {
+                baseAspects.add(TCAspects.valueOf(aspect.name()).getAspect(), aspect.amount());
+            }
 
-            if (WGConfig.allowClusters && !clusterBlacklist(material)
+            if (WGConfig.allowClusters && rgba != null
+                    && !clusterBlacklist(material)
                     && oresInVeins.contains(material)
-                    && hasItem("ore", material.mName)) {
-                int rgb = ((material.getRGBA()[0] & 0xff) << 16) | ((material.getRGBA()[1] & 0xff) << 8)
-                        | (material.getRGBA()[2] & 0xff);
+                    && hasItem("ore", materialName)) {
+                int rgb = ((rgba[0] & 0xff) << 16) | ((rgba[1] & 0xff) << 8) | (rgba[2] & 0xff);
 
                 ClusterOverlay clusterOverlay = ClusterOverlay.fromRGB(rgb);
 
@@ -309,25 +314,27 @@ public class WG_alchemic_clusters {
 
                 FluidStack liquid = null;
 
-                if (!material.mBlastFurnaceRequired) {
-                    liquid = material.getMolten(288);
+                boolean blastFurnaceRequired = MaterialUtils.blastFurnaceRequired(material);
+
+                if (!blastFurnaceRequired) {
+                    liquid = MaterialUtils.molten(material, 288);
 
                     if (liquid == null) {
-                        liquid = material.getFluid(288);
+                        liquid = MaterialUtils.fluid(material, 288);
                     }
                 }
 
-                MetaInfo metaInfo = new MetaInfo(ItemClusters.Series.GT5u, material.mMetaItemSubID);
+                MetaInfo metaInfo = new MetaInfo(ItemClusters.Series.GT5u, MaterialUtils.oldSubId(material));
 
                 ClusterInfo clusterInfo = new ClusterInfo(
-                        material.mName,
+                        materialName,
                         metaInfo,
-                        material.mBlastFurnaceRequired,
+                        blastFurnaceRequired,
                         liquid,
                         rgb,
                         clusterOverlay);
 
-                CLUSTER_INFO.put(material.mName, clusterInfo);
+                CLUSTER_INFO.put(materialName, clusterInfo);
 
                 AspectList alchemyAspects = baseAspects.copy().add(Aspect.ORDER, 1);
 
@@ -343,28 +350,28 @@ public class WG_alchemic_clusters {
                 }
 
                 List<ItemStack> normalOre = notRich.stream()
-                        .flatMap(prefix -> Utilities.oredictStream(prefix.name() + material.mName))
+                        .flatMap(prefix -> Utilities.oredictStream(prefix.name() + materialName))
                         .collect(Collectors.toList());
 
                 if (!normalOre.isEmpty()) {
                     CLUSTER_RECIPES.add(
                             registerAlchemyRecipe(
                                     "METALLURGICPERFECTION_CLUSTERS",
-                                    "_" + material.mName + "_Normal",
+                                    "_" + materialName + "_Normal",
                                     new ItemStack(WGContent.ItemCluster, 2, metaInfo.getMeta()),
                                     normalOre,
                                     alchemyAspects));
                 }
 
                 List<ItemStack> richOre = rich.stream()
-                        .flatMap(prefix -> Utilities.oredictStream(prefix.name() + material.mName))
+                        .flatMap(prefix -> Utilities.oredictStream(prefix.name() + materialName))
                         .collect(Collectors.toList());
 
                 if (!richOre.isEmpty()) {
                     CLUSTER_RECIPES.add(
                             registerAlchemyRecipe(
                                     "METALLURGICPERFECTION_CLUSTERS",
-                                    "_" + material.mName + "_Rich",
+                                    "_" + materialName + "_Rich",
                                     new ItemStack(WGContent.ItemCluster, 4, metaInfo.getMeta()),
                                     richOre,
                                     alchemyAspects));
@@ -373,7 +380,8 @@ public class WG_alchemic_clusters {
 
             ItemStack nugget = GTOreDictUnificator.get(OrePrefixes.nugget, material, 1);
 
-            if (WGConfig.allowTransmutations && nugget != null && material.contains(SubTag.TRANSMUTABLE_NUGGETS)) {
+            if (WGConfig.allowTransmutations && nugget != null
+                    && MaterialUtils.hasSubTag(material, SubTag.TRANSMUTABLE_NUGGETS)) {
                 AspectList transmuteAspects = baseAspects.copy();
 
                 if (Arrays.asList(transmuteAspects.getAspects()).contains(null)) {
@@ -390,7 +398,7 @@ public class WG_alchemic_clusters {
                 TRANSMUTE_RECIPES.add(
                         registerAlchemyRecipe(
                                 "METALLURGICPERFECTION_TRANSMUTATION",
-                                "_" + material.mName,
+                                "_" + materialName,
                                 Utilities.copyStackWithSize(nugget, 3),
                                 Utilities.copyStackWithSize(nugget, 1),
                                 transmuteAspects));

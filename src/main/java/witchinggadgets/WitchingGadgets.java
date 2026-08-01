@@ -18,6 +18,7 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLConstructionEvent;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLMissingMappingsEvent;
@@ -33,6 +34,7 @@ import witchinggadgets.common.CommonProxy;
 import witchinggadgets.common.WGConfig;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.WGModCompat;
+import witchinggadgets.common.recipes.WGShapeConsumers;
 import witchinggadgets.common.util.WGCreativeTab;
 import witchinggadgets.common.util.handler.EventHandler;
 import witchinggadgets.common.util.handler.PlayerTickHandler;
@@ -54,6 +56,7 @@ import witchinggadgets.common.world.VillageComponentPhotoshop;
                 + "after:TwilightForest;"
                 + "after:TaintedMagic;"
                 + "after:gregtech_nh;"
+                + "after:materiallib;"
                 + "after:miscutils;"
                 + "after:Mystcraft;"
                 + "after:TConstruct;"
@@ -88,6 +91,13 @@ public class WitchingGadgets {
     public static final String BOOTS = "thaumicboots";
 
     public static boolean isGT5uLoaded = false;
+
+    @Mod.EventHandler
+    public void construct(FMLConstructionEvent event) {
+        if (Loader.isModLoaded("gregtech_nh") && Loader.isModLoaded("materiallib")) {
+            MinecraftForge.EVENT_BUS.register(new WGShapeConsumers());
+        }
+    }
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {

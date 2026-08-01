@@ -10,11 +10,14 @@ import static witchinggadgets.common.recipes.WG_other_recipes.addBlastTripling;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
+import com.ruling_0.materiallib.api.Material;
+
 import gregtech.api.enums.GTValues;
-import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.SubTag;
 import gregtech.api.enums.TierEU;
+import gregtech.api.enums.materials.Materials;
+import gregtech.api.material.MaterialUtils;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTOreDictUnificator;
 import witchinggadgets.common.recipes.alchemic.WG_alchemic_clusters;
@@ -29,20 +32,20 @@ public class WG_GT_clusters {
 
             if (cluster == null) continue;
 
-            Materials material = clusterInfo.getGT5uMaterial();
+            Material material = clusterInfo.getGT5uMaterial();
             if (!clusterInfo.ebf()) {
                 addBlastTripling(clusterInfo.matName());
             }
 
-            int oreMultiplier = material == null ? 1 : material.mOreMultiplier;
+            int oreMultiplier = material == null ? 1 : MaterialUtils.oreMultiplier(material);
 
             if (material == Materials.Oilsands) {
                 GTValues.RA.stdBuilder().itemInputs(Utilities.copyStackWithSize(cluster, 1))
-                        .fluidOutputs(Materials.OilHeavy.getFluid(4000L)).eut(TierEU.RECIPE_MV).duration(60 * SECONDS)
-                        .addTo(centrifugeRecipes);
-            } else if (material != null && material.contains(SubTag.ICE_ORE)) {
+                        .fluidOutputs(MaterialUtils.fluid(Materials.OilHeavy, 4000L)).eut(TierEU.RECIPE_MV)
+                        .duration(60 * SECONDS).addTo(centrifugeRecipes);
+            } else if (MaterialUtils.hasSubTag(material, SubTag.ICE_ORE)) {
                 GTValues.RA.stdBuilder().itemInputs(cluster.copy())
-                        .fluidOutputs(material.getGas(1000L * material.mOreMultiplier)).duration(5 * SECONDS)
+                        .fluidOutputs(MaterialUtils.gas(material, 1000L * oreMultiplier)).duration(5 * SECONDS)
                         .eut(TierEU.RECIPE_MV).addTo(RecipeMaps.fluidExtractionRecipes);
             } else {
                 ItemStack dusts = clusterInfo.getPart(OrePrefixes.dust, 1);

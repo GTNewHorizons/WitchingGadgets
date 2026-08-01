@@ -12,9 +12,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 
+import com.ruling_0.materiallib.api.Material;
+
 import cpw.mods.fml.common.Optional;
-import gregtech.api.GregTechAPI;
-import gregtech.api.enums.Materials;
+import gregtech.api.enums.materials.LegacyMaterialIDIndex;
+import gregtech.api.material.LegacyNameDomain;
+import gregtech.api.material.MaterialUtils;
 import lombok.Data;
 import mods.railcraft.common.items.firestone.IItemFirestoneBurning;
 import witchinggadgets.WitchingGadgets;
@@ -55,24 +58,24 @@ public class ItemClusters extends Item implements IItemFirestoneBurning {
         public String getMaterialName() {
             return switch (series) {
                 case Legacy -> null;
-                case GT5u -> GregTechAPI.sGeneratedMaterials[matId].mName;
+                case GT5u -> MaterialUtils.internalName(LegacyMaterialIDIndex.get(matId));
                 case Misc -> WG_alchemic_clusters.subNames[matId];
                 case Error -> null;
             };
         }
 
         @Optional.Method(modid = "gregtech_nh")
-        public Materials getGT5uMaterial() {
+        public Material getGT5uMaterial() {
             if (series == Series.Legacy) return null;
-            if (series == Series.GT5u) return GregTechAPI.sGeneratedMaterials[matId];
+            if (series == Series.GT5u) return LegacyMaterialIDIndex.get(matId);
             if (series == Series.Error) return null;
 
-            return Materials.get(getMaterialName());
+            return LegacyNameDomain.lookup(getMaterialName());
         }
 
         @Optional.Method(modid = "gregtech_nh")
         public String getGT5uMatName() {
-            Materials mat = getGT5uMaterial();
+            Material mat = getGT5uMaterial();
 
             return mat == null ? "NULL" : mat.getLocalizedName();
         }

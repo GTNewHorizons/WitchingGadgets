@@ -3,11 +3,12 @@ package witchinggadgets.common.recipes.other;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
+import com.ruling_0.materiallib.api.MaterialLibAPI;
+
 import cpw.mods.fml.common.Loader;
-import gregtech.api.enums.Materials;
-import gregtech.api.enums.OrePrefixes;
+import gregtech.api.enums.materials.Materials;
+import gregtech.api.enums.materials.Shapes;
 import gregtech.api.util.GTModHandler;
-import gregtech.api.util.GTOreDictUnificator;
 import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.WGContent;
 import witchinggadgets.common.WGModCompat;
@@ -30,9 +31,9 @@ public class WG_other_spinning {
                 SpinningRecipe spin_flameString = new SpinningRecipe(
                         GTModHandler.getModItem("Natura", "barleyFood", 2L, 7),
                         new ItemStack(WGContent.ItemMaterial, 1, 2),
-                        GTOreDictUnificator.get(OrePrefixes.bolt, Materials.InfusedFire, 1L),
+                        MaterialLibAPI.getStack(Materials.InfusedFire, Shapes.bolt, 1),
                         new ItemStack(WGContent.ItemMaterial, 1, 2),
-                        GTOreDictUnificator.get(OrePrefixes.bolt, Materials.InfusedFire, 1L),
+                        MaterialLibAPI.getStack(Materials.InfusedFire, Shapes.bolt, 1),
                         new ItemStack(WGContent.ItemMaterial, 1, 2));
                 SpinningRecipe.addRecipe(spin_flameString);
             }
@@ -49,8 +50,8 @@ public class WG_other_spinning {
                     new ItemStack(WGContent.ItemMaterial, 2, 1),
                     Items.string,
                     Items.string,
-                    GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Gold, 1L),
-                    GTOreDictUnificator.get(OrePrefixes.wireFine, Materials.Gold, 1L));
+                    MaterialLibAPI.getStack(Materials.Gold, Shapes.wireFine, 1),
+                    MaterialLibAPI.getStack(Materials.Gold, Shapes.wireFine, 1));
             SpinningRecipe.addRecipe(spin_goldThread);
 
             SpinningRecipe spin_thaumiumThread = new SpinningRecipe(

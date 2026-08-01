@@ -11,10 +11,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagByte;
 
 import com.gtnewhorizon.gtnhlib.api.thaumcraft.EnhancedInfusionRecipe;
+import com.ruling_0.materiallib.api.MaterialLibAPI;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
+import gregtech.api.enums.materials.Materials;
+import gregtech.api.enums.materials.Shapes;
 import gregtech.api.util.GTModHandler;
 import gregtech.api.util.GTOreDictUnificator;
 import thaumcraft.api.aspects.Aspect;
@@ -73,9 +75,9 @@ public class WG_infusion_primordial_gear {
                     new ItemStack(ConfigBlocks.blockStoneDevice, 1, 11),
                     new ItemStack[] { new ItemStack(WGContent.ItemMaterial, 1, 5),
                             new ItemStack(ConfigItems.itemResource, 1, 17),
-                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Shadow, 1L),
+                            MaterialLibAPI.getStack(Materials.Shadow, Shapes.plate, 1),
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
-                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Shadow, 1L),
+                            MaterialLibAPI.getStack(Materials.Shadow, Shapes.plate, 1),
                             new ItemStack(ConfigItems.itemResource, 1, 17) },
                     replacePearl);
         }
@@ -487,9 +489,9 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence),
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
-                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Shadow, 1L),
+                            MaterialLibAPI.getStack(Materials.Shadow, Shapes.plate, 1),
                             GTModHandler.getModItem("TaintedMagic", "ItemShadowFortressHelmet", 1L),
-                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Shadow, 1L),
+                            MaterialLibAPI.getStack(Materials.Shadow, Shapes.plate, 1),
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence) },
@@ -508,9 +510,9 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence),
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
-                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Shadow, 1L),
+                            MaterialLibAPI.getStack(Materials.Shadow, Shapes.plate, 1),
                             GTModHandler.getModItem("TaintedMagic", "ItemShadowFortressChestplate", 1L),
-                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Shadow, 1L),
+                            MaterialLibAPI.getStack(Materials.Shadow, Shapes.plate, 1),
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence) },
@@ -529,9 +531,9 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence),
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
-                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Shadow, 1L),
+                            MaterialLibAPI.getStack(Materials.Shadow, Shapes.plate, 1),
                             GTModHandler.getModItem("TaintedMagic", "ItemShadowFortressLeggings", 1L),
-                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Shadow, 1L),
+                            MaterialLibAPI.getStack(Materials.Shadow, Shapes.plate, 1),
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence) },
@@ -550,9 +552,9 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence),
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
-                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Shadow, 1L),
+                            MaterialLibAPI.getStack(Materials.Shadow, Shapes.plate, 1),
                             GTModHandler.getModItem("TaintedMagic", "ItemVoidwalkerBoots", 1L),
-                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Shadow, 1L),
+                            MaterialLibAPI.getStack(Materials.Shadow, Shapes.plate, 1),
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence) },
@@ -572,9 +574,9 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence),
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
-                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Shadow, 1L),
+                            MaterialLibAPI.getStack(Materials.Shadow, Shapes.plate, 1),
                             new ItemStack(ConfigItems.itemHelmetFortress),
-                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Shadow, 1L),
+                            MaterialLibAPI.getStack(Materials.Shadow, Shapes.plate, 1),
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence) },
@@ -593,9 +595,9 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence),
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
-                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Shadow, 1L),
+                            MaterialLibAPI.getStack(Materials.Shadow, Shapes.plate, 1),
                             new ItemStack(ConfigItems.itemChestFortress),
-                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Shadow, 1L),
+                            MaterialLibAPI.getStack(Materials.Shadow, Shapes.plate, 1),
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence) },
@@ -614,9 +616,9 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence),
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
-                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Shadow, 1L),
+                            MaterialLibAPI.getStack(Materials.Shadow, Shapes.plate, 1),
                             new ItemStack(ConfigItems.itemLegsFortress),
-                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Shadow, 1L),
+                            MaterialLibAPI.getStack(Materials.Shadow, Shapes.plate, 1),
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence) },
@@ -635,9 +637,9 @@ public class WG_infusion_primordial_gear {
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence),
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
-                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Shadow, 1L),
+                            MaterialLibAPI.getStack(Materials.Shadow, Shapes.plate, 1),
                             new ItemStack(ConfigItems.itemBootsTraveller),
-                            GTOreDictUnificator.get(OrePrefixes.plate, Materials.Shadow, 1L),
+                            MaterialLibAPI.getStack(Materials.Shadow, Shapes.plate, 1),
                             new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence) },
