@@ -71,7 +71,6 @@ import witchinggadgets.common.util.WGKeyHandler;
 
 public class ClientProxy extends CommonProxy {
 
-    public static IModelCustom eliteArmorModel;
     public static IModelCustom cameraModel;
     public static IModelCustom gauntletModel;
     public static IModelCustom gemModel;
@@ -95,7 +94,6 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityEssentiaPump.class, new TileRenderEssentiaPump());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTerraformer.class, new TileRenderTerraformer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTerraformFocus.class, new TileRenderTerraformFocus());
-        eliteArmorModel = ClientUtilities.bindModel("witchinggadgets", "models/EliteRunicArmor.obj");
         cameraModel = ClientUtilities.bindModel("witchinggadgets", "models/ScanCamera.obj");
         gauntletModel = ClientUtilities.bindModel("witchinggadgets", "models/gauntlet.obj");
         gemModel = ClientUtilities.bindModel("witchinggadgets", "models/gems.obj");

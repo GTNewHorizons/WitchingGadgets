@@ -37,12 +37,13 @@ import witchinggadgets.common.util.WGCreativeTab;
 import witchinggadgets.common.util.handler.EventHandler;
 import witchinggadgets.common.util.handler.PlayerTickHandler;
 import witchinggadgets.common.util.handler.WGWandManager;
+import witchinggadgets.common.util.network.message.MessageChangeAspect;
 import witchinggadgets.common.util.network.message.MessageClientNotifier;
+import witchinggadgets.common.util.network.message.MessageCutGem;
 import witchinggadgets.common.util.network.message.MessageOpenCloak;
 import witchinggadgets.common.util.network.message.MessagePlaySound;
 import witchinggadgets.common.util.network.message.MessagePrimordialGlove;
 import witchinggadgets.common.util.network.message.MessageSyncGlide;
-import witchinggadgets.common.util.network.message.MessageTileUpdate;
 import witchinggadgets.common.world.VillageComponentPhotoshop;
 
 @Mod(
@@ -144,8 +145,9 @@ public class WitchingGadgets {
                 MessagePrimordialGlove.class,
                 2,
                 Side.SERVER);
-        packetHandler.registerMessage(MessageTileUpdate.HandlerClient.class, MessageTileUpdate.class, 3, Side.CLIENT);
-        packetHandler.registerMessage(MessageTileUpdate.HandlerServer.class, MessageTileUpdate.class, 4, Side.SERVER);
+        packetHandler
+                .registerMessage(MessageChangeAspect.HandlerServer.class, MessageChangeAspect.class, 3, Side.SERVER);
+        packetHandler.registerMessage(MessageCutGem.HandlerServer.class, MessageCutGem.class, 4, Side.SERVER);
 
         packetHandler.registerMessage(MessageOpenCloak.HandlerClient.class, MessageOpenCloak.class, 5, Side.CLIENT);
         packetHandler.registerMessage(MessageOpenCloak.HandlerServer.class, MessageOpenCloak.class, 6, Side.SERVER);
