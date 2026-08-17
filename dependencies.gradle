@@ -5,12 +5,12 @@ dependencies {
     implementation("com.github.GTNewHorizons:GTNHLib:0.9.48:dev")
     implementation('com.github.GTNewHorizons:Baubles-Expanded:2.2.11-GTNH:dev')
     compileOnly('com.github.GTNewHorizons:GT5-Unofficial:5.99.99-mu2:dev') {exclude module: "Baubles" }
-    compileOnly('com.ruling_0:MaterialLib:0.2.0-mu:dev')
+    compileOnly('com.ruling_0:MaterialLib:0.9.0-mu:dev')
     implementation('com.github.GTNewHorizons:ForbiddenMagic:0.9.15-GTNH:dev') {exclude module: "Baubles" }
     implementation('com.github.GTNewHorizons:twilightforest:2.7.26:dev')
     implementation('thaumcraft:Thaumcraft:1.7.10-4.2.3.5:dev') {transitive=false}
     implementation('com.github.GTNewHorizons:NotEnoughItems:2.8.86-GTNH:dev')
-    compileOnly("com.github.GTNewHorizons:Postea:1.2.5:dev")
+    compileOnly("com.github.GTNewHorizons:Postea:1.2.6:dev")
 
     devOnlyNonPublishable('com.github.GTNewHorizons:ThaumicBoots:1.5.9:dev') {transitive=false}
     compileOnly('com.github.GTNewHorizons:ThaumicBases:1.9.12:dev') {transitive=false}
