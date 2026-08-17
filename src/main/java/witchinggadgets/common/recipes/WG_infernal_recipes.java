@@ -18,10 +18,8 @@ import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.util.recipe.InfernalBlastfurnaceRecipe;
 
 /// Mirrors GregTech's primitive blast furnace into the infernal blast furnace, one recipe per dust-carrying
-/// material. Ingots resolve through the ore dictionary rather than [MaterialLibAPI#getStack]: a material
-/// carrying a dust need not carry an ingot at all, and the ones backed by a vanilla ingot (iron, gold) hold
-/// no `ingot` shape even though `ingotIron` exists. MaterialLib also turns an exception thrown from a shape
-/// consumer into a load failure, so every lookup here has to be able to answer null.
+/// material. Ingots resolve through the ore dictionary, not [MaterialLibAPI#getStack]: a material carrying a
+/// dust need not carry an `ingot` shape, and the vanilla-backed ones (iron, gold) never do.
 public class WG_infernal_recipes implements ShapeConsumer {
 
     @Override

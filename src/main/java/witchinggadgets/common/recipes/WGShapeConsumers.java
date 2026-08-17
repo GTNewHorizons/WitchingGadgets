@@ -6,12 +6,10 @@ import com.ruling_0.materiallib.api.MaterialRegistrationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import witchinggadgets.WitchingGadgets;
 
-/// Carries the [MaterialRegistrationEvent] subscription for Witching Gadgets. It is deliberately not on
-/// [WitchingGadgets] itself: GregTech and MaterialLib are soft dependencies, so bus registration of this
-/// handler happens only once both are present and the main mod class never names a MaterialLib type.
+/// Holds Witching Gadgets' [MaterialRegistrationEvent] subscription, kept off [WitchingGadgets] to keep the
+/// main mod class free of MaterialLib types under a soft dependency.
 ///
-/// Shapes are targeted by name rather than by a `Shapes` constant because those constants are still null
-/// while this event is being dispatched.
+/// Shapes are targeted by name: the `Shapes` constants are still null while this event is dispatched.
 public class WGShapeConsumers {
 
     @SubscribeEvent

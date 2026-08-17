@@ -290,8 +290,7 @@ public class WG_alchemic_clusters {
         }
 
         for (Material material : MaterialLibAPI.getMaterials()) {
-            // MetaInfo packs the cluster meta out of the legacy 1000-entry sub-id space, so a material with no
-            // slot in it has no representable cluster.
+            // MetaInfo packs the cluster meta out of the legacy 1000-entry sub-id space.
             if (MaterialUtils.oldSubId(material) < 0) continue;
 
             final String materialName = MaterialUtils.internalName(material);
