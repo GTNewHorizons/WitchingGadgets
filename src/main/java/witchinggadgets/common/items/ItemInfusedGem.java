@@ -51,7 +51,7 @@ import witchinggadgets.common.util.Utilities;
 
 public class ItemInfusedGem extends Item implements IInfusedGem {
 
-    IIcon[] icons = new IIcon[GemCut.values().length];
+    IIcon[] icons = new IIcon[GemCut.VALUES.length];
 
     public ItemInfusedGem() {
         super();
@@ -768,8 +768,8 @@ public class ItemInfusedGem extends Item implements IInfusedGem {
     @SideOnly(Side.CLIENT)
     @Override
     public void registerIcons(IIconRegister ir) {
-        for (int i = 0; i < icons.length; i++) this.icons[i] = ir
-                .registerIcon("witchinggadgets:infusedGem_" + GemCut.values()[i].toString().toLowerCase());
+        for (int i = 0; i < icons.length; i++)
+            this.icons[i] = ir.registerIcon("witchinggadgets:infusedGem_" + GemCut.VALUES[i].toString().toLowerCase());
     }
 
     @Override
@@ -844,9 +844,11 @@ public class ItemInfusedGem extends Item implements IInfusedGem {
         // ROSE,
         OVAL;
 
+        public static final GemCut[] VALUES = values();
+
         public static GemCut getValue(byte b) {
-            if (b >= 0 && b < values().length) return values()[b];
-            return values()[0];
+            if (b >= 0 && b < VALUES.length) return VALUES[b];
+            return VALUES[0];
         }
     }
 
