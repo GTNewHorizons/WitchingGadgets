@@ -15,7 +15,7 @@ import witchinggadgets.common.WGContent;
 
 public class WG_infusion_ice_solidifier {
 
-    public static void registerSnowballer() {
+    public static void registerIceSolidifier() {
         if (WitchingGadgets.isGT5uLoaded) {
             registerInfusionRecipe(
                     "ICESOLIDIFIER",
