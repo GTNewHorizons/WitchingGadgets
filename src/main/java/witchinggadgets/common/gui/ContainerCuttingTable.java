@@ -14,6 +14,7 @@ public class ContainerCuttingTable extends Container {
 
     protected final TileEntityCuttingTable tileEntity;
     private static final int SLOT_AMOUNT = 5;
+    public static final int ID = 9;
 
     public ContainerCuttingTable(InventoryPlayer inventoryPlayer, TileEntityCuttingTable te) {
         this.tileEntity = te;

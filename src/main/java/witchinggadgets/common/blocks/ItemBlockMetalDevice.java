@@ -27,6 +27,6 @@ public class ItemBlockMetalDevice extends ItemBlock {
 
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
-        return getUnlocalizedName() + "." + BlockWGMetalDevice.subNames[itemstack.getItemDamage()];
+        return getUnlocalizedName() + "." + BlockWGMetalDevice.SubID.fromMeta(itemstack.getItemDamage()).name;
     }
 }

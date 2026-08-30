@@ -11,6 +11,7 @@ import witchinggadgets.common.blocks.tiles.TileEntitySpinningWheel;
 public class ContainerSpinningWheel extends Container {
 
     protected TileEntitySpinningWheel tileEntity;
+    public static final int ID = 0;
     private static final int SLOT_AMOUNT = 6;
 
     public ContainerSpinningWheel(InventoryPlayer inventoryPlayer, TileEntitySpinningWheel te) {

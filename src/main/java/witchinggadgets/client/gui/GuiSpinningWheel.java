@@ -12,6 +12,7 @@ import witchinggadgets.common.gui.ContainerSpinningWheel;
 public class GuiSpinningWheel extends GuiContainer {
 
     private final TileEntitySpinningWheel tile;
+    public static final int GUI_ID = 0;
 
     public GuiSpinningWheel(InventoryPlayer inventoryPlayer, TileEntitySpinningWheel tileEntity) {
         super(new ContainerSpinningWheel(inventoryPlayer, tileEntity));

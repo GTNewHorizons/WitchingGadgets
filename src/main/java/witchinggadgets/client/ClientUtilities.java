@@ -47,6 +47,7 @@ public class ClientUtilities {
     public static int colour_CloakNil = 14737632;
     public static int colour_CloakRaven = 3487288;
     public static int colour_CloakStorage = Aspect.VOID.getColor();
+    public static int colour_GuiGrey = 4210752;
 
     public static String[] nodeTypeChatColour = { "7", "2", "8", "5", "4", "f" };
     public static String[] nodeModifierChatColour = { "f", "7", "8" };

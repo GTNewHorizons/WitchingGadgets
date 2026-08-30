@@ -22,6 +22,7 @@ import org.lwjgl.opengl.GL12;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import thaumcraft.client.renderers.block.BlockRenderer;
+import witchinggadgets.common.blocks.BlockWGMetalDevice;
 import witchinggadgets.common.blocks.tiles.TileEntityEssentiaPump;
 import witchinggadgets.common.blocks.tiles.TileEntityTerraformFocus;
 import witchinggadgets.common.blocks.tiles.TileEntityTerraformer;
@@ -32,15 +33,15 @@ public class BlockRenderMetalDevice implements ISimpleBlockRenderingHandler {
 
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
-        if (metadata == 1) {
+        if (metadata == BlockWGMetalDevice.SubID.VOIDMETAL_BLOCK.getMeta()) {
             block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
             renderer.setRenderBoundsFromBlock(block);
             BlockRenderer.drawFaces(renderer, block, block.getIcon(0, metadata), true);
-        } else if (metadata == 2) {
+        } else if (metadata == BlockWGMetalDevice.SubID.TERRAFORMER.getMeta()) {
             GL11.glTranslatef(-.5f, -.5F, -.5f);
             TileEntityRendererDispatcher.instance
                     .renderTileEntityAt(new TileEntityTerraformer(), 0.0D, 0.0D, 0.0D, 0.0F);
-        } else if (metadata > 2) {
+        } else if (BlockWGMetalDevice.SubID.isTFFocus(metadata)) {
             GL11.glTranslatef(-.5f, -.5F, -.5f);
             TileEntityTerraformFocus tetf = new TileEntityTerraformFocus();
             tetf.blockType = block;
@@ -66,7 +67,7 @@ public class BlockRenderMetalDevice implements ISimpleBlockRenderingHandler {
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
             RenderBlocks renderer) {
-        if (world.getBlockMetadata(x, y, z) == 1) {
+        if (world.getBlockMetadata(x, y, z) == BlockWGMetalDevice.SubID.VOIDMETAL_BLOCK.getMeta()) {
             block.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
             renderer.setRenderBoundsFromBlock(block);
             return renderer.renderStandardBlock(block, x, y, z);

@@ -19,6 +19,7 @@ public class ContainerBag extends Container {
     public InventoryBag input = new InventoryBag(this);
     private final int hotbarSlot;
     private static final int POUCH_SLOT_AMOUNT = 18;
+    public static final int ID = 3;
 
     public ContainerBag(InventoryPlayer iinventory, World world) {
         this.worldObj = world;

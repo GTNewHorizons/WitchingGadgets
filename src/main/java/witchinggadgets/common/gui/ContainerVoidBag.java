@@ -18,6 +18,7 @@ public class ContainerVoidBag extends ContainerGhostSlots {
     EntityPlayer player;
     private final int hotbarSlot;
     private static final int POUCH_SLOT_AMOUNT = 18;
+    public static final int ID = 11;
 
     public ContainerVoidBag(InventoryPlayer iinventory, World world) {
         this.worldObj = world;

@@ -20,7 +20,8 @@ public class GuiVoidBag extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2) {
-        this.fontRendererObj.drawString(I18n.format("container.inventory"), 4, this.ySize - 92, 4210752);
+        this.fontRendererObj
+                .drawString(I18n.format("container.inventory"), 4, this.ySize - 92, ClientUtilities.colour_GuiGrey);
     }
 
     @Override
