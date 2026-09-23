@@ -16,6 +16,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import com.gtnewhorizons.postea.api.ItemStackReplacementManager;
 import com.ruling_0.materiallib.api.Material;
 import com.ruling_0.materiallib.api.MaterialLibAPI;
+import com.ruling_0.materiallib.api.Shape;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
@@ -115,6 +116,13 @@ public class WG_alchemic_clusters {
         @Optional.Method(modid = "gregtech_nh")
         public ItemStack getPart(OrePrefixes prefix, int amount) {
             return GTOreDictUnificator.get(prefix, getGT5uMaterial(), amount);
+        }
+
+        @Optional.Method(modid = "gregtech_nh")
+        public ItemStack getPart(Shape shape, int amount) {
+            Material material = getGT5uMaterial();
+            if (material == null || !material.hasShape(shape)) return null;
+            return MaterialLibAPI.getStack(material, shape, amount);
         }
 
         public String matName() {
