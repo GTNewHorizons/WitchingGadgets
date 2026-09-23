@@ -15,13 +15,13 @@ import com.ruling_0.materiallib.api.MaterialLibAPI;
 import com.ruling_0.materiallib.api.Shape;
 
 import gregtech.api.enums.GTValues;
-import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.SubTag;
 import gregtech.api.enums.TierEU;
 import gregtech.api.enums.materials.Materials;
 import gregtech.api.enums.materials.Shapes;
 import gregtech.api.material.MaterialUtils;
 import gregtech.api.recipe.RecipeMaps;
+import witchinggadgets.common.WGContent;
 import witchinggadgets.common.recipes.alchemic.WG_alchemic_clusters;
 import witchinggadgets.common.recipes.alchemic.WG_alchemic_clusters.ClusterInfo;
 import witchinggadgets.common.util.Utilities;
@@ -30,9 +30,7 @@ public class WG_GT_clusters {
 
     public static void registerClusterRecipesGT() {
         for (ClusterInfo clusterInfo : WG_alchemic_clusters.CLUSTER_INFO.values()) {
-            ItemStack cluster = clusterInfo.getPart(OrePrefixes.cluster, 1);
-
-            if (cluster == null) continue;
+            ItemStack cluster = new ItemStack(WGContent.ItemCluster, 1, clusterInfo.meta().getMeta());
 
             Material material = clusterInfo.getGT5uMaterial();
             if (!clusterInfo.ebf()) {

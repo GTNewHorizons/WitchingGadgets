@@ -28,10 +28,10 @@ import gregtech.api.enums.SubTag;
 import gregtech.api.enums.TCAspects;
 import gregtech.api.enums.materials.MaterialFacades;
 import gregtech.api.enums.materials.Materials;
+import gregtech.api.enums.materials.Shapes;
 import gregtech.api.material.AspectRefStack;
 import gregtech.api.material.LegacyNameDomain;
 import gregtech.api.material.MaterialUtils;
-import gregtech.api.util.GTOreDictUnificator;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import lombok.AllArgsConstructor;
@@ -111,11 +111,6 @@ public class WG_alchemic_clusters {
 
         public ItemStack getPart(String prefix, int amount) {
             return Utilities.getOredict(prefix + matName, amount);
-        }
-
-        @Optional.Method(modid = "gregtech_nh")
-        public ItemStack getPart(OrePrefixes prefix, int amount) {
-            return GTOreDictUnificator.get(prefix, getGT5uMaterial(), amount);
         }
 
         @Optional.Method(modid = "gregtech_nh")
@@ -385,7 +380,8 @@ public class WG_alchemic_clusters {
                 }
             }
 
-            ItemStack nugget = GTOreDictUnificator.get(OrePrefixes.nugget, material, 1);
+            ItemStack nugget = material.hasShape(Shapes.nugget) ? MaterialLibAPI.getStack(material, Shapes.nugget, 1)
+                    : null;
 
             if (WGConfig.allowTransmutations && nugget != null
                     && MaterialUtils.hasSubTag(material, SubTag.TRANSMUTABLE_NUGGETS)) {
