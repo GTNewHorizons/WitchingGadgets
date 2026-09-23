@@ -14,11 +14,10 @@ import com.gtnewhorizon.gtnhlib.api.thaumcraft.EnhancedInfusionRecipe;
 import com.ruling_0.materiallib.api.MaterialLibAPI;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import gregtech.api.enums.OrePrefixes;
+import gregtech.api.enums.materials.BlockShapes;
 import gregtech.api.enums.materials.Materials;
 import gregtech.api.enums.materials.Shapes;
 import gregtech.api.util.GTModHandler;
-import gregtech.api.util.GTOreDictUnificator;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.config.ConfigBlocks;
@@ -90,7 +89,7 @@ public class WG_infusion_primordial_gear {
                 new AspectList().add(Aspect.MAGIC, 512).add(Aspect.METAL, 1024).add(Aspect.WEAPON, 512)
                         .add(Aspect.AIR, 256).add(Aspect.FIRE, 256).add(Aspect.WATER, 256).add(Aspect.EARTH, 256)
                         .add(Aspect.ORDER, 256).add(Aspect.ENTROPY, 256),
-                GTOreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L),
+                MaterialLibAPI.getStack(Materials.Void, BlockShapes.block, 1),
                 new ItemStack[] { new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemSwordVoid),
                         new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                         new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
@@ -107,7 +106,7 @@ public class WG_infusion_primordial_gear {
                 new AspectList().add(Aspect.MAGIC, 512).add(Aspect.METAL, 1024).add(Aspect.TOOL, 256)
                         .add(Aspect.WEAPON, 256).add(Aspect.AIR, 256).add(Aspect.FIRE, 256).add(Aspect.WATER, 256)
                         .add(Aspect.EARTH, 256).add(Aspect.ORDER, 256).add(Aspect.ENTROPY, 256),
-                GTOreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L),
+                MaterialLibAPI.getStack(Materials.Void, BlockShapes.block, 1),
                 new ItemStack[] { new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemPickVoid),
                         new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                         new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
@@ -124,7 +123,7 @@ public class WG_infusion_primordial_gear {
                 new AspectList().add(Aspect.MAGIC, 512).add(Aspect.METAL, 1024).add(Aspect.TOOL, 256)
                         .add(Aspect.WEAPON, 256).add(Aspect.AIR, 256).add(Aspect.FIRE, 256).add(Aspect.WATER, 256)
                         .add(Aspect.EARTH, 256).add(Aspect.ORDER, 256).add(Aspect.ENTROPY, 256),
-                GTOreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L),
+                MaterialLibAPI.getStack(Materials.Void, BlockShapes.block, 1),
                 new ItemStack[] { new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemAxeVoid),
                         new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                         new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
@@ -484,7 +483,7 @@ public class WG_infusion_primordial_gear {
                     new AspectList().add(Aspect.MAGIC, 512).add(Aspect.METAL, 1024).add(Aspect.ARMOR, 256)
                             .add(Aspect.AIR, 256).add(Aspect.FIRE, 256).add(Aspect.WATER, 256).add(Aspect.EARTH, 256)
                             .add(Aspect.ORDER, 256).add(Aspect.ENTROPY, 256),
-                    GTOreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L),
+                    MaterialLibAPI.getStack(Materials.Void, BlockShapes.block, 1),
                     new ItemStack[] { new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence),
@@ -505,7 +504,7 @@ public class WG_infusion_primordial_gear {
                     new AspectList().add(Aspect.MAGIC, 512).add(Aspect.METAL, 1024).add(Aspect.ARMOR, 256)
                             .add(Aspect.AIR, 256).add(Aspect.FIRE, 256).add(Aspect.WATER, 256).add(Aspect.EARTH, 256)
                             .add(Aspect.ORDER, 256).add(Aspect.ENTROPY, 256),
-                    GTOreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L),
+                    MaterialLibAPI.getStack(Materials.Void, BlockShapes.block, 1),
                     new ItemStack[] { new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence),
@@ -526,7 +525,7 @@ public class WG_infusion_primordial_gear {
                     new AspectList().add(Aspect.MAGIC, 512).add(Aspect.METAL, 1024).add(Aspect.ARMOR, 256)
                             .add(Aspect.AIR, 256).add(Aspect.FIRE, 256).add(Aspect.WATER, 256).add(Aspect.EARTH, 256)
                             .add(Aspect.ORDER, 256).add(Aspect.ENTROPY, 256),
-                    GTOreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L),
+                    MaterialLibAPI.getStack(Materials.Void, BlockShapes.block, 1),
                     new ItemStack[] { new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence),
@@ -547,7 +546,7 @@ public class WG_infusion_primordial_gear {
                     new AspectList().add(Aspect.MAGIC, 512).add(Aspect.METAL, 1024).add(Aspect.ARMOR, 256)
                             .add(Aspect.AIR, 256).add(Aspect.FIRE, 256).add(Aspect.WATER, 256).add(Aspect.EARTH, 256)
                             .add(Aspect.ORDER, 256).add(Aspect.ENTROPY, 256),
-                    GTOreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L),
+                    MaterialLibAPI.getStack(Materials.Void, BlockShapes.block, 1),
                     new ItemStack[] { new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence),
@@ -569,7 +568,7 @@ public class WG_infusion_primordial_gear {
                     new AspectList().add(Aspect.MAGIC, 512).add(Aspect.METAL, 1024).add(Aspect.ARMOR, 256)
                             .add(Aspect.AIR, 256).add(Aspect.FIRE, 256).add(Aspect.WATER, 256).add(Aspect.EARTH, 256)
                             .add(Aspect.ORDER, 256).add(Aspect.ENTROPY, 256),
-                    GTOreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L),
+                    MaterialLibAPI.getStack(Materials.Void, BlockShapes.block, 1),
                     new ItemStack[] { new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence),
@@ -590,7 +589,7 @@ public class WG_infusion_primordial_gear {
                     new AspectList().add(Aspect.MAGIC, 512).add(Aspect.METAL, 1024).add(Aspect.ARMOR, 256)
                             .add(Aspect.AIR, 256).add(Aspect.FIRE, 256).add(Aspect.WATER, 256).add(Aspect.EARTH, 256)
                             .add(Aspect.ORDER, 256).add(Aspect.ENTROPY, 256),
-                    GTOreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L),
+                    MaterialLibAPI.getStack(Materials.Void, BlockShapes.block, 1),
                     new ItemStack[] { new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence),
@@ -611,7 +610,7 @@ public class WG_infusion_primordial_gear {
                     new AspectList().add(Aspect.MAGIC, 512).add(Aspect.METAL, 1024).add(Aspect.ARMOR, 256)
                             .add(Aspect.AIR, 256).add(Aspect.FIRE, 256).add(Aspect.WATER, 256).add(Aspect.EARTH, 256)
                             .add(Aspect.ORDER, 256).add(Aspect.ENTROPY, 256),
-                    GTOreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L),
+                    MaterialLibAPI.getStack(Materials.Void, BlockShapes.block, 1),
                     new ItemStack[] { new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence),
@@ -632,7 +631,7 @@ public class WG_infusion_primordial_gear {
                     new AspectList().add(Aspect.MAGIC, 512).add(Aspect.METAL, 1024).add(Aspect.ARMOR, 256)
                             .add(Aspect.AIR, 256).add(Aspect.FIRE, 256).add(Aspect.WATER, 256).add(Aspect.EARTH, 256)
                             .add(Aspect.ORDER, 256).add(Aspect.ENTROPY, 256),
-                    GTOreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L),
+                    MaterialLibAPI.getStack(Materials.Void, BlockShapes.block, 1),
                     new ItemStack[] { new ItemStack(ConfigItems.itemEldritchObject, 1, 3),
                             new ItemStack(ConfigItems.itemWispEssence), new ItemStack(ConfigItems.itemResource, 1, 15),
                             new ItemStack(ConfigItems.itemWispEssence),

@@ -11,12 +11,14 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 import com.ruling_0.materiallib.api.Material;
+import com.ruling_0.materiallib.api.MaterialLibAPI;
 
 import gregtech.api.enums.GTValues;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.SubTag;
 import gregtech.api.enums.TierEU;
 import gregtech.api.enums.materials.Materials;
+import gregtech.api.enums.materials.Shapes;
 import gregtech.api.material.MaterialUtils;
 import gregtech.api.recipe.RecipeMaps;
 import gregtech.api.util.GTOreDictUnificator;
@@ -160,7 +162,7 @@ public class WG_GT_clusters {
                                             new ItemStack(Items.coal, 2, 0),
                                             new ItemStack(Items.coal, 2, 0),
                                             new ItemStack(Items.coal, 2, 0),
-                                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Coal, 2L))
+                                            MaterialLibAPI.getStack(Materials.Coal, Shapes.dust, 2))
                                     .outputChances(10000, 9000, 8000, 7000, 6000, 5000).duration(60 * SECONDS)
                                     .eut(TierEU.RECIPE_LV).addTo(sifterRecipes);
                         }

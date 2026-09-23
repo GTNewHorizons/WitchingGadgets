@@ -8,12 +8,10 @@ import com.ruling_0.materiallib.api.Shape;
 import com.ruling_0.materiallib.api.ShapeConsumer;
 
 import gregtech.GTMod;
-import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.SubTag;
 import gregtech.api.enums.materials.Materials;
 import gregtech.api.enums.materials.Shapes;
 import gregtech.api.material.MaterialUtils;
-import gregtech.api.util.GTOreDictUnificator;
 import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.util.recipe.InfernalBlastfurnaceRecipe;
 
@@ -33,18 +31,17 @@ public class WG_infernal_recipes implements ShapeConsumer {
                 return;
             }
 
-            ItemStack ingot = GTOreDictUnificator.get(OrePrefixes.ingot, material, 1L);
-            if (ingot == null) return;
+            if (!material.hasShape(Shapes.ingot)) return;
 
-            addRecipe(ingot, MaterialLibAPI.getStack(material, shape, 1));
+            addRecipe(MaterialLibAPI.getStack(material, Shapes.ingot, 1), MaterialLibAPI.getStack(material, shape, 1));
             return;
         }
 
         if (material == directSmelt) return;
 
         int outputAmount = GTMod.proxy.mMixedOreOnlyYieldsTwoThirdsOfPureOre ? 2 : 3;
-        ItemStack ingots = GTOreDictUnificator.get(OrePrefixes.ingot, directSmelt, outputAmount);
-        if (ingots == null) return;
+        if (!directSmelt.hasShape(Shapes.ingot)) return;
+        ItemStack ingots = MaterialLibAPI.getStack(directSmelt, Shapes.ingot, outputAmount);
 
         if (!MaterialUtils.hasSubTag(material, SubTag.DONT_ADD_DEFAULT_BBF_RECIPE)) {
             addRecipe(ingots, MaterialLibAPI.getStack(material, shape, 2));

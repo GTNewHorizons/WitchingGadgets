@@ -12,11 +12,10 @@ import com.ruling_0.materiallib.api.MaterialLibAPI;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import fox.spiteful.forbidden.DarkAspects;
-import gregtech.api.enums.OrePrefixes;
+import gregtech.api.enums.materials.BlockShapes;
 import gregtech.api.enums.materials.Materials;
 import gregtech.api.enums.materials.Shapes;
 import gregtech.api.util.GTModHandler;
-import gregtech.api.util.GTOreDictUnificator;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -47,12 +46,12 @@ public class WG_infusion_terraformer {
                         new AspectList().add(Aspect.WEATHER, 64).add(Aspect.EXCHANGE, 256)
                                 .add((Aspect) gregtech.api.enums.TCAspects.NEBRISUM.mAspect, 32),
                         new ItemStack(ConfigBlocks.blockMetalDevice, 1, 9),
-                        new ItemStack[] { GTOreDictUnificator.get(OrePrefixes.block, Materials.Blaze, 1L),
-                                GTOreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L),
+                        new ItemStack[] { MaterialLibAPI.getStack(Materials.Blaze, BlockShapes.block, 1),
+                                MaterialLibAPI.getStack(Materials.Void, BlockShapes.block, 1),
                                 GTModHandler.getModItem("dreamcraft", "CallistoColdIce", 1L),
-                                GTOreDictUnificator.get(OrePrefixes.block, Materials.Knightmetal, 1L),
+                                MaterialLibAPI.getStack(Materials.Knightmetal, BlockShapes.block, 1),
                                 gregtech.api.enums.ItemList.Field_Generator_MV.get(1L),
-                                GTOreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L) });
+                                MaterialLibAPI.getStack(Materials.Void, BlockShapes.block, 1) });
             } else {
                 registerInfusionRecipe(
                         "TERRAFORMER",
@@ -62,12 +61,12 @@ public class WG_infusion_terraformer {
                         new AspectList().add(Aspect.WEATHER, 64).add(Aspect.EXCHANGE, 256)
                                 .add((Aspect) gregtech.api.enums.TCAspects.NEBRISUM.mAspect, 32),
                         new ItemStack(ConfigBlocks.blockMetalDevice, 1, 9),
-                        new ItemStack[] { GTOreDictUnificator.get(OrePrefixes.block, Materials.Blaze, 1L),
-                                GTOreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L),
+                        new ItemStack[] { MaterialLibAPI.getStack(Materials.Blaze, BlockShapes.block, 1),
+                                MaterialLibAPI.getStack(Materials.Void, BlockShapes.block, 1),
                                 new ItemStack(Blocks.packed_ice),
-                                GTOreDictUnificator.get(OrePrefixes.block, Materials.Knightmetal, 1L),
+                                MaterialLibAPI.getStack(Materials.Knightmetal, BlockShapes.block, 1),
                                 gregtech.api.enums.ItemList.Field_Generator_MV.get(1L),
-                                GTOreDictUnificator.get(OrePrefixes.block, Materials.Void, 1L) });
+                                MaterialLibAPI.getStack(Materials.Void, BlockShapes.block, 1) });
             }
 
             registerInfusionRecipe(
