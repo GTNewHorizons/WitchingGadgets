@@ -422,6 +422,16 @@ public class Utilities {
         return copy;
     }
 
+    /// The `prefix` part of the material named `materialName`: GregTech's MaterialLib part when GregTech serves it,
+    /// else the first item registered under the combined ore-dictionary name.
+    public static ItemStack getPart(String prefix, String materialName, int amount) {
+        if (WitchingGadgets.isGT5uLoaded) {
+            ItemStack part = GT5uParts.get(prefix, materialName, amount);
+            if (part != null) return part;
+        }
+        return getOredict(prefix + materialName, amount);
+    }
+
     public static ItemStack getOredict(String name, int amount) {
         if (WitchingGadgets.isGT5uLoaded) {
             return GTOreDictUnificator.get(name, amount);

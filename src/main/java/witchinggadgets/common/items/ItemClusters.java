@@ -158,7 +158,7 @@ public class ItemClusters extends Item implements IItemFirestoneBurning {
                     return StatCollector.translateToLocal(key);
                 }
 
-                ItemStack ingot = Utilities.getOredict("ingot" + clusterInfo.matName(), 1);
+                ItemStack ingot = Utilities.getPart("ingot", clusterInfo.matName(), 1);
 
                 if (ingot == null) {
                     return StatCollector.translateToLocal("item.WG_Material.clusterInvalid.name");

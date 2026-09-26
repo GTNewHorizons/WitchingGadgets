@@ -110,7 +110,7 @@ public class WG_alchemic_clusters {
         }
 
         public ItemStack getPart(String prefix, int amount) {
-            return Utilities.getOredict(prefix + matName, amount);
+            return Utilities.getPart(prefix, matName, amount);
         }
 
         @Optional.Method(modid = "gregtech_nh")
@@ -202,7 +202,7 @@ public class WG_alchemic_clusters {
                                     "ore" + subName,
                                     alchemyAspects));
 
-                    ItemStack ingot = Utilities.getOredict("ingot" + subName, 1);
+                    ItemStack ingot = Utilities.getPart("ingot", subName, 1);
 
                     int rgb = 0;
 
@@ -225,7 +225,7 @@ public class WG_alchemic_clusters {
 
             if (WGConfig.allowTransmutations) {
                 if (hasItem("nugget", subName) && hasItem("ingot", subName)) {
-                    ItemStack ingot = Utilities.getOredict("ingot" + subName, 1);
+                    ItemStack ingot = Utilities.getPart("ingot", subName, 1);
 
                     AspectList alchemyAspects = ThaumcraftApi.objectTags
                             .get(Arrays.asList(ingot.getItem(), ingot.getItemDamage()));
@@ -238,7 +238,7 @@ public class WG_alchemic_clusters {
 
                     alchemyAspects.aspects.entrySet().removeIf(e -> e.getKey() == null || e.getValue() == null);
 
-                    ItemStack nuggets = Utilities.getOredict("nugget" + subName, 3);
+                    ItemStack nuggets = Utilities.getPart("nugget", subName, 3);
 
                     TRANSMUTE_RECIPES.add(
                             registerAlchemyRecipe(

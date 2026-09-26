@@ -52,8 +52,8 @@ public class WG_GT_clusters {
                 ItemStack tinyDusts = clusterInfo.getPart(Shapes.dustTiny, 1);
 
                 if ("NaquadahEnriched".equals(clusterInfo.matName())) {
-                    dusts = Utilities.getOredict("dustEnriched-NaquadahOxideMixture", 1);
-                    tinyDusts = Utilities.getOredict("dustTinyEnriched-NaquadahOxideMixture", 1);;
+                    dusts = MaterialLibAPI.getStack(Materials.EnrichedNaquadahOxideMixture, Shapes.dust, 1);
+                    tinyDusts = MaterialLibAPI.getStack(Materials.EnrichedNaquadahOxideMixture, Shapes.dustTiny, 1);
                 }
                 ItemStack gems = clusterInfo.getPart(Shapes.gem, 1);
 
