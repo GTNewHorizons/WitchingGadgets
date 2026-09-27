@@ -41,7 +41,6 @@ import org.apache.logging.log4j.Level;
 import baubles.api.BaublesApi;
 import baubles.api.expanded.BaubleExpandedSlots;
 import cpw.mods.fml.common.Loader;
-import gregtech.api.util.GTOreDictUnificator;
 import gregtech.api.util.GTUtility;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -429,19 +428,9 @@ public class Utilities {
             ItemStack part = GT5uParts.get(prefix, materialName, amount);
             if (part != null) return part;
         }
-        return getOredict(prefix + materialName, amount);
-    }
-
-    public static ItemStack getOredict(String name, int amount) {
-        if (WitchingGadgets.isGT5uLoaded) {
-            return GTOreDictUnificator.get(name, amount);
-        } else {
-            List<ItemStack> stack = OreDictionary.getOres(name);
-
-            if (stack.isEmpty() || stack.get(0) == null) return null;
-
-            return copyStackWithSize(stack.get(0), amount);
-        }
+        List<ItemStack> ores = OreDictionary.getOres(prefix + materialName);
+        if (ores.isEmpty() || ores.get(0) == null) return null;
+        return copyStackWithSize(ores.get(0), amount);
     }
 
     public static void setAttackTarget(EntityLiving living, EntityLivingBase target) {
