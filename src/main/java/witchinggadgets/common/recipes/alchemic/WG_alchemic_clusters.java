@@ -30,7 +30,6 @@ import gregtech.api.enums.materials.MaterialFacades;
 import gregtech.api.enums.materials.Materials;
 import gregtech.api.enums.materials.Shapes;
 import gregtech.api.material.AspectRefStack;
-import gregtech.api.material.LegacyNameDomain;
 import gregtech.api.material.MaterialUtils;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
@@ -106,7 +105,7 @@ public class WG_alchemic_clusters {
 
         @Optional.Method(modid = "gregtech_nh")
         public Material getGT5uMaterial() {
-            return LegacyNameDomain.lookup(matName);
+            return MaterialUtils.gregTechMaterial(matName);
         }
 
         public ItemStack getPart(String prefix, int amount) {

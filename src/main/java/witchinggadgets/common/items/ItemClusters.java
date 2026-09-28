@@ -16,7 +16,6 @@ import com.ruling_0.materiallib.api.Material;
 
 import cpw.mods.fml.common.Optional;
 import gregtech.api.enums.materials.LegacyMaterialIDIndex;
-import gregtech.api.material.LegacyNameDomain;
 import gregtech.api.material.MaterialUtils;
 import lombok.Data;
 import mods.railcraft.common.items.firestone.IItemFirestoneBurning;
@@ -70,7 +69,7 @@ public class ItemClusters extends Item implements IItemFirestoneBurning {
             if (series == Series.GT5u) return LegacyMaterialIDIndex.get(matId);
             if (series == Series.Error) return null;
 
-            return LegacyNameDomain.lookup(getMaterialName());
+            return MaterialUtils.gregTechMaterial(getMaterialName());
         }
 
         @Optional.Method(modid = "gregtech_nh")
