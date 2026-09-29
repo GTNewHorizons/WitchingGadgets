@@ -69,7 +69,7 @@ public class ItemClusters extends Item implements IItemFirestoneBurning {
             if (series == Series.GT5u) return LegacyMaterialIDIndex.get(matId);
             if (series == Series.Error) return null;
 
-            return MaterialUtils.gregTechMaterial(getMaterialName());
+            return MaterialUtils.byLegacyName(getMaterialName());
         }
 
         @Optional.Method(modid = "gregtech_nh")

@@ -105,7 +105,7 @@ public class WG_alchemic_clusters {
 
         @Optional.Method(modid = "gregtech_nh")
         public Material getGT5uMaterial() {
-            return MaterialUtils.gregTechMaterial(matName);
+            return MaterialUtils.byLegacyName(matName);
         }
 
         public ItemStack getPart(String prefix, int amount) {

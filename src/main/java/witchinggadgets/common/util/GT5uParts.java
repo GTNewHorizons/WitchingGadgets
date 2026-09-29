@@ -18,7 +18,7 @@ final class GT5uParts {
 
     /// The `prefix` part of the material named `materialName`, or null when GregTech does not serve that part.
     static ItemStack get(String prefix, String materialName, int amount) {
-        Material material = MaterialUtils.gregTechMaterial(materialName);
+        Material material = MaterialUtils.byLegacyName(materialName);
         if (material == null) return null;
         if (prefix.equals("ore")) {
             if (!material.hasShape(OreShapes.ore)) return null;
