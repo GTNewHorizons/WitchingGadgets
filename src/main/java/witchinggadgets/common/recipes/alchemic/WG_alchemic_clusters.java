@@ -26,7 +26,6 @@ import gregtech.api.enums.OreMixes;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.SubTag;
 import gregtech.api.enums.TCAspects;
-import gregtech.api.enums.materials.MaterialFacades;
 import gregtech.api.enums.materials.Materials;
 import gregtech.api.enums.materials.Shapes;
 import gregtech.api.material.AspectRefStack;
@@ -174,8 +173,6 @@ public class WG_alchemic_clusters {
         if (material == Materials.Lead) return true;
         if (material == Materials.Cinnabar) return true;
         if (material == Materials.Gold) return true;
-        if (material == MaterialFacades.AnyCopper) return true;
-        if (material == MaterialFacades.AnyIron) return true;
         for (String name : WGConfig.triplingClusterList) {
             if (name.equals(MaterialUtils.internalName(material))) return true;
         }
