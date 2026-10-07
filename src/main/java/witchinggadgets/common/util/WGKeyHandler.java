@@ -40,9 +40,10 @@ public class WGKeyHandler {
         if (event.phase == TickEvent.Phase.START) {
             if (thaumcraftFKey == null) {
                 for (KeyBinding kb : Minecraft.getMinecraft().gameSettings.keyBindings) {
-                    if ("Thaumcraft".equals(kb.getKeyCategory())
-                            && "Change Wand Focus".equals(kb.getKeyDescription())) {
+                    String desc = kb.getKeyDescription();
+                    if ("Change Wand Focus".equals(desc) || "tc.key.change_wand_focus".equals(desc)) {
                         thaumcraftFKey = kb;
+                        break;
                     }
                 }
             }

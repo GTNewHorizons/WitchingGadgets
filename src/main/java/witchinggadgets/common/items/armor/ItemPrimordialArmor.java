@@ -232,8 +232,7 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
                 break;
             case 3:
                 if (this.armorType == 0) {
-                    if (!world.isDaytime() || player.getBrightness(0) < 4)
-                        player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 202, 0, true));
+                    player.addPotionEffect(new PotionEffect(Potion.nightVision.id, 202, 0, true));
                 }
                 if (player.isBurning()) {
                     player.extinguish();
