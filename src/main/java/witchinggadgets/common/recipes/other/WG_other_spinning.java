@@ -3,7 +3,6 @@ package witchinggadgets.common.recipes.other;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-import cpw.mods.fml.common.Loader;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GTModHandler;
@@ -17,7 +16,7 @@ public class WG_other_spinning {
 
     public static void registerSpinningRecipes() {
         if (WitchingGadgets.isGT5uLoaded) {
-            if (Loader.isModLoaded("Natura")) {
+            if (WitchingGadgets.isNaturaLoaded) {
                 SpinningRecipe spin_String = new SpinningRecipe(
                         new ItemStack(Items.string, 5),
                         GTModHandler.getModItem("Natura", "barleyFood", 1L, 3),
@@ -61,7 +60,7 @@ public class WG_other_spinning {
                     "wireFineThaumium");
             SpinningRecipe.addRecipe(spin_thaumiumThread);
         } else {
-            if (Loader.isModLoaded("Natura")) {
+            if (WitchingGadgets.isNaturaLoaded) {
                 SpinningRecipe spin_String = new SpinningRecipe(
                         new ItemStack(Items.string, 5),
                         new ItemStack(WGModCompat.natBarleyFood, 1, 3),

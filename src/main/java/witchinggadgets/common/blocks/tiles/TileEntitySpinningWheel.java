@@ -1,5 +1,7 @@
 package witchinggadgets.common.blocks.tiles;
 
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -17,8 +19,11 @@ public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedI
     public int maxProgress = 120;
     public ItemStack[] inv = new ItemStack[6];
 
+    public List<Object> cachedAllowedForRecipe; // does NOT update on direct inv access
+
     public TileEntitySpinningWheel() {
         super();
+        updateAllowedItemCache();
     }
 
     public void updateEntity() {
@@ -157,6 +162,7 @@ public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedI
         if (stack != null && stack.stackSize > getInventoryStackLimit()) {
             stack.stackSize = getInventoryStackLimit();
         }
+        updateAllowedItemCache();
     }
 
     @Override
@@ -187,8 +193,11 @@ public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedI
     public void closeInventory() {}
 
     @Override
-    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-        return true;
+    public boolean isItemValidForSlot(int s, ItemStack in) {
+        return inv[s] != null && in != null
+                && inv[s].isItemEqual(in)
+                && inv[s].stackSize + in.stackSize <= Math.min(in.getMaxStackSize(), getInventoryStackLimit())
+                || cachedAllowedForRecipe.size() != 0 && SpinningRecipe.isCompatible(cachedAllowedForRecipe, in);
     }
 
     public static int[] InSlots = { 0, 1, 2, 3, 4 };
@@ -200,12 +209,17 @@ public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedI
     }
 
     @Override
-    public boolean canInsertItem(int p_102007_1_, ItemStack p_102007_2_, int p_102007_3_) {
-        return p_102007_3_ != ForgeDirection.DOWN.ordinal();
+    public boolean canInsertItem(int p_102007_1_, ItemStack in, int side) {
+        return side != ForgeDirection.DOWN.ordinal();
     }
 
     @Override
     public boolean canExtractItem(int p_102008_1_, ItemStack p_102008_2_, int p_102008_3_) {
         return p_102008_3_ == ForgeDirection.DOWN.ordinal();
     }
+
+    public void updateAllowedItemCache() {
+        cachedAllowedForRecipe = SpinningRecipe.getCompatibleEntries(inv);
+    }
+
 }
