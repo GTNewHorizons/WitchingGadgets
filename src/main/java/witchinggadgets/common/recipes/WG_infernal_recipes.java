@@ -8,9 +8,9 @@ import com.ruling_0.materiallib.api.Shape;
 import com.ruling_0.materiallib.api.ShapeConsumer;
 
 import gregtech.GTMod;
-import gregtech.api.enums.SubTag;
 import gregtech.api.enums.materials.Materials;
 import gregtech.api.enums.materials.Shapes;
+import gregtech.api.material.GTMaterialFlag;
 import gregtech.api.material.MaterialUtils;
 import witchinggadgets.WitchingGadgets;
 import witchinggadgets.common.util.recipe.InfernalBlastfurnaceRecipe;
@@ -22,7 +22,7 @@ public class WG_infernal_recipes implements ShapeConsumer {
 
     @Override
     public void consume(Shape shape, Material material) {
-        if (MaterialUtils.hasSubTag(material, SubTag.NO_SMELTING)) return;
+        if (MaterialUtils.hasFlag(material, GTMaterialFlag.NO_SMELTING)) return;
 
         Material directSmelt = MaterialUtils.directSmelting(material);
 
@@ -43,7 +43,7 @@ public class WG_infernal_recipes implements ShapeConsumer {
         if (!directSmelt.hasShape(Shapes.ingot)) return;
         ItemStack ingots = MaterialLibAPI.getStack(directSmelt, Shapes.ingot, outputAmount);
 
-        if (!MaterialUtils.hasSubTag(material, SubTag.DONT_ADD_DEFAULT_BBF_RECIPE)) {
+        if (!MaterialUtils.hasFlag(material, GTMaterialFlag.DONT_ADD_DEFAULT_BBF_RECIPE)) {
             addRecipe(ingots, MaterialLibAPI.getStack(material, shape, 2));
         } else if (material == Materials.Tetrahedrite) {
             InfernalBlastfurnaceRecipe recipe = addRecipe(ingots, MaterialLibAPI.getStack(material, shape, 2));

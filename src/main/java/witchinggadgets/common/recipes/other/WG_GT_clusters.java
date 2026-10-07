@@ -15,10 +15,10 @@ import com.ruling_0.materiallib.api.MaterialLibAPI;
 import com.ruling_0.materiallib.api.Shape;
 
 import gregtech.api.enums.GTValues;
-import gregtech.api.enums.SubTag;
 import gregtech.api.enums.TierEU;
 import gregtech.api.enums.materials.Materials;
 import gregtech.api.enums.materials.Shapes;
+import gregtech.api.material.GTMaterialFlag;
 import gregtech.api.material.MaterialUtils;
 import gregtech.api.recipe.RecipeMaps;
 import witchinggadgets.common.WGContent;
@@ -43,7 +43,7 @@ public class WG_GT_clusters {
                 GTValues.RA.stdBuilder().itemInputs(Utilities.copyStackWithSize(cluster, 1))
                         .fluidOutputs(MaterialUtils.fluid(Materials.OilHeavy, 4000L)).eut(TierEU.RECIPE_MV)
                         .duration(60 * SECONDS).addTo(centrifugeRecipes);
-            } else if (MaterialUtils.hasSubTag(material, SubTag.ICE_ORE)) {
+            } else if (MaterialUtils.hasFlag(material, GTMaterialFlag.ICE_ORE)) {
                 GTValues.RA.stdBuilder().itemInputs(cluster.copy())
                         .fluidOutputs(MaterialUtils.gas(material, 1000L * oreMultiplier)).duration(5 * SECONDS)
                         .eut(TierEU.RECIPE_MV).addTo(RecipeMaps.fluidExtractionRecipes);

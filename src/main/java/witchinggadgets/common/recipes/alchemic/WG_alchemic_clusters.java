@@ -24,11 +24,11 @@ import cpw.mods.fml.common.Optional;
 import gregtech.GTMod;
 import gregtech.api.enums.OreMixes;
 import gregtech.api.enums.OrePrefixes;
-import gregtech.api.enums.SubTag;
 import gregtech.api.enums.TCAspects;
 import gregtech.api.enums.materials.Materials;
 import gregtech.api.enums.materials.Shapes;
 import gregtech.api.material.AspectRefStack;
+import gregtech.api.material.GTMaterialFlag;
 import gregtech.api.material.MaterialUtils;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
@@ -380,7 +380,7 @@ public class WG_alchemic_clusters {
                     : null;
 
             if (WGConfig.allowTransmutations && nugget != null
-                    && MaterialUtils.hasSubTag(material, SubTag.TRANSMUTABLE_NUGGETS)) {
+                    && MaterialUtils.hasFlag(material, GTMaterialFlag.TRANSMUTABLE_NUGGETS)) {
                 AspectList transmuteAspects = baseAspects.copy();
 
                 if (Arrays.asList(transmuteAspects.getAspects()).contains(null)) {
