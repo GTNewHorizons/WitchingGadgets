@@ -27,9 +27,6 @@ import net.minecraftforge.oredict.RecipeSorter;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import gregtech.GTMod;
-import gregtech.api.enums.Materials;
-import gregtech.api.enums.SubTag;
 import thaumcraft.api.ItemApi;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
@@ -243,57 +240,7 @@ public class WGContent {
         postInitItems();
         postInitBlocks();
         postInitThaumcraft();
-        add_infernal_recipes();
-    }
-
-    private static void add_infernal_recipes() {
-        if (WitchingGadgets.isGT5uLoaded) {
-            if (!devbuild) for (Materials aMaterial : gregtech.api.enums.Materials.getMaterialsMap().values()) {
-                if (!aMaterial.contains(SubTag.NO_SMELTING)) {
-                    if ((aMaterial.mBlastFurnaceRequired) || (aMaterial.mDirectSmelting.mBlastFurnaceRequired)) {
-                        if (aMaterial.mBlastFurnaceTemp <= 1000
-                                && aMaterial.mDirectSmelting.mBlastFurnaceTemp <= 1000) {
-                            if (aMaterial.getDust(1) != null) {
-                                InfernalBlastfurnaceRecipe temp = new InfernalBlastfurnaceRecipe(
-                                        aMaterial.getIngots(1),
-                                        aMaterial.getDust(1),
-                                        240,
-                                        false);
-                                InfernalBlastfurnaceRecipe.addRecipe(temp);
-                                if (!InfernalBlastfurnaceRecipe.recipes.contains(temp)) WitchingGadgets.logger.warn(
-                                        "Error at performing GT-Primitive-Blast Recipe -> InfernalBlastfurnaceRecipe");
-                            }
-                        }
-                    } else {
-                        int outputAmount = GTMod.gregtechproxy.mMixedOreOnlyYieldsTwoThirdsOfPureOre ? 2 : 3;
-                        if (aMaterial.mDirectSmelting != aMaterial) {
-                            if (!aMaterial.contains(SubTag.DONT_ADD_DEFAULT_BBF_RECIPE)) {
-                                InfernalBlastfurnaceRecipe temp = new InfernalBlastfurnaceRecipe(
-                                        aMaterial.mDirectSmelting.getIngots(outputAmount),
-                                        aMaterial.getDust(2),
-                                        240,
-                                        false);
-                                InfernalBlastfurnaceRecipe.addRecipe(temp);
-                                if (!InfernalBlastfurnaceRecipe.recipes.contains(temp)) WitchingGadgets.logger.warn(
-                                        "Error at performing GT-Primitive-Blast Recipe -> InfernalBlastfurnaceRecipe");
-                            } else if (aMaterial == Materials.Tetrahedrite) {
-                                InfernalBlastfurnaceRecipe temp = new InfernalBlastfurnaceRecipe(
-                                        aMaterial.mDirectSmelting.getIngots(outputAmount),
-                                        aMaterial.getDust(2),
-                                        240,
-                                        false);
-                                temp.addBonus(Materials.Antimony.getNuggets(3 * outputAmount));
-                                InfernalBlastfurnaceRecipe.addRecipe(temp);
-                                if (!InfernalBlastfurnaceRecipe.recipes.contains(temp)) WitchingGadgets.logger.warn(
-                                        "Error at performing GT-Primitive-Blast Recipe -> InfernalBlastfurnaceRecipe");
-                            }
-                        }
-                    }
-                }
-            }
-        } else {
-            InfernalBlastfurnaceRecipe.tryAddIngotImprovement("Iron", "Steel", false);
-        }
+        if (!WitchingGadgets.isGT5uLoaded) InfernalBlastfurnaceRecipe.tryAddIngotImprovement("Iron", "Steel", false);
         remove_broken_recipes();
     }
 

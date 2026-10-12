@@ -10,12 +10,13 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
+import com.ruling_0.materiallib.api.MaterialLibAPI;
+
 import cpw.mods.fml.common.Loader;
 import fox.spiteful.forbidden.DarkAspects;
-import gregtech.api.enums.Materials;
-import gregtech.api.enums.OrePrefixes;
+import gregtech.api.enums.materials.Materials;
+import gregtech.api.enums.materials.Shapes;
 import gregtech.api.util.GTModHandler;
-import gregtech.api.util.GTOreDictUnificator;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -1294,19 +1295,19 @@ public class WGResearch {
                     GTModHandler.getModItem("dreamcraft", "PrimordialPearlFragment", 1L),
                     new ItemStack[] { GTModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L),
                             GTModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L, 6),
-                            GTOreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L),
+                            MaterialLibAPI.getStack(Materials.Ichorium, Shapes.ingot, 1),
                             GTModHandler.getModItem("TwilightForest", "tile.TFAuroraBrick", 1L),
                             GTModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L),
                             GTModHandler.getModItem("TwilightForest", "tile.TFAuroraBrick", 1L),
-                            GTOreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L),
+                            MaterialLibAPI.getStack(Materials.Ichorium, Shapes.ingot, 1),
                             GTModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L, 7),
                             GTModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L),
                             GTModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L, 7),
-                            GTOreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L),
+                            MaterialLibAPI.getStack(Materials.Ichorium, Shapes.ingot, 1),
                             GTModHandler.getModItem("TwilightForest", "tile.TFAuroraBrick", 1L),
                             GTModHandler.getModItem("Thaumcraft", "ItemEldritchObject", 1L),
                             GTModHandler.getModItem("TwilightForest", "tile.TFAuroraBrick", 1L),
-                            GTOreDictUnificator.get(OrePrefixes.ingot, Materials.Ichorium, 1L),
+                            MaterialLibAPI.getStack(Materials.Ichorium, Shapes.ingot, 1),
                             GTModHandler.getModItem("ThaumicTinkerer", "kamiResource", 1L, 6) });
 
             ResearchItem PearlDupeResearch = new ResearchItem(

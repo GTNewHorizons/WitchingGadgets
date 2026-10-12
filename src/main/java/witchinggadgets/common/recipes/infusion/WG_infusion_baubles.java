@@ -7,10 +7,11 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
+import com.ruling_0.materiallib.api.MaterialLibAPI;
+
 import gregtech.api.enums.ItemList;
-import gregtech.api.enums.Materials;
-import gregtech.api.enums.OrePrefixes;
-import gregtech.api.util.GTOreDictUnificator;
+import gregtech.api.enums.materials.Materials;
+import gregtech.api.enums.materials.Shapes;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.config.ConfigItems;
@@ -41,10 +42,10 @@ public class WG_infusion_baubles {
                     new AspectList().add(Aspect.MINE, 48).add(Aspect.TOOL, 24).add(Aspect.MOTION, 24)
                             .add(Aspect.AIR, 16).add((Aspect) gregtech.api.enums.TCAspects.NEBRISUM.mAspect, 8),
                     new ItemStack(WGContent.ItemMagicalBaubles, 1, 8),
-                    new ItemStack[] { Materials.Platinum.getIngots(1),
-                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Coffee, 1L),
+                    new ItemStack[] { MaterialLibAPI.getStack(Materials.Platinum, Shapes.ingot, 1),
+                            MaterialLibAPI.getStack(Materials.Coffee, Shapes.dust, 1),
                             new ItemStack(Items.potionitem, 1, 8194),
-                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Coffee, 1L) });
+                            MaterialLibAPI.getStack(Materials.Coffee, Shapes.dust, 1) });
 
             if (WGModCompat.loaded_Twilight) {
                 registerInfusionRecipe(
@@ -81,13 +82,13 @@ public class WG_infusion_baubles {
                     new AspectList().add(Aspect.AIR, 32).add(Aspect.WEAPON, 16).add(Aspect.ORDER, 8)
                             .add((Aspect) gregtech.api.enums.TCAspects.NEBRISUM.mAspect, 8),
                     new ItemStack(ConfigItems.itemBaubleBlanks, 1, 1),
-                    new ItemStack[] { GTOreDictUnificator.get(OrePrefixes.lens, Materials.InfusedAir, 1L),
+                    new ItemStack[] { MaterialLibAPI.getStack(Materials.InfusedAir, Shapes.lens, 1),
                             new ItemStack(ConfigItems.itemPrimalArrow, 1, 0),
                             new ItemStack(ConfigItems.itemPrimalArrow, 1, 1),
-                            GTOreDictUnificator.get(OrePrefixes.lens, Materials.InfusedAir, 1L),
+                            MaterialLibAPI.getStack(Materials.InfusedAir, Shapes.lens, 1),
                             new ItemStack(ConfigItems.itemPrimalArrow, 1, 2),
                             new ItemStack(ConfigItems.itemPrimalArrow, 1, 3),
-                            GTOreDictUnificator.get(OrePrefixes.lens, Materials.InfusedAir, 1L),
+                            MaterialLibAPI.getStack(Materials.InfusedAir, Shapes.lens, 1),
                             new ItemStack(ConfigItems.itemPrimalArrow, 1, 4),
                             new ItemStack(ConfigItems.itemPrimalArrow, 1, 5) });
 
@@ -99,10 +100,10 @@ public class WG_infusion_baubles {
                     new AspectList().add(Aspect.GREED, 32).add(Aspect.TOOL, 16)
                             .add((Aspect) gregtech.api.enums.TCAspects.NEBRISUM.mAspect, 8),
                     new ItemStack(ConfigItems.itemBaubleBlanks, 1, 1),
-                    new ItemStack[] { luckyCoin, GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Silver, 1L),
-                            luckyCoin, GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Silver, 1L), luckyCoin,
-                            GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Silver, 1L), luckyCoin,
-                            GTOreDictUnificator.get(OrePrefixes.bolt, Materials.Silver, 1L) });
+                    new ItemStack[] { luckyCoin, MaterialLibAPI.getStack(Materials.Silver, Shapes.bolt, 1), luckyCoin,
+                            MaterialLibAPI.getStack(Materials.Silver, Shapes.bolt, 1), luckyCoin,
+                            MaterialLibAPI.getStack(Materials.Silver, Shapes.bolt, 1), luckyCoin,
+                            MaterialLibAPI.getStack(Materials.Silver, Shapes.bolt, 1) });
         } else {
             registerInfusionRecipe(
                     "WGBAUBLES",

@@ -5,9 +5,10 @@ import static witchinggadgets.common.recipes.WG_arcane_recipes.registerArcaneRec
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-import gregtech.api.enums.Materials;
-import gregtech.api.enums.OrePrefixes;
-import gregtech.api.util.GTOreDictUnificator;
+import com.ruling_0.materiallib.api.MaterialLibAPI;
+
+import gregtech.api.enums.materials.Materials;
+import gregtech.api.enums.materials.Shapes;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.config.ConfigBlocks;
@@ -29,15 +30,15 @@ public class WG_arcane_spinning_wheel {
                     'T',
                     new ItemStack(ConfigBlocks.blockTable),
                     's',
-                    GTOreDictUnificator.get(OrePrefixes.screw, Materials.Steel, 1L),
+                    MaterialLibAPI.getStack(Materials.Steel, Shapes.screw, 1),
                     'D',
                     "craftingToolScrewdriver",
                     'I',
                     "gearGtWoodSealed",
                     'R',
-                    GTOreDictUnificator.get(OrePrefixes.stickLong, Materials.WoodSealed, 1L),
+                    MaterialLibAPI.getStack(Materials.WoodSealed, Shapes.stickLong, 1),
                     'S',
-                    GTOreDictUnificator.get(OrePrefixes.stick, Materials.WoodSealed, 1L),
+                    MaterialLibAPI.getStack(Materials.WoodSealed, Shapes.stick, 1),
                     'W',
                     "gearGtSmallThaumium");
         } else {
