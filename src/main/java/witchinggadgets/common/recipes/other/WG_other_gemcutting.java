@@ -6,9 +6,10 @@ import static witchinggadgets.common.recipes.WG_other_recipes.registerShapedOreR
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-import gregtech.api.enums.Materials;
-import gregtech.api.enums.OrePrefixes;
-import gregtech.api.util.GTOreDictUnificator;
+import com.ruling_0.materiallib.api.MaterialLibAPI;
+
+import gregtech.api.enums.materials.Materials;
+import gregtech.api.enums.materials.Shapes;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.config.ConfigBlocks;
 import witchinggadgets.WitchingGadgets;
@@ -25,13 +26,13 @@ public class WG_other_gemcutting {
                     "qfi",
                     "sss",
                     'q',
-                    GTOreDictUnificator.get(OrePrefixes.gemChipped, Materials.Ruby, 1L),
+                    MaterialLibAPI.getStack(Materials.Ruby, Shapes.gemChipped, 1),
                     'f',
-                    GTOreDictUnificator.get(OrePrefixes.gemChipped, Materials.Diamond, 1L),
+                    MaterialLibAPI.getStack(Materials.Diamond, Shapes.gemChipped, 1),
                     'i',
-                    GTOreDictUnificator.get(OrePrefixes.gemChipped, Materials.Emerald, 1L),
+                    MaterialLibAPI.getStack(Materials.Emerald, Shapes.gemChipped, 1),
                     's',
-                    GTOreDictUnificator.get(OrePrefixes.stick, Materials.Thaumium, 1L));
+                    MaterialLibAPI.getStack(Materials.Thaumium, Shapes.stick, 1));
         } else {
             registerShapedOreRecipe(
                     "GEMCUTTING",
