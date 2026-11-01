@@ -87,7 +87,8 @@ public class WitchingGadgets {
     public static boolean isBootsActive = false;
     public static final String BOOTS = "thaumicboots";
 
-    public static boolean isGT5uLoaded = false;
+    public static final boolean isGT5uLoaded = Loader.isModLoaded("gregtech_nh");
+    public static final boolean isNaturaLoaded = Loader.isModLoaded("Natura");
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -95,10 +96,6 @@ public class WitchingGadgets {
 
         if (Loader.isModLoaded(BOOTS)) {
             isBootsActive = true;
-        }
-
-        if (Loader.isModLoaded("gregtech_nh")) {
-            isGT5uLoaded = true;
         }
 
         WGConfig.loadConfig(event);
