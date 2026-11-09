@@ -4,11 +4,12 @@ import static witchinggadgets.common.recipes.WG_arcane_recipes.registerArcaneRec
 
 import net.minecraft.item.ItemStack;
 
+import com.ruling_0.materiallib.api.MaterialLibAPI;
+
 import cpw.mods.fml.common.Loader;
-import gregtech.api.enums.Materials;
-import gregtech.api.enums.OrePrefixes;
+import gregtech.api.enums.materials.Materials;
+import gregtech.api.enums.materials.Shapes;
 import gregtech.api.util.GTModHandler;
-import gregtech.api.util.GTOreDictUnificator;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.config.ConfigItems;
@@ -106,7 +107,7 @@ public class WG_arcane_cloaks {
                             'C',
                             new ItemStack(WGContent.ItemCloak, 1, cm),
                             'S',
-                            GTOreDictUnificator.get(OrePrefixes.screw, Materials.Thaumium, 1L),
+                            MaterialLibAPI.getStack(Materials.Thaumium, Shapes.screw, 1),
                             'R',
                             "ringThaumium");
                 }

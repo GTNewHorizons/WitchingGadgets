@@ -64,8 +64,8 @@ public class WG_other_recipes {
     }
 
     public static void addBlastTripling(String matName) {
-        ItemStack ingot = Utilities.getOredict("ingot" + matName, 3);
-        ItemStack nugget = Utilities.getOredict("nugget" + matName, 1);
+        ItemStack ingot = Utilities.getPart("ingot", matName, 3);
+        ItemStack nugget = Utilities.getPart("nugget", matName, 1);
 
         if (ingot != null) {
             InfernalBlastfurnaceRecipe recipe = InfernalBlastfurnaceRecipe
