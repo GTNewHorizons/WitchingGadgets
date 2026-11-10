@@ -35,7 +35,7 @@ public class WG_Infusion_recipes {
 
         WG_infusion_stone_extruder.registerStoneExtruder();
         WG_infusion_snowballer.registerSnowballer();
-        WG_infusion_ice_solidifier.registerSnowballer();
+        WG_infusion_ice_solidifier.registerIceSolidifier();
 
         if (WGConfig.moduleBag) {
             WG_infusion_bags.registerBags();

@@ -43,13 +43,16 @@ import witchinggadgets.common.util.Utilities;
 
 public class VillageComponentPhotoshop extends StructureVillagePieces.Village {
 
-    static ChestGenHooks chestContents = new ChestGenHooks(
-            "WG:PHOTOWORKSHOP",
-            new WeightedRandomChestContent[] { new WeightedRandomChestContent(Items.paper, 0, 2, 7, 10),
-                    new WeightedRandomChestContent(Items.dye, 0, 2, 7, 10),
-                    new WeightedRandomChestContent(ConfigItems.itemResource, 10, 1, 1, 1) },
-            3,
-            9);
+    static ChestGenHooks chestContents;
+
+    static {
+        chestContents = ChestGenHooks.getInfo("WG:PHOTOWORKSHOP");
+        chestContents.setMin(3);
+        chestContents.setMax(9);
+        chestContents.addItem(new WeightedRandomChestContent(Items.paper, 0, 2, 7, 10));
+        chestContents.addItem(new WeightedRandomChestContent(Items.dye, 0, 2, 7, 10));
+        chestContents.addItem(new WeightedRandomChestContent(ConfigItems.itemResource, 10, 1, 1, 1));
+    }
 
     public VillageComponentPhotoshop() {}
 

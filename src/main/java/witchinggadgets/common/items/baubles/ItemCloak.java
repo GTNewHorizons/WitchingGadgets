@@ -4,6 +4,7 @@ import static witchinggadgets.common.util.WGKeyHandler.activateKey;
 
 import java.util.List;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.creativetab.CreativeTabs;
@@ -251,7 +252,9 @@ public class ItemCloak extends Item implements IBaubleExpanded, ICosmeticAttacha
     }
 
     public void onItemTicked(EntityPlayer player, ItemStack stack) {
-        if (player.worldObj.isRemote) {
+        // Baubles ticks worn items for every player visible on the client, so the keybind must only be handled for
+        // the local player. Otherwise a nearby player's cloak reacts to our keypress.
+        if (player.worldObj.isRemote && player == Minecraft.getMinecraft().thePlayer) {
 
             if (shouldActivate() && subNames[stack.getItemDamage()].equals("raven")) {
                 int slot = BaubleExpandedSlots.getIndexesOfAssignedSlotsOfType(getBaubleTypes(stack)[0])[0];

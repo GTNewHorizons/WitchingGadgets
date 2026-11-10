@@ -13,10 +13,11 @@ import witchinggadgets.common.util.recipe.SpinningRecipe;
 
 public class TileEntitySpinningWheel extends TileEntityWGBase implements ISidedInventory {
 
+    public static final int BASE_PROCESS_TICKS = 120;
     public int facing = 0;
     public int animation = 0;
     public int progress = 0;
-    public int maxProgress = 120;
+    public int maxProgress = BASE_PROCESS_TICKS;
     public ItemStack[] inv = new ItemStack[6];
 
     public List<Object> cachedAllowedForRecipe; // does NOT update on direct inv access

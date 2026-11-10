@@ -120,4 +120,10 @@ public class ContainerCuttingTable extends Container {
         }
         return stack;
     }
+
+    public void setGemCut(byte value) {
+        tileEntity.targetGemCut = value;
+        tileEntity.markDirty();
+        tileEntity.getWorldObj().markBlockForUpdate(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord);
+    }
 }

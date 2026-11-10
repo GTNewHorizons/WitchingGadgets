@@ -28,7 +28,7 @@ public class ContainerCloak extends Container {
 
         bindPlayerInventory(iinventory);
 
-        if (!world.isRemote) try {
+        if (!world.isRemote && this.cloak != null) try {
             this.input.stackList = ItemCloak.getStoredItems(this.cloak);
         } catch (Exception e) {
             e.printStackTrace();
@@ -72,7 +72,14 @@ public class ContainerCloak extends Container {
     @Override
     public void onContainerClosed(EntityPlayer par1EntityPlayer) {
         super.onContainerClosed(par1EntityPlayer);
+        // The cloak can be gone by the time the GUI closes (unequipped, or opened without one equipped at all).
+        // Drop the contents instead of losing them to a failed save.
         if (!this.worldObj.isRemote) {
+            if (this.cloak == null) {
+                for (ItemStack stack : this.input.stackList)
+                    if (stack != null) par1EntityPlayer.dropPlayerItemWithRandomChoice(stack, false);
+                return;
+            }
             ItemCloak.setStoredItems(this.cloak, this.input.stackList);
 
             Utilities.updateActiveMagicalCloak(player, cloak);
