@@ -75,7 +75,14 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
     public ItemPrimordialArmor(ArmorMaterial mat, int idx, int type) {
         super(mat, idx, type);
         this.setCreativeTab(WitchingGadgets.tabWG);
+        // Primordial Armor is indestructible: a max damage of 0 makes ItemStack ignore every damageItem() call.
+        this.setMaxDamage(0);
         flightStatus = FlightStatus.OFF;
+    }
+
+    /** Clears damage that pieces crafted before the armor became unbreakable may still carry. */
+    private static void clearLegacyDamage(World world, ItemStack stack) {
+        if (!world.isRemote && stack.getItemDamage() != 0) stack.setItemDamage(0);
     }
 
     @Override
@@ -96,10 +103,7 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
     @Override
     public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean equipped) {
         super.onUpdate(stack, world, entity, slot, equipped);
-        if ((!world.isRemote) && (stack.isItemDamaged())
-                && (entity.ticksExisted % 40 == 0)
-                && ((entity instanceof EntityLivingBase)))
-            stack.damageItem(-1, (EntityLivingBase) entity);
+        clearLegacyDamage(world, stack);
     }
 
     @Override
@@ -113,7 +117,7 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
 
     @Override
     public void onArmorTick(World world, EntityPlayer player, ItemStack stack) {
-        if (!world.isRemote && stack.isItemDamaged() && player.ticksExisted % 20 == 0) stack.damageItem(-1, player);
+        clearLegacyDamage(world, stack);
 
         byte armorcounter = 0;
         byte[] modescounter = { 0, 0, 0, 0, 0, 0 };
