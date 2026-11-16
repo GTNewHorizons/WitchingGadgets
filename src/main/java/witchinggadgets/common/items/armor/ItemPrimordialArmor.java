@@ -75,12 +75,10 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
     public ItemPrimordialArmor(ArmorMaterial mat, int idx, int type) {
         super(mat, idx, type);
         this.setCreativeTab(WitchingGadgets.tabWG);
-        // Primordial Armor is indestructible: a max damage of 0 makes ItemStack ignore every damageItem() call.
         this.setMaxDamage(0);
         flightStatus = FlightStatus.OFF;
     }
 
-    /** Clears damage that pieces crafted before the armor became unbreakable may still carry. */
     private static void clearLegacyDamage(World world, ItemStack stack) {
         if (!world.isRemote && stack.getItemDamage() != 0) stack.setItemDamage(0);
     }
