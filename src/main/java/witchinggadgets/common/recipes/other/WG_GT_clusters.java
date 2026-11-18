@@ -10,13 +10,18 @@ import static witchinggadgets.common.recipes.WG_other_recipes.addBlastTripling;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
+import com.ruling_0.materiallib.api.Material;
+import com.ruling_0.materiallib.api.MaterialLibAPI;
+import com.ruling_0.materiallib.api.Shape;
+
 import gregtech.api.enums.GTValues;
-import gregtech.api.enums.Materials;
-import gregtech.api.enums.OrePrefixes;
-import gregtech.api.enums.SubTag;
 import gregtech.api.enums.TierEU;
+import gregtech.api.enums.materials.Materials;
+import gregtech.api.enums.materials.Shapes;
+import gregtech.api.material.GTMaterialFlag;
+import gregtech.api.material.MaterialUtils;
 import gregtech.api.recipe.RecipeMaps;
-import gregtech.api.util.GTOreDictUnificator;
+import witchinggadgets.common.WGContent;
 import witchinggadgets.common.recipes.alchemic.WG_alchemic_clusters;
 import witchinggadgets.common.recipes.alchemic.WG_alchemic_clusters.ClusterInfo;
 import witchinggadgets.common.util.Utilities;
@@ -25,34 +30,32 @@ public class WG_GT_clusters {
 
     public static void registerClusterRecipesGT() {
         for (ClusterInfo clusterInfo : WG_alchemic_clusters.CLUSTER_INFO.values()) {
-            ItemStack cluster = clusterInfo.getPart(OrePrefixes.cluster, 1);
+            ItemStack cluster = new ItemStack(WGContent.ItemCluster, 1, clusterInfo.meta().getMeta());
 
-            if (cluster == null) continue;
-
-            Materials material = clusterInfo.getGT5uMaterial();
+            Material material = clusterInfo.getGT5uMaterial();
             if (!clusterInfo.ebf()) {
                 addBlastTripling(clusterInfo.matName());
             }
 
-            int oreMultiplier = material == null ? 1 : material.mOreMultiplier;
+            int oreMultiplier = material == null ? 1 : MaterialUtils.oreMultiplier(material);
 
             if (material == Materials.Oilsands) {
                 GTValues.RA.stdBuilder().itemInputs(Utilities.copyStackWithSize(cluster, 1))
-                        .fluidOutputs(Materials.OilHeavy.getFluid(4000L)).eut(TierEU.RECIPE_MV).duration(60 * SECONDS)
-                        .addTo(centrifugeRecipes);
-            } else if (material != null && material.contains(SubTag.ICE_ORE)) {
+                        .fluidOutputs(MaterialUtils.fluid(Materials.OilHeavy, 4000L)).eut(TierEU.RECIPE_MV)
+                        .duration(60 * SECONDS).addTo(centrifugeRecipes);
+            } else if (MaterialUtils.hasFlag(material, GTMaterialFlag.ICE_ORE)) {
                 GTValues.RA.stdBuilder().itemInputs(cluster.copy())
-                        .fluidOutputs(material.getGas(1000L * material.mOreMultiplier)).duration(5 * SECONDS)
+                        .fluidOutputs(MaterialUtils.gas(material, 1000L * oreMultiplier)).duration(5 * SECONDS)
                         .eut(TierEU.RECIPE_MV).addTo(RecipeMaps.fluidExtractionRecipes);
             } else {
-                ItemStack dusts = clusterInfo.getPart(OrePrefixes.dust, 1);
-                ItemStack tinyDusts = clusterInfo.getPart(OrePrefixes.dustTiny, 1);
+                ItemStack dusts = clusterInfo.getPart(Shapes.dust, 1);
+                ItemStack tinyDusts = clusterInfo.getPart(Shapes.dustTiny, 1);
 
                 if ("NaquadahEnriched".equals(clusterInfo.matName())) {
-                    dusts = Utilities.getOredict("dustEnriched-NaquadahOxideMixture", 1);
-                    tinyDusts = Utilities.getOredict("dustTinyEnriched-NaquadahOxideMixture", 1);;
+                    dusts = MaterialLibAPI.getStack(Materials.EnrichedNaquadahOxideMixture, Shapes.dust, 1);
+                    tinyDusts = MaterialLibAPI.getStack(Materials.EnrichedNaquadahOxideMixture, Shapes.dustTiny, 1);
                 }
-                ItemStack gems = clusterInfo.getPart(OrePrefixes.gem, 1);
+                ItemStack gems = clusterInfo.getPart(Shapes.gem, 1);
 
                 if (dusts != null && tinyDusts != null) {
                     int tinyDustCount = oreMultiplier * 22;
@@ -80,72 +83,72 @@ public class WG_GT_clusters {
                         case "Tanzanite", "Sapphire", "Olivine", "GreenSapphire", "Opal", "Amethyst", "Emerald", "Ruby", "Diamond", "FoolsRuby", "BlueTopaz", "GarnetRed", "Topaz", "Jasper", "GarnetYellow" -> {
                             GTValues.RA.stdBuilder().itemInputs(cluster.copy())
                                     .itemOutputs(
-                                            GTOreDictUnificator.get(OrePrefixes.gemExquisite, material, gems, 1L),
-                                            GTOreDictUnificator.get(OrePrefixes.gemFlawless, material, gems, 1L),
+                                            gemTier(material, Shapes.gemExquisite, gems, 1),
+                                            gemTier(material, Shapes.gemFlawless, gems, 1),
                                             gems,
-                                            GTOreDictUnificator.get(OrePrefixes.gemFlawed, material, gems, 1L),
-                                            GTOreDictUnificator.get(OrePrefixes.gemChipped, material, gems, 1L),
-                                            GTOreDictUnificator.get(OrePrefixes.dust, material, gems, 1L))
+                                            gemTier(material, Shapes.gemFlawed, gems, 1),
+                                            gemTier(material, Shapes.gemChipped, gems, 1),
+                                            gemTier(material, Shapes.dust, gems, 1))
                                     .outputChances(600, 2400, 9000, 2800, 5600, 7000).duration(80 * SECONDS)
                                     .eut(TierEU.RECIPE_LV).addTo(sifterRecipes);
                         }
                         case "CertusQuartz", "NetherQuartz" -> {
                             GTValues.RA.stdBuilder().itemInputs(cluster.copy())
                                     .itemOutputs(
-                                            GTOreDictUnificator.get(OrePrefixes.gemExquisite, material, gems, 2L),
-                                            GTOreDictUnificator.get(OrePrefixes.gemFlawless, material, gems, 2L),
-                                            GTOreDictUnificator.get(OrePrefixes.gem, material, gems, 2L),
-                                            GTOreDictUnificator.get(OrePrefixes.gemFlawed, material, gems, 2L),
-                                            GTOreDictUnificator.get(OrePrefixes.gemChipped, material, gems, 2L),
-                                            GTOreDictUnificator.get(OrePrefixes.dust, material, gems, 2L))
+                                            gemTier(material, Shapes.gemExquisite, gems, 2),
+                                            gemTier(material, Shapes.gemFlawless, gems, 2),
+                                            gemTier(material, Shapes.gem, gems, 2),
+                                            gemTier(material, Shapes.gemFlawed, gems, 2),
+                                            gemTier(material, Shapes.gemChipped, gems, 2),
+                                            gemTier(material, Shapes.dust, gems, 2))
                                     .outputChances(200, 800, 3000, 4000, 8000, 10000).duration(160 * SECONDS)
                                     .eut(TierEU.RECIPE_LV).addTo(sifterRecipes);
                         }
                         case "Apatite" -> {
                             GTValues.RA.stdBuilder().itemInputs(cluster.copy())
                                     .itemOutputs(
-                                            GTOreDictUnificator.get(OrePrefixes.gemExquisite, material, gems, 4L),
-                                            GTOreDictUnificator.get(OrePrefixes.gemFlawless, material, gems, 4L),
-                                            GTOreDictUnificator.get(OrePrefixes.gem, material, gems, 4L),
-                                            GTOreDictUnificator.get(OrePrefixes.gemFlawed, material, gems, 4L),
-                                            GTOreDictUnificator.get(OrePrefixes.gemChipped, material, gems, 4L),
-                                            GTOreDictUnificator.get(OrePrefixes.dust, material, gems, 4L))
+                                            gemTier(material, Shapes.gemExquisite, gems, 4),
+                                            gemTier(material, Shapes.gemFlawless, gems, 4),
+                                            gemTier(material, Shapes.gem, gems, 4),
+                                            gemTier(material, Shapes.gemFlawed, gems, 4),
+                                            gemTier(material, Shapes.gemChipped, gems, 4),
+                                            gemTier(material, Shapes.dust, gems, 4))
                                     .outputChances(200, 800, 3000, 4000, 8000, 10000).duration(32 * SECONDS)
                                     .eut(TierEU.RECIPE_LV).addTo(sifterRecipes);
                         }
                         case "Amber" -> {
                             GTValues.RA.stdBuilder().itemInputs(cluster.copy())
                                     .itemOutputs(
-                                            GTOreDictUnificator.get(OrePrefixes.gemExquisite, material, gems, 2L),
-                                            GTOreDictUnificator.get(OrePrefixes.gemFlawless, material, gems, 2L),
-                                            GTOreDictUnificator.get(OrePrefixes.gem, material, gems, 2L),
-                                            GTOreDictUnificator.get(OrePrefixes.gemFlawed, material, gems, 2L),
-                                            GTOreDictUnificator.get(OrePrefixes.gemChipped, material, gems, 2L),
-                                            GTOreDictUnificator.get(OrePrefixes.dust, material, gems, 2L))
+                                            gemTier(material, Shapes.gemExquisite, gems, 2),
+                                            gemTier(material, Shapes.gemFlawless, gems, 2),
+                                            gemTier(material, Shapes.gem, gems, 2),
+                                            gemTier(material, Shapes.gemFlawed, gems, 2),
+                                            gemTier(material, Shapes.gemChipped, gems, 2),
+                                            gemTier(material, Shapes.dust, gems, 2))
                                     .outputChances(600, 2400, 9000, 2800, 5600, 7000).duration(160 * SECONDS)
                                     .eut(TierEU.RECIPE_LV).addTo(sifterRecipes);
                         }
                         case "Lapis", "Sodalite", "Lazurite" -> {
                             GTValues.RA.stdBuilder().itemInputs(cluster.copy())
                                     .itemOutputs(
-                                            GTOreDictUnificator.get(OrePrefixes.gemExquisite, material, gems, 6L),
-                                            GTOreDictUnificator.get(OrePrefixes.gemFlawless, material, gems, 6L),
-                                            GTOreDictUnificator.get(OrePrefixes.gem, material, gems, 6L),
-                                            GTOreDictUnificator.get(OrePrefixes.gemFlawed, material, gems, 6L),
-                                            GTOreDictUnificator.get(OrePrefixes.gemChipped, material, gems, 6L),
-                                            GTOreDictUnificator.get(OrePrefixes.dust, material, gems, 6L))
+                                            gemTier(material, Shapes.gemExquisite, gems, 6),
+                                            gemTier(material, Shapes.gemFlawless, gems, 6),
+                                            gemTier(material, Shapes.gem, gems, 6),
+                                            gemTier(material, Shapes.gemFlawed, gems, 6),
+                                            gemTier(material, Shapes.gemChipped, gems, 6),
+                                            gemTier(material, Shapes.dust, gems, 6))
                                     .outputChances(200, 800, 3000, 4000, 8000, 10000).duration(480 * SECONDS)
                                     .eut(TierEU.RECIPE_LV).addTo(sifterRecipes);
                         }
                         case "Monazite" -> {
                             GTValues.RA.stdBuilder().itemInputs(cluster.copy())
                                     .itemOutputs(
-                                            GTOreDictUnificator.get(OrePrefixes.gemExquisite, material, gems, 8L),
-                                            GTOreDictUnificator.get(OrePrefixes.gemFlawless, material, gems, 8L),
-                                            GTOreDictUnificator.get(OrePrefixes.gem, material, gems, 6L),
-                                            GTOreDictUnificator.get(OrePrefixes.gemFlawed, material, gems, 8L),
-                                            GTOreDictUnificator.get(OrePrefixes.gemChipped, material, gems, 8L),
-                                            GTOreDictUnificator.get(OrePrefixes.dust, material, gems, 8L))
+                                            gemTier(material, Shapes.gemExquisite, gems, 8),
+                                            gemTier(material, Shapes.gemFlawless, gems, 8),
+                                            gemTier(material, Shapes.gem, gems, 6),
+                                            gemTier(material, Shapes.gemFlawed, gems, 8),
+                                            gemTier(material, Shapes.gemChipped, gems, 8),
+                                            gemTier(material, Shapes.dust, gems, 8))
                                     .outputChances(200, 800, 3000, 4000, 8000, 10000).duration(640 * SECONDS)
                                     .eut(TierEU.RECIPE_LV).addTo(sifterRecipes);
                         }
@@ -157,19 +160,19 @@ public class WG_GT_clusters {
                                             new ItemStack(Items.coal, 2, 0),
                                             new ItemStack(Items.coal, 2, 0),
                                             new ItemStack(Items.coal, 2, 0),
-                                            GTOreDictUnificator.get(OrePrefixes.dust, Materials.Coal, 2L))
+                                            MaterialLibAPI.getStack(Materials.Coal, Shapes.dust, 2))
                                     .outputChances(10000, 9000, 8000, 7000, 6000, 5000).duration(60 * SECONDS)
                                     .eut(TierEU.RECIPE_LV).addTo(sifterRecipes);
                         }
                         default -> {
                             GTValues.RA.stdBuilder().itemInputs(cluster.copy())
                                     .itemOutputs(
-                                            GTOreDictUnificator.get(OrePrefixes.gemExquisite, material, gems, 1L),
-                                            GTOreDictUnificator.get(OrePrefixes.gemFlawless, material, gems, 1L),
+                                            gemTier(material, Shapes.gemExquisite, gems, 1),
+                                            gemTier(material, Shapes.gemFlawless, gems, 1),
                                             gems,
-                                            GTOreDictUnificator.get(OrePrefixes.gemFlawed, material, gems, 1L),
-                                            GTOreDictUnificator.get(OrePrefixes.gemChipped, material, gems, 1L),
-                                            GTOreDictUnificator.get(OrePrefixes.dust, material, gems, 1L))
+                                            gemTier(material, Shapes.gemFlawed, gems, 1),
+                                            gemTier(material, Shapes.gemChipped, gems, 1),
+                                            gemTier(material, Shapes.dust, gems, 1))
                                     .outputChances(200, 800, 3000, 4000, 8000, 10000).duration(80 * SECONDS)
                                     .eut(TierEU.RECIPE_LV).addTo(sifterRecipes);
                         }
@@ -177,5 +180,10 @@ public class WG_GT_clusters {
                 }
             }
         }
+    }
+
+    private static ItemStack gemTier(Material material, Shape shape, ItemStack gems, int amount) {
+        if (material.hasShape(shape)) return MaterialLibAPI.getStack(material, shape, amount);
+        return Utilities.copyStackWithSize(gems, amount);
     }
 }
