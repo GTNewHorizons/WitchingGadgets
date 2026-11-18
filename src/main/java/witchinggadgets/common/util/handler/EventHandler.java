@@ -293,64 +293,65 @@ public class EventHandler {
 
     @SubscribeEvent
     public void onItemPickup(EntityItemPickupEvent event) {
-        for (int i = 0; i < event.entityPlayer.inventory.getSizeInventory(); i++) {
-            if (event.entityPlayer.inventory.getStackInSlot(i) != null
-                    && event.entityPlayer.inventory.getStackInSlot(i).getItem() instanceof ItemBag) {
-                if (event.entityPlayer.inventory.getStackInSlot(i).getItemDamage() == 1) {
-                    ItemStack[] filter = ItemBag.getStoredItems(event.entityPlayer.inventory.getStackInSlot(i));
-                    for (ItemStack f : filter) if (OreDictionary.itemMatches(f, event.item.getEntityItem(), true)) {
-                        AspectList al = ThaumcraftCraftingManager.getObjectTags(event.item.getEntityItem());
-                        al = ThaumcraftCraftingManager.getBonusTags(event.item.getEntityItem(), al);
-                        if (al.size() >= 0) {
-                            AspectList primals = ResearchManager.reduceToPrimals(al);
-                            Aspect a = primals.getAspects()[event.entityPlayer.getRNG()
-                                    .nextInt(primals.getAspects().length)];
-                            if (a != null) {
-                                int slot = InventoryUtils.isWandInHotbarWithRoom(a, 1, event.entityPlayer);
-                                if (slot >= 0) {
-                                    ItemWandCasting wand = (ItemWandCasting) event.entityPlayer.inventory.mainInventory[slot]
-                                            .getItem();
-                                    wand.addVis(
-                                            event.entityPlayer.inventory.mainInventory[slot],
-                                            a,
-                                            primals.getAmount(a),
-                                            true);
-                                }
+        if (event.item.isDead) return;
+        final ItemStack dropStack = event.item.getEntityItem();
+        if (dropStack.stackSize <= 0) return;
+
+        final EntityPlayer player = event.entityPlayer;
+        for (int i = 0; i < player.inventory.getSizeInventory(); i++) {
+            final ItemStack bagStack = player.inventory.getStackInSlot(i);
+            if (bagStack == null || !(bagStack.getItem() instanceof ItemBag)) continue;
+
+            if (bagStack.getItemDamage() == 1) {
+                ItemStack[] filter = ItemBag.getStoredItems(bagStack);
+                for (ItemStack f : filter) if (OreDictionary.itemMatches(f, dropStack, true)) {
+                    AspectList al = ThaumcraftCraftingManager.getObjectTags(dropStack);
+                    al = ThaumcraftCraftingManager.getBonusTags(dropStack, al);
+                    if (al.size() >= 0) {
+                        AspectList primals = ResearchManager.reduceToPrimals(al);
+                        Aspect a = primals.getAspects()[player.getRNG().nextInt(primals.size())];
+                        if (a != null) {
+                            int slot = InventoryUtils.isWandInHotbarWithRoom(a, 1, player);
+                            if (slot >= 0) {
+                                final ItemStack wandStack = player.inventory.mainInventory[slot];
+                                ItemWandCasting wand = (ItemWandCasting) wandStack.getItem();
+                                wand.addVis(wandStack, a, primals.getAmount(a), true);
                             }
                         }
+                    }
+                    event.item.setDead();
+                    event.setCanceled(true);
+                    return;
+                }
+            } else if (bagStack.getItemDamage() == 3) {
+                ItemStack[] inv = ItemBag.getStoredItems(bagStack);
+                boolean bagChanged = false;
+                for (int f = 0; f < inv.length; f++) {
+                    if (inv[f] == null) {
+                        inv[f] = dropStack.copy();
+                        bagChanged = true;
+
                         event.item.setDead();
                         event.setCanceled(true);
-                        return;
-                    }
-                } else if (event.entityPlayer.inventory.getStackInSlot(i).getItemDamage() == 3) {
-                    ItemStack[] inv = ItemBag.getStoredItems(event.entityPlayer.inventory.getStackInSlot(i));
-                    boolean itemWasPickedUp = false;
-                    for (int f = 0; f < inv.length; f++) {
-                        if (inv[f] == null) {
-                            inv[f] = event.item.getEntityItem().copy();
+                        break;
+                    } else if (inv[f].isItemEqual(dropStack) && ItemStack.areItemStackTagsEqual(inv[f], dropStack)) {
+                        int fit = Math
+                                .min(Math.min(64, inv[f].getMaxStackSize()) - inv[f].stackSize, dropStack.stackSize);
+                        inv[f].stackSize += fit;
+                        dropStack.stackSize -= fit;
+                        bagChanged = true;
+
+                        if (dropStack.stackSize <= 0) {
                             event.item.setDead();
                             event.setCanceled(true);
-                            itemWasPickedUp = true;
                             break;
-                        } else if (inv[f].isItemEqual(event.item.getEntityItem())
-                                && ItemStack.areItemStackTagsEqual(inv[f], event.item.getEntityItem())) {
-                                    int fit = Math.min(
-                                            Math.min(64, inv[f].getMaxStackSize()) - inv[f].stackSize,
-                                            event.item.getEntityItem().stackSize);
-                                    inv[f].stackSize += fit;
-                                    event.item.getEntityItem().stackSize -= fit;
-                                    if (event.item.getEntityItem().stackSize <= 0) {
-                                        event.item.setDead();
-                                        event.setCanceled(true);
-                                        itemWasPickedUp = true;
-                                        break;
-                                    }
-                                }
+                        }
                     }
-                    ItemBag.setStoredItems(event.entityPlayer.inventory.getStackInSlot(i), inv);
-                    if (itemWasPickedUp) {
-                        break;
-                    }
+                }
+
+                if (bagChanged) {
+                    ItemBag.setStoredItems(bagStack, inv);
+                    if (event.item.isDead) return;
                 }
             }
         }
