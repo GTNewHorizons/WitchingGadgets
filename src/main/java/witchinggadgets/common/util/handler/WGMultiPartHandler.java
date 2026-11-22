@@ -4,15 +4,17 @@ import java.util.HashSet;
 import java.util.Set;
 
 import net.minecraft.block.Block;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
+import codechicken.lib.data.MCDataInput;
 import codechicken.lib.raytracer.RayTracer;
 import codechicken.lib.vec.BlockCoord;
 import codechicken.multipart.MultiPartRegistry;
 import codechicken.multipart.MultiPartRegistry.IPartConverter;
-import codechicken.multipart.MultiPartRegistry.IPartFactory;
+import codechicken.multipart.MultiPartRegistry.IPartFactory2;
 import codechicken.multipart.MultipartGenerator;
 import codechicken.multipart.TMultiPart;
 import codechicken.multipart.TileMultipart;
@@ -27,14 +29,14 @@ import witchinggadgets.common.blocks.tiles.MultipartEssentiaTube;
 import witchinggadgets.common.blocks.tiles.MultipartEssentiaTube_Filtered;
 import witchinggadgets.common.blocks.tiles.MultipartEssentiaTube_Valve;
 
-public class WGMultiPartHandler implements IPartFactory, IPartConverter {
+public class WGMultiPartHandler implements IPartFactory2, IPartConverter {
 
     public static WGMultiPartHandler instance = new WGMultiPartHandler();
     public static RayTracer rayTracer = new RayTracer();
 
     public void init() {
         MultiPartRegistry.registerConverter(this);
-        MultiPartRegistry.registerParts(
+        MultiPartRegistry.registerPartFactory(
                 this,
                 new String[] {
                         // "witchingGadgets:vis_relay",
@@ -69,7 +71,22 @@ public class WGMultiPartHandler implements IPartFactory, IPartConverter {
     }
 
     @Override
-    public TMultiPart createPart(String name, boolean client) {
+    public TMultiPart createPart(String name, NBTTagCompound nbt) {
+        return newPart(name);
+    }
+
+    @Override
+    public TMultiPart createPart(String name, MCDataInput packet) {
+        return newPart(name);
+    }
+
+    // Matches the legacy IPartFactory adapter, which answered previews with the client part.
+    @Override
+    public TMultiPart createPartForClientPreview(String name, NBTTagCompound nbt) {
+        return newPart(name);
+    }
+
+    private TMultiPart newPart(String name) {
         if (name.equals("witchingGadgets:essentia_tube")) return new MultipartEssentiaTube(0);
         if (name.equals("witchingGadgets:essentia_tube_valve")) return new MultipartEssentiaTube_Valve(0);
         if (name.equals("witchingGadgets:essentia_tube_filtered")) return new MultipartEssentiaTube_Filtered(0);
