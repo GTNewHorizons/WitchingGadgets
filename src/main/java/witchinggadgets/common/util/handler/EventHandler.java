@@ -309,7 +309,7 @@ public class EventHandler {
                     al = ThaumcraftCraftingManager.getBonusTags(dropStack, al);
                     if (al.size() >= 0) {
                         AspectList primals = ResearchManager.reduceToPrimals(al);
-                        Aspect a = primals.getAspects()[player.getRNG().nextInt(primals.size())];
+                        Aspect a = primals.getAspects()[player.getRNG().nextInt(Math.max(1, primals.size()))];
                         if (a != null) {
                             int slot = InventoryUtils.isWandInHotbarWithRoom(a, 1, player);
                             if (slot >= 0) {
