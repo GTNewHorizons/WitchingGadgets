@@ -384,6 +384,11 @@ public class ItemPrimordialArmor extends ItemFortressArmor implements IPrimordia
     }
 
     @Override
+    public boolean isItemTool(ItemStack stack) {
+        return stack.stackSize == 1;
+    }
+
+    @Override
     public boolean getIsRepairable(ItemStack s, ItemStack s2) {
         return false;
     }
